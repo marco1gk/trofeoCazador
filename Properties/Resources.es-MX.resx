@@ -177,4 +177,58 @@
   <data name="btnRegister" xml:space="preserve">
     <value>Crear cuenta</value>
   </data>
+  <data name="lbCreateAccount" xml:space="preserve">
+    <value>Crear cuenta</value>
+  </data>
+  <data name="lbCreateYourAccount" xml:space="preserve">
+    <value>Crea tu cuenta</value>
+  </data>
+  <data name="lbInsertData" xml:space="preserve">
+    <value>Ingresa los siguientes datos</value>
+  </data>
+  <data name="lbPasswordPolitic" xml:space="preserve">
+    <value>Tu contraseña debe contener</value>
+  </data>
+  <data name="lbUppercaseLetterRequirement " xml:space="preserve">
+    <value>Una mayúscula </value>
+  </data>
+  <data name="lbLowercaseLetterRequirement " xml:space="preserve">
+    <value>Una minúscula </value>
+  </data>
+  <data name="lbAtLeast12Characters" xml:space="preserve">
+    <value>Al menos 12 caracteres</value>
+  </data>
+  <data name="lbSpecialCharacterRequirement " xml:space="preserve">
+    <value>Por le menos un caracter especial</value>
+  </data>
+  <data name="lbAtLeastOneNumber" xml:space="preserve">
+    <value>Al menos un numero</value>
+  </data>
+  <data name="lbGlobalName " xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="lbGlobalFirstLastName " xml:space="preserve">
+    <value>Primer apellido</value>
+  </data>
+  <data name="lbGlobalFirstSecondLastName " xml:space="preserve">
+    <value>Segundo apellido</value>
+  </data>
+  <data name="lbDateOfTheBird " xml:space="preserve">
+    <value>Fecha de nacimiento</value>
+  </data>
+  <data name="lbEmail " xml:space="preserve">
+    <value>Correo</value>
+  </data>
+  <data name="lbGlobalUsername " xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="lbGlobalPassword " xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="lbMustFillFields" xml:space="preserve">
+    <value>Debes llenar los campos obligatorios</value>
+  </data>
+  <data name="btnCreateAccount" xml:space="preserve">
+    <value>Crear cuenta</value>
+  </data>
 </root>

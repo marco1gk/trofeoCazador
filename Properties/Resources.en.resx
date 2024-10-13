@@ -177,4 +177,58 @@
   <data name="btnRegister" xml:space="preserve">
     <value>Create account</value>
   </data>
+  <data name="lbCreateAccount" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="lbCreateYourAccount" xml:space="preserve">
+    <value>Create your account</value>
+  </data>
+  <data name="lbInsertData" xml:space="preserve">
+    <value>Insert your data</value>
+  </data>
+  <data name="lbPasswordPolitic" xml:space="preserve">
+    <value>Your passwod must have</value>
+  </data>
+  <data name="lbUppercaseLetterRequirement " xml:space="preserve">
+    <value>One uppercase letter </value>
+  </data>
+  <data name="lbLowercaseLetterRequirement " xml:space="preserve">
+    <value>One lowercase letter </value>
+  </data>
+  <data name="lbAtLeast12Characters" xml:space="preserve">
+    <value>At least 12 characters</value>
+  </data>
+  <data name="lbSpecialCharacterRequirement " xml:space="preserve">
+    <value>At least one special character</value>
+  </data>
+  <data name="lbAtLeastOneNumber" xml:space="preserve">
+    <value>At least one number</value>
+  </data>
+  <data name="lbGlobalName " xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lbGlobalFirstLastName " xml:space="preserve">
+    <value>First last name</value>
+  </data>
+  <data name="lbGlobalFirstSecondLastName " xml:space="preserve">
+    <value>Second last name </value>
+  </data>
+  <data name="lbDateOfTheBird " xml:space="preserve">
+    <value>BirthDay</value>
+  </data>
+  <data name="lbEmail " xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="lbGlobalUsername " xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="lbGlobalPassword " xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="lbMustFillFields" xml:space="preserve">
+    <value>You must fill all fields</value>
+  </data>
+  <data name="btnCreateAccount" xml:space="preserve">
+    <value>Create Account</value>
+  </data>
 </root>

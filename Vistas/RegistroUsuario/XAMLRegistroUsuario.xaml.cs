@@ -24,5 +24,10 @@ namespace trofeoCazador.Vistas.RegistroUsuario
         {
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

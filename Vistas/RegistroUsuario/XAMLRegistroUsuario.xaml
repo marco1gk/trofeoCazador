@@ -8,42 +8,45 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="XAMLRegistroUsuario">
-    <Grid Background="White">
+
+    <Grid>
+        <!-- Aquí se agrega la imagen de fondo -->
+        <Grid.Background>
+            <ImageBrush ImageSource="/Recursos/otoño.webp" Stretch="Fill" />
+        </Grid.Background>
+
         <Grid.RowDefinitions>
+
             <RowDefinition Height="*" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label Content="Crear cuenta" HorizontalAlignment="Left" Margin="24,19,0,0" FontSize="29" VerticalAlignment="Top"/>
-        <Label Content="Crea tu cuenta" HorizontalAlignment="Left" Margin="90,74,0,0" VerticalAlignment="Top"/>
-        <Label Content="La contraseña debe contener" HorizontalAlignment="Left" Margin="95,0,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="Al menos una letra en mayúscula" HorizontalAlignment="Left" Margin="110,18,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="&#xD;&#xA;" Height="74" VerticalAlignment="Top"/>
-        <Label Content="Al menos 12 caracteres" HorizontalAlignment="Left" Margin="110,44,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="Al menos una letra en minúscula&#xD;&#xA;" HorizontalAlignment="Left" Margin="109,60,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="Al menos un numero" HorizontalAlignment="Left" Margin="110,30,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="Al menos un simbolo" HorizontalAlignment="Left" Margin="109,76,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="Ingresa los siguientes datos" HorizontalAlignment="Left" Margin="298,74,0,0" VerticalAlignment="Top"/>
-        <Label Content="Primer apellido" HorizontalAlignment="Left" Margin="303,56,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="Fecha de nacimiento" HorizontalAlignment="Left" Margin="303,108,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="Correo" HorizontalAlignment="Left" Margin="307,158,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.542,-0.289"/>
-        <Label Content="Contraseña" HorizontalAlignment="Left" Margin="313,6,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="Nombre" HorizontalAlignment="Left" Margin="303,112,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <Label Content="Segundo apellido&#xD;&#xA;" HorizontalAlignment="Left" Margin="512,40,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="Nombre de usuario" HorizontalAlignment="Left" Margin="519,158,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="Debes llenar los campos obligatoriosl" HorizontalAlignment="Left" Margin="582,76,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="316,26,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="316,86,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="512,184,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="316,182,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="512,86,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <PasswordBox HorizontalAlignment="Left" Margin="316,30,0,0" Grid.Row="2" VerticalAlignment="Top" Width="120"/>
-        <DatePicker HorizontalAlignment="Left" Margin="316,130,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Button Content="{x:Static p:Resources.btnRegister}" HorizontalAlignment="Left" Margin="686,30,0,0" Grid.Row="2" VerticalAlignment="Top"/>
 
-
-
+        <!-- Los controles existentes no se moverán -->
+        <Label x:Name = "lbCrearCuenta" Content="{x:Static p:Resources.lbCreateAccount}" FontWeight="Bold" HorizontalAlignment="Left" Margin="24,19,0,0" FontSize="29" VerticalAlignment="Top"/>
+        <Label x:Name="lbCreaTuCuenta" Content="{x:Static p:Resources.lbCreateYourAccount}" HorizontalAlignment="Left" FontWeight="Bold" Margin="89,40,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label x:Name = "lbPoliticaContraseña" Content="{x:Static p:Resources.lbPasswordPolitic}" HorizontalAlignment="Left" FontWeight="Bold" Margin="95,0,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label x:Name = "lbRequerimientoMayuscula" Content="{x:Static p:Resources.lbUppercaseLetterRequirement_}" HorizontalAlignment="Left" Margin="110,18,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label x:Name = "lbRequerimientoLongitud" Content="{x:Static p:Resources.lbAtLeast12Characters}" HorizontalAlignment="Left" Margin="110,44,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.lbLowercaseLetterRequirement_}" HorizontalAlignment="Left" Margin="109,60,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.lbAtLeastOneNumber}" HorizontalAlignment="Left" Margin="110,30,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.lbSpecialCharacterRequirement_}" HorizontalAlignment="Left" Margin="109,76,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.lbInsertData}" FontWeight="Bold" HorizontalAlignment="Left" Margin="298,74,0,0" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.lbGlobalFirstLastName_}" FontWeight="Bold" HorizontalAlignment="Left" Margin="303,56,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.lbDateOfTheBird_}" HorizontalAlignment="Left" FontWeight="Bold"  Margin="303,108,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.lbEmail_}" FontWeight="Bold" HorizontalAlignment="Left" Margin="307,158,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.542,-0.289"/>
+        <Label Content="{x:Static p:Resources.lbPassword_}" FontWeight="Bold" HorizontalAlignment="Left" Margin="313,6,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.lbGlobalName_}" FontWeight="Bold" HorizontalAlignment="Left" Margin="303,112,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Label Content="{x:Static p:Resources.lbGlobalFirstSecondLastName_}" FontWeight="Bold" HorizontalAlignment="Left" Margin="512,40,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.lbGlobalUsername_}" HorizontalAlignment="Left" FontWeight="Bold" Margin="519,158,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.lbMustFillFields}" HorizontalAlignment="Left" FontWeight="Bold" Margin="582,76,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="316,26,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="316,86,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="512,184,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="316,182,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="512,86,0,0" Grid.Row="1" TextWrapping="Wrap" BorderBrush="{x:Null}" VerticalAlignment="Top" Width="120"/>
+        <PasswordBox HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="316,30,0,0" Grid.Row="2" VerticalAlignment="Top" Width="120"/>
+        <DatePicker BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="316,130,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Button BorderBrush="{x:Null}" Content="{x:Static p:Resources.btnRegister}" Background="SaddleBrown" FontWeight="Bold" HorizontalAlignment="Left" Margin="613,50,0,0" Grid.Row="2" VerticalAlignment="Top" Width="156" Height="26"/>
     </Grid>
-
-
 </Page>

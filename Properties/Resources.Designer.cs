@@ -61,6 +61,15 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Crear Cuenta.
+        /// </summary>
+        public static string btnCreateAccount {
+            get {
+                return ResourceManager.GetString("btnCreateAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Inicio de sesión .
         /// </summary>
         public static string btnLogin_ {
@@ -106,11 +115,119 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Al menos 12 caracteres.
+        /// </summary>
+        public static string lbAtLeast12Characters {
+            get {
+                return ResourceManager.GetString("lbAtLeast12Characters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Al menos un numero.
+        /// </summary>
+        public static string lbAtLeastOneNumber {
+            get {
+                return ResourceManager.GetString("lbAtLeastOneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Crear cuenta.
+        /// </summary>
+        public static string lbCreateAccount {
+            get {
+                return ResourceManager.GetString("lbCreateAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Crea tu cuenta.
+        /// </summary>
+        public static string lbCreateYourAccount {
+            get {
+                return ResourceManager.GetString("lbCreateYourAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha de nacimiento.
+        /// </summary>
+        public static string lbDateOfTheBird_ {
+            get {
+                return ResourceManager.GetString("lbDateOfTheBird ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Correo.
+        /// </summary>
+        public static string lbEmail_ {
+            get {
+                return ResourceManager.GetString("lbEmail ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Olvide mi contraseña .
         /// </summary>
         public static string lbForgotPassword_ {
             get {
                 return ResourceManager.GetString("lbForgotPassword ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Primer apellido.
+        /// </summary>
+        public static string lbGlobalFirstLastName_ {
+            get {
+                return ResourceManager.GetString("lbGlobalFirstLastName ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Segundo apellido.
+        /// </summary>
+        public static string lbGlobalFirstSecondLastName_ {
+            get {
+                return ResourceManager.GetString("lbGlobalFirstSecondLastName ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre.
+        /// </summary>
+        public static string lbGlobalName_ {
+            get {
+                return ResourceManager.GetString("lbGlobalName ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contraseña.
+        /// </summary>
+        public static string lbGlobalPassword_ {
+            get {
+                return ResourceManager.GetString("lbGlobalPassword ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre de usuario.
+        /// </summary>
+        public static string lbGlobalUsername_ {
+            get {
+                return ResourceManager.GetString("lbGlobalUsername ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingresa los siguientes datos.
+        /// </summary>
+        public static string lbInsertData {
+            get {
+                return ResourceManager.GetString("lbInsertData", resourceCulture);
             }
         }
         
@@ -124,6 +241,24 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Una minúscula .
+        /// </summary>
+        public static string lbLowercaseLetterRequirement_ {
+            get {
+                return ResourceManager.GetString("lbLowercaseLetterRequirement ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Debes llenar los campos obligatorios.
+        /// </summary>
+        public static string lbMustFillFields {
+            get {
+                return ResourceManager.GetString("lbMustFillFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Contraseña .
         /// </summary>
         public static string lbPassword_ {
@@ -133,11 +268,38 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña debe contener.
+        /// </summary>
+        public static string lbPasswordPolitic {
+            get {
+                return ResourceManager.GetString("lbPasswordPolitic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Registrarse .
         /// </summary>
         public static string lbRegister_ {
             get {
                 return ResourceManager.GetString("lbRegister ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Por le menos un caracter especial.
+        /// </summary>
+        public static string lbSpecialCharacterRequirement_ {
+            get {
+                return ResourceManager.GetString("lbSpecialCharacterRequirement ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Una mayúscula .
+        /// </summary>
+        public static string lbUppercaseLetterRequirement_ {
+            get {
+                return ResourceManager.GetString("lbUppercaseLetterRequirement ", resourceCulture);
             }
         }
         
