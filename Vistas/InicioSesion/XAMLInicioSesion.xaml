@@ -16,13 +16,24 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <Grid Grid.RowSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="31*"/>
+                <RowDefinition Height="79*"/>
+            </Grid.RowDefinitions>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Recursos/landsCape.png"/>
+            </Grid.Background>
+        </Grid>
+
+        <Image Source="/Recursos/loginBox.png" HorizontalAlignment="Center" VerticalAlignment="Top"  Stretch="Fill" Height="352" Width="343" Margin="0,42,0,0" Grid.RowSpan="3"/>
         <TextBlock
                    FontSize="28"
                    FontWeight="Bold"
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
+                   VerticalAlignment="Top"
                    Grid.Row="0"
-                   Margin="0,30,0,0"
+                   Margin="0,42,0,0"
                    Foreground="Black"><Run Language="es-mx" Text="Hunter´s Trophy"/></TextBlock>
 
         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
@@ -43,24 +54,26 @@
                          Height="40"
                          FontSize="16"
                          
-                          Background="Transparent"
+                          Background="White"
                          Foreground="#CDCDCD" />
 
             <Button Content="Iniciar Sesión"
                     Background="#007ACC"
-                    Foreground="White"
+                    Foreground="Black"
                     FontSize="16"
                     FontWeight="Bold"
                     Margin="0,20,0,0"
                     Padding="10"
                     Height="40"/>
         </StackPanel>
-        <Label  Content="{x:Static p:Resources.lbLogin_}"  HorizontalAlignment="Center" Margin="0,90,0,0" Height="23" VerticalAlignment="Top" Width="136" Grid.RowSpan="2"/>
-        <Label Content="{x:Static p:Resources.lbUserName_}" HorizontalAlignment="Left" Margin="264,112,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <Label Content="{x:Static p:Resources.lbPassword_}" HorizontalAlignment="Left" Margin="254,72,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Resources.NewInGame_}" HorizontalAlignment="Center" Margin="0,218,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <Button Content="{x:Static p:Resources.btnRegister_}" HorizontalAlignment="Left" Margin="364,18,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Button Content="{x:Static p:Resources.Guest_}" HorizontalAlignment="Left" Margin="676,70,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Button Content="{x:Static p:Resources.btnForgotPassword_}" HorizontalAlignment="Left" Margin="250,138,0,0" Grid.Row="1" VerticalAlignment="Top" Click="Button_Click"/>
+        <Label  Content="{x:Static p:Resources.lbLogin_}" Foreground="Black" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Margin="328,78,0,0" Height="34" VerticalAlignment="Top" Width="178"/>
+        <Label Content="{x:Static p:Resources.lbUserName_}" HorizontalAlignment="Left" FontWeight="Bold" Margin="264,112,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Label Content="{x:Static p:Resources.lbPassword_}" HorizontalAlignment="Left" FontWeight="Bold" Margin="254,72,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.NewInGame_}" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,218,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Label  FontFamily="Inter" FontSize="14" VerticalAlignment="Top" Foreground="PowderBlue" Cursor="Hand" Content="{x:Static p:Resources.lbForgotPassword_}" Margin="250,134,163,0" Grid.Row="1"></Label>
+        <Button Content="{x:Static p:Resources.Guest_}" HorizontalAlignment="Left" Margin="343,62,0,0" Foreground="Black" FontWeight="Bold" FontSize="30" BorderThickness="0" Background="Transparent" Grid.Row="2" VerticalAlignment="Top"/>
+        <Button Content="" Margin="254,134,0,0" HorizontalAlignment="Left" Background="Transparent"     BorderThickness="0" Grid.Row="1" VerticalAlignment="Top" Click="Button_Click" Height="22" Width="175"/>
+        <Button Content="" HorizontalAlignment="Center" Margin="0,18,0,0" Background="Transparent" BorderThickness="0" Grid.Row="2" VerticalAlignment="Top" Click="Button_Click_1" Height="32" Width="88"/>
+        <Label Content="{x:Static p:Resources.lbRegister_}" FontFamily="Inter" FontSize="14" VerticalAlignment="Top" Foreground="PowderBlue" Cursor="Hand" HorizontalAlignment="Left" Margin="356,22,0,0" Grid.Row="2"  RenderTransformOrigin="-0.421,0.039" Width="102"/>
     </Grid>
 </Page>

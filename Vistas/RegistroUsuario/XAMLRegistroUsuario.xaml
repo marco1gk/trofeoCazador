@@ -39,6 +39,8 @@
         <TextBox HorizontalAlignment="Left" Margin="512,86,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <PasswordBox HorizontalAlignment="Left" Margin="316,30,0,0" Grid.Row="2" VerticalAlignment="Top" Width="120"/>
         <DatePicker HorizontalAlignment="Left" Margin="316,130,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Button Content="{x:Static p:Resources.btnRegister}" HorizontalAlignment="Left" Margin="686,30,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+
 
 
     </Grid>

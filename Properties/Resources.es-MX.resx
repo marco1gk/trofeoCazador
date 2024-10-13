@@ -120,8 +120,8 @@
   <data name="hola" xml:space="preserve">
     <value>MEJICO</value>
   </data>
-  <data name="UserName " xml:space="preserve">
-    <value>Usuario </value>
+  <data name="lbUserName " xml:space="preserve">
+    <value>Usuario</value>
   </data>
   <data name="vtLogin" xml:space="preserve">
     <value>Inicio de sesión </value>
@@ -129,14 +129,14 @@
   <data name="TitleGame " xml:space="preserve">
     <value>Trofeo del Cazador</value>
   </data>
-  <data name="Login " xml:space="preserve">
-    <value>Inicio de sesión </value>
+  <data name="lbLogin " xml:space="preserve">
+    <value>Iniciar sesión</value>
   </data>
-  <data name="Password " xml:space="preserve">
-    <value>Contraseña </value>
+  <data name="lbPassword " xml:space="preserve">
+    <value>Contraseña</value>
   </data>
-  <data name="forgotPassword " xml:space="preserve">
-    <value>Olvide mi contraseña </value>
+  <data name="lbForgotPassword " xml:space="preserve">
+    <value>Olvide mi contraseña</value>
   </data>
   <data name="NewInGame " xml:space="preserve">
     <value>¿Nuevo en el juego? </value>
@@ -144,8 +144,8 @@
   <data name="btnLogin " xml:space="preserve">
     <value>Inicio de sesión </value>
   </data>
-  <data name="Register " xml:space="preserve">
-    <value>Registrarse </value>
+  <data name="lbRegister " xml:space="preserve">
+    <value>Registrarse</value>
   </data>
   <data name="Guest " xml:space="preserve">
     <value>Invitado </value>
@@ -158,5 +158,23 @@
   </data>
   <data name="lbWLoginWrongData" xml:space="preserve">
     <value>Los datos ingresados son incorrectos, intente de nuevo </value>
+  </data>
+  <data name="UserName " xml:space="preserve">
+    <value>Usuario </value>
+  </data>
+  <data name="Login " xml:space="preserve">
+    <value>Inicio de sesión </value>
+  </data>
+  <data name="Password " xml:space="preserve">
+    <value>Contraseña </value>
+  </data>
+  <data name="forgotPassword " xml:space="preserve">
+    <value>Olvide mi contraseña </value>
+  </data>
+  <data name="Register " xml:space="preserve">
+    <value>Registrarse </value>
+  </data>
+  <data name="btnRegister" xml:space="preserve">
+    <value>Crear cuenta</value>
   </data>
 </root>

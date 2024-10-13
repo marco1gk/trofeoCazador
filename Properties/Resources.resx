@@ -135,7 +135,7 @@
   <data name="lbPassword " xml:space="preserve">
     <value>Contraseña </value>
   </data>
-  <data name="btnForgotPassword " xml:space="preserve">
+  <data name="lbForgotPassword " xml:space="preserve">
     <value>Olvide mi contraseña </value>
   </data>
   <data name="NewInGame " xml:space="preserve">
@@ -144,7 +144,7 @@
   <data name="btnLogin " xml:space="preserve">
     <value>Inicio de sesión </value>
   </data>
-  <data name="btnRegister " xml:space="preserve">
+  <data name="lbRegister " xml:space="preserve">
     <value>Registrarse </value>
   </data>
   <data name="Guest " xml:space="preserve">
@@ -158,5 +158,23 @@
   </data>
   <data name="lbWLoginWrongData" xml:space="preserve">
     <value>Los datos ingresados son incorrectos, intente de nuevo </value>
+  </data>
+  <data name="UserName " xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="Login " xml:space="preserve">
+    <value>Inicio de sesión</value>
+  </data>
+  <data name="Password " xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="forgotPassword " xml:space="preserve">
+    <value>Olvidaste tu contraseña</value>
+  </data>
+  <data name="Register " xml:space="preserve">
+    <value>Registrarse</value>
+  </data>
+  <data name="btnRegister" xml:space="preserve">
+    <value>Crear cuenta</value>
   </data>
 </root>
