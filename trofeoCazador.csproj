@@ -127,5 +127,8 @@
   <ItemGroup>
     <Resource Include="Recursos\fondoCrearPerfil.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\invierno.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
