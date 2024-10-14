@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="ModeloBD.Jugador" Width="1.5" PointX="3" PointY="7.375" />
         <EntityTypeShape EntityType="ModeloBD.Partida" Width="1.5" PointX="5.25" PointY="12.375" />
         <EntityTypeShape EntityType="ModeloBD.recuperarContrasenia" Width="1.5" PointX="3" PointY="1.5" />
-        <EntityTypeShape EntityType="ModeloBD.jugadorPartida" Width="1.5" PointX="5.25" PointY="7.125" />
+        <EntityTypeShape EntityType="ModeloBD.jugadorPartida" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
         <AssociationConnector Association="ModeloBD.FK_Amistad_Jugador" />
         <AssociationConnector Association="ModeloBD.FK_Amistad_Jugador1" />
         <AssociationConnector Association="ModeloBD.FK_Baneo_Jugador" />
