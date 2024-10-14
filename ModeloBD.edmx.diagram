@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="42d2ab6ff42c4922a64bd60a49a38bfb" Name="Diagram1" ZoomLevel="55" >
+        <EntityTypeShape EntityType="ModeloBD.Amistad" Width="1.5" PointX="5.25" PointY="4.25" />
+        <EntityTypeShape EntityType="ModeloBD.Baneo" Width="1.5" PointX="5.25" PointY="9.5" />
+        <EntityTypeShape EntityType="ModeloBD.Cuenta" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="ModeloBD.Jugador" Width="1.5" PointX="3" PointY="7.375" />
+        <EntityTypeShape EntityType="ModeloBD.Partida" Width="1.5" PointX="5.25" PointY="12.375" />
+        <EntityTypeShape EntityType="ModeloBD.recuperarContrasenia" Width="1.5" PointX="3" PointY="1.5" />
+        <EntityTypeShape EntityType="ModeloBD.jugadorPartida" Width="1.5" PointX="5.25" PointY="7.125" />
+        <AssociationConnector Association="ModeloBD.FK_Amistad_Jugador" />
+        <AssociationConnector Association="ModeloBD.FK_Amistad_Jugador1" />
+        <AssociationConnector Association="ModeloBD.FK_Baneo_Jugador" />
+        <AssociationConnector Association="ModeloBD.FK_Jugador_Cuenta" />
+        <AssociationConnector Association="ModeloBD.FK_recuperarContrasenia_Cuenta" />
+        <AssociationConnector Association="ModeloBD.FK_jugadorPartida_Jugador" />
+        <AssociationConnector Association="ModeloBD.FK_Partida_Jugador" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
