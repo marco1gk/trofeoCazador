@@ -75,6 +75,9 @@
     <Compile Include="Vistas\InicioSesion\XAMLInicioSesion.xaml.cs">
       <DependentUpon>XAMLInicioSesion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Perfil\EditarUsuario.xaml.cs">
+      <DependentUpon>EditarUsuario.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Perfil\XAMLPerfil.xaml.cs">
       <DependentUpon>XAMLPerfil.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Vistas\InicioSesion\XAMLInicioSesion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Perfil\EditarUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

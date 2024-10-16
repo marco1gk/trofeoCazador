@@ -231,4 +231,10 @@
   <data name="btnCreateAccount" xml:space="preserve">
     <value>Crear cuenta</value>
   </data>
+  <data name="lbCurrentUsername" xml:space="preserve">
+    <value>Nombre de usuario actual:</value>
+  </data>
+  <data name="lbNewUsername" xml:space="preserve">
+    <value>Nuevo nombre de usuario:</value>
+  </data>
 </root>

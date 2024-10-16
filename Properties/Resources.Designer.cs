@@ -151,6 +151,15 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Nombre de usuario actual.
+        /// </summary>
+        public static string lbCurrentUsername {
+            get {
+                return ResourceManager.GetString("lbCurrentUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Fecha de nacimiento.
         /// </summary>
         public static string lbDateOfTheBird_ {
@@ -255,6 +264,15 @@ namespace trofeoCazador.Properties {
         public static string lbMustFillFields {
             get {
                 return ResourceManager.GetString("lbMustFillFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nuevo nombre de usuario.
+        /// </summary>
+        public static string lbNewUsername {
+            get {
+                return ResourceManager.GetString("lbNewUsername", resourceCulture);
             }
         }
         

@@ -9,7 +9,8 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PerfilUsuario">
 
-    <Grid>
+    <
+        >
      
         <Grid.Background>
             <ImageBrush ImageSource="/Recursos/invierno.jpg" />
@@ -74,5 +75,5 @@
 
         <!-- Botón Atrás -->
         <Button Content="Atrás"  Width="80" Height="40" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="30,0,0,30" VerticalAlignment="Bottom" Grid.Row="2"/>
-    </Grid>
+    </>
 </Page>
