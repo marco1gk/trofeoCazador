@@ -30,7 +30,7 @@
         <!-- Contenido de edición -->
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="400" Margin="0,20">
             <!-- Nombre de usuario actual -->
-            <TextBlock Text="{x:Static p:Resources.lbCurrentUsername}" FontSize="16" FontWeight="Bold" />
+            <TextBlock Text="{x:Static p:Resources.lbCurrentUsername}" FontSize="16" FontWeight="Bold"/>
             <TextBlock Text="{Binding CurrentUserName}" FontSize="14" Foreground="Gray" Margin="0,5" />
 
             <!-- Nuevo nombre de usuario -->
@@ -46,5 +46,6 @@
 
         <!-- Botón Atrás -->
         <Button Content="Atrás"  Width="80" Height="40" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="30,0,0,30" VerticalAlignment="Bottom" Grid.Row="2"/>
+        <Label Content="PRUEBA OPARA COMMIT" HorizontalAlignment="Left" Margin="456,20,0,0" Grid.Row="2" VerticalAlignment="Top"/>
     </Grid>
 </Page>
