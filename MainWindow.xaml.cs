@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trofeoCazador.Servidor;
 
 namespace trofeoCazador
 {
@@ -23,6 +24,18 @@ namespace trofeoCazador
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button2_Click(object sender, RoutedEventArgs e)
+        {
+     
+            //   Servidor.GestionUsuarioClient proxy = Servidor.GestionUsuarioClient();
+            Servidor.GestionUsuarioClient s = new Servidor.GestionUsuarioClient();
+            Jugador jugador = new Jugador();
+            jugador.usuario = "dasda";
+            s.agregarJugador(jugador);
+           
+
         }
     }
 }

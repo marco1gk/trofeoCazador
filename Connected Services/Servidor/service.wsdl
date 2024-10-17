@@ -17,36 +17,24 @@
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/trofeoDelCazadorServicio.Servicios.gestionUsuario" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IGestionUsuario_agregarCuenta_InputMessage">
-    <wsdl:part name="parameters" element="tns:agregarCuenta" />
+  <wsdl:message name="IGestionUsuario_agregarJugador_InputMessage">
+    <wsdl:part name="parameters" element="tns:agregarJugador" />
   </wsdl:message>
-  <wsdl:message name="IGestionUsuario_UsersResponse_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:UsersResponse" />
-  </wsdl:message>
-  <wsdl:message name="IGestionUsuario_UsersResponse_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:UsersResponseResponse" />
+  <wsdl:message name="IGestionUsuario_agregarJugador_OutputMessage">
+    <wsdl:part name="parameters" element="tns:agregarJugadorResponse" />
   </wsdl:message>
   <wsdl:portType name="IGestionUsuario">
-    <wsdl:operation name="agregarCuenta">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestionUsuario/agregarCuenta" message="tns:IGestionUsuario_agregarCuenta_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="UsersResponse">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestionUsuario/UsersResponse" message="tns:IGestionUsuario_UsersResponse_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestionUsuario/UsersResponseResponse" message="tns:IGestionUsuario_UsersResponse_InputCallbackMessage" />
+    <wsdl:operation name="agregarJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionUsuario/agregarJugador" message="tns:IGestionUsuario_agregarJugador_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionUsuario/agregarJugadorResponse" message="tns:IGestionUsuario_agregarJugador_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionUsuario" type="tns:IGestionUsuario">
     <wsp:PolicyReference URI="#NetTcpBinding_IGestionUsuario_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="agregarCuenta">
-      <soap12:operation soapAction="http://tempuri.org/IGestionUsuario/agregarCuenta" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="UsersResponse">
-      <soap12:operation soapAction="http://tempuri.org/IGestionUsuario/UsersResponse" style="document" />
+    <wsdl:operation name="agregarJugador">
+      <soap12:operation soapAction="http://tempuri.org/IGestionUsuario/agregarJugador" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

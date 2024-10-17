@@ -68,7 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\Servicio\Reference.cs">
+    <Compile Include="Connected Services\Servidor\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -134,14 +134,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\Servicio\service.wsdl" />
-    <None Include="Connected Services\Servicio\service.xsd">
+    <None Include="Connected Services\Servidor\service.wsdl" />
+    <None Include="Connected Services\Servidor\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Servicio\service1.xsd">
+    <None Include="Connected Services\Servidor\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Servicio\trofeoDelCazadorServicio.Servicios.gestionUsuario.xsd">
+    <None Include="Connected Services\Servidor\trofeoDelCazadorServicio.Servicios.gestionUsuario.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">
@@ -172,16 +172,16 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\Servicio\" />
+    <WCFMetadataStorage Include="Connected Services\Servidor\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\Servicio\configuration91.svcinfo" />
+    <None Include="Connected Services\Servidor\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\Servicio\configuration.svcinfo" />
+    <None Include="Connected Services\Servidor\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\Servicio\Reference.svcmap">
+    <None Include="Connected Services\Servidor\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

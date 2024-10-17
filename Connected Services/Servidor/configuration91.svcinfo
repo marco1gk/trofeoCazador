@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="hhJ56EXY2c4Yzrb2iDcqwqNl5QX45Ow6ePPqpd6wGU4=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="kpp1iXiIKQ8GE1KqYS+6aB+y6zjP9Ol+C3FMFP/EUxI=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IGestionUsuario">
       <properties>
@@ -121,7 +121,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IGestionUsuario" contract="Servicio.IGestionUsuario" bindingType="netTcpBinding" address="net.tcp://localhost:8081/Service" bindingConfiguration="NetTcpBinding_IGestionUsuario">
+    <endpoint name="NetTcpBinding_IGestionUsuario" contract="Servidor.IGestionUsuario" bindingType="netTcpBinding" address="net.tcp://localhost:8081/Service" bindingConfiguration="NetTcpBinding_IGestionUsuario">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:8081/Service</serializedValue>
@@ -136,7 +136,7 @@
           <serializedValue>NetTcpBinding_IGestionUsuario</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>Servicio.IGestionUsuario</serializedValue>
+          <serializedValue>Servidor.IGestionUsuario</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
