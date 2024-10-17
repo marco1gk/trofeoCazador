@@ -71,7 +71,7 @@
         </StackPanel>
 
         <!-- Botón Atrás -->
-        <Button Content="Atrás"  Width="80" Height="40" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="30,0,0,30" VerticalAlignment="Bottom" Grid.Row="2"/>
+        <Button Content="{x:Static p:Resources.btnGlobalBack}"  Width="80" Height="40" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="30,0,0,30" VerticalAlignment="Bottom" Grid.Row="2"/>
         <Label Content="prueba commit" HorizontalAlignment="Left" Margin="644,139,0,0" Grid.Row="1" VerticalAlignment="Top"/>
     </Grid>
 </Page>

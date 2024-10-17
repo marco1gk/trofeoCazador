@@ -237,4 +237,58 @@
   <data name="lbNewUsername" xml:space="preserve">
     <value>Nuevo nombre de usuario:</value>
   </data>
+  <data name="lbNewName" xml:space="preserve">
+    <value>Nuevo nombre:</value>
+  </data>
+  <data name="lbNewLastName" xml:space="preserve">
+    <value>Nuevo apellido:</value>
+  </data>
+  <data name="lbCurrentName" xml:space="preserve">
+    <value>Nombre actual:</value>
+  </data>
+  <data name="btnGlobalSave" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="btnGlobalCancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="btnGlobalBack" xml:space="preserve">
+    <value>Atrás</value>
+  </data>
+  <data name="lbTitleChangeEmail" xml:space="preserve">
+    <value>Cambiar el correo electronico</value>
+  </data>
+  <data name="lbCurrentEmail" xml:space="preserve">
+    <value>Correo actual:</value>
+  </data>
+  <data name="lbNewEmail" xml:space="preserve">
+    <value>Nuevo correo:</value>
+  </data>
+  <data name="lbTitleChangePassword" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+  </data>
+  <data name="lbCurrentPassword" xml:space="preserve">
+    <value>Contraseña actual:</value>
+  </data>
+  <data name="lbNewPassword" xml:space="preserve">
+    <value>Nueva contraseña:</value>
+  </data>
+  <data name="lbTitleEmailChangeConfirmation" xml:space="preserve">
+    <value>Confirmación de cambio de correo</value>
+  </data>
+  <data name="lbEnterVerificationCode" xml:space="preserve">
+    <value>Ingrese el código que se le envio a su correo</value>
+  </data>
+  <data name="btnSendCode" xml:space="preserve">
+    <value>Enviar código</value>
+  </data>
+  <data name="btnRequestNewCode" xml:space="preserve">
+    <value>Solicitar nuevo código</value>
+  </data>
+  <data name="lbTitleEditUsername" xml:space="preserve">
+    <value>Editar nombre de usuario</value>
+  </data>
+  <data name="lbTitleEditName" xml:space="preserve">
+    <value>Editar nombre</value>
+  </data>
 </root>

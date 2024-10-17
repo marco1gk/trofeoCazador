@@ -237,4 +237,58 @@
   <data name="lbNewUsername" xml:space="preserve">
     <value>New username:</value>
   </data>
+  <data name="lbNewName" xml:space="preserve">
+    <value>New name:</value>
+  </data>
+  <data name="lbNewLastName" xml:space="preserve">
+    <value>New last name:</value>
+  </data>
+  <data name="lbCurrentName" xml:space="preserve">
+    <value>Current name:</value>
+  </data>
+  <data name="btnGlobalSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="btnGlobalCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="btnGlobalBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="lbTitleChangeEmail" xml:space="preserve">
+    <value>Change email address</value>
+  </data>
+  <data name="lbCurrentEmail" xml:space="preserve">
+    <value>Current email:</value>
+  </data>
+  <data name="lbNewEmail" xml:space="preserve">
+    <value>New email adress:</value>
+  </data>
+  <data name="lbTitleChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="lbCurrentPassword" xml:space="preserve">
+    <value>Current password:</value>
+  </data>
+  <data name="lbNewPassword" xml:space="preserve">
+    <value>New password:</value>
+  </data>
+  <data name="lbTitleEmailChangeConfirmation" xml:space="preserve">
+    <value>Email change confirmation</value>
+  </data>
+  <data name="lbEnterVerificationCode" xml:space="preserve">
+    <value>Enter the code that was sent to your email</value>
+  </data>
+  <data name="btnSendCode" xml:space="preserve">
+    <value>Send code</value>
+  </data>
+  <data name="btnRequestNewCode" xml:space="preserve">
+    <value>Request new code</value>
+  </data>
+  <data name="lbTitleEditUsername" xml:space="preserve">
+    <value>Change username</value>
+  </data>
+  <data name="lbTitleEditName" xml:space="preserve">
+    <value>Change name</value>
+  </data>
 </root>

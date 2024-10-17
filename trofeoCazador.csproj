@@ -81,6 +81,18 @@
     <Compile Include="Vistas\InicioSesion\XAMLInicioSesion.xaml.cs">
       <DependentUpon>XAMLInicioSesion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Perfil\EditarContrasenia.xaml.cs">
+      <DependentUpon>EditarContrasenia.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Perfil\EditarCorreo.xaml.cs">
+      <DependentUpon>EditarCorreo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Perfil\EditarCorreoCodigo.xaml.cs">
+      <DependentUpon>EditarCorreoCodigo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Perfil\EditarNombre.xaml.cs">
+      <DependentUpon>EditarNombre.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Perfil\EditarUsuario.xaml.cs">
       <DependentUpon>EditarUsuario.xaml</DependentUpon>
     </Compile>
@@ -103,6 +115,22 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Vistas\InicioSesion\XAMLInicioSesion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Perfil\EditarContrasenia.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Perfil\EditarCorreo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Perfil\EditarCorreoCodigo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Perfil\EditarNombre.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

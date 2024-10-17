@@ -70,6 +70,33 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Atras.
+        /// </summary>
+        public static string btnGlobalBack {
+            get {
+                return ResourceManager.GetString("btnGlobalBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancelar.
+        /// </summary>
+        public static string btnGlobalCancel {
+            get {
+                return ResourceManager.GetString("btnGlobalCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Guardar.
+        /// </summary>
+        public static string btnGlobalSave {
+            get {
+                return ResourceManager.GetString("btnGlobalSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Inicio de sesión .
         /// </summary>
         public static string btnLogin_ {
@@ -84,6 +111,24 @@ namespace trofeoCazador.Properties {
         public static string btnRegister {
             get {
                 return ResourceManager.GetString("btnRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Solicitar nuevo código.
+        /// </summary>
+        public static string btnRequestNewCode {
+            get {
+                return ResourceManager.GetString("btnRequestNewCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enviar código.
+        /// </summary>
+        public static string btnSendCode {
+            get {
+                return ResourceManager.GetString("btnSendCode", resourceCulture);
             }
         }
         
@@ -151,6 +196,33 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Correo actual.
+        /// </summary>
+        public static string lbCurrentEmail {
+            get {
+                return ResourceManager.GetString("lbCurrentEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre actual.
+        /// </summary>
+        public static string lbCurrentName {
+            get {
+                return ResourceManager.GetString("lbCurrentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contrasena actual.
+        /// </summary>
+        public static string lbCurrentPassword {
+            get {
+                return ResourceManager.GetString("lbCurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nombre de usuario actual.
         /// </summary>
         public static string lbCurrentUsername {
@@ -174,6 +246,15 @@ namespace trofeoCazador.Properties {
         public static string lbEmail_ {
             get {
                 return ResourceManager.GetString("lbEmail ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingrese el código que se le envio a su correo.
+        /// </summary>
+        public static string lbEnterVerificationCode {
+            get {
+                return ResourceManager.GetString("lbEnterVerificationCode", resourceCulture);
             }
         }
         
@@ -268,6 +349,42 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Nuevo correo.
+        /// </summary>
+        public static string lbNewEmail {
+            get {
+                return ResourceManager.GetString("lbNewEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nuevo apellido.
+        /// </summary>
+        public static string lbNewLastName {
+            get {
+                return ResourceManager.GetString("lbNewLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nuevo nombre.
+        /// </summary>
+        public static string lbNewName {
+            get {
+                return ResourceManager.GetString("lbNewName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nueva contrasena.
+        /// </summary>
+        public static string lbNewPassword {
+            get {
+                return ResourceManager.GetString("lbNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nuevo nombre de usuario.
         /// </summary>
         public static string lbNewUsername {
@@ -309,6 +426,51 @@ namespace trofeoCazador.Properties {
         public static string lbSpecialCharacterRequirement_ {
             get {
                 return ResourceManager.GetString("lbSpecialCharacterRequirement ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Editar correo.
+        /// </summary>
+        public static string lbTitleChangeEmail {
+            get {
+                return ResourceManager.GetString("lbTitleChangeEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cambiar contraseña.
+        /// </summary>
+        public static string lbTitleChangePassword {
+            get {
+                return ResourceManager.GetString("lbTitleChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Editar nombre.
+        /// </summary>
+        public static string lbTitleEditName {
+            get {
+                return ResourceManager.GetString("lbTitleEditName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Editar nombre de usuario.
+        /// </summary>
+        public static string lbTitleEditUsername {
+            get {
+                return ResourceManager.GetString("lbTitleEditUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Verificacion de cambio de correo.
+        /// </summary>
+        public static string lbTitleEmailChangeConfirmation {
+            get {
+                return ResourceManager.GetString("lbTitleEmailChangeConfirmation", resourceCulture);
             }
         }
         
