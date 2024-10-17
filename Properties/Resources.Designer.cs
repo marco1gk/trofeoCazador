@@ -486,9 +486,9 @@ namespace trofeoCazador.Properties {
         /// <summary>
         ///   Busca una cadena traducida similar a Usuario .
         /// </summary>
-        public static string lbUserName_ {
+        public static string lbUserName {
             get {
-                return ResourceManager.GetString("lbUserName ", resourceCulture);
+                return ResourceManager.GetString("lbUserName", resourceCulture);
             }
         }
         

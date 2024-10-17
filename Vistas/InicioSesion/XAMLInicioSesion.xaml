@@ -67,11 +67,11 @@
                     Height="40"/>
         </StackPanel>
         <Label  Content="{x:Static p:Resources.lbLogin_}" Foreground="Black" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Margin="328,78,0,0" Height="34" VerticalAlignment="Top" Width="178"/>
-        <Label Content="{x:Static p:Resources.lbUserName_}" HorizontalAlignment="Left" FontWeight="Bold" Margin="264,112,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Label Content="{x:Static p:Resources.lbUserName}" HorizontalAlignment="Left" FontWeight="Bold" Margin="264,112,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Label Content="{x:Static p:Resources.lbPassword_}" HorizontalAlignment="Left" FontWeight="Bold" Margin="254,72,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Label Content="{x:Static p:Resources.NewInGame_}" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,218,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Label  FontFamily="Inter" FontSize="14" VerticalAlignment="Top" Foreground="PowderBlue" Cursor="Hand" Content="{x:Static p:Resources.lbForgotPassword_}" Margin="250,134,163,0" Grid.Row="1"></Label>
-        <Button Content="{x:Static p:Resources.Guest_}" HorizontalAlignment="Left" Margin="343,62,0,0" Foreground="Black" FontWeight="Bold" FontSize="30" BorderThickness="0" Background="Transparent" Grid.Row="2" VerticalAlignment="Top"/>
+        <Button Content="{x:Static p:Resources.Guest_}" HorizontalAlignment="Left" Margin="302,60,0,0" Foreground="Black" FontWeight="Bold" FontSize="30" BorderThickness="0" Background="Transparent" Grid.Row="2" VerticalAlignment="Top"/>
         <Button Content="" Margin="254,134,0,0" HorizontalAlignment="Left" Background="Transparent"     BorderThickness="0" Grid.Row="1" VerticalAlignment="Top" Click="Button_Click" Height="22" Width="175"/>
         <Button Content="" HorizontalAlignment="Center" Margin="0,18,0,0" Background="Transparent" BorderThickness="0" Grid.Row="2" VerticalAlignment="Top" Click="Button_Click_1" Height="32" Width="88"/>
         <Label Content="{x:Static p:Resources.lbRegister_}" FontFamily="Inter" FontSize="14" VerticalAlignment="Top" Foreground="PowderBlue" Cursor="Hand" HorizontalAlignment="Left" Margin="356,22,0,0" Grid.Row="2"  RenderTransformOrigin="-0.421,0.039" Width="102"/>

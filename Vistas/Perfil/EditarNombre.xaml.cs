@@ -22,7 +22,7 @@ namespace trofeoCazador.Vistas.Perfil
     {
         public EditarNombre()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
     }
 }

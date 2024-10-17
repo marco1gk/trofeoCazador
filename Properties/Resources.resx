@@ -120,7 +120,7 @@
   <data name="hola" xml:space="preserve">
     <value>VALORNORMAL</value>
   </data>
-  <data name="lbUserName " xml:space="preserve">
+  <data name="lbUserName" xml:space="preserve">
     <value>Usuario </value>
   </data>
   <data name="vtLogin" xml:space="preserve">

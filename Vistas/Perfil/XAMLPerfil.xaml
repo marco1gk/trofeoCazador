@@ -33,7 +33,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{x:Static p:Resources.lbUserName_}"  FontSize="16" FontWeight="Bold" />
+                <TextBlock Text="{x:Static p:Resources.lbUserName}"  FontSize="16" FontWeight="Bold" />
                 <Button Grid.Column="1" Content="✏️" Background="Transparent" Width="30" Height="30" VerticalAlignment="Center" BorderBrush="{x:Null}" />
             </Grid>
 
@@ -43,7 +43,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{x:Static p:Resources.lbPassword_}" FontSize="16" FontWeight="Bold" />
+                <TextBlock  Text="{x:Static p:Resources.lbPassword_}" FontSize="16" FontWeight="Bold" />
                 <TextBlock Grid.Row="1" FontSize="14" Foreground="Gray"/>
                 <Button Grid.Column="1" Background="Transparent" BorderBrush="{x:Null}" Content="✏️" Width="30" Height="30"  VerticalAlignment="Center" />
             </Grid>
