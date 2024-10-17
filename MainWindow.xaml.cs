@@ -14,11 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using trofeoCazador.Servidor;
 
+
 namespace trofeoCazador
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -28,14 +26,33 @@ namespace trofeoCazador
 
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
-     
-            //   Servidor.GestionUsuarioClient proxy = Servidor.GestionUsuarioClient();
-            Servidor.GestionUsuarioClient s = new Servidor.GestionUsuarioClient();
-            Jugador jugador = new Jugador();
-            jugador.usuario = "dasda";
-            s.agregarJugador(jugador);
-           
+            // Crear instancia del cliente que se comunica con el servicio
+            Servidor.GestionUsuarioClient proxy = new Servidor.GestionUsuarioClient();
 
+            // Crear un nuevo jugador con valores fijos para pruebas
+            Jugador jugador = new Jugador
+            {
+                usuario = "PruebaJugador", // Nombre de usuario fijo
+                fechaNacimiento = new DateTime(1990, 1, 1), // Fecha de nacimiento fija
+                partidasJugadas = 10, // Asignar un número de partidas jugadas fijo
+                partidasGanadas = 5, // Asignar un número de partidas ganadas fijo
+                fechaRegistro = DateTime.Now // Fecha de registro actual
+            };
+
+            // Llamar al servicio para agregar el jugador
+            int jugadorId = proxy.agregarJugador(jugador);
+
+            if (jugadorId > 0)
+            {
+                MessageBox.Show("Jugador creado con éxito. ID: " + jugadorId);
+            }
+            else
+            {
+                MessageBox.Show("Error al crear el jugador.");
+            }
+
+            // Cerrar el cliente del servicio
+            proxy.Close();
         }
     }
 }
