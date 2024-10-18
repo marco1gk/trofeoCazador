@@ -28,7 +28,7 @@
                    Margin="0,30,0,0" Grid.Row="0" />
 
         <!-- Sección para ingresar el código -->
-        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10" Padding="20" Margin="0,20,0,0" Grid.Row="1">
+        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10" Padding="20" Margin="194,20,194,0" Grid.Row="1">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <!-- Texto explicativo -->
                 <TextBlock Text="{x:Static p:Resources.lbEnterVerificationCode}"

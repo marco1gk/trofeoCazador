@@ -33,8 +33,9 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{x:Static p:Resources.lbUserName}"  FontSize="16" FontWeight="Bold" />
+                <TextBlock Text="{x:Static p:Resources.lbUserName}" FontSize="16" FontWeight="Bold" />
                 <Button Grid.Column="1" Content="✏️" Background="Transparent" Width="30" Height="30" VerticalAlignment="Center" BorderBrush="{x:Null}" />
+                <Label Content="{Binding UserName}" FontSize="14" Foreground="Black" Margin="-5,15,5,-10" />
             </Grid>
 
             <!-- Contraseña -->
@@ -43,9 +44,9 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock  Text="{x:Static p:Resources.lbPassword_}" FontSize="16" FontWeight="Bold" />
-                <TextBlock Grid.Row="1" FontSize="14" Foreground="Gray"/>
-                <Button Grid.Column="1" Background="Transparent" BorderBrush="{x:Null}" Content="✏️" Width="30" Height="30"  VerticalAlignment="Center" />
+                <TextBlock Text="{x:Static p:Resources.lbPassword_}" FontSize="16" FontWeight="Bold" />
+                <Button Grid.Column="1" Background="Transparent" BorderBrush="{x:Null}" Content="✏️" Width="30" Height="30" VerticalAlignment="Center" />
+                <Label Content="**********" FontSize="14" Foreground="Black" Margin="-5,17,5,-11" />
             </Grid>
 
             <!-- Correo -->
@@ -56,6 +57,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{x:Static p:Resources.lbEmail_}" FontSize="16" FontWeight="Bold" />
                 <Button Grid.Column="1" Background="Transparent" BorderBrush="{x:Null}" Content="✏️" Width="30" Height="30" VerticalAlignment="Center" />
+                <Label Content="{Binding Email}" FontSize="14" Foreground="Black" Margin="-4,16,4,-11" />
             </Grid>
 
             <!-- Nombre Global -->
@@ -65,13 +67,13 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{x:Static p:Resources.lbGlobalName_}" FontSize="16" FontWeight="Bold" />
-                <TextBlock Grid.Row="1" FontSize="14" Foreground="Gray"/>
                 <Button Grid.Column="1" BorderBrush="{x:Null}" Content="✏️" Background="Transparent" Width="30" Height="30" VerticalAlignment="Center" />
+                <Label Content="{Binding GlobalName}" FontSize="14" Foreground="Black" Margin="-5,15,5,-10" />
             </Grid>
         </StackPanel>
 
         <!-- Botón Atrás -->
-        <Button Content="{x:Static p:Resources.btnGlobalBack}"  Width="80" Height="40" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="30,0,0,30" VerticalAlignment="Bottom" Grid.Row="2"/>
-        <Label Content="prueba commit" HorizontalAlignment="Left" Margin="644,139,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Button Content="{x:Static p:Resources.btnGlobalBack}" Width="80" Height="40" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="30,0,0,30" VerticalAlignment="Bottom" Grid.Row="2"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="183,60,183,85" Grid.RowSpan="2"/>
     </Grid>
 </Page>
