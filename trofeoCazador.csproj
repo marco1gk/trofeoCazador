@@ -78,6 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ViewModelPerfil.cs" />
     <Compile Include="Vistas\InicioSesion\XAMLInicioSesion.xaml.cs">
       <DependentUpon>XAMLInicioSesion.xaml</DependentUpon>
     </Compile>
@@ -175,6 +176,9 @@
     </None>
     <None Include="Connected Services\Servidor\service1.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\Servidor\trofeoCazador.Servidor.Jugadorr.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\Servidor\trofeoDelCazadorServicio.Servicios.gestionUsuario.xsd">
       <SubType>Designer</SubType>

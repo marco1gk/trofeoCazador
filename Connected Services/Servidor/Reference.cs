@@ -15,10 +15,10 @@ namespace trofeoCazador.Servidor {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Jugador", Namespace="http://schemas.datacontract.org/2004/07/trofeoDelCazadorServicio.Servicios.gestio" +
+    [System.Runtime.Serialization.DataContractAttribute(Name="Jugadorr", Namespace="http://schemas.datacontract.org/2004/07/trofeoDelCazadorServicio.Servicios.gestio" +
         "nUsuario")]
     [System.SerializableAttribute()]
-    public partial class Jugador : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Jugadorr : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -160,10 +160,16 @@ namespace trofeoCazador.Servidor {
     public interface IGestionUsuario {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionUsuario/agregarJugador", ReplyAction="http://tempuri.org/IGestionUsuario/agregarJugadorResponse")]
-        int agregarJugador(trofeoCazador.Servidor.Jugador jugador);
+        int agregarJugador(trofeoCazador.Servidor.Jugadorr jugador);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionUsuario/agregarJugador", ReplyAction="http://tempuri.org/IGestionUsuario/agregarJugadorResponse")]
-        System.Threading.Tasks.Task<int> agregarJugadorAsync(trofeoCazador.Servidor.Jugador jugador);
+        System.Threading.Tasks.Task<int> agregarJugadorAsync(trofeoCazador.Servidor.Jugadorr jugador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionUsuario/obtenerJugador", ReplyAction="http://tempuri.org/IGestionUsuario/obtenerJugadorResponse")]
+        trofeoCazador.Servidor.Jugadorr obtenerJugador(int idJugador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionUsuario/obtenerJugador", ReplyAction="http://tempuri.org/IGestionUsuario/obtenerJugadorResponse")]
+        System.Threading.Tasks.Task<trofeoCazador.Servidor.Jugadorr> obtenerJugadorAsync(int idJugador);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -193,12 +199,20 @@ namespace trofeoCazador.Servidor {
                 base(binding, remoteAddress) {
         }
         
-        public int agregarJugador(trofeoCazador.Servidor.Jugador jugador) {
+        public int agregarJugador(trofeoCazador.Servidor.Jugadorr jugador) {
             return base.Channel.agregarJugador(jugador);
         }
         
-        public System.Threading.Tasks.Task<int> agregarJugadorAsync(trofeoCazador.Servidor.Jugador jugador) {
+        public System.Threading.Tasks.Task<int> agregarJugadorAsync(trofeoCazador.Servidor.Jugadorr jugador) {
             return base.Channel.agregarJugadorAsync(jugador);
+        }
+        
+        public trofeoCazador.Servidor.Jugadorr obtenerJugador(int idJugador) {
+            return base.Channel.obtenerJugador(idJugador);
+        }
+        
+        public System.Threading.Tasks.Task<trofeoCazador.Servidor.Jugadorr> obtenerJugadorAsync(int idJugador) {
+            return base.Channel.obtenerJugadorAsync(idJugador);
         }
     }
 }

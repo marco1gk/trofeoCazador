@@ -23,10 +23,20 @@
   <wsdl:message name="IGestionUsuario_agregarJugador_OutputMessage">
     <wsdl:part name="parameters" element="tns:agregarJugadorResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionUsuario_obtenerJugador_InputMessage">
+    <wsdl:part name="parameters" element="tns:obtenerJugador" />
+  </wsdl:message>
+  <wsdl:message name="IGestionUsuario_obtenerJugador_OutputMessage">
+    <wsdl:part name="parameters" element="tns:obtenerJugadorResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGestionUsuario">
     <wsdl:operation name="agregarJugador">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionUsuario/agregarJugador" message="tns:IGestionUsuario_agregarJugador_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionUsuario/agregarJugadorResponse" message="tns:IGestionUsuario_agregarJugador_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="obtenerJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionUsuario/obtenerJugador" message="tns:IGestionUsuario_obtenerJugador_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionUsuario/obtenerJugadorResponse" message="tns:IGestionUsuario_obtenerJugador_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionUsuario" type="tns:IGestionUsuario">
@@ -35,6 +45,15 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="agregarJugador">
       <soap12:operation soapAction="http://tempuri.org/IGestionUsuario/agregarJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerJugador">
+      <soap12:operation soapAction="http://tempuri.org/IGestionUsuario/obtenerJugador" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
