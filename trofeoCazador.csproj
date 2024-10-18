@@ -102,6 +102,9 @@
     <Compile Include="Vistas\RegistroUsuario\XAMLRegistroUsuario.xaml.cs">
       <DependentUpon>XAMLRegistroUsuario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Vestibulo\XAMLVestibulo.xaml.cs">
+      <DependentUpon>XAMLVestibulo.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -143,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\RegistroUsuario\XAMLRegistroUsuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Vestibulo\XAMLVestibulo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,6 +227,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\regresar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\verde.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Vistas\RestablecerConstraseña\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
