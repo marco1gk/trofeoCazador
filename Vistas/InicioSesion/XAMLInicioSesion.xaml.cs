@@ -35,7 +35,7 @@ namespace trofeoCazador.Vistas.InicioSesion
             // Navegar a la página de registro de usuario
             if (this.NavigationService == null)
             {
-                return;
+                return;//veo  veo
             }
             this.NavigationService.Navigate(new Uri("Vistas/RegistroUsuario/XAMLRegistroUsuario.xaml", UriKind.Relative));
 
