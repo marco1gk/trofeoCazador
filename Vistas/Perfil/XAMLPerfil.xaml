@@ -35,7 +35,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{x:Static p:Resources.lbUserName}" FontSize="16" FontWeight="Bold" />
                 <Button Grid.Column="1" Content="✏️" Background="Transparent" Width="30" Height="30" VerticalAlignment="Center" BorderBrush="{x:Null}" />
-                <Label Content="{Binding UserName}" FontSize="14" Foreground="Black" Margin="-5,15,5,-10" />
+                <Label Name="UsuarioLabel" FontSize="14" Foreground="Black" Margin="-5,15,5,-10" />
             </Grid>
 
             <!-- Contraseña -->
@@ -57,7 +57,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{x:Static p:Resources.lbEmail_}" FontSize="16" FontWeight="Bold" />
                 <Button Grid.Column="1" Background="Transparent" BorderBrush="{x:Null}" Content="✏️" Width="30" Height="30" VerticalAlignment="Center" />
-                <Label Content="{Binding Email}" FontSize="14" Foreground="Black" Margin="-4,16,4,-11" />
+                <Label Name="CorreoLabel" FontSize="14" Foreground="Black" Margin="-4,16,4,-11" />
             </Grid>
 
             <!-- Nombre Global -->
@@ -68,7 +68,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{x:Static p:Resources.lbGlobalName_}" FontSize="16" FontWeight="Bold" />
                 <Button Grid.Column="1" BorderBrush="{x:Null}" Content="✏️" Background="Transparent" Width="30" Height="30" VerticalAlignment="Center" />
-                <Label Content="{Binding GlobalName}" FontSize="14" Foreground="Black" Margin="-5,15,5,-10" />
+                <Label Name="NombreLabel" FontSize="14" Foreground="Black" Margin="-5,15,5,-10" />
             </Grid>
         </StackPanel>
 

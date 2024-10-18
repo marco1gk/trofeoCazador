@@ -26,6 +26,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="41d30f46-ae09-4a4d-975c-71d577f817c1" SourceId="1" SourceUrl="net.tcp://localhost:8081/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="689a0d49-a87d-43ef-a67d-9b9a2f9ffd9c" SourceId="1" SourceUrl="net.tcp://localhost:8081/mex" />
     <MetadataFile FileName="trofeoDelCazadorServicio.Servicios.gestionUsuario.xsd" MetadataType="Schema" ID="22d8a143-ff12-46f1-812f-73fd45dfbe95" SourceId="1" SourceUrl="net.tcp://localhost:8081/mex" />
+    <MetadataFile FileName="dataAccess.xsd" MetadataType="Schema" ID="90adcdd2-8182-48d7-bf67-429d63f5d1a1" SourceId="1" SourceUrl="net.tcp://localhost:8081/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

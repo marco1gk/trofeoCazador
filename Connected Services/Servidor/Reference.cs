@@ -24,10 +24,16 @@ namespace trofeoCazador.Servidor {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime fechaNacimientoField;
+        private trofeoCazador.Servidor.Cuenta CuentaLlaveForaneaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime fechaRegistroField;
+        private string contraseniaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string correoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime fechaNacimientoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int idCuentaField;
@@ -55,6 +61,45 @@ namespace trofeoCazador.Servidor {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Cuenta CuentaLlaveForanea {
+            get {
+                return this.CuentaLlaveForaneaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CuentaLlaveForaneaField, value) != true)) {
+                    this.CuentaLlaveForaneaField = value;
+                    this.RaisePropertyChanged("CuentaLlaveForanea");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string contrasenia {
+            get {
+                return this.contraseniaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.contraseniaField, value) != true)) {
+                    this.contraseniaField = value;
+                    this.RaisePropertyChanged("contrasenia");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string correo {
+            get {
+                return this.correoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.correoField, value) != true)) {
+                    this.correoField = value;
+                    this.RaisePropertyChanged("correo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime fechaNacimiento {
             get {
                 return this.fechaNacimientoField;
@@ -63,19 +108,6 @@ namespace trofeoCazador.Servidor {
                 if ((this.fechaNacimientoField.Equals(value) != true)) {
                     this.fechaNacimientoField = value;
                     this.RaisePropertyChanged("fechaNacimiento");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime fechaRegistro {
-            get {
-                return this.fechaRegistroField;
-            }
-            set {
-                if ((this.fechaRegistroField.Equals(value) != true)) {
-                    this.fechaRegistroField = value;
-                    this.RaisePropertyChanged("fechaRegistro");
                 }
             }
         }
@@ -141,6 +173,852 @@ namespace trofeoCazador.Servidor {
                 if ((object.ReferenceEquals(this.usuarioField, value) != true)) {
                     this.usuarioField = value;
                     this.RaisePropertyChanged("usuario");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Cuenta", Namespace="http://schemas.datacontract.org/2004/07/dataAccess")]
+    [System.SerializableAttribute()]
+    public partial class Cuenta : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.Jugador[] JugadorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string apellidoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime fechaRegistroField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idCuentaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nombreField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.recuperarContrasenia[] recuperarContraseniaField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Jugador[] Jugador {
+            get {
+                return this.JugadorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.JugadorField, value) != true)) {
+                    this.JugadorField = value;
+                    this.RaisePropertyChanged("Jugador");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string apellido {
+            get {
+                return this.apellidoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.apellidoField, value) != true)) {
+                    this.apellidoField = value;
+                    this.RaisePropertyChanged("apellido");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime fechaRegistro {
+            get {
+                return this.fechaRegistroField;
+            }
+            set {
+                if ((this.fechaRegistroField.Equals(value) != true)) {
+                    this.fechaRegistroField = value;
+                    this.RaisePropertyChanged("fechaRegistro");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idCuenta {
+            get {
+                return this.idCuentaField;
+            }
+            set {
+                if ((this.idCuentaField.Equals(value) != true)) {
+                    this.idCuentaField = value;
+                    this.RaisePropertyChanged("idCuenta");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string nombre {
+            get {
+                return this.nombreField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nombreField, value) != true)) {
+                    this.nombreField = value;
+                    this.RaisePropertyChanged("nombre");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.recuperarContrasenia[] recuperarContrasenia {
+            get {
+                return this.recuperarContraseniaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.recuperarContraseniaField, value) != true)) {
+                    this.recuperarContraseniaField = value;
+                    this.RaisePropertyChanged("recuperarContrasenia");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Jugador", Namespace="http://schemas.datacontract.org/2004/07/dataAccess")]
+    [System.SerializableAttribute()]
+    public partial class Jugador : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.Amistad[] AmistadField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.Amistad[] Amistad1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.Baneo[] BaneoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.Cuenta CuentaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.Partida[] PartidaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.Partida[] Partida1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string contraseniaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string correoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime fechaNacimientoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idCuentaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idJugadorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> partidasGanadasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> partidasJugadasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string usuarioField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Amistad[] Amistad {
+            get {
+                return this.AmistadField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AmistadField, value) != true)) {
+                    this.AmistadField = value;
+                    this.RaisePropertyChanged("Amistad");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Amistad[] Amistad1 {
+            get {
+                return this.Amistad1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Amistad1Field, value) != true)) {
+                    this.Amistad1Field = value;
+                    this.RaisePropertyChanged("Amistad1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Baneo[] Baneo {
+            get {
+                return this.BaneoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BaneoField, value) != true)) {
+                    this.BaneoField = value;
+                    this.RaisePropertyChanged("Baneo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Cuenta Cuenta {
+            get {
+                return this.CuentaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CuentaField, value) != true)) {
+                    this.CuentaField = value;
+                    this.RaisePropertyChanged("Cuenta");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Partida[] Partida {
+            get {
+                return this.PartidaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PartidaField, value) != true)) {
+                    this.PartidaField = value;
+                    this.RaisePropertyChanged("Partida");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Partida[] Partida1 {
+            get {
+                return this.Partida1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Partida1Field, value) != true)) {
+                    this.Partida1Field = value;
+                    this.RaisePropertyChanged("Partida1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string contrasenia {
+            get {
+                return this.contraseniaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.contraseniaField, value) != true)) {
+                    this.contraseniaField = value;
+                    this.RaisePropertyChanged("contrasenia");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string correo {
+            get {
+                return this.correoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.correoField, value) != true)) {
+                    this.correoField = value;
+                    this.RaisePropertyChanged("correo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime fechaNacimiento {
+            get {
+                return this.fechaNacimientoField;
+            }
+            set {
+                if ((this.fechaNacimientoField.Equals(value) != true)) {
+                    this.fechaNacimientoField = value;
+                    this.RaisePropertyChanged("fechaNacimiento");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idCuenta {
+            get {
+                return this.idCuentaField;
+            }
+            set {
+                if ((this.idCuentaField.Equals(value) != true)) {
+                    this.idCuentaField = value;
+                    this.RaisePropertyChanged("idCuenta");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idJugador {
+            get {
+                return this.idJugadorField;
+            }
+            set {
+                if ((this.idJugadorField.Equals(value) != true)) {
+                    this.idJugadorField = value;
+                    this.RaisePropertyChanged("idJugador");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> partidasGanadas {
+            get {
+                return this.partidasGanadasField;
+            }
+            set {
+                if ((this.partidasGanadasField.Equals(value) != true)) {
+                    this.partidasGanadasField = value;
+                    this.RaisePropertyChanged("partidasGanadas");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> partidasJugadas {
+            get {
+                return this.partidasJugadasField;
+            }
+            set {
+                if ((this.partidasJugadasField.Equals(value) != true)) {
+                    this.partidasJugadasField = value;
+                    this.RaisePropertyChanged("partidasJugadas");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string usuario {
+            get {
+                return this.usuarioField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usuarioField, value) != true)) {
+                    this.usuarioField = value;
+                    this.RaisePropertyChanged("usuario");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="recuperarContrasenia", Namespace="http://schemas.datacontract.org/2004/07/dataAccess")]
+    [System.SerializableAttribute()]
+    public partial class recuperarContrasenia : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.Cuenta CuentaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime fechaCreacionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime fechaExpiracionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idCuentaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idRecuperacionContraseniaField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Cuenta Cuenta {
+            get {
+                return this.CuentaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CuentaField, value) != true)) {
+                    this.CuentaField = value;
+                    this.RaisePropertyChanged("Cuenta");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime fechaCreacion {
+            get {
+                return this.fechaCreacionField;
+            }
+            set {
+                if ((this.fechaCreacionField.Equals(value) != true)) {
+                    this.fechaCreacionField = value;
+                    this.RaisePropertyChanged("fechaCreacion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime fechaExpiracion {
+            get {
+                return this.fechaExpiracionField;
+            }
+            set {
+                if ((this.fechaExpiracionField.Equals(value) != true)) {
+                    this.fechaExpiracionField = value;
+                    this.RaisePropertyChanged("fechaExpiracion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idCuenta {
+            get {
+                return this.idCuentaField;
+            }
+            set {
+                if ((this.idCuentaField.Equals(value) != true)) {
+                    this.idCuentaField = value;
+                    this.RaisePropertyChanged("idCuenta");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idRecuperacionContrasenia {
+            get {
+                return this.idRecuperacionContraseniaField;
+            }
+            set {
+                if ((this.idRecuperacionContraseniaField.Equals(value) != true)) {
+                    this.idRecuperacionContraseniaField = value;
+                    this.RaisePropertyChanged("idRecuperacionContrasenia");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Amistad", Namespace="http://schemas.datacontract.org/2004/07/dataAccess")]
+    [System.SerializableAttribute()]
+    public partial class Amistad : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.Jugador JugadorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.Jugador Jugador1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string estadoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idAmistadField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idJugador1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idJugador2Field;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Jugador Jugador {
+            get {
+                return this.JugadorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.JugadorField, value) != true)) {
+                    this.JugadorField = value;
+                    this.RaisePropertyChanged("Jugador");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Jugador Jugador1 {
+            get {
+                return this.Jugador1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Jugador1Field, value) != true)) {
+                    this.Jugador1Field = value;
+                    this.RaisePropertyChanged("Jugador1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string estado {
+            get {
+                return this.estadoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.estadoField, value) != true)) {
+                    this.estadoField = value;
+                    this.RaisePropertyChanged("estado");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idAmistad {
+            get {
+                return this.idAmistadField;
+            }
+            set {
+                if ((this.idAmistadField.Equals(value) != true)) {
+                    this.idAmistadField = value;
+                    this.RaisePropertyChanged("idAmistad");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idJugador1 {
+            get {
+                return this.idJugador1Field;
+            }
+            set {
+                if ((this.idJugador1Field.Equals(value) != true)) {
+                    this.idJugador1Field = value;
+                    this.RaisePropertyChanged("idJugador1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idJugador2 {
+            get {
+                return this.idJugador2Field;
+            }
+            set {
+                if ((this.idJugador2Field.Equals(value) != true)) {
+                    this.idJugador2Field = value;
+                    this.RaisePropertyChanged("idJugador2");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Baneo", Namespace="http://schemas.datacontract.org/2004/07/dataAccess")]
+    [System.SerializableAttribute()]
+    public partial class Baneo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.Jugador JugadorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> fechaFinField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime fechaInicioField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idBaneoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idJugadorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string motivoField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Jugador Jugador {
+            get {
+                return this.JugadorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.JugadorField, value) != true)) {
+                    this.JugadorField = value;
+                    this.RaisePropertyChanged("Jugador");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> fechaFin {
+            get {
+                return this.fechaFinField;
+            }
+            set {
+                if ((this.fechaFinField.Equals(value) != true)) {
+                    this.fechaFinField = value;
+                    this.RaisePropertyChanged("fechaFin");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime fechaInicio {
+            get {
+                return this.fechaInicioField;
+            }
+            set {
+                if ((this.fechaInicioField.Equals(value) != true)) {
+                    this.fechaInicioField = value;
+                    this.RaisePropertyChanged("fechaInicio");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idBaneo {
+            get {
+                return this.idBaneoField;
+            }
+            set {
+                if ((this.idBaneoField.Equals(value) != true)) {
+                    this.idBaneoField = value;
+                    this.RaisePropertyChanged("idBaneo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idJugador {
+            get {
+                return this.idJugadorField;
+            }
+            set {
+                if ((this.idJugadorField.Equals(value) != true)) {
+                    this.idJugadorField = value;
+                    this.RaisePropertyChanged("idJugador");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string motivo {
+            get {
+                return this.motivoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.motivoField, value) != true)) {
+                    this.motivoField = value;
+                    this.RaisePropertyChanged("motivo");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Partida", Namespace="http://schemas.datacontract.org/2004/07/dataAccess")]
+    [System.SerializableAttribute()]
+    public partial class Partida : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.Jugador JugadorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.Servidor.Jugador[] Jugador1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime fechaHoraField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idGanadorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idPartidaField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Jugador Jugador {
+            get {
+                return this.JugadorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.JugadorField, value) != true)) {
+                    this.JugadorField = value;
+                    this.RaisePropertyChanged("Jugador");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.Servidor.Jugador[] Jugador1 {
+            get {
+                return this.Jugador1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Jugador1Field, value) != true)) {
+                    this.Jugador1Field = value;
+                    this.RaisePropertyChanged("Jugador1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime fechaHora {
+            get {
+                return this.fechaHoraField;
+            }
+            set {
+                if ((this.fechaHoraField.Equals(value) != true)) {
+                    this.fechaHoraField = value;
+                    this.RaisePropertyChanged("fechaHora");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idGanador {
+            get {
+                return this.idGanadorField;
+            }
+            set {
+                if ((this.idGanadorField.Equals(value) != true)) {
+                    this.idGanadorField = value;
+                    this.RaisePropertyChanged("idGanador");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idPartida {
+            get {
+                return this.idPartidaField;
+            }
+            set {
+                if ((this.idPartidaField.Equals(value) != true)) {
+                    this.idPartidaField = value;
+                    this.RaisePropertyChanged("idPartida");
                 }
             }
         }

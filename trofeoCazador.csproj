@@ -78,7 +78,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\ViewModelPerfil.cs" />
     <Compile Include="Vistas\InicioSesion\XAMLInicioSesion.xaml.cs">
       <DependentUpon>XAMLInicioSesion.xaml</DependentUpon>
     </Compile>
@@ -170,6 +169,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\Servidor\dataAccess.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\Servidor\service.wsdl" />
     <None Include="Connected Services\Servidor\service.xsd">
       <SubType>Designer</SubType>
