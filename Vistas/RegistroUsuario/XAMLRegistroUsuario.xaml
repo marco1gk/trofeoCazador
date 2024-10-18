@@ -12,7 +12,7 @@
     <Grid>
         <!-- Aquí se agrega la imagen de fondo -->
         <Grid.Background>
-            <ImageBrush ImageSource="/Recursos/otoño.webp" Stretch="Fill" />
+            <ImageBrush ImageSource="/Recursos/otoñoCrearPerfil.jpg"/>
         </Grid.Background>
 
         <Grid.RowDefinitions>
@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
 
         <!-- Los controles existentes no se moverán -->
-        <Label x:Name = "lbCrearCuenta" Content="{x:Static p:Resources.lbCreateAccount}" FontWeight="Bold" HorizontalAlignment="Left" Margin="24,19,0,0" FontSize="29" VerticalAlignment="Top"/>
+        <Label x:Name = "lbCrearCuenta" Content="{x:Static p:Resources.lbCreateAccount}" FontWeight="Bold" HorizontalAlignment="Left" Margin="21,74,0,0" FontSize="29" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Label x:Name="lbCreaTuCuenta" Content="{x:Static p:Resources.lbCreateYourAccount}" HorizontalAlignment="Left" FontWeight="Bold" Margin="89,40,0,0" VerticalAlignment="Top" Grid.Row="1"/>
         <Label x:Name = "lbPoliticaContraseña" Content="{x:Static p:Resources.lbPasswordPolitic}" HorizontalAlignment="Left" FontWeight="Bold" Margin="95,0,0,0" Grid.Row="2" VerticalAlignment="Top"/>
         <Label x:Name = "lbRequerimientoMayuscula" Content="{x:Static p:Resources.lbUppercaseLetterRequirement_}" HorizontalAlignment="Left" Margin="110,18,0,0" Grid.Row="2" VerticalAlignment="Top"/>
@@ -40,13 +40,14 @@
         <Label Content="{x:Static p:Resources.lbGlobalFirstSecondLastName_}" FontWeight="Bold" HorizontalAlignment="Left" Margin="512,40,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Label Content="{x:Static p:Resources.lbGlobalUsername_}" HorizontalAlignment="Left" FontWeight="Bold" Margin="519,158,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Label Content="{x:Static p:Resources.lbMustFillFields}" HorizontalAlignment="Left" FontWeight="Bold" Margin="582,76,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Image Name="ImgBack" HorizontalAlignment="Left" Height="56" Margin="10,0,0,0" VerticalAlignment="Top" Width="88" Source="/Recursos/regresar.png" Cursor="Hand" MouseLeftButtonDown="ImagenCLicAtras" RenderTransformOrigin="0.83,1.2"/>
         <TextBox HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="316,26,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
         <TextBox HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="316,86,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
         <TextBox BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="512,184,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
         <TextBox HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="316,182,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
         <TextBox HorizontalAlignment="Left" Margin="512,86,0,0" Grid.Row="1" TextWrapping="Wrap" BorderBrush="{x:Null}" VerticalAlignment="Top" Width="120"/>
         <PasswordBox HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="316,30,0,0" Grid.Row="2" VerticalAlignment="Top" Width="120"/>
-        <DatePicker BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="316,130,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <DatePicker x:Name ="dpFechaNacimiento" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="316,130,0,0" Grid.Row="1" VerticalAlignment="Top" Loaded="DpFechaNacimiento_Cargado"/>
         <Button BorderBrush="{x:Null}" Content="{x:Static p:Resources.btnRegister}" Background="SaddleBrown" FontWeight="Bold" HorizontalAlignment="Left" Margin="613,50,0,0" Grid.Row="2" VerticalAlignment="Top" Width="156" Height="26"/>
     </Grid>
 </Page>

@@ -30,7 +30,23 @@ namespace trofeoCazador.Vistas.InicioSesion
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void BtnRegistrarCuenta(object sender, RoutedEventArgs e)
+        {
+            // Navegar a la página de registro de usuario
+            if (this.NavigationService == null)
+            {
+                return;
+            }
+            this.NavigationService.Navigate(new Uri("Vistas/RegistroUsuario/XAMLRegistroUsuario.xaml", UriKind.Relative));
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
         {
 
         }

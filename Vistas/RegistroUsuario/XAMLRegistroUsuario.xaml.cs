@@ -29,5 +29,18 @@ namespace trofeoCazador.Vistas.RegistroUsuario
         {
 
         }
+        private void ImagenCLicAtras(object sender, MouseButtonEventArgs e)
+        {
+                NavigationService.GoBack();
+        }
+
+        private void DpFechaNacimiento_Cargado(object sender, RoutedEventArgs e)
+        {
+            if (sender is DatePicker datePicker)
+            {
+                datePicker.DisplayDateEnd = new DateTime(DateTime.Today.Year, 12, 31);
+            }
+        }
+
     }
 }
