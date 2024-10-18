@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,50 +24,49 @@ namespace trofeoCazador
         {
             InitializeComponent();
             MainFrame.NavigationService.Navigate(new Uri("Vistas/InicioSesion/XAMLInicioSesion.xaml", UriKind.Relative));
-        }
+            /* try
+             {
+                 // Configurar el cliente del servicio
+                 ChannelFactory<IGestionUsuario> channelFactory = new ChannelFactory<IGestionUsuario>(new BasicHttpBinding(), new EndpointAddress("http://localhost:8733/Design_Time_Addresses/trofeoDelCazadorServicio/gestionUsuarioServicio/"));
+            
+            IGestionUsuario client = channelFactory.CreateChannel();
 
-        private void Button2_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Servidor.GestionUsuarioClient proxy = new Servidor.GestionUsuarioClient();
-
-                Jugador jugador = new Jugador
+                // Crear un nuevo objeto Cuentaa para enviar al servicio
+                Cuentaa nuevaCuenta = new Cuentaa
                 {
-                    usuario = "PruebaJugador", 
-                    fechaNacimiento = new DateTime(1990, 1, 1),
-                    partidasJugadas = 10, 
-                    partidasGanadas = 5, 
-                    fechaRegistro = DateTime.Now 
+                    nombre = "Juan",
+                    apellido = "Pérez",
+                    correo = "juan.perez@example.com",
+                    contrasenia = "password123",
+                    fechaRegistro = DateTime.Now
                 };
 
-               
-                int jugadorId = proxy.agregarJugador(jugador);
-
-                if (jugadorId > 0)
+                // Crear un nuevo objeto Jugadorr para enviar al servicio
+                Jugadorr nuevoJugador = new Jugadorr
                 {
-                    MessageBox.Show("Jugador creado con éxito. ID: " + jugadorId);
-                }
-                else
-                {
-                    MessageBox.Show("Error al crear el jugador.");
-                }
+                    usuario = "juanperez",
+                    fechaNacimiento = new DateTime(1995, 5, 20),
+                    partidasJugadas = null, // Dejarlo nulo si no se han jugado partidas aún
+                    partidasGanadas = null, // Dejarlo nulo si no se han ganado partidas aún
+                    fechaRegistro = DateTime.Now,
+                    CuentaLlaveForanea = nuevaCuenta
+                };
 
-             
-                proxy.Close();
+                // Llamar al método agregarJugador del servicio
+                int idJugadorCreado = client.agregarJugador(nuevoJugador);
 
+                MessageBox.Show($"Jugador creado con éxito. ID: {idJugadorCreado}", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
 
+                // Cerrar el canal
+                channelFactory.Close();
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.StackTrace);
-                Console.WriteLine($"Error al agregar el jugador y la cuenta: {ex.Message}");
-                // Imprimir la cadena de conexión para depuración (solo para propósitos de desarrollo)
-                Console.WriteLine("Cadena de conexión utilizada: " + "name=ModeloBDContainer");
-               // Código de error
-            }
-
-
+                MessageBox.Show($"Error al crear el jugador: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }*/
         }
     }
-}
+
+        
+    }
+
