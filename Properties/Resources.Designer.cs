@@ -484,7 +484,7 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Usuario .
+        ///   Busca una cadena traducida similar a Usuario.
         /// </summary>
         public static string lbUserName {
             get {

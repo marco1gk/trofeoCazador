@@ -120,9 +120,6 @@
   <data name="hola" xml:space="preserve">
     <value>MEJICO</value>
   </data>
-  <data name="lbUserName " xml:space="preserve">
-    <value>Usuario</value>
-  </data>
   <data name="vtLogin" xml:space="preserve">
     <value>Inicio de sesión </value>
   </data>
@@ -290,5 +287,8 @@
   </data>
   <data name="lbTitleEditName" xml:space="preserve">
     <value>Editar nombre</value>
+  </data>
+  <data name="lbUsuario" xml:space="preserve">
+    <value>Nombre de usuario</value>
   </data>
 </root>
