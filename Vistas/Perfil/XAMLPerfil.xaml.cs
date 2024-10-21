@@ -42,5 +42,31 @@ namespace trofeoCazador.Vistas.Perfil
         }
 
 
+        private void btnClicEditarUsuario(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService == null)
+            {
+                return;
+            }
+            this.NavigationService.Navigate(new Uri("Vistas/Perfil/EditarUsuarioNombre.xaml", UriKind.Relative));
+        }
+
+        private void btnClicEditarContrasenia(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService == null)
+            {
+                return;
+            }
+            this.NavigationService.Navigate(new Uri("Vistas/Perfil/EditarContrasenia.xaml", UriKind.Relative));
+        }
+
+        private void btnClicEditarCorreo(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService == null)
+            {
+                return;
+            }
+            this.NavigationService.Navigate(new Uri("Vistas/Perfil/EditarContrasenia.xaml", UriKind.Relative));
+        }
     }
 }

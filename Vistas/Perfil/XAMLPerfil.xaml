@@ -43,7 +43,7 @@
 
                 <!-- Botón para editar ambos campos con borde morado y lápiz azul -->
                 <Button Grid.Column="1" Content="✏️" Width="50" Height="50" VerticalAlignment="Center" 
-                        Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue">
+                        Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue" Click="Button_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="Transparent" />
@@ -75,7 +75,7 @@
                 <TextBlock Text="{x:Static p:Resources.lbPassword_}" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2" />
                 <Button Grid.Column="2" Width="50" Height="50" VerticalAlignment="Center" 
                         Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue"
-                        Content="✏️">
+                        Content="✏️" Click="Button_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="Transparent" />
@@ -106,7 +106,7 @@
                 <TextBlock Text="{x:Static p:Resources.lbEmail_}" FontSize="16" FontWeight="Bold" />
                 <Button Grid.Column="1" Width="50" Height="50" VerticalAlignment="Center" 
                         Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue"
-                        Content="✏️">
+                        Content="✏️" Click="Button_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="Transparent" />
