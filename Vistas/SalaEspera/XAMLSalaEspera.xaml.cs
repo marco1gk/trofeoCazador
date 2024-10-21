@@ -24,5 +24,10 @@ namespace trofeoCazador.Vistas.SalaEspera
         {
             InitializeComponent();
         }
+
+        private void BtnSendMessage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
