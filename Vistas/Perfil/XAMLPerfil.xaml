@@ -26,7 +26,7 @@
                    Margin="0,10,0,0" Grid.Row="0" />
 
         <!-- Contenido del perfil -->
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="400">
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400">
 
             <!-- Sección combinada de Nombre de Usuario y Nombre Global -->
             <Grid Margin="0,10">
@@ -37,10 +37,8 @@
 
                 <!-- Textos para Nombre de Usuario y Nombre Global -->
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                    <TextBlock Text="{x:Static p:Resources.lbUserName}" FontSize="16" FontWeight="Bold" />
                     <Label Name="UsuarioLabel" FontSize="14" Foreground="Black" Margin="0,5,0,0" />
-
-                    <TextBlock Text="{x:Static p:Resources.lbGlobalName_}" FontSize="16" FontWeight="Bold" Margin="0,15,0,0"/>
+                    <TextBlock Text="{x:Static p:Resources.lbUserName}" FontSize="16" FontWeight="Bold" />
                     <Label Name="NombreLabel" FontSize="14" Foreground="Black" Margin="0,5,0,0" />
                 </StackPanel>
 

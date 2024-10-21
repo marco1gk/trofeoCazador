@@ -143,6 +143,12 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ValidarInicioSesion", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ValidarInicioSesionResponse")]
         System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.JugadorDataContract> ValidarInicioSesionAsync(string nombreUsuario, string contraseniaHash);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ObtenerJugador", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ObtenerJugadorResponse")]
+        trofeoCazador.ServicioDelJuego.JugadorDataContract ObtenerJugador(int idJugador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ObtenerJugador", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ObtenerJugadorResponse")]
+        System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.JugadorDataContract> ObtenerJugadorAsync(int idJugador);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -194,6 +200,14 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.JugadorDataContract> ValidarInicioSesionAsync(string nombreUsuario, string contraseniaHash) {
             return base.Channel.ValidarInicioSesionAsync(nombreUsuario, contraseniaHash);
+        }
+        
+        public trofeoCazador.ServicioDelJuego.JugadorDataContract ObtenerJugador(int idJugador) {
+            return base.Channel.ObtenerJugador(idJugador);
+        }
+        
+        public System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.JugadorDataContract> ObtenerJugadorAsync(int idJugador) {
+            return base.Channel.ObtenerJugadorAsync(idJugador);
         }
     }
 }
