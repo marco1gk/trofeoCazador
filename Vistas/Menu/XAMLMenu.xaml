@@ -3,51 +3,59 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:p="clr-namespace:trofeoCazador.Properties"
-      xmlns:local="clr-namespace:trofeoCazador.Vistas.Menu"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="XAMLVestibulo">
+      Title="MenuPrincipal">
 
     <Grid>
+        <!-- Fondo de imagen -->
         <Grid.Background>
-            <ImageBrush ImageSource="/Recursos/verde.png" 
-                        Stretch="UniformToFill" />
+            <ImageBrush ImageSource="/Recursos/green-leaf-texture-leaf-texture-background.jpg" Stretch="UniformToFill" />
         </Grid.Background>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <!-- Fila para encabezado -->
-            <RowDefinition Height="*" />
-            <!-- Fila principal -->
-            <RowDefinition Height="Auto" />
-            <!-- Fila para pie de página -->
-        </Grid.RowDefinitions>
+        <!-- Contenido principal en un StackPanel para centrar los elementos -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <!-- Columna principal -->
-            <ColumnDefinition Width="200" />
-            <!-- Columna lateral -->
-        </Grid.ColumnDefinitions>
+            <!-- Título del menú -->
+            <TextBlock Text="Menú Principal" FontSize="36" FontWeight="Bold" 
+                       Foreground="White" HorizontalAlignment="Center" />
 
-        <!-- Encabezado -->
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Bienvenido al Vestíbulo" 
-                   FontSize="24" HorizontalAlignment="Center" Margin="10" />
+            <!-- Botón Lobby -->
+            <Button Content="Lobby" Width="200" Height="50" 
+                    Background="#FF2C3E50" Foreground="White" 
+                    FontSize="18" FontWeight="SemiBold" 
+                    BorderBrush="#FF34495E" BorderThickness="2" />
 
-        <!-- Contenido principal -->
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Contenido Principal Aquí" 
-                   FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <!-- Botón Configuraciones -->
+            <Button Content="Configuraciones" Width="200" Height="50" 
+                    Background="#FF2C3E50" Foreground="White" 
+                    FontSize="18" FontWeight="SemiBold" 
+                    BorderBrush="#FF34495E" BorderThickness="2" />
 
-        <!-- Columna lateral -->
-        <StackPanel Grid.Row="1" Grid.Column="1" Background="#F0F0F0" Margin="5">
-            <Button Content="Opción 1" Margin="5" />
-            <Button Content="Opción 2" Margin="5" />
-            <Button Content="Opción 3" Margin="5" />
+            <!-- Botón Tabla de Ganadores -->
+            <Button Content="Tabla de Ganadores" Width="200" Height="50" 
+                    Background="#FF2C3E50" Foreground="White" 
+                    FontSize="18" FontWeight="SemiBold" 
+                    BorderBrush="#FF34495E" BorderThickness="2" />
+
+            <!-- Botón Perfil -->
+            <Button Content="Perfil" Width="200" Height="50" 
+                    Background="#FF2C3E50" Foreground="White" 
+                    FontSize="18" FontWeight="SemiBold" 
+                    BorderBrush="#FF34495E" BorderThickness="2" />
+
+            <!-- Botón Ayuda -->
+            <Button Content="Ayuda" Width="200" Height="50" 
+                    Background="#FF2C3E50" Foreground="White" 
+                    FontSize="18" FontWeight="SemiBold" 
+                    BorderBrush="#FF34495E" BorderThickness="2" />
+
+            <!-- Botón Salir -->
+            <Button Content="Salir" Width="200" Height="50" 
+                    Background="#FF2C3E50" Foreground="White" 
+                    FontSize="18" FontWeight="SemiBold" 
+                    BorderBrush="#FF34495E" BorderThickness="2" />
+
         </StackPanel>
-
-        <!-- Pie de página -->
-        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" 
-                   FontSize="14" HorizontalAlignment="Center" Margin="10" />
     </Grid>
 </Page>

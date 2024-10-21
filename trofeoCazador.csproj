@@ -241,6 +241,15 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\fondoMenu.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\6075834.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\green-leaf-texture-leaf-texture-background.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
