@@ -37,9 +37,8 @@
 
                 <!-- Textos para Nombre de Usuario y Nombre Global -->
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                    <Label Name="UsuarioLabel" FontSize="14" Foreground="Black" Margin="0,5,0,0" />
                     <TextBlock Text="{x:Static p:Resources.lbUserName}" FontSize="16" FontWeight="Bold" />
-                    <Label Name="NombreLabel" FontSize="14" Foreground="Black" Margin="0,5,0,0" />
+                    <Label x:Name="UsuarioLabel"  FontSize="14" Foreground="Black" Height="29" />
                 </StackPanel>
 
                 <!-- Botón para editar ambos campos con borde morado y lápiz azul -->
@@ -69,11 +68,12 @@
             <!-- Contraseña -->
             <Grid Margin="0,10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="47*" />
+                    <ColumnDefinition Width="303*"/>
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{x:Static p:Resources.lbPassword_}" FontSize="16" FontWeight="Bold" />
-                <Button Grid.Column="1" Width="50" Height="50" VerticalAlignment="Center" 
+                <TextBlock Text="{x:Static p:Resources.lbPassword_}" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2" />
+                <Button Grid.Column="2" Width="50" Height="50" VerticalAlignment="Center" 
                         Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue"
                         Content="✏️">
                     <Button.Style>
@@ -94,7 +94,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Label Content="**********" FontSize="14" Foreground="Black" Margin="-5,17,5,-11" />
+                <Label Content="**********" FontSize="14" Foreground="Black" Margin="-5,17,5,-11" Grid.ColumnSpan="2" />
             </Grid>
 
             <!-- Correo -->
@@ -125,7 +125,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Label Name="CorreoLabel" FontSize="14" Foreground="Black" Margin="-4,16,4,-11" />
+                <Label Name="CorreoLabel"  FontSize="14" Foreground="Black" Margin="-4,16,4,-11" />
             </Grid>
         </StackPanel>
 

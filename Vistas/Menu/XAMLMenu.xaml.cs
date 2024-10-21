@@ -24,5 +24,16 @@ namespace trofeoCazador.Vistas.Menu
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            // Navegar a la página de registro de usuario
+            if (this.NavigationService == null)
+            {
+                return;//veo  veo
+            }
+            this.NavigationService.Navigate(new Uri("Vistas/Perfil/XAMLPerfil.xaml", UriKind.Relative));
+
+        }
     }
 }

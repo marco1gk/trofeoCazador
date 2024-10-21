@@ -19,27 +19,28 @@ namespace trofeoCazador.Vistas.Perfil
 {
     public partial class XAMLPerfil : Page
     {
+        
         public XAMLPerfil()
         {
+            SingletonSesion sesion = SingletonSesion.Instancia;
             InitializeComponent();
-            int idJugador = ObtenerIdJugadorActual();
+            CargarPerfil(sesion.JugadorId);
+
+
         }
 
-        private void CargarPerfil(int idJugador)
+        private void CargarPerfil(int IdJugador)
         {
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            JugadorDataContract jugador = proxy.ObtenerJugador(idJugador);
+            JugadorDataContract jugador = proxy.ObtenerJugador(IdJugador);
             if (jugador != null)
             {
                 UsuarioLabel.Content = jugador.NombreUsuario;
                 CorreoLabel.Content = jugador.Correo;
             }
+            
         }
 
-        private int ObtenerIdJugadorActual()
-        {
-            return 1;
-        }
 
     }
 }
