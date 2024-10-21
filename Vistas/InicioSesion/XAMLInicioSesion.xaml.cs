@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trofeoCazador.ServicioDelJuego;
 
 namespace trofeoCazador.Vistas.InicioSesion
 {
@@ -41,12 +42,42 @@ namespace trofeoCazador.Vistas.InicioSesion
 
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
 
+
+        private void BtnIniciarSesion(object sender, RoutedEventArgs e)
+        {
+            string contraseña = ContrasenaPasswordBox.Password;
+            string usuario = UsuarioTextBox.Text;
+
+            GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
+
+            // Validar las credenciales del jugador
+            JugadorDataContract jugador = proxy.ValidarInicioSesion(usuario, contraseña);
+
+            if (jugador != null)
+            {
+                // Asignar los datos del jugador al SingletonSesion
+                SingletonSesion sesion = SingletonSesion.Instancia;
+                sesion.JugadorId = jugador.JugadorId;
+                sesion.NombreUsuario = jugador.NombreUsuario;
+                sesion.NumeroFotoPerfil = jugador.NumeroFotoPerfil;
+                sesion.Correo = jugador.Correo;
+
+                Console.WriteLine("El correo es: " + jugador.Correo);
+
+                // Navegar al menú inicial (vestíbulo)
+                this.NavigationService.Navigate(new Uri("Vistas/Menu/XAMLMenu.xaml", UriKind.Relative));
+            }
+            else
+            {
+                // Manejar el fallo del inicio de sesión
+                Console.WriteLine("El inicio de sesión falló o los datos no fueron recuperados correctamente.");
+            }
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
 
         }

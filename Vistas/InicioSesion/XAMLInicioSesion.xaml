@@ -44,12 +44,11 @@
                      Height="40"
                      FontSize="16"
                      Background="White"
-                     Foreground="Black"/>
+                     Foreground="Black" />
 
             <PasswordBox x:Name="ContrasenaPasswordBox"
                          Margin="0,10"
                          Padding="10"
-                         Password="************"
                          Tag="************"
                          Height="40"
                          FontSize="16"
@@ -64,14 +63,14 @@
                     FontWeight="Bold"
                     Margin="0,20,0,0"
                     Padding="10"
-                    Height="40" Click="Button_Click_3"/>
+                    Height="40" Click="BtnIniciarSesion"/>
         </StackPanel>
         <Label  Content="{x:Static p:Resources.lbLogin_}" Foreground="Black" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Margin="328,78,0,0" Height="34" VerticalAlignment="Top" Width="178"/>
         <Label Content="{x:Static p:Resources.lbUserName}" HorizontalAlignment="Left" FontWeight="Bold" Margin="254,104,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Label Content="{x:Static p:Resources.lbPassword_}" HorizontalAlignment="Left" FontWeight="Bold" Margin="254,72,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Label Content="{x:Static p:Resources.NewInGame_}" HorizontalAlignment="Left" FontWeight="Bold" Margin="368,202,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="2.164,-1.002" Grid.RowSpan="2"/>
         <Label  FontFamily="Inter" FontSize="14" VerticalAlignment="Top" Foreground="PowderBlue" Cursor="Hand" Content="{x:Static p:Resources.lbForgotPassword_}" Margin="250,134,163,0" Grid.Row="1"></Label>
-        <Button Content="{x:Static p:Resources.Guest_}" HorizontalAlignment="Left" Margin="592,16,0,0" Foreground="Black" FontWeight="Bold" FontSize="30" BorderThickness="0" Background="Transparent" Grid.Row="2" VerticalAlignment="Top" Click="Button_Click_2"/>
+        <Button Content="{x:Static p:Resources.Guest_}" HorizontalAlignment="Left" Margin="353,70,0,0" Foreground="Black" FontWeight="Bold" FontSize="30" BorderThickness="0" Background="Transparent" Grid.Row="2" VerticalAlignment="Top" Click="Button_Click_2"/>
         <Button Content="" Margin="254,134,0,0" HorizontalAlignment="Left" Background="Transparent"     BorderThickness="0" Grid.Row="1" VerticalAlignment="Top" Click="Button_Click" Height="22" Width="175"/>
         <Button  Content="{x:Static p:Resources.lbRegister_}" HorizontalAlignment="Center" Margin="0,16,0,0" Background="Transparent" BorderThickness="0" Grid.Row="2" VerticalAlignment="Top" Click="BtnRegistrarCuenta" Height="32" Width="88"/>
     </Grid>

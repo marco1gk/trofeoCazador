@@ -23,6 +23,15 @@ namespace trofeoCazador.ServicioDelJuego {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ContraseniaHashField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorreoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int JugadorIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NombreUsuarioField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -35,6 +44,45 @@ namespace trofeoCazador.ServicioDelJuego {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ContraseniaHash {
+            get {
+                return this.ContraseniaHashField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContraseniaHashField, value) != true)) {
+                    this.ContraseniaHashField = value;
+                    this.RaisePropertyChanged("ContraseniaHash");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Correo {
+            get {
+                return this.CorreoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorreoField, value) != true)) {
+                    this.CorreoField = value;
+                    this.RaisePropertyChanged("Correo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int JugadorId {
+            get {
+                return this.JugadorIdField;
+            }
+            set {
+                if ((this.JugadorIdField.Equals(value) != true)) {
+                    this.JugadorIdField = value;
+                    this.RaisePropertyChanged("JugadorId");
+                }
             }
         }
         
@@ -74,82 +122,27 @@ namespace trofeoCazador.ServicioDelJuego {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CuentaDataContract", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego")]
-    [System.SerializableAttribute()]
-    public partial class CuentaDataContract : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ContraseniaHashField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CorreoField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ContraseniaHash {
-            get {
-                return this.ContraseniaHashField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ContraseniaHashField, value) != true)) {
-                    this.ContraseniaHashField = value;
-                    this.RaisePropertyChanged("ContraseniaHash");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Correo {
-            get {
-                return this.CorreoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CorreoField, value) != true)) {
-                    this.CorreoField = value;
-                    this.RaisePropertyChanged("Correo");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IGestionCuentaServicio")]
     public interface IGestionCuentaServicio {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/GetData", ReplyAction="http://tempuri.org/IGestionCuentaServicio/GetDataResponse")]
-        bool GetData(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador, trofeoCazador.ServicioDelJuego.CuentaDataContract cuent);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/GetData", ReplyAction="http://tempuri.org/IGestionCuentaServicio/GetDataResponse")]
-        System.Threading.Tasks.Task<bool> GetDataAsync(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador, trofeoCazador.ServicioDelJuego.CuentaDataContract cuent);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/AgregarJugador", ReplyAction="http://tempuri.org/IGestionCuentaServicio/AgregarJugadorResponse")]
+        bool AgregarJugador(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/AgregarJugador", ReplyAction="http://tempuri.org/IGestionCuentaServicio/AgregarJugadorResponse")]
-        bool AgregarJugador(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador, trofeoCazador.ServicioDelJuego.CuentaDataContract cuenta);
+        System.Threading.Tasks.Task<bool> AgregarJugadorAsync(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/AgregarJugador", ReplyAction="http://tempuri.org/IGestionCuentaServicio/AgregarJugadorResponse")]
-        System.Threading.Tasks.Task<bool> AgregarJugadorAsync(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador, trofeoCazador.ServicioDelJuego.CuentaDataContract cuenta);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EditarContraseña", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EditarContraseñaResponse")]
+        bool EditarContraseña(string correo, string nuevaContraseña);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EditarContraseña", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EditarContraseñaResponse")]
+        System.Threading.Tasks.Task<bool> EditarContraseñaAsync(string correo, string nuevaContraseña);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ValidarInicioSesion", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ValidarInicioSesionResponse")]
+        trofeoCazador.ServicioDelJuego.JugadorDataContract ValidarInicioSesion(string nombreUsuario, string contraseniaHash);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ValidarInicioSesion", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ValidarInicioSesionResponse")]
+        System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.JugadorDataContract> ValidarInicioSesionAsync(string nombreUsuario, string contraseniaHash);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -179,20 +172,28 @@ namespace trofeoCazador.ServicioDelJuego {
                 base(binding, remoteAddress) {
         }
         
-        public bool GetData(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador, trofeoCazador.ServicioDelJuego.CuentaDataContract cuent) {
-            return base.Channel.GetData(jugador, cuent);
+        public bool AgregarJugador(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador) {
+            return base.Channel.AgregarJugador(jugador);
         }
         
-        public System.Threading.Tasks.Task<bool> GetDataAsync(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador, trofeoCazador.ServicioDelJuego.CuentaDataContract cuent) {
-            return base.Channel.GetDataAsync(jugador, cuent);
+        public System.Threading.Tasks.Task<bool> AgregarJugadorAsync(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador) {
+            return base.Channel.AgregarJugadorAsync(jugador);
         }
         
-        public bool AgregarJugador(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador, trofeoCazador.ServicioDelJuego.CuentaDataContract cuenta) {
-            return base.Channel.AgregarJugador(jugador, cuenta);
+        public bool EditarContraseña(string correo, string nuevaContraseña) {
+            return base.Channel.EditarContraseña(correo, nuevaContraseña);
         }
         
-        public System.Threading.Tasks.Task<bool> AgregarJugadorAsync(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador, trofeoCazador.ServicioDelJuego.CuentaDataContract cuenta) {
-            return base.Channel.AgregarJugadorAsync(jugador, cuenta);
+        public System.Threading.Tasks.Task<bool> EditarContraseñaAsync(string correo, string nuevaContraseña) {
+            return base.Channel.EditarContraseñaAsync(correo, nuevaContraseña);
+        }
+        
+        public trofeoCazador.ServicioDelJuego.JugadorDataContract ValidarInicioSesion(string nombreUsuario, string contraseniaHash) {
+            return base.Channel.ValidarInicioSesion(nombreUsuario, contraseniaHash);
+        }
+        
+        public System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.JugadorDataContract> ValidarInicioSesionAsync(string nombreUsuario, string contraseniaHash) {
+            return base.Channel.ValidarInicioSesionAsync(nombreUsuario, contraseniaHash);
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trofeoCazador.ServicioDelJuego;
 
 namespace trofeoCazador.Vistas.RegistroUsuario
 {
@@ -25,22 +26,26 @@ namespace trofeoCazador.Vistas.RegistroUsuario
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+        
         private void ImagenCLicAtras(object sender, MouseButtonEventArgs e)
         {
                 NavigationService.GoBack();
         }
 
-        private void DpFechaNacimiento_Cargado(object sender, RoutedEventArgs e)
+        private void BtnCrearCuenta(object sender, RoutedEventArgs e)
         {
-            if (sender is DatePicker datePicker)
-            {//veoveo
-                datePicker.DisplayDateEnd = new DateTime(DateTime.Today.Year, 12, 31);
-            }
-        }
+            string nombreUsuario= tbUsuario.Text;
+            string correo= tbCorreo.Text;   
+            string contrasenia = pbContraseña.Password;
 
+            GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
+            JugadorDataContract jugador = new JugadorDataContract();
+   
+            jugador.NombreUsuario = nombreUsuario;
+            jugador.NumeroFotoPerfil = 1;
+            jugador.ContraseniaHash = contrasenia;
+            jugador.Correo = correo;
+            proxy.AgregarJugador(jugador);
+        }
     }
 }

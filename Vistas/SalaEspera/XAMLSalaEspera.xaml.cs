@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace trofeoCazador.Vistas.Vestibulo
+namespace trofeoCazador.Vistas.SalaEspera
 {
     /// <summary>
-    /// Lógica de interacción para XAMLVestibulo.xaml
+    /// Lógica de interacción para XAMLSalaEspera.xaml
     /// </summary>
-    public partial class XAMLVestibulo : Page
+    public partial class XAMLSalaEspera : Page
     {
-        public XAMLVestibulo()
+        public XAMLSalaEspera()
         {
             InitializeComponent();
         }

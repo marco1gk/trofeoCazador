@@ -17,34 +17,44 @@
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServicioJuego" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IGestionCuentaServicio_GetData_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetData" />
-  </wsdl:message>
-  <wsdl:message name="IGestionCuentaServicio_GetData_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataResponse" />
-  </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_AgregarJugador_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarJugador" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_AgregarJugador_OutputMessage">
     <wsdl:part name="parameters" element="tns:AgregarJugadorResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_EditarContraseña_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditarContraseña" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_EditarContraseña_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditarContraseñaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ValidarInicioSesion_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarInicioSesion" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ValidarInicioSesion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarInicioSesionResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGestionCuentaServicio">
-    <wsdl:operation name="GetData">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/GetData" message="tns:IGestionCuentaServicio_GetData_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/GetDataResponse" message="tns:IGestionCuentaServicio_GetData_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="AgregarJugador">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/AgregarJugador" message="tns:IGestionCuentaServicio_AgregarJugador_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/AgregarJugadorResponse" message="tns:IGestionCuentaServicio_AgregarJugador_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarContraseña">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarContraseña" message="tns:IGestionCuentaServicio_EditarContraseña_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarContraseñaResponse" message="tns:IGestionCuentaServicio_EditarContraseña_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarInicioSesion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarInicioSesion" message="tns:IGestionCuentaServicio_ValidarInicioSesion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarInicioSesionResponse" message="tns:IGestionCuentaServicio_ValidarInicioSesion_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionCuentaServicio" type="tns:IGestionCuentaServicio">
     <wsp:PolicyReference URI="#NetTcpBinding_IGestionCuentaServicio_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="GetData">
-      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/GetData" style="document" />
+    <wsdl:operation name="AgregarJugador">
+      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/AgregarJugador" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -52,8 +62,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AgregarJugador">
-      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/AgregarJugador" style="document" />
+    <wsdl:operation name="EditarContraseña">
+      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/EditarContraseña" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarInicioSesion">
+      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ValidarInicioSesion" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
