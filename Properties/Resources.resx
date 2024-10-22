@@ -291,4 +291,7 @@
   <data name="lbUserName" xml:space="preserve">
     <value>Usuario</value>
   </data>
+  <data name="lbUsuario" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
 </root>

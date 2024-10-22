@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Proxies;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,17 +13,40 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trofeoCazador.ServicioDelJuego;
+using trofeoCazador.Vistas.Perfil;
 
 namespace trofeoCazador.Vistas.Perfil
 {
-    /// <summary>
-    /// Lógica de interacción para EditarCorreoCodigo.xaml
-    /// </summary>
     public partial class EditarCorreoCodigo : Page
     {
         public EditarCorreoCodigo()
         {
-            //InitializeComponent();
+            InitializeComponent();
+        }
+        GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
+        SingletonSesion sesion = SingletonSesion.Instancia;
+
+        private void btnClicEnviarCodigo(object sender, RoutedEventArgs e)
+        {
+
+            string codigoIngresado = CodigoTextBox.Text.Trim();
+            string codigoEnviado = sesion.CodigoVerificacion;
+
+            if (proxy.ValidarCodigo(codigoIngresado, codigoEnviado))
+            {
+                if(proxy.EditarCorreo(sesion.JugadorId, sesion.NuevoCorreo))
+                this.NavigationService.Navigate(new Uri("Vistas/Perfil/XAMLPerfil.xaml", UriKind.Relative));
+            }
+            else
+            {
+                MessageBox.Show("Código incorrecto, por favor intenta de nuevo.");
+            }
+        }
+
+        private void btnClicSolicitarNuevoCodigo(object sender, RoutedEventArgs e)
+        {
+            proxy.EnviarCodigoConfirmacion(sesion.Correo);   
         }
     }
 }

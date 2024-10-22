@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace trofeoCazador
 {
@@ -14,8 +9,6 @@ namespace trofeoCazador
 
         // Objeto para controlar el acceso en entornos multihilo.
         private static readonly object bloqueo = new object();
-
-       //preguntar si esta bien esto public static ServicioDelJuego.JugadorDataContract jugador {  get; set; }
 
         // Constructor privado para evitar que se creen instancias desde fuera de la clase.
         private SingletonSesion() { }
@@ -45,6 +38,9 @@ namespace trofeoCazador
         public string NombreUsuario { get; set; }
         public int NumeroFotoPerfil { get; set; }
         public string Correo { get; set; }
-    }
 
+        // Nuevas propiedades para el cambio de correo
+        public string NuevoCorreo { get; set; } // Para almacenar el nuevo correo que el usuario desea establecer
+        public string CodigoVerificacion { get; set; } // Para almacenar el código de verificación enviado al correo actual
+    }
 }

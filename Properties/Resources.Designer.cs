@@ -493,6 +493,15 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Usuario.
+        /// </summary>
+        public static string lbUsuario {
+            get {
+                return ResourceManager.GetString("lbUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ha dejado campos vacios, complete todos .
         /// </summary>
         public static string lbWLogin_ {

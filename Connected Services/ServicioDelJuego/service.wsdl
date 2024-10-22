@@ -41,6 +41,30 @@
   <wsdl:message name="IGestionCuentaServicio_ObtenerJugador_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerJugadorResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_EditarNombreUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditarNombreUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_EditarNombreUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditarNombreUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_EditarCorreo_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditarCorreo" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_EditarCorreo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditarCorreoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_EnviarCodigoConfirmacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnviarCodigoConfirmacion" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_EnviarCodigoConfirmacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnviarCodigoConfirmacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ValidarCodigo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarCodigo" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ValidarCodigo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarCodigoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGestionCuentaServicio">
     <wsdl:operation name="AgregarJugador">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/AgregarJugador" message="tns:IGestionCuentaServicio_AgregarJugador_InputMessage" />
@@ -57,6 +81,22 @@
     <wsdl:operation name="ObtenerJugador">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ObtenerJugador" message="tns:IGestionCuentaServicio_ObtenerJugador_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ObtenerJugadorResponse" message="tns:IGestionCuentaServicio_ObtenerJugador_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarNombreUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuario" message="tns:IGestionCuentaServicio_EditarNombreUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuarioResponse" message="tns:IGestionCuentaServicio_EditarNombreUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarCorreo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarCorreo" message="tns:IGestionCuentaServicio_EditarCorreo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarCorreoResponse" message="tns:IGestionCuentaServicio_EditarCorreo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarCodigoConfirmacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacion" message="tns:IGestionCuentaServicio_EnviarCodigoConfirmacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacionResponse" message="tns:IGestionCuentaServicio_EnviarCodigoConfirmacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarCodigo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigo" message="tns:IGestionCuentaServicio_ValidarCodigo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigoResponse" message="tns:IGestionCuentaServicio_ValidarCodigo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionCuentaServicio" type="tns:IGestionCuentaServicio">
@@ -92,6 +132,42 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerJugador">
       <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ObtenerJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarNombreUsuario">
+      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditarCorreo">
+      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/EditarCorreo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarCodigoConfirmacion">
+      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarCodigo">
+      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ValidarCodigo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

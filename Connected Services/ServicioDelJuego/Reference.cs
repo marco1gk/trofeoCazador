@@ -149,6 +149,30 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ObtenerJugador", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ObtenerJugadorResponse")]
         System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.JugadorDataContract> ObtenerJugadorAsync(int idJugador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuario", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuarioResponse")]
+        bool EditarNombreUsuario(int idJugador, string nuevoNombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuario", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuarioResponse")]
+        System.Threading.Tasks.Task<bool> EditarNombreUsuarioAsync(int idJugador, string nuevoNombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EditarCorreo", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EditarCorreoResponse")]
+        bool EditarCorreo(int idCuenta, string nuevoCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EditarCorreo", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EditarCorreoResponse")]
+        System.Threading.Tasks.Task<bool> EditarCorreoAsync(int idCuenta, string nuevoCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacion", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacionResponse")]
+        string EnviarCodigoConfirmacion(string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacion", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacionResponse")]
+        System.Threading.Tasks.Task<string> EnviarCodigoConfirmacionAsync(string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigo", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ValidarCodigoResponse")]
+        bool ValidarCodigo(string codigoIngresado, string codigoEnviado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigo", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ValidarCodigoResponse")]
+        System.Threading.Tasks.Task<bool> ValidarCodigoAsync(string codigoIngresado, string codigoEnviado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -208,6 +232,38 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.JugadorDataContract> ObtenerJugadorAsync(int idJugador) {
             return base.Channel.ObtenerJugadorAsync(idJugador);
+        }
+        
+        public bool EditarNombreUsuario(int idJugador, string nuevoNombreUsuario) {
+            return base.Channel.EditarNombreUsuario(idJugador, nuevoNombreUsuario);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EditarNombreUsuarioAsync(int idJugador, string nuevoNombreUsuario) {
+            return base.Channel.EditarNombreUsuarioAsync(idJugador, nuevoNombreUsuario);
+        }
+        
+        public bool EditarCorreo(int idCuenta, string nuevoCorreo) {
+            return base.Channel.EditarCorreo(idCuenta, nuevoCorreo);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EditarCorreoAsync(int idCuenta, string nuevoCorreo) {
+            return base.Channel.EditarCorreoAsync(idCuenta, nuevoCorreo);
+        }
+        
+        public string EnviarCodigoConfirmacion(string correo) {
+            return base.Channel.EnviarCodigoConfirmacion(correo);
+        }
+        
+        public System.Threading.Tasks.Task<string> EnviarCodigoConfirmacionAsync(string correo) {
+            return base.Channel.EnviarCodigoConfirmacionAsync(correo);
+        }
+        
+        public bool ValidarCodigo(string codigoIngresado, string codigoEnviado) {
+            return base.Channel.ValidarCodigo(codigoIngresado, codigoEnviado);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ValidarCodigoAsync(string codigoIngresado, string codigoEnviado) {
+            return base.Channel.ValidarCodigoAsync(codigoIngresado, codigoEnviado);
         }
     }
 }

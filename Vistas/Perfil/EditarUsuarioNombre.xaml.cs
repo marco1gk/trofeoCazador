@@ -12,17 +12,64 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trofeoCazador.ServicioDelJuego;
 
 namespace trofeoCazador.Vistas.Perfil
 {
-    /// <summary>
-    /// Lógica de interacción para EditarUsuario.xaml
-    /// </summary>
-    public partial class EditarUsuario : Page
+    public partial class EditarUsuarioNombre : Page
     {
-        public EditarUsuario()
+        public EditarUsuarioNombre()
         {
-            //InitializeComponent();
+            InitializeComponent();
+            CargarUsuarioJugador(ObtenerIdJugador());
+        }
+
+        private int ObtenerIdJugador()
+        {
+            SingletonSesion sesion = SingletonSesion.Instancia;
+            return sesion.JugadorId;
+        }
+
+        private void CargarUsuarioJugador(int idJugador)
+        {
+            GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
+            JugadorDataContract jugador = new JugadorDataContract();
+
+            if (jugador != null)
+            {
+                NombreUsuarioActualLabel.Content = jugador.NombreUsuario;
+            }
+        }
+
+        private void btnClicGuardar(object sender, RoutedEventArgs e)
+        {
+            string nuevoNombre = NuevoNombreUsuarioTextBox.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(nuevoNombre))
+            {
+                MessageBox.Show("Por favor, ingresa un nuevo nombre de usuario.");
+                return;
+            }
+
+            try
+            {
+                GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
+                bool resultado = proxy.EditarNombreUsuario(ObtenerIdJugador(), nuevoNombre);
+
+                if (resultado)
+                {
+                    MessageBox.Show("Nombre de usuario actualizado con éxito.");
+                    this.NavigationService.Navigate(new Uri("Vistas/Perfil/XAMLPerfil.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    MessageBox.Show("Hubo un problema al actualizar el nombre de usuario.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al conectar con el servicio: " + ex.Message);
+            }
         }
     }
 }

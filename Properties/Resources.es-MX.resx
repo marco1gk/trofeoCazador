@@ -288,6 +288,9 @@
   <data name="lbTitleEditName" xml:space="preserve">
     <value>Editar nombre</value>
   </data>
+  <data name="lbUserName" xml:space="preserve">
+    <value>Nombre de usuario</value>
+  </data>
   <data name="lbUsuario" xml:space="preserve">
     <value>Nombre de usuario</value>
   </data>

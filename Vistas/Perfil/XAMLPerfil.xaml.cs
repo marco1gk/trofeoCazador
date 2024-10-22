@@ -66,7 +66,7 @@ namespace trofeoCazador.Vistas.Perfil
             {
                 return;
             }
-            this.NavigationService.Navigate(new Uri("Vistas/Perfil/EditarContrasenia.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("Vistas/Perfil/EditarCorreo.xaml", UriKind.Relative));
         }
     }
 }
