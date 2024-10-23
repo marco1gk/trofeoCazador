@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
+using trofeoCazador.Recursos;
 
 
 namespace trofeoCazador.Vistas.Perfil

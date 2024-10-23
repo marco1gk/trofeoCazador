@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Vistas.Perfil;
+using trofeoCazador.Recursos;
 
 namespace trofeoCazador.Vistas.Perfil
 {
@@ -32,15 +33,28 @@ namespace trofeoCazador.Vistas.Perfil
 
             string codigoIngresado = CodigoTextBox.Text.Trim();
             string codigoEnviado = sesion.CodigoVerificacion;
+            int longitudMaximaCodigo = 6;
+
+            if (!Metodos.ValidarEntradaVacia(codigoIngresado))
+            {
+                Metodos.MostrarMensaje("Por favor, ingrese el código.");
+                return;
+            }
+
+            if(!Metodos.ValidarLongitudDeEntrada(codigoIngresado, longitudMaximaCodigo))
+            {
+                Metodos.MostrarMensaje("El código debe ser un número de 6 dígitos.");
+                return;
+            }
 
             if (proxy.ValidarCodigo(codigoIngresado, codigoEnviado))
             {
                 if(proxy.EditarCorreo(sesion.JugadorId, sesion.NuevoCorreo))
-                this.NavigationService.Navigate(new Uri("Vistas/Perfil/XAMLPerfil.xaml", UriKind.Relative));
+                    this.NavigationService.Navigate(new Uri("Vistas/Perfil/XAMLPerfil.xaml", UriKind.Relative));
             }
             else
             {
-                MessageBox.Show("Código incorrecto, por favor intenta de nuevo.");
+                Metodos.MostrarMensaje("Código incorrecto, por favor intenta de nuevo.");
             }
         }
 

@@ -14,38 +14,52 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
+using trofeoCazador.Recursos;
+using System.Runtime.Remoting.Proxies;
 
 namespace trofeoCazador.Vistas.Perfil
 {
     public partial class XAMLEditarCorreo : Page
     {
+        private JugadorDataContract jugador;
         public XAMLEditarCorreo()
         {
             InitializeComponent();
+            jugador = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
             CargarCorreoActual();
         }
-
         private void CargarCorreoActual()
         {
-            SingletonSesion sesion = SingletonSesion.Instancia;
-            GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            JugadorDataContract jugador = proxy.ObtenerJugador(sesion.JugadorId);
             if (jugador != null)
             {
                 CorreoActualLabel.Content = jugador.Correo;
             }
         }
-
         private void btnClicGuardar(object sender, RoutedEventArgs e)
         {
             string nuevoCorreo = NuevoCorreoTextBox.Text.Trim();
-
+            int longitudMaximaCorreo = 100;
             try
             {
-                // Obtener el correo actual del jugador
-                SingletonSesion sesion = SingletonSesion.Instancia;
-                GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-                JugadorDataContract jugador = proxy.ObtenerJugador(sesion.JugadorId);
+                if (!Metodos.ValidarEntradaVacia(nuevoCorreo))
+                {
+                    Metodos.MostrarMensaje("El correo no puede estar vacío.");
+                    return;
+                }
+
+                if (!Metodos.ValidarEntradaIgual(jugador.Correo, nuevoCorreo))
+                {
+                    Metodos.MostrarMensaje("El nuevo correo no puede ser el mismo que el actual.");
+                    return;
+                }
+
+                if (!Metodos.ValidarLongitudDeEntrada(nuevoCorreo, longitudMaximaCorreo))
+                {
+                    Metodos.MostrarMensaje("El correo no puede exceder los 50 caracteres.");
+                    return;
+                }
+
+                GestionCuentaServicioClient proxy = Metodos.EstablecerConexionServidor();
 
                 if (jugador != null)
                 {
@@ -53,20 +67,16 @@ namespace trofeoCazador.Vistas.Perfil
                     string codigoVerificacion = proxy.EnviarCodigoConfirmacion(correoActual);
                     if (!string.IsNullOrEmpty(codigoVerificacion))
                     {
-                        // Guardar el nuevo correo en la sesión o en algún lugar
-                        SingletonSesion.Instancia.NuevoCorreo = nuevoCorreo; // Almacenar el nuevo correo
+                        SingletonSesion.Instancia.NuevoCorreo = nuevoCorreo;
                         SingletonSesion.Instancia.CodigoVerificacion = codigoVerificacion;
-
-                        // Navegar a la página de verificación
                         this.NavigationService.Navigate(new Uri("Vistas/Perfil/EditarCorreoCodigo.xaml", UriKind.Relative));
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al enviar el correo: " + ex.Message);
+                Metodos.MostrarMensaje("Error al enviar el correo: " + ex.Message);
             }
         }
-
     }
 }

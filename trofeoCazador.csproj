@@ -78,6 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Recursos\Metodos.cs" />
     <Compile Include="SingletonSesion.cs" />
     <Compile Include="Utilidades\UtilidadesDeValidacion.cs" />
     <Compile Include="Vistas\InicioSesion\XAMLInicioSesion.xaml.cs">

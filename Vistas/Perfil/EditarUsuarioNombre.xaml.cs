@@ -13,28 +13,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
+using trofeoCazador.Recursos;
+using System.Collections;
+using System.Runtime.Remoting.Proxies;
 
 namespace trofeoCazador.Vistas.Perfil
 {
     public partial class EditarUsuarioNombre : Page
     {
+        private JugadorDataContract jugador;
         public EditarUsuarioNombre()
         {
             InitializeComponent();
-            CargarUsuarioJugador(ObtenerIdJugador());
+            jugador = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
+            CargarUsuarioJugador();
         }
 
-        private int ObtenerIdJugador()
+        private void CargarUsuarioJugador()
         {
-            SingletonSesion sesion = SingletonSesion.Instancia;
-            return sesion.JugadorId;
-        }
-
-        private void CargarUsuarioJugador(int idJugador)
-        {
-            GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            JugadorDataContract jugador = new JugadorDataContract();
-
             if (jugador != null)
             {
                 NombreUsuarioActualLabel.Content = jugador.NombreUsuario;
@@ -43,32 +39,47 @@ namespace trofeoCazador.Vistas.Perfil
 
         private void btnClicGuardar(object sender, RoutedEventArgs e)
         {
-            string nuevoNombre = NuevoNombreUsuarioTextBox.Text.Trim();
+            string nuevoNombreUsuario = NuevoNombreUsuarioTextBox.Text.Trim();
+            int longitudValidaNombreUsuario = 50;
 
-            if (string.IsNullOrWhiteSpace(nuevoNombre))
+            if (!Metodos.ValidarEntradaVacia(nuevoNombreUsuario))
             {
-                MessageBox.Show("Por favor, ingresa un nuevo nombre de usuario.");
+                Metodos.MostrarMensaje("Por favor, debe ingresar un nuevo nombre de usuario.");
                 return;
             }
 
+            if (!Metodos.ValidarLongitudDeEntrada(nuevoNombreUsuario, longitudValidaNombreUsuario))
+            {
+                Metodos.MostrarMensaje("El nombre de usuario no puede tener más de 50 caracteres.");
+                return;
+            }
+
+            if (!Metodos.ValidarEntradaIgual(jugador.NombreUsuario, nuevoNombreUsuario))
+            {
+                Metodos.MostrarMensaje("El nuevo nombre de usuario es igual al actual.");
+                return;
+            }
+
+            SingletonSesion sesion = SingletonSesion.Instancia;
+            GestionCuentaServicioClient proxy = Metodos.EstablecerConexionServidor();
+            bool resultado = proxy.EditarNombreUsuario(sesion.JugadorId, nuevoNombreUsuario);
+
             try
             {
-                GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-                bool resultado = proxy.EditarNombreUsuario(ObtenerIdJugador(), nuevoNombre);
 
                 if (resultado)
                 {
-                    MessageBox.Show("Nombre de usuario actualizado con éxito.");
+                    Metodos.MostrarMensaje("Nombre de usuario actualizado con éxito.");
                     this.NavigationService.Navigate(new Uri("Vistas/Perfil/XAMLPerfil.xaml", UriKind.Relative));
                 }
                 else
                 {
-                    MessageBox.Show("Hubo un problema al actualizar el nombre de usuario.");
+                    Metodos.MostrarMensaje("Hubo un problema al actualizar el nombre de usuario.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al conectar con el servicio: " + ex.Message);
+                Metodos.MostrarMensaje("Error al conectar con el servicio: " + ex.Message);
             }
         }
     }
