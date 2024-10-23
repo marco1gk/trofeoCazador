@@ -16,6 +16,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <!-- Imagen de fondo -->
         <Grid Grid.RowSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="31*"/>
@@ -26,18 +27,29 @@
             </Grid.Background>
         </Grid>
 
-        <Image Source="/Recursos/loginBox.png" HorizontalAlignment="Center" VerticalAlignment="Top"  Stretch="Fill" Height="352" Width="343" Margin="0,42,0,0" Grid.RowSpan="3"/>
-        <TextBlock
-                   FontSize="28"
+        <!-- Imagen del login -->
+        <Image Source="/Recursos/loginBox.png" 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Top"  
+               Stretch="Fill" 
+               Height="352" 
+               Width="343" 
+               Margin="0,42,0,0" 
+               Grid.RowSpan="3"/>
+
+        <!-- Título -->
+        <TextBlock FontSize="28"
                    FontWeight="Bold"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"
                    Grid.Row="0"
                    Margin="0,42,0,0"
-                   Foreground="Black"><Run Language="es-mx" Text="Hunter´s Trophy"/></TextBlock>
+                   Foreground="Black">
+            <Run Language="es-mx" Text="Hunter´s Trophy"/>
+        </TextBlock>
 
+        <!-- Campos de entrada -->
         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-
             <TextBox x:Name="UsuarioTextBox"
                      Margin="0,10"
                      Padding="10"
@@ -52,8 +64,7 @@
                          Tag="************"
                          Height="40"
                          FontSize="16"
-                         
-                          Background="White"
+                         Background="White"
                          Foreground="#CDCDCD" />
 
             <Button Content="Iniciar Sesión"
@@ -63,15 +74,104 @@
                     FontWeight="Bold"
                     Margin="0,20,0,0"
                     Padding="10"
-                    Height="40" Click="BtnIniciarSesion"/>
+                    Height="40" 
+                    Click="BtnIniciarSesion"/>
         </StackPanel>
-        <Label  Content="{x:Static p:Resources.lbLogin_}" Foreground="Black" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Margin="328,78,0,0" Height="34" VerticalAlignment="Top" Width="178"/>
-        <Label Content="{x:Static p:Resources.lbUserName}" HorizontalAlignment="Left" FontWeight="Bold" Margin="254,104,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <Label Content="{x:Static p:Resources.lbPassword_}" HorizontalAlignment="Left" FontWeight="Bold" Margin="254,72,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Resources.NewInGame_}" HorizontalAlignment="Left" FontWeight="Bold" Margin="368,202,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="2.164,-1.002" Grid.RowSpan="2"/>
-        <Label  FontFamily="Inter" FontSize="14" VerticalAlignment="Top" Foreground="PowderBlue" Cursor="Hand" Content="{x:Static p:Resources.lbForgotPassword_}" Margin="250,134,163,0" Grid.Row="1"></Label>
-        <Button Content="{x:Static p:Resources.Guest_}" HorizontalAlignment="Left" Margin="353,70,0,0" Foreground="Black" FontWeight="Bold" FontSize="30" BorderThickness="0" Background="Transparent" Grid.Row="2" VerticalAlignment="Top" Click="Button_Click_2"/>
-        <Button Content="" Margin="254,134,0,0" HorizontalAlignment="Left" Background="Transparent"     BorderThickness="0" Grid.Row="1" VerticalAlignment="Top" Click="Button_Click" Height="22" Width="175"/>
-        <Button  Content="{x:Static p:Resources.lbRegister_}" HorizontalAlignment="Center" Margin="0,16,0,0" Background="Transparent" BorderThickness="0" Grid.Row="2" VerticalAlignment="Top" Click="BtnRegistrarCuenta" Height="32" Width="88"/>
+
+        <!-- Etiquetas de texto -->
+        <Label Content="{x:Static p:Resources.lbLogin_}" 
+               Foreground="Black" 
+               FontSize="18" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Left" 
+               Margin="328,78,0,0" 
+               Height="34" 
+               VerticalAlignment="Top" 
+               Width="178"/>
+
+        <Label Content="{x:Static p:Resources.lbUserName}" 
+               HorizontalAlignment="Left" 
+               FontWeight="Bold" 
+               Margin="254,104,0,0" 
+               VerticalAlignment="Top" 
+               Grid.RowSpan="2"/>
+
+        <Label Content="{x:Static p:Resources.lbPassword_}" 
+               HorizontalAlignment="Left" 
+               FontWeight="Bold" 
+               Margin="254,72,0,0" 
+               Grid.Row="1" 
+               VerticalAlignment="Top"/>
+
+        <Label Content="{x:Static p:Resources.NewInGame_}" 
+               HorizontalAlignment="Left" 
+               FontWeight="Bold" 
+               Margin="368,202,0,0" 
+               Grid.Row="1" 
+               VerticalAlignment="Top" 
+               Grid.RowSpan="2"/>
+
+        <!-- Mensaje de credenciales incorrectas (sin transformación) -->
+        <Label x:Name="lbCredencialesIncorrectas" 
+               Content="Credenciales incorrectas" 
+               Visibility="Collapsed" 
+               HorizontalAlignment="Left" 
+               Margin="294,88,0,0" 
+               Grid.Row="1" 
+               VerticalAlignment="Top" 
+               Width="374" 
+               FontFamily="Inter" 
+               FontSize="14" 
+               VerticalContentAlignment="Center" 
+               HorizontalContentAlignment="Center" 
+               Foreground="#FFFF5959" 
+               Height="110"/>
+
+        <!-- Enlace a recuperar contraseña -->
+        <Label FontFamily="Inter" 
+               FontSize="14" 
+               VerticalAlignment="Top" 
+               Foreground="PowderBlue" 
+               Cursor="Hand" 
+               Content="{x:Static p:Resources.lbForgotPassword_}" 
+               Margin="250,134,163,0" 
+               Grid.Row="1"/>
+
+        <!-- Botón para jugar como invitado -->
+        <Button Content="{x:Static p:Resources.Guest_}" 
+                HorizontalAlignment="Left" 
+                Margin="353,70,0,0" 
+                Foreground="Black" 
+                FontWeight="Bold" 
+                FontSize="30" 
+                BorderThickness="0" 
+                Background="Transparent" 
+                Grid.Row="2" 
+                VerticalAlignment="Top" 
+                Click="Button_Click_2"/>
+
+        <!-- Botón vacío (si es necesario) -->
+        <Button Content="" 
+                Margin="254,134,0,0" 
+                HorizontalAlignment="Left" 
+                Background="Transparent" 
+                BorderThickness="0" 
+                Grid.Row="1" 
+                VerticalAlignment="Top" 
+                Click="Button_Click" 
+                Height="22" 
+                Width="175"/>
+
+        <!-- Botón para registrarse -->
+        <Button Content="{x:Static p:Resources.lbRegister_}" 
+                HorizontalAlignment="Center" 
+                Margin="0,16,0,0" 
+                Background="Transparent" 
+                BorderThickness="0" 
+                Grid.Row="2" 
+                VerticalAlignment="Top" 
+                Click="BtnRegistrarCuenta" 
+                Height="32" 
+                Width="88"/>
     </Grid>
 </Page>

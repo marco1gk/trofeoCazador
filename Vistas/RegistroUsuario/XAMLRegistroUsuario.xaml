@@ -23,23 +23,23 @@
         </Grid.RowDefinitions>
 
         <!-- Los controles existentes no se moverán -->
-        <Label x:Name = "lbCrearCuenta" Content="{x:Static p:Resources.lbCreateAccount}" FontWeight="Bold" HorizontalAlignment="Left" Margin="21,74,0,0" FontSize="29" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <Label x:Name="lbCreaTuCuenta" Content="{x:Static p:Resources.lbCreateYourAccount}" HorizontalAlignment="Left" FontWeight="Bold" Margin="89,40,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label x:Name = "lbPoliticaContraseña" Content="{x:Static p:Resources.lbPasswordPolitic}" HorizontalAlignment="Left" FontWeight="Bold" Margin="95,0,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label x:Name = "lbRequerimientoMayuscula" Content="{x:Static p:Resources.lbUppercaseLetterRequirement_}" HorizontalAlignment="Left" Margin="110,18,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label x:Name = "lbRequerimientoLongitud" Content="{x:Static p:Resources.lbAtLeast12Characters}" HorizontalAlignment="Left" Margin="110,44,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Resources.lbLowercaseLetterRequirement_}" HorizontalAlignment="Left" Margin="109,60,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Resources.lbAtLeastOneNumber}" HorizontalAlignment="Left" Margin="110,30,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Resources.lbSpecialCharacterRequirement_}" HorizontalAlignment="Left" Margin="109,76,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Resources.lbInsertData}" FontWeight="Bold" HorizontalAlignment="Left" Margin="298,74,0,0" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Resources.lbEmail_}" FontWeight="Bold" HorizontalAlignment="Left" Margin="313,86,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.542,-0.289"/>
-        <Label Content="{x:Static p:Resources.lbPassword_}" FontWeight="Bold" HorizontalAlignment="Left" Margin="298,166,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Resources.lbGlobalUsername_}" HorizontalAlignment="Left" FontWeight="Bold" Margin="316,112,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Label x:Name = "lbCrearCuenta" Content="{x:Static p:Resources.lbCreateAccount}" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,54,0,0" FontSize="29" VerticalAlignment="Top"/>
+        <Label x:Name="lbCreaTuCuenta" Content="{x:Static p:Resources.lbCreateYourAccount}" HorizontalAlignment="Left" FontWeight="Bold" Margin="112,112,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Label x:Name = "lbPoliticaContraseña" Content="{x:Static p:Resources.lbPasswordPolitic}" HorizontalAlignment="Left" FontWeight="Bold" Margin="273,152,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label x:Name = "lbRequerimientoMayuscula" Content="{x:Static p:Resources.lbUppercaseLetterRequirement_}" HorizontalAlignment="Left" Margin="298,200,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Label x:Name = "lbRequerimientoLongitud" Content="{x:Static p:Resources.lbAtLeast12Characters}" HorizontalAlignment="Left" Margin="299,26,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label x:Name = "lbRequerimientoMinuscula" Content="{x:Static p:Resources.lbLowercaseLetterRequirement_}" HorizontalAlignment="Left" Margin="298,0,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label x:Name = "lbRequerimientoNumero" Content="{x:Static p:Resources.lbAtLeastOneNumber}" HorizontalAlignment="Left" Margin="299,178,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label x:Name="lbCaracterEspecial" Content="{x:Static p:Resources.lbSpecialCharacterRequirement_}" HorizontalAlignment="Left" Margin="296,50,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Resources.lbInsertData}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Content="{x:Static p:Resources.lbEmail_}" FontWeight="Bold" HorizontalAlignment="Left" Margin="298,52,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.542,-0.289"/>
+        <Label Content="{x:Static p:Resources.lbPassword_}" FontWeight="Bold" HorizontalAlignment="Left" Margin="299,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
+        <Label Content="{x:Static p:Resources.lbGlobalUsername_}" HorizontalAlignment="Left" FontWeight="Bold" Margin="298,112,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Label Content="{x:Static p:Resources.lbMustFillFields}" HorizontalAlignment="Left" FontWeight="Bold" Margin="582,76,0,0" Grid.Row="2" VerticalAlignment="Top"/>
         <Image Name="ImgBack" HorizontalAlignment="Left" Height="56" Margin="10,0,0,0" VerticalAlignment="Top" Width="88" Source="/Recursos/regresar.png" Cursor="Hand" MouseLeftButtonDown="ImagenCLicAtras" RenderTransformOrigin="0.83,1.2"/>
-        <TextBox Name="tbUsuario" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="313,30,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" />
-        <TextBox Name="tbCorreo" HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="313,112,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <PasswordBox Name="pbContraseña" HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="316,208,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Grid.RowSpan="2"/>
+        <TextBox Name="tbUsuario" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="298,30,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" />
+        <TextBox Name="tbCorreo" HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="298,78,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <PasswordBox Name="PbContraseña" HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="299,130,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120"/>
         <Button BorderBrush="{x:Null}" Content="{x:Static p:Resources.btnRegister}" Background="SaddleBrown" FontWeight="Bold" HorizontalAlignment="Left" Margin="613,50,0,0" Grid.Row="2" VerticalAlignment="Top" Width="156" Height="26" Click="BtnCrearCuenta"/>
     </Grid>
 </Page>

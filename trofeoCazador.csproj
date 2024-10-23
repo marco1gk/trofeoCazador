@@ -79,6 +79,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SingletonSesion.cs" />
+    <Compile Include="Utilidades\UtilidadesDeValidacion.cs" />
     <Compile Include="Vistas\InicioSesion\XAMLInicioSesion.xaml.cs">
       <DependentUpon>XAMLInicioSesion.xaml</DependentUpon>
     </Compile>

@@ -10,4 +10,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="JugadorDataContract" nillable="true" type="tns:JugadorDataContract" />
+  <xs:complexType name="LobbyPlayer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LobbyPlayer" nillable="true" type="tns:LobbyPlayer" />
+  <xs:complexType name="ArrayOfLobbyPlayer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LobbyPlayer" nillable="true" type="tns:LobbyPlayer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLobbyPlayer" nillable="true" type="tns:ArrayOfLobbyPlayer" />
 </xs:schema>

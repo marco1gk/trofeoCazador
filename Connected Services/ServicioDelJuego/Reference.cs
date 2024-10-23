@@ -122,6 +122,51 @@ namespace trofeoCazador.ServicioDelJuego {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LobbyPlayer", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego")]
+    [System.SerializableAttribute()]
+    public partial class LobbyPlayer : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UsernameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Username {
+            get {
+                return this.UsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
+                    this.UsernameField = value;
+                    this.RaisePropertyChanged("Username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IGestionCuentaServicio")]
     public interface IGestionCuentaServicio {
@@ -265,5 +310,143 @@ namespace trofeoCazador.ServicioDelJuego {
         public System.Threading.Tasks.Task<bool> ValidarCodigoAsync(string codigoIngresado, string codigoEnviado) {
             return base.Channel.ValidarCodigoAsync(codigoIngresado, codigoEnviado);
         }
+<<<<<<< HEAD
+=======
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.ILobbyManager", CallbackContract=typeof(trofeoCazador.ServicioDelJuego.ILobbyManagerCallback))]
+    public interface ILobbyManager {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/CreateLobby")]
+        void CreateLobby(trofeoCazador.ServicioDelJuego.LobbyPlayer jugador);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/CreateLobby")]
+        System.Threading.Tasks.Task CreateLobbyAsync(trofeoCazador.ServicioDelJuego.LobbyPlayer jugador);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/JoinLobby")]
+        void JoinLobby(string lobbyCode, trofeoCazador.ServicioDelJuego.LobbyPlayer lobbyPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/JoinLobby")]
+        System.Threading.Tasks.Task JoinLobbyAsync(string lobbyCode, trofeoCazador.ServicioDelJuego.LobbyPlayer lobbyPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/JoinLobbyAsHost")]
+        void JoinLobbyAsHost(string lobbyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/JoinLobbyAsHost")]
+        System.Threading.Tasks.Task JoinLobbyAsHostAsync(string lobbyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ExitLobby", ReplyAction="http://tempuri.org/ILobbyManager/ExitLobbyResponse")]
+        void ExitLobby(string lobbyCode, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ExitLobby", ReplyAction="http://tempuri.org/ILobbyManager/ExitLobbyResponse")]
+        System.Threading.Tasks.Task ExitLobbyAsync(string lobbyCode, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/sendMessage", ReplyAction="http://tempuri.org/ILobbyManager/sendMessageResponse")]
+        void sendMessage(string mensaje);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/sendMessage", ReplyAction="http://tempuri.org/ILobbyManager/sendMessageResponse")]
+        System.Threading.Tasks.Task sendMessageAsync(string mensaje);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ILobbyManagerCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyLobbyCreated", ReplyAction="http://tempuri.org/ILobbyManager/NotifyLobbyCreatedResponse")]
+        void NotifyLobbyCreated(string lobbyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyPlayersInLobby", ReplyAction="http://tempuri.org/ILobbyManager/NotifyPlayersInLobbyResponse")]
+        void NotifyPlayersInLobby(string lobbyCode, trofeoCazador.ServicioDelJuego.LobbyPlayer[] lobbyPlayers);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyPlayerJoinToLobby", ReplyAction="http://tempuri.org/ILobbyManager/NotifyPlayerJoinToLobbyResponse")]
+        void NotifyPlayerJoinToLobby(trofeoCazador.ServicioDelJuego.LobbyPlayer lobbyPlayer, int numOfPlayersInLobby);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyPlayerLeftLobby", ReplyAction="http://tempuri.org/ILobbyManager/NotifyPlayerLeftLobbyResponse")]
+        void NotifyPlayerLeftLobby(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyHostPlayerLeftLobby", ReplyAction="http://tempuri.org/ILobbyManager/NotifyHostPlayerLeftLobbyResponse")]
+        void NotifyHostPlayerLeftLobby();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyStartOfMatch", ReplyAction="http://tempuri.org/ILobbyManager/NotifyStartOfMatchResponse")]
+        void NotifyStartOfMatch();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyLobbyIsFull", ReplyAction="http://tempuri.org/ILobbyManager/NotifyLobbyIsFullResponse")]
+        void NotifyLobbyIsFull();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyLobbyDoesNotExist", ReplyAction="http://tempuri.org/ILobbyManager/NotifyLobbyDoesNotExistResponse")]
+        void NotifyLobbyDoesNotExist();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobby", ReplyAction="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobbyResponse")]
+        void NotifyExpulsedFromLobby();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ILobbyManagerChannel : trofeoCazador.ServicioDelJuego.ILobbyManager, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class LobbyManagerClient : System.ServiceModel.DuplexClientBase<trofeoCazador.ServicioDelJuego.ILobbyManager>, trofeoCazador.ServicioDelJuego.ILobbyManager {
+        
+        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void CreateLobby(trofeoCazador.ServicioDelJuego.LobbyPlayer jugador) {
+            base.Channel.CreateLobby(jugador);
+        }
+        
+        public System.Threading.Tasks.Task CreateLobbyAsync(trofeoCazador.ServicioDelJuego.LobbyPlayer jugador) {
+            return base.Channel.CreateLobbyAsync(jugador);
+        }
+        
+        public void JoinLobby(string lobbyCode, trofeoCazador.ServicioDelJuego.LobbyPlayer lobbyPlayer) {
+            base.Channel.JoinLobby(lobbyCode, lobbyPlayer);
+        }
+        
+        public System.Threading.Tasks.Task JoinLobbyAsync(string lobbyCode, trofeoCazador.ServicioDelJuego.LobbyPlayer lobbyPlayer) {
+            return base.Channel.JoinLobbyAsync(lobbyCode, lobbyPlayer);
+        }
+        
+        public void JoinLobbyAsHost(string lobbyCode) {
+            base.Channel.JoinLobbyAsHost(lobbyCode);
+        }
+        
+        public System.Threading.Tasks.Task JoinLobbyAsHostAsync(string lobbyCode) {
+            return base.Channel.JoinLobbyAsHostAsync(lobbyCode);
+        }
+        
+        public void ExitLobby(string lobbyCode, string username) {
+            base.Channel.ExitLobby(lobbyCode, username);
+        }
+        
+        public System.Threading.Tasks.Task ExitLobbyAsync(string lobbyCode, string username) {
+            return base.Channel.ExitLobbyAsync(lobbyCode, username);
+        }
+        
+        public void sendMessage(string mensaje) {
+            base.Channel.sendMessage(mensaje);
+        }
+        
+        public System.Threading.Tasks.Task sendMessageAsync(string mensaje) {
+            return base.Channel.sendMessageAsync(mensaje);
+        }
+>>>>>>> modificaciones lobby
     }
 }

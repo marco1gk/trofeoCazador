@@ -24,6 +24,10 @@ namespace trofeoCazador.Vistas.Menu
         {
             InitializeComponent();
         }
+        private void BtnSendMessage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -33,6 +37,17 @@ namespace trofeoCazador.Vistas.Menu
                 return;//veo  veo
             }
             this.NavigationService.Navigate(new Uri("Vistas/Perfil/XAMLPerfil.xaml", UriKind.Relative));
+
+        }
+
+        private void BtnLobby(object sender, RoutedEventArgs e)
+        {
+            // Navegar a la página de registro de usuario
+            if (this.NavigationService == null)
+            {
+                return;//veo  veo
+            }
+            this.NavigationService.Navigate(new Uri("Vistas/SalaEspera/XAMLSalaEspera.xaml", UriKind.Relative));
 
         }
     }

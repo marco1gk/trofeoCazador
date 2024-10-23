@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
+using trofeoCazador.Utilidades;
 
 namespace trofeoCazador.Vistas.InicioSesion
 {
@@ -62,11 +63,14 @@ namespace trofeoCazador.Vistas.InicioSesion
                 sesion.NombreUsuario = jugador.NombreUsuario;
                 sesion.NumeroFotoPerfil = jugador.NumeroFotoPerfil;
                 sesion.Correo = jugador.Correo;
+               // proxy.EnviarCodigoConfirmacion("vaomarco052@gmail.com");
 
                 Console.WriteLine("El correo es: " + jugador.Correo);
 
                 // Navegar al menú inicial (vestíbulo)
                 this.NavigationService.Navigate(new Uri("Vistas/Menu/XAMLMenu.xaml", UriKind.Relative));
+              //  proxy.EditarCorreo(sesion.JugadorId, "esteEsElNuevoCorreo");
+               // proxy.EditarNombreUsuario(sesion.JugadorId, "esteEsElNuevoNombreDeUsuario");
             }
             else
             {
@@ -75,6 +79,35 @@ namespace trofeoCazador.Vistas.InicioSesion
             }
         }
 
+        private void EstablecerEstilosPorDefecto()
+        {
+            string estiloTextBoxNormal = "NormalTextBoxStyle";
+
+            UsuarioTextBox.Style = (Style)FindResource(estiloTextBoxNormal);
+            ContrasenaPasswordBox.Style = (Style)FindResource(estiloTextBoxNormal);
+            lbCredencialesIncorrectas.Visibility = Visibility.Hidden;
+        }
+
+        private bool ValidarCampos()
+        {
+            EstablecerEstilosPorDefecto();
+            bool esValido = true;
+            string estiloErrorTextBox = "ErrorTextBoxStyle";
+
+            if (UtilidadesDeValidacion.EsNombreUsuarioValido(UsuarioTextBox.Text) || UsuarioTextBox.Text.Equals(UsuarioTextBox.Tag))
+            {
+                UsuarioTextBox.Style = (Style)FindResource(estiloErrorTextBox);
+                esValido = false;
+            }
+
+            if (!UtilidadesDeValidacion.EsContrasenaValida(ContrasenaPasswordBox.Password) || ContrasenaPasswordBox.Password.Equals(ContrasenaPasswordBox.Tag))
+            {
+                ContrasenaPasswordBox.Style = (Style)FindResource(estiloErrorTextBox);
+                esValido = false;
+            }
+
+            return esValido;
+        }
 
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

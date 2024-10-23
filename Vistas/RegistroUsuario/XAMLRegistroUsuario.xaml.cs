@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using trofeoCazador.ServicioDelJuego;
+using trofeoCazador.Utilidades;
 
 namespace trofeoCazador.Vistas.RegistroUsuario
 {
@@ -36,7 +38,7 @@ namespace trofeoCazador.Vistas.RegistroUsuario
         {
             string nombreUsuario= tbUsuario.Text;
             string correo= tbCorreo.Text;   
-            string contrasenia = pbContraseña.Password;
+            string contrasenia = PbContraseña.Password;
 
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
             JugadorDataContract jugador = new JugadorDataContract();
@@ -45,7 +47,67 @@ namespace trofeoCazador.Vistas.RegistroUsuario
             jugador.NumeroFotoPerfil = 1;
             jugador.ContraseniaHash = contrasenia;
             jugador.Correo = correo;
-            proxy.AgregarJugador(jugador);
+          //  proxy.AgregarJugador(jugador);
         }
+
+        /*
+        private void EstablecerEstilosPredeterminados()
+        {
+            string estiloNormalTextBox = "NormalTextBoxStyle";
+            string estiloNormalContraseña = "NormalPasswordBoxStyle";
+
+            tbCorreo.Style = (Style)FindResource(estiloNormalTextBox);
+            tbUsuario.Style = (Style)FindResource(estiloNormalTextBox);
+            PbContraseña.Style = (Style)FindResource(estiloNormalContraseña);
+
+            lbExistentEmail.Visibility = Visibility.Hidden;
+            lbExistentUsername.Visibility = Visibility.Hidden;
+            lbEmailError.Visibility = Visibility.Hidden;
+
+            lbPasswordLengthInstruction.Foreground = Brushes.Red;
+            lbPasswordSymbolInstruction.Foreground = Brushes.Red;
+            lbPasswordCapitalLetterInstruction.Foreground = Brushes.Red;
+            lbPasswordLowerLetterInstruction.Foreground = Brushes.Red;
+            lbPasswordNumberInstruction.Foreground = Brushes.Red;
+
+            ImgNameErrorDetails.Visibility = Visibility.Hidden;
+            ImgLastNameErrorDetails.Visibility = Visibility.Hidden;
+            ImgEmailErrorDetails.Visibility = Visibility.Hidden;
+            ImgUsernameErrorDetails.Visibility = Visibility.Hidden;
+            ImgPasswordErrorDetails.Visibility = Visibility.Hidden;
+        }
+        */
+
+
+        private void ValidadPropiedadesContraseña()
+        {
+            if (PbContraseña.Password.Trim().Length >= 12)   
+            {
+                lbRequerimientoLongitud.Foreground = Brushes.GreenYellow;
+            }
+
+            if (UtilidadesDeValidacion.EsSimboloValido(PbContraseña.Password))
+            {
+                lbCaracterEspecial.Foreground = Brushes.GreenYellow;
+            }
+
+            if (UtilidadesDeValidacion.EsMayusculaValida(PbContraseña.Password))
+            {
+                lbRequerimientoMayuscula.Foreground = Brushes.GreenYellow;
+            }
+
+            if (UtilidadesDeValidacion.EsMinusculaValida(PbContraseña.Password))
+            {
+                lbRequerimientoMinuscula.Foreground = Brushes.GreenYellow;
+            }
+
+            if (UtilidadesDeValidacion.EsNumeroValido(PbContraseña.Password))
+            {
+                lbRequerimientoNumero.Foreground = Brushes.GreenYellow;
+            }
+        }
+
+
+
     }
 }
