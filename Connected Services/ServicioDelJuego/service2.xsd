@@ -118,8 +118,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-<<<<<<< HEAD
-=======
   <xs:element name="CreateLobby">
     <xs:complexType>
       <xs:sequence>
@@ -267,5 +265,4 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
->>>>>>> modificaciones lobby
 </xs:schema>

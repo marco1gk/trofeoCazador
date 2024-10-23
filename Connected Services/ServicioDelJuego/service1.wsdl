@@ -75,8 +75,6 @@
   <wsdl:message name="IGestionCuentaServicio_ValidarCodigo_OutputMessage">
     <wsdl:part name="parameters" element="tns:ValidarCodigoResponse" />
   </wsdl:message>
-<<<<<<< HEAD
-=======
   <wsdl:message name="ILobbyManager_CreateLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateLobby" />
   </wsdl:message>
@@ -152,7 +150,6 @@
   <wsdl:message name="ILobbyManager_NotifyExpulsedFromLobby_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyExpulsedFromLobbyResponse" />
   </wsdl:message>
->>>>>>> modificaciones lobby
   <wsdl:portType name="IGestionCuentaServicio">
     <wsdl:operation name="AgregarJugador">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/AgregarJugador" message="tns:IGestionCuentaServicio_AgregarJugador_InputMessage" />
@@ -186,8 +183,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigo" message="tns:IGestionCuentaServicio_ValidarCodigo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigoResponse" message="tns:IGestionCuentaServicio_ValidarCodigo_OutputMessage" />
     </wsdl:operation>
-<<<<<<< HEAD
-=======
   </wsdl:portType>
   <wsdl:portType name="ILobbyManager">
     <wsdl:operation name="CreateLobby">
@@ -243,7 +238,6 @@
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobby" message="tns:ILobbyManager_NotifyExpulsedFromLobby_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobbyResponse" message="tns:ILobbyManager_NotifyExpulsedFromLobby_InputCallbackMessage" />
     </wsdl:operation>
->>>>>>> modificaciones lobby
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionCuentaServicio" type="tns:IGestionCuentaServicio">
     <wsp:PolicyReference URI="#NetTcpBinding_IGestionCuentaServicio_policy">
@@ -321,8 +315,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-<<<<<<< HEAD
-=======
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_ILobbyManager" type="tns:ILobbyManager">
     <wsp:PolicyReference URI="#NetTcpBinding_ILobbyManager_policy">
@@ -445,7 +437,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
->>>>>>> modificaciones lobby
   </wsdl:binding>
   <wsdl:service name="ImplementacionServicio">
     <wsdl:port name="NetTcpBinding_IGestionCuentaServicio" binding="tns:NetTcpBinding_IGestionCuentaServicio">

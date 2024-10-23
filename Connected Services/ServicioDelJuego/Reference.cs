@@ -310,8 +310,6 @@ namespace trofeoCazador.ServicioDelJuego {
         public System.Threading.Tasks.Task<bool> ValidarCodigoAsync(string codigoIngresado, string codigoEnviado) {
             return base.Channel.ValidarCodigoAsync(codigoIngresado, codigoEnviado);
         }
-<<<<<<< HEAD
-=======
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -447,6 +445,5 @@ namespace trofeoCazador.ServicioDelJuego {
         public System.Threading.Tasks.Task sendMessageAsync(string mensaje) {
             return base.Channel.sendMessageAsync(mensaje);
         }
->>>>>>> modificaciones lobby
     }
 }

@@ -22,8 +22,8 @@
     <MetadataSource Address="net.tcp://localhost:8000/ServiceImplementation/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="2a82332f-b1df-4c95-ae2c-5b9742a3e8c1" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="16c2748e-c9fa-4720-aad2-cc1d290dc85a" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="9d7951b8-13de-48ad-a0ca-532e7083ca48" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="9ede957e-1341-4aa2-ab9c-57e8b67f3139" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="114a65c7-907d-4c30-858b-34dc95e6637a" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
     <MetadataFile FileName="ServicioJuego.xsd" MetadataType="Schema" ID="9fc6fb20-0f38-4453-a9b0-558c475d9794" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
   </Metadata>
