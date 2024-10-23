@@ -47,7 +47,7 @@ namespace trofeoCazador.Vistas.RegistroUsuario
             jugador.NumeroFotoPerfil = 1;
             jugador.ContraseniaHash = contrasenia;
             jugador.Correo = correo;
-          //  proxy.AgregarJugador(jugador);
+           proxy.AgregarJugador(jugador);
         }
 
         /*
