@@ -57,7 +57,8 @@ namespace trofeoCazador.Vistas.InicioSesion
             // Puedes descomentar el siguiente código y ajustar según tus necesidades
             
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            JugadorDataContract jugador = proxy.ValidarInicioSesion(usuario, contraseña);
+            JugadorDataContract jugador = new JugadorDataContract();
+                proxy.ValidarInicioSesion(usuario, contraseña);
 
             if (jugador != null)
             {

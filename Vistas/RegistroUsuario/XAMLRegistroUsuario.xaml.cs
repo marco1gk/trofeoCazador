@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -36,51 +37,91 @@ namespace trofeoCazador.Vistas.RegistroUsuario
 
         private void BtnCrearCuenta(object sender, RoutedEventArgs e)
         {
-            string nombreUsuario= tbUsuario.Text;
-            string correo= tbCorreo.Text;   
-            string contrasenia = PbContraseña.Password;
+            // Validar campos ingresados
+            string errores = ValidateFields();
+
+            if (!string.IsNullOrEmpty(errores))
+            {
+                MessageBox.Show(errores, "Errores en la validación", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return; // Detener ejecución si hay errores en los datos ingresados
+            }
 
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            JugadorDataContract jugador = new JugadorDataContract();
-   
-            jugador.NombreUsuario = nombreUsuario;
-            jugador.NumeroFotoPerfil = 1;
-            jugador.ContraseniaHash = contrasenia;
-            jugador.Correo = correo;
-           proxy.AgregarJugador(jugador);
+
+            // Verificar si el correo ya está registrado
+            if (proxy.ExisteCorreo(tbCorreo.Text.Trim()))
+            {
+                MessageBox.Show("Este correo ya está registrado. Por favor, elige otro.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return; // Detener la ejecución si el correo está registrado
+            }
+
+            // Verificar si el nombre de usuario ya está registrado
+            if (proxy.ExisteNombreUsuario(tbUsuario.Text.Trim()))
+            {
+                MessageBox.Show("Este nombre de usuario ya está en uso. Por favor, elige otro.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return; // Detener la ejecución si el nombre de usuario está registrado
+            }
+
+            // Proceder con la creación de la cuenta si no hay errores ni registros duplicados
+            string nombreUsuario = tbUsuario.Text;
+            string correo = tbCorreo.Text;
+            string contrasenia = PbContraseña.Password;
+
+            JugadorDataContract jugador = new JugadorDataContract
+            {
+                NombreUsuario = nombreUsuario,
+                NumeroFotoPerfil = 1,
+                ContraseniaHash = contrasenia,
+                Correo = correo
+            };
+
+            proxy.AgregarJugador(jugador);
+
+            MessageBox.Show("Cuenta creada exitosamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        /*
-        private void EstablecerEstilosPredeterminados()
+
+
+
+        public string ValidateFields()
         {
-            string estiloNormalTextBox = "NormalTextBoxStyle";
-            string estiloNormalContraseña = "NormalPasswordBoxStyle";
+            CultureInfo cultureInfo = CultureInfo.CurrentCulture;
+            StringBuilder errores = new StringBuilder();
+           
 
-            tbCorreo.Style = (Style)FindResource(estiloNormalTextBox);
-            tbUsuario.Style = (Style)FindResource(estiloNormalTextBox);
-            PbContraseña.Style = (Style)FindResource(estiloNormalContraseña);
+            ValidadPropiedadesContraseña();
 
-            lbExistentEmail.Visibility = Visibility.Hidden;
-            lbExistentUsername.Visibility = Visibility.Hidden;
-            lbEmailError.Visibility = Visibility.Hidden;
+            if (!UtilidadesDeValidacion.EsCorreoValido(tbCorreo.Text.Trim()))
+            {
+              //  tbCorreo.Style = (Style)FindResource(errorTextBoxStyle);
+                errores.AppendLine("El correo electrónico no es válido.");
+            }
 
-            lbPasswordLengthInstruction.Foreground = Brushes.Red;
-            lbPasswordSymbolInstruction.Foreground = Brushes.Red;
-            lbPasswordCapitalLetterInstruction.Foreground = Brushes.Red;
-            lbPasswordLowerLetterInstruction.Foreground = Brushes.Red;
-            lbPasswordNumberInstruction.Foreground = Brushes.Red;
+            if (!UtilidadesDeValidacion.EsNombreUsuarioValido(tbUsuario.Text.Trim()))
+            {
+                //tbUsuario.Style = (Style)FindResource(errorTextBoxStyle);
+                errores.AppendLine("El nombre de usuario no es válido.");
+            }
 
-            ImgNameErrorDetails.Visibility = Visibility.Hidden;
-            ImgLastNameErrorDetails.Visibility = Visibility.Hidden;
-            ImgEmailErrorDetails.Visibility = Visibility.Hidden;
-            ImgUsernameErrorDetails.Visibility = Visibility.Hidden;
-            ImgPasswordErrorDetails.Visibility = Visibility.Hidden;
+            if (!UtilidadesDeValidacion.EsContrasenaValida(PbContraseña.Password.Trim()))
+            {
+                //PbContraseña.Style = (Style)FindResource(errorPasswordBoxStyle);
+                errores.AppendLine("La contraseña no es válida.");
+            }
+
+            return errores.ToString();
         }
-        */
+
 
 
         private void ValidadPropiedadesContraseña()
         {
+
+            lbRequerimientoLongitud.Foreground = Brushes.Red;
+            lbCaracterEspecial.Foreground = Brushes.Red;
+            lbRequerimientoMayuscula.Foreground = Brushes.Red;
+            lbRequerimientoMinuscula.Foreground = Brushes.Red;
+            lbRequerimientoNumero.Foreground = Brushes.Red;
             if (PbContraseña.Password.Trim().Length >= 12)   
             {
                 lbRequerimientoLongitud.Foreground = Brushes.GreenYellow;

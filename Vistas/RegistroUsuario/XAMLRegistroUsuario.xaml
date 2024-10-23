@@ -29,7 +29,7 @@
         <Label x:Name = "lbRequerimientoMayuscula" Content="{x:Static p:Resources.lbUppercaseLetterRequirement_}" HorizontalAlignment="Left" Margin="298,200,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Label x:Name = "lbRequerimientoLongitud" Content="{x:Static p:Resources.lbAtLeast12Characters}" HorizontalAlignment="Left" Margin="299,26,0,0" Grid.Row="2" VerticalAlignment="Top"/>
         <Label x:Name = "lbRequerimientoMinuscula" Content="{x:Static p:Resources.lbLowercaseLetterRequirement_}" HorizontalAlignment="Left" Margin="298,0,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label x:Name = "lbRequerimientoNumero" Content="{x:Static p:Resources.lbAtLeastOneNumber}" HorizontalAlignment="Left" Margin="299,178,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label x:Name = "lbRequerimientoNumero" Content="{x:Static p:Resources.lbAtLeastOneNumber}" HorizontalAlignment="Left" Margin="305,174,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Label x:Name="lbCaracterEspecial" Content="{x:Static p:Resources.lbSpecialCharacterRequirement_}" HorizontalAlignment="Left" Margin="296,50,0,0" Grid.Row="2" VerticalAlignment="Top"/>
         <Label Content="{x:Static p:Resources.lbInsertData}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Content="{x:Static p:Resources.lbEmail_}" FontWeight="Bold" HorizontalAlignment="Left" Margin="298,52,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.542,-0.289"/>

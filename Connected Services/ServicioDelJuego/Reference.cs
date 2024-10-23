@@ -218,6 +218,18 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigo", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ValidarCodigoResponse")]
         System.Threading.Tasks.Task<bool> ValidarCodigoAsync(string codigoIngresado, string codigoEnviado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ExisteCorreo", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ExisteCorreoResponse")]
+        bool ExisteCorreo(string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ExisteCorreo", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ExisteCorreoResponse")]
+        System.Threading.Tasks.Task<bool> ExisteCorreoAsync(string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuario", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuarioResponse")]
+        bool ExisteNombreUsuario(string nombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuario", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuarioResponse")]
+        System.Threading.Tasks.Task<bool> ExisteNombreUsuarioAsync(string nombreUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -309,6 +321,22 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task<bool> ValidarCodigoAsync(string codigoIngresado, string codigoEnviado) {
             return base.Channel.ValidarCodigoAsync(codigoIngresado, codigoEnviado);
+        }
+        
+        public bool ExisteCorreo(string correo) {
+            return base.Channel.ExisteCorreo(correo);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ExisteCorreoAsync(string correo) {
+            return base.Channel.ExisteCorreoAsync(correo);
+        }
+        
+        public bool ExisteNombreUsuario(string nombreUsuario) {
+            return base.Channel.ExisteNombreUsuario(nombreUsuario);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ExisteNombreUsuarioAsync(string nombreUsuario) {
+            return base.Channel.ExisteNombreUsuarioAsync(nombreUsuario);
         }
     }
     

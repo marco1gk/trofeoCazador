@@ -75,6 +75,18 @@
   <wsdl:message name="IGestionCuentaServicio_ValidarCodigo_OutputMessage">
     <wsdl:part name="parameters" element="tns:ValidarCodigoResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ExisteCorreo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExisteCorreo" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ExisteCorreo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExisteCorreoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ExisteNombreUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExisteNombreUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ExisteNombreUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExisteNombreUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="ILobbyManager_CreateLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateLobby" />
   </wsdl:message>
@@ -182,6 +194,14 @@
     <wsdl:operation name="ValidarCodigo">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigo" message="tns:IGestionCuentaServicio_ValidarCodigo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigoResponse" message="tns:IGestionCuentaServicio_ValidarCodigo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExisteCorreo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ExisteCorreo" message="tns:IGestionCuentaServicio_ExisteCorreo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ExisteCorreoResponse" message="tns:IGestionCuentaServicio_ExisteCorreo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExisteNombreUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuario" message="tns:IGestionCuentaServicio_ExisteNombreUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuarioResponse" message="tns:IGestionCuentaServicio_ExisteNombreUsuario_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ILobbyManager">
@@ -308,6 +328,24 @@
     </wsdl:operation>
     <wsdl:operation name="ValidarCodigo">
       <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ValidarCodigo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExisteCorreo">
+      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ExisteCorreo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExisteNombreUsuario">
+      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
