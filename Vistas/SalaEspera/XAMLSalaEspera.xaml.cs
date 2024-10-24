@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
 using System.ServiceModel;
 
@@ -26,30 +18,95 @@ namespace trofeoCazador.Vistas.SalaEspera
 
         public XAMLSalaEspera()
         {
-            SingletonSesion sesion = SingletonSesion.Instancia;
             InitializeComponent();
-            SetupClient();
-            LobbyPlayer lb = new LobbyPlayer();
-            lb.Username = sesion.NombreUsuario;
-             
-            client.CreateLobby(lb);
-            
-            // Ejemplo: Llamar al servicio para unirte a un lobby al cargar la página
-            //JoinLobbyAsHost("59ZY34"); // Código de ejemplo de un lobby
+            SetupClient();  // Asegúrate de configurar el cliente WCF al inicializar
+            UnirseOcrearLobby();  // Intentar unirse a un lobby o crear uno nuevo
         }
 
-        private void BtnSendMessage_Click(object sender, RoutedEventArgs e)
+        // Método que busca si hay un lobby existente o crea uno nuevo si no hay ninguno
+        private async void UnirseOcrearLobby()
         {
-            client.sendMessage("a ver");
+            SingletonSesion sesion = SingletonSesion.Instancia;
+            string username = sesion.NombreUsuario;
+            LobbyPlayer lb = new LobbyPlayer { Username = username };
 
+            try
+            {
+                // Intentar unirse a un lobby existente
+                string existingLobbyCode = await BuscarLobbyExistente();
+                if (!string.IsNullOrEmpty(existingLobbyCode))
+                {
+                    client.JoinLobby(existingLobbyCode, lb);  // Unirse al lobby existente
+                    MessageBox.Show($"Unido al lobby con código: {existingLobbyCode}");
+                }
+                else
+                {
+                    // Si no hay un lobby existente, crear uno nuevo
+                    client.CreateLobby(lb);
+                    MessageBox.Show("No se encontró un lobby, creando uno nuevo.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
+
+        // Método para buscar un lobby existente
+        private async Task<string> BuscarLobbyExistente()
+        {
+            // Simulación de una consulta al servicio para buscar lobbies existentes
+            return await Task.Run(() =>
+            {
+                try
+                {
+                    // Llama al servicio para obtener el código del primer lobby disponible
+                    return client.BuscarLobbyDisponible(); // Debes implementar este método en el servicio
+                }
+                catch (Exception)
+                {
+                    return null; // Devuelve null si ocurre algún error o no hay lobby
+                }
+            });
+        }
+
+        private async void BtnSendMessage_Click(object sender, RoutedEventArgs e)
+        {
+            string message = tbxMessage.Text.Trim();
+
+            if (string.IsNullOrEmpty(message))
+            {
+                MessageBox.Show("Por favor, escribe un mensaje antes de enviar.");
+                return;
+            }
+
+            try
+            {
+                if (client == null)
+                {
+                    SetupClient(); // Asegúrate de que el cliente esté inicializado
+                }
+
+                await Task.Run(() => client.sendMessage(message)); // Enviar el mensaje de manera asíncrona
+                tbxMessage.Clear(); // Limpiar el TextBox después de enviar el mensaje
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al enviar mensaje: {ex.Message}");
+            }
+        }
+
+        public void JoinExistingLobby(string lobbyCode, string username)
+        {
+            LobbyPlayer newPlayer = new LobbyPlayer { Username = username };
+            client.JoinLobby(lobbyCode, newPlayer);
+        }
+
         // Configuración del cliente WCF
         private void SetupClient()
         {
             // Crear el contexto para manejar los callbacks
             InstanceContext instanceContext = new InstanceContext(this);
-
-            // Crear el cliente WCF usando el contexto
             client = new LobbyManagerClient(instanceContext);
         }
 
@@ -127,9 +184,30 @@ namespace trofeoCazador.Vistas.SalaEspera
             MessageBox.Show("Has sido expulsado del lobby.");
         }
 
+        public void ReceiveMessage(string username, string message)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                // Asegúrate de que estás actualizando la UI en el hilo correcto
+                stackPanelMessages.Children.Add(new TextBlock { Text = $"{username}: {message}" });
+            });
+        }
+
         public void NotifyPlayersInLobby(string lobbyCode, LobbyPlayer[] lobbyPlayers)
         {
-            throw new NotImplementedException();
+            // Actualizamos la UI para mostrar los jugadores en el lobby
+            Dispatcher.Invoke(() =>
+            {
+                // Limpiamos el stackPanelMessages o algún control similar que esté mostrando los jugadores
+                stackPanelMessages.Children.Clear();
+
+                // Mostramos los jugadores en el lobby
+                foreach (var player in lobbyPlayers)
+                {
+                    stackPanelMessages.Children.Add(new TextBlock { Text = $"{player.Username} está en el lobby {lobbyCode}" });
+                }
+            });
         }
+
     }
 }

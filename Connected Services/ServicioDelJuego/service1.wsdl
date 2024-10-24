@@ -108,6 +108,12 @@
   <wsdl:message name="ILobbyManager_sendMessage_OutputMessage">
     <wsdl:part name="parameters" element="tns:sendMessageResponse" />
   </wsdl:message>
+  <wsdl:message name="ILobbyManager_BuscarLobbyDisponible_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarLobbyDisponible" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyManager_BuscarLobbyDisponible_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarLobbyDisponibleResponse" />
+  </wsdl:message>
   <wsdl:message name="ILobbyManager_NotifyLobbyCreated_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyLobbyCreated" />
   </wsdl:message>
@@ -161,6 +167,12 @@
   </wsdl:message>
   <wsdl:message name="ILobbyManager_NotifyExpulsedFromLobby_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyExpulsedFromLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyManager_ReceiveMessage_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveMessage" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyManager_ReceiveMessage_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveMessageResponse" />
   </wsdl:message>
   <wsdl:portType name="IGestionCuentaServicio">
     <wsdl:operation name="AgregarJugador">
@@ -222,6 +234,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/sendMessage" message="tns:ILobbyManager_sendMessage_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/sendMessageResponse" message="tns:ILobbyManager_sendMessage_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="BuscarLobbyDisponible">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/BuscarLobbyDisponible" message="tns:ILobbyManager_BuscarLobbyDisponible_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/BuscarLobbyDisponibleResponse" message="tns:ILobbyManager_BuscarLobbyDisponible_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotifyLobbyCreated">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotifyLobbyCreated" message="tns:ILobbyManager_NotifyLobbyCreated_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotifyLobbyCreatedResponse" message="tns:ILobbyManager_NotifyLobbyCreated_InputCallbackMessage" />
@@ -257,6 +273,10 @@
     <wsdl:operation name="NotifyExpulsedFromLobby">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobby" message="tns:ILobbyManager_NotifyExpulsedFromLobby_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobbyResponse" message="tns:ILobbyManager_NotifyExpulsedFromLobby_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveMessage">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/ReceiveMessage" message="tns:ILobbyManager_ReceiveMessage_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/ReceiveMessageResponse" message="tns:ILobbyManager_ReceiveMessage_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionCuentaServicio" type="tns:IGestionCuentaServicio">
@@ -394,6 +414,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="BuscarLobbyDisponible">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/BuscarLobbyDisponible" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="NotifyLobbyCreated">
       <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotifyLobbyCreated" style="document" />
       <wsdl:input>
@@ -468,6 +497,15 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyExpulsedFromLobby">
       <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveMessage">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/ReceiveMessage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

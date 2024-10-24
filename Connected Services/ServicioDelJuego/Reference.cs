@@ -373,6 +373,12 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/sendMessage", ReplyAction="http://tempuri.org/ILobbyManager/sendMessageResponse")]
         System.Threading.Tasks.Task sendMessageAsync(string mensaje);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/BuscarLobbyDisponible", ReplyAction="http://tempuri.org/ILobbyManager/BuscarLobbyDisponibleResponse")]
+        string BuscarLobbyDisponible();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/BuscarLobbyDisponible", ReplyAction="http://tempuri.org/ILobbyManager/BuscarLobbyDisponibleResponse")]
+        System.Threading.Tasks.Task<string> BuscarLobbyDisponibleAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -404,6 +410,9 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobby", ReplyAction="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobbyResponse")]
         void NotifyExpulsedFromLobby();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ReceiveMessage", ReplyAction="http://tempuri.org/ILobbyManager/ReceiveMessageResponse")]
+        void ReceiveMessage(string username, string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -472,6 +481,14 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task sendMessageAsync(string mensaje) {
             return base.Channel.sendMessageAsync(mensaje);
+        }
+        
+        public string BuscarLobbyDisponible() {
+            return base.Channel.BuscarLobbyDisponible();
+        }
+        
+        public System.Threading.Tasks.Task<string> BuscarLobbyDisponibleAsync() {
+            return base.Channel.BuscarLobbyDisponibleAsync();
         }
     }
 }

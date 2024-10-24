@@ -193,6 +193,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="BuscarLobbyDisponible">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarLobbyDisponibleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BuscarLobbyDisponibleResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NotifyLobbyCreated">
     <xs:complexType>
       <xs:sequence>
@@ -289,6 +301,19 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="NotifyExpulsedFromLobbyResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReceiveMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReceiveMessageResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
