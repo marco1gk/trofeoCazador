@@ -50,5 +50,12 @@ namespace trofeoCazador.Vistas.Menu
             this.NavigationService.Navigate(new Uri("Vistas/SalaEspera/XAMLSalaEspera.xaml", UriKind.Relative));
 
         }
+
+        private void BtnSalir(object sender, RoutedEventArgs e)
+        {
+            SingletonSesion.Instancia.LimpiarSesion();
+            NavigationService.GoBack();
+        }
+
     }
 }

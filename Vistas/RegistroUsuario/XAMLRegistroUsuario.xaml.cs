@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Utilidades;
+using trofeoCazador.VentanasReutilizables;
 
 namespace trofeoCazador.Vistas.RegistroUsuario
 {
@@ -37,7 +38,7 @@ namespace trofeoCazador.Vistas.RegistroUsuario
 
         private void BtnCrearCuenta(object sender, RoutedEventArgs e)
         {
-            // Validar campos ingresados
+            // Validar los campos ingresados
             string errores = ValidateFields();
 
             if (!string.IsNullOrEmpty(errores))
@@ -62,23 +63,28 @@ namespace trofeoCazador.Vistas.RegistroUsuario
                 return; // Detener la ejecución si el nombre de usuario está registrado
             }
 
-            // Proceder con la creación de la cuenta si no hay errores ni registros duplicados
-            string nombreUsuario = tbUsuario.Text;
-            string correo = tbCorreo.Text;
-            string contrasenia = PbContraseña.Password;
+            // Enviar el código de verificación por correo
+            string codigoEnviado = proxy.EnviarCodigoConfirmacion(tbCorreo.Text);
 
+            if (string.IsNullOrEmpty(codigoEnviado))
+            {
+                MessageBox.Show("No se pudo enviar el código de verificación. Intenta de nuevo.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; // Detener la ejecución si hay un error enviando el código
+            }
+
+            // Abrir la ventana para validar el código
             JugadorDataContract jugador = new JugadorDataContract
             {
-                NombreUsuario = nombreUsuario,
+                NombreUsuario = tbUsuario.Text,
                 NumeroFotoPerfil = 1,
-                ContraseniaHash = contrasenia,
-                Correo = correo
+                ContraseniaHash = PbContraseña.Password,
+                Correo = tbCorreo.Text
             };
 
-            proxy.AgregarJugador(jugador);
-
-            MessageBox.Show("Cuenta creada exitosamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            ValidarCodigoRegistro ventanaValidacion = new ValidarCodigoRegistro(jugador, codigoEnviado);
+            ventanaValidacion.ShowDialog(); // Mostrar la ventana de validación
         }
+
 
 
 

@@ -37,7 +37,6 @@ namespace trofeoCazador.Vistas.InicioSesion
 
         private void BtnIniciarSesion(object sender, RoutedEventArgs e)
         {
-
             // Ocultar mensaje de error antes de validar
             lbCredencialesIncorrectas.Visibility = Visibility.Hidden;
 
@@ -53,12 +52,10 @@ namespace trofeoCazador.Vistas.InicioSesion
             string contraseña = ContrasenaPasswordBox.Password;
             string usuario = UsuarioTextBox.Text;
 
-            // Simulación de la validación de credenciales
-            // Puedes descomentar el siguiente código y ajustar según tus necesidades
-            
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            JugadorDataContract jugador = new JugadorDataContract();
-                proxy.ValidarInicioSesion(usuario, contraseña);
+
+            // Asegúrate de obtener el jugador de la validación
+            JugadorDataContract jugador = proxy.ValidarInicioSesion(usuario, contraseña);
 
             if (jugador != null)
             {
@@ -68,7 +65,7 @@ namespace trofeoCazador.Vistas.InicioSesion
                 sesion.NombreUsuario = jugador.NombreUsuario;
                 sesion.NumeroFotoPerfil = jugador.NumeroFotoPerfil;
                 sesion.Correo = jugador.Correo;
-
+              
                 // Navegar al menú inicial (vestíbulo)
                 this.NavigationService.Navigate(new Uri("Vistas/Menu/XAMLMenu.xaml", UriKind.Relative));
             }
@@ -78,8 +75,8 @@ namespace trofeoCazador.Vistas.InicioSesion
                 lbCredencialesIncorrectas.Visibility = Visibility.Visible; // Muestra el mensaje de error
                 Console.WriteLine("El inicio de sesión falló o los datos no fueron recuperados correctamente.");
             }
-            
         }
+
 
         private bool ValidarCampos()
         {

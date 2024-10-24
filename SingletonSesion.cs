@@ -42,5 +42,20 @@ namespace trofeoCazador
         // Nuevas propiedades para el cambio de correo
         public string NuevoCorreo { get; set; } // Para almacenar el nuevo correo que el usuario desea establecer
         public string CodigoVerificacion { get; set; } // Para almacenar el código de verificación enviado al correo actual
+
+        // Método para limpiar los datos del Singleton (Cerrar sesión o salir de la aplicación)
+        public void LimpiarSesion()
+        {
+            JugadorId = 0;
+            NombreUsuario = null;
+            NumeroFotoPerfil = 0;
+            Correo = null;
+            NuevoCorreo = null;
+            CodigoVerificacion = null;
+        }
+
+
     }
+
+
 }
