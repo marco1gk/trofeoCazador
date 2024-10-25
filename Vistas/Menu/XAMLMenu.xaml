@@ -27,10 +27,10 @@
                     BorderBrush="#FF34495E" BorderThickness="2" Click="BtnLobby" />
 
             <!-- Botón Configuraciones -->
-            <Button Content="Unirse a lobby" Width="200" Height="50" 
+            <Button Content="Configuraciones" Width="200" Height="50" 
                     Background="#FF2C3E50" Foreground="White" 
                     FontSize="18" FontWeight="SemiBold" 
-                    BorderBrush="#FF34495E" BorderThickness="2" Click="Button_Click_1" />
+                    BorderBrush="#FF34495E" BorderThickness="2" Click="BtnUnirseLobby" />
 
             <!-- Botón Tabla de Ganadores -->
             <Button Content="Tabla de Ganadores" Width="200" Height="50" 

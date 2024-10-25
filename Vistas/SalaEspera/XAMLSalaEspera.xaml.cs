@@ -21,7 +21,54 @@ namespace trofeoCazador.Vistas.SalaEspera
         {
             InitializeComponent();
             SetupClient();  
-            UnirseOcrearLobby();  
+          //  UnirseOcrearLobby();  
+        }
+        private async void BtnCrearLobby_Click(object sender, RoutedEventArgs e)
+        {
+            SingletonSesion sesion = SingletonSesion.Instancia;
+            string username = sesion.NombreUsuario;
+            LobbyPlayer lb = new LobbyPlayer { Username = username };
+
+            try
+            {
+                // Crear un lobby nuevo
+                client.CreateLobby(lb);
+                MessageBox.Show("Se ha creado un nuevo lobby.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al crear el lobby: {ex.Message}");
+            }
+        }
+
+        private async void BtnUnirseLobby_Click(object sender, RoutedEventArgs e)
+        {
+            SingletonSesion sesion = SingletonSesion.Instancia;
+            string username = sesion.NombreUsuario;
+            LobbyPlayer lb = new LobbyPlayer { Username = username };
+
+            // Mostrar el campo de texto para que el usuario introduzca el código del lobby
+            txtCodigoLobby.Visibility = Visibility.Visible;
+
+            // Obtener el código ingresado
+            string codigoLobby = txtCodigoLobby.Text.Trim();
+
+            if (string.IsNullOrEmpty(codigoLobby))
+            {
+                MessageBox.Show("Por favor, ingresa un código de lobby válido.");
+                return;
+            }
+
+            try
+            {
+                // Intentar unirse a un lobby existente con el código proporcionado
+                client.JoinLobby(codigoLobby, lb);
+                MessageBox.Show($"Unido al lobby con código: {codigoLobby}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al unirse al lobby: {ex.Message}");
+            }
         }
         private void ImagenCLicAtras(object sender, MouseButtonEventArgs e)
         {
@@ -37,16 +84,16 @@ namespace trofeoCazador.Vistas.SalaEspera
             {
                 // Intentar unirse a un lobby existente
                 string existingLobbyCode = await BuscarLobbyExistente();
-                if (!string.IsNullOrEmpty(existingLobbyCode))
-                {
-                    client.JoinLobby(existingLobbyCode, lb);  
-                    MessageBox.Show($"Unido al lobby con código: {existingLobbyCode}");
-                }
-                else
-                {
+                //if (!string.IsNullOrEmpty(existingLobbyCode))
+              //  {
+                   // client.JoinLobby(existingLobbyCode, lb);  
+                 //   MessageBox.Show($"Unido al lobby con código: {existingLobbyCode}");
+               // }
+                //else
+                //{
                     client.CreateLobby(lb);
                     MessageBox.Show("No se encontró un lobby, creando uno nuevo.");
-                }
+                //}
             }
             catch (Exception ex)
             {

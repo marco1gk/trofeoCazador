@@ -14,27 +14,34 @@
             <ImageBrush ImageSource="/Recursos/4867851.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
+        <!-- Opciones para crear o unirse a un lobby -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Orientation="Horizontal" >
+            <Button Name="btnCrearLobby" Content="Crear Lobby" Click="BtnCrearLobby_Click" Width="100" Height="30" Background="LightGreen"/>
+            <Button Name="btnUnirseLobby" Content="Unirse a Lobby" Click="BtnUnirseLobby_Click" Width="100" Height="30" Background="LightBlue"/>
+            <TextBox x:Name="txtCodigoLobby" Width="150" Height="30"  Visibility="Collapsed" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <!-- Chat grid -->
         <Grid x:Name="gridChat" Width="250" Height="350" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,0">
             <Rectangle Fill="LightGreen" RadiusX="15" RadiusY="15" />
             <Label Content="Chat" FontFamily="Titan One" Foreground="black" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"/>
             <Line Stroke="black" HorizontalAlignment="Center" VerticalAlignment="Top" X2="220" StrokeThickness="3" Margin="0,45,0,0"/>
+
             <Grid VerticalAlignment="Center" Margin="10,60,10,60">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="stackPanelMessages">
-                    </StackPanel>
+                    <StackPanel x:Name="stackPanelMessages" />
                 </ScrollViewer>
             </Grid>
+
             <Image Name="ImgBack" HorizontalAlignment="Left" Height="56" Margin="-474,279,0,0" VerticalAlignment="Top" Width="88" Source="/Recursos/regresar.png" Cursor="Hand" MouseLeftButtonDown="ImagenCLicAtras" RenderTransformOrigin="0.83,1.2"/>
             <Line Stroke="black" HorizontalAlignment="Center" VerticalAlignment="Bottom" X2="220" StrokeThickness="3" Margin="0,0,0,60"/>
 
-           <Rectangle Fill="white" RadiusX="12" RadiusY="12" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,10,10"/>
+            <Rectangle Fill="white" RadiusX="12" RadiusY="12" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,10,10"/>
             <Image Source="/Recursos/enviarMensaje.png" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="30" Height="30" Margin="10,0,15,15"/>
             <Button Background="Transparent" Click="BtnSendMessage_Click" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,10,10" BorderBrush="Transparent"/>
 
             <Rectangle Fill="White" RadiusX="12" RadiusY="12" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,60,10" Width="160" />
             <TextBox x:Name="tbxMessage" FontFamily="Inter" FontSize="14" VerticalContentAlignment="Center" Margin="10,305,0,10" Width="160" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" />
-
         </Grid>
-
     </Grid>
 </Page>
