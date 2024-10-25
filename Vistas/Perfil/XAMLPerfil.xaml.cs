@@ -38,8 +38,7 @@ namespace trofeoCazador.Vistas.Perfil
             {
                 UsuarioLabel.Content = jugador.NombreUsuario;
                 CorreoLabel.Content = jugador.Correo;
-
-                // Cargar la imagen de perfil según el número de foto del jugador
+            
                 string rutaImagen = ObtenerRutaImagenPerfil(jugador.NumeroFotoPerfil);
                 imgPerfil.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
             }
@@ -47,20 +46,18 @@ namespace trofeoCazador.Vistas.Perfil
         }
         private string ObtenerRutaImagenPerfil(int numeroFotoPerfil)
         {
-            // Definir las rutas de las imágenes según el número de foto de perfil
             switch (numeroFotoPerfil)
             {
                 case 1:
                     return "/Recursos/FotosPerfil/abeja.jpg";
                 case 2:
                     return "/Recursos/FotosPerfil/cazador.jpg";
-                // Agregar más casos según las imágenes disponibles
                 default:
-                    return "/Recursos/FotosPerfil/cazador.jpg"; // Imagen por defecto
+                    return "/Recursos/FotosPerfil/cazador.jpg"; 
             }
         }
 
-        private void btnClicEditarUsuario(object sender, RoutedEventArgs e)
+        private void BtnClicEditarUsuario(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService == null)
             {
@@ -69,7 +66,7 @@ namespace trofeoCazador.Vistas.Perfil
             this.NavigationService.Navigate(new Uri("Vistas/Perfil/EditarUsuarioNombre.xaml", UriKind.Relative));
         }
 
-        private void btnClicEditarContrasenia(object sender, RoutedEventArgs e)
+        private void BtnClicEditarContrasenia(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService == null)
             {
@@ -78,13 +75,18 @@ namespace trofeoCazador.Vistas.Perfil
             this.NavigationService.Navigate(new Uri("Vistas/Perfil/EditarContrasenia.xaml", UriKind.Relative));
         }
 
-        private void btnClicEditarCorreo(object sender, RoutedEventArgs e)
+        private void BtnClicEditarCorreo(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService == null)
             {
                 return;
             }
             this.NavigationService.Navigate(new Uri("Vistas/Perfil/EditarCorreo.xaml", UriKind.Relative));
+        }
+
+        private void ImagenCLicAtras(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

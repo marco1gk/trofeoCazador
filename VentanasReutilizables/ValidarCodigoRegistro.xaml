@@ -36,7 +36,7 @@
     <Viewbox Stretch="Fill">
         <Grid Height="770" Width="1200">
             <!-- Fondo de la caja de login -->
-            <Image Source="../Recursos/loginBox.png" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill" Height="524" Width="511" Margin="337,71,0,0" Grid.RowSpan="2"/>
+            <Image Source="../Recursos/negroo.png" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill" Height="524" Width="511" Margin="337,71,0,0" Grid.RowSpan="2"/>
 
             <!-- Título de la ventana -->
             <Label FontFamily="Titan One" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="68" Foreground="White" Margin="0,85,0,0">Validar Código</Label>
@@ -56,7 +56,7 @@
                      VerticalContentAlignment="Center" Margin="422,300,404,423"/>
 
             <!-- Botón para enviar el código -->
-            <Button Background="#7F92F6" Foreground="White" BorderThickness="0" 
+            <Button Background="gray" Foreground="White" BorderThickness="0" 
                     FontFamily="Titan One" FontSize="24" Content="Enviar" 
                     Click="BtnEnviar" Margin="416,455,410,268" Cursor="Hand"/>
 

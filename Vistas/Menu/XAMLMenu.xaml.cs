@@ -31,7 +31,6 @@ namespace trofeoCazador.Vistas.Menu
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // Navegar a la página de registro de usuario
             if (this.NavigationService == null)
             {
                 return;//veo  veo

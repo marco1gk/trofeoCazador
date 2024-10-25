@@ -8,7 +8,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PerfilUsuario">
 
-    <!-- ScrollViewer para permitir el desplazamiento en caso de que el contenido sea más grande -->
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <Grid>
             <Grid.Background>
@@ -20,15 +19,11 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-
-            <!-- Título -->
             <TextBlock Text="Cuenta" FontSize="40" FontWeight="Bold"
                        HorizontalAlignment="Center" VerticalAlignment="Top"
                        Margin="0,10,0,0" Grid.Row="0" />
 
-            <!-- Contenido del perfil -->
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400">
-                <!-- Nombre de Usuario -->
                 <Grid Margin="0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -42,8 +37,7 @@
 
                     <Button Grid.Column="1" Content="✏️" Width="50" Height="50" VerticalAlignment="Center" 
                             Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue" 
-                            Click="btnClicEditarUsuario">
-                        <!-- Estilo del botón -->
+                            Click="BtnClicEditarUsuario">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="Transparent" />
@@ -64,7 +58,6 @@
                     </Button>
                 </Grid>
 
-                <!-- Contraseña -->
                 <Grid Margin="0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="47*" />
@@ -74,7 +67,7 @@
                     <TextBlock Text="{x:Static p:Resources.lbPassword_}" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2" />
                     <Button Grid.Column="2" Width="50" Height="50" VerticalAlignment="Center" 
                             Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue"
-                            Content="✏️" Click="btnClicEditarContrasenia" />
+                            Content="✏️" Click="BtnClicEditarContrasenia" />
                     <Label Content="**********" FontSize="14" Foreground="Black" Margin="-5,17,5,-11" Grid.ColumnSpan="2" />
                 </Grid>
 
@@ -87,7 +80,7 @@
                     <TextBlock Text="{x:Static p:Resources.lbEmail_}" FontSize="16" FontWeight="Bold" />
                     <Button Grid.Column="1" Width="50" Height="50" VerticalAlignment="Center" 
                             Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue"
-                            Content="✏️" Click="btnClicEditarCorreo" />
+                            Content="✏️" Click="BtnClicEditarCorreo" />
                     <Label Name="CorreoLabel"  FontSize="14" Foreground="Black" Margin="-4,16,4,-11" />
                 </Grid>
 
@@ -102,8 +95,7 @@
             </StackPanel>
 
             <!-- Botón Atrás -->
-            <Button Content="{x:Static p:Resources.btnGlobalBack}" Width="80" Height="40" BorderBrush="{x:Null}" 
-                    HorizontalAlignment="Left" Margin="30,0,0,30" VerticalAlignment="Bottom" Grid.Row="2"/>
+            <Image Name="ImgBack" HorizontalAlignment="Left" Height="56" Margin="49,32,0,0" VerticalAlignment="Top" Width="88" Source="/Recursos/regresar.png" Cursor="Hand" MouseLeftButtonDown="ImagenCLicAtras" RenderTransformOrigin="0.83,1.2" Grid.RowSpan="2"/>
         </Grid>
     </ScrollViewer>
 </Page>

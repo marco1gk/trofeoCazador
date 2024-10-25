@@ -29,119 +29,103 @@ namespace trofeoCazador.Vistas.RegistroUsuario
         {
             InitializeComponent();
 
-            // Lista de imágenes de perfil
             List<ImagenPerfil> imagenesPerfil = new List<ImagenPerfil>
-    {
-        new ImagenPerfil { Id = 1, NombreImagen = "Perfil 1", RutaImagen = "/Recursos/FotosPerfil/abeja.jpg" },
-        new ImagenPerfil { Id = 2, NombreImagen = "Perfil 2", RutaImagen = "/Recursos/FotosPerfil/cazador.jpg" },
+            {
+                new ImagenPerfil { Id = 1, NombreImagen = "Perfil 1", RutaImagen = "/Recursos/FotosPerfil/abeja.jpg" },
+                new ImagenPerfil { Id = 2, NombreImagen = "Perfil 2", RutaImagen = "/Recursos/FotosPerfil/cazador.jpg" },
         
-    };
+            };
 
-            // Asignar la lista como fuente de datos para el ComboBox
             cbImagenPerfil.ItemsSource = imagenesPerfil;
         }
         private void CbImagenPerfil_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Obtener la imagen seleccionada
             ImagenPerfil seleccionada = (ImagenPerfil)cbImagenPerfil.SelectedItem;
             if (seleccionada != null)
             {
                 int idImagenSeleccionada = seleccionada.Id;
-                // Aquí puedes usar el ID para asociarlo con el jugador
-                MessageBox.Show($"Has seleccionado la imagen con ID: {idImagenSeleccionada}");
+                Console.WriteLine("Id de foto seleccionada"+idImagenSeleccionada+"]");
+               
             }
         }
-
-
 
         private void ImagenCLicAtras(object sender, MouseButtonEventArgs e)
         {
                 NavigationService.GoBack();
         }
+
         private void BtnCrearCuenta(object sender, RoutedEventArgs e)
         {
-            // Validar los campos ingresados
-            string errores = ValidateFields();
+            string errores = ValidarCampos();
 
             if (!string.IsNullOrEmpty(errores))
             {
                 MessageBox.Show(errores, "Errores en la validación", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return; // Detener ejecución si hay errores en los datos ingresados
+                return; 
             }
 
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
 
-            // Verificar si el correo ya está registrado
             if (proxy.ExisteCorreo(tbCorreo.Text.Trim()))
             {
                 MessageBox.Show("Este correo ya está registrado. Por favor, elige otro.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return; // Detener la ejecución si el correo está registrado
+                return; 
             }
 
-            // Verificar si el nombre de usuario ya está registrado
             if (proxy.ExisteNombreUsuario(tbUsuario.Text.Trim()))
             {
                 MessageBox.Show("Este nombre de usuario ya está en uso. Por favor, elige otro.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return; // Detener la ejecución si el nombre de usuario está registrado
+                return; 
             }
 
-            // Enviar el código de verificación por correo
             string codigoEnviado = proxy.EnviarCodigoConfirmacion(tbCorreo.Text);
 
             if (string.IsNullOrEmpty(codigoEnviado))
             {
                 MessageBox.Show("No se pudo enviar el código de verificación. Intenta de nuevo.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return; // Detener la ejecución si hay un error enviando el código
+                return;
             }
 
-            // Capturar la imagen seleccionada por el usuario
-            int numeroImagenPerfil = cbImagenPerfil.SelectedIndex + 1; // Asumiendo que las imágenes están numeradas del 1 al 3
+            int numeroImagenPerfil = cbImagenPerfil.SelectedIndex + 1; 
 
-            // Abrir la ventana para validar el código
             JugadorDataContract jugador = new JugadorDataContract
             {
                 NombreUsuario = tbUsuario.Text,
-                NumeroFotoPerfil = numeroImagenPerfil, // Guardar la imagen seleccionada
+                NumeroFotoPerfil = numeroImagenPerfil, 
                 ContraseniaHash = PbContraseña.Password,
                 Correo = tbCorreo.Text
             };
-
             ValidarCodigoRegistro ventanaValidacion = new ValidarCodigoRegistro(jugador, codigoEnviado);
-            ventanaValidacion.ShowDialog(); // Mostrar la ventana de validación
+            bool? resultadoValidacion = ventanaValidacion.ShowDialog();
+
+            if (resultadoValidacion == true)
+            {
+                MessageBox.Show("Cuenta creada exitosamente. Ahora puedes iniciar sesión.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                NavigationService.Navigate(new Uri("Vistas/InicioSesion/XAMLInicioSesion.xaml", UriKind.Relative));
+            }
         }
 
 
-
-
-
-
-        public string ValidateFields()
+        public string ValidarCampos()
         {
-            CultureInfo cultureInfo = CultureInfo.CurrentCulture;
             StringBuilder errores = new StringBuilder();
-           
-
             ValidadPropiedadesContraseña();
 
             if (!UtilidadesDeValidacion.EsCorreoValido(tbCorreo.Text.Trim()))
             {
-              //  tbCorreo.Style = (Style)FindResource(errorTextBoxStyle);
                 errores.AppendLine("El correo electrónico no es válido.");
             }
 
             if (!UtilidadesDeValidacion.EsNombreUsuarioValido(tbUsuario.Text.Trim()))
             {
-                //tbUsuario.Style = (Style)FindResource(errorTextBoxStyle);
                 errores.AppendLine("El nombre de usuario no es válido.");
             }
 
             if (!UtilidadesDeValidacion.EsContrasenaValida(PbContraseña.Password.Trim()))
             {
-                //PbContraseña.Style = (Style)FindResource(errorPasswordBoxStyle);
                 errores.AppendLine("La contraseña no es válida.");
             }
-
-            // Validar que se haya seleccionado una imagen de perfil
             if (cbImagenPerfil.SelectedItem == null)
             {
                 errores.AppendLine("Por favor, selecciona una imagen de perfil.");
@@ -149,9 +133,6 @@ namespace trofeoCazador.Vistas.RegistroUsuario
 
             return errores.ToString();
         }
-
-
-
         private void ValidadPropiedadesContraseña()
         {
 
@@ -192,9 +173,9 @@ namespace trofeoCazador.Vistas.RegistroUsuario
 
     public class ImagenPerfil
     {
-        public int Id { get; set; } // ID de la imagen
-        public string NombreImagen { get; set; } // Nombre o etiqueta de la imagen
-        public string RutaImagen { get; set; } // Ruta a la imagen
+        public int Id { get; set; } 
+        public string NombreImagen { get; set; } 
+        public string RutaImagen { get; set; } 
     }
 
 }

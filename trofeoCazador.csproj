@@ -271,6 +271,9 @@
   <ItemGroup>
     <Resource Include="Recursos\FotosPerfil\cazador.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\negroo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
