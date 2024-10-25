@@ -102,11 +102,11 @@
   <wsdl:message name="ILobbyManager_ExitLobby_OutputMessage">
     <wsdl:part name="parameters" element="tns:ExitLobbyResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_sendMessage_InputMessage">
-    <wsdl:part name="parameters" element="tns:sendMessage" />
+  <wsdl:message name="ILobbyManager_SendMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_sendMessage_OutputMessage">
-    <wsdl:part name="parameters" element="tns:sendMessageResponse" />
+  <wsdl:message name="ILobbyManager_SendMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessageResponse" />
   </wsdl:message>
   <wsdl:message name="ILobbyManager_BuscarLobbyDisponible_InputMessage">
     <wsdl:part name="parameters" element="tns:BuscarLobbyDisponible" />
@@ -230,9 +230,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/ExitLobby" message="tns:ILobbyManager_ExitLobby_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/ExitLobbyResponse" message="tns:ILobbyManager_ExitLobby_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="sendMessage">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/sendMessage" message="tns:ILobbyManager_sendMessage_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/sendMessageResponse" message="tns:ILobbyManager_sendMessage_OutputMessage" />
+    <wsdl:operation name="SendMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/SendMessage" message="tns:ILobbyManager_SendMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/SendMessageResponse" message="tns:ILobbyManager_SendMessage_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="BuscarLobbyDisponible">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/BuscarLobbyDisponible" message="tns:ILobbyManager_BuscarLobbyDisponible_InputMessage" />
@@ -405,8 +405,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="sendMessage">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/sendMessage" style="document" />
+    <wsdl:operation name="SendMessage">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/SendMessage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -368,11 +368,11 @@ namespace trofeoCazador.ServicioDelJuego {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ExitLobby", ReplyAction="http://tempuri.org/ILobbyManager/ExitLobbyResponse")]
         System.Threading.Tasks.Task ExitLobbyAsync(string lobbyCode, string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/sendMessage", ReplyAction="http://tempuri.org/ILobbyManager/sendMessageResponse")]
-        void sendMessage(string mensaje);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/SendMessage", ReplyAction="http://tempuri.org/ILobbyManager/SendMessageResponse")]
+        void SendMessage(string mensaje);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/sendMessage", ReplyAction="http://tempuri.org/ILobbyManager/sendMessageResponse")]
-        System.Threading.Tasks.Task sendMessageAsync(string mensaje);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/SendMessage", ReplyAction="http://tempuri.org/ILobbyManager/SendMessageResponse")]
+        System.Threading.Tasks.Task SendMessageAsync(string mensaje);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/BuscarLobbyDisponible", ReplyAction="http://tempuri.org/ILobbyManager/BuscarLobbyDisponibleResponse")]
         string BuscarLobbyDisponible();
@@ -475,12 +475,12 @@ namespace trofeoCazador.ServicioDelJuego {
             return base.Channel.ExitLobbyAsync(lobbyCode, username);
         }
         
-        public void sendMessage(string mensaje) {
-            base.Channel.sendMessage(mensaje);
+        public void SendMessage(string mensaje) {
+            base.Channel.SendMessage(mensaje);
         }
         
-        public System.Threading.Tasks.Task sendMessageAsync(string mensaje) {
-            return base.Channel.sendMessageAsync(mensaje);
+        public System.Threading.Tasks.Task SendMessageAsync(string mensaje) {
+            return base.Channel.SendMessageAsync(mensaje);
         }
         
         public string BuscarLobbyDisponible() {

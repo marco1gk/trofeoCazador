@@ -88,7 +88,7 @@ namespace trofeoCazador.Vistas.SalaEspera
                     SetupClient(); 
                 }
 
-                await Task.Run(() => client.sendMessage(message)); 
+                await Task.Run(() => client.SendMessage(message)); 
                 tbxMessage.Clear();
             }
             catch (Exception ex)
