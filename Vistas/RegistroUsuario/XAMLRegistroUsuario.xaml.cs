@@ -28,14 +28,36 @@ namespace trofeoCazador.Vistas.RegistroUsuario
         public XAMLRegistroUsuario()
         {
             InitializeComponent();
+
+            // Lista de imágenes de perfil
+            List<ImagenPerfil> imagenesPerfil = new List<ImagenPerfil>
+    {
+        new ImagenPerfil { Id = 1, NombreImagen = "Perfil 1", RutaImagen = "/Recursos/FotosPerfil/abeja.jpg" },
+        new ImagenPerfil { Id = 2, NombreImagen = "Perfil 2", RutaImagen = "/Recursos/FotosPerfil/cazador.jpg" },
+        
+    };
+
+            // Asignar la lista como fuente de datos para el ComboBox
+            cbImagenPerfil.ItemsSource = imagenesPerfil;
+        }
+        private void CbImagenPerfil_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Obtener la imagen seleccionada
+            ImagenPerfil seleccionada = (ImagenPerfil)cbImagenPerfil.SelectedItem;
+            if (seleccionada != null)
+            {
+                int idImagenSeleccionada = seleccionada.Id;
+                // Aquí puedes usar el ID para asociarlo con el jugador
+                MessageBox.Show($"Has seleccionado la imagen con ID: {idImagenSeleccionada}");
+            }
         }
 
-        
+
+
         private void ImagenCLicAtras(object sender, MouseButtonEventArgs e)
         {
                 NavigationService.GoBack();
         }
-
         private void BtnCrearCuenta(object sender, RoutedEventArgs e)
         {
             // Validar los campos ingresados
@@ -72,11 +94,14 @@ namespace trofeoCazador.Vistas.RegistroUsuario
                 return; // Detener la ejecución si hay un error enviando el código
             }
 
+            // Capturar la imagen seleccionada por el usuario
+            int numeroImagenPerfil = cbImagenPerfil.SelectedIndex + 1; // Asumiendo que las imágenes están numeradas del 1 al 3
+
             // Abrir la ventana para validar el código
             JugadorDataContract jugador = new JugadorDataContract
             {
                 NombreUsuario = tbUsuario.Text,
-                NumeroFotoPerfil = 1,
+                NumeroFotoPerfil = numeroImagenPerfil, // Guardar la imagen seleccionada
                 ContraseniaHash = PbContraseña.Password,
                 Correo = tbCorreo.Text
             };
@@ -84,6 +109,7 @@ namespace trofeoCazador.Vistas.RegistroUsuario
             ValidarCodigoRegistro ventanaValidacion = new ValidarCodigoRegistro(jugador, codigoEnviado);
             ventanaValidacion.ShowDialog(); // Mostrar la ventana de validación
         }
+
 
 
 
@@ -113,6 +139,12 @@ namespace trofeoCazador.Vistas.RegistroUsuario
             {
                 //PbContraseña.Style = (Style)FindResource(errorPasswordBoxStyle);
                 errores.AppendLine("La contraseña no es válida.");
+            }
+
+            // Validar que se haya seleccionado una imagen de perfil
+            if (cbImagenPerfil.SelectedItem == null)
+            {
+                errores.AppendLine("Por favor, selecciona una imagen de perfil.");
             }
 
             return errores.ToString();
@@ -157,4 +189,12 @@ namespace trofeoCazador.Vistas.RegistroUsuario
 
 
     }
+
+    public class ImagenPerfil
+    {
+        public int Id { get; set; } // ID de la imagen
+        public string NombreImagen { get; set; } // Nombre o etiqueta de la imagen
+        public string RutaImagen { get; set; } // Ruta a la imagen
+    }
+
 }

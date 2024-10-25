@@ -4,132 +4,106 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:p="clr-namespace:trofeoCazador.Properties"
-      xmlns:local="clr-namespace:trofeoCazador.Vistas.Perfil"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PerfilUsuario">
 
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/Recursos/invierno.jpg" />
-        </Grid.Background>
+    <!-- ScrollViewer para permitir el desplazamiento en caso de que el contenido sea más grande -->
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Recursos/invierno.jpg" />
+            </Grid.Background>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <!-- Título -->
-        <TextBlock Text="Cuenta" FontSize="40" FontWeight="Bold"
-                   HorizontalAlignment="Center" VerticalAlignment="Top"
-                   Margin="0,10,0,0" Grid.Row="0" />
+            <!-- Título -->
+            <TextBlock Text="Cuenta" FontSize="40" FontWeight="Bold"
+                       HorizontalAlignment="Center" VerticalAlignment="Top"
+                       Margin="0,10,0,0" Grid.Row="0" />
 
-        <!-- Contenido del perfil -->
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400">
+            <!-- Contenido del perfil -->
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400">
+                <!-- Nombre de Usuario -->
+                <Grid Margin="0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-            <!-- Sección combinada de Nombre de Usuario y Nombre Global -->
-            <Grid Margin="0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock Text="{x:Static p:Resources.lbUserName}" FontSize="16" FontWeight="Bold" />
+                        <Label x:Name="UsuarioLabel" FontSize="14" Foreground="Black" Height="29" />
+                    </StackPanel>
 
-                <!-- Textos para Nombre de Usuario y Nombre Global -->
-                <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                    <TextBlock Text="{x:Static p:Resources.lbUserName}" FontSize="16" FontWeight="Bold" />
-                    <Label x:Name="UsuarioLabel"  FontSize="14" Foreground="Black" Height="29" />
-                </StackPanel>
+                    <Button Grid.Column="1" Content="✏️" Width="50" Height="50" VerticalAlignment="Center" 
+                            Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue" 
+                            Click="btnClicEditarUsuario">
+                        <!-- Estilo del botón -->
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="Blue" />
+                                <Setter Property="FontSize" Value="20" />
+                                <Setter Property="Width" Value="50" />
+                                <Setter Property="Height" Value="50" />
+                                <Setter Property="BorderBrush" Value="Purple" />
+                                <Setter Property="BorderThickness" Value="2" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="LightSkyBlue" />
+                                        <Setter Property="BorderBrush" Value="MediumPurple" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
 
-                <!-- Botón para editar ambos campos con borde morado y lápiz azul -->
-                <Button Grid.Column="1" Content="✏️" Width="50" Height="50" VerticalAlignment="Center" 
-                        Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue" Click="btnClicEditarUsuario">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="Foreground" Value="Blue" />
-                            <Setter Property="FontSize" Value="20" />
-                            <Setter Property="Width" Value="50" />
-                            <Setter Property="Height" Value="50" />
-                            <Setter Property="BorderBrush" Value="Purple" />
-                            <Setter Property="BorderThickness" Value="2" />
-                            <Style.Triggers>
-                                <!-- Efecto Hover -->
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="LightSkyBlue" />
-                                    <Setter Property="BorderBrush" Value="MediumPurple" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </Grid>
+                <!-- Contraseña -->
+                <Grid Margin="0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="47*" />
+                        <ColumnDefinition Width="303*"/>
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{x:Static p:Resources.lbPassword_}" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2" />
+                    <Button Grid.Column="2" Width="50" Height="50" VerticalAlignment="Center" 
+                            Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue"
+                            Content="✏️" Click="btnClicEditarContrasenia" />
+                    <Label Content="**********" FontSize="14" Foreground="Black" Margin="-5,17,5,-11" Grid.ColumnSpan="2" />
+                </Grid>
 
-            <!-- Contraseña -->
-            <Grid Margin="0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="47*" />
-                    <ColumnDefinition Width="303*"/>
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="{x:Static p:Resources.lbPassword_}" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2" />
-                <Button Grid.Column="2" Width="50" Height="50" VerticalAlignment="Center" 
-                        Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue"
-                        Content="✏️" Click="btnClicEditarContrasenia">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="Foreground" Value="Blue" />
-                            <Setter Property="FontSize" Value="20" />
-                            <Setter Property="Width" Value="50" />
-                            <Setter Property="Height" Value="50" />
-                            <Setter Property="BorderBrush" Value="Purple" />
-                            <Setter Property="BorderThickness" Value="2" />
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="LightSkyBlue" />
-                                    <Setter Property="BorderBrush" Value="MediumPurple" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Label Content="**********" FontSize="14" Foreground="Black" Margin="-5,17,5,-11" Grid.ColumnSpan="2" />
-            </Grid>
+                <!-- Correo -->
+                <Grid Margin="0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{x:Static p:Resources.lbEmail_}" FontSize="16" FontWeight="Bold" />
+                    <Button Grid.Column="1" Width="50" Height="50" VerticalAlignment="Center" 
+                            Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue"
+                            Content="✏️" Click="btnClicEditarCorreo" />
+                    <Label Name="CorreoLabel"  FontSize="14" Foreground="Black" Margin="-4,16,4,-11" />
+                </Grid>
 
-            <!-- Correo -->
-            <Grid Margin="0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="{x:Static p:Resources.lbEmail_}" FontSize="16" FontWeight="Bold" />
-                <Button Grid.Column="1" Width="50" Height="50" VerticalAlignment="Center" 
-                        Background="Transparent" BorderBrush="Purple" BorderThickness="2" Foreground="Blue"
-                        Content="✏️" Click="btnClicEditarCorreo">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="Foreground" Value="Blue" />
-                            <Setter Property="FontSize" Value="20" />
-                            <Setter Property="Width" Value="50" />
-                            <Setter Property="Height" Value="50" />
-                            <Setter Property="BorderBrush" Value="Purple" />
-                            <Setter Property="BorderThickness" Value="2" />
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="LightSkyBlue" />
-                                    <Setter Property="BorderBrush" Value="MediumPurple" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Label Name="CorreoLabel"  FontSize="14" Foreground="Black" Margin="-4,16,4,-11" />
-            </Grid>
-        </StackPanel>
+                <!-- Imagen de perfil -->
+                <Grid Margin="0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Foto de perfil" FontSize="16" FontWeight="Bold" />
+                    <Image x:Name="imgPerfil" Width="100" Height="100" Margin="0,5,10,0" />
+                </Grid>
+            </StackPanel>
 
-        <!-- Botón Atrás -->
-        <Button Content="{x:Static p:Resources.btnGlobalBack}" Width="80" Height="40" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="30,0,0,30" VerticalAlignment="Bottom" Grid.Row="2"/>
-    </Grid>
+            <!-- Botón Atrás -->
+            <Button Content="{x:Static p:Resources.btnGlobalBack}" Width="80" Height="40" BorderBrush="{x:Null}" 
+                    HorizontalAlignment="Left" Margin="30,0,0,30" VerticalAlignment="Bottom" Grid.Row="2"/>
+        </Grid>
+    </ScrollViewer>
 </Page>

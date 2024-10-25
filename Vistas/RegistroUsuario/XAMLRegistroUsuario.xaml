@@ -21,6 +21,18 @@
             <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Label Content="Selecciona una imagen de perfil:" FontWeight="Bold" HorizontalAlignment="Left" Margin="458,48,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <ComboBox Name="cbImagenPerfil" HorizontalAlignment="Left" Margin="494,84,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectionChanged="CbImagenPerfil_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding RutaImagen}" Width="50" Height="50" Margin="5"/>
+                        <TextBlock Text="{Binding NombreImagen}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
 
         <!-- Los controles existentes no se moverán -->
         <Label x:Name = "lbCrearCuenta" Content="{x:Static p:Resources.lbCreateAccount}" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,54,0,0" FontSize="29" VerticalAlignment="Top"/>

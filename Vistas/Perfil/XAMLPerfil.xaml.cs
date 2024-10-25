@@ -38,10 +38,27 @@ namespace trofeoCazador.Vistas.Perfil
             {
                 UsuarioLabel.Content = jugador.NombreUsuario;
                 CorreoLabel.Content = jugador.Correo;
+
+                // Cargar la imagen de perfil según el número de foto del jugador
+                string rutaImagen = ObtenerRutaImagenPerfil(jugador.NumeroFotoPerfil);
+                imgPerfil.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
             }
             
         }
-
+        private string ObtenerRutaImagenPerfil(int numeroFotoPerfil)
+        {
+            // Definir las rutas de las imágenes según el número de foto de perfil
+            switch (numeroFotoPerfil)
+            {
+                case 1:
+                    return "/Recursos/FotosPerfil/abeja.jpg";
+                case 2:
+                    return "/Recursos/FotosPerfil/cazador.jpg";
+                // Agregar más casos según las imágenes disponibles
+                default:
+                    return "/Recursos/FotosPerfil/cazador.jpg"; // Imagen por defecto
+            }
+        }
 
         private void btnClicEditarUsuario(object sender, RoutedEventArgs e)
         {
