@@ -93,8 +93,8 @@
     <Compile Include="Vistas\Perfil\EditarCorreo.xaml.cs">
       <DependentUpon>EditarCorreo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Perfil\EditarCorreoCodigo.xaml.cs">
-      <DependentUpon>EditarCorreoCodigo.xaml</DependentUpon>
+    <Compile Include="Vistas\Perfil\VerificarCodigo.xaml.cs">
+      <DependentUpon>VerificarCodigo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Perfil\EditarUsuarioNombre.xaml.cs">
       <DependentUpon>EditarUsuarioNombre.xaml</DependentUpon>
@@ -139,7 +139,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vistas\Perfil\EditarCorreoCodigo.xaml">
+    <Page Include="Vistas\Perfil\VerificarCodigo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

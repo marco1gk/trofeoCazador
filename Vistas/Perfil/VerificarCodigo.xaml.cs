@@ -49,8 +49,13 @@ namespace trofeoCazador.Vistas.Perfil
 
             if (proxy.ValidarCodigo(codigoIngresado, codigoEnviado))
             {
-                if(proxy.EditarCorreo(sesion.JugadorId, sesion.NuevoCorreo))
+                if (proxy.EditarCorreo(sesion.JugadorId, sesion.NuevoCorreo))
+                {
+                    Metodos.MostrarMensaje("El correo ha sido actualizado con éxito.");
                     this.NavigationService.Navigate(new Uri("Vistas/Perfil/XAMLPerfil.xaml", UriKind.Relative));
+                }
+                else
+                    Metodos.MostrarMensaje("Hubo un problema al intentar actualizar el correo, intentelo de nuevo más tarde.");      
             }
             else
             {

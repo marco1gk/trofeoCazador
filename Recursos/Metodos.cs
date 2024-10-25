@@ -29,7 +29,7 @@ namespace trofeoCazador.Recursos
 
         public static bool ValidarEntradaIgual(string valorActual, string valorNuevo)
         {
-            return !string.Equals(valorActual?.Trim(), valorNuevo?.Trim(), StringComparison.OrdinalIgnoreCase);
+            return !string.Equals(valorActual?.Trim(), valorNuevo?.Trim(), StringComparison.Ordinal);
         }
 
         public static bool ValidarLongitudDeEntrada(string texto, int longitudMaxima)
