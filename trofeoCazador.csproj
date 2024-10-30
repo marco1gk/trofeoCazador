@@ -108,6 +108,9 @@
     <Compile Include="Vistas\Menu\XAMLMenu.xaml.cs">
       <DependentUpon>XAMLMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\SalaEspera\IngresarCodigoSalaEspera.xaml.cs">
+      <DependentUpon>IngresarCodigoSalaEspera.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\SalaEspera\XAMLSalaEspera.xaml.cs">
       <DependentUpon>XAMLSalaEspera.xaml</DependentUpon>
     </Compile>
@@ -156,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\Menu\XAMLMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\SalaEspera\IngresarCodigoSalaEspera.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
