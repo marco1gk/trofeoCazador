@@ -491,4 +491,302 @@ namespace trofeoCazador.ServicioDelJuego {
             return base.Channel.BuscarLobbyDisponibleAsync();
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IGestorAmistad")]
+    public interface IGestorAmistad {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/GetListUsernameFriends", ReplyAction="http://tempuri.org/IGestorAmistad/GetListUsernameFriendsResponse")]
+        string[] GetListUsernameFriends(int idPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/GetListUsernameFriends", ReplyAction="http://tempuri.org/IGestorAmistad/GetListUsernameFriendsResponse")]
+        System.Threading.Tasks.Task<string[]> GetListUsernameFriendsAsync(int idPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSending", ReplyAction="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSendingResponse")]
+        bool ValidateFriendRequestSending(int idPlayerSender, string usernamePlayerRequested);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSending", ReplyAction="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSendingResponse")]
+        System.Threading.Tasks.Task<bool> ValidateFriendRequestSendingAsync(int idPlayerSender, string usernamePlayerRequested);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/AddRequestFriendship", ReplyAction="http://tempuri.org/IGestorAmistad/AddRequestFriendshipResponse")]
+        int AddRequestFriendship(int idPlayerSender, string usernamePlayerRequested);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/AddRequestFriendship", ReplyAction="http://tempuri.org/IGestorAmistad/AddRequestFriendshipResponse")]
+        System.Threading.Tasks.Task<int> AddRequestFriendshipAsync(int idPlayerSender, string usernamePlayerRequested);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequesters", ReplyAction="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequestersResponse")]
+        string[] GetUsernamePlayersRequesters(int idPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequesters", ReplyAction="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequestersResponse")]
+        System.Threading.Tasks.Task<string[]> GetUsernamePlayersRequestersAsync(int idPlayer);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IGestorAmistadChannel : trofeoCazador.ServicioDelJuego.IGestorAmistad, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GestorAmistadClient : System.ServiceModel.ClientBase<trofeoCazador.ServicioDelJuego.IGestorAmistad>, trofeoCazador.ServicioDelJuego.IGestorAmistad {
+        
+        public GestorAmistadClient() {
+        }
+        
+        public GestorAmistadClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public GestorAmistadClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public GestorAmistadClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public GestorAmistadClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public string[] GetListUsernameFriends(int idPlayer) {
+            return base.Channel.GetListUsernameFriends(idPlayer);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetListUsernameFriendsAsync(int idPlayer) {
+            return base.Channel.GetListUsernameFriendsAsync(idPlayer);
+        }
+        
+        public bool ValidateFriendRequestSending(int idPlayerSender, string usernamePlayerRequested) {
+            return base.Channel.ValidateFriendRequestSending(idPlayerSender, usernamePlayerRequested);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ValidateFriendRequestSendingAsync(int idPlayerSender, string usernamePlayerRequested) {
+            return base.Channel.ValidateFriendRequestSendingAsync(idPlayerSender, usernamePlayerRequested);
+        }
+        
+        public int AddRequestFriendship(int idPlayerSender, string usernamePlayerRequested) {
+            return base.Channel.AddRequestFriendship(idPlayerSender, usernamePlayerRequested);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddRequestFriendshipAsync(int idPlayerSender, string usernamePlayerRequested) {
+            return base.Channel.AddRequestFriendshipAsync(idPlayerSender, usernamePlayerRequested);
+        }
+        
+        public string[] GetUsernamePlayersRequesters(int idPlayer) {
+            return base.Channel.GetUsernamePlayersRequesters(idPlayer);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetUsernamePlayersRequestersAsync(int idPlayer) {
+            return base.Channel.GetUsernamePlayersRequestersAsync(idPlayer);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IGestorDeSolicitudesDeAmistad", CallbackContract=typeof(trofeoCazador.ServicioDelJuego.IGestorDeSolicitudesDeAmistadCallback))]
+    public interface IGestorDeSolicitudesDeAmistad {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AddToOnlineFriendshipDictionary")]
+        void AddToOnlineFriendshipDictionary(string usernameCurrentPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AddToOnlineFriendshipDictionary")]
+        System.Threading.Tasks.Task AddToOnlineFriendshipDictionaryAsync(string usernameCurrentPlayer);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/SendFriendRequest")]
+        void SendFriendRequest(string usernamePlayerSender, string usernamePlayerRequested);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/SendFriendRequest")]
+        System.Threading.Tasks.Task SendFriendRequestAsync(string usernamePlayerSender, string usernamePlayerRequested);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AcceptFriendRequest")]
+        void AcceptFriendRequest(int idPlayerRequested, string usernamePlayerRequested, string usernamePlayerSender);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AcceptFriendRequest")]
+        System.Threading.Tasks.Task AcceptFriendRequestAsync(int idPlayerRequested, string usernamePlayerRequested, string usernamePlayerSender);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RejectFriendRequest")]
+        void RejectFriendRequest(int idCurrentPlayer, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RejectFriendRequest")]
+        System.Threading.Tasks.Task RejectFriendRequestAsync(int idCurrentPlayer, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/DeleteFriend")]
+        void DeleteFriend(int idCurrentPlayer, string usernameCurrentPlayer, string usernameFriendDeleted);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/DeleteFriend")]
+        System.Threading.Tasks.Task DeleteFriendAsync(int idCurrentPlayer, string usernameCurrentPlayer, string usernameFriendDeleted);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RemoveFromOnlineFriendshipDictio" +
+            "nary")]
+        void RemoveFromOnlineFriendshipDictionary(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RemoveFromOnlineFriendshipDictio" +
+            "nary")]
+        System.Threading.Tasks.Task RemoveFromOnlineFriendshipDictionaryAsync(string username);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IGestorDeSolicitudesDeAmistadCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyNewFriendRequest", ReplyAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyNewFriendRequestResponse")]
+        void NotifyNewFriendRequest(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyFriendRequestAccepted", ReplyAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyFriendRequestAcceptedRespo" +
+            "nse")]
+        void NotifyFriendRequestAccepted(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyDeletedFriend", ReplyAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyDeletedFriendResponse")]
+        void NotifyDeletedFriend(string username);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IGestorDeSolicitudesDeAmistadChannel : trofeoCazador.ServicioDelJuego.IGestorDeSolicitudesDeAmistad, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GestorDeSolicitudesDeAmistadClient : System.ServiceModel.DuplexClientBase<trofeoCazador.ServicioDelJuego.IGestorDeSolicitudesDeAmistad>, trofeoCazador.ServicioDelJuego.IGestorDeSolicitudesDeAmistad {
+        
+        public GestorDeSolicitudesDeAmistadClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public GestorDeSolicitudesDeAmistadClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public GestorDeSolicitudesDeAmistadClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public GestorDeSolicitudesDeAmistadClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public GestorDeSolicitudesDeAmistadClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void AddToOnlineFriendshipDictionary(string usernameCurrentPlayer) {
+            base.Channel.AddToOnlineFriendshipDictionary(usernameCurrentPlayer);
+        }
+        
+        public System.Threading.Tasks.Task AddToOnlineFriendshipDictionaryAsync(string usernameCurrentPlayer) {
+            return base.Channel.AddToOnlineFriendshipDictionaryAsync(usernameCurrentPlayer);
+        }
+        
+        public void SendFriendRequest(string usernamePlayerSender, string usernamePlayerRequested) {
+            base.Channel.SendFriendRequest(usernamePlayerSender, usernamePlayerRequested);
+        }
+        
+        public System.Threading.Tasks.Task SendFriendRequestAsync(string usernamePlayerSender, string usernamePlayerRequested) {
+            return base.Channel.SendFriendRequestAsync(usernamePlayerSender, usernamePlayerRequested);
+        }
+        
+        public void AcceptFriendRequest(int idPlayerRequested, string usernamePlayerRequested, string usernamePlayerSender) {
+            base.Channel.AcceptFriendRequest(idPlayerRequested, usernamePlayerRequested, usernamePlayerSender);
+        }
+        
+        public System.Threading.Tasks.Task AcceptFriendRequestAsync(int idPlayerRequested, string usernamePlayerRequested, string usernamePlayerSender) {
+            return base.Channel.AcceptFriendRequestAsync(idPlayerRequested, usernamePlayerRequested, usernamePlayerSender);
+        }
+        
+        public void RejectFriendRequest(int idCurrentPlayer, string username) {
+            base.Channel.RejectFriendRequest(idCurrentPlayer, username);
+        }
+        
+        public System.Threading.Tasks.Task RejectFriendRequestAsync(int idCurrentPlayer, string username) {
+            return base.Channel.RejectFriendRequestAsync(idCurrentPlayer, username);
+        }
+        
+        public void DeleteFriend(int idCurrentPlayer, string usernameCurrentPlayer, string usernameFriendDeleted) {
+            base.Channel.DeleteFriend(idCurrentPlayer, usernameCurrentPlayer, usernameFriendDeleted);
+        }
+        
+        public System.Threading.Tasks.Task DeleteFriendAsync(int idCurrentPlayer, string usernameCurrentPlayer, string usernameFriendDeleted) {
+            return base.Channel.DeleteFriendAsync(idCurrentPlayer, usernameCurrentPlayer, usernameFriendDeleted);
+        }
+        
+        public void RemoveFromOnlineFriendshipDictionary(string username) {
+            base.Channel.RemoveFromOnlineFriendshipDictionary(username);
+        }
+        
+        public System.Threading.Tasks.Task RemoveFromOnlineFriendshipDictionaryAsync(string username) {
+            return base.Channel.RemoveFromOnlineFriendshipDictionaryAsync(username);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IGestorUsuariosConectados", CallbackContract=typeof(trofeoCazador.ServicioDelJuego.IGestorUsuariosConectadosCallback))]
+    public interface IGestorUsuariosConectados {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/RegisterUserToOnlineUsers")]
+        void RegisterUserToOnlineUsers(int idPlayer, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/RegisterUserToOnlineUsers")]
+        System.Threading.Tasks.Task RegisterUserToOnlineUsersAsync(int idPlayer, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/UnregisterUserToOnlineUsers")]
+        void UnregisterUserToOnlineUsers(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/UnregisterUserToOnlineUsers")]
+        System.Threading.Tasks.Task UnregisterUserToOnlineUsersAsync(string username);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IGestorUsuariosConectadosCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedIn", ReplyAction="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedInResponse")]
+        void NotifyUserLoggedIn(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedOut", ReplyAction="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedOutResponse")]
+        void NotifyUserLoggedOut(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorUsuariosConectados/NotifyOnlineFriends", ReplyAction="http://tempuri.org/IGestorUsuariosConectados/NotifyOnlineFriendsResponse")]
+        void NotifyOnlineFriends(string[] onlineUsernames);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IGestorUsuariosConectadosChannel : trofeoCazador.ServicioDelJuego.IGestorUsuariosConectados, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GestorUsuariosConectadosClient : System.ServiceModel.DuplexClientBase<trofeoCazador.ServicioDelJuego.IGestorUsuariosConectados>, trofeoCazador.ServicioDelJuego.IGestorUsuariosConectados {
+        
+        public GestorUsuariosConectadosClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public GestorUsuariosConectadosClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public GestorUsuariosConectadosClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public GestorUsuariosConectadosClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public GestorUsuariosConectadosClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void RegisterUserToOnlineUsers(int idPlayer, string username) {
+            base.Channel.RegisterUserToOnlineUsers(idPlayer, username);
+        }
+        
+        public System.Threading.Tasks.Task RegisterUserToOnlineUsersAsync(int idPlayer, string username) {
+            return base.Channel.RegisterUserToOnlineUsersAsync(idPlayer, username);
+        }
+        
+        public void UnregisterUserToOnlineUsers(string username) {
+            base.Channel.UnregisterUserToOnlineUsers(username);
+        }
+        
+        public System.Threading.Tasks.Task UnregisterUserToOnlineUsersAsync(string username) {
+            return base.Channel.UnregisterUserToOnlineUsersAsync(username);
+        }
+    }
 }

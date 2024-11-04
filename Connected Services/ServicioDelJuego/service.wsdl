@@ -20,11 +20,42 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IGestorAmistad_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IGestorDeSolicitudesDeAmistad_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IGestorUsuariosConectados_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServicioJuego" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGestionCuentaServicio_AgregarJugador_InputMessage">
@@ -174,6 +205,90 @@
   <wsdl:message name="ILobbyManager_ReceiveMessage_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveMessageResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestorAmistad_GetListUsernameFriends_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListUsernameFriends" />
+  </wsdl:message>
+  <wsdl:message name="IGestorAmistad_GetListUsernameFriends_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListUsernameFriendsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestorAmistad_ValidateFriendRequestSending_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateFriendRequestSending" />
+  </wsdl:message>
+  <wsdl:message name="IGestorAmistad_ValidateFriendRequestSending_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateFriendRequestSendingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestorAmistad_AddRequestFriendship_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRequestFriendship" />
+  </wsdl:message>
+  <wsdl:message name="IGestorAmistad_AddRequestFriendship_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRequestFriendshipResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestorAmistad_GetUsernamePlayersRequesters_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsernamePlayersRequesters" />
+  </wsdl:message>
+  <wsdl:message name="IGestorAmistad_GetUsernamePlayersRequesters_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsernamePlayersRequestersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_AddToOnlineFriendshipDictionary_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddToOnlineFriendshipDictionary" />
+  </wsdl:message>
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_SendFriendRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_AcceptFriendRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_RejectFriendRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:RejectFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_DeleteFriend_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriend" />
+  </wsdl:message>
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_RemoveFromOnlineFriendshipDictionary_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveFromOnlineFriendshipDictionary" />
+  </wsdl:message>
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotifyNewFriendRequest_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyNewFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotifyNewFriendRequest_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyNewFriendRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotifyFriendRequestAccepted_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyFriendRequestAccepted" />
+  </wsdl:message>
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotifyFriendRequestAccepted_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyFriendRequestAcceptedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotifyDeletedFriend_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyDeletedFriend" />
+  </wsdl:message>
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotifyDeletedFriend_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyDeletedFriendResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestorUsuariosConectados_RegisterUserToOnlineUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUserToOnlineUsers" />
+  </wsdl:message>
+  <wsdl:message name="IGestorUsuariosConectados_UnregisterUserToOnlineUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnregisterUserToOnlineUsers" />
+  </wsdl:message>
+  <wsdl:message name="IGestorUsuariosConectados_NotifyUserLoggedIn_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyUserLoggedIn" />
+  </wsdl:message>
+  <wsdl:message name="IGestorUsuariosConectados_NotifyUserLoggedIn_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyUserLoggedInResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestorUsuariosConectados_NotifyUserLoggedOut_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyUserLoggedOut" />
+  </wsdl:message>
+  <wsdl:message name="IGestorUsuariosConectados_NotifyUserLoggedOut_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyUserLoggedOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestorUsuariosConectados_NotifyOnlineFriends_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyOnlineFriends" />
+  </wsdl:message>
+  <wsdl:message name="IGestorUsuariosConectados_NotifyOnlineFriends_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyOnlineFriendsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGestionCuentaServicio">
     <wsdl:operation name="AgregarJugador">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/AgregarJugador" message="tns:IGestionCuentaServicio_AgregarJugador_InputMessage" />
@@ -277,6 +392,76 @@
     <wsdl:operation name="ReceiveMessage">
       <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/ReceiveMessage" message="tns:ILobbyManager_ReceiveMessage_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/ReceiveMessageResponse" message="tns:ILobbyManager_ReceiveMessage_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IGestorAmistad">
+    <wsdl:operation name="GetListUsernameFriends">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorAmistad/GetListUsernameFriends" message="tns:IGestorAmistad_GetListUsernameFriends_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorAmistad/GetListUsernameFriendsResponse" message="tns:IGestorAmistad_GetListUsernameFriends_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateFriendRequestSending">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSending" message="tns:IGestorAmistad_ValidateFriendRequestSending_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSendingResponse" message="tns:IGestorAmistad_ValidateFriendRequestSending_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRequestFriendship">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorAmistad/AddRequestFriendship" message="tns:IGestorAmistad_AddRequestFriendship_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorAmistad/AddRequestFriendshipResponse" message="tns:IGestorAmistad_AddRequestFriendship_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsernamePlayersRequesters">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequesters" message="tns:IGestorAmistad_GetUsernamePlayersRequesters_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequestersResponse" message="tns:IGestorAmistad_GetUsernamePlayersRequesters_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IGestorDeSolicitudesDeAmistad">
+    <wsdl:operation name="AddToOnlineFriendshipDictionary">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AddToOnlineFriendshipDictionary" message="tns:IGestorDeSolicitudesDeAmistad_AddToOnlineFriendshipDictionary_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFriendRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/SendFriendRequest" message="tns:IGestorDeSolicitudesDeAmistad_SendFriendRequest_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptFriendRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AcceptFriendRequest" message="tns:IGestorDeSolicitudesDeAmistad_AcceptFriendRequest_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RejectFriendRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RejectFriendRequest" message="tns:IGestorDeSolicitudesDeAmistad_RejectFriendRequest_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFriend">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/DeleteFriend" message="tns:IGestorDeSolicitudesDeAmistad_DeleteFriend_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromOnlineFriendshipDictionary">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RemoveFromOnlineFriendshipDictionary" message="tns:IGestorDeSolicitudesDeAmistad_RemoveFromOnlineFriendshipDictionary_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyNewFriendRequest">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyNewFriendRequest" message="tns:IGestorDeSolicitudesDeAmistad_NotifyNewFriendRequest_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyNewFriendRequestResponse" message="tns:IGestorDeSolicitudesDeAmistad_NotifyNewFriendRequest_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyFriendRequestAccepted">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyFriendRequestAccepted" message="tns:IGestorDeSolicitudesDeAmistad_NotifyFriendRequestAccepted_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyFriendRequestAcceptedResponse" message="tns:IGestorDeSolicitudesDeAmistad_NotifyFriendRequestAccepted_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyDeletedFriend">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyDeletedFriend" message="tns:IGestorDeSolicitudesDeAmistad_NotifyDeletedFriend_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyDeletedFriendResponse" message="tns:IGestorDeSolicitudesDeAmistad_NotifyDeletedFriend_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IGestorUsuariosConectados">
+    <wsdl:operation name="RegisterUserToOnlineUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/RegisterUserToOnlineUsers" message="tns:IGestorUsuariosConectados_RegisterUserToOnlineUsers_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnregisterUserToOnlineUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/UnregisterUserToOnlineUsers" message="tns:IGestorUsuariosConectados_UnregisterUserToOnlineUsers_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyUserLoggedIn">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedIn" message="tns:IGestorUsuariosConectados_NotifyUserLoggedIn_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedInResponse" message="tns:IGestorUsuariosConectados_NotifyUserLoggedIn_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyUserLoggedOut">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedOut" message="tns:IGestorUsuariosConectados_NotifyUserLoggedOut_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedOutResponse" message="tns:IGestorUsuariosConectados_NotifyUserLoggedOut_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyOnlineFriends">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotifyOnlineFriends" message="tns:IGestorUsuariosConectados_NotifyOnlineFriends_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotifyOnlineFriendsResponse" message="tns:IGestorUsuariosConectados_NotifyOnlineFriends_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionCuentaServicio" type="tns:IGestionCuentaServicio">
@@ -514,6 +699,159 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IGestorAmistad" type="tns:IGestorAmistad">
+    <wsp:PolicyReference URI="#NetTcpBinding_IGestorAmistad_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetListUsernameFriends">
+      <soap12:operation soapAction="http://tempuri.org/IGestorAmistad/GetListUsernameFriends" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateFriendRequestSending">
+      <soap12:operation soapAction="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSending" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRequestFriendship">
+      <soap12:operation soapAction="http://tempuri.org/IGestorAmistad/AddRequestFriendship" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsernamePlayersRequesters">
+      <soap12:operation soapAction="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequesters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IGestorDeSolicitudesDeAmistad" type="tns:IGestorDeSolicitudesDeAmistad">
+    <wsp:PolicyReference URI="#NetTcpBinding_IGestorDeSolicitudesDeAmistad_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="AddToOnlineFriendshipDictionary">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AddToOnlineFriendshipDictionary" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="SendFriendRequest">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/SendFriendRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptFriendRequest">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AcceptFriendRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RejectFriendRequest">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RejectFriendRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFriend">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/DeleteFriend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromOnlineFriendshipDictionary">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RemoveFromOnlineFriendshipDictionary" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyNewFriendRequest">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyNewFriendRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyFriendRequestAccepted">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyFriendRequestAccepted" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyDeletedFriend">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyDeletedFriend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IGestorUsuariosConectados" type="tns:IGestorUsuariosConectados">
+    <wsp:PolicyReference URI="#NetTcpBinding_IGestorUsuariosConectados_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="RegisterUserToOnlineUsers">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/RegisterUserToOnlineUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UnregisterUserToOnlineUsers">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/UnregisterUserToOnlineUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyUserLoggedIn">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedIn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyUserLoggedOut">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyOnlineFriends">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotifyOnlineFriends" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ImplementacionServicio">
     <wsdl:port name="NetTcpBinding_IGestionCuentaServicio" binding="tns:NetTcpBinding_IGestionCuentaServicio">
       <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
@@ -522,6 +860,24 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_ILobbyManager" binding="tns:NetTcpBinding_ILobbyManager">
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IGestorAmistad" binding="tns:NetTcpBinding_IGestorAmistad">
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IGestorDeSolicitudesDeAmistad" binding="tns:NetTcpBinding_IGestorDeSolicitudesDeAmistad">
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IGestorUsuariosConectados" binding="tns:NetTcpBinding_IGestorUsuariosConectados">
       <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>

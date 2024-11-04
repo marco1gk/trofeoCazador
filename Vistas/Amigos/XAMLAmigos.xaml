@@ -1,0 +1,45 @@
+﻿<Page x:Class="trofeoCazador.Vistas.Amigos.XAMLAmigos"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:trofeoCazador.Vistas.Amigos"
+      mc:Ignorable="d" 
+      d:DesignHeight="770" d:DesignWidth="1200"
+      Title="Amigos"
+      Background="LightSeaGreen">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Panel de Solicitudes de Amistad -->
+        <StackPanel Grid.Column="0" Margin="10">
+            <TextBlock Text="Solicitudes de Amistad" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" />
+            <ScrollViewer x:Name="scrollViewerFriendsRequest" Visibility="Visible" VerticalScrollBarVisibility="Auto" Height="500">
+                <StackPanel x:Name="stackPanelFriendsRequest" />
+            </ScrollViewer>
+            <Button Content="Ver Solicitudes de Amistad" Click="BtnFriendsRequest_Click" Margin="0,10,0,0" />
+        </StackPanel>
+
+        <!-- Panel de Lista de Amigos -->
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="Lista de Amigos" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" />
+            <ScrollViewer x:Name="scrollViewerFriends" Visibility="Visible" VerticalScrollBarVisibility="Auto" Height="500">
+                <StackPanel x:Name="stackPanelFriends" />
+            </ScrollViewer>
+            <Button Content="Ver Amigos" Click="BtnFriends_Click" Margin="0,10,0,0" />
+        </StackPanel>
+
+        <!-- Panel de Enviar Solicitud -->
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="Enviar Solicitud de Amistad" FontWeight="Bold" FontSize="16" />
+            <TextBox x:Name="tbxUsernameSendRequest" Width="200" Margin="0,5,0,5" />
+            <TextBlock x:Name="lbFriendRequestUsernameError" Text="Error: Usuario no válido o solicitud ya enviada." 
+                       Foreground="Red" Visibility="Hidden" Margin="0,5,0,10" />
+            <Button Content="Enviar Solicitud" Click="BtnSendRequest_Click" Width="200" Margin="0,10,0,0"/>
+        </StackPanel>
+    </Grid>
+</Page>

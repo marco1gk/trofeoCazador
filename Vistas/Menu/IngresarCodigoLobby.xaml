@@ -1,0 +1,12 @@
+﻿<Page x:Class="trofeoCazador.Vistas.Menu.IngresarCodigoLobby"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Ingresar Código de Lobby">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Ingrese el Código del Lobby" FontSize="24" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+            <TextBox x:Name="txtCodigoLobby" Width="200" Height="30" Text="Código del Lobby" Margin="0,0,0,20"/>
+            <Button Content="Unirse" Width="100" Height="30" />
+        </StackPanel>
+    </Grid>
+</Page>

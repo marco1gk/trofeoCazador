@@ -45,10 +45,10 @@
                     BorderBrush="#FF34495E" BorderThickness="2" Click="Button_Click" />
 
             <!-- Botón Ayuda -->
-            <Button Content="Ayuda" Width="200" Height="50" 
+            <Button Content="Amigos" Width="200" Height="50" 
                     Background="#FF2C3E50" Foreground="White" 
                     FontSize="18" FontWeight="SemiBold" 
-                    BorderBrush="#FF34495E" BorderThickness="2" />
+                    BorderBrush="#FF34495E" BorderThickness="2" Click="BtnAmigos" />
 
             <!-- Botón Salir -->
             <Button Content="Salir" Width="200" Height="50" 

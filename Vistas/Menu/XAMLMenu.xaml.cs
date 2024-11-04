@@ -60,5 +60,17 @@ namespace trofeoCazador.Vistas.Menu
         {
 
         }
+
+
+        private void BtnAmigos(object sender, RoutedEventArgs e)
+        {
+            // Navegar a la página de registro de usuario
+            if (this.NavigationService == null)
+            {
+                return;//veo  veo
+            }
+            this.NavigationService.Navigate(new Uri("Vistas/Amigos/XAMLAmigos.xaml", UriKind.Relative));
+
+        }
     }
 }

@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="trofeoCazador.Vistas.Amigos.XAMLFriendRequestItemComponent"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:trofeoCazador.Vistas.Amigos"
+      mc:Ignorable="d" 
+      d:DesignHeight="58" d:DesignWidth="248"
+  >
+    <Grid>
+        <Rectangle Fill="#063343" Height="50" RadiusX="25" RadiusY="25" Width="248" Opacity="0.75" Margin="0,0,0,8" />
+        <Label x:Name="lbUsername" Content="username" Foreground="White" FontSize="16" FontFamily="Inter" FontWeight="Bold" Margin="6,10,70,0" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left"  MouseLeftButtonDown="ImgAcceptFriendRequest_Click" Height="26" Margin="141,6,0,0" VerticalAlignment="Top" Width="24" Source="/Recursos/acceptFriendRequestIcon.png" Cursor="Hand" RenderTransformOrigin="1.938,0.359"/>
+        <Image HorizontalAlignment="Left" MouseLeftButtonDown="ImgRejectFriendRequest_Click" Height="22" Margin="194,7,0,0" VerticalAlignment="Top" Width="20" Source="/Recursos/rejectFriendRequestIcon.png.png" Cursor="Hand"/>
+        <Label Content="Aceptar" HorizontalAlignment="Left" Margin="134,30,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Inter" FontSize="8" Height="22"/>
+        <Label Content="Rechazar" HorizontalAlignment="Left" Margin="183,32,0,0" VerticalAlignment="Top" FontSize="8" FontFamily="Inter" Foreground="White"/>
+
+    </Grid>
+</UserControl>

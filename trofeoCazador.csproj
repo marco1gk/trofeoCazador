@@ -84,8 +84,22 @@
     <Compile Include="VentanasReutilizables\ValidarCodigoRegistro.xaml.cs">
       <DependentUpon>ValidarCodigoRegistro.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Amigos\GestorAmigosLinea.cs" />
+    <Compile Include="Vistas\Amigos\GestorSolicitudesAmistad.cs" />
+    <Compile Include="Vistas\Amigos\XAMLActiveUserItemControl.xaml.cs">
+      <DependentUpon>XAMLActiveUserItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Amigos\XAMLAmigos.xaml.cs">
+      <DependentUpon>XAMLAmigos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Amigos\XAMLFriendRequestItemComponent.xaml.cs">
+      <DependentUpon>XAMLFriendRequestItemComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\InicioSesion\XAMLInicioSesion.xaml.cs">
       <DependentUpon>XAMLInicioSesion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Menu\IngresarCodigoLobby.xaml.cs">
+      <DependentUpon>IngresarCodigoLobby.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Perfil\EditarContrasenia.xaml.cs">
       <DependentUpon>EditarContrasenia.xaml</DependentUpon>
@@ -108,9 +122,6 @@
     <Compile Include="Vistas\Menu\XAMLMenu.xaml.cs">
       <DependentUpon>XAMLMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\SalaEspera\IngresarCodigoSalaEspera.xaml.cs">
-      <DependentUpon>IngresarCodigoSalaEspera.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Vistas\SalaEspera\XAMLSalaEspera.xaml.cs">
       <DependentUpon>XAMLSalaEspera.xaml</DependentUpon>
     </Compile>
@@ -130,7 +141,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Vistas\Amigos\XAMLActiveUserItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Amigos\XAMLAmigos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Amigos\XAMLFriendRequestItemComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vistas\InicioSesion\XAMLInicioSesion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Menu\IngresarCodigoLobby.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,10 +189,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vistas\SalaEspera\IngresarCodigoSalaEspera.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Vistas\SalaEspera\XAMLSalaEspera.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -189,11 +212,14 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="Connected Services\ServicioDelJuego\service1.wsdl" />
-    <None Include="Connected Services\ServicioDelJuego\service1.xsd">
+    <None Include="Connected Services\ServicioDelJuego\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioDelJuego\service2.xsd">
+    <None Include="Connected Services\ServicioDelJuego\service.wsdl" />
+    <None Include="Connected Services\ServicioDelJuego\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioDelJuego\service1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServicioDelJuego\ServicioJuego.xsd">
@@ -240,24 +266,6 @@
     <Folder Include="Vistas\RestablecerConstraseña\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ServicioDelJuego\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioDelJuego\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioDelJuego\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServicioDelJuego\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Recursos\fondoMenu.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +288,33 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\negroo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServicioDelJuego\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioDelJuego\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioDelJuego\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicioDelJuego\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\acceptFriendRequestIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\rejectFriendRequestIcon.png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\friendItemButton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
