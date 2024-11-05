@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using trofeoCazador.ServicioDelJuego;
 using System.ServiceModel;
 using System.Windows.Input;
+using trofeoCazador.Vistas.Partida;
 
 namespace trofeoCazador.Vistas.SalaEspera
 {
@@ -16,6 +17,7 @@ namespace trofeoCazador.Vistas.SalaEspera
     public partial class XAMLSalaEspera : Page, ILobbyManagerCallback
     {
         private LobbyManagerClient client;
+        private string codigoLobbyActual;
 
         public XAMLSalaEspera()
         {
@@ -187,12 +189,19 @@ namespace trofeoCazador.Vistas.SalaEspera
         
         public void NotifyLobbyCreated(string lobbyCode)
         {
+            codigoLobbyActual = lobbyCode;
             MessageBox.Show($"Lobby creado con el código: {lobbyCode}");
+            btnIniciarPartida.Visibility = Visibility.Visible;
         }
 
         public void NotifyPlayersInLobby(string lobbyCode, List<LobbyPlayer> lobbyPlayers)
         {
-            MessageBox.Show($"Jugadores en el lobby {lobbyCode}: {string.Join(", ", lobbyPlayers.Select(p => p.Username))}");
+            // Actualiza la UI con los datos de los jugadores
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                MessageBox.Show($"Jugadores en el lobby {lobbyCode}: {string.Join(", ", lobbyPlayers.Select(p => p.Username))}");
+                // Aquí podrías llamar a otro método para actualizar la interfaz de usuario, como MostrarJugadores(lobbyPlayers);
+            });
         }
 
         public void NotifyPlayerJoinToLobby(LobbyPlayer lobbyPlayer, int numOfPlayersInLobby)
@@ -210,9 +219,17 @@ namespace trofeoCazador.Vistas.SalaEspera
             MessageBox.Show("El anfitrión ha dejado el lobby.");
         }
 
-        public void NotifyStartOfMatch()
+        public void NotifyStartMatch(LobbyPlayer[] jugadores)
         {
-            MessageBox.Show("¡La partida ha comenzado!");
+            Console.WriteLine("Jugadores recibidos en el cliente:");
+            foreach (var jugador in jugadores)
+            {
+                Console.WriteLine($"Jugador: {jugador.Username}");
+            }
+
+            XAMLPartida partida = new XAMLPartida();
+            partida.MostrarJugadores(jugadores.ToList());
+            this.NavigationService.Navigate(partida);
         }
 
         public void NotifyLobbyIsFull()
@@ -253,5 +270,32 @@ namespace trofeoCazador.Vistas.SalaEspera
             });
         }
 
+        public void NotifyCanStartGame(bool canStart)
+        {
+            // Se hace visible el boton una vez que haya al menos 2 jugadores
+            Dispatcher.Invoke(() => {
+                btnIniciarPartida.Visibility = canStart ? Visibility.Visible : Visibility.Collapsed;
+            });
+        }
+
+        private async void BtnClicIniciarPartida(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(codigoLobbyActual))
+            {
+                try
+                {
+                    await Task.Run(() => client.StartGame(codigoLobbyActual));
+                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al iniciar la partida: {ex.Message}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Código de lobby no disponible. Asegúrate de haber creado o unido a un lobby.");
+            }
+        }
     }
 }

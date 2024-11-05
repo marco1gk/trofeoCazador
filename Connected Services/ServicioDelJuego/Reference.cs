@@ -132,6 +132,9 @@ namespace trofeoCazador.ServicioDelJuego {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumeroFotoPerfilField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UsernameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -141,6 +144,19 @@ namespace trofeoCazador.ServicioDelJuego {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumeroFotoPerfil {
+            get {
+                return this.NumeroFotoPerfilField;
+            }
+            set {
+                if ((this.NumeroFotoPerfilField.Equals(value) != true)) {
+                    this.NumeroFotoPerfilField = value;
+                    this.RaisePropertyChanged("NumeroFotoPerfil");
+                }
             }
         }
         
@@ -379,6 +395,12 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/BuscarLobbyDisponible", ReplyAction="http://tempuri.org/ILobbyManager/BuscarLobbyDisponibleResponse")]
         System.Threading.Tasks.Task<string> BuscarLobbyDisponibleAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/StartGame")]
+        void StartGame(string lobbyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/StartGame")]
+        System.Threading.Tasks.Task StartGameAsync(string lobbyCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -399,8 +421,8 @@ namespace trofeoCazador.ServicioDelJuego {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyHostPlayerLeftLobby", ReplyAction="http://tempuri.org/ILobbyManager/NotifyHostPlayerLeftLobbyResponse")]
         void NotifyHostPlayerLeftLobby();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyStartOfMatch", ReplyAction="http://tempuri.org/ILobbyManager/NotifyStartOfMatchResponse")]
-        void NotifyStartOfMatch();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyStartMatch", ReplyAction="http://tempuri.org/ILobbyManager/NotifyStartMatchResponse")]
+        void NotifyStartMatch(trofeoCazador.ServicioDelJuego.LobbyPlayer[] jugadores);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyLobbyIsFull", ReplyAction="http://tempuri.org/ILobbyManager/NotifyLobbyIsFullResponse")]
         void NotifyLobbyIsFull();
@@ -413,6 +435,9 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ReceiveMessage", ReplyAction="http://tempuri.org/ILobbyManager/ReceiveMessageResponse")]
         void ReceiveMessage(string username, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyCanStartGame", ReplyAction="http://tempuri.org/ILobbyManager/NotifyCanStartGameResponse")]
+        void NotifyCanStartGame(bool canStart);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -489,6 +514,14 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task<string> BuscarLobbyDisponibleAsync() {
             return base.Channel.BuscarLobbyDisponibleAsync();
+        }
+        
+        public void StartGame(string lobbyCode) {
+            base.Channel.StartGame(lobbyCode);
+        }
+        
+        public System.Threading.Tasks.Task StartGameAsync(string lobbyCode) {
+            return base.Channel.StartGameAsync(lobbyCode);
         }
     }
     

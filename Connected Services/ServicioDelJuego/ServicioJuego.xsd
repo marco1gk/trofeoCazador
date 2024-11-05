@@ -12,6 +12,7 @@
   <xs:element name="JugadorDataContract" nillable="true" type="tns:JugadorDataContract" />
   <xs:complexType name="LobbyPlayer">
     <xs:sequence>
+      <xs:element minOccurs="0" name="NumeroFotoPerfil" type="xs:int" />
       <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

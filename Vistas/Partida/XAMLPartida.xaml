@@ -1,0 +1,74 @@
+﻿<Page x:Class="trofeoCazador.Vistas.Partida.XAMLPartida"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:p="clr-namespace:trofeoCazador.Properties"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Tablero">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Recursos/Partida/FondoTablero.jpg" />
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Esta es la zona donde se pondran las fichas-->
+        <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <TextBlock Text="(Aqui iran las fichas)" FontSize="20" FontWeight="Bold"/>
+            <ItemsControl x:Name="FichasItemsControl">
+                <!-- Para agregar las fichas de forma dinamica se utilizara esta parte. -->
+            </ItemsControl>
+        </StackPanel>
+
+        <!-- Zona del mazo de cartas-->
+        <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <TextBlock Text="(Mazo de Cartas)" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <Image x:Name="MazoImagen" Source="/Recursos/Partida/Cartas/Carta_Mazo.png" Width="100" Height="150"/>
+        </StackPanel>
+
+        <!-- Zona del escondite-->
+        <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
+            <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <Image x:Name="EsconditeImagen" Source="/Recursos/Partida/Cartas/Carta_Escondite.png" Width="100" Height="150"/>
+            <Button Content="Ver Escondite" Width="100" Height="30" Margin="0,10,0,0"/>
+        </StackPanel>
+
+        <!-- Aqui es donde se agregaran las cartas que se le repartan a cada jugador -->
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
+            <TextBlock Text="(Cartas que tenga en la mano)" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <ItemsControl x:Name="CartasManoItemsControl">
+                <!--Aqui se implementara para mostrar sus cartas dinamicamente-->
+            </ItemsControl>
+        </StackPanel>
+
+        <!-- Jugador 2 -->
+        <StackPanel x:Name="AreaJugador2" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Visibility="Collapsed">
+            <TextBlock x:Name="NombreJugador2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <Image x:Name="Jugador2Imagen" Width="50" Height="50" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Jugador 3 -->
+        <StackPanel x:Name="AreaJugador3" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Visibility="Collapsed">
+            <TextBlock x:Name="NombreJugador3" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <Image x:Name="Jugador3Imagen" Width="50" Height="50" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Jugador 4 -->
+        <StackPanel x:Name="AreaJugador4" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Visibility="Collapsed">
+            <TextBlock x:Name="NombreJugador4" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <Image x:Name="Jugador4Imagen" Width="50" Height="50" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Page>

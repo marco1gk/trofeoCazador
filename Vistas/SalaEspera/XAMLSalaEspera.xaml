@@ -43,5 +43,6 @@
             <Rectangle Fill="White" RadiusX="12" RadiusY="12" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,60,10" Width="160" />
             <TextBox x:Name="tbxMessage" FontFamily="Inter" FontSize="14" VerticalContentAlignment="Center" Margin="10,305,0,10" Width="160" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" />
         </Grid>
+        <Button Name="btnIniciarPartida" Content="Iniciar Partida" Width="120" Height="30" Background="LightCoral" Visibility ="Collapsed" HorizontalAlignment="Center" Click="BtnClicIniciarPartida" Margin="0,344,0,76"/>
     </Grid>
 </Page>
