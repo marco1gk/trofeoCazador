@@ -101,6 +101,9 @@
     <Compile Include="Vistas\Menu\IngresarCodigoLobby.xaml.cs">
       <DependentUpon>IngresarCodigoLobby.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\PartidaJuego\XAMLTablero.xaml.cs">
+      <DependentUpon>XAMLTablero.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Perfil\EditarContrasenia.xaml.cs">
       <DependentUpon>EditarContrasenia.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\Menu\IngresarCodigoLobby.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\PartidaJuego\XAMLTablero.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -315,6 +322,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\friendItemButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\ImagenesPartida\FondoTablero.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\ImagenesPartida\Cartas\Carta_Escondite.png" />
+    <Resource Include="Recursos\ImagenesPartida\Cartas\Carta_Mazo.png" />
+    <Resource Include="Recursos\ImagenesPartida\Cartas\Carta_Reglas.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

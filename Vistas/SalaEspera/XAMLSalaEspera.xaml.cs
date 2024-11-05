@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using trofeoCazador.ServicioDelJuego;
 using System.ServiceModel;
 using System.Windows.Input;
-using trofeoCazador.Vistas.Partida;
+using trofeoCazador.Vistas.PartidaJuego;
 
 namespace trofeoCazador.Vistas.SalaEspera
 {
@@ -196,11 +196,9 @@ namespace trofeoCazador.Vistas.SalaEspera
 
         public void NotifyPlayersInLobby(string lobbyCode, List<LobbyPlayer> lobbyPlayers)
         {
-            // Actualiza la UI con los datos de los jugadores
             Application.Current.Dispatcher.Invoke(() =>
             {
                 MessageBox.Show($"Jugadores en el lobby {lobbyCode}: {string.Join(", ", lobbyPlayers.Select(p => p.Username))}");
-                // Aquí podrías llamar a otro método para actualizar la interfaz de usuario, como MostrarJugadores(lobbyPlayers);
             });
         }
 
@@ -227,9 +225,9 @@ namespace trofeoCazador.Vistas.SalaEspera
                 Console.WriteLine($"Jugador: {jugador.Username}");
             }
 
-            XAMLPartida partida = new XAMLPartida();
-            partida.MostrarJugadores(jugadores.ToList());
-            this.NavigationService.Navigate(partida);
+            XAMLTablero tablero = new XAMLTablero();
+            tablero.MostrarJugadores(jugadores.ToList());
+            this.NavigationService.Navigate(tablero);
         }
 
         public void NotifyLobbyIsFull()
