@@ -30,5 +30,11 @@ namespace trofeoCazador.Vistas.Amigos
             Console.WriteLine("este");
         }
 
+
+        private void ImagenCLicAtras(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
     }
 }

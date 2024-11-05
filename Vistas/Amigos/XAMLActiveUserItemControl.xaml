@@ -16,10 +16,8 @@
     </UserControl.Resources>
 
     <Grid Background="#00000000" Margin="0,8,0,-8">
-        <Rectangle Fill="#063343" Height="50" RadiusX="25" RadiusY="25" Width="248" Opacity="0.75" />
-        <Label x:Name="lbUsername" Content="username" Foreground="White" FontSize="16" FontFamily="Inter" FontWeight="Bold" Margin="20,0,37,0" VerticalAlignment="Center"/>
-        <Image Source="/Recursos/friendItemButton.png" Margin="211,15,10,14" MouseLeftButtonDown="ImgOptionPlayer_Click" Cursor="Hand"/>
-        <Rectangle x:Name="rectangleStatusPlayer" Width="15" Height="15" RadiusX="7.5" RadiusY="7.5" Fill="#FF5A5E59" Margin="5,22,228,22" />
+        <Rectangle Fill="BlanchedAlmond" Height="50" RadiusX="25" RadiusY="25" Width="248" Opacity="0.75" Margin="0,6,0,10" />
+        <Label x:Name="lbUsername" Content="username" Foreground="White" FontSize="16" FontFamily="arial" FontWeight="Bold" Margin="20,0,37,0" VerticalAlignment="Center"/>
         <Grid Margin="68,-10,-68,10" x:Name="gridOptionsPlayer" Visibility="Collapsed">
             <Border Background="#5E7682"  BorderThickness="1" CornerRadius="15, 15, 0, 15" Margin="9,0,103,33" />
             <Button Content="btnDeleteFriend" Margin="15,5,107,37" Background="#FF435B67" BorderBrush="{x:Null}" FontFamily="Inter" Foreground="White" Cursor="Hand" Click="BtnDeleteFriend_Click" />

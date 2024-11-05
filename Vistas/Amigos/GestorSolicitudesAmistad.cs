@@ -136,11 +136,63 @@ namespace trofeoCazador.Vistas.Amigos
         private void BtnFriends_Click(object sender, RoutedEventArgs e)
         {
             scrollViewerFriends.Visibility = Visibility.Visible;
-            scrollViewerFriendsRequest.Visibility = Visibility.Visible;
-            Console.WriteLine("amikos");
+            scrollViewerFriendsRequest.Visibility = Visibility.Hidden; // Oculta las solicitudes para evitar confusión
 
-    
+            // Limpia la lista actual de amigos en el panel
+            stackPanelFriends.Children.Clear();
+
+            // Obtiene la lista de amigos desde el servidor
+            string[] friendUsernames = GetFriendsList();
+
+            // Agrega cada amigo a la lista en la interfaz
+            if (friendUsernames != null)
+            {
+                foreach (string friendUsername in friendUsernames)
+                {
+                    AddUserToFriendsList(friendUsername);
+                }
+            }
         }
+
+        private string[] GetFriendsList()
+        {
+            GestorAmistadClient friendshipManagerClient = new GestorAmistadClient();
+            string[] friendUsernames = null;
+
+            try
+            {
+                friendUsernames = friendshipManagerClient.GetListUsernameFriends(sesion.JugadorId).ToArray();
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (FaultException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return friendUsernames;
+        }
+
+        private void AddUserToFriendsList(string username)
+        {
+            XAMLActiveUserItemControl friendItem = new XAMLActiveUserItemControl(username);
+            stackPanelFriends.Children.Add(friendItem);
+        }
+
 
         private void BtnFriendsRequest_Click(object sender, RoutedEventArgs e)
         {
