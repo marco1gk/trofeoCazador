@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trofeoCazador.Vistas;
 
 namespace trofeoCazador.Vistas.Amigos
 {
@@ -23,6 +25,7 @@ namespace trofeoCazador.Vistas.Amigos
         public XAMLAmigos()
         {
             InitializeComponent();
+            motrarDatosALV();
         }
 
         public void BtnCloseFriendsMenu_Click(object sender, RoutedEventArgs e)
@@ -36,5 +39,40 @@ namespace trofeoCazador.Vistas.Amigos
             NavigationService.GoBack();
         }
 
-    }
+
+
+        private void motrarDatosALV()
+        {
+            bool areSuccessMethods = false;
+
+            try
+            {
+                LoadPlayerFriends();
+                ShowAsActiveUser();
+              
+
+                areSuccessMethods = true;
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            
+            catch (CommunicationException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+
+
+        }
+}
 }

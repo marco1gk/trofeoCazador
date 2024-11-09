@@ -136,7 +136,7 @@ namespace trofeoCazador.Vistas.Amigos
         private void BtnFriends_Click(object sender, RoutedEventArgs e)
         {
             scrollViewerFriends.Visibility = Visibility.Visible;
-            scrollViewerFriendsRequest.Visibility = Visibility.Hidden; // Oculta las solicitudes para evitar confusión
+            scrollViewerFriendsRequest.Visibility = Visibility.Visible; // Oculta las solicitudes para evitar confusión
 
             // Limpia la lista actual de amigos en el panel
             stackPanelFriends.Children.Clear();
@@ -196,26 +196,32 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void BtnFriendsRequest_Click(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine("antes d mostrar");
             ShowFriendRequests();
+            Console.WriteLine("despues d mostrar");
         }
 
         private void ShowFriendRequests()
         {
+            Console.WriteLine("Mostrando solicitudes de amistad...");
             scrollViewerFriendsRequest.Visibility = Visibility.Visible;
             scrollViewerFriends.Visibility = Visibility.Visible;
-
-            
 
             stackPanelFriendsRequest.Children.Clear();
             string[] usernamePlayers = GetCurrentFriendRequests();
 
-            if (usernamePlayers != null)
+            if (usernamePlayers != null && usernamePlayers.Length > 0)
             {
+                Console.WriteLine($"Número de solicitudes de amistad: {usernamePlayers.Length}");
                 AddUsersToFriendsRequestList(usernamePlayers);
+            }
+            else
+            {
+                Console.WriteLine("No hay solicitudes de amistad pendientes.");
             }
         }
 
-        
+
 
         private string[] GetCurrentFriendRequests()
         {
@@ -225,30 +231,32 @@ namespace trofeoCazador.Vistas.Amigos
             try
             {
                 usernamePlayers = friendshipManagerClient.GetUsernamePlayersRequesters(sesion.JugadorId);
+                Console.WriteLine($"Solicitudes encontradas: {usernamePlayers?.Length ?? 0}");
             }
             catch (EndpointNotFoundException ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine("Error: " + ex.Message);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine("Error: " + ex.Message);
             }
             catch (FaultException ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine("Error: " + ex.Message);
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine("Error: " + ex.Message);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine("Error: " + ex.Message);
             }
 
             return usernamePlayers;
         }
+
 
         private void AddUsersToFriendsRequestList(string[] usernamePlayers)
         {
@@ -264,7 +272,16 @@ namespace trofeoCazador.Vistas.Amigos
         private void AddUserToFriendRequestList(string username)
         {
             XAMLFriendRequestItemComponent friendRequestItem = CreateFriendRequestItemControl(username);
-            stackPanelFriendsRequest.Children.Add(friendRequestItem);
+
+            if (friendRequestItem != null)
+            {
+                Console.WriteLine($"Agregando solicitud de: {username}");
+                stackPanelFriendsRequest.Children.Add(friendRequestItem);
+            }
+            else
+            {
+                Console.WriteLine("No se pudo crear el control para la solicitud.");
+            }
         }
 
         private XAMLFriendRequestItemComponent CreateFriendRequestItemControl(string username)
@@ -390,7 +407,7 @@ namespace trofeoCazador.Vistas.Amigos
 
         public void NotifyFriendRequestAccepted(string username)
         {
-           // AddUserToFriendsList(username, ONLINE_STATUS_PLAYER_HEX_COLOR);
+           AddUserToFriendsList(username);
             RemoveFriendRequestFromStackPanel(username);
         }
 

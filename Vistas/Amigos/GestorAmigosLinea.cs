@@ -5,9 +5,11 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Path = System.IO.Path;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Utilidades;
 
@@ -78,14 +80,14 @@ namespace trofeoCazador.Vistas.Amigos
 
                 if (isOnline)
                 {
-                    Console.WriteLine("esta conectado");
+                    statusPlayerColor = Utilities.CreateColorFromHexadecimal(ONLINE_STATUS_PLAYER_HEX_COLOR);
                 }
                 else
                 {
-                    Console.WriteLine("no ta conectado");
+                    statusPlayerColor = Utilities.CreateColorFromHexadecimal(OFFLINE_STATUS_PLAYER_HEX_COLOR);
                 }
 
-           //     userOnlineItem.rectangleStatusPlayer.Fill = statusPlayerColor;
+                userOnlineItem.rectangleStatusPlayer.Fill = statusPlayerColor;
             }
         }
 
@@ -174,4 +176,49 @@ namespace trofeoCazador.Vistas.Amigos
                 
 
     }
+    public static class Utilities
+    {
+        public static SolidColorBrush CreateColorFromHexadecimal(string hexadecimalColor)
+        {
+            SolidColorBrush solidColorBrush = null;
+
+            if (hexadecimalColor != null)
+            {
+                try
+                {
+                    solidColorBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(hexadecimalColor));
+                }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+
+            return solidColorBrush;
+        }
+
+        public static Image CreateImageByPath(string imagePath)
+        {
+            string absolutePath = BuildAbsolutePath(imagePath);
+
+            Image styleImage = new Image();
+            BitmapImage bitmapImage = new BitmapImage(new Uri(absolutePath));
+            styleImage.Source = bitmapImage;
+
+            return styleImage;
+        }
+
+        public static string BuildAbsolutePath(string relativePath)
+        {
+            string absolutePath = "";
+
+            if (relativePath != null)
+            {
+                absolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
+            }
+
+            return absolutePath;
+        }
+    }
+
 }

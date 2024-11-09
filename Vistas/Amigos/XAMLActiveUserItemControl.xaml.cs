@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace trofeoCazador.Vistas.Amigos
 {
-    /// <summary>
-    /// Lógica de interacción para XAMLActiveUserItemControl.xaml
-    /// </summary>
+
     public partial class XAMLActiveUserItemControl : UserControl
     {
         private const string BTN_DELETE_FRIEND = "DeleteFriend";
@@ -49,5 +47,6 @@ namespace trofeoCazador.Vistas.Amigos
         {
             ButtonClicked?.Invoke(this, new ButtonClickEventArgs(BTN_DELETE_FRIEND, _username));
         }
+
     }
 }

@@ -5,10 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:trofeoCazador.Vistas.Amigos"
       mc:Ignorable="d" 
-      d:DesignHeight="58" d:DesignWidth="248"
+      d:DesignHeight="50" d:DesignWidth="248"
+      Background="CadetBlue"
   >
     <Grid>
-        <Label x:Name="lbUsername" Content="username" Foreground="White" FontSize="16" FontFamily="Inter" FontWeight="Bold" Margin="6,10,109,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbUsername" Content="username" Foreground="White" FontSize="16" FontFamily="Inter" FontWeight="Bold" Margin="6,10,6,0" VerticalAlignment="Top"/>
+
         <Image HorizontalAlignment="Left"  MouseLeftButtonDown="ImgAcceptFriendRequest_Click" Height="26" Margin="164,14,0,0" VerticalAlignment="Top" Width="24" Source="/Recursos/acceptFriendRequestIcon.png" Cursor="Hand" RenderTransformOrigin="1.938,0.359"/>
         <Image HorizontalAlignment="Left" MouseLeftButtonDown="ImgRejectFriendRequest_Click" Height="22" Margin="203,14,0,0" VerticalAlignment="Top" Width="20" Source="/Recursos/rejectFriendRequestIcon.png.png" Cursor="Hand"/>
         <Label Content="" HorizontalAlignment="Left" Margin="134,30,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Inter" FontSize="8" Height="22"/>
