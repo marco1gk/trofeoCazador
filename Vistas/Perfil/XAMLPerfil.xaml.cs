@@ -68,11 +68,9 @@ namespace trofeoCazador.Vistas.Perfil
 
         private void BtnClicEditarContrasenia(object sender, RoutedEventArgs e)
         {
-            if (this.NavigationService == null)
-            {
-                return;
-            }
-            this.NavigationService.Navigate(new Uri("Vistas/Perfil/EditarContrasenia.xaml", UriKind.Relative));
+            NavigationWindow navigationWindow = new NavigationWindow();
+            navigationWindow.Content = new EditarContrasenia(null);
+            navigationWindow.Show();
         }
 
         private void BtnClicEditarCorreo(object sender, RoutedEventArgs e)

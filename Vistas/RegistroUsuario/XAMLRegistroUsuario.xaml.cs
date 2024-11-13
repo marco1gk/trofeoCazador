@@ -92,7 +92,7 @@ namespace trofeoCazador.Vistas.RegistroUsuario
                 ContraseniaHash = PbContraseña.Password,
                 Correo = tbCorreo.Text
             };
-            ValidarCodigoRegistro ventanaValidacion = new ValidarCodigoRegistro(jugador, codigoEnviado);
+            ValidarCodigoRegistro ventanaValidacion = new ValidarCodigoRegistro(jugador, null, codigoEnviado);
             bool? resultadoValidacion = ventanaValidacion.ShowDialog();
 
             if (resultadoValidacion == true)

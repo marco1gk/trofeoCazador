@@ -115,7 +115,7 @@
         <Label Content="{x:Static p:Resources.NewInGame_}" 
                HorizontalAlignment="Left" 
                FontWeight="Bold" 
-               Margin="368,202,0,0" 
+               Margin="337,202,0,0" 
                Grid.Row="1" 
                VerticalAlignment="Top" 
                Grid.RowSpan="2"/>
@@ -144,7 +144,8 @@
                Cursor="Hand" 
                Content="{x:Static p:Resources.lbForgotPassword_}" 
                Margin="250,134,383,0" 
-               Grid.Row="1"/>
+               Grid.Row="1"
+               MouseLeftButtonUp="lbClicRecuperarContrasena"/>
 
         <!-- Botón para jugar como invitado -->
         <Button Content="{x:Static p:Resources.Guest_}" 

@@ -10,8 +10,11 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
+using trofeoCazador.Vistas.Perfil;
+
 
 namespace trofeoCazador.VentanasReutilizables
 {
@@ -22,12 +25,14 @@ namespace trofeoCazador.VentanasReutilizables
     {
         private JugadorDataContract _jugador;
         private string _codigoEnviado;
-
-        public ValidarCodigoRegistro(JugadorDataContract jugador, string codigoEnviado)
+        private string _correo;
+        public ValidarCodigoRegistro(JugadorDataContract jugador, string correo, string codigoEnviado)
         {
             InitializeComponent();
             _jugador = jugador;  // Guardamos la información del jugador
             _codigoEnviado = codigoEnviado; // Guardamos el código enviado
+            _correo = correo;
+
         }
 
         private void BtnEnviar(object sender, RoutedEventArgs e)
@@ -38,10 +43,21 @@ namespace trofeoCazador.VentanasReutilizables
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
             if (proxy.ValidarCodigo(codigoIngresado, _codigoEnviado))
             {
-                // Si el código es correcto, creamos la cuenta
-                proxy.AgregarJugador(_jugador);
-                MessageBox.Show("Cuenta creada exitosamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                this.Close(); // Cerramos la ventana de validación
+                if(_jugador != null)
+                {
+                    // Si el código es correcto, creamos la cuenta
+                    proxy.AgregarJugador(_jugador);
+                    MessageBox.Show("Cuenta creada exitosamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close(); // Cerramos la ventana de validación
+                }
+                else
+                {
+                    NavigationWindow navigationWindow = new NavigationWindow();
+                    navigationWindow.Content = new EditarContrasenia(_correo);
+                    navigationWindow.Show();
+                    this.Close();
+                }
+                
             }
             else
             {

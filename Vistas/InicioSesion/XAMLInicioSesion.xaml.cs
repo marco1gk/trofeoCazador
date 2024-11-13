@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Utilidades;
+using trofeoCazador.VentanasReutilizables;
 
 namespace trofeoCazador.Vistas.InicioSesion
 {
@@ -19,7 +21,9 @@ namespace trofeoCazador.Vistas.InicioSesion
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // TODO
+            CorreoJugador ventanaCorreo = new CorreoJugador();
+            ventanaCorreo.Show();
+
         }
 
         private void BtnRegistrarCuenta(object sender, RoutedEventArgs e)
@@ -124,6 +128,12 @@ namespace trofeoCazador.Vistas.InicioSesion
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             //TODO
+        }
+
+        private void lbClicRecuperarContrasena(object sender, MouseButtonEventArgs e)
+        {
+            CorreoJugador ventanaCorreo = new CorreoJugador();
+            ventanaCorreo.Show();
         }
     }
 }
