@@ -20,42 +20,42 @@ namespace trofeoCazador.Vistas.Amigos
     /// </summary>
     public partial class XAMLFriendRequestItemComponent : UserControl
     {
-        private const string BTN_ACCEPT = "Accept";
-        private const string BTN_REJECT = "Reject";
-        private readonly string _username;
+        private const string BTNACEPTAR = "Accept";
+        private const string BTNRECHAZAR = "Reject";
+        private readonly string _nombreUsuario;
 
-        public event EventHandler<ButtonClickEventArgs> ButtonClicked;
+        public event EventHandler<ArgumentosDeEventoDeClicDeBotón> ButtonClicked;
 
-        public XAMLFriendRequestItemComponent(string username)
+        public XAMLFriendRequestItemComponent(string nombreUsuario)
         {
             InitializeComponent();
 
-            _username = username;
-            lbUsername.Content = username;
+            _nombreUsuario = nombreUsuario;
+            lbUsername.Content = nombreUsuario;
         }
 
-        private void ImgAcceptFriendRequest_Click(object sender, MouseButtonEventArgs e)
+        private void ImgAceptarSolicitudAmistad_Click(object sender, MouseButtonEventArgs e)
         {
-            ButtonClicked?.Invoke(this, new ButtonClickEventArgs(BTN_ACCEPT, _username));
+            ButtonClicked?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTNACEPTAR, _nombreUsuario));
         }
 
-        private void ImgRejectFriendRequest_Click(object sender, MouseButtonEventArgs e)
+        private void ImgRechazarSolicitudAmistad_Click(object sender, MouseButtonEventArgs e)
         {
-            ButtonClicked?.Invoke(this, new ButtonClickEventArgs(BTN_REJECT, _username));
+            ButtonClicked?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTNRECHAZAR, _nombreUsuario));
         }
 
 
     }
 
-    public class ButtonClickEventArgs : EventArgs
+    public class ArgumentosDeEventoDeClicDeBotón : EventArgs
     {
-        public string ButtonName { get; private set; }
-        public string Username { get; private set; }
+        public string NombreBoton { get; private set; }
+        public string NombreUsuario { get; private set; }
 
-        public ButtonClickEventArgs(string buttonName, string username)
+        public ArgumentosDeEventoDeClicDeBotón(string nombreBoton, string nombreUsuario)
         {
-            ButtonName = buttonName;
-            Username = username;
+            NombreBoton = nombreBoton;
+            NombreUsuario = nombreUsuario;
         }
     }
 }

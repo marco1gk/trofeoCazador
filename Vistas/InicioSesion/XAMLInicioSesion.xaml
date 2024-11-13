@@ -58,8 +58,8 @@
                      Background="Transparent"
                      Height="40"
                      FontSize="16"
-                     GotFocus="TbxUsername_GotFocus"
-                    LostFocus="TbxUsername_LostFocus"
+                     GotFocus="TbxUsuarioObtenerFoco"
+                    LostFocus="TbxUsuarioPerderFoco"
                      Foreground="#CDCDCD" />
     
             
@@ -71,8 +71,8 @@
                          FontSize="16"
                          Password="************"
                          Background="Transparent"
-                         GotFocus="PwBxPassword_GotFocus"
-                         LostFocus="PwBxPassword_LostFocus"
+                         GotFocus="PbContraseñaObtenerFoco"
+                         LostFocus="PbContraseñaPerderFoco"
                          BorderBrush="Transparent"
                          Foreground="#CDCDCD" />
           

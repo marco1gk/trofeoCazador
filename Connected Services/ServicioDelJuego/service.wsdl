@@ -118,161 +118,161 @@
   <wsdl:message name="IGestionCuentaServicio_ExisteNombreUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ExisteNombreUsuarioResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_CreateLobby_InputMessage">
-    <wsdl:part name="parameters" element="tns:CreateLobby" />
+  <wsdl:message name="ILobbyManager_CrearSalaEspera_InputMessage">
+    <wsdl:part name="parameters" element="tns:CrearSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_JoinLobby_InputMessage">
-    <wsdl:part name="parameters" element="tns:JoinLobby" />
+  <wsdl:message name="ILobbyManager_UnirseSalaEspera_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnirseSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_JoinLobbyAsHost_InputMessage">
-    <wsdl:part name="parameters" element="tns:JoinLobbyAsHost" />
+  <wsdl:message name="ILobbyManager_UnirSalaEsperaComoAnfitrion_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnirSalaEsperaComoAnfitrion" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_ExitLobby_InputMessage">
-    <wsdl:part name="parameters" element="tns:ExitLobby" />
+  <wsdl:message name="ILobbyManager_SalirSalaEspera_InputMessage">
+    <wsdl:part name="parameters" element="tns:SalirSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_ExitLobby_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ExitLobbyResponse" />
+  <wsdl:message name="ILobbyManager_SalirSalaEspera_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SalirSalaEsperaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_SendMessage_InputMessage">
-    <wsdl:part name="parameters" element="tns:SendMessage" />
+  <wsdl:message name="ILobbyManager_MandarMensaje_InputMessage">
+    <wsdl:part name="parameters" element="tns:MandarMensaje" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_SendMessage_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SendMessageResponse" />
+  <wsdl:message name="ILobbyManager_MandarMensaje_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MandarMensajeResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_BuscarLobbyDisponible_InputMessage">
-    <wsdl:part name="parameters" element="tns:BuscarLobbyDisponible" />
+  <wsdl:message name="ILobbyManager_BuscarSalaEsperaDisponible_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarSalaEsperaDisponible" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_BuscarLobbyDisponible_OutputMessage">
-    <wsdl:part name="parameters" element="tns:BuscarLobbyDisponibleResponse" />
+  <wsdl:message name="ILobbyManager_BuscarSalaEsperaDisponible_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarSalaEsperaDisponibleResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_StartGame_InputMessage">
-    <wsdl:part name="parameters" element="tns:StartGame" />
+  <wsdl:message name="ILobbyManager_IniciarPartida_InputMessage">
+    <wsdl:part name="parameters" element="tns:IniciarPartida" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyLobbyCreated_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyLobbyCreated" />
+  <wsdl:message name="ILobbyManager_NotificarSalaEsperaCreada_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarSalaEsperaCreada" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyLobbyCreated_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyLobbyCreatedResponse" />
+  <wsdl:message name="ILobbyManager_NotificarSalaEsperaCreada_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarSalaEsperaCreadaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyPlayersInLobby_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayersInLobby" />
+  <wsdl:message name="ILobbyManager_NotificarJugadoresEnSalaEspera_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarJugadoresEnSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyPlayersInLobby_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayersInLobbyResponse" />
+  <wsdl:message name="ILobbyManager_NotificarJugadoresEnSalaEspera_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarJugadoresEnSalaEsperaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyPlayerJoinToLobby_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerJoinToLobby" />
+  <wsdl:message name="ILobbyManager_NotificarJugadorSeUnioSalaEspera_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarJugadorSeUnioSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyPlayerJoinToLobby_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerJoinToLobbyResponse" />
+  <wsdl:message name="ILobbyManager_NotificarJugadorSeUnioSalaEspera_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarJugadorSeUnioSalaEsperaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyPlayerLeftLobby_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerLeftLobby" />
+  <wsdl:message name="ILobbyManager_NotificarJugadorSalioSalaEspera_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarJugadorSalioSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyPlayerLeftLobby_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerLeftLobbyResponse" />
+  <wsdl:message name="ILobbyManager_NotificarJugadorSalioSalaEspera_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarJugadorSalioSalaEsperaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyHostPlayerLeftLobby_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyHostPlayerLeftLobby" />
+  <wsdl:message name="ILobbyManager_NotificarAnfritionJugadorSalioSalaEspera_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarAnfritionJugadorSalioSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyHostPlayerLeftLobby_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyHostPlayerLeftLobbyResponse" />
+  <wsdl:message name="ILobbyManager_NotificarAnfritionJugadorSalioSalaEspera_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarAnfritionJugadorSalioSalaEsperaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyStartMatch_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyStartMatch" />
+  <wsdl:message name="ILobbyManager_NotificarIniciarPartida_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarIniciarPartida" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyStartMatch_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyStartMatchResponse" />
+  <wsdl:message name="ILobbyManager_NotificarIniciarPartida_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarIniciarPartidaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyLobbyIsFull_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyLobbyIsFull" />
+  <wsdl:message name="ILobbyManager_NotificarSalaEsperaLlena_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarSalaEsperaLlena" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyLobbyIsFull_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyLobbyIsFullResponse" />
+  <wsdl:message name="ILobbyManager_NotificarSalaEsperaLlena_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarSalaEsperaLlenaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyLobbyDoesNotExist_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyLobbyDoesNotExist" />
+  <wsdl:message name="ILobbyManager_NotificarSalaEsperaNoExiste_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarSalaEsperaNoExiste" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyLobbyDoesNotExist_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyLobbyDoesNotExistResponse" />
+  <wsdl:message name="ILobbyManager_NotificarSalaEsperaNoExiste_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarSalaEsperaNoExisteResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyExpulsedFromLobby_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyExpulsedFromLobby" />
+  <wsdl:message name="ILobbyManager_NotificarExpulsadoSalaEspera_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarExpulsadoSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyExpulsedFromLobby_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyExpulsedFromLobbyResponse" />
+  <wsdl:message name="ILobbyManager_NotificarExpulsadoSalaEspera_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarExpulsadoSalaEsperaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_ReceiveMessage_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReceiveMessage" />
+  <wsdl:message name="ILobbyManager_RecibirMensaje_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RecibirMensaje" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_ReceiveMessage_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ReceiveMessageResponse" />
+  <wsdl:message name="ILobbyManager_RecibirMensaje_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RecibirMensajeResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyCanStartGame_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyCanStartGame" />
+  <wsdl:message name="ILobbyManager_NotificarPuedeIniciarPartida_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarPuedeIniciarPartida" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotifyCanStartGame_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyCanStartGameResponse" />
+  <wsdl:message name="ILobbyManager_NotificarPuedeIniciarPartida_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarPuedeIniciarPartidaResponse" />
   </wsdl:message>
-  <wsdl:message name="IGestorAmistad_GetListUsernameFriends_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetListUsernameFriends" />
+  <wsdl:message name="IGestorAmistad_ObtenerListaNombresUsuariosAmigos_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerListaNombresUsuariosAmigos" />
   </wsdl:message>
-  <wsdl:message name="IGestorAmistad_GetListUsernameFriends_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetListUsernameFriendsResponse" />
+  <wsdl:message name="IGestorAmistad_ObtenerListaNombresUsuariosAmigos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerListaNombresUsuariosAmigosResponse" />
   </wsdl:message>
-  <wsdl:message name="IGestorAmistad_ValidateFriendRequestSending_InputMessage">
-    <wsdl:part name="parameters" element="tns:ValidateFriendRequestSending" />
+  <wsdl:message name="IGestorAmistad_ValidarEnvioSolicitudAmistad_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarEnvioSolicitudAmistad" />
   </wsdl:message>
-  <wsdl:message name="IGestorAmistad_ValidateFriendRequestSending_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ValidateFriendRequestSendingResponse" />
+  <wsdl:message name="IGestorAmistad_ValidarEnvioSolicitudAmistad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarEnvioSolicitudAmistadResponse" />
   </wsdl:message>
-  <wsdl:message name="IGestorAmistad_AddRequestFriendship_InputMessage">
-    <wsdl:part name="parameters" element="tns:AddRequestFriendship" />
+  <wsdl:message name="IGestorAmistad_AgregarSolicitudAmistad_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarSolicitudAmistad" />
   </wsdl:message>
-  <wsdl:message name="IGestorAmistad_AddRequestFriendship_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AddRequestFriendshipResponse" />
+  <wsdl:message name="IGestorAmistad_AgregarSolicitudAmistad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarSolicitudAmistadResponse" />
   </wsdl:message>
-  <wsdl:message name="IGestorAmistad_GetUsernamePlayersRequesters_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetUsernamePlayersRequesters" />
+  <wsdl:message name="IGestorAmistad_ObtenerNombresUsuariosSolicitantes_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerNombresUsuariosSolicitantes" />
   </wsdl:message>
-  <wsdl:message name="IGestorAmistad_GetUsernamePlayersRequesters_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetUsernamePlayersRequestersResponse" />
+  <wsdl:message name="IGestorAmistad_ObtenerNombresUsuariosSolicitantes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerNombresUsuariosSolicitantesResponse" />
   </wsdl:message>
-  <wsdl:message name="IGestorDeSolicitudesDeAmistad_AddToOnlineFriendshipDictionary_InputMessage">
-    <wsdl:part name="parameters" element="tns:AddToOnlineFriendshipDictionary" />
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_AgregarADiccionarioAmistadesEnLinea_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarADiccionarioAmistadesEnLinea" />
   </wsdl:message>
-  <wsdl:message name="IGestorDeSolicitudesDeAmistad_SendFriendRequest_InputMessage">
-    <wsdl:part name="parameters" element="tns:SendFriendRequest" />
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_EnviarSolicitudAmistad_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnviarSolicitudAmistad" />
   </wsdl:message>
-  <wsdl:message name="IGestorDeSolicitudesDeAmistad_AcceptFriendRequest_InputMessage">
-    <wsdl:part name="parameters" element="tns:AcceptFriendRequest" />
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_AceptarSolicitudAmistad_InputMessage">
+    <wsdl:part name="parameters" element="tns:AceptarSolicitudAmistad" />
   </wsdl:message>
-  <wsdl:message name="IGestorDeSolicitudesDeAmistad_RejectFriendRequest_InputMessage">
-    <wsdl:part name="parameters" element="tns:RejectFriendRequest" />
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_RechazarSolicitudAmistad_InputMessage">
+    <wsdl:part name="parameters" element="tns:RechazarSolicitudAmistad" />
   </wsdl:message>
-  <wsdl:message name="IGestorDeSolicitudesDeAmistad_DeleteFriend_InputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteFriend" />
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_EliminarAmigo_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarAmigo" />
   </wsdl:message>
-  <wsdl:message name="IGestorDeSolicitudesDeAmistad_RemoveFromOnlineFriendshipDictionary_InputMessage">
-    <wsdl:part name="parameters" element="tns:RemoveFromOnlineFriendshipDictionary" />
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_EliminarDeDiccionarioAmistadesEnLinea_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarDeDiccionarioAmistadesEnLinea" />
   </wsdl:message>
-  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotifyNewFriendRequest_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyNewFriendRequest" />
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotificarNuevaSolicitudAmistad_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarNuevaSolicitudAmistad" />
   </wsdl:message>
-  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotifyNewFriendRequest_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyNewFriendRequestResponse" />
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotificarNuevaSolicitudAmistad_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarNuevaSolicitudAmistadResponse" />
   </wsdl:message>
-  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotifyFriendRequestAccepted_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyFriendRequestAccepted" />
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotificarSolicitudAmistadAceptada_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarSolicitudAmistadAceptada" />
   </wsdl:message>
-  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotifyFriendRequestAccepted_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyFriendRequestAcceptedResponse" />
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotificarSolicitudAmistadAceptada_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarSolicitudAmistadAceptadaResponse" />
   </wsdl:message>
-  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotifyDeletedFriend_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyDeletedFriend" />
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotificarAmigoEliminado_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarAmigoEliminado" />
   </wsdl:message>
-  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotifyDeletedFriend_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyDeletedFriendResponse" />
+  <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotificarAmigoEliminado_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarAmigoEliminadoResponse" />
   </wsdl:message>
   <wsdl:message name="IGestorUsuariosConectados_RegisterUserToOnlineUsers_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterUserToOnlineUsers" />
@@ -341,123 +341,123 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ILobbyManager">
-    <wsdl:operation name="CreateLobby">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/CreateLobby" message="tns:ILobbyManager_CreateLobby_InputMessage" />
+    <wsdl:operation name="CrearSalaEspera">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/CrearSalaEspera" message="tns:ILobbyManager_CrearSalaEspera_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="JoinLobby">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/JoinLobby" message="tns:ILobbyManager_JoinLobby_InputMessage" />
+    <wsdl:operation name="UnirseSalaEspera">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/UnirseSalaEspera" message="tns:ILobbyManager_UnirseSalaEspera_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="JoinLobbyAsHost">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/JoinLobbyAsHost" message="tns:ILobbyManager_JoinLobbyAsHost_InputMessage" />
+    <wsdl:operation name="UnirSalaEsperaComoAnfitrion">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/UnirSalaEsperaComoAnfitrion" message="tns:ILobbyManager_UnirSalaEsperaComoAnfitrion_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ExitLobby">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/ExitLobby" message="tns:ILobbyManager_ExitLobby_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/ExitLobbyResponse" message="tns:ILobbyManager_ExitLobby_OutputMessage" />
+    <wsdl:operation name="SalirSalaEspera">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/SalirSalaEspera" message="tns:ILobbyManager_SalirSalaEspera_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/SalirSalaEsperaResponse" message="tns:ILobbyManager_SalirSalaEspera_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SendMessage">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/SendMessage" message="tns:ILobbyManager_SendMessage_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/SendMessageResponse" message="tns:ILobbyManager_SendMessage_OutputMessage" />
+    <wsdl:operation name="MandarMensaje">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/MandarMensaje" message="tns:ILobbyManager_MandarMensaje_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/MandarMensajeResponse" message="tns:ILobbyManager_MandarMensaje_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="BuscarLobbyDisponible">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/BuscarLobbyDisponible" message="tns:ILobbyManager_BuscarLobbyDisponible_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/BuscarLobbyDisponibleResponse" message="tns:ILobbyManager_BuscarLobbyDisponible_OutputMessage" />
+    <wsdl:operation name="BuscarSalaEsperaDisponible">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponible" message="tns:ILobbyManager_BuscarSalaEsperaDisponible_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponibleResponse" message="tns:ILobbyManager_BuscarSalaEsperaDisponible_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="StartGame">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/StartGame" message="tns:ILobbyManager_StartGame_InputMessage" />
+    <wsdl:operation name="IniciarPartida">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/IniciarPartida" message="tns:ILobbyManager_IniciarPartida_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyLobbyCreated">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotifyLobbyCreated" message="tns:ILobbyManager_NotifyLobbyCreated_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotifyLobbyCreatedResponse" message="tns:ILobbyManager_NotifyLobbyCreated_InputCallbackMessage" />
+    <wsdl:operation name="NotificarSalaEsperaCreada">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaCreada" message="tns:ILobbyManager_NotificarSalaEsperaCreada_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaCreadaResponse" message="tns:ILobbyManager_NotificarSalaEsperaCreada_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayersInLobby">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotifyPlayersInLobby" message="tns:ILobbyManager_NotifyPlayersInLobby_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotifyPlayersInLobbyResponse" message="tns:ILobbyManager_NotifyPlayersInLobby_InputCallbackMessage" />
+    <wsdl:operation name="NotificarJugadoresEnSalaEspera">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarJugadoresEnSalaEspera" message="tns:ILobbyManager_NotificarJugadoresEnSalaEspera_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarJugadoresEnSalaEsperaResponse" message="tns:ILobbyManager_NotificarJugadoresEnSalaEspera_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerJoinToLobby">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotifyPlayerJoinToLobby" message="tns:ILobbyManager_NotifyPlayerJoinToLobby_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotifyPlayerJoinToLobbyResponse" message="tns:ILobbyManager_NotifyPlayerJoinToLobby_InputCallbackMessage" />
+    <wsdl:operation name="NotificarJugadorSeUnioSalaEspera">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarJugadorSeUnioSalaEspera" message="tns:ILobbyManager_NotificarJugadorSeUnioSalaEspera_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarJugadorSeUnioSalaEsperaResponse" message="tns:ILobbyManager_NotificarJugadorSeUnioSalaEspera_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerLeftLobby">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotifyPlayerLeftLobby" message="tns:ILobbyManager_NotifyPlayerLeftLobby_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotifyPlayerLeftLobbyResponse" message="tns:ILobbyManager_NotifyPlayerLeftLobby_InputCallbackMessage" />
+    <wsdl:operation name="NotificarJugadorSalioSalaEspera">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarJugadorSalioSalaEspera" message="tns:ILobbyManager_NotificarJugadorSalioSalaEspera_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarJugadorSalioSalaEsperaResponse" message="tns:ILobbyManager_NotificarJugadorSalioSalaEspera_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyHostPlayerLeftLobby">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotifyHostPlayerLeftLobby" message="tns:ILobbyManager_NotifyHostPlayerLeftLobby_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotifyHostPlayerLeftLobbyResponse" message="tns:ILobbyManager_NotifyHostPlayerLeftLobby_InputCallbackMessage" />
+    <wsdl:operation name="NotificarAnfritionJugadorSalioSalaEspera">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarAnfritionJugadorSalioSalaEspera" message="tns:ILobbyManager_NotificarAnfritionJugadorSalioSalaEspera_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarAnfritionJugadorSalioSalaEsperaResponse" message="tns:ILobbyManager_NotificarAnfritionJugadorSalioSalaEspera_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyStartMatch">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotifyStartMatch" message="tns:ILobbyManager_NotifyStartMatch_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotifyStartMatchResponse" message="tns:ILobbyManager_NotifyStartMatch_InputCallbackMessage" />
+    <wsdl:operation name="NotificarIniciarPartida">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarIniciarPartida" message="tns:ILobbyManager_NotificarIniciarPartida_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarIniciarPartidaResponse" message="tns:ILobbyManager_NotificarIniciarPartida_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyLobbyIsFull">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotifyLobbyIsFull" message="tns:ILobbyManager_NotifyLobbyIsFull_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotifyLobbyIsFullResponse" message="tns:ILobbyManager_NotifyLobbyIsFull_InputCallbackMessage" />
+    <wsdl:operation name="NotificarSalaEsperaLlena">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaLlena" message="tns:ILobbyManager_NotificarSalaEsperaLlena_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaLlenaResponse" message="tns:ILobbyManager_NotificarSalaEsperaLlena_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyLobbyDoesNotExist">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotifyLobbyDoesNotExist" message="tns:ILobbyManager_NotifyLobbyDoesNotExist_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotifyLobbyDoesNotExistResponse" message="tns:ILobbyManager_NotifyLobbyDoesNotExist_InputCallbackMessage" />
+    <wsdl:operation name="NotificarSalaEsperaNoExiste">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaNoExiste" message="tns:ILobbyManager_NotificarSalaEsperaNoExiste_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaNoExisteResponse" message="tns:ILobbyManager_NotificarSalaEsperaNoExiste_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyExpulsedFromLobby">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobby" message="tns:ILobbyManager_NotifyExpulsedFromLobby_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobbyResponse" message="tns:ILobbyManager_NotifyExpulsedFromLobby_InputCallbackMessage" />
+    <wsdl:operation name="NotificarExpulsadoSalaEspera">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarExpulsadoSalaEspera" message="tns:ILobbyManager_NotificarExpulsadoSalaEspera_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarExpulsadoSalaEsperaResponse" message="tns:ILobbyManager_NotificarExpulsadoSalaEspera_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReceiveMessage">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/ReceiveMessage" message="tns:ILobbyManager_ReceiveMessage_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/ReceiveMessageResponse" message="tns:ILobbyManager_ReceiveMessage_InputCallbackMessage" />
+    <wsdl:operation name="RecibirMensaje">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/RecibirMensaje" message="tns:ILobbyManager_RecibirMensaje_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/RecibirMensajeResponse" message="tns:ILobbyManager_RecibirMensaje_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyCanStartGame">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotifyCanStartGame" message="tns:ILobbyManager_NotifyCanStartGame_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotifyCanStartGameResponse" message="tns:ILobbyManager_NotifyCanStartGame_InputCallbackMessage" />
+    <wsdl:operation name="NotificarPuedeIniciarPartida">
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarPuedeIniciarPartida" message="tns:ILobbyManager_NotificarPuedeIniciarPartida_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarPuedeIniciarPartidaResponse" message="tns:ILobbyManager_NotificarPuedeIniciarPartida_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IGestorAmistad">
-    <wsdl:operation name="GetListUsernameFriends">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorAmistad/GetListUsernameFriends" message="tns:IGestorAmistad_GetListUsernameFriends_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorAmistad/GetListUsernameFriendsResponse" message="tns:IGestorAmistad_GetListUsernameFriends_OutputMessage" />
+    <wsdl:operation name="ObtenerListaNombresUsuariosAmigos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorAmistad/ObtenerListaNombresUsuariosAmigos" message="tns:IGestorAmistad_ObtenerListaNombresUsuariosAmigos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorAmistad/ObtenerListaNombresUsuariosAmigosResponse" message="tns:IGestorAmistad_ObtenerListaNombresUsuariosAmigos_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ValidateFriendRequestSending">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSending" message="tns:IGestorAmistad_ValidateFriendRequestSending_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSendingResponse" message="tns:IGestorAmistad_ValidateFriendRequestSending_OutputMessage" />
+    <wsdl:operation name="ValidarEnvioSolicitudAmistad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorAmistad/ValidarEnvioSolicitudAmistad" message="tns:IGestorAmistad_ValidarEnvioSolicitudAmistad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorAmistad/ValidarEnvioSolicitudAmistadResponse" message="tns:IGestorAmistad_ValidarEnvioSolicitudAmistad_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="AddRequestFriendship">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorAmistad/AddRequestFriendship" message="tns:IGestorAmistad_AddRequestFriendship_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorAmistad/AddRequestFriendshipResponse" message="tns:IGestorAmistad_AddRequestFriendship_OutputMessage" />
+    <wsdl:operation name="AgregarSolicitudAmistad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorAmistad/AgregarSolicitudAmistad" message="tns:IGestorAmistad_AgregarSolicitudAmistad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorAmistad/AgregarSolicitudAmistadResponse" message="tns:IGestorAmistad_AgregarSolicitudAmistad_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetUsernamePlayersRequesters">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequesters" message="tns:IGestorAmistad_GetUsernamePlayersRequesters_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequestersResponse" message="tns:IGestorAmistad_GetUsernamePlayersRequesters_OutputMessage" />
+    <wsdl:operation name="ObtenerNombresUsuariosSolicitantes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorAmistad/ObtenerNombresUsuariosSolicitantes" message="tns:IGestorAmistad_ObtenerNombresUsuariosSolicitantes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorAmistad/ObtenerNombresUsuariosSolicitantesResponse" message="tns:IGestorAmistad_ObtenerNombresUsuariosSolicitantes_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IGestorDeSolicitudesDeAmistad">
-    <wsdl:operation name="AddToOnlineFriendshipDictionary">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AddToOnlineFriendshipDictionary" message="tns:IGestorDeSolicitudesDeAmistad_AddToOnlineFriendshipDictionary_InputMessage" />
+    <wsdl:operation name="AgregarADiccionarioAmistadesEnLinea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AgregarADiccionarioAmistadesEnLinea" message="tns:IGestorDeSolicitudesDeAmistad_AgregarADiccionarioAmistadesEnLinea_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SendFriendRequest">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/SendFriendRequest" message="tns:IGestorDeSolicitudesDeAmistad_SendFriendRequest_InputMessage" />
+    <wsdl:operation name="EnviarSolicitudAmistad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/EnviarSolicitudAmistad" message="tns:IGestorDeSolicitudesDeAmistad_EnviarSolicitudAmistad_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="AcceptFriendRequest">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AcceptFriendRequest" message="tns:IGestorDeSolicitudesDeAmistad_AcceptFriendRequest_InputMessage" />
+    <wsdl:operation name="AceptarSolicitudAmistad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AceptarSolicitudAmistad" message="tns:IGestorDeSolicitudesDeAmistad_AceptarSolicitudAmistad_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RejectFriendRequest">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RejectFriendRequest" message="tns:IGestorDeSolicitudesDeAmistad_RejectFriendRequest_InputMessage" />
+    <wsdl:operation name="RechazarSolicitudAmistad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RechazarSolicitudAmistad" message="tns:IGestorDeSolicitudesDeAmistad_RechazarSolicitudAmistad_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="DeleteFriend">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/DeleteFriend" message="tns:IGestorDeSolicitudesDeAmistad_DeleteFriend_InputMessage" />
+    <wsdl:operation name="EliminarAmigo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/EliminarAmigo" message="tns:IGestorDeSolicitudesDeAmistad_EliminarAmigo_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RemoveFromOnlineFriendshipDictionary">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RemoveFromOnlineFriendshipDictionary" message="tns:IGestorDeSolicitudesDeAmistad_RemoveFromOnlineFriendshipDictionary_InputMessage" />
+    <wsdl:operation name="EliminarDeDiccionarioAmistadesEnLinea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/EliminarDeDiccionarioAmistadesEnLinea" message="tns:IGestorDeSolicitudesDeAmistad_EliminarDeDiccionarioAmistadesEnLinea_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyNewFriendRequest">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyNewFriendRequest" message="tns:IGestorDeSolicitudesDeAmistad_NotifyNewFriendRequest_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyNewFriendRequestResponse" message="tns:IGestorDeSolicitudesDeAmistad_NotifyNewFriendRequest_InputCallbackMessage" />
+    <wsdl:operation name="NotificarNuevaSolicitudAmistad">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarNuevaSolicitudAmistad" message="tns:IGestorDeSolicitudesDeAmistad_NotificarNuevaSolicitudAmistad_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarNuevaSolicitudAmistadResponse" message="tns:IGestorDeSolicitudesDeAmistad_NotificarNuevaSolicitudAmistad_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyFriendRequestAccepted">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyFriendRequestAccepted" message="tns:IGestorDeSolicitudesDeAmistad_NotifyFriendRequestAccepted_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyFriendRequestAcceptedResponse" message="tns:IGestorDeSolicitudesDeAmistad_NotifyFriendRequestAccepted_InputCallbackMessage" />
+    <wsdl:operation name="NotificarSolicitudAmistadAceptada">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarSolicitudAmistadAceptada" message="tns:IGestorDeSolicitudesDeAmistad_NotificarSolicitudAmistadAceptada_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarSolicitudAmistadAceptadaResponse" message="tns:IGestorDeSolicitudesDeAmistad_NotificarSolicitudAmistadAceptada_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyDeletedFriend">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyDeletedFriend" message="tns:IGestorDeSolicitudesDeAmistad_NotifyDeletedFriend_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyDeletedFriendResponse" message="tns:IGestorDeSolicitudesDeAmistad_NotifyDeletedFriend_InputCallbackMessage" />
+    <wsdl:operation name="NotificarAmigoEliminado">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarAmigoEliminado" message="tns:IGestorDeSolicitudesDeAmistad_NotificarAmigoEliminado_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarAmigoEliminadoResponse" message="tns:IGestorDeSolicitudesDeAmistad_NotificarAmigoEliminado_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IGestorUsuariosConectados">
@@ -579,35 +579,26 @@
     <wsp:PolicyReference URI="#NetTcpBinding_ILobbyManager_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="CreateLobby">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/CreateLobby" style="document" />
+    <wsdl:operation name="CrearSalaEspera">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/CrearSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="JoinLobby">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/JoinLobby" style="document" />
+    <wsdl:operation name="UnirseSalaEspera">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/UnirseSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="JoinLobbyAsHost">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/JoinLobbyAsHost" style="document" />
+    <wsdl:operation name="UnirSalaEsperaComoAnfitrion">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/UnirSalaEsperaComoAnfitrion" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="ExitLobby">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/ExitLobby" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SendMessage">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/SendMessage" style="document" />
+    <wsdl:operation name="SalirSalaEspera">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/SalirSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -615,8 +606,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="BuscarLobbyDisponible">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/BuscarLobbyDisponible" style="document" />
+    <wsdl:operation name="MandarMensaje">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/MandarMensaje" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -624,14 +615,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="StartGame">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/StartGame" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="NotifyLobbyCreated">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotifyLobbyCreated" style="document" />
+    <wsdl:operation name="BuscarSalaEsperaDisponible">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponible" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -639,8 +624,14 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayersInLobby">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotifyPlayersInLobby" style="document" />
+    <wsdl:operation name="IniciarPartida">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/IniciarPartida" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarSalaEsperaCreada">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarSalaEsperaCreada" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -648,8 +639,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerJoinToLobby">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotifyPlayerJoinToLobby" style="document" />
+    <wsdl:operation name="NotificarJugadoresEnSalaEspera">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarJugadoresEnSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -657,8 +648,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerLeftLobby">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotifyPlayerLeftLobby" style="document" />
+    <wsdl:operation name="NotificarJugadorSeUnioSalaEspera">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarJugadorSeUnioSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -666,8 +657,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyHostPlayerLeftLobby">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotifyHostPlayerLeftLobby" style="document" />
+    <wsdl:operation name="NotificarJugadorSalioSalaEspera">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarJugadorSalioSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -675,8 +666,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyStartMatch">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotifyStartMatch" style="document" />
+    <wsdl:operation name="NotificarAnfritionJugadorSalioSalaEspera">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarAnfritionJugadorSalioSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -684,8 +675,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyLobbyIsFull">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotifyLobbyIsFull" style="document" />
+    <wsdl:operation name="NotificarIniciarPartida">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarIniciarPartida" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -693,8 +684,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyLobbyDoesNotExist">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotifyLobbyDoesNotExist" style="document" />
+    <wsdl:operation name="NotificarSalaEsperaLlena">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarSalaEsperaLlena" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -702,8 +693,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyExpulsedFromLobby">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobby" style="document" />
+    <wsdl:operation name="NotificarSalaEsperaNoExiste">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarSalaEsperaNoExiste" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -711,8 +702,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReceiveMessage">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/ReceiveMessage" style="document" />
+    <wsdl:operation name="NotificarExpulsadoSalaEspera">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarExpulsadoSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -720,8 +711,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyCanStartGame">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotifyCanStartGame" style="document" />
+    <wsdl:operation name="RecibirMensaje">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/RecibirMensaje" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarPuedeIniciarPartida">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarPuedeIniciarPartida" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -734,8 +734,8 @@
     <wsp:PolicyReference URI="#NetTcpBinding_IGestorAmistad_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="GetListUsernameFriends">
-      <soap12:operation soapAction="http://tempuri.org/IGestorAmistad/GetListUsernameFriends" style="document" />
+    <wsdl:operation name="ObtenerListaNombresUsuariosAmigos">
+      <soap12:operation soapAction="http://tempuri.org/IGestorAmistad/ObtenerListaNombresUsuariosAmigos" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -743,8 +743,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ValidateFriendRequestSending">
-      <soap12:operation soapAction="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSending" style="document" />
+    <wsdl:operation name="ValidarEnvioSolicitudAmistad">
+      <soap12:operation soapAction="http://tempuri.org/IGestorAmistad/ValidarEnvioSolicitudAmistad" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -752,8 +752,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AddRequestFriendship">
-      <soap12:operation soapAction="http://tempuri.org/IGestorAmistad/AddRequestFriendship" style="document" />
+    <wsdl:operation name="AgregarSolicitudAmistad">
+      <soap12:operation soapAction="http://tempuri.org/IGestorAmistad/AgregarSolicitudAmistad" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -761,8 +761,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetUsernamePlayersRequesters">
-      <soap12:operation soapAction="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequesters" style="document" />
+    <wsdl:operation name="ObtenerNombresUsuariosSolicitantes">
+      <soap12:operation soapAction="http://tempuri.org/IGestorAmistad/ObtenerNombresUsuariosSolicitantes" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -775,53 +775,44 @@
     <wsp:PolicyReference URI="#NetTcpBinding_IGestorDeSolicitudesDeAmistad_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="AddToOnlineFriendshipDictionary">
-      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AddToOnlineFriendshipDictionary" style="document" />
+    <wsdl:operation name="AgregarADiccionarioAmistadesEnLinea">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AgregarADiccionarioAmistadesEnLinea" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="SendFriendRequest">
-      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/SendFriendRequest" style="document" />
+    <wsdl:operation name="EnviarSolicitudAmistad">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/EnviarSolicitudAmistad" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="AcceptFriendRequest">
-      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AcceptFriendRequest" style="document" />
+    <wsdl:operation name="AceptarSolicitudAmistad">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AceptarSolicitudAmistad" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="RejectFriendRequest">
-      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RejectFriendRequest" style="document" />
+    <wsdl:operation name="RechazarSolicitudAmistad">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RechazarSolicitudAmistad" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="DeleteFriend">
-      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/DeleteFriend" style="document" />
+    <wsdl:operation name="EliminarAmigo">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/EliminarAmigo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="RemoveFromOnlineFriendshipDictionary">
-      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RemoveFromOnlineFriendshipDictionary" style="document" />
+    <wsdl:operation name="EliminarDeDiccionarioAmistadesEnLinea">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/EliminarDeDiccionarioAmistadesEnLinea" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="NotifyNewFriendRequest">
-      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyNewFriendRequest" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="NotifyFriendRequestAccepted">
-      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyFriendRequestAccepted" style="document" />
+    <wsdl:operation name="NotificarNuevaSolicitudAmistad">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarNuevaSolicitudAmistad" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -829,8 +820,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyDeletedFriend">
-      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyDeletedFriend" style="document" />
+    <wsdl:operation name="NotificarSolicitudAmistadAceptada">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarSolicitudAmistadAceptada" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarAmigoEliminado">
+      <soap12:operation soapAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarAmigoEliminado" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

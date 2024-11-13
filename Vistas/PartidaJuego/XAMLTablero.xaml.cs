@@ -30,29 +30,29 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             InitializeComponent();
         }
-        public void MostrarJugadores(List<LobbyPlayer> jugadores)
+        public void MostrarJugadores(List<JugadorSalaEspera> jugadores)
         {
             Console.WriteLine("Mostrando jugadores en la página de partida:");
             if (jugadores.Count > 0)
             {
-                Console.WriteLine($"Mostrando Jugador 2: {jugadores[0].Username}");
-                NombreJugador2.Text = jugadores[0].Username;
+                Console.WriteLine($"Mostrando Jugador 2: {jugadores[0].NombreUsuario}");
+                NombreJugador2.Text = jugadores[0].NombreUsuario;
                 string rutaImagen = ObtenerRutaImagenPerfil(jugadores[0].NumeroFotoPerfil);
                 Jugador2Imagen.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
                 AreaJugador2.Visibility = Visibility.Visible;
             }
             if (jugadores.Count > 1)
             {
-                Console.WriteLine($"Mostrando Jugador 3: {jugadores[1].Username}");
-                NombreJugador3.Text = jugadores[1].Username;
+                Console.WriteLine($"Mostrando Jugador 3: {jugadores[1].NombreUsuario}");
+                NombreJugador3.Text = jugadores[1].NombreUsuario;
                 string rutaImagen = ObtenerRutaImagenPerfil(jugadores[1].NumeroFotoPerfil);
                 Jugador3Imagen.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
                 AreaJugador3.Visibility = Visibility.Visible;
             }
             if (jugadores.Count > 2)
             {
-                Console.WriteLine($"Mostrando Jugador 4: {jugadores[2].Username}");
-                NombreJugador4.Text = jugadores[2].Username;
+                Console.WriteLine($"Mostrando Jugador 4: {jugadores[2].NombreUsuario}");
+                NombreJugador4.Text = jugadores[2].NombreUsuario;
                 string rutaImagen = ObtenerRutaImagenPerfil(jugadores[2].NumeroFotoPerfil);
                 Jugador4Imagen.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
                 AreaJugador4.Visibility = Visibility.Visible;

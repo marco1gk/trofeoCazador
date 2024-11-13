@@ -8,16 +8,15 @@ using trofeoCazador.ServicioDelJuego;
 using System.ServiceModel;
 using System.Windows.Input;
 using trofeoCazador.Vistas.PartidaJuego;
+using trofeoCazador.Vistas.InicioSesion;
 
 namespace trofeoCazador.Vistas.SalaEspera
 {
-    /// <summary>
-    /// Lógica de interacción para XAMLSalaEspera.xaml
-    /// </summary>
+
     public partial class XAMLSalaEspera : Page, ILobbyManagerCallback
     {
         private LobbyManagerClient client;
-        private string codigoLobbyActual;
+        private string codigoSalaEsperaActual;
 
         public XAMLSalaEspera()
         {
@@ -28,13 +27,13 @@ namespace trofeoCazador.Vistas.SalaEspera
         private async void BtnCrearLobby_Click(object sender, RoutedEventArgs e)
         {
             SingletonSesion sesion = SingletonSesion.Instancia;
-            string username = sesion.NombreUsuario;
-            LobbyPlayer lb = new LobbyPlayer { Username = username };
+            string nombreUsuario = sesion.NombreUsuario;
+            JugadorSalaEspera lb = new JugadorSalaEspera { NombreUsuario = nombreUsuario };
 
             try
             {
                 // Crear un lobby nuevo
-                client.CreateLobby(lb);
+                client.CrearSalaEspera(lb);
                 MessageBox.Show("Se ha creado un nuevo lobby.");
             }
             catch (Exception ex)
@@ -47,7 +46,7 @@ namespace trofeoCazador.Vistas.SalaEspera
         {
             SingletonSesion sesion = SingletonSesion.Instancia;
             string username = sesion.NombreUsuario;
-            LobbyPlayer lb = new LobbyPlayer { Username = username };
+            JugadorSalaEspera lb = new JugadorSalaEspera { NombreUsuario = username };
 
             // Mostrar el campo de texto para que el usuario introduzca el código del lobby
             txtCodigoLobby.Visibility = Visibility.Visible;
@@ -64,7 +63,7 @@ namespace trofeoCazador.Vistas.SalaEspera
             try
             {
                 // Intentar unirse a un lobby existente con el código proporcionado
-                client.JoinLobby(codigoLobby, lb);
+                client.UnirseSalaEspera(codigoLobby, lb);
                 MessageBox.Show($"Unido al lobby con código: {codigoLobby}");
             }
             catch (Exception ex)
@@ -80,7 +79,7 @@ namespace trofeoCazador.Vistas.SalaEspera
         {
             SingletonSesion sesion = SingletonSesion.Instancia;
             string username = sesion.NombreUsuario;
-            LobbyPlayer lb = new LobbyPlayer { Username = username };
+            JugadorSalaEspera lb = new JugadorSalaEspera { NombreUsuario = username };
 
             try
             {
@@ -93,7 +92,7 @@ namespace trofeoCazador.Vistas.SalaEspera
                // }
                 //else
                 //{
-                    client.CreateLobby(lb);
+                    client.CrearSalaEspera(lb);
                     MessageBox.Show("No se encontró un lobby, creando uno nuevo.");
                 //}
             }
@@ -111,7 +110,7 @@ namespace trofeoCazador.Vistas.SalaEspera
                 try
                 {
                     // Llama al servicio para obtener el código del primer lobby disponible
-                    return client.BuscarLobbyDisponible();
+                    return client.BuscarSalaEsperaDisponible();
                 }
                 catch (Exception)
                 {
@@ -120,7 +119,7 @@ namespace trofeoCazador.Vistas.SalaEspera
             });
         }
 
-        private async void BtnSendMessage_Click(object sender, RoutedEventArgs e)
+        private async void BtnEnviarMensaje(object sender, RoutedEventArgs e)
         {
             string message = tbxMessage.Text.Trim();
 
@@ -137,7 +136,7 @@ namespace trofeoCazador.Vistas.SalaEspera
                     SetupClient(); 
                 }
 
-                await Task.Run(() => client.SendMessage(message)); 
+                await Task.Run(() => client.MandarMensaje(message)); 
                 tbxMessage.Clear();
             }
             catch (Exception ex)
@@ -146,10 +145,10 @@ namespace trofeoCazador.Vistas.SalaEspera
             }
         }
 
-        public void JoinExistingLobby(string lobbyCode, string username)
+        public void UnirseSalaEsperaExistente(string lobbyCode, string username)
         {
-            LobbyPlayer newPlayer = new LobbyPlayer { Username = username };
-            client.JoinLobby(lobbyCode, newPlayer);
+            JugadorSalaEspera newPlayer = new JugadorSalaEspera { NombreUsuario = username };
+            client.UnirseSalaEspera(lobbyCode, newPlayer);
         }
 
       
@@ -160,11 +159,11 @@ namespace trofeoCazador.Vistas.SalaEspera
             client = new LobbyManagerClient(instanceContext);
         }
 
-        public void JoinLobbyAsHost(string lobbyCode)
+        public void UnirseSalaEsperaComoHost(string lobbyCode)
         {
             try
             {
-                client.JoinLobbyAsHost(lobbyCode);
+                client.UnirSalaEsperaComoAnfitrion(lobbyCode);
                 MessageBox.Show($"Intentando unirse al lobby {lobbyCode} como anfitrión...");
             }
             catch (Exception ex)
@@ -173,11 +172,11 @@ namespace trofeoCazador.Vistas.SalaEspera
             }
         }
 
-        public void ExitLobby(string lobbyCode, string username)
+        public void SalirSalaEspera(string lobbyCode, string username)
         {
             try
             {
-                client.ExitLobby(lobbyCode, username);
+                client.SalirSalaEspera(lobbyCode, username);
                 MessageBox.Show($"{username} ha salido del lobby {lobbyCode}.");
             }
             catch (Exception ex)
@@ -187,27 +186,27 @@ namespace trofeoCazador.Vistas.SalaEspera
         }
 
         
-        public void NotifyLobbyCreated(string lobbyCode)
+        public void NotificarSalaEsperaCreada(string lobbyCode)
         {
-            codigoLobbyActual = lobbyCode;
+            codigoSalaEsperaActual = lobbyCode;
             MessageBox.Show($"Lobby creado con el código: {lobbyCode}");
             btnIniciarPartida.Visibility = Visibility.Visible;
         }
 
-        public void NotifyPlayersInLobby(string lobbyCode, List<LobbyPlayer> lobbyPlayers)
+        public void NotificarJugadoresEnSalaEspera(string lobbyCode, List<JugadorSalaEspera> lobbyPlayers)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                MessageBox.Show($"Jugadores en el lobby {lobbyCode}: {string.Join(", ", lobbyPlayers.Select(p => p.Username))}");
+                MessageBox.Show($"Jugadores en el lobby {lobbyCode}: {string.Join(", ", lobbyPlayers.Select(p => p.NombreUsuario))}");
             });
         }
 
-        public void NotifyPlayerJoinToLobby(LobbyPlayer lobbyPlayer, int numOfPlayersInLobby)
+        public void NotificarJugadorSeUnioSalaEspera(JugadorSalaEspera lobbyPlayer, int numOfPlayersInLobby)
         {
-            MessageBox.Show($"{lobbyPlayer.Username} se unió. Jugadores en el lobby: {numOfPlayersInLobby}");
+            MessageBox.Show($"{lobbyPlayer.NombreUsuario} se unió. Jugadores en el lobby: {numOfPlayersInLobby}");
         }
 
-        public void NotifyPlayerLeftLobby(string username)
+        public void NotificarJugadorSalioSalaEspera(string username)
         {
             MessageBox.Show($"{username} ha salido del lobby.");
         }
@@ -217,35 +216,35 @@ namespace trofeoCazador.Vistas.SalaEspera
             MessageBox.Show("El anfitrión ha dejado el lobby.");
         }
 
-        public void NotifyStartMatch(LobbyPlayer[] jugadores)
+        public void NotificarIniciarPartida(JugadorSalaEspera[] jugadores)
         {
             Console.WriteLine("Jugadores recibidos en el cliente:");
             foreach (var jugador in jugadores)
             {
-                Console.WriteLine($"Jugador: {jugador.Username}");
+                Console.WriteLine($"Jugador: {jugador.NombreUsuario}");
             }
 
             XAMLTablero tablero = new XAMLTablero();
-            tablero.MostrarJugadores(jugadores.ToList());
+            //tablero.MostrarJugadores(jugadores.ToList());
             this.NavigationService.Navigate(tablero);
         }
 
-        public void NotifyLobbyIsFull()
+        public void NotificarSalaEsperaLlena()
         {
             MessageBox.Show("El lobby está lleno.");
         }
 
-        public void NotifyLobbyDoesNotExist()
+        public void NotificarSalaEsperaNoExiste()
         {
             MessageBox.Show("El lobby no existe.");
         }
 
-        public void NotifyExpulsedFromLobby()
+        public void NotificarExpulsadoSalaEspera()
         {
             MessageBox.Show("Has sido expulsado del lobby.");
         }
 
-        public void ReceiveMessage(string username, string message)
+        public void RecibirMensaje(string username, string message)
         {
             Dispatcher.Invoke(() =>
             {
@@ -254,7 +253,7 @@ namespace trofeoCazador.Vistas.SalaEspera
             });
         }
 
-        public void NotifyPlayersInLobby(string lobbyCode, LobbyPlayer[] lobbyPlayers)
+        public void NotificarJugadoresEnSalaEspera(string lobbyCode, JugadorSalaEspera[] lobbyPlayers)
         {
             
             Dispatcher.Invoke(() =>
@@ -263,12 +262,12 @@ namespace trofeoCazador.Vistas.SalaEspera
 
                 foreach (var player in lobbyPlayers)
                 {
-                    stackPanelMessages.Children.Add(new TextBlock { Text = $"{player.Username} está en el lobby {lobbyCode}" });
+                    stackPanelMessages.Children.Add(new TextBlock { Text = $"{player.NombreUsuario} está en el lobby {lobbyCode}" });
                 }
             });
         }
 
-        public void NotifyCanStartGame(bool canStart)
+        public void NotificarPuedeIniciarPartida(bool canStart)
         {
             // Se hace visible el boton una vez que haya al menos 2 jugadores
             Dispatcher.Invoke(() => {
@@ -278,11 +277,11 @@ namespace trofeoCazador.Vistas.SalaEspera
 
         private async void BtnClicIniciarPartida(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(codigoLobbyActual))
+            if (!string.IsNullOrEmpty(codigoSalaEsperaActual))
             {
                 try
                 {
-                    await Task.Run(() => client.StartGame(codigoLobbyActual));
+                    await Task.Run(() => client.IniciarPartida(codigoSalaEsperaActual));
                     
                 }
                 catch (Exception ex)
@@ -294,6 +293,12 @@ namespace trofeoCazador.Vistas.SalaEspera
             {
                 MessageBox.Show("Código de lobby no disponible. Asegúrate de haber creado o unido a un lobby.");
             }
+        }
+
+        public void NotificarAnfritionJugadorSalioSalaEspera()
+        {
+     
+            NavigationService.Navigate(new XAMLInicioSesion());
         }
     }
 }

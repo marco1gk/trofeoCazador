@@ -18,12 +18,6 @@ namespace trofeoCazador.Utilidades
         private const string MINUSCULAS_VALIDAS = "^(?=.*[a-z])";
         private const string NUMEROS_VALIDOS = "^(?=.*\\d)";
 
-        public static bool EsInformacionPersonalValida(string informacionPersonal)
-        {
-            Regex regex = new Regex(INFORMACION_PERSONAL_VALIDA);
-
-            return regex.IsMatch(informacionPersonal.Trim());
-        }
 
         public static bool EsNombreUsuarioValido(string nombreUsuario)
         {

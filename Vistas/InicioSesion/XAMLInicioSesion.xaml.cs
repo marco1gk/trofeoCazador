@@ -7,9 +7,7 @@ using trofeoCazador.Utilidades;
 
 namespace trofeoCazador.Vistas.InicioSesion
 {
-    /// <summary>
-    /// Interaction logic for XAMLInicioSesion.xaml
-    /// </summary>
+ 
     public partial class XAMLInicioSesion : Page
     {
         private const string FUENTE_SECUNDARIA = "Inter";
@@ -88,7 +86,7 @@ namespace trofeoCazador.Vistas.InicioSesion
 
             return esValido;
         }
-        private void TbxUsername_GotFocus(object sender, RoutedEventArgs e)
+        private void TbxUsuarioObtenerFoco(object sender, RoutedEventArgs e)
         {
             if (UsuarioTextBox.Text == (string)UsuarioTextBox.Tag)
             {
@@ -98,7 +96,7 @@ namespace trofeoCazador.Vistas.InicioSesion
                 UsuarioTextBox.FontWeight = FontWeights.Bold;
             }
         }
-        private void TbxUsername_LostFocus(object sender, RoutedEventArgs e)
+        private void TbxUsuarioPerderFoco(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(UsuarioTextBox.Text))
             {
@@ -106,7 +104,7 @@ namespace trofeoCazador.Vistas.InicioSesion
             }
         }
 
-        private void PwBxPassword_GotFocus(object sender, RoutedEventArgs e)
+        private void PbContraseñaObtenerFoco(object sender, RoutedEventArgs e)
         {
             if (ContrasenaPasswordBox.Password == (string)ContrasenaPasswordBox.Tag)
             {
@@ -115,7 +113,7 @@ namespace trofeoCazador.Vistas.InicioSesion
             }
         }
 
-        private void PwBxPassword_LostFocus(object sender, RoutedEventArgs e)
+        private void PbContraseñaPerderFoco(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(ContrasenaPasswordBox.Password))
             {

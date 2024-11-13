@@ -124,18 +124,18 @@ namespace trofeoCazador.ServicioDelJuego {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="LobbyPlayer", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="JugadorSalaEspera", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego")]
     [System.SerializableAttribute()]
-    public partial class LobbyPlayer : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class JugadorSalaEspera : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int NumeroFotoPerfilField;
+        private string NombreUsuarioField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UsernameField;
+        private int NumeroFotoPerfilField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -148,6 +148,19 @@ namespace trofeoCazador.ServicioDelJuego {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NombreUsuario {
+            get {
+                return this.NombreUsuarioField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NombreUsuarioField, value) != true)) {
+                    this.NombreUsuarioField = value;
+                    this.RaisePropertyChanged("NombreUsuario");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int NumeroFotoPerfil {
             get {
                 return this.NumeroFotoPerfilField;
@@ -156,19 +169,6 @@ namespace trofeoCazador.ServicioDelJuego {
                 if ((this.NumeroFotoPerfilField.Equals(value) != true)) {
                     this.NumeroFotoPerfilField = value;
                     this.RaisePropertyChanged("NumeroFotoPerfil");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Username {
-            get {
-                return this.UsernameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
-                    this.UsernameField = value;
-                    this.RaisePropertyChanged("Username");
                 }
             }
         }
@@ -360,84 +360,85 @@ namespace trofeoCazador.ServicioDelJuego {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.ILobbyManager", CallbackContract=typeof(trofeoCazador.ServicioDelJuego.ILobbyManagerCallback))]
     public interface ILobbyManager {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/CreateLobby")]
-        void CreateLobby(trofeoCazador.ServicioDelJuego.LobbyPlayer jugador);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/CrearSalaEspera")]
+        void CrearSalaEspera(trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/CreateLobby")]
-        System.Threading.Tasks.Task CreateLobbyAsync(trofeoCazador.ServicioDelJuego.LobbyPlayer jugador);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/CrearSalaEspera")]
+        System.Threading.Tasks.Task CrearSalaEsperaAsync(trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/JoinLobby")]
-        void JoinLobby(string lobbyCode, trofeoCazador.ServicioDelJuego.LobbyPlayer lobbyPlayer);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/UnirseSalaEspera")]
+        void UnirseSalaEspera(string codigoSalaEspera, trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/JoinLobby")]
-        System.Threading.Tasks.Task JoinLobbyAsync(string lobbyCode, trofeoCazador.ServicioDelJuego.LobbyPlayer lobbyPlayer);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/UnirseSalaEspera")]
+        System.Threading.Tasks.Task UnirseSalaEsperaAsync(string codigoSalaEspera, trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/JoinLobbyAsHost")]
-        void JoinLobbyAsHost(string lobbyCode);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/UnirSalaEsperaComoAnfitrion")]
+        void UnirSalaEsperaComoAnfitrion(string codigoSalaEspera);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/JoinLobbyAsHost")]
-        System.Threading.Tasks.Task JoinLobbyAsHostAsync(string lobbyCode);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/UnirSalaEsperaComoAnfitrion")]
+        System.Threading.Tasks.Task UnirSalaEsperaComoAnfitrionAsync(string codigoSalaEspera);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ExitLobby", ReplyAction="http://tempuri.org/ILobbyManager/ExitLobbyResponse")]
-        void ExitLobby(string lobbyCode, string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/SalirSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/SalirSalaEsperaResponse")]
+        void SalirSalaEspera(string codigoSalaEspera, string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ExitLobby", ReplyAction="http://tempuri.org/ILobbyManager/ExitLobbyResponse")]
-        System.Threading.Tasks.Task ExitLobbyAsync(string lobbyCode, string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/SalirSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/SalirSalaEsperaResponse")]
+        System.Threading.Tasks.Task SalirSalaEsperaAsync(string codigoSalaEspera, string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/SendMessage", ReplyAction="http://tempuri.org/ILobbyManager/SendMessageResponse")]
-        void SendMessage(string mensaje);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/MandarMensaje", ReplyAction="http://tempuri.org/ILobbyManager/MandarMensajeResponse")]
+        void MandarMensaje(string mensaje);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/SendMessage", ReplyAction="http://tempuri.org/ILobbyManager/SendMessageResponse")]
-        System.Threading.Tasks.Task SendMessageAsync(string mensaje);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/MandarMensaje", ReplyAction="http://tempuri.org/ILobbyManager/MandarMensajeResponse")]
+        System.Threading.Tasks.Task MandarMensajeAsync(string mensaje);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/BuscarLobbyDisponible", ReplyAction="http://tempuri.org/ILobbyManager/BuscarLobbyDisponibleResponse")]
-        string BuscarLobbyDisponible();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponible", ReplyAction="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponibleResponse")]
+        string BuscarSalaEsperaDisponible();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/BuscarLobbyDisponible", ReplyAction="http://tempuri.org/ILobbyManager/BuscarLobbyDisponibleResponse")]
-        System.Threading.Tasks.Task<string> BuscarLobbyDisponibleAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponible", ReplyAction="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponibleResponse")]
+        System.Threading.Tasks.Task<string> BuscarSalaEsperaDisponibleAsync();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/StartGame")]
-        void StartGame(string lobbyCode);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/IniciarPartida")]
+        void IniciarPartida(string codigoSalaEspera);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/StartGame")]
-        System.Threading.Tasks.Task StartGameAsync(string lobbyCode);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/IniciarPartida")]
+        System.Threading.Tasks.Task IniciarPartidaAsync(string codigoSalaEspera);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ILobbyManagerCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyLobbyCreated", ReplyAction="http://tempuri.org/ILobbyManager/NotifyLobbyCreatedResponse")]
-        void NotifyLobbyCreated(string lobbyCode);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaCreada", ReplyAction="http://tempuri.org/ILobbyManager/NotificarSalaEsperaCreadaResponse")]
+        void NotificarSalaEsperaCreada(string codigoSalaEspera);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyPlayersInLobby", ReplyAction="http://tempuri.org/ILobbyManager/NotifyPlayersInLobbyResponse")]
-        void NotifyPlayersInLobby(string lobbyCode, trofeoCazador.ServicioDelJuego.LobbyPlayer[] lobbyPlayers);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarJugadoresEnSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/NotificarJugadoresEnSalaEsperaResponse")]
+        void NotificarJugadoresEnSalaEspera(string codigoSalaEspera, trofeoCazador.ServicioDelJuego.JugadorSalaEspera[] jugador);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyPlayerJoinToLobby", ReplyAction="http://tempuri.org/ILobbyManager/NotifyPlayerJoinToLobbyResponse")]
-        void NotifyPlayerJoinToLobby(trofeoCazador.ServicioDelJuego.LobbyPlayer lobbyPlayer, int numOfPlayersInLobby);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarJugadorSeUnioSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/NotificarJugadorSeUnioSalaEsperaResponse")]
+        void NotificarJugadorSeUnioSalaEspera(trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador, int numeroJugadoresSalaEspera);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyPlayerLeftLobby", ReplyAction="http://tempuri.org/ILobbyManager/NotifyPlayerLeftLobbyResponse")]
-        void NotifyPlayerLeftLobby(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarJugadorSalioSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/NotificarJugadorSalioSalaEsperaResponse")]
+        void NotificarJugadorSalioSalaEspera(string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyHostPlayerLeftLobby", ReplyAction="http://tempuri.org/ILobbyManager/NotifyHostPlayerLeftLobbyResponse")]
-        void NotifyHostPlayerLeftLobby();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarAnfritionJugadorSalioSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/NotificarAnfritionJugadorSalioSalaEsperaResponse" +
+            "")]
+        void NotificarAnfritionJugadorSalioSalaEspera();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyStartMatch", ReplyAction="http://tempuri.org/ILobbyManager/NotifyStartMatchResponse")]
-        void NotifyStartMatch(trofeoCazador.ServicioDelJuego.LobbyPlayer[] jugadores);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarIniciarPartida", ReplyAction="http://tempuri.org/ILobbyManager/NotificarIniciarPartidaResponse")]
+        void NotificarIniciarPartida(trofeoCazador.ServicioDelJuego.JugadorSalaEspera[] jugadores);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyLobbyIsFull", ReplyAction="http://tempuri.org/ILobbyManager/NotifyLobbyIsFullResponse")]
-        void NotifyLobbyIsFull();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaLlena", ReplyAction="http://tempuri.org/ILobbyManager/NotificarSalaEsperaLlenaResponse")]
+        void NotificarSalaEsperaLlena();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyLobbyDoesNotExist", ReplyAction="http://tempuri.org/ILobbyManager/NotifyLobbyDoesNotExistResponse")]
-        void NotifyLobbyDoesNotExist();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaNoExiste", ReplyAction="http://tempuri.org/ILobbyManager/NotificarSalaEsperaNoExisteResponse")]
+        void NotificarSalaEsperaNoExiste();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobby", ReplyAction="http://tempuri.org/ILobbyManager/NotifyExpulsedFromLobbyResponse")]
-        void NotifyExpulsedFromLobby();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarExpulsadoSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/NotificarExpulsadoSalaEsperaResponse")]
+        void NotificarExpulsadoSalaEspera();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ReceiveMessage", ReplyAction="http://tempuri.org/ILobbyManager/ReceiveMessageResponse")]
-        void ReceiveMessage(string username, string message);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/RecibirMensaje", ReplyAction="http://tempuri.org/ILobbyManager/RecibirMensajeResponse")]
+        void RecibirMensaje(string nombreUsuario, string mensaje);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotifyCanStartGame", ReplyAction="http://tempuri.org/ILobbyManager/NotifyCanStartGameResponse")]
-        void NotifyCanStartGame(bool canStart);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarPuedeIniciarPartida", ReplyAction="http://tempuri.org/ILobbyManager/NotificarPuedeIniciarPartidaResponse")]
+        void NotificarPuedeIniciarPartida(bool puedeIniciar);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -468,60 +469,60 @@ namespace trofeoCazador.ServicioDelJuego {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void CreateLobby(trofeoCazador.ServicioDelJuego.LobbyPlayer jugador) {
-            base.Channel.CreateLobby(jugador);
+        public void CrearSalaEspera(trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador) {
+            base.Channel.CrearSalaEspera(jugador);
         }
         
-        public System.Threading.Tasks.Task CreateLobbyAsync(trofeoCazador.ServicioDelJuego.LobbyPlayer jugador) {
-            return base.Channel.CreateLobbyAsync(jugador);
+        public System.Threading.Tasks.Task CrearSalaEsperaAsync(trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador) {
+            return base.Channel.CrearSalaEsperaAsync(jugador);
         }
         
-        public void JoinLobby(string lobbyCode, trofeoCazador.ServicioDelJuego.LobbyPlayer lobbyPlayer) {
-            base.Channel.JoinLobby(lobbyCode, lobbyPlayer);
+        public void UnirseSalaEspera(string codigoSalaEspera, trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador) {
+            base.Channel.UnirseSalaEspera(codigoSalaEspera, jugador);
         }
         
-        public System.Threading.Tasks.Task JoinLobbyAsync(string lobbyCode, trofeoCazador.ServicioDelJuego.LobbyPlayer lobbyPlayer) {
-            return base.Channel.JoinLobbyAsync(lobbyCode, lobbyPlayer);
+        public System.Threading.Tasks.Task UnirseSalaEsperaAsync(string codigoSalaEspera, trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador) {
+            return base.Channel.UnirseSalaEsperaAsync(codigoSalaEspera, jugador);
         }
         
-        public void JoinLobbyAsHost(string lobbyCode) {
-            base.Channel.JoinLobbyAsHost(lobbyCode);
+        public void UnirSalaEsperaComoAnfitrion(string codigoSalaEspera) {
+            base.Channel.UnirSalaEsperaComoAnfitrion(codigoSalaEspera);
         }
         
-        public System.Threading.Tasks.Task JoinLobbyAsHostAsync(string lobbyCode) {
-            return base.Channel.JoinLobbyAsHostAsync(lobbyCode);
+        public System.Threading.Tasks.Task UnirSalaEsperaComoAnfitrionAsync(string codigoSalaEspera) {
+            return base.Channel.UnirSalaEsperaComoAnfitrionAsync(codigoSalaEspera);
         }
         
-        public void ExitLobby(string lobbyCode, string username) {
-            base.Channel.ExitLobby(lobbyCode, username);
+        public void SalirSalaEspera(string codigoSalaEspera, string nombreUsuario) {
+            base.Channel.SalirSalaEspera(codigoSalaEspera, nombreUsuario);
         }
         
-        public System.Threading.Tasks.Task ExitLobbyAsync(string lobbyCode, string username) {
-            return base.Channel.ExitLobbyAsync(lobbyCode, username);
+        public System.Threading.Tasks.Task SalirSalaEsperaAsync(string codigoSalaEspera, string nombreUsuario) {
+            return base.Channel.SalirSalaEsperaAsync(codigoSalaEspera, nombreUsuario);
         }
         
-        public void SendMessage(string mensaje) {
-            base.Channel.SendMessage(mensaje);
+        public void MandarMensaje(string mensaje) {
+            base.Channel.MandarMensaje(mensaje);
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(string mensaje) {
-            return base.Channel.SendMessageAsync(mensaje);
+        public System.Threading.Tasks.Task MandarMensajeAsync(string mensaje) {
+            return base.Channel.MandarMensajeAsync(mensaje);
         }
         
-        public string BuscarLobbyDisponible() {
-            return base.Channel.BuscarLobbyDisponible();
+        public string BuscarSalaEsperaDisponible() {
+            return base.Channel.BuscarSalaEsperaDisponible();
         }
         
-        public System.Threading.Tasks.Task<string> BuscarLobbyDisponibleAsync() {
-            return base.Channel.BuscarLobbyDisponibleAsync();
+        public System.Threading.Tasks.Task<string> BuscarSalaEsperaDisponibleAsync() {
+            return base.Channel.BuscarSalaEsperaDisponibleAsync();
         }
         
-        public void StartGame(string lobbyCode) {
-            base.Channel.StartGame(lobbyCode);
+        public void IniciarPartida(string codigoSalaEspera) {
+            base.Channel.IniciarPartida(codigoSalaEspera);
         }
         
-        public System.Threading.Tasks.Task StartGameAsync(string lobbyCode) {
-            return base.Channel.StartGameAsync(lobbyCode);
+        public System.Threading.Tasks.Task IniciarPartidaAsync(string codigoSalaEspera) {
+            return base.Channel.IniciarPartidaAsync(codigoSalaEspera);
         }
     }
     
@@ -529,29 +530,29 @@ namespace trofeoCazador.ServicioDelJuego {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IGestorAmistad")]
     public interface IGestorAmistad {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/GetListUsernameFriends", ReplyAction="http://tempuri.org/IGestorAmistad/GetListUsernameFriendsResponse")]
-        string[] GetListUsernameFriends(int idPlayer);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ObtenerListaNombresUsuariosAmigos", ReplyAction="http://tempuri.org/IGestorAmistad/ObtenerListaNombresUsuariosAmigosResponse")]
+        string[] ObtenerListaNombresUsuariosAmigos(int idPlayer);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/GetListUsernameFriends", ReplyAction="http://tempuri.org/IGestorAmistad/GetListUsernameFriendsResponse")]
-        System.Threading.Tasks.Task<string[]> GetListUsernameFriendsAsync(int idPlayer);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ObtenerListaNombresUsuariosAmigos", ReplyAction="http://tempuri.org/IGestorAmistad/ObtenerListaNombresUsuariosAmigosResponse")]
+        System.Threading.Tasks.Task<string[]> ObtenerListaNombresUsuariosAmigosAsync(int idPlayer);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSending", ReplyAction="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSendingResponse")]
-        bool ValidateFriendRequestSending(int idPlayerSender, string usernamePlayerRequested);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ValidarEnvioSolicitudAmistad", ReplyAction="http://tempuri.org/IGestorAmistad/ValidarEnvioSolicitudAmistadResponse")]
+        bool ValidarEnvioSolicitudAmistad(int idPlayerSender, string usernamePlayerRequested);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSending", ReplyAction="http://tempuri.org/IGestorAmistad/ValidateFriendRequestSendingResponse")]
-        System.Threading.Tasks.Task<bool> ValidateFriendRequestSendingAsync(int idPlayerSender, string usernamePlayerRequested);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ValidarEnvioSolicitudAmistad", ReplyAction="http://tempuri.org/IGestorAmistad/ValidarEnvioSolicitudAmistadResponse")]
+        System.Threading.Tasks.Task<bool> ValidarEnvioSolicitudAmistadAsync(int idPlayerSender, string usernamePlayerRequested);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/AddRequestFriendship", ReplyAction="http://tempuri.org/IGestorAmistad/AddRequestFriendshipResponse")]
-        int AddRequestFriendship(int idPlayerSender, string usernamePlayerRequested);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/AgregarSolicitudAmistad", ReplyAction="http://tempuri.org/IGestorAmistad/AgregarSolicitudAmistadResponse")]
+        int AgregarSolicitudAmistad(int idPlayerSender, string usernamePlayerRequested);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/AddRequestFriendship", ReplyAction="http://tempuri.org/IGestorAmistad/AddRequestFriendshipResponse")]
-        System.Threading.Tasks.Task<int> AddRequestFriendshipAsync(int idPlayerSender, string usernamePlayerRequested);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/AgregarSolicitudAmistad", ReplyAction="http://tempuri.org/IGestorAmistad/AgregarSolicitudAmistadResponse")]
+        System.Threading.Tasks.Task<int> AgregarSolicitudAmistadAsync(int idPlayerSender, string usernamePlayerRequested);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequesters", ReplyAction="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequestersResponse")]
-        string[] GetUsernamePlayersRequesters(int idPlayer);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ObtenerNombresUsuariosSolicitantes", ReplyAction="http://tempuri.org/IGestorAmistad/ObtenerNombresUsuariosSolicitantesResponse")]
+        string[] ObtenerNombresUsuariosSolicitantes(int idPlayer);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequesters", ReplyAction="http://tempuri.org/IGestorAmistad/GetUsernamePlayersRequestersResponse")]
-        System.Threading.Tasks.Task<string[]> GetUsernamePlayersRequestersAsync(int idPlayer);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ObtenerNombresUsuariosSolicitantes", ReplyAction="http://tempuri.org/IGestorAmistad/ObtenerNombresUsuariosSolicitantesResponse")]
+        System.Threading.Tasks.Task<string[]> ObtenerNombresUsuariosSolicitantesAsync(int idPlayer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -581,36 +582,36 @@ namespace trofeoCazador.ServicioDelJuego {
                 base(binding, remoteAddress) {
         }
         
-        public string[] GetListUsernameFriends(int idPlayer) {
-            return base.Channel.GetListUsernameFriends(idPlayer);
+        public string[] ObtenerListaNombresUsuariosAmigos(int idPlayer) {
+            return base.Channel.ObtenerListaNombresUsuariosAmigos(idPlayer);
         }
         
-        public System.Threading.Tasks.Task<string[]> GetListUsernameFriendsAsync(int idPlayer) {
-            return base.Channel.GetListUsernameFriendsAsync(idPlayer);
+        public System.Threading.Tasks.Task<string[]> ObtenerListaNombresUsuariosAmigosAsync(int idPlayer) {
+            return base.Channel.ObtenerListaNombresUsuariosAmigosAsync(idPlayer);
         }
         
-        public bool ValidateFriendRequestSending(int idPlayerSender, string usernamePlayerRequested) {
-            return base.Channel.ValidateFriendRequestSending(idPlayerSender, usernamePlayerRequested);
+        public bool ValidarEnvioSolicitudAmistad(int idPlayerSender, string usernamePlayerRequested) {
+            return base.Channel.ValidarEnvioSolicitudAmistad(idPlayerSender, usernamePlayerRequested);
         }
         
-        public System.Threading.Tasks.Task<bool> ValidateFriendRequestSendingAsync(int idPlayerSender, string usernamePlayerRequested) {
-            return base.Channel.ValidateFriendRequestSendingAsync(idPlayerSender, usernamePlayerRequested);
+        public System.Threading.Tasks.Task<bool> ValidarEnvioSolicitudAmistadAsync(int idPlayerSender, string usernamePlayerRequested) {
+            return base.Channel.ValidarEnvioSolicitudAmistadAsync(idPlayerSender, usernamePlayerRequested);
         }
         
-        public int AddRequestFriendship(int idPlayerSender, string usernamePlayerRequested) {
-            return base.Channel.AddRequestFriendship(idPlayerSender, usernamePlayerRequested);
+        public int AgregarSolicitudAmistad(int idPlayerSender, string usernamePlayerRequested) {
+            return base.Channel.AgregarSolicitudAmistad(idPlayerSender, usernamePlayerRequested);
         }
         
-        public System.Threading.Tasks.Task<int> AddRequestFriendshipAsync(int idPlayerSender, string usernamePlayerRequested) {
-            return base.Channel.AddRequestFriendshipAsync(idPlayerSender, usernamePlayerRequested);
+        public System.Threading.Tasks.Task<int> AgregarSolicitudAmistadAsync(int idPlayerSender, string usernamePlayerRequested) {
+            return base.Channel.AgregarSolicitudAmistadAsync(idPlayerSender, usernamePlayerRequested);
         }
         
-        public string[] GetUsernamePlayersRequesters(int idPlayer) {
-            return base.Channel.GetUsernamePlayersRequesters(idPlayer);
+        public string[] ObtenerNombresUsuariosSolicitantes(int idPlayer) {
+            return base.Channel.ObtenerNombresUsuariosSolicitantes(idPlayer);
         }
         
-        public System.Threading.Tasks.Task<string[]> GetUsernamePlayersRequestersAsync(int idPlayer) {
-            return base.Channel.GetUsernamePlayersRequestersAsync(idPlayer);
+        public System.Threading.Tasks.Task<string[]> ObtenerNombresUsuariosSolicitantesAsync(int idPlayer) {
+            return base.Channel.ObtenerNombresUsuariosSolicitantesAsync(idPlayer);
         }
     }
     
@@ -618,57 +619,61 @@ namespace trofeoCazador.ServicioDelJuego {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IGestorDeSolicitudesDeAmistad", CallbackContract=typeof(trofeoCazador.ServicioDelJuego.IGestorDeSolicitudesDeAmistadCallback))]
     public interface IGestorDeSolicitudesDeAmistad {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AddToOnlineFriendshipDictionary")]
-        void AddToOnlineFriendshipDictionary(string usernameCurrentPlayer);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AgregarADiccionarioAmistadesEnLi" +
+            "nea")]
+        void AgregarADiccionarioAmistadesEnLinea(string nombreUsuarioDeActualJugador);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AddToOnlineFriendshipDictionary")]
-        System.Threading.Tasks.Task AddToOnlineFriendshipDictionaryAsync(string usernameCurrentPlayer);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AgregarADiccionarioAmistadesEnLi" +
+            "nea")]
+        System.Threading.Tasks.Task AgregarADiccionarioAmistadesEnLineaAsync(string nombreUsuarioDeActualJugador);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/SendFriendRequest")]
-        void SendFriendRequest(string usernamePlayerSender, string usernamePlayerRequested);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/EnviarSolicitudAmistad")]
+        void EnviarSolicitudAmistad(string nombreUsuarioJugadorRemitente, string nombreUsuarioJugadorSolicitado);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/SendFriendRequest")]
-        System.Threading.Tasks.Task SendFriendRequestAsync(string usernamePlayerSender, string usernamePlayerRequested);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/EnviarSolicitudAmistad")]
+        System.Threading.Tasks.Task EnviarSolicitudAmistadAsync(string nombreUsuarioJugadorRemitente, string nombreUsuarioJugadorSolicitado);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AcceptFriendRequest")]
-        void AcceptFriendRequest(int idPlayerRequested, string usernamePlayerRequested, string usernamePlayerSender);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AceptarSolicitudAmistad")]
+        void AceptarSolicitudAmistad(int idJugadorSolicitado, string nombreUsuarioJugadorSolicitado, string nombreUsuarioJugadorRemitente);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AcceptFriendRequest")]
-        System.Threading.Tasks.Task AcceptFriendRequestAsync(int idPlayerRequested, string usernamePlayerRequested, string usernamePlayerSender);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/AceptarSolicitudAmistad")]
+        System.Threading.Tasks.Task AceptarSolicitudAmistadAsync(int idJugadorSolicitado, string nombreUsuarioJugadorSolicitado, string nombreUsuarioJugadorRemitente);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RejectFriendRequest")]
-        void RejectFriendRequest(int idCurrentPlayer, string username);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RechazarSolicitudAmistad")]
+        void RechazarSolicitudAmistad(int idJugadorActual, string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RejectFriendRequest")]
-        System.Threading.Tasks.Task RejectFriendRequestAsync(int idCurrentPlayer, string username);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RechazarSolicitudAmistad")]
+        System.Threading.Tasks.Task RechazarSolicitudAmistadAsync(int idJugadorActual, string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/DeleteFriend")]
-        void DeleteFriend(int idCurrentPlayer, string usernameCurrentPlayer, string usernameFriendDeleted);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/EliminarAmigo")]
+        void EliminarAmigo(int idJugadorActual, string nombreUsuarioDeActualJugador, string nombreUsuarioAmigoEliminado);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/DeleteFriend")]
-        System.Threading.Tasks.Task DeleteFriendAsync(int idCurrentPlayer, string usernameCurrentPlayer, string usernameFriendDeleted);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/EliminarAmigo")]
+        System.Threading.Tasks.Task EliminarAmigoAsync(int idJugadorActual, string nombreUsuarioDeActualJugador, string nombreUsuarioAmigoEliminado);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RemoveFromOnlineFriendshipDictio" +
-            "nary")]
-        void RemoveFromOnlineFriendshipDictionary(string username);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/EliminarDeDiccionarioAmistadesEn" +
+            "Linea")]
+        void EliminarDeDiccionarioAmistadesEnLinea(string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/RemoveFromOnlineFriendshipDictio" +
-            "nary")]
-        System.Threading.Tasks.Task RemoveFromOnlineFriendshipDictionaryAsync(string username);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/EliminarDeDiccionarioAmistadesEn" +
+            "Linea")]
+        System.Threading.Tasks.Task EliminarDeDiccionarioAmistadesEnLineaAsync(string nombreUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IGestorDeSolicitudesDeAmistadCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyNewFriendRequest", ReplyAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyNewFriendRequestResponse")]
-        void NotifyNewFriendRequest(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarNuevaSolicitudAmistad", ReplyAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarNuevaSolicitudAmistadRe" +
+            "sponse")]
+        void NotificarNuevaSolicitudAmistad(string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyFriendRequestAccepted", ReplyAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyFriendRequestAcceptedRespo" +
-            "nse")]
-        void NotifyFriendRequestAccepted(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarSolicitudAmistadAceptad" +
+            "a", ReplyAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarSolicitudAmistadAceptad" +
+            "aResponse")]
+        void NotificarSolicitudAmistadAceptada(string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyDeletedFriend", ReplyAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotifyDeletedFriendResponse")]
-        void NotifyDeletedFriend(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarAmigoEliminado", ReplyAction="http://tempuri.org/IGestorDeSolicitudesDeAmistad/NotificarAmigoEliminadoResponse")]
+        void NotificarAmigoEliminado(string nombreUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -699,52 +704,52 @@ namespace trofeoCazador.ServicioDelJuego {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void AddToOnlineFriendshipDictionary(string usernameCurrentPlayer) {
-            base.Channel.AddToOnlineFriendshipDictionary(usernameCurrentPlayer);
+        public void AgregarADiccionarioAmistadesEnLinea(string nombreUsuarioDeActualJugador) {
+            base.Channel.AgregarADiccionarioAmistadesEnLinea(nombreUsuarioDeActualJugador);
         }
         
-        public System.Threading.Tasks.Task AddToOnlineFriendshipDictionaryAsync(string usernameCurrentPlayer) {
-            return base.Channel.AddToOnlineFriendshipDictionaryAsync(usernameCurrentPlayer);
+        public System.Threading.Tasks.Task AgregarADiccionarioAmistadesEnLineaAsync(string nombreUsuarioDeActualJugador) {
+            return base.Channel.AgregarADiccionarioAmistadesEnLineaAsync(nombreUsuarioDeActualJugador);
         }
         
-        public void SendFriendRequest(string usernamePlayerSender, string usernamePlayerRequested) {
-            base.Channel.SendFriendRequest(usernamePlayerSender, usernamePlayerRequested);
+        public void EnviarSolicitudAmistad(string nombreUsuarioJugadorRemitente, string nombreUsuarioJugadorSolicitado) {
+            base.Channel.EnviarSolicitudAmistad(nombreUsuarioJugadorRemitente, nombreUsuarioJugadorSolicitado);
         }
         
-        public System.Threading.Tasks.Task SendFriendRequestAsync(string usernamePlayerSender, string usernamePlayerRequested) {
-            return base.Channel.SendFriendRequestAsync(usernamePlayerSender, usernamePlayerRequested);
+        public System.Threading.Tasks.Task EnviarSolicitudAmistadAsync(string nombreUsuarioJugadorRemitente, string nombreUsuarioJugadorSolicitado) {
+            return base.Channel.EnviarSolicitudAmistadAsync(nombreUsuarioJugadorRemitente, nombreUsuarioJugadorSolicitado);
         }
         
-        public void AcceptFriendRequest(int idPlayerRequested, string usernamePlayerRequested, string usernamePlayerSender) {
-            base.Channel.AcceptFriendRequest(idPlayerRequested, usernamePlayerRequested, usernamePlayerSender);
+        public void AceptarSolicitudAmistad(int idJugadorSolicitado, string nombreUsuarioJugadorSolicitado, string nombreUsuarioJugadorRemitente) {
+            base.Channel.AceptarSolicitudAmistad(idJugadorSolicitado, nombreUsuarioJugadorSolicitado, nombreUsuarioJugadorRemitente);
         }
         
-        public System.Threading.Tasks.Task AcceptFriendRequestAsync(int idPlayerRequested, string usernamePlayerRequested, string usernamePlayerSender) {
-            return base.Channel.AcceptFriendRequestAsync(idPlayerRequested, usernamePlayerRequested, usernamePlayerSender);
+        public System.Threading.Tasks.Task AceptarSolicitudAmistadAsync(int idJugadorSolicitado, string nombreUsuarioJugadorSolicitado, string nombreUsuarioJugadorRemitente) {
+            return base.Channel.AceptarSolicitudAmistadAsync(idJugadorSolicitado, nombreUsuarioJugadorSolicitado, nombreUsuarioJugadorRemitente);
         }
         
-        public void RejectFriendRequest(int idCurrentPlayer, string username) {
-            base.Channel.RejectFriendRequest(idCurrentPlayer, username);
+        public void RechazarSolicitudAmistad(int idJugadorActual, string nombreUsuario) {
+            base.Channel.RechazarSolicitudAmistad(idJugadorActual, nombreUsuario);
         }
         
-        public System.Threading.Tasks.Task RejectFriendRequestAsync(int idCurrentPlayer, string username) {
-            return base.Channel.RejectFriendRequestAsync(idCurrentPlayer, username);
+        public System.Threading.Tasks.Task RechazarSolicitudAmistadAsync(int idJugadorActual, string nombreUsuario) {
+            return base.Channel.RechazarSolicitudAmistadAsync(idJugadorActual, nombreUsuario);
         }
         
-        public void DeleteFriend(int idCurrentPlayer, string usernameCurrentPlayer, string usernameFriendDeleted) {
-            base.Channel.DeleteFriend(idCurrentPlayer, usernameCurrentPlayer, usernameFriendDeleted);
+        public void EliminarAmigo(int idJugadorActual, string nombreUsuarioDeActualJugador, string nombreUsuarioAmigoEliminado) {
+            base.Channel.EliminarAmigo(idJugadorActual, nombreUsuarioDeActualJugador, nombreUsuarioAmigoEliminado);
         }
         
-        public System.Threading.Tasks.Task DeleteFriendAsync(int idCurrentPlayer, string usernameCurrentPlayer, string usernameFriendDeleted) {
-            return base.Channel.DeleteFriendAsync(idCurrentPlayer, usernameCurrentPlayer, usernameFriendDeleted);
+        public System.Threading.Tasks.Task EliminarAmigoAsync(int idJugadorActual, string nombreUsuarioDeActualJugador, string nombreUsuarioAmigoEliminado) {
+            return base.Channel.EliminarAmigoAsync(idJugadorActual, nombreUsuarioDeActualJugador, nombreUsuarioAmigoEliminado);
         }
         
-        public void RemoveFromOnlineFriendshipDictionary(string username) {
-            base.Channel.RemoveFromOnlineFriendshipDictionary(username);
+        public void EliminarDeDiccionarioAmistadesEnLinea(string nombreUsuario) {
+            base.Channel.EliminarDeDiccionarioAmistadesEnLinea(nombreUsuario);
         }
         
-        public System.Threading.Tasks.Task RemoveFromOnlineFriendshipDictionaryAsync(string username) {
-            return base.Channel.RemoveFromOnlineFriendshipDictionaryAsync(username);
+        public System.Threading.Tasks.Task EliminarDeDiccionarioAmistadesEnLineaAsync(string nombreUsuario) {
+            return base.Channel.EliminarDeDiccionarioAmistadesEnLineaAsync(nombreUsuario);
         }
     }
     

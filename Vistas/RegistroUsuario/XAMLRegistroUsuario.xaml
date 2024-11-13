@@ -22,7 +22,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label Content="Selecciona una imagen de perfil:" FontWeight="Bold" HorizontalAlignment="Left" Margin="317,58,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <ComboBox Name="cbImagenPerfil" HorizontalAlignment="Left" Margin="530,58,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectionChanged="CbImagenPerfil_SelectionChanged">
+        <ComboBox Name="cbImagenPerfil" HorizontalAlignment="Left" Margin="530,58,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" SelectionChanged="CbImagenPerfil_Seleccion">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

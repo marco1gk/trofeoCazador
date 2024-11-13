@@ -34,11 +34,11 @@
 
                 <TextBlock Text="Solicitudes de Amistad" FontWeight="Bold" FontSize="18" Margin="0,0,0,10" Foreground="#00796B" Grid.Row="0"/>
 
-                <ScrollViewer x:Name="scrollViewerFriendsRequest" VerticalScrollBarVisibility="Auto" Height="300" Grid.Row="1">
+                <ScrollViewer x:Name="vistaDesplazableSolicitudesAmistad" VerticalScrollBarVisibility="Auto" Height="300" Grid.Row="1">
                     <StackPanel x:Name="stackPanelFriendsRequest" />
                 </ScrollViewer>
 
-                <Button Content="Ver Solicitudes de Amistad" Click="BtnFriendsRequest_Click" Margin="0,10,0,0" Width="200" HorizontalAlignment="Center" Background="#00796B" Foreground="White" BorderBrush="Transparent" BorderThickness="1" Padding="10" Grid.Row="2"/>
+                <Button Content="Ver Solicitudes de Amistad" Click="BtnSolicitudDeAmigos_Click" Margin="0,10,0,0" Width="200" HorizontalAlignment="Center" Background="#00796B" Foreground="White" BorderBrush="Transparent" BorderThickness="1" Padding="10" Grid.Row="2" Height="38" VerticalAlignment="Top"/>
             </Grid>
         </Border>
 
@@ -53,11 +53,11 @@
 
                 <TextBlock Text="Lista de Amigos" FontWeight="Bold" FontSize="18" Margin="0,0,0,10" Foreground="#00796B" Grid.Row="0"/>
 
-                <ScrollViewer x:Name="scrollViewerFriends" VerticalScrollBarVisibility="Auto" Height="300" Grid.Row="1">
+                <ScrollViewer x:Name="vistaDesplazableAmigos" VerticalScrollBarVisibility="Auto" Height="300" Grid.Row="1">
                     <StackPanel x:Name="stackPanelFriends" />
                 </ScrollViewer>
 
-                <Button Content="Ver Amigos" Click="BtnFriends_Click" Margin="0,348,0,2" Width="200" HorizontalAlignment="Center" Background="#00796B" Foreground="White" BorderBrush="Transparent" BorderThickness="1" Padding="10" Grid.Row="1"/>
+                <Button Content="Ver Amigos" Click="BtnAmigos_Click" Margin="0,348,0,0" Width="200" HorizontalAlignment="Center" Background="#00796B" Foreground="White" BorderBrush="Transparent" BorderThickness="1" Padding="10" Grid.Row="1" Height="37" VerticalAlignment="Top"/>
             </Grid>
         </Border>
 
@@ -65,9 +65,9 @@
         <Border Grid.Row="2" Grid.ColumnSpan="2" Margin="10" Padding="20" Background="White" CornerRadius="10" BorderBrush="#B2DFDB" BorderThickness="1">
             <StackPanel HorizontalAlignment="Center">
                 <TextBlock Text="Enviar Solicitud de Amistad" FontWeight="Bold" FontSize="18" Margin="0,0,0,10" Foreground="#00796B"/>
-                <TextBox x:Name="tbxUsernameSendRequest" Width="300" Text="" Margin="0,5,0,5" Padding="5" BorderBrush="#00796B" BorderThickness="1"/>
-                <TextBlock x:Name="lbFriendRequestUsernameError" Text="Error: Usuario no válido o solicitud ya enviada." Foreground="Red" Visibility="Hidden" Margin="0,5,0,10"/>
-                <Button Content="Enviar Solicitud" Click="BtnSendRequest_Click" Width="200" Margin="0,10,0,0" HorizontalAlignment="Center" Background="#00796B" Foreground="White" BorderBrush="Transparent" BorderThickness="1" Padding="10"/>
+                <TextBox x:Name="tbxNombreDeUsuarioEnviarSolicitud" Width="300" Text="" Margin="0,5,0,5" Padding="5" BorderBrush="#00796B" BorderThickness="1"/>
+                <TextBlock x:Name="lbErrorNombreDeUsuarioSolicitudAmistad" Text="Error: Usuario no válido o solicitud ya enviada." Foreground="Red" Visibility="Hidden" Margin="0,5,0,10"/>
+                <Button Content="Enviar Solicitud" Click="BtnEnviarSolicitud_Click" Width="200" Margin="0,10,0,0" HorizontalAlignment="Center" Background="#00796B" Foreground="White" BorderBrush="Transparent" BorderThickness="1" Padding="10"/>
             </StackPanel>
         </Border>
     </Grid>

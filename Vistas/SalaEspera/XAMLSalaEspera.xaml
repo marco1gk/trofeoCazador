@@ -38,7 +38,7 @@
 
             <Rectangle Fill="white" RadiusX="12" RadiusY="12" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,10,10"/>
             <Image Source="/Recursos/enviarMensaje.png" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="30" Height="30" Margin="10,0,15,15"/>
-            <Button Background="Transparent" Click="BtnSendMessage_Click" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,10,10" BorderBrush="Transparent"/>
+            <Button Background="Transparent" Click="BtnEnviarMensaje" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,10,10" BorderBrush="Transparent"/>
 
             <Rectangle Fill="White" RadiusX="12" RadiusY="12" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,60,10" Width="160" />
             <TextBox x:Name="tbxMessage" FontFamily="Inter" FontSize="14" VerticalContentAlignment="Center" Margin="10,305,0,10" Width="160" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" />

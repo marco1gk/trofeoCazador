@@ -11,8 +11,8 @@
     <Grid>
         <Label x:Name="lbUsername" Content="username" Foreground="White" FontSize="16" FontFamily="Inter" FontWeight="Bold" Margin="6,10,6,0" VerticalAlignment="Top"/>
 
-        <Image HorizontalAlignment="Left"  MouseLeftButtonDown="ImgAcceptFriendRequest_Click" Height="26" Margin="164,14,0,0" VerticalAlignment="Top" Width="24" Source="/Recursos/acceptFriendRequestIcon.png" Cursor="Hand" RenderTransformOrigin="1.938,0.359"/>
-        <Image HorizontalAlignment="Left" MouseLeftButtonDown="ImgRejectFriendRequest_Click" Height="22" Margin="203,14,0,0" VerticalAlignment="Top" Width="20" Source="/Recursos/rejectFriendRequestIcon.png.png" Cursor="Hand"/>
+        <Image HorizontalAlignment="Left"  MouseLeftButtonDown="ImgAceptarSolicitudAmistad_Click" Height="26" Margin="164,14,0,0" VerticalAlignment="Top" Width="24" Source="/Recursos/acceptFriendRequestIcon.png" Cursor="Hand" RenderTransformOrigin="1.938,0.359"/>
+        <Image HorizontalAlignment="Left" MouseLeftButtonDown="ImgRechazarSolicitudAmistad_Click" Height="22" Margin="203,14,0,0" VerticalAlignment="Top" Width="20" Source="/Recursos/rejectFriendRequestIcon.png.png" Cursor="Hand"/>
         <Label Content="" HorizontalAlignment="Left" Margin="134,30,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Inter" FontSize="8" Height="22"/>
         <Label Content="" HorizontalAlignment="Left" Margin="183,32,0,0" VerticalAlignment="Top" FontSize="8" FontFamily="Inter" Foreground="White"/>
 

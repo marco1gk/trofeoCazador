@@ -25,7 +25,7 @@ namespace trofeoCazador.Vistas.Amigos
         public XAMLAmigos()
         {
             InitializeComponent();
-            motrarDatosALV();
+            MostrarDatos();
         }
 
         public void BtnCloseFriendsMenu_Click(object sender, RoutedEventArgs e)
@@ -41,17 +41,17 @@ namespace trofeoCazador.Vistas.Amigos
 
 
 
-        private void motrarDatosALV()
+        private void MostrarDatos()
         {
-            bool areSuccessMethods = false;
+            bool exito = false;
 
             try
             {
-                LoadPlayerFriends();
-                ShowAsActiveUser();
+                CargarAmigosJugador();
+              MostrarComoUsuarioActivo();
               
 
-                areSuccessMethods = true;
+                exito = true;
             }
             catch (EndpointNotFoundException ex)
             {

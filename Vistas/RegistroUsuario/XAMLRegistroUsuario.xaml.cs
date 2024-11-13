@@ -20,9 +20,6 @@ using trofeoCazador.VentanasReutilizables;
 
 namespace trofeoCazador.Vistas.RegistroUsuario
 {
-    /// <summary>
-    /// Interaction logic for XAMLRegistroUsuario.xaml
-    /// </summary>
     public partial class XAMLRegistroUsuario : Page
     {
         public XAMLRegistroUsuario()
@@ -38,7 +35,7 @@ namespace trofeoCazador.Vistas.RegistroUsuario
 
             cbImagenPerfil.ItemsSource = imagenesPerfil;
         }
-        private void CbImagenPerfil_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CbImagenPerfil_Seleccion(object sender, SelectionChangedEventArgs e)
         {
             ImagenPerfil seleccionada = (ImagenPerfil)cbImagenPerfil.SelectedItem;
             if (seleccionada != null)
@@ -110,7 +107,7 @@ namespace trofeoCazador.Vistas.RegistroUsuario
         public string ValidarCampos()
         {
             StringBuilder errores = new StringBuilder();
-            ValidadPropiedadesContraseña();
+            ValidarPropiedadesContraseña();
 
             if (!UtilidadesDeValidacion.EsCorreoValido(tbCorreo.Text.Trim()))
             {
@@ -133,7 +130,7 @@ namespace trofeoCazador.Vistas.RegistroUsuario
 
             return errores.ToString();
         }
-        private void ValidadPropiedadesContraseña()
+        private void ValidarPropiedadesContraseña()
         {
 
             lbRequerimientoLongitud.Foreground = Brushes.Red;
@@ -169,13 +166,6 @@ namespace trofeoCazador.Vistas.RegistroUsuario
 
 
 
-    }
-
-    public class ImagenPerfil
-    {
-        public int Id { get; set; } 
-        public string NombreImagen { get; set; } 
-        public string RutaImagen { get; set; } 
     }
 
 }

@@ -147,214 +147,214 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CreateLobby">
+  <xs:element name="CrearSalaEspera">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugador" nillable="true" type="q4:LobbyPlayer" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugador" nillable="true" type="q4:JugadorSalaEspera" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="JoinLobby">
+  <xs:element name="UnirseSalaEspera">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="lobbyCode" nillable="true" type="xs:string" />
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="lobbyPlayer" nillable="true" type="q5:LobbyPlayer" />
+        <xs:element minOccurs="0" name="codigoSalaEspera" nillable="true" type="xs:string" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugador" nillable="true" type="q5:JugadorSalaEspera" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="JoinLobbyAsHost">
+  <xs:element name="UnirSalaEsperaComoAnfitrion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="lobbyCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="codigoSalaEspera" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ExitLobby">
+  <xs:element name="SalirSalaEspera">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="lobbyCode" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="codigoSalaEspera" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ExitLobbyResponse">
+  <xs:element name="SalirSalaEsperaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="SendMessage">
+  <xs:element name="MandarMensaje">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="mensaje" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SendMessageResponse">
+  <xs:element name="MandarMensajeResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="BuscarLobbyDisponible">
+  <xs:element name="BuscarSalaEsperaDisponible">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="BuscarLobbyDisponibleResponse">
+  <xs:element name="BuscarSalaEsperaDisponibleResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="BuscarLobbyDisponibleResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="BuscarSalaEsperaDisponibleResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="StartGame">
+  <xs:element name="IniciarPartida">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="lobbyCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="codigoSalaEspera" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyLobbyCreated">
+  <xs:element name="NotificarSalaEsperaCreada">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="lobbyCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="codigoSalaEspera" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyLobbyCreatedResponse">
+  <xs:element name="NotificarSalaEsperaCreadaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyPlayersInLobby">
+  <xs:element name="NotificarJugadoresEnSalaEspera">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="lobbyCode" nillable="true" type="xs:string" />
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="lobbyPlayers" nillable="true" type="q6:ArrayOfLobbyPlayer" />
+        <xs:element minOccurs="0" name="codigoSalaEspera" nillable="true" type="xs:string" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugador" nillable="true" type="q6:ArrayOfJugadorSalaEspera" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyPlayersInLobbyResponse">
+  <xs:element name="NotificarJugadoresEnSalaEsperaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyPlayerJoinToLobby">
+  <xs:element name="NotificarJugadorSeUnioSalaEspera">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="lobbyPlayer" nillable="true" type="q7:LobbyPlayer" />
-        <xs:element minOccurs="0" name="numOfPlayersInLobby" type="xs:int" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugador" nillable="true" type="q7:JugadorSalaEspera" />
+        <xs:element minOccurs="0" name="numeroJugadoresSalaEspera" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyPlayerJoinToLobbyResponse">
+  <xs:element name="NotificarJugadorSeUnioSalaEsperaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyPlayerLeftLobby">
+  <xs:element name="NotificarJugadorSalioSalaEspera">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyPlayerLeftLobbyResponse">
+  <xs:element name="NotificarJugadorSalioSalaEsperaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyHostPlayerLeftLobby">
+  <xs:element name="NotificarAnfritionJugadorSalioSalaEspera">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyHostPlayerLeftLobbyResponse">
+  <xs:element name="NotificarAnfritionJugadorSalioSalaEsperaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyStartMatch">
+  <xs:element name="NotificarIniciarPartida">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugadores" nillable="true" type="q8:ArrayOfLobbyPlayer" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugadores" nillable="true" type="q8:ArrayOfJugadorSalaEspera" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyStartMatchResponse">
+  <xs:element name="NotificarIniciarPartidaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyLobbyIsFull">
+  <xs:element name="NotificarSalaEsperaLlena">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyLobbyIsFullResponse">
+  <xs:element name="NotificarSalaEsperaLlenaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyLobbyDoesNotExist">
+  <xs:element name="NotificarSalaEsperaNoExiste">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyLobbyDoesNotExistResponse">
+  <xs:element name="NotificarSalaEsperaNoExisteResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyExpulsedFromLobby">
+  <xs:element name="NotificarExpulsadoSalaEspera">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyExpulsedFromLobbyResponse">
+  <xs:element name="NotificarExpulsadoSalaEsperaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="ReceiveMessage">
+  <xs:element name="RecibirMensaje">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mensaje" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ReceiveMessageResponse">
+  <xs:element name="RecibirMensajeResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyCanStartGame">
+  <xs:element name="NotificarPuedeIniciarPartida">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="canStart" type="xs:boolean" />
+        <xs:element minOccurs="0" name="puedeIniciar" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyCanStartGameResponse">
+  <xs:element name="NotificarPuedeIniciarPartidaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetListUsernameFriends">
+  <xs:element name="ObtenerListaNombresUsuariosAmigos">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idPlayer" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetListUsernameFriendsResponse">
+  <xs:element name="ObtenerListaNombresUsuariosAmigosResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetListUsernameFriendsResult" nillable="true" type="q9:ArrayOfstring" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerListaNombresUsuariosAmigosResult" nillable="true" type="q9:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ValidateFriendRequestSending">
+  <xs:element name="ValidarEnvioSolicitudAmistad">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idPlayerSender" type="xs:int" />
@@ -362,14 +362,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ValidateFriendRequestSendingResponse">
+  <xs:element name="ValidarEnvioSolicitudAmistadResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="ValidateFriendRequestSendingResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="ValidarEnvioSolicitudAmistadResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddRequestFriendship">
+  <xs:element name="AgregarSolicitudAmistad">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idPlayerSender" type="xs:int" />
@@ -377,107 +377,107 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddRequestFriendshipResponse">
+  <xs:element name="AgregarSolicitudAmistadResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AddRequestFriendshipResult" type="xs:int" />
+        <xs:element minOccurs="0" name="AgregarSolicitudAmistadResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetUsernamePlayersRequesters">
+  <xs:element name="ObtenerNombresUsuariosSolicitantes">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idPlayer" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetUsernamePlayersRequestersResponse">
+  <xs:element name="ObtenerNombresUsuariosSolicitantesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetUsernamePlayersRequestersResult" nillable="true" type="q10:ArrayOfstring" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerNombresUsuariosSolicitantesResult" nillable="true" type="q10:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddToOnlineFriendshipDictionary">
+  <xs:element name="AgregarADiccionarioAmistadesEnLinea">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="usernameCurrentPlayer" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuarioDeActualJugador" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SendFriendRequest">
+  <xs:element name="EnviarSolicitudAmistad">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="usernamePlayerSender" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="usernamePlayerRequested" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuarioJugadorRemitente" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuarioJugadorSolicitado" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AcceptFriendRequest">
+  <xs:element name="AceptarSolicitudAmistad">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="idPlayerRequested" type="xs:int" />
-        <xs:element minOccurs="0" name="usernamePlayerRequested" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="usernamePlayerSender" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idJugadorSolicitado" type="xs:int" />
+        <xs:element minOccurs="0" name="nombreUsuarioJugadorSolicitado" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuarioJugadorRemitente" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RejectFriendRequest">
+  <xs:element name="RechazarSolicitudAmistad">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="idCurrentPlayer" type="xs:int" />
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idJugadorActual" type="xs:int" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeleteFriend">
+  <xs:element name="EliminarAmigo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="idCurrentPlayer" type="xs:int" />
-        <xs:element minOccurs="0" name="usernameCurrentPlayer" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="usernameFriendDeleted" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idJugadorActual" type="xs:int" />
+        <xs:element minOccurs="0" name="nombreUsuarioDeActualJugador" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuarioAmigoEliminado" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RemoveFromOnlineFriendshipDictionary">
+  <xs:element name="EliminarDeDiccionarioAmistadesEnLinea">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyNewFriendRequest">
+  <xs:element name="NotificarNuevaSolicitudAmistad">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyNewFriendRequestResponse">
+  <xs:element name="NotificarNuevaSolicitudAmistadResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyFriendRequestAccepted">
+  <xs:element name="NotificarSolicitudAmistadAceptada">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyFriendRequestAcceptedResponse">
+  <xs:element name="NotificarSolicitudAmistadAceptadaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyDeletedFriend">
+  <xs:element name="NotificarAmigoEliminado">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyDeletedFriendResponse">
+  <xs:element name="NotificarAmigoEliminadoResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

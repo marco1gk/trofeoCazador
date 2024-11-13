@@ -10,17 +10,17 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="JugadorDataContract" nillable="true" type="tns:JugadorDataContract" />
-  <xs:complexType name="LobbyPlayer">
+  <xs:complexType name="JugadorSalaEspera">
     <xs:sequence>
+      <xs:element minOccurs="0" name="NombreUsuario" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NumeroFotoPerfil" type="xs:int" />
-      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="LobbyPlayer" nillable="true" type="tns:LobbyPlayer" />
-  <xs:complexType name="ArrayOfLobbyPlayer">
+  <xs:element name="JugadorSalaEspera" nillable="true" type="tns:JugadorSalaEspera" />
+  <xs:complexType name="ArrayOfJugadorSalaEspera">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="LobbyPlayer" nillable="true" type="tns:LobbyPlayer" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="JugadorSalaEspera" nillable="true" type="tns:JugadorSalaEspera" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfLobbyPlayer" nillable="true" type="tns:ArrayOfLobbyPlayer" />
+  <xs:element name="ArrayOfJugadorSalaEspera" nillable="true" type="tns:ArrayOfJugadorSalaEspera" />
 </xs:schema>

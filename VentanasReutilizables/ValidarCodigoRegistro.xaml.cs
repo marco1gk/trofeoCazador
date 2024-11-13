@@ -50,7 +50,7 @@ namespace trofeoCazador.VentanasReutilizables
         }
 
         // Evento para cerrar la ventana
-        private void CloseWindow(object sender, MouseButtonEventArgs e)
+        private void CerrarVentana(object sender, MouseButtonEventArgs e)
         {
             this.Close(); // Cerrar la ventana cuando el usuario hace clic en la imagen de "cerrar"
         }

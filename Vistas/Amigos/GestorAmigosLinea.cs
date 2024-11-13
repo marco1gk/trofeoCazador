@@ -12,90 +12,71 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Utilidades;
+using trofeoCazador.Vistas.InicioSesion;
 
 namespace trofeoCazador.Vistas.Amigos
 {
     public partial class XAMLAmigos : Page, IGestorUsuariosConectadosCallback
     {
-      //  
-        private const string ONLINE_STATUS_PLAYER_HEX_COLOR = "#61FF00";
-        private const string OFFLINE_STATUS_PLAYER_HEX_COLOR = "#FF5A5E59";
-
-
-
+      
+        private const string ESTADOENLINEA = "#61FF00";
+        private const string ESTADOFUERADELINEA = "#FF5A5E59";
        
-        private void LoadPlayerFriends()
+        private void CargarAmigosJugador()
         {
-            GestorAmistadClient friendshipManagerClient = new GestorAmistadClient();
-            SingletonSesion sesion = SingletonSesion.Instancia;
-            string[] usernamePlayerFriends = friendshipManagerClient.GetListUsernameFriends(sesion.JugadorId);
-            AddUsersToFriendsList(usernamePlayerFriends);
+            GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
+           
+            string[] nombreUsuarioAmigosJugador = gestorAmistadCliente.ObtenerListaNombresUsuariosAmigos(sesion.JugadorId);
+            AñadirUsuariosListaAmigos(nombreUsuarioAmigosJugador);//GetListUsernameFriends
         }
 
-        private void ShowAsActiveUser()
+        public void MostrarComoUsuarioActivo()
         {
-            InstanceContext context = new InstanceContext(this);
-            GestorUsuariosConectadosClient client = new GestorUsuariosConectadosClient(context);
+            InstanceContext contexto = new InstanceContext(this);
+            GestorUsuariosConectadosClient cliente = new GestorUsuariosConectadosClient(contexto);
 
-            client.RegisterUserToOnlineUsers(sesion.JugadorId, sesion.NombreUsuario);
+            cliente.RegisterUserToOnlineUsers(sesion.JugadorId, sesion.NombreUsuario);
         }
 
-        public void NotifyUserLoggedIn(string username)
-        {
-            bool isOnline = true;
-            ChangeStatusPlayer(username, isOnline);
-        }
 
-        public void NotifyUserLoggedOut(string username)
+        private void CambiarEstadoAmigos(string[] nombreLinea, bool estaEnLinea)
         {
-            bool isOnline = false;
-            ChangeStatusPlayer(username, isOnline);
-        }
-
-        public void NotifyOnlineFriends(string[] onlineUsernames)
-        {
-            bool isOnline = true;
-
-            ChangeStatusFriends(onlineUsernames, isOnline);
-            SuscribeUserToOnlineFriendsDictionary();
-        }
-
-        private void ChangeStatusFriends(string[] onlineUsernames, bool isOnline)
-        {
-            foreach (string onlineUsername in onlineUsernames)
+            foreach (string nombreEnLinea in nombreLinea)
             {
-                ChangeStatusPlayer(onlineUsername, isOnline);
+                CambiarEstadoJugador(nombreEnLinea, estaEnLinea);
             }
         }
 
-        private void ChangeStatusPlayer(string username, bool isOnline)
+        private void CambiarEstadoJugador(string nombreUsuario, bool estaEnLinea)
         {
+              Console.WriteLine($"Cambiando estado de {nombreUsuario} a {(estaEnLinea ? "Conectado" : "Desconectado")}");
             string idLabel = "lb";
-            string idUserItem = idLabel + username;
-            XAMLActiveUserItemControl userOnlineItem = FindActiveUserItemControlById(idUserItem);
+            string idUsuarioItem = idLabel + nombreUsuario;
+            XAMLActiveUserItemControl usuarionEnLineaItem = BuscarControlElementoUsuarioActivoPorId(idUsuarioItem);
 
-            if (userOnlineItem != null)
+            if (usuarionEnLineaItem != null)
             {
-                SolidColorBrush statusPlayerColor;
+                SolidColorBrush estadoJugadorColor;
 
-                if (isOnline)
+                if (estaEnLinea)
                 {
-                    statusPlayerColor = Utilities.CreateColorFromHexadecimal(ONLINE_STATUS_PLAYER_HEX_COLOR);
+                    estadoJugadorColor = Utilities.CrearColorDeHexadecimal(ESTADOENLINEA);
                 }
                 else
                 {
-                    statusPlayerColor = Utilities.CreateColorFromHexadecimal(OFFLINE_STATUS_PLAYER_HEX_COLOR);
+                    estadoJugadorColor = Utilities.CrearColorDeHexadecimal(ESTADOFUERADELINEA);
                 }
 
-                userOnlineItem.rectangleStatusPlayer.Fill = statusPlayerColor;
+                usuarionEnLineaItem.rectangleStatusPlayer.Fill = estadoJugadorColor;
             }
         }
 
-        private XAMLActiveUserItemControl FindActiveUserItemControlById(string idUserItem)
+
+        private XAMLActiveUserItemControl BuscarControlElementoUsuarioActivoPorId(string idUsuarioItem)
         {
             foreach (XAMLActiveUserItemControl item in stackPanelFriends.Children)
             {
-                if (item.Name == idUserItem)
+                if (item.Name == idUsuarioItem)
                 {
                     return item;
                 }
@@ -104,51 +85,51 @@ namespace trofeoCazador.Vistas.Amigos
             return null;
         }
 
-        private void AddUsersToFriendsList(string[] onlineUsernames)
+        private void AñadirUsuariosListaAmigos(string[] nombresUsuarioEnLinea)
         {
-            foreach (var username in onlineUsernames)
+            foreach (var nombreUsuario in nombresUsuarioEnLinea)
             {
-                AddUserToFriendsList(username, OFFLINE_STATUS_PLAYER_HEX_COLOR);
+                AñadirUsuarioListaAmigos(nombreUsuario, ESTADOFUERADELINEA);
             }
         }
 
-        private void AddUserToFriendsList(string username, string connectionStatusPlayer)
+        private void AñadirUsuarioListaAmigos(string nombreUsuario, string estadoConexiónJugador)
         {
-            XAMLActiveUserItemControl userOnlineItem = CreateActiveUserItemControl(username, connectionStatusPlayer);
-            stackPanelFriends.Children.Add(userOnlineItem);
+            XAMLActiveUserItemControl elementoUsuarioEnLínea = CrearControlElementoUsuarioActivo(nombreUsuario, estadoConexiónJugador);
+            stackPanelFriends.Children.Add(elementoUsuarioEnLínea);
         }
 
-        private XAMLActiveUserItemControl CreateActiveUserItemControl(string username, string haxadecimalColor)
+        private XAMLActiveUserItemControl CrearControlElementoUsuarioActivo(string nombreUsuario, string colorHexadecimal)
         {
             string idItem = "lb";
-            string idUserItem = idItem + username;
-            XAMLActiveUserItemControl userOnlineItem = new XAMLActiveUserItemControl(username);
-            userOnlineItem.Name = idUserItem;
-            userOnlineItem.ButtonClicked += UserOnlineItem_BtnDeleteFriendClicked;
+            string idUsuarioItem = idItem + nombreUsuario;
+            XAMLActiveUserItemControl usuarioEnLineaItem = new XAMLActiveUserItemControl(nombreUsuario);
+            usuarioEnLineaItem.Name = idUsuarioItem;
+            usuarioEnLineaItem.ButtonClicked += ElementoUsuarioEnLínea_BotónEliminarAmigoClickeado;
          
 
-            return userOnlineItem;
+            return usuarioEnLineaItem;
         }
 
-        private void UserOnlineItem_BtnDeleteFriendClicked(object sender, ButtonClickEventArgs e)
+        private void ElementoUsuarioEnLínea_BotónEliminarAmigoClickeado(object sender, ArgumentosDeEventoDeClicDeBotón e)
         {
-            string btnDeleteFriend = "DeleteFriend";
+            string btnEliminarAmigo = "DeleteFriend";
 
-            if (e.ButtonName.Equals(btnDeleteFriend))
+            if (e.NombreBoton.Equals(btnEliminarAmigo))
             {
-                DeleteFriend(e.Username);
+                EliminarAmigo(e.NombreUsuario);
             }
         }
 
-        private void DeleteFriend(string usernameFriendToDelete)
+        private void EliminarAmigo(string nombreUsuarioAmigoEliminar)
         {
-            InstanceContext context = new InstanceContext(this);
-            GestorDeSolicitudesDeAmistadClient friendRequestManagerClient = new GestorDeSolicitudesDeAmistadClient(context);
+            InstanceContext contexto = new InstanceContext(this);
+            GestorDeSolicitudesDeAmistadClient gestorSolicitudesAmistadCliente = new GestorDeSolicitudesDeAmistadClient(contexto);
 
             try
             {
                 
-                friendRequestManagerClient.DeleteFriend(sesion.JugadorId, sesion.NombreUsuario, usernameFriendToDelete);
+                gestorSolicitudesAmistadCliente.EliminarAmigo(sesion.JugadorId, sesion.NombreUsuario, nombreUsuarioAmigoEliminar);
             }
             catch (EndpointNotFoundException ex)
             {
@@ -165,6 +146,7 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (CommunicationException ex)
             {
+
                 Console.WriteLine(ex);
             }
             catch (Exception ex)
@@ -173,20 +155,38 @@ namespace trofeoCazador.Vistas.Amigos
             }
         }
 
-                
+        public void NotifyUserLoggedIn(string nombreUsuario)
+        {
+            bool esEnLinea = true;
+            CambiarEstadoJugador(nombreUsuario, esEnLinea);
+        }
+
+        public void NotifyUserLoggedOut(string nombreUsuario)
+        {
+            bool esEnLinea = false;
+            CambiarEstadoJugador(nombreUsuario, esEnLinea);
+        }
+
+        public void NotifyOnlineFriends(string[] nombresUsuariosEnLinea)
+        {
+            bool esEnLinea = true;
+
+            CambiarEstadoAmigos(nombresUsuariosEnLinea, esEnLinea);
+            SuscribirUsuarioAlDiccionarioDeAmigosEnLínea();
+        }
 
     }
     public static class Utilities
     {
-        public static SolidColorBrush CreateColorFromHexadecimal(string hexadecimalColor)
+        public static SolidColorBrush CrearColorDeHexadecimal(string coloHexadecimal)
         {
             SolidColorBrush solidColorBrush = null;
 
-            if (hexadecimalColor != null)
+            if (coloHexadecimal != null)
             {
                 try
                 {
-                    solidColorBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(hexadecimalColor));
+                    solidColorBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(coloHexadecimal));
                 }
                 catch (FormatException ex)
                 {
@@ -197,28 +197,58 @@ namespace trofeoCazador.Vistas.Amigos
             return solidColorBrush;
         }
 
-        public static Image CreateImageByPath(string imagePath)
+        public static Image CrearImagenPorPath(string imagenPath)
         {
-            string absolutePath = BuildAbsolutePath(imagePath);
+            string pathAbsoluto = ConstruirPathAbsoluto(imagenPath);
 
-            Image styleImage = new Image();
-            BitmapImage bitmapImage = new BitmapImage(new Uri(absolutePath));
-            styleImage.Source = bitmapImage;
+            Image estiloImagen = new Image();
+            BitmapImage bitmapImage = new BitmapImage(new Uri(pathAbsoluto));
+            estiloImagen.Source = bitmapImage;
 
-            return styleImage;
+            return estiloImagen;
         }
 
-        public static string BuildAbsolutePath(string relativePath)
+        public static string ConstruirPathAbsoluto(string pathRelativo)
         {
-            string absolutePath = "";
+            string pathAbsoluto = "";
 
-            if (relativePath != null)
+            if (pathRelativo != null)
             {
-                absolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
+                pathAbsoluto = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathRelativo);
             }
 
-            return absolutePath;
+            return pathAbsoluto;
         }
+
     }
 
+
+
 }
+//private void BtnSignOff_Click(object sender, RoutedEventArgs e)
+//{
+//    ExitGameFromLobby();
+//    NavigationService.Navigate(new XAMLInicioSesion());
+//}
+
+//public void BtnCloseWindow_Click()
+//{
+//    ExitGameFromLobby();
+//}
+
+//private void ExitGameFromLobby()
+//{
+//    InstanceContext context = new InstanceContext(this);
+//    GestorUsuariosConectadosClient client = new GestorUsuariosConectadosClient(context);
+
+
+//    try
+//    {
+//        // Asegurarse de eliminar correctamente al jugador de la lista de jugadores activos
+//        client.UnregisterUserToOnlineUsers(sesion.NombreUsuario);
+//    }
+//    catch (Exception ex)
+//    {
+//        Console.WriteLine(ex);
+//    }
+//}

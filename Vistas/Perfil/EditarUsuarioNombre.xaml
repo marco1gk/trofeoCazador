@@ -42,7 +42,7 @@
 
         <!-- Botones Guardar y Cancelar en la nueva fila -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Margin="10">
-            <Button Content="{x:Static p:Resources.btnGlobalSave}" Width="100" Height="40" Margin="10,0" Click="btnClicGuardar" />
+            <Button Content="{x:Static p:Resources.btnGlobalSave}" Width="100" Height="40" Margin="10,0" Click="BtnClicGuardar" />
             <Button Content="{x:Static p:Resources.btnGlobalCancel}" Width="100" Height="40" Margin="10,0" />
         </StackPanel>
 

@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Recursos\Metodos.cs" />
     <Compile Include="SingletonSesion.cs" />
+    <Compile Include="Utilidades\ImagenPerfil.cs" />
     <Compile Include="Utilidades\UtilidadesDeValidacion.cs" />
     <Compile Include="VentanasReutilizables\ValidarCodigoRegistro.xaml.cs">
       <DependentUpon>ValidarCodigoRegistro.xaml</DependentUpon>
@@ -330,6 +331,12 @@
     <Resource Include="Recursos\ImagenesPartida\Cartas\Carta_Escondite.png" />
     <Resource Include="Recursos\ImagenesPartida\Cartas\Carta_Mazo.png" />
     <Resource Include="Recursos\ImagenesPartida\Cartas\Carta_Reglas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\configuraciones.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\Configuracion.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

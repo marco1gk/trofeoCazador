@@ -27,17 +27,7 @@ namespace trofeoCazador
            
             InitializeComponent();
             MainFrame.NavigationService.Navigate(new Uri("Vistas/InicioSesion/XAMLInicioSesion.xaml", UriKind.Relative));
-            
-           /*  GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            JugadorDataContract jugador = new JugadorDataContract();
-            //CuentaDataContract cuenta = new CuentaDataContract();
-            jugador.NombreUsuario = "Juan";
-            jugador.NumeroFotoPerfil = 1;
-            jugador.ContraseniaHash = "juandos";
-            jugador.Correo = "juan@gmail.com";
-            proxy.AgregarJugador(jugador);
-           */
-
+         
             
     
         }

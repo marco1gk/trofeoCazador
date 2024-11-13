@@ -28,7 +28,7 @@ namespace trofeoCazador.Vistas.Perfil
         GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
         SingletonSesion sesion = SingletonSesion.Instancia;
 
-        private void btnClicEnviarCodigo(object sender, RoutedEventArgs e)
+        private void BtnClicEnviarCodigo(object sender, RoutedEventArgs e)
         {
 
             string codigoIngresado = CodigoTextBox.Text.Trim();
@@ -63,7 +63,7 @@ namespace trofeoCazador.Vistas.Perfil
             }
         }
 
-        private void btnClicSolicitarNuevoCodigo(object sender, RoutedEventArgs e)
+        private void BtnClicSolicitarNuevoCodigo(object sender, RoutedEventArgs e)
         {
             proxy.EnviarCodigoConfirmacion(sesion.Correo);   
         }

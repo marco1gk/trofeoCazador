@@ -21,7 +21,7 @@ namespace trofeoCazador.Vistas.Amigos
         private const string BTN_DELETE_FRIEND = "DeleteFriend";
         private readonly string _username;
 
-        public event EventHandler<ButtonClickEventArgs> ButtonClicked;
+        public event EventHandler<ArgumentosDeEventoDeClicDeBotón> ButtonClicked;
 
         public XAMLActiveUserItemControl(string username)
         {
@@ -45,7 +45,7 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void BtnDeleteFriend_Click(object sender, RoutedEventArgs e)
         {
-            ButtonClicked?.Invoke(this, new ButtonClickEventArgs(BTN_DELETE_FRIEND, _username));
+            ButtonClicked?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTN_DELETE_FRIEND, _username));
         }
 
     }

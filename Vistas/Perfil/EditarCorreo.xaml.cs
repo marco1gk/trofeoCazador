@@ -35,7 +35,7 @@ namespace trofeoCazador.Vistas.Perfil
                 CorreoActualLabel.Content = jugador.Correo;
             }
         }
-        private void btnClicGuardar(object sender, RoutedEventArgs e)
+        private void BtnClicGuardar(object sender, RoutedEventArgs e)
         {
             string nuevoCorreo = NuevoCorreoTextBox.Text.Trim();
             int longitudMaximaCorreo = 100;

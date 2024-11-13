@@ -21,23 +21,23 @@ namespace trofeoCazador.Vistas.Perfil
 {
     public partial class EditarUsuarioNombre : Page
     {
-        private JugadorDataContract jugador;
+        private JugadorDataContract Jugador;
         public EditarUsuarioNombre()
         {
             InitializeComponent();
-            jugador = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
+            Jugador = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
             CargarUsuarioJugador();
         }
 
         private void CargarUsuarioJugador()
         {
-            if (jugador != null)
+            if (Jugador != null)
             {
-                NombreUsuarioActualLabel.Content = jugador.NombreUsuario;
+                NombreUsuarioActualLabel.Content = Jugador.NombreUsuario;
             }
         }
 
-        private void btnClicGuardar(object sender, RoutedEventArgs e)
+        private void BtnClicGuardar(object sender, RoutedEventArgs e)
         {
             string nuevoNombreUsuario = NuevoNombreUsuarioTextBox.Text.Trim();
             int longitudValidaNombreUsuario = 50;
@@ -54,7 +54,7 @@ namespace trofeoCazador.Vistas.Perfil
                 return;
             }
 
-            if (!Metodos.ValidarEntradaIgual(jugador.NombreUsuario, nuevoNombreUsuario))
+            if (!Metodos.ValidarEntradaIgual(Jugador.NombreUsuario, nuevoNombreUsuario))
             {
                 Metodos.MostrarMensaje("El nuevo nombre de usuario es igual al actual.");
                 return;

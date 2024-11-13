@@ -69,7 +69,7 @@
             <!-- Botón para cerrar la ventana -->
             <Image HorizontalAlignment="Left" Cursor="Hand" Height="37" Margin="351,85,0,0" 
                    VerticalAlignment="Top" Width="33" Source="/Recursos/close.png" 
-                   MouseDown="CloseWindow"/>
+                   MouseDown="CerrarVentana"/>
         </Grid>
     </Viewbox>
 </Window>

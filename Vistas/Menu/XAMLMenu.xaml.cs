@@ -12,12 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trofeoCazador.Vistas.Amigos;
 
 namespace trofeoCazador.Vistas.Menu
 {
-    /// <summary>
-
-    /// </summary>
     public partial class XAMLMenu : Page
     {
         public XAMLMenu()
@@ -33,19 +31,17 @@ namespace trofeoCazador.Vistas.Menu
         {
             if (this.NavigationService == null)
             {
-                return;//veo  veo
+                return;
             }
             this.NavigationService.Navigate(new Uri("Vistas/Perfil/XAMLPerfil.xaml", UriKind.Relative));
 
         }
-
-        private void BtnLobby(object sender, RoutedEventArgs e)
+       
+        private void BtnSalaEspera(object sender, RoutedEventArgs e)
         {
-            // Navegar a la página de registro de usuario
             if (this.NavigationService == null)
             {
-                return;//veo  veo
-            }
+                return;         }
             this.NavigationService.Navigate(new Uri("Vistas/SalaEspera/XAMLSalaEspera.xaml", UriKind.Relative));
 
         }
@@ -56,18 +52,16 @@ namespace trofeoCazador.Vistas.Menu
             NavigationService.GoBack();
         }
 
-        private void BtnUnirseLobby(object sender, RoutedEventArgs e)
+        private void BtnUnirseSalaEspera(object sender, RoutedEventArgs e)
         {
 
         }
 
-
         private void BtnAmigos(object sender, RoutedEventArgs e)
         {
-            // Navegar a la página de registro de usuario
             if (this.NavigationService == null)
             {
-                return;//veo  veo
+                return;
             }
             this.NavigationService.Navigate(new Uri("Vistas/Amigos/XAMLAmigos.xaml", UriKind.Relative));
 

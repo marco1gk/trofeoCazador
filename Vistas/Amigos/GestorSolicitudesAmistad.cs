@@ -15,14 +15,15 @@ namespace trofeoCazador.Vistas.Amigos
     public partial class XAMLAmigos : Page, IGestorDeSolicitudesDeAmistadCallback
     {
         SingletonSesion sesion = SingletonSesion.Instancia;
-        private void SuscribeUserToOnlineFriendsDictionary()
+
+        private void SuscribirUsuarioAlDiccionarioDeAmigosEnLínea()
         {
-            InstanceContext context = new InstanceContext(this);
-            GestorDeSolicitudesDeAmistadClient friendRequestManagerClient = new GestorDeSolicitudesDeAmistadClient(context);
+            InstanceContext contexto = new InstanceContext(this);
+            GestorDeSolicitudesDeAmistadClient gestorSolicitudesAmistadCliente = new GestorDeSolicitudesDeAmistadClient(contexto);
            
             try
             {
-                friendRequestManagerClient.AddToOnlineFriendshipDictionary(sesion.NombreUsuario);
+                gestorSolicitudesAmistadCliente.AgregarADiccionarioAmistadesEnLinea(sesion.NombreUsuario);
             }
             catch (EndpointNotFoundException ex)
             {
@@ -47,11 +48,11 @@ namespace trofeoCazador.Vistas.Amigos
         }
 
 
-        private void BtnSendRequest_Click(object sender, RoutedEventArgs e)
+        private void BtnEnviarSolicitud_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                SendRequest();
+                EnviarSolicitud();
             }
             catch (EndpointNotFoundException ex)
             {
@@ -76,93 +77,92 @@ namespace trofeoCazador.Vistas.Amigos
         }
 
 
-        private void SendRequest()
+        private void EnviarSolicitud()
         {
-            lbFriendRequestUsernameError.Visibility = Visibility.Visible;
+            lbErrorNombreDeUsuarioSolicitudAmistad.Visibility = Visibility.Visible;
 
-            string usernamePlayerRequested = tbxUsernameSendRequest.Text.Trim();
-            int idPlayer = sesion.JugadorId;
+            string nombreDeUsuarioJugadorSolicitado = tbxNombreDeUsuarioEnviarSolicitud.Text.Trim();
+            int idJugador = sesion.JugadorId;
 
-            if (ValidateSendRequest(idPlayer, usernamePlayerRequested))
+            if (ValidarEnviarSolicitud(idJugador, nombreDeUsuarioJugadorSolicitado))
             {
-                AddRequestFriendship(idPlayer, usernamePlayerRequested);
-                SendFriendRequest(usernamePlayerRequested);
+                AgregarSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
+                EnviarSolicitudAmistad(nombreDeUsuarioJugadorSolicitado);
 
                 Console.WriteLine("");
 
-                tbxUsernameSendRequest.Text = string.Empty;
+                tbxNombreDeUsuarioEnviarSolicitud.Text = string.Empty;
             }
             else
             {
-             //   EmergentWindows.CreateEmergentWindow(Properties.Resources.lbFriendRequest,
+             //   EmergentWindows.CreateEmergentWindow(Properties.Recursos.lbFriendRequest,
                //     Properties.Resources.tbkFriendRequestErrorDescription);
             }
         }
 
-        private void AddRequestFriendship(int idPlayer, string usernamePlayerRequested)
+        private void AgregarSolicitudAmistad(int idJugador, string nombreDeUsuarioJugadorSolicitado)
         {
-            GestorAmistadClient friendshipManagerClient = new GestorAmistadClient();
+            GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
 
-            friendshipManagerClient.AddRequestFriendship(idPlayer, usernamePlayerRequested);
+            gestorAmistadCliente.AgregarSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
         }
 
 
-        private void SendFriendRequest(string usernamePlayerRequested)
+        private void EnviarSolicitudAmistad(string nombreDeUsuarioJugadorSolicitado)
         {
-            InstanceContext context = new InstanceContext(this);
-            GestorDeSolicitudesDeAmistadClient friendRequestManagerClient = new GestorDeSolicitudesDeAmistadClient(context);
+            InstanceContext contexto = new InstanceContext(this);
+            GestorDeSolicitudesDeAmistadClient gestorAmistadCliente = new GestorDeSolicitudesDeAmistadClient(contexto);
 
-            friendRequestManagerClient.SendFriendRequest(sesion.NombreUsuario, usernamePlayerRequested);
+            gestorAmistadCliente.EnviarSolicitudAmistad(sesion.NombreUsuario, nombreDeUsuarioJugadorSolicitado);
         }
 
-        private bool ValidateSendRequest(int idPlayer, string usernamePlayerRequested)
+        private bool ValidarEnviarSolicitud(int idJugador, string nombreDeUsuarioJugadorSolicitado)
         {
-            bool isRequestValid = false;
+            bool esSolicitudValida = false;
 
-            if (UtilidadesDeValidacion.EsNombreUsuarioValido(usernamePlayerRequested))
+            if (UtilidadesDeValidacion.EsNombreUsuarioValido(nombreDeUsuarioJugadorSolicitado))
             {
-                GestorAmistadClient friendshipManagerClient = new GestorAmistadClient();
+                GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
 
-                isRequestValid = friendshipManagerClient.ValidateFriendRequestSending(idPlayer, usernamePlayerRequested);
+                esSolicitudValida = gestorAmistadCliente.ValidarEnvioSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
             }
             else
             {
-                lbFriendRequestUsernameError.Visibility = Visibility.Visible;
+                lbErrorNombreDeUsuarioSolicitudAmistad.Visibility = Visibility.Visible;
             }
 
-            return isRequestValid;
+            return esSolicitudValida;
         }
 
-        private void BtnFriends_Click(object sender, RoutedEventArgs e)
+        private void BtnAmigos_Click(object sender, RoutedEventArgs e)
         {
-            scrollViewerFriends.Visibility = Visibility.Visible;
-            scrollViewerFriendsRequest.Visibility = Visibility.Visible; // Oculta las solicitudes para evitar confusión
-
-            // Limpia la lista actual de amigos en el panel
+            vistaDesplazableAmigos.Visibility = Visibility.Visible;
+            vistaDesplazableSolicitudesAmistad.Visibility = Visibility.Visible; 
+            
             stackPanelFriends.Children.Clear();
 
-            // Obtiene la lista de amigos desde el servidor
-            string[] friendUsernames = GetFriendsList();
+            
+            string[] nombresAmigos = ObtenerListaAmigos();
 
             // Agrega cada amigo a la lista en la interfaz
-            if (friendUsernames != null)
+            if (nombresAmigos != null)
             {
-                foreach (string friendUsername in friendUsernames)
+                foreach (string nombreUsuarioAmigo in nombresAmigos)
                 {
-                    AddUserToFriendsList(friendUsername);
+                    AgregarUsuarioListaAmigos(nombreUsuarioAmigo);
                 }
             }
         }
 
-        private string[] GetFriendsList()
+        private string[] ObtenerListaAmigos()
         {
-            GestorAmistadClient friendshipManagerClient = new GestorAmistadClient();
-            string[] friendUsernames = null;
+            GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
+            string[] nombresUsuarioAmigo = null;
 
             try
             {
-                friendUsernames = friendshipManagerClient.GetListUsernameFriends(sesion.JugadorId).ToArray();
-            }
+                nombresUsuarioAmigo = gestorAmistadCliente.ObtenerListaNombresUsuariosAmigos(sesion.JugadorId).ToArray();
+            }//GetListUsernameFriends
             catch (EndpointNotFoundException ex)
             {
                 Console.WriteLine(ex);
@@ -184,36 +184,36 @@ namespace trofeoCazador.Vistas.Amigos
                 Console.WriteLine(ex);
             }
 
-            return friendUsernames;
+            return nombresUsuarioAmigo;
         }
 
-        private void AddUserToFriendsList(string username)
+        private void AgregarUsuarioListaAmigos(string nombreUsuario)
         {
-            XAMLActiveUserItemControl friendItem = new XAMLActiveUserItemControl(username);
-            stackPanelFriends.Children.Add(friendItem);
+            XAMLActiveUserItemControl AmigoItem = new XAMLActiveUserItemControl(nombreUsuario);
+            stackPanelFriends.Children.Add(AmigoItem);
         }
 
 
-        private void BtnFriendsRequest_Click(object sender, RoutedEventArgs e)
+        private void BtnSolicitudDeAmigos_Click(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("antes d mostrar");
-            ShowFriendRequests();
+            MostrarSolicitudesAmistad();
             Console.WriteLine("despues d mostrar");
         }
 
-        private void ShowFriendRequests()
+        private void MostrarSolicitudesAmistad()
         {
             Console.WriteLine("Mostrando solicitudes de amistad...");
-            scrollViewerFriendsRequest.Visibility = Visibility.Visible;
-            scrollViewerFriends.Visibility = Visibility.Visible;
+            vistaDesplazableSolicitudesAmistad.Visibility = Visibility.Visible;
+            vistaDesplazableAmigos.Visibility = Visibility.Visible;
 
             stackPanelFriendsRequest.Children.Clear();
-            string[] usernamePlayers = GetCurrentFriendRequests();
+            string[] nombresUsuarioJugadores = ObtenerSolicitudesAmistadActuales();
 
-            if (usernamePlayers != null && usernamePlayers.Length > 0)
+            if (nombresUsuarioJugadores != null && nombresUsuarioJugadores.Length > 0)
             {
-                Console.WriteLine($"Número de solicitudes de amistad: {usernamePlayers.Length}");
-                AddUsersToFriendsRequestList(usernamePlayers);
+                Console.WriteLine($"Número de solicitudes de amistad: {nombresUsuarioJugadores.Length}");
+                AgregarUsuariosALaListaDeSolicitudesDeAmigos(nombresUsuarioJugadores);
             }
             else
             {
@@ -223,15 +223,15 @@ namespace trofeoCazador.Vistas.Amigos
 
 
 
-        private string[] GetCurrentFriendRequests()
+        private string[] ObtenerSolicitudesAmistadActuales()
         {
-            GestorAmistadClient friendshipManagerClient = new GestorAmistadClient();
-            string[] usernamePlayers = null;
+            GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
+            string[] nombreUsuarioJugadores = null;
 
-            try
+            try//GetUsernamePlayersRequesters
             {
-                usernamePlayers = friendshipManagerClient.GetUsernamePlayersRequesters(sesion.JugadorId);
-                Console.WriteLine($"Solicitudes encontradas: {usernamePlayers?.Length ?? 0}");
+                nombreUsuarioJugadores = gestorAmistadCliente.ObtenerNombresUsuariosSolicitantes(sesion.JugadorId);
+                Console.WriteLine($"Solicitudes encontradas: {nombreUsuarioJugadores?.Length ?? 0}");
             }
             catch (EndpointNotFoundException ex)
             {
@@ -254,29 +254,29 @@ namespace trofeoCazador.Vistas.Amigos
                 Console.WriteLine("Error: " + ex.Message);
             }
 
-            return usernamePlayers;
+            return nombreUsuarioJugadores;
         }
 
 
-        private void AddUsersToFriendsRequestList(string[] usernamePlayers)
+        private void AgregarUsuariosALaListaDeSolicitudesDeAmigos(string[] nombresUsuarioJugadores)
         {
-            if (usernamePlayers != null)
+            if (nombresUsuarioJugadores != null)
             {
-                foreach (string username in usernamePlayers)
+                foreach (string nombreUsuario in nombresUsuarioJugadores)
                 {
-                    AddUserToFriendRequestList(username);
+                    AgregarUsuariosALaListaDeSolicitudesDeAmigos(nombreUsuario);
                 }
             }
         }
 
-        private void AddUserToFriendRequestList(string username)
+        private void AgregarUsuariosALaListaDeSolicitudesDeAmigos(string nombreUsuario)
         {
-            XAMLFriendRequestItemComponent friendRequestItem = CreateFriendRequestItemControl(username);
+            XAMLFriendRequestItemComponent solicitudAmistadItem = CrearSolicitudAmistadItemControl(nombreUsuario);
 
-            if (friendRequestItem != null)
+            if (solicitudAmistadItem != null)
             {
-                Console.WriteLine($"Agregando solicitud de: {username}");
-                stackPanelFriendsRequest.Children.Add(friendRequestItem);
+                Console.WriteLine($"Agregando solicitud de: {nombreUsuario}");
+                stackPanelFriendsRequest.Children.Add(solicitudAmistadItem);
             }
             else
             {
@@ -284,41 +284,41 @@ namespace trofeoCazador.Vistas.Amigos
             }
         }
 
-        private XAMLFriendRequestItemComponent CreateFriendRequestItemControl(string username)
+        private XAMLFriendRequestItemComponent CrearSolicitudAmistadItemControl(string nombreUsuario)
         {
             string idItem = "lbRequest";
-            string idUserItem = idItem + username;
-            XAMLFriendRequestItemComponent friendRequestItem = new XAMLFriendRequestItemComponent(username);
-            friendRequestItem.Name = idUserItem;
-            friendRequestItem.ButtonClicked += FriendRequestItem_BtnClicked;
+            string idUsuarioItem = idItem + nombreUsuario;
+            XAMLFriendRequestItemComponent solicitudAmistadItem = new XAMLFriendRequestItemComponent(nombreUsuario);
+            solicitudAmistadItem.Name = idUsuarioItem;
+            solicitudAmistadItem.ButtonClicked += SolicitudAmistradItem_BtnClicked;
 
-            return friendRequestItem;
+            return solicitudAmistadItem;
         }
 
-        private void FriendRequestItem_BtnClicked(object sender, ButtonClickEventArgs e)
+        private void SolicitudAmistradItem_BtnClicked(object sender, ArgumentosDeEventoDeClicDeBotón e)
         {
             string btnAccept = "Accept";
             string btnReject = "Reject";
 
-            if (e.ButtonName.Equals(btnAccept))
+            if (e.NombreBoton.Equals(btnAccept))
             {
-                AcceptFriendRequest(e.Username);
+                AceptarSolicitudAmistad(e.NombreUsuario);
             }
 
-            if (e.ButtonName.Equals(btnReject))
+            if (e.NombreBoton.Equals(btnReject))
             {
-                RejectFriendRequest(e.Username);
+                RechazarSolicitudAmistad(e.NombreUsuario);
             }
         }
 
-        private void AcceptFriendRequest(string usernameSender)
+        private void AceptarSolicitudAmistad(string nombreUsuarioEmisor)
         {
-            InstanceContext context = new InstanceContext(this);
-            GestorDeSolicitudesDeAmistadClient friendRequestManagerClient = new GestorDeSolicitudesDeAmistadClient(context);
+            InstanceContext contexto = new InstanceContext(this);
+            GestorDeSolicitudesDeAmistadClient gestorSolicitudesAmistadCliente = new GestorDeSolicitudesDeAmistadClient(contexto);
 
             try
             {
-                friendRequestManagerClient.AcceptFriendRequest(sesion.JugadorId, sesion.NombreUsuario, usernameSender);
+                gestorSolicitudesAmistadCliente.AceptarSolicitudAmistad(sesion.JugadorId, sesion.NombreUsuario, nombreUsuarioEmisor);
             }
             catch (EndpointNotFoundException ex)
             {
@@ -342,15 +342,15 @@ namespace trofeoCazador.Vistas.Amigos
             }
         }
 
-        private void RejectFriendRequest(string username)
+        private void RechazarSolicitudAmistad(string nombreUsuario)
         {
-            InstanceContext context = new InstanceContext(this);
-            GestorDeSolicitudesDeAmistadClient friendRequestManagerClient = new GestorDeSolicitudesDeAmistadClient(context);
+            InstanceContext contexto = new InstanceContext(this);
+            GestorDeSolicitudesDeAmistadClient gestorSolicitudesAmistadCliente = new GestorDeSolicitudesDeAmistadClient(contexto);
 
             try
             {
-                friendRequestManagerClient.RejectFriendRequest(sesion.JugadorId, username);
-                RemoveFriendRequestFromStackPanel(username);
+                gestorSolicitudesAmistadCliente.RechazarSolicitudAmistad(sesion.JugadorId, nombreUsuario);
+                RemoverSolicitudAmistadStackPanel(nombreUsuario);
             }
             catch (EndpointNotFoundException ex)
             {
@@ -374,24 +374,24 @@ namespace trofeoCazador.Vistas.Amigos
             }
         }
 
-        private void RemoveFriendRequestFromStackPanel(string username)
+        private void RemoverSolicitudAmistadStackPanel(string nombreUsuario)
         {
             string idItem = "lbRequest";
-            string idFriendRequestItem = idItem + username;
+            string idSolicitudAmistadItem = idItem + nombreUsuario;
 
-            XAMLFriendRequestItemComponent friendRequestItemToRemove = FindFriendRequeustItemControlById(idFriendRequestItem);
+            XAMLFriendRequestItemComponent solicitudAmistadItemRemover = BuscarControlElementoSolicitudDeAmistadPorId(idSolicitudAmistadItem);
 
-            if (friendRequestItemToRemove != null)
+            if (solicitudAmistadItemRemover != null)
             {
-                stackPanelFriendsRequest.Children.Remove(friendRequestItemToRemove);
+                stackPanelFriendsRequest.Children.Remove(solicitudAmistadItemRemover);
             }
         }
 
-        private XAMLFriendRequestItemComponent FindFriendRequeustItemControlById(string idFriendRequestItem)
+        private XAMLFriendRequestItemComponent BuscarControlElementoSolicitudDeAmistadPorId(string idSolicitudAmistadItem)
         {
             foreach (XAMLFriendRequestItemComponent item in stackPanelFriendsRequest.Children)
             {
-                if (item.Name == idFriendRequestItem)
+                if (item.Name == idSolicitudAmistadItem)
                 {
                     return item;
                 }
@@ -400,32 +400,32 @@ namespace trofeoCazador.Vistas.Amigos
             return null;
         }
 
-        public void NotifyNewFriendRequest(string username)
+        public void NotificarNuevaSolicitudAmistad(string nombreUsuario)
         {
-            AddUserToFriendRequestList(username);
+            AgregarUsuariosALaListaDeSolicitudesDeAmigos(nombreUsuario);
         }
 
-        public void NotifyFriendRequestAccepted(string username)
+        public void NotificarSolicitudAmistadAceptada(string nombreUsuario)
         {
-           AddUserToFriendsList(username);
-            RemoveFriendRequestFromStackPanel(username);
+           AgregarUsuarioListaAmigos(nombreUsuario);
+            RemoverSolicitudAmistadStackPanel(nombreUsuario);
         }
 
-        public void NotifyDeletedFriend(string username)
+        public void NotificarAmigoEliminado(string nombreUsuario)
         {
-            RemoveFriendFromFriendsList(username);
+            EliminarAmigoDeLaListaDeAmigos(nombreUsuario);
         }
 
-        private void RemoveFriendFromFriendsList(string username)
+        private void EliminarAmigoDeLaListaDeAmigos(string nombreUsuario)
         {
             string idItem = "lb";
-            string idUserItem = idItem + username;
+            string idUsuarioItem = idItem + nombreUsuario;
 
-            XAMLActiveUserItemControl userOnlineItemToRemove = FindActiveUserItemControlById(idUserItem);
+            XAMLActiveUserItemControl elementoUsuarioEnLíneaParaEliminar = BuscarControlElementoUsuarioActivoPorId(idUsuarioItem);
 
-            if (userOnlineItemToRemove != null)
+            if (elementoUsuarioEnLíneaParaEliminar != null)
             {
-                stackPanelFriends.Children.Remove(userOnlineItemToRemove);
+                stackPanelFriends.Children.Remove(elementoUsuarioEnLíneaParaEliminar);
             }
         }
 
