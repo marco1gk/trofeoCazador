@@ -832,30 +832,36 @@ namespace trofeoCazador.ServicioDelJuego {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IGestorUsuariosConectados", CallbackContract=typeof(trofeoCazador.ServicioDelJuego.IGestorUsuariosConectadosCallback))]
     public interface IGestorUsuariosConectados {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/RegisterUserToOnlineUsers")]
-        void RegisterUserToOnlineUsers(int idPlayer, string username);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/RegistrarUsuarioAUsuariosConectados")]
+        void RegistrarUsuarioAUsuariosConectados(int idJugador, string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/RegisterUserToOnlineUsers")]
-        System.Threading.Tasks.Task RegisterUserToOnlineUsersAsync(int idPlayer, string username);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/RegistrarUsuarioAUsuariosConectados")]
+        System.Threading.Tasks.Task RegistrarUsuarioAUsuariosConectadosAsync(int idJugador, string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/UnregisterUserToOnlineUsers")]
-        void UnregisterUserToOnlineUsers(string username);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/DesregistrarUsuarioDeUsuariosEnLinea" +
+            "")]
+        void DesregistrarUsuarioDeUsuariosEnLinea(string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/UnregisterUserToOnlineUsers")]
-        System.Threading.Tasks.Task UnregisterUserToOnlineUsersAsync(string username);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/DesregistrarUsuarioDeUsuariosEnLinea" +
+            "")]
+        System.Threading.Tasks.Task DesregistrarUsuarioDeUsuariosEnLineaAsync(string nombreUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IGestorUsuariosConectadosCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedIn", ReplyAction="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedInResponse")]
-        void NotifyUserLoggedIn(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioConectado", ReplyAction="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioConectadoResponse")]
+        void NotificarUsuarioConectado(string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedOut", ReplyAction="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedOutResponse")]
-        void NotifyUserLoggedOut(string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioDesconectado", ReplyAction="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioDesconectadoResponse" +
+            "")]
+        void NotificarUsuarioDesconectado(string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorUsuariosConectados/NotifyOnlineFriends", ReplyAction="http://tempuri.org/IGestorUsuariosConectados/NotifyOnlineFriendsResponse")]
-        void NotifyOnlineFriends(string[] onlineUsernames);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorUsuariosConectados/NotificarAmigosEnLinea", ReplyAction="http://tempuri.org/IGestorUsuariosConectados/NotificarAmigosEnLineaResponse")]
+        void NotificarAmigosEnLinea(string[] nombresUsuariosEnLinea);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/Ping")]
+        void Ping();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -886,20 +892,20 @@ namespace trofeoCazador.ServicioDelJuego {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void RegisterUserToOnlineUsers(int idPlayer, string username) {
-            base.Channel.RegisterUserToOnlineUsers(idPlayer, username);
+        public void RegistrarUsuarioAUsuariosConectados(int idJugador, string nombreUsuario) {
+            base.Channel.RegistrarUsuarioAUsuariosConectados(idJugador, nombreUsuario);
         }
         
-        public System.Threading.Tasks.Task RegisterUserToOnlineUsersAsync(int idPlayer, string username) {
-            return base.Channel.RegisterUserToOnlineUsersAsync(idPlayer, username);
+        public System.Threading.Tasks.Task RegistrarUsuarioAUsuariosConectadosAsync(int idJugador, string nombreUsuario) {
+            return base.Channel.RegistrarUsuarioAUsuariosConectadosAsync(idJugador, nombreUsuario);
         }
         
-        public void UnregisterUserToOnlineUsers(string username) {
-            base.Channel.UnregisterUserToOnlineUsers(username);
+        public void DesregistrarUsuarioDeUsuariosEnLinea(string nombreUsuario) {
+            base.Channel.DesregistrarUsuarioDeUsuariosEnLinea(nombreUsuario);
         }
         
-        public System.Threading.Tasks.Task UnregisterUserToOnlineUsersAsync(string username) {
-            return base.Channel.UnregisterUserToOnlineUsersAsync(username);
+        public System.Threading.Tasks.Task DesregistrarUsuarioDeUsuariosEnLineaAsync(string nombreUsuario) {
+            return base.Channel.DesregistrarUsuarioDeUsuariosEnLineaAsync(nombreUsuario);
         }
     }
     

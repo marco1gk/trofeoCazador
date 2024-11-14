@@ -35,7 +35,7 @@ namespace trofeoCazador.Vistas.Amigos
             InstanceContext contexto = new InstanceContext(this);
             GestorUsuariosConectadosClient cliente = new GestorUsuariosConectadosClient(contexto);
 
-            cliente.RegisterUserToOnlineUsers(sesion.JugadorId, sesion.NombreUsuario);
+            cliente.RegistrarUsuarioAUsuariosConectados(sesion.JugadorId, sesion.NombreUsuario);
         }
 
 
@@ -155,19 +155,19 @@ namespace trofeoCazador.Vistas.Amigos
             }
         }
 
-        public void NotifyUserLoggedIn(string nombreUsuario)
+        public void NotificarUsuarioConectado(string nombreUsuario)
         {
             bool esEnLinea = true;
             CambiarEstadoJugador(nombreUsuario, esEnLinea);
         }
 
-        public void NotifyUserLoggedOut(string nombreUsuario)
+        public void NotificarUsuarioDesconectado(string nombreUsuario)
         {
             bool esEnLinea = false;
             CambiarEstadoJugador(nombreUsuario, esEnLinea);
         }
 
-        public void NotifyOnlineFriends(string[] nombresUsuariosEnLinea)
+        public void NotificarAmigosEnLinea(string[] nombresUsuariosEnLinea)
         {
             bool esEnLinea = true;
 
@@ -175,6 +175,10 @@ namespace trofeoCazador.Vistas.Amigos
             SuscribirUsuarioAlDiccionarioDeAmigosEnLínea();
         }
 
+        public void Ping()
+        {
+            Console.WriteLine("es el ping");
+        }
     }
     public static class Utilities
     {

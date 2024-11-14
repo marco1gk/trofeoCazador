@@ -274,29 +274,32 @@
   <wsdl:message name="IGestorDeSolicitudesDeAmistad_NotificarAmigoEliminado_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarAmigoEliminadoResponse" />
   </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_RegisterUserToOnlineUsers_InputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterUserToOnlineUsers" />
+  <wsdl:message name="IGestorUsuariosConectados_RegistrarUsuarioAUsuariosConectados_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrarUsuarioAUsuariosConectados" />
   </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_UnregisterUserToOnlineUsers_InputMessage">
-    <wsdl:part name="parameters" element="tns:UnregisterUserToOnlineUsers" />
+  <wsdl:message name="IGestorUsuariosConectados_DesregistrarUsuarioDeUsuariosEnLinea_InputMessage">
+    <wsdl:part name="parameters" element="tns:DesregistrarUsuarioDeUsuariosEnLinea" />
   </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_NotifyUserLoggedIn_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyUserLoggedIn" />
+  <wsdl:message name="IGestorUsuariosConectados_NotificarUsuarioConectado_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarUsuarioConectado" />
   </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_NotifyUserLoggedIn_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyUserLoggedInResponse" />
+  <wsdl:message name="IGestorUsuariosConectados_NotificarUsuarioConectado_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarUsuarioConectadoResponse" />
   </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_NotifyUserLoggedOut_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyUserLoggedOut" />
+  <wsdl:message name="IGestorUsuariosConectados_NotificarUsuarioDesconectado_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarUsuarioDesconectado" />
   </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_NotifyUserLoggedOut_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyUserLoggedOutResponse" />
+  <wsdl:message name="IGestorUsuariosConectados_NotificarUsuarioDesconectado_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarUsuarioDesconectadoResponse" />
   </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_NotifyOnlineFriends_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyOnlineFriends" />
+  <wsdl:message name="IGestorUsuariosConectados_NotificarAmigosEnLinea_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarAmigosEnLinea" />
   </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_NotifyOnlineFriends_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyOnlineFriendsResponse" />
+  <wsdl:message name="IGestorUsuariosConectados_NotificarAmigosEnLinea_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarAmigosEnLineaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestorUsuariosConectados_Ping_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
   </wsdl:message>
   <wsdl:portType name="IGestionCuentaServicio">
     <wsdl:operation name="AgregarJugador">
@@ -461,23 +464,26 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IGestorUsuariosConectados">
-    <wsdl:operation name="RegisterUserToOnlineUsers">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/RegisterUserToOnlineUsers" message="tns:IGestorUsuariosConectados_RegisterUserToOnlineUsers_InputMessage" />
+    <wsdl:operation name="RegistrarUsuarioAUsuariosConectados">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/RegistrarUsuarioAUsuariosConectados" message="tns:IGestorUsuariosConectados_RegistrarUsuarioAUsuariosConectados_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="UnregisterUserToOnlineUsers">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/UnregisterUserToOnlineUsers" message="tns:IGestorUsuariosConectados_UnregisterUserToOnlineUsers_InputMessage" />
+    <wsdl:operation name="DesregistrarUsuarioDeUsuariosEnLinea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/DesregistrarUsuarioDeUsuariosEnLinea" message="tns:IGestorUsuariosConectados_DesregistrarUsuarioDeUsuariosEnLinea_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyUserLoggedIn">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedIn" message="tns:IGestorUsuariosConectados_NotifyUserLoggedIn_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedInResponse" message="tns:IGestorUsuariosConectados_NotifyUserLoggedIn_InputCallbackMessage" />
+    <wsdl:operation name="NotificarUsuarioConectado">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioConectado" message="tns:IGestorUsuariosConectados_NotificarUsuarioConectado_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioConectadoResponse" message="tns:IGestorUsuariosConectados_NotificarUsuarioConectado_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyUserLoggedOut">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedOut" message="tns:IGestorUsuariosConectados_NotifyUserLoggedOut_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedOutResponse" message="tns:IGestorUsuariosConectados_NotifyUserLoggedOut_InputCallbackMessage" />
+    <wsdl:operation name="NotificarUsuarioDesconectado">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioDesconectado" message="tns:IGestorUsuariosConectados_NotificarUsuarioDesconectado_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioDesconectadoResponse" message="tns:IGestorUsuariosConectados_NotificarUsuarioDesconectado_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyOnlineFriends">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotifyOnlineFriends" message="tns:IGestorUsuariosConectados_NotifyOnlineFriends_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotifyOnlineFriendsResponse" message="tns:IGestorUsuariosConectados_NotifyOnlineFriends_InputCallbackMessage" />
+    <wsdl:operation name="NotificarAmigosEnLinea">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarAmigosEnLinea" message="tns:IGestorUsuariosConectados_NotificarAmigosEnLinea_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarAmigosEnLineaResponse" message="tns:IGestorUsuariosConectados_NotificarAmigosEnLinea_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/Ping" message="tns:IGestorUsuariosConectados_Ping_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionCuentaServicio" type="tns:IGestionCuentaServicio">
@@ -843,20 +849,20 @@
     <wsp:PolicyReference URI="#NetTcpBinding_IGestorUsuariosConectados_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="RegisterUserToOnlineUsers">
-      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/RegisterUserToOnlineUsers" style="document" />
+    <wsdl:operation name="RegistrarUsuarioAUsuariosConectados">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/RegistrarUsuarioAUsuariosConectados" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="UnregisterUserToOnlineUsers">
-      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/UnregisterUserToOnlineUsers" style="document" />
+    <wsdl:operation name="DesregistrarUsuarioDeUsuariosEnLinea">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/DesregistrarUsuarioDeUsuariosEnLinea" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="NotifyUserLoggedIn">
-      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedIn" style="document" />
+    <wsdl:operation name="NotificarUsuarioConectado">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioConectado" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -864,8 +870,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyUserLoggedOut">
-      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotifyUserLoggedOut" style="document" />
+    <wsdl:operation name="NotificarUsuarioDesconectado">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioDesconectado" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -873,11 +879,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyOnlineFriends">
-      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotifyOnlineFriends" style="document" />
+    <wsdl:operation name="NotificarAmigosEnLinea">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotificarAmigosEnLinea" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/Ping" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

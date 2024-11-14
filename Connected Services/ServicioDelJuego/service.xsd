@@ -482,53 +482,58 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="RegisterUserToOnlineUsers">
+  <xs:element name="RegistrarUsuarioAUsuariosConectados">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="idPlayer" type="xs:int" />
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idJugador" type="xs:int" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="UnregisterUserToOnlineUsers">
+  <xs:element name="DesregistrarUsuarioDeUsuariosEnLinea">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyUserLoggedIn">
+  <xs:element name="NotificarUsuarioConectado">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyUserLoggedInResponse">
+  <xs:element name="NotificarUsuarioConectadoResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyUserLoggedOut">
+  <xs:element name="NotificarUsuarioDesconectado">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyUserLoggedOutResponse">
+  <xs:element name="NotificarUsuarioDesconectadoResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyOnlineFriends">
+  <xs:element name="NotificarAmigosEnLinea">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="onlineUsernames" nillable="true" type="q11:ArrayOfstring" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="nombresUsuariosEnLinea" nillable="true" type="q11:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyOnlineFriendsResponse">
+  <xs:element name="NotificarAmigosEnLineaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Ping">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

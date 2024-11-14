@@ -13,9 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace trofeoCazador.Vistas.Amigos
 {
-
     public partial class XAMLActiveUserItemControl : UserControl
     {
         private const string BTN_DELETE_FRIEND = "DeleteFriend";
@@ -23,12 +23,26 @@ namespace trofeoCazador.Vistas.Amigos
 
         public event EventHandler<ArgumentosDeEventoDeClicDeBotón> ButtonClicked;
 
+        // Propiedad IsConnected para cambiar el color según el estado.
+        private bool _isConnected;
+        public bool IsConnected
+        {
+            get => _isConnected;
+            set
+            {
+                _isConnected = value;
+                // Cambiar el color de rectangleStatusPlayer dependiendo del estado.
+                rectangleStatusPlayer.Fill = _isConnected ? Brushes.Green : Brushes.Red;
+            }
+        }
+
         public XAMLActiveUserItemControl(string username)
         {
             InitializeComponent();
-
             _username = username;
             lbUsername.Content = _username;
+            // Inicializa con el color de desconectado (rojo).
+            rectangleStatusPlayer.Fill = Brushes.Red;
         }
 
         private void ImgOptionPlayer_Click(object sender, MouseButtonEventArgs e)
@@ -47,6 +61,5 @@ namespace trofeoCazador.Vistas.Amigos
         {
             ButtonClicked?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTN_DELETE_FRIEND, _username));
         }
-
     }
 }

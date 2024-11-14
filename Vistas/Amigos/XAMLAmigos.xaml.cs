@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
+using System.Windows.Media;s
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -27,6 +27,33 @@ namespace trofeoCazador.Vistas.Amigos
             InitializeComponent();
             MostrarDatos();
         }
+
+
+        private void CambiarEstadoEnUI(string nombreUsuario, bool conectado)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                var amigoControl = stackPanelFriends.Children
+                    .OfType<XAMLActiveUserItemControl>()
+                    .FirstOrDefault(control => control.lbUsername.Content.ToString() == nombreUsuario);
+
+                if (amigoControl != null)
+                {
+                    // Actualiza el estado de conexión, lo que cambiará el color.
+                    amigoControl.IsConnected = conectado;
+                }
+                else
+                {
+                    // Crea un nuevo control para el usuario si no existe en la lista.
+                    var nuevoAmigoControl = new XAMLActiveUserItemControl(nombreUsuario)
+                    {
+                        IsConnected = conectado
+                    };
+                    stackPanelFriends.Children.Add(nuevoAmigoControl);
+                }
+            });
+        }
+
 
         public void BtnCloseFriendsMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -47,9 +74,10 @@ namespace trofeoCazador.Vistas.Amigos
 
             try
             {
-                CargarAmigosJugador();
+                
               MostrarComoUsuarioActivo();
-              
+                CargarAmigosJugador();
+
 
                 exito = true;
             }
