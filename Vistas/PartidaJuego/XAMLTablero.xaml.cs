@@ -12,6 +12,7 @@ using trofeoCazador.Recursos;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using trofeoCazador.Recursos.ElementosPartida;
+using System.Windows.Media;
 
 
 namespace trofeoCazador.Vistas.PartidaJuego
@@ -34,7 +35,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
             this.jugadores = jugadores;
             mazo = new Mazo();  // Inicializamos el mazo
             mazo.InicializarMazo();  // Llamamos al método para inicializar las cartas
-            CargarFichas();
+           CargarFichas();
             dado = new Dado(DadoImagen);
             BarajarYRepartirCartas(jugadores);
             this.codigoPartida = codigoPartida;
@@ -185,6 +186,56 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             client.StartMatch(jugadoresPartida.ToArray(), codigoPartida);
         }
+        private Thickness margenInicialCarta = new Thickness(); // Variable para guardar el margen inicial
+
+        private void CartaMouseEnter(object sender, MouseEventArgs e)
+        {
+            if (sender is Border border)
+            {
+                // Guardamos el margen inicial al pasar el mouse por primera vez
+                if (margenInicialCarta == new Thickness())
+                {
+                    margenInicialCarta = border.Margin;
+                }
+
+                // Animación de margen para mover la carta hacia arriba
+                ThicknessAnimation animacionMargen = new ThicknessAnimation
+                {
+                    From = border.Margin,
+                    To = new Thickness(margenInicialCarta.Left, margenInicialCarta.Top - 20, margenInicialCarta.Right, margenInicialCarta.Bottom),
+                    Duration = TimeSpan.FromSeconds(0.3)
+                };
+                border.BeginAnimation(Border.MarginProperty, animacionMargen);
+            }
+        }
+
+        private void CartaMouseLeave(object sender, MouseEventArgs e)
+        {
+            if (sender is Border border)
+            {
+                // Animación de margen para devolver la carta a su posición inicial
+                ThicknessAnimation animacionMargen = new ThicknessAnimation
+                {
+                    From = border.Margin,
+                    To = margenInicialCarta, // Regresa al margen inicial
+                    Duration = TimeSpan.FromSeconds(0.3)
+                };
+                border.BeginAnimation(Border.MarginProperty, animacionMargen);
+            }
+        }
+
+
+        private void CartaMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border border)
+            {
+                // Alterna el color o el grosor del borde para indicar la selección
+                border.BorderBrush = border.BorderBrush == Brushes.Blue ? Brushes.Transparent : Brushes.Blue;
+                border.BorderThickness = new Thickness(border.BorderThickness == new Thickness(0) ? 2 : 0);
+            }
+        }
+
+
     }
 }
 
