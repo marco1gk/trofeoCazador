@@ -22,7 +22,7 @@ namespace trofeoCazador.Vistas.InicioSesion
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            CorreoJugador ventanaCorreo = new CorreoJugador();
+            VentanaCorreoJugador ventanaCorreo = new VentanaCorreoJugador();
             ventanaCorreo.Show();
 
         }
@@ -133,7 +133,7 @@ namespace trofeoCazador.Vistas.InicioSesion
 
         private void lbClicRecuperarContrasena(object sender, MouseButtonEventArgs e)
         {
-            CorreoJugador ventanaCorreo = new CorreoJugador();
+            VentanaCorreoJugador ventanaCorreo = new VentanaCorreoJugador();
             ventanaCorreo.Show();
         }
     }

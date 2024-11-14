@@ -78,12 +78,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Recursos\ElementosPartida\Carta.cs" />
+    <Compile Include="Recursos\ElementosPartida\Dado.cs" />
+    <Compile Include="Recursos\ElementosPartida\Ficha.cs" />
+    <Compile Include="Recursos\ElementosPartida\Mazo.cs" />
     <Compile Include="Recursos\Metodos.cs" />
     <Compile Include="SingletonSesion.cs" />
     <Compile Include="Utilidades\ImagenPerfil.cs" />
     <Compile Include="Utilidades\UtilidadesDeValidacion.cs" />
     <Compile Include="VentanasReutilizables\ValidarCodigoRegistro.xaml.cs">
       <DependentUpon>ValidarCodigoRegistro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VentanasReutilizables\VentanaCorreoJugador.xaml.cs">
+      <DependentUpon>VentanaCorreoJugador.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Amigos\GestorAmigosLinea.cs" />
     <Compile Include="Vistas\Amigos\GestorSolicitudesAmistad.cs" />
@@ -142,6 +149,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="VentanasReutilizables\ValidarCodigoRegistro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanasReutilizables\VentanaCorreoJugador.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -325,18 +336,42 @@
     <Resource Include="Recursos\friendItemButton.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Recursos\ImagenesPartida\FondoTablero.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Recursos\ImagenesPartida\Cartas\Carta_Escondite.png" />
-    <Resource Include="Recursos\ImagenesPartida\Cartas\Carta_Mazo.png" />
-    <Resource Include="Recursos\ImagenesPartida\Cartas\Carta_Reglas.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Recursos\configuraciones.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\Configuracion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta1.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta2.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta3.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta4.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta5.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta6.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta7.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta8.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta_Escondite.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta_Mazo.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta_Reglas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Dado\Cara1.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Dado\Cara2.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Dado\Cara3.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Dado\Cara4.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Dado\Cara5.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Dado\Cara6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Fichas\Ficha1.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Fichas\Ficha2.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Fichas\Ficha3.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Fichas\Ficha4.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Fichas\Ficha5.png" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Fichas\Ficha6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\TableroJuego.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -28,7 +28,8 @@ namespace trofeoCazador.Vistas.SalaEspera
         {
             SingletonSesion sesion = SingletonSesion.Instancia;
             string nombreUsuario = sesion.NombreUsuario;
-            JugadorSalaEspera lb = new JugadorSalaEspera { NombreUsuario = nombreUsuario };
+            int numeroFotoPerfil = sesion.NumeroFotoPerfil;
+            JugadorSalaEspera lb = new JugadorSalaEspera { NombreUsuario = nombreUsuario, NumeroFotoPerfil = numeroFotoPerfil};
 
             try
             {
@@ -46,7 +47,8 @@ namespace trofeoCazador.Vistas.SalaEspera
         {
             SingletonSesion sesion = SingletonSesion.Instancia;
             string username = sesion.NombreUsuario;
-            JugadorSalaEspera lb = new JugadorSalaEspera { NombreUsuario = username };
+            int numeroFotoPerfil = sesion.NumeroFotoPerfil;
+            JugadorSalaEspera lb = new JugadorSalaEspera { NombreUsuario = username, NumeroFotoPerfil = numeroFotoPerfil };
 
             // Mostrar el campo de texto para que el usuario introduzca el código del lobby
             txtCodigoLobby.Visibility = Visibility.Visible;
@@ -190,7 +192,6 @@ namespace trofeoCazador.Vistas.SalaEspera
         {
             codigoSalaEsperaActual = lobbyCode;
             MessageBox.Show($"Lobby creado con el código: {lobbyCode}");
-            btnIniciarPartida.Visibility = Visibility.Visible;
         }
 
         public void NotificarJugadoresEnSalaEspera(string lobbyCode, List<JugadorSalaEspera> lobbyPlayers)
@@ -224,9 +225,8 @@ namespace trofeoCazador.Vistas.SalaEspera
                 Console.WriteLine($"Jugador: {jugador.NombreUsuario}");
             }
 
-            //   XAMLTablero tablero = new XAMLTablero();
-            //tablero.MostrarJugadores(jugadores.ToList());
-            //     this.NavigationService.Navigate(tablero);
+            XAMLTablero tablero = new XAMLTablero(jugadores.ToList(), codigoSalaEsperaActual);
+            this.NavigationService.Navigate(tablero);
         }
 
         public void NotificarSalaEsperaLlena()

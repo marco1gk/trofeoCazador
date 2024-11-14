@@ -6,14 +6,12 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Collections.ObjectModel;
 using trofeoCazador.ServicioDelJuego;
-using trofeoCazador.Recursos.Cartas;
-using trofeoCazador.Recursos.Fichas;
 using System.Windows.Media.Animation;
-using trofeoCazador.Recursos.Dado;
 using System.Windows.Input;
 using trofeoCazador.Recursos;
 using System.ServiceModel;
 using System.Threading.Tasks;
+using trofeoCazador.Recursos.ElementosPartida;
 
 
 namespace trofeoCazador.Vistas.PartidaJuego
@@ -40,6 +38,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
             dado = new Dado(DadoImagen);
             BarajarYRepartirCartas(jugadores);
             this.codigoPartida = codigoPartida;
+            MostrarJugadores();
         }
 
         public void MostrarJugadores()
@@ -124,7 +123,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             for (int i = 1; i <= 6; i++)
             {
-                Fichas.Add(new Ficha { RutaImagenFicha = $"/Recursos/ImagenesPartida/Fichas/Ficha{i}.png" });
+                Fichas.Add(new Ficha { RutaImagenFicha = $"/Recursos/ElementosPartida/ImagenesPartida/Fichas/Ficha{i}.png" });
             }
             FichasItemsControl.ItemsSource = Fichas;
         }

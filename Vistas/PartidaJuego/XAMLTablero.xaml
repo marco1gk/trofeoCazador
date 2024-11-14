@@ -9,7 +9,7 @@
       Title="Tablero">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Recursos/ImagenesPartida/FondoTablero.jpg" />
+            <ImageBrush ImageSource="/Recursos/ElementosPartida/ImagenesPartida/TableroJuego.png" />
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -41,12 +41,12 @@
         <!-- Zona del mazo de cartas-->
         <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
             <TextBlock Text="(Mazo de Cartas)" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <Image x:Name="MazoImagen" Source="/Recursos/ImagenesPartida/Cartas/Carta_Mazo.png" Width="100" Height="150"/>
+            <Image x:Name="MazoImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta_Mazo.png" Width="100" Height="150"/>
         </StackPanel>
         <!-- Zona del escondite-->
         <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
             <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <Image x:Name="EsconditeImagen" Source="/Recursos/ImagenesPartida/Cartas/Carta_Escondite.png" Width="100" Height="150"/>
+            <Image x:Name="EsconditeImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta_Escondite.png" Width="100" Height="150"/>
             <Button Content="Ver Escondite" Width="100" Height="30" Margin="0,10,0,0"/>
         </StackPanel>
         <!-- Aqui es donde se agregaran las cartas que se le repartan a cada jugador -->
@@ -86,7 +86,7 @@
         <!--Dado-->
         <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
             <TextBlock Text="Dado" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <Image x:Name="DadoImagen" Source="/Recursos/ImagenesPartida/Fichas/Ficha1.png" Width="100" Height="100" Cursor="Hand" MouseDown="ImagenDado_MouseDown"/>
+            <Image x:Name="DadoImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Dado/Cara1.png" Width="100" Height="100" Cursor="Hand" MouseDown="ImagenDado_MouseDown"/>
         </StackPanel>
         <Button Content="Iniciar juego" HorizontalAlignment="Center" Margin="0,285,0,0" VerticalAlignment="Top" Click="BtnClicIniciarJuego"/>
     </Grid>
