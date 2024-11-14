@@ -224,9 +224,9 @@ namespace trofeoCazador.Vistas.SalaEspera
                 Console.WriteLine($"Jugador: {jugador.NombreUsuario}");
             }
 
-            XAMLTablero tablero = new XAMLTablero();
+            //   XAMLTablero tablero = new XAMLTablero();
             //tablero.MostrarJugadores(jugadores.ToList());
-            this.NavigationService.Navigate(tablero);
+            //     this.NavigationService.Navigate(tablero);
         }
 
         public void NotificarSalaEsperaLlena()

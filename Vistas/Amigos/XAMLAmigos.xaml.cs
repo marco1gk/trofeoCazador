@@ -70,7 +70,6 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void MostrarDatos()
         {
-            bool exito = false;
 
             try
             {
@@ -78,8 +77,6 @@ namespace trofeoCazador.Vistas.Amigos
               MostrarComoUsuarioActivo();
                 CargarAmigosJugador();
 
-
-                exito = true;
             }
             catch (EndpointNotFoundException ex)
             {

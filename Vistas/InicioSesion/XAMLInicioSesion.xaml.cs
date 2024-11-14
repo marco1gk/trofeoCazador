@@ -6,6 +6,7 @@ using System.Windows.Media;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Utilidades;
 using trofeoCazador.VentanasReutilizables;
+using trofeoCazador.Vistas.SalaEspera;
 
 namespace trofeoCazador.Vistas.InicioSesion
 {

@@ -292,32 +292,6 @@
   </wsdl:message>
   <wsdl:message name="IGestorUsuariosConectados_RegistrarUsuarioAUsuariosConectados_InputMessage">
     <wsdl:part name="parameters" element="tns:RegistrarUsuarioAUsuariosConectados" />
-<<<<<<< HEAD
-  </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_DesregistrarUsuarioDeUsuariosEnLinea_InputMessage">
-    <wsdl:part name="parameters" element="tns:DesregistrarUsuarioDeUsuariosEnLinea" />
-  </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_NotificarUsuarioConectado_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotificarUsuarioConectado" />
-  </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_NotificarUsuarioConectado_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotificarUsuarioConectadoResponse" />
-  </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_NotificarUsuarioDesconectado_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotificarUsuarioDesconectado" />
-  </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_NotificarUsuarioDesconectado_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotificarUsuarioDesconectadoResponse" />
-  </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_NotificarAmigosEnLinea_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotificarAmigosEnLinea" />
-  </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_NotificarAmigosEnLinea_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotificarAmigosEnLineaResponse" />
-  </wsdl:message>
-  <wsdl:message name="IGestorUsuariosConectados_Ping_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:Ping" />
-=======
   </wsdl:message>
   <wsdl:message name="IGestorUsuariosConectados_DesregistrarUsuarioDeUsuariosEnLinea_InputMessage">
     <wsdl:part name="parameters" element="tns:DesregistrarUsuarioDeUsuariosEnLinea" />
@@ -378,7 +352,6 @@
   </wsdl:message>
   <wsdl:message name="IJuegoService_NotifyActionResult_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotifyActionResultResponse" />
->>>>>>> cambiosNecesarios
   </wsdl:message>
   <wsdl:portType name="IGestionCuentaServicio">
     <wsdl:operation name="AgregarJugador">
@@ -552,23 +525,6 @@
     </wsdl:operation>
     <wsdl:operation name="DesregistrarUsuarioDeUsuariosEnLinea">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/DesregistrarUsuarioDeUsuariosEnLinea" message="tns:IGestorUsuariosConectados_DesregistrarUsuarioDeUsuariosEnLinea_InputMessage" />
-<<<<<<< HEAD
-    </wsdl:operation>
-    <wsdl:operation name="NotificarUsuarioConectado">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioConectado" message="tns:IGestorUsuariosConectados_NotificarUsuarioConectado_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioConectadoResponse" message="tns:IGestorUsuariosConectados_NotificarUsuarioConectado_InputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="NotificarUsuarioDesconectado">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioDesconectado" message="tns:IGestorUsuariosConectados_NotificarUsuarioDesconectado_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioDesconectadoResponse" message="tns:IGestorUsuariosConectados_NotificarUsuarioDesconectado_InputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="NotificarAmigosEnLinea">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarAmigosEnLinea" message="tns:IGestorUsuariosConectados_NotificarAmigosEnLinea_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarAmigosEnLineaResponse" message="tns:IGestorUsuariosConectados_NotificarAmigosEnLinea_InputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="Ping">
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/Ping" message="tns:IGestorUsuariosConectados_Ping_OutputCallbackMessage" />
-=======
     </wsdl:operation>
     <wsdl:operation name="NotificarUsuarioConectado">
       <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioConectado" message="tns:IGestorUsuariosConectados_NotificarUsuarioConectado_OutputCallbackMessage" />
@@ -610,7 +566,6 @@
     <wsdl:operation name="NotifyActionResult">
       <wsdl:output wsaw:Action="http://tempuri.org/IJuegoService/NotifyActionResult" message="tns:IJuegoService_NotifyActionResult_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IJuegoService/NotifyActionResultResponse" message="tns:IJuegoService_NotifyActionResult_InputCallbackMessage" />
->>>>>>> cambiosNecesarios
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionCuentaServicio" type="tns:IGestionCuentaServicio">
@@ -987,8 +942,6 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="RegistrarUsuarioAUsuariosConectados">
       <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/RegistrarUsuarioAUsuariosConectados" style="document" />
-<<<<<<< HEAD
-=======
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1039,7 +992,6 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="StartTurn">
       <soap12:operation soapAction="http://tempuri.org/IJuegoService/StartTurn" style="document" />
->>>>>>> cambiosNecesarios
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1047,13 +999,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-<<<<<<< HEAD
-    <wsdl:operation name="DesregistrarUsuarioDeUsuariosEnLinea">
-      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/DesregistrarUsuarioDeUsuariosEnLinea" style="document" />
-=======
     <wsdl:operation name="EndTurn">
       <soap12:operation soapAction="http://tempuri.org/IJuegoService/EndTurn" style="document" />
->>>>>>> cambiosNecesarios
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1061,13 +1008,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-<<<<<<< HEAD
-    <wsdl:operation name="NotificarUsuarioConectado">
-      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioConectado" style="document" />
-=======
     <wsdl:operation name="StartMatch">
       <soap12:operation soapAction="http://tempuri.org/IJuegoService/StartMatch" style="document" />
->>>>>>> cambiosNecesarios
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1075,13 +1017,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-<<<<<<< HEAD
-    <wsdl:operation name="NotificarUsuarioDesconectado">
-      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioDesconectado" style="document" />
-=======
     <wsdl:operation name="NotifyTurnStarted">
       <soap12:operation soapAction="http://tempuri.org/IJuegoService/NotifyTurnStarted" style="document" />
->>>>>>> cambiosNecesarios
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1089,10 +1026,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-<<<<<<< HEAD
-    <wsdl:operation name="NotificarAmigosEnLinea">
-      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotificarAmigosEnLinea" style="document" />
-=======
     <wsdl:operation name="NotifyTurnEnded">
       <soap12:operation soapAction="http://tempuri.org/IJuegoService/NotifyTurnEnded" style="document" />
       <wsdl:input>
@@ -1104,16 +1037,9 @@
     </wsdl:operation>
     <wsdl:operation name="NotifyActionResult">
       <soap12:operation soapAction="http://tempuri.org/IJuegoService/NotifyActionResult" style="document" />
->>>>>>> cambiosNecesarios
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Ping">
-      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/Ping" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

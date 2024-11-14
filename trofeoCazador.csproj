@@ -223,11 +223,11 @@
     <None Include="Connected Services\ServicioDelJuego\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioDelJuego\service.wsdl" />
-    <None Include="Connected Services\ServicioDelJuego\service.xsd">
+    <None Include="Connected Services\ServicioDelJuego\service1.wsdl" />
+    <None Include="Connected Services\ServicioDelJuego\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioDelJuego\service1.xsd">
+    <None Include="Connected Services\ServicioDelJuego\service2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServicioDelJuego\ServicioJuego.xsd">

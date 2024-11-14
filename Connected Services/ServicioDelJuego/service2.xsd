@@ -502,12 +502,6 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="idJugador" type="xs:int" />
         <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
-<<<<<<< HEAD
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DesregistrarUsuarioDeUsuariosEnLinea">
-=======
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -519,23 +513,12 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="NotificarUsuarioConectado">
->>>>>>> cambiosNecesarios
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-<<<<<<< HEAD
-  <xs:element name="NotificarUsuarioConectado">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NotificarUsuarioConectadoResponse">
-=======
   <xs:element name="NotificarUsuarioConectadoResponse">
     <xs:complexType>
       <xs:sequence />
@@ -616,21 +599,10 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="NotifyTurnStartedResponse">
->>>>>>> cambiosNecesarios
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-<<<<<<< HEAD
-  <xs:element name="NotificarUsuarioDesconectado">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NotificarUsuarioDesconectadoResponse">
-=======
   <xs:element name="NotifyTurnEnded">
     <xs:complexType>
       <xs:sequence>
@@ -639,26 +611,10 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="NotifyTurnEndedResponse">
->>>>>>> cambiosNecesarios
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-<<<<<<< HEAD
-  <xs:element name="NotificarAmigosEnLinea">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="nombresUsuariosEnLinea" nillable="true" type="q11:ArrayOfstring" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NotificarAmigosEnLineaResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="Ping">
-=======
   <xs:element name="NotifyActionResult">
     <xs:complexType>
       <xs:sequence>
@@ -668,7 +624,6 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="NotifyActionResultResponse">
->>>>>>> cambiosNecesarios
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
