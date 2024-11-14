@@ -23,4 +23,17 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfJugadorSalaEspera" nillable="true" type="tns:ArrayOfJugadorSalaEspera" />
+  <xs:complexType name="ArrayOfMatchPlayer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MatchPlayer" nillable="true" type="tns:MatchPlayer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMatchPlayer" nillable="true" type="tns:ArrayOfMatchPlayer" />
+  <xs:complexType name="MatchPlayer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NumeroFotoPerfil" type="xs:int" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchPlayer" nillable="true" type="tns:MatchPlayer" />
 </xs:schema>

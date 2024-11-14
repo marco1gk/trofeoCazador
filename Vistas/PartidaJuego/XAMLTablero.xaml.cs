@@ -21,7 +21,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
     public partial class XAMLTablero : Page, IJuegoServiceCallback
     {
         private JuegoServiceClient client;
-        private List<LobbyPlayer> jugadores;
+        private List<JugadorSalaEspera> jugadores;
         private List<MatchPlayer> jugadoresPartida;
         private string codigoPartida;
         private JugadorDataContract jugadorActual = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
@@ -30,7 +30,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
         public ObservableCollection<Ficha> Fichas { get; set; } = new ObservableCollection<Ficha>();
         private Dado dado;
 
-        public XAMLTablero(List<LobbyPlayer> jugadores, string codigoPartida)
+        public XAMLTablero(List<JugadorSalaEspera> jugadores, string codigoPartida)
         {
             InitializeComponent();
             this.jugadores = jugadores;
@@ -45,33 +45,33 @@ namespace trofeoCazador.Vistas.PartidaJuego
         public void MostrarJugadores()
         {
             var jugadoresEnPartida = jugadores
-                .Where(j => j.Username != jugadorActual.NombreUsuario)
+                .Where(j => j.NombreUsuario != jugadorActual.NombreUsuario)
                 .ToList();
 
             if (jugadoresEnPartida.Count > 0)
             {
-                NombreJugador2.Text = jugadoresEnPartida[0].Username;
+                NombreJugador2.Text = jugadoresEnPartida[0].NombreUsuario;
                 string rutaImagen = ObtenerRutaImagenPerfil(jugadoresEnPartida[0].NumeroFotoPerfil);
                 Jugador2Imagen.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
                 AreaJugador2.Visibility = Visibility.Visible;
             }
             if (jugadoresEnPartida.Count > 1)
             {
-                NombreJugador3.Text = jugadoresEnPartida[1].Username;
+                NombreJugador3.Text = jugadoresEnPartida[1].NombreUsuario;
                 string rutaImagen = ObtenerRutaImagenPerfil(jugadoresEnPartida[1].NumeroFotoPerfil);
                 Jugador3Imagen.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
                 AreaJugador3.Visibility = Visibility.Visible;
             }
             if (jugadoresEnPartida.Count > 2)
             {
-                NombreJugador4.Text = jugadoresEnPartida[2].Username;
+                NombreJugador4.Text = jugadoresEnPartida[2].NombreUsuario;
                 string rutaImagen = ObtenerRutaImagenPerfil(jugadoresEnPartida[2].NumeroFotoPerfil);
                 Jugador4Imagen.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
                 AreaJugador4.Visibility = Visibility.Visible;
             }
         }
 
-        private void BarajarYRepartirCartas(List<LobbyPlayer> jugadores)
+        private void BarajarYRepartirCartas(List<JugadorSalaEspera> jugadores)
         {
             Console.WriteLine("Barajando el mazo de cartas...");
             mazo.Barajar();  // Barajamos el mazo
@@ -84,17 +84,17 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 int cantidadCartas = cartasPorJugador[i];
 
                 // Inicializar la colección de cartas para el jugador
-                cartasDeJugadores[jugador.Username] = new ObservableCollection<Carta>();
+                cartasDeJugadores[jugador.NombreUsuario] = new ObservableCollection<Carta>();
 
                 // Repartir las cartas
                 var cartasRepartidas = mazo.RepartirCartas(cantidadCartas);
                 foreach (var carta in cartasRepartidas)
                 {
-                    cartasDeJugadores[jugador.Username].Add(carta);
+                    cartasDeJugadores[jugador.NombreUsuario].Add(carta);
                 }
 
-                Console.WriteLine($"Cartas repartidas a {jugador.Username}:");
-                foreach (var carta in cartasDeJugadores[jugador.Username])
+                Console.WriteLine($"Cartas repartidas a {jugador.NombreUsuario}:");
+                foreach (var carta in cartasDeJugadores[jugador.NombreUsuario])
                 {
                     Console.WriteLine($"- {carta.Tipo}");
                 }
