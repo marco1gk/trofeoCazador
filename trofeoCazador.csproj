@@ -106,9 +106,6 @@
     <Compile Include="Vistas\InicioSesion\XAMLInicioSesion.xaml.cs">
       <DependentUpon>XAMLInicioSesion.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Menu\IngresarCodigoLobby.xaml.cs">
-      <DependentUpon>IngresarCodigoLobby.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Vistas\PartidaJuego\XAMLTablero.xaml.cs">
       <DependentUpon>XAMLTablero.xaml</DependentUpon>
     </Compile>
@@ -135,6 +132,12 @@
     </Compile>
     <Compile Include="Vistas\SalaEspera\XAMLSalaEspera.xaml.cs">
       <DependentUpon>XAMLSalaEspera.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\SalaEspera\XAMLSeleccionLobby.xaml.cs">
+      <DependentUpon>XAMLSeleccionLobby.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\SalaEspera\XAMLUsuario.xaml.cs">
+      <DependentUpon>XAMLUsuario.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -172,10 +175,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vistas\Menu\IngresarCodigoLobby.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Vistas\PartidaJuego\XAMLTablero.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -209,6 +208,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\SalaEspera\XAMLSalaEspera.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\SalaEspera\XAMLSeleccionLobby.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\SalaEspera\XAMLUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

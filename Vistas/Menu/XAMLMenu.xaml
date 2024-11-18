@@ -27,7 +27,7 @@
                     BorderBrush="#FF34495E" BorderThickness="2" Click="BtnSalaEspera" />
 
             <!-- Botón Configuraciones -->
-            <Button Content="Unirse a lobby" Width="200" Height="50" 
+            <Button Content="..." Width="200" Height="50" 
                     Background="#FF2C3E50" Foreground="White" 
                     FontSize="18" FontWeight="SemiBold" 
                     BorderBrush="#FF34495E" BorderThickness="2" Click="BtnUnirseSalaEspera" />

@@ -22,23 +22,27 @@
 
         <!-- Encabezado -->
         <TextBlock Text="Gestión de Amigos" FontWeight="Bold" FontSize="26" HorizontalAlignment="Center" Margin="0,0,0,20" Grid.ColumnSpan="2" Foreground="#00796B"/>
-
+        <Image Name="ImgBack" HorizontalAlignment="Left" Height="56" Margin="10,0,0,0" VerticalAlignment="Top" Width="88" Source="/Recursos/regresar.png" Cursor="Hand" MouseLeftButtonDown="ImagenCLicAtras" RenderTransformOrigin="0.83,1.2"/>
         <!-- Panel de Solicitudes de Amistad -->
         <Border Grid.Row="1" Grid.Column="0" Margin="10" Padding="10" Background="White" CornerRadius="10" BorderBrush="#B2DFDB" BorderThickness="1">
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="21.01"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Solicitudes de Amistad" FontWeight="Bold" FontSize="18" Margin="0,0,0,10" Foreground="#00796B" Grid.Row="0"/>
+                <TextBlock Text="Solicitudes de Amistad" FontWeight="Bold" FontSize="18" Margin="0,0,0,10" Foreground="#00796B" Grid.Row="0" Grid.ColumnSpan="2"/>
 
-                <ScrollViewer x:Name="vistaDesplazableSolicitudesAmistad" VerticalScrollBarVisibility="Auto" Height="300" Grid.Row="1">
+                <ScrollViewer x:Name="vistaDesplazableSolicitudesAmistad" VerticalScrollBarVisibility="Auto" Height="300" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,19,0,18">
                     <StackPanel x:Name="stackPanelFriendsRequest" />
                 </ScrollViewer>
 
-                <Button Content="Ver Solicitudes de Amistad" Click="BtnSolicitudDeAmigos_Click" Margin="0,10,0,0" Width="200" HorizontalAlignment="Center" Background="#00796B" Foreground="White" BorderBrush="Transparent" BorderThickness="1" Padding="10" Grid.Row="2" Height="38" VerticalAlignment="Top"/>
+                <Button Content="Ver Solicitudes de Amistad" Click="BtnSolicitudDeAmigos_Click" Margin="245,10,0,0" Width="200" HorizontalAlignment="Left" Background="#00796B" Foreground="White" BorderBrush="Transparent" BorderThickness="1" Padding="10" Grid.Row="2" Height="38" VerticalAlignment="Top" Grid.Column="1"/>
             </Grid>
         </Border>
 

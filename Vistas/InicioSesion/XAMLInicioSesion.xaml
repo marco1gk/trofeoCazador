@@ -28,14 +28,6 @@
         </Grid>
 
         <!-- Imagen del login -->
-        <Image Source="/Recursos/loginBox.png" 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Top"  
-               Stretch="Fill" 
-               Height="352" 
-               Width="355" 
-               Margin="0,42,0,0" 
-               Grid.RowSpan="3"/>
 
         <!-- Título -->
         <TextBlock FontSize="28"
@@ -60,7 +52,7 @@
                      FontSize="16"
                      GotFocus="TbxUsuarioObtenerFoco"
                     LostFocus="TbxUsuarioPerderFoco"
-                     Foreground="#CDCDCD" />
+                     Foreground="Black" />
     
             
             <PasswordBox x:Name="ContrasenaPasswordBox"
@@ -74,7 +66,7 @@
                          GotFocus="PbContraseñaObtenerFoco"
                          LostFocus="PbContraseñaPerderFoco"
                          BorderBrush="Transparent"
-                         Foreground="#CDCDCD" />
+                         Foreground="black" />
           
             <Button Content="Iniciar Sesión"
                     Background="#007ACC"

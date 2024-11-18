@@ -13,16 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace trofeoCazador.Vistas.Menu
+namespace trofeoCazador.Vistas.SalaEspera
 {
     /// <summary>
-    /// Lógica de interacción para IngresarCodigoLobby.xaml
+    /// Lógica de interacción para XAMLSeleccionLobby.xaml
     /// </summary>
-    public partial class IngresarCodigoLobby : Page
+    public partial class XAMLSeleccionLobby : Page
     {
-        public IngresarCodigoLobby()
+        public XAMLSeleccionLobby()
         {
             InitializeComponent();
+        }
+
+        private void BtnCrearLobby_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnUnirseLobby_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

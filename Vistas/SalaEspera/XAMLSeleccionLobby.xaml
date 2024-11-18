@@ -1,0 +1,16 @@
+﻿<Page x:Class="trofeoCazador.Vistas.SalaEspera.XAMLSeleccionLobby"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="SeleccionLobby">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Recursos/fondoMenu.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Button Content="Crear Lobby" Width="200" Height="50" Click="BtnCrearLobby_Click" Background="LightGreen" />
+            <Button Content="Unirse a Lobby" Width="200" Height="50" Click="BtnUnirseLobby_Click" Background="LightBlue" />
+        </StackPanel>
+    </Grid>
+</Page>

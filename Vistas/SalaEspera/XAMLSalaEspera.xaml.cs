@@ -9,6 +9,9 @@ using System.ServiceModel;
 using System.Windows.Input;
 using trofeoCazador.Vistas.PartidaJuego;
 using trofeoCazador.Vistas.InicioSesion;
+using System.Windows.Media.Imaging;
+using trofeoCazador.Vistas.SalaEspera;
+using System.Collections.ObjectModel;
 
 namespace trofeoCazador.Vistas.SalaEspera
 {
@@ -17,15 +20,24 @@ namespace trofeoCazador.Vistas.SalaEspera
     {
         private LobbyManagerClient client;
         private string codigoSalaEsperaActual;
-
+        public ObservableCollection<JugadorSalaEspera> JugadoresEnSala { get; set; }
+       
         public XAMLSalaEspera()
         {
             InitializeComponent();
-            SetupClient();  
-          //  UnirseOcrearLobby();  
+            JugadoresEnSala = new ObservableCollection<JugadorSalaEspera>();
+            DataContext = this; // Establecer el contexto de datos para la página
+            SetupClient();
+            
+                                //  UnirseOcrearLobby();  
         }
         private async void BtnCrearLobby_Click(object sender, RoutedEventArgs e)
         {
+            stackPanelOpciones.Visibility = Visibility.Collapsed;
+            stackPanelJugadores.Visibility = Visibility.Visible;
+            gridChat.Visibility = Visibility.Visible;
+            btnIniciarPartida.Visibility = Visibility.Visible;
+            btnSalir.Visibility = Visibility.Visible;
             SingletonSesion sesion = SingletonSesion.Instancia;
             string nombreUsuario = sesion.NombreUsuario;
             int numeroFotoPerfil = sesion.NumeroFotoPerfil;
@@ -42,9 +54,15 @@ namespace trofeoCazador.Vistas.SalaEspera
                 MessageBox.Show($"Error al crear el lobby: {ex.Message}");
             }
         }
-
+        bool isJoiningLobby = false;
         private async void BtnUnirseLobby_Click(object sender, RoutedEventArgs e)
         {
+            btnCrearLobby.Visibility = Visibility.Collapsed;
+            txtCodigoLobby.Visibility = Visibility.Visible;
+           
+            if (isJoiningLobby) return;  // Prevenir recursión
+
+            isJoiningLobby = true;
             SingletonSesion sesion = SingletonSesion.Instancia;
             string username = sesion.NombreUsuario;
             int numeroFotoPerfil = sesion.NumeroFotoPerfil;
@@ -59,19 +77,36 @@ namespace trofeoCazador.Vistas.SalaEspera
             if (string.IsNullOrEmpty(codigoLobby))
             {
                 MessageBox.Show("Por favor, ingresa un código de lobby válido.");
+                isJoiningLobby = false;
                 return;
             }
 
             try
             {
+                Console.WriteLine("antes de unirse a sala");
                 // Intentar unirse a un lobby existente con el código proporcionado
                 client.UnirseSalaEspera(codigoLobby, lb);
-                MessageBox.Show($"Unido al lobby con código: {codigoLobby}");
+                Console.WriteLine("después de unirse a sala");
+                stackPanelOpciones.Visibility = Visibility.Collapsed;
+                stackPanelJugadores.Visibility = Visibility.Visible;
+                gridChat.Visibility = Visibility.Visible;
+                btnSalir.Visibility = Visibility.Visible;
+                btnIniciarPartida.Visibility = Visibility.Visible;
+                // Actualizar el código de la sala actual
+                codigoSalaEsperaActual = codigoLobby;
+                txtCodigoLobby.Visibility= Visibility.Collapsed;
+                MessageBox.Show($"Te has unido al lobby con código: {codigoLobby}");
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 MessageBox.Show($"Error al unirse al lobby: {ex.Message}");
             }
+            finally
+            {
+                isJoiningLobby = false;  // Resetear la bandera
+            }
+
         }
         private void ImagenCLicAtras(object sender, MouseButtonEventArgs e)
         {
@@ -187,35 +222,43 @@ namespace trofeoCazador.Vistas.SalaEspera
             }
         }
 
-        
+
         public void NotificarSalaEsperaCreada(string lobbyCode)
         {
             codigoSalaEsperaActual = lobbyCode;
             MessageBox.Show($"Lobby creado con el código: {lobbyCode}");
         }
 
-        public void NotificarJugadoresEnSalaEspera(string lobbyCode, List<JugadorSalaEspera> lobbyPlayers)
+
+
+
+
+        public void NotificarJugadorSeUnioSalaEspera(JugadorSalaEspera jugador, int numOfPlayersInLobby)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            Dispatcher.Invoke(() =>
             {
-                MessageBox.Show($"Jugadores en el lobby {lobbyCode}: {string.Join(", ", lobbyPlayers.Select(p => p.NombreUsuario))}");
+                JugadoresEnSala.Add(jugador);
+                MessageBox.Show($"{jugador.NombreUsuario} se unió. Jugadores en el lobby: {numOfPlayersInLobby}");
             });
         }
 
-        public void NotificarJugadorSeUnioSalaEspera(JugadorSalaEspera lobbyPlayer, int numOfPlayersInLobby)
-        {
-            MessageBox.Show($"{lobbyPlayer.NombreUsuario} se unió. Jugadores en el lobby: {numOfPlayersInLobby}");
-        }
 
         public void NotificarJugadorSalioSalaEspera(string username)
         {
-            MessageBox.Show($"{username} ha salido del lobby.");
+            Dispatcher.Invoke(() =>
+            {
+                var jugador = JugadoresEnSala.FirstOrDefault(j => j.NombreUsuario == username);
+                if (jugador != null)
+                {
+                    JugadoresEnSala.Remove(jugador); // Eliminar al jugador de la colección
+                }
+            });
         }
 
-        public void NotifyHostPlayerLeftLobby()
-        {
-            MessageBox.Show("El anfitrión ha dejado el lobby.");
-        }
+
+
+
+
 
         public void NotificarIniciarPartida(JugadorSalaEspera[] jugadores)
         {
@@ -252,20 +295,21 @@ namespace trofeoCazador.Vistas.SalaEspera
                 stackPanelMessages.Children.Add(new TextBlock { Text = $"{username}: {message}" });
             });
         }
-
-        public void NotificarJugadoresEnSalaEspera(string lobbyCode, JugadorSalaEspera[] lobbyPlayers)
+        public void NotificarJugadoresEnSalaEspera(string lobbyCode, JugadorSalaEspera[] jugadores)
         {
-            
             Dispatcher.Invoke(() =>
             {
-                stackPanelMessages.Children.Clear();
-
-                foreach (var player in lobbyPlayers)
+                // Sincronizar la colección `JugadoresEnSala` con los datos recibidos
+                JugadoresEnSala.Clear(); // Limpiar la colección antes de agregar nuevos jugadores
+                foreach (var jugador in jugadores)
                 {
-                    stackPanelMessages.Children.Add(new TextBlock { Text = $"{player.NombreUsuario} está en el lobby {lobbyCode}" });
+                    JugadoresEnSala.Add(jugador); // Agregar jugadores a la colección
                 }
             });
         }
+
+
+
 
         public void NotificarPuedeIniciarPartida(bool canStart)
         {
@@ -298,7 +342,48 @@ namespace trofeoCazador.Vistas.SalaEspera
         public void NotificarAnfritionJugadorSalioSalaEspera()
         {
      
-            NavigationService.Navigate(new XAMLInicioSesion());
+            NavigationService.Navigate(new XAMLSalaEspera());
         }
+
+        private async void BtnSalirLobby(object sender, RoutedEventArgs e)
+        {
+            SingletonSesion sesion = SingletonSesion.Instancia;
+            string username = sesion.NombreUsuario;
+
+            if (string.IsNullOrEmpty(codigoSalaEsperaActual))
+            {
+                MessageBox.Show("No estás en un lobby.");
+                return;
+            }
+
+            try
+            {
+                await Task.Run(() => client.SalirSalaEspera(codigoSalaEsperaActual, username));
+
+                // Limpiar datos locales
+                codigoSalaEsperaActual = null;
+
+                // Limpiar jugadores en la lista
+                Dispatcher.Invoke(() => JugadoresEnSala.Clear());
+
+                // Navegar a la página anterior
+                if (NavigationService.CanGoBack)
+                {
+                    NavigationService.GoBack();
+                }
+                else
+                {
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al salir del lobby: {ex.Message}");
+            }
+        }
+    
+
+
+
     }
 }

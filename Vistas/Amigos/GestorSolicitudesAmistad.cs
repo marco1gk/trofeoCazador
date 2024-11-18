@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Utilidades;
@@ -200,7 +201,10 @@ namespace trofeoCazador.Vistas.Amigos
             MostrarSolicitudesAmistad();
             Console.WriteLine("despues d mostrar");
         }
-
+        private void ImageenCLicAtras(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
         private void MostrarSolicitudesAmistad()
         {
             Console.WriteLine("Mostrando solicitudes de amistad...");
