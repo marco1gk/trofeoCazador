@@ -44,24 +44,21 @@ namespace trofeoCazador.Vistas.SalaEspera
             gridChat.Visibility = Visibility.Visible;
             btnIniciarPartida.Visibility = Visibility.Visible;
             btnSalir.Visibility = Visibility.Visible;
-            
+
             SingletonSesion sesion = SingletonSesion.Instancia;
             string nombreUsuario = sesion.NombreUsuario;
-             anfitrion = nombreUsuario;
+            anfitrion = nombreUsuario;
             int numeroFotoPerfil = sesion.NumeroFotoPerfil;
-            JugadorSalaEspera lb = new JugadorSalaEspera { NombreUsuario = nombreUsuario, NumeroFotoPerfil = numeroFotoPerfil};
+            JugadorSalaEspera lb = new JugadorSalaEspera { NombreUsuario = nombreUsuario, NumeroFotoPerfil = numeroFotoPerfil };
 
             try
             {
-                // Crear un lobby nuevo
-<<<<<<< HEAD
-                client.CrearSalaEspera(lb);
-                btnIniciarPartida.Visibility = Visibility.Visible;
-                MessageBox.Show("Se ha creado un nuevo lobby.");
-=======
+  
+
                 cliente.CrearSalaEspera(lb);
+                btnIniciarPartida.Visibility = Visibility.Visible;
                 MessageBox.Show("Se ha creado un nuevo lobby POR ."+nombreUsuario   );
->>>>>>> expulsar jugador
+
             }
             catch (Exception ex)
             {
@@ -250,7 +247,6 @@ namespace trofeoCazador.Vistas.SalaEspera
 
                 }
             });
-<<<<<<< HEAD
         }
 
 
@@ -259,10 +255,6 @@ namespace trofeoCazador.Vistas.SalaEspera
 
 
         public void NotificarIniciarPartida(JugadorPartida[] jugadores)
-=======
-        } 
-        public void NotificarIniciarPartida(JugadorSalaEspera[] jugadores)
->>>>>>> expulsar jugador
         {
             Console.WriteLine("Jugadores recibidos en el cliente:");
             foreach (var jugador in jugadores)
@@ -378,5 +370,7 @@ namespace trofeoCazador.Vistas.SalaEspera
                 MessageBox.Show($"Error al salir del lobby: {ex.Message}");
             }
         }
+
+       
     }
 }
