@@ -476,6 +476,12 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/IniciarPartida")]
         System.Threading.Tasks.Task IniciarPartidaAsync(string codigoSalaEspera);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ExpulsarJugadorSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/ExpulsarJugadorSalaEsperaResponse")]
+        void ExpulsarJugadorSalaEspera(string lobbyCode, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ExpulsarJugadorSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/ExpulsarJugadorSalaEsperaResponse")]
+        System.Threading.Tasks.Task ExpulsarJugadorSalaEsperaAsync(string lobbyCode, string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -598,6 +604,14 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task IniciarPartidaAsync(string codigoSalaEspera) {
             return base.Channel.IniciarPartidaAsync(codigoSalaEspera);
+        }
+        
+        public void ExpulsarJugadorSalaEspera(string lobbyCode, string username) {
+            base.Channel.ExpulsarJugadorSalaEspera(lobbyCode, username);
+        }
+        
+        public System.Threading.Tasks.Task ExpulsarJugadorSalaEsperaAsync(string lobbyCode, string username) {
+            return base.Channel.ExpulsarJugadorSalaEsperaAsync(lobbyCode, username);
         }
     }
     
