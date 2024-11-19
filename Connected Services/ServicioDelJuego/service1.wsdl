@@ -50,7 +50,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_IJuegoService_policy">
+  <wsp:Policy wsu:Id="NetTcpBinding_IServicioPartida_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
@@ -317,41 +317,41 @@
   <wsdl:message name="IGestorUsuariosConectados_Ping_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:Ping" />
   </wsdl:message>
-  <wsdl:message name="IJuegoService_StartTurn_InputMessage">
-    <wsdl:part name="parameters" element="tns:StartTurn" />
+  <wsdl:message name="IServicioPartida_EmpezarTurno_InputMessage">
+    <wsdl:part name="parameters" element="tns:EmpezarTurno" />
   </wsdl:message>
-  <wsdl:message name="IJuegoService_StartTurn_OutputMessage">
-    <wsdl:part name="parameters" element="tns:StartTurnResponse" />
+  <wsdl:message name="IServicioPartida_FinalizarTurno_InputMessage">
+    <wsdl:part name="parameters" element="tns:FinalizarTurno" />
   </wsdl:message>
-  <wsdl:message name="IJuegoService_EndTurn_InputMessage">
-    <wsdl:part name="parameters" element="tns:EndTurn" />
+  <wsdl:message name="IServicioPartida_CrearPartida_InputMessage">
+    <wsdl:part name="parameters" element="tns:CrearPartida" />
   </wsdl:message>
-  <wsdl:message name="IJuegoService_EndTurn_OutputMessage">
-    <wsdl:part name="parameters" element="tns:EndTurnResponse" />
+  <wsdl:message name="IServicioPartida_RegistrarJugador_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrarJugador" />
   </wsdl:message>
-  <wsdl:message name="IJuegoService_StartMatch_InputMessage">
-    <wsdl:part name="parameters" element="tns:StartMatch" />
+  <wsdl:message name="IServicioPartida_NotificarTurnoIniciado_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarTurnoIniciado" />
   </wsdl:message>
-  <wsdl:message name="IJuegoService_StartMatch_OutputMessage">
-    <wsdl:part name="parameters" element="tns:StartMatchResponse" />
+  <wsdl:message name="IServicioPartida_NotificarTurnoIniciado_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarTurnoIniciadoResponse" />
   </wsdl:message>
-  <wsdl:message name="IJuegoService_NotifyTurnStarted_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyTurnStarted" />
+  <wsdl:message name="IServicioPartida_NotificarTurnoTerminado_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarTurnoTerminado" />
   </wsdl:message>
-  <wsdl:message name="IJuegoService_NotifyTurnStarted_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyTurnStartedResponse" />
+  <wsdl:message name="IServicioPartida_NotificarTurnoTerminado_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarTurnoTerminadoResponse" />
   </wsdl:message>
-  <wsdl:message name="IJuegoService_NotifyTurnEnded_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyTurnEnded" />
+  <wsdl:message name="IServicioPartida_NotificarResultadoAccion_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarResultadoAccion" />
   </wsdl:message>
-  <wsdl:message name="IJuegoService_NotifyTurnEnded_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyTurnEndedResponse" />
+  <wsdl:message name="IServicioPartida_NotificarResultadoAccion_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarResultadoAccionResponse" />
   </wsdl:message>
-  <wsdl:message name="IJuegoService_NotifyActionResult_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyActionResult" />
+  <wsdl:message name="IServicioPartida_NotificarPartidaCreada_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarPartidaCreada" />
   </wsdl:message>
-  <wsdl:message name="IJuegoService_NotifyActionResult_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyActionResultResponse" />
+  <wsdl:message name="IServicioPartida_NotificarPartidaCreada_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarPartidaCreadaResponse" />
   </wsdl:message>
   <wsdl:portType name="IGestionCuentaServicio">
     <wsdl:operation name="AgregarJugador">
@@ -542,30 +542,34 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/Ping" message="tns:IGestorUsuariosConectados_Ping_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:portType name="IJuegoService">
-    <wsdl:operation name="StartTurn">
-      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoService/StartTurn" message="tns:IJuegoService_StartTurn_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoService/StartTurnResponse" message="tns:IJuegoService_StartTurn_OutputMessage" />
+  <wsdl:portType name="IServicioPartida">
+    <wsdl:operation name="EmpezarTurno">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/EmpezarTurno" message="tns:IServicioPartida_EmpezarTurno_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="EndTurn">
-      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoService/EndTurn" message="tns:IJuegoService_EndTurn_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoService/EndTurnResponse" message="tns:IJuegoService_EndTurn_OutputMessage" />
+    <wsdl:operation name="FinalizarTurno">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/FinalizarTurno" message="tns:IServicioPartida_FinalizarTurno_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="StartMatch">
-      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoService/StartMatch" message="tns:IJuegoService_StartMatch_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoService/StartMatchResponse" message="tns:IJuegoService_StartMatch_OutputMessage" />
+    <wsdl:operation name="CrearPartida">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/CrearPartida" message="tns:IServicioPartida_CrearPartida_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyTurnStarted">
-      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoService/NotifyTurnStarted" message="tns:IJuegoService_NotifyTurnStarted_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoService/NotifyTurnStartedResponse" message="tns:IJuegoService_NotifyTurnStarted_InputCallbackMessage" />
+    <wsdl:operation name="RegistrarJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/RegistrarJugador" message="tns:IServicioPartida_RegistrarJugador_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyTurnEnded">
-      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoService/NotifyTurnEnded" message="tns:IJuegoService_NotifyTurnEnded_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoService/NotifyTurnEndedResponse" message="tns:IJuegoService_NotifyTurnEnded_InputCallbackMessage" />
+    <wsdl:operation name="NotificarTurnoIniciado">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado" message="tns:IServicioPartida_NotificarTurnoIniciado_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciadoResponse" message="tns:IServicioPartida_NotificarTurnoIniciado_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyActionResult">
-      <wsdl:output wsaw:Action="http://tempuri.org/IJuegoService/NotifyActionResult" message="tns:IJuegoService_NotifyActionResult_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IJuegoService/NotifyActionResultResponse" message="tns:IJuegoService_NotifyActionResult_InputCallbackMessage" />
+    <wsdl:operation name="NotificarTurnoTerminado">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoTerminado" message="tns:IServicioPartida_NotificarTurnoTerminado_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoTerminadoResponse" message="tns:IServicioPartida_NotificarTurnoTerminado_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarResultadoAccion">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarResultadoAccion" message="tns:IServicioPartida_NotificarResultadoAccion_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarResultadoAccionResponse" message="tns:IServicioPartida_NotificarResultadoAccion_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarPartidaCreada">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarPartidaCreada" message="tns:IServicioPartida_NotificarPartidaCreada_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarPartidaCreadaResponse" message="tns:IServicioPartida_NotificarPartidaCreada_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionCuentaServicio" type="tns:IGestionCuentaServicio">
@@ -986,12 +990,36 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_IJuegoService" type="tns:IJuegoService">
-    <wsp:PolicyReference URI="#NetTcpBinding_IJuegoService_policy">
+  <wsdl:binding name="NetTcpBinding_IServicioPartida" type="tns:IServicioPartida">
+    <wsp:PolicyReference URI="#NetTcpBinding_IServicioPartida_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="StartTurn">
-      <soap12:operation soapAction="http://tempuri.org/IJuegoService/StartTurn" style="document" />
+    <wsdl:operation name="EmpezarTurno">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/EmpezarTurno" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizarTurno">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/FinalizarTurno" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="CrearPartida">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/CrearPartida" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarJugador">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/RegistrarJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarTurnoIniciado">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -999,8 +1027,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="EndTurn">
-      <soap12:operation soapAction="http://tempuri.org/IJuegoService/EndTurn" style="document" />
+    <wsdl:operation name="NotificarTurnoTerminado">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarTurnoTerminado" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1008,8 +1036,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="StartMatch">
-      <soap12:operation soapAction="http://tempuri.org/IJuegoService/StartMatch" style="document" />
+    <wsdl:operation name="NotificarResultadoAccion">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarResultadoAccion" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1017,26 +1045,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyTurnStarted">
-      <soap12:operation soapAction="http://tempuri.org/IJuegoService/NotifyTurnStarted" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="NotifyTurnEnded">
-      <soap12:operation soapAction="http://tempuri.org/IJuegoService/NotifyTurnEnded" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="NotifyActionResult">
-      <soap12:operation soapAction="http://tempuri.org/IJuegoService/NotifyActionResult" style="document" />
+    <wsdl:operation name="NotificarPartidaCreada">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarPartidaCreada" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1076,7 +1086,7 @@
         <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
-    <wsdl:port name="NetTcpBinding_IJuegoService" binding="tns:NetTcpBinding_IJuegoService">
+    <wsdl:port name="NetTcpBinding_IServicioPartida" binding="tns:NetTcpBinding_IServicioPartida">
       <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>

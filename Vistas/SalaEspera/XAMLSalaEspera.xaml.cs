@@ -47,6 +47,7 @@ namespace trofeoCazador.Vistas.SalaEspera
             {
                 // Crear un lobby nuevo
                 client.CrearSalaEspera(lb);
+                btnIniciarPartida.Visibility = Visibility.Visible;
                 MessageBox.Show("Se ha creado un nuevo lobby.");
             }
             catch (Exception ex)
@@ -260,12 +261,13 @@ namespace trofeoCazador.Vistas.SalaEspera
 
 
 
-        public void NotificarIniciarPartida(JugadorSalaEspera[] jugadores)
+        public void NotificarIniciarPartida(JugadorPartida[] jugadores)
         {
             Console.WriteLine("Jugadores recibidos en el cliente:");
             foreach (var jugador in jugadores)
             {
                 Console.WriteLine($"Jugador: {jugador.NombreUsuario}");
+                Console.WriteLine($"Foto de perfil: {jugador.NumeroFotoPerfil}");
             }
 
             XAMLTablero tablero = new XAMLTablero(jugadores.ToList(), codigoSalaEsperaActual);

@@ -185,18 +185,18 @@ namespace trofeoCazador.ServicioDelJuego {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MatchPlayer", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="JugadorPartida", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego")]
     [System.SerializableAttribute()]
-    public partial class MatchPlayer : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class JugadorPartida : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int NumeroFotoPerfilField;
+        private string NombreUsuarioField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UsernameField;
+        private int NumeroFotoPerfilField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -209,6 +209,19 @@ namespace trofeoCazador.ServicioDelJuego {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NombreUsuario {
+            get {
+                return this.NombreUsuarioField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NombreUsuarioField, value) != true)) {
+                    this.NombreUsuarioField = value;
+                    this.RaisePropertyChanged("NombreUsuario");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int NumeroFotoPerfil {
             get {
                 return this.NumeroFotoPerfilField;
@@ -217,19 +230,6 @@ namespace trofeoCazador.ServicioDelJuego {
                 if ((this.NumeroFotoPerfilField.Equals(value) != true)) {
                     this.NumeroFotoPerfilField = value;
                     this.RaisePropertyChanged("NumeroFotoPerfil");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Username {
-            get {
-                return this.UsernameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
-                    this.UsernameField = value;
-                    this.RaisePropertyChanged("Username");
                 }
             }
         }
@@ -498,7 +498,7 @@ namespace trofeoCazador.ServicioDelJuego {
         void NotificarAnfritionJugadorSalioSalaEspera();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarIniciarPartida", ReplyAction="http://tempuri.org/ILobbyManager/NotificarIniciarPartidaResponse")]
-        void NotificarIniciarPartida(trofeoCazador.ServicioDelJuego.JugadorSalaEspera[] jugadores);
+        void NotificarIniciarPartida(trofeoCazador.ServicioDelJuego.JugadorPartida[] jugadoresPartida);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaLlena", ReplyAction="http://tempuri.org/ILobbyManager/NotificarSalaEsperaLlenaResponse")]
         void NotificarSalaEsperaLlena();
@@ -910,91 +910,108 @@ namespace trofeoCazador.ServicioDelJuego {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IJuegoService", CallbackContract=typeof(trofeoCazador.ServicioDelJuego.IJuegoServiceCallback))]
-    public interface IJuegoService {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IServicioPartida", CallbackContract=typeof(trofeoCazador.ServicioDelJuego.IServicioPartidaCallback))]
+    public interface IServicioPartida {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoService/StartTurn", ReplyAction="http://tempuri.org/IJuegoService/StartTurnResponse")]
-        void StartTurn(string gameId);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/EmpezarTurno")]
+        void EmpezarTurno(string idPartida);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoService/StartTurn", ReplyAction="http://tempuri.org/IJuegoService/StartTurnResponse")]
-        System.Threading.Tasks.Task StartTurnAsync(string gameId);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/EmpezarTurno")]
+        System.Threading.Tasks.Task EmpezarTurnoAsync(string idPartida);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoService/EndTurn", ReplyAction="http://tempuri.org/IJuegoService/EndTurnResponse")]
-        void EndTurn(string gameId, string playerId);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/FinalizarTurno")]
+        void FinalizarTurno(string idPartida, string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoService/EndTurn", ReplyAction="http://tempuri.org/IJuegoService/EndTurnResponse")]
-        System.Threading.Tasks.Task EndTurnAsync(string gameId, string playerId);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/FinalizarTurno")]
+        System.Threading.Tasks.Task FinalizarTurnoAsync(string idPartida, string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoService/StartMatch", ReplyAction="http://tempuri.org/IJuegoService/StartMatchResponse")]
-        void StartMatch(trofeoCazador.ServicioDelJuego.MatchPlayer[] players, string gameId);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/CrearPartida")]
+        void CrearPartida(trofeoCazador.ServicioDelJuego.JugadorPartida[] jugadores, string idPartida);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoService/StartMatch", ReplyAction="http://tempuri.org/IJuegoService/StartMatchResponse")]
-        System.Threading.Tasks.Task StartMatchAsync(trofeoCazador.ServicioDelJuego.MatchPlayer[] players, string gameId);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/CrearPartida")]
+        System.Threading.Tasks.Task CrearPartidaAsync(trofeoCazador.ServicioDelJuego.JugadorPartida[] jugadores, string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/RegistrarJugador")]
+        void RegistrarJugador(string nombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/RegistrarJugador")]
+        System.Threading.Tasks.Task RegistrarJugadorAsync(string nombreUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IJuegoServiceCallback {
+    public interface IServicioPartidaCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoService/NotifyTurnStarted", ReplyAction="http://tempuri.org/IJuegoService/NotifyTurnStartedResponse")]
-        void NotifyTurnStarted(string playerId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarTurnoIniciadoResponse")]
+        void NotificarTurnoIniciado(string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoService/NotifyTurnEnded", ReplyAction="http://tempuri.org/IJuegoService/NotifyTurnEndedResponse")]
-        void NotifyTurnEnded(string playerId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarTurnoTerminado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarTurnoTerminadoResponse")]
+        void NotificarTurnoTerminado(string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IJuegoService/NotifyActionResult", ReplyAction="http://tempuri.org/IJuegoService/NotifyActionResultResponse")]
-        void NotifyActionResult(string action, bool success);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarResultadoAccion", ReplyAction="http://tempuri.org/IServicioPartida/NotificarResultadoAccionResponse")]
+        void NotificarResultadoAccion(string accion, bool sucedio);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarPartidaCreada", ReplyAction="http://tempuri.org/IServicioPartida/NotificarPartidaCreadaResponse")]
+        void NotificarPartidaCreada(string idPartida);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IJuegoServiceChannel : trofeoCazador.ServicioDelJuego.IJuegoService, System.ServiceModel.IClientChannel {
+    public interface IServicioPartidaChannel : trofeoCazador.ServicioDelJuego.IServicioPartida, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class JuegoServiceClient : System.ServiceModel.DuplexClientBase<trofeoCazador.ServicioDelJuego.IJuegoService>, trofeoCazador.ServicioDelJuego.IJuegoService {
+    public partial class ServicioPartidaClient : System.ServiceModel.DuplexClientBase<trofeoCazador.ServicioDelJuego.IServicioPartida>, trofeoCazador.ServicioDelJuego.IServicioPartida {
         
-        public JuegoServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+        public ServicioPartidaClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
         }
         
-        public JuegoServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+        public ServicioPartidaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
                 base(callbackInstance, endpointConfigurationName) {
         }
         
-        public JuegoServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+        public ServicioPartidaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
                 base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public JuegoServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ServicioPartidaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public JuegoServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ServicioPartidaClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void StartTurn(string gameId) {
-            base.Channel.StartTurn(gameId);
+        public void EmpezarTurno(string idPartida) {
+            base.Channel.EmpezarTurno(idPartida);
         }
         
-        public System.Threading.Tasks.Task StartTurnAsync(string gameId) {
-            return base.Channel.StartTurnAsync(gameId);
+        public System.Threading.Tasks.Task EmpezarTurnoAsync(string idPartida) {
+            return base.Channel.EmpezarTurnoAsync(idPartida);
         }
         
-        public void EndTurn(string gameId, string playerId) {
-            base.Channel.EndTurn(gameId, playerId);
+        public void FinalizarTurno(string idPartida, string nombreUsuario) {
+            base.Channel.FinalizarTurno(idPartida, nombreUsuario);
         }
         
-        public System.Threading.Tasks.Task EndTurnAsync(string gameId, string playerId) {
-            return base.Channel.EndTurnAsync(gameId, playerId);
+        public System.Threading.Tasks.Task FinalizarTurnoAsync(string idPartida, string nombreUsuario) {
+            return base.Channel.FinalizarTurnoAsync(idPartida, nombreUsuario);
         }
         
-        public void StartMatch(trofeoCazador.ServicioDelJuego.MatchPlayer[] players, string gameId) {
-            base.Channel.StartMatch(players, gameId);
+        public void CrearPartida(trofeoCazador.ServicioDelJuego.JugadorPartida[] jugadores, string idPartida) {
+            base.Channel.CrearPartida(jugadores, idPartida);
         }
         
-        public System.Threading.Tasks.Task StartMatchAsync(trofeoCazador.ServicioDelJuego.MatchPlayer[] players, string gameId) {
-            return base.Channel.StartMatchAsync(players, gameId);
+        public System.Threading.Tasks.Task CrearPartidaAsync(trofeoCazador.ServicioDelJuego.JugadorPartida[] jugadores, string idPartida) {
+            return base.Channel.CrearPartidaAsync(jugadores, idPartida);
+        }
+        
+        public void RegistrarJugador(string nombreUsuario) {
+            base.Channel.RegistrarJugador(nombreUsuario);
+        }
+        
+        public System.Threading.Tasks.Task RegistrarJugadorAsync(string nombreUsuario) {
+            return base.Channel.RegistrarJugadorAsync(nombreUsuario);
         }
     }
 }

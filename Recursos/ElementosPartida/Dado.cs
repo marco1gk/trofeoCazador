@@ -17,6 +17,7 @@ namespace trofeoCazador.Recursos.ElementosPartida
         private DispatcherTimer animacionTimer;
         private Random random;
         private string[] carasDado;
+        public event Action<int> DadoLanzado;
         public Dado(Image dadoImagenControl)
         {
             dadoImagen = dadoImagenControl;
@@ -74,6 +75,8 @@ namespace trofeoCazador.Recursos.ElementosPartida
                 animacionTimer.Stop();
                 int caraFinal = random.Next(carasDado.Length);
                 dadoImagen.Source = new BitmapImage(new Uri(carasDado[caraFinal], UriKind.Relative));
+                // Emitir el evento con el resultado del dado (1 a 6)
+                DadoLanzado?.Invoke(caraFinal + 1);
                 // Mostrar la cara final con un desvanecimiento breve
                 DoubleAnimation fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
                 dadoImagen.BeginAnimation(Image.OpacityProperty, fadeIn);

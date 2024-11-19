@@ -291,7 +291,7 @@
   <xs:element name="NotificarIniciarPartida">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugadores" nillable="true" type="q8:ArrayOfJugadorSalaEspera" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugadoresPartida" nillable="true" type="q8:ArrayOfJugadorPartida" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -553,77 +553,81 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="StartTurn">
+  <xs:element name="EmpezarTurno">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="gameId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="StartTurnResponse">
+  <xs:element name="FinalizarTurno">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CrearPartida">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugadores" nillable="true" type="q12:ArrayOfJugadorPartida" />
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegistrarJugador">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarTurnoIniciado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarTurnoIniciadoResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="EndTurn">
+  <xs:element name="NotificarTurnoTerminado">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="gameId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="playerId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="EndTurnResponse">
+  <xs:element name="NotificarTurnoTerminadoResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="StartMatch">
+  <xs:element name="NotificarResultadoAccion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="players" nillable="true" type="q12:ArrayOfMatchPlayer" />
-        <xs:element minOccurs="0" name="gameId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="accion" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sucedio" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="StartMatchResponse">
+  <xs:element name="NotificarResultadoAccionResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyTurnStarted">
+  <xs:element name="NotificarPartidaCreada">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="playerId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotifyTurnStartedResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NotifyTurnEnded">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="playerId" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NotifyTurnEndedResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NotifyActionResult">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="action" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="success" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NotifyActionResultResponse">
+  <xs:element name="NotificarPartidaCreadaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

@@ -14,32 +14,44 @@ using System.Threading.Tasks;
 using trofeoCazador.Recursos.ElementosPartida;
 using System.Windows.Media;
 
-
 namespace trofeoCazador.Vistas.PartidaJuego
 {
-    public partial class XAMLTablero : Page, IJuegoServiceCallback
+    public partial class XAMLTablero : Page, IServicioPartidaCallback
     {
-        private JuegoServiceClient client;
-        private List<JugadorSalaEspera> jugadores;
-        private List<MatchPlayer> jugadoresPartida;
-        private string codigoPartida;
+        private ServicioPartidaClient cliente;
+        private List<JugadorPartida> jugadores;
+        private string idPartida;
         private JugadorDataContract jugadorActual = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
-        private Mazo mazo;  // Usamos la clase Mazo
+        private Mazo mazo;
         private Dictionary<string, ObservableCollection<Carta>> cartasDeJugadores = new Dictionary<string, ObservableCollection<Carta>>();
         public ObservableCollection<Ficha> Fichas { get; set; } = new ObservableCollection<Ficha>();
+        private ObservableCollection<Ficha> FichasEnMano { get; set; } = new ObservableCollection<Ficha>();
+
         private Dado dado;
 
-        public XAMLTablero(List<JugadorSalaEspera> jugadores, string codigoPartida)
+        public XAMLTablero(List<JugadorPartida> jugadores, string idPartida)
         {
             InitializeComponent();
+            SetupClient();
             this.jugadores = jugadores;
-            mazo = new Mazo();  // Inicializamos el mazo
-            mazo.InicializarMazo();  // Llamamos al método para inicializar las cartas
-           CargarFichas();
+            mazo = new Mazo();
+            mazo.InicializarMazo();
+            CargarFichas();
             dado = new Dado(DadoImagen);
-            BarajarYRepartirCartas(jugadores);
-            this.codigoPartida = codigoPartida;
+            dado.DadoLanzado += ManejarResultadoDado;
+            this.idPartida = idPartida;
             MostrarJugadores();
+            cliente.RegistrarJugador(jugadorActual.NombreUsuario);
+            DadoImagen.IsEnabled = false;
+            //FichasItemsControl.ItemsSource = Fichas;
+            FichasManoItemsControl.ItemsSource = FichasEnMano;
+
+        }
+
+        private void SetupClient()
+        {
+            InstanceContext instanceContext = new InstanceContext(this);
+            cliente = new ServicioPartidaClient(instanceContext);
         }
 
         public void MostrarJugadores()
@@ -71,10 +83,10 @@ namespace trofeoCazador.Vistas.PartidaJuego
             }
         }
 
-        private void BarajarYRepartirCartas(List<JugadorSalaEspera> jugadores)
+        private void BarajarYRepartirCartas(List<JugadorPartida> jugadores)
         {
-            Console.WriteLine("Barajando el mazo de cartas...");
-            mazo.Barajar();  // Barajamos el mazo
+            Metodos.MostrarMensaje("Barajando el mazo de cartas...");
+            mazo.Barajar();
 
             int[] cartasPorJugador = { 3, 4, 5, 6 };
 
@@ -83,10 +95,8 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 var jugador = jugadores[i];
                 int cantidadCartas = cartasPorJugador[i];
 
-                // Inicializar la colección de cartas para el jugador
                 cartasDeJugadores[jugador.NombreUsuario] = new ObservableCollection<Carta>();
 
-                // Repartir las cartas
                 var cartasRepartidas = mazo.RepartirCartas(cantidadCartas);
                 foreach (var carta in cartasRepartidas)
                 {
@@ -100,7 +110,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 }
             }
 
-            // Si el jugador actual tiene cartas, las mostramos en el ItemsControl
             if (jugadores.Count > 0 && cartasDeJugadores.ContainsKey(jugadorActual.NombreUsuario))
             {
                 CartasManoItemsControl.ItemsSource = cartasDeJugadores[jugadorActual.NombreUsuario];
@@ -124,14 +133,14 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             for (int i = 1; i <= 6; i++)
             {
-                Fichas.Add(new Ficha { RutaImagenFicha = $"/Recursos/ElementosPartida/ImagenesPartida/Fichas/Ficha{i}.png" });
+                Fichas.Add(new Ficha { IdFicha = i, RutaImagenFicha = $"/Recursos/ElementosPartida/ImagenesPartida/Fichas/Ficha{i}.png" });
             }
             FichasItemsControl.ItemsSource = Fichas;
         }
 
         private async void ImagenDado_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            dado.LanzarDado(); // Lanza el dado y obtiene el resultado
+            dado.LanzarDado();
             MessageBoxResult decision = MessageBox.Show(
                 "Obtuviste... ¿Quieres continuar o parar?",
                 "Decisión de turno",
@@ -139,66 +148,79 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 MessageBoxImage.Question
             );
 
-            if (decision == MessageBoxResult.Yes)
+            if (decision != MessageBoxResult.Yes)
             {
-                // El jugador decide continuar
-                Console.WriteLine("El jugador decide continuar.");
-                // Opcionalmente, puedes llamar algún método para realizar una acción extra.
+                //Metodos.MostrarMensaje("El jugador decide parar.");
+                //Metodos.MostrarMensaje($"IDPartida que se esta mandando: {idPartida}");
+                //Metodos.MostrarMensaje($"Jugador actual que se esta mandando: {jugadorActual.NombreUsuario}");
+                await Task.Run(() => cliente.FinalizarTurno(idPartida, jugadorActual.NombreUsuario));
+                ResetearFichas();
+            }
+        }
+
+        public void NotificarTurnoIniciado(string nombreUsuario)
+        {
+            if (nombreUsuario == jugadorActual.NombreUsuario)
+            {
+                Metodos.MostrarMensaje("Es tu turno.");
+                DadoImagen.IsEnabled = true;
             }
             else
             {
-                // El jugador decide terminar su turno
-                Console.WriteLine("El jugador decide parar.");
-                await Task.Run(() => client.EndTurn(codigoPartida, jugadorActual.NombreUsuario));
+                Metodos.MostrarMensaje($"Es el turno de {nombreUsuario}.");
+                DadoImagen.IsEnabled = false;
             }
         }
 
-        public void NotifyTurnStarted(string playerId)
+        public void NotificarTurnoTerminado(string nombreUsuario)
         {
-            if (playerId == jugadorActual.NombreUsuario)
+            if (nombreUsuario == jugadorActual.NombreUsuario)
             {
-                Console.WriteLine("Es tu turno.");
-                DadoImagen.IsEnabled = true; // Habilita el dado solo para el jugador actual
+                DadoImagen.IsEnabled = false;
+                Console.WriteLine("Resetear fichas del jugador porque terminó su turno."); // Log
+                ResetearFichas();
             }
             else
             {
-                Console.WriteLine($"Es el turno de {playerId}.");
-                DadoImagen.IsEnabled = false; // Deshabilita el dado para los demás
+                Console.WriteLine($"El turno de {nombreUsuario} terminó, pero no es el jugador actual.");
             }
         }
 
-        public void NotifyTurnEnded(string playerId)
-        {
-            Console.WriteLine($"El turno de {playerId} ha terminado.");
-            if (playerId == jugadorActual.NombreUsuario)
-            {
-                DadoImagen.IsEnabled = false; // Deshabilita el dado al terminar el turno
-                MessageBox.Show("Tu turno ha terminado.", "Fin de turno", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-
-        public void NotifyActionResult(string action, bool success)
+        public void NotificarResultadoAccion(string action, bool success)
         {
             //TODO
         }
 
+        public void NotificarPartidaCreada(string idPartida)
+        {
+            this.idPartida = idPartida;
+            BarajarYRepartirCartas(jugadores);
+        }
+
         private void BtnClicIniciarJuego(object sender, RoutedEventArgs e)
         {
-            client.StartMatch(jugadoresPartida.ToArray(), codigoPartida);
+            try
+            {
+                cliente.CrearPartida(jugadores.ToArray(), idPartida);
+                cliente.EmpezarTurno(idPartida);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al crear la partida: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-        private Thickness margenInicialCarta = new Thickness(); // Variable para guardar el margen inicial
+
+        private Thickness margenInicialCarta = new Thickness();
 
         private void CartaMouseEnter(object sender, MouseEventArgs e)
         {
             if (sender is Border border)
             {
-                // Guardamos el margen inicial al pasar el mouse por primera vez
                 if (margenInicialCarta == new Thickness())
                 {
                     margenInicialCarta = border.Margin;
                 }
 
-                // Animación de margen para mover la carta hacia arriba
                 ThicknessAnimation animacionMargen = new ThicknessAnimation
                 {
                     From = border.Margin,
@@ -213,29 +235,64 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             if (sender is Border border)
             {
-                // Animación de margen para devolver la carta a su posición inicial
                 ThicknessAnimation animacionMargen = new ThicknessAnimation
                 {
                     From = border.Margin,
-                    To = margenInicialCarta, // Regresa al margen inicial
+                    To = margenInicialCarta,
                     Duration = TimeSpan.FromSeconds(0.3)
                 };
                 border.BeginAnimation(Border.MarginProperty, animacionMargen);
             }
         }
 
-
         private void CartaMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Border border)
             {
-                // Alterna el color o el grosor del borde para indicar la selección
                 border.BorderBrush = border.BorderBrush == Brushes.Blue ? Brushes.Transparent : Brushes.Blue;
                 border.BorderThickness = new Thickness(border.BorderThickness == new Thickness(0) ? 2 : 0);
             }
         }
 
+        private async void ManejarResultadoDado(int resultadoDado)
+        {
+            Metodos.MostrarMensaje($"Número obtenido: {resultadoDado}");
+
+            {
+                // Obtener ficha seleccionada
+                Ficha fichaSeleccionada = Fichas.FirstOrDefault(f => f.IdFicha == resultadoDado);
+
+                // Verificar si la ficha ya está en las manos del jugador
+                if (!FichasEnMano.Contains(fichaSeleccionada))
+                {
+                    // Agregar ficha a la mano del jugador
+                    FichasEnMano.Add(fichaSeleccionada);
+                    Fichas.Remove(fichaSeleccionada);
+                    //Metodos.MostrarMensaje($"Ficha {resultadoDado} agregada a tu mano.");
+                }
+                else
+                {
+                    // Finalizar turno si ya tiene la ficha
+                    //Metodos.MostrarMensaje("Ya tienes esta ficha. Finalizando tu turno...");
+                    await Task.Run(() => cliente.FinalizarTurno(idPartida, jugadorActual.NombreUsuario));
+                }
+            }
+        }
+
+        private void ResetearFichas()
+        {
+            // Mover todas las fichas de la mano de regreso al área general
+            foreach (var ficha in FichasEnMano.ToList()) // Usar ToList para evitar modificaciones durante la iteración
+            {
+                Fichas.Add(ficha); // Agregar ficha a la colección principal
+            }
+
+            // Limpiar la colección de fichas en mano
+            FichasEnMano.Clear();
+
+        }
 
     }
 }
+
 

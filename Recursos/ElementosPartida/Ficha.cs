@@ -9,5 +9,6 @@ namespace trofeoCazador.Recursos.ElementosPartida
     public class Ficha
     {
         public string RutaImagenFicha { get; set; }
+        public int IdFicha { get; set; }    
     }
 }

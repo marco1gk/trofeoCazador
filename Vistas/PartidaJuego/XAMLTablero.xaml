@@ -11,93 +11,112 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Recursos/ElementosPartida/ImagenesPartida/TableroJuego.png" />
         </Grid.Background>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <!-- Esta es la zona donde se pondran las fichas-->
-        <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-            <TextBlock Text="(Aqui iran las fichas)" FontSize="20" FontWeight="Bold"/>
-            <ItemsControl x:Name="FichasItemsControl" HorizontalAlignment="Center">
+
+        <!-- Zona de fichas en mano -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <TextBlock Text="Fichas en mano" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
+            <ItemsControl x:Name="FichasManoItemsControl">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <!-- UniformGrid organiza las imágenes en 2 filas y 3 columnas -->
-                        <UniformGrid Rows="2" Columns="3"/>
+                        <UniformGrid Columns="6" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <!-- Cada ficha ocupa su espacio pero no tiene bordes ni recortes -->
-                        <Image Source="{Binding RutaImagenFicha}" Stretch="UniformToFill"/>
+                        <Image Source="{Binding RutaImagenFicha}" Stretch="Uniform" Margin="5" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Border MouseEnter="CartaMouseEnter" MouseLeave="CartaMouseLeave" MouseLeftButtonDown="CartaMouseLeftButtonDown">
-                <StackPanel Margin="5">
-                    <Image Source="{Binding RutaImagen}" Width="100" Height="150" />
-                    <TextBlock Text="{Binding Tipo}" HorizontalAlignment="Center" FontSize="12" />
-                </StackPanel>
-            </Border>
+        </StackPanel>
 
-        </StackPanel>
-        <!-- Zona del mazo de cartas-->
-        <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-            <TextBlock Text="(Mazo de Cartas)" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <Image x:Name="MazoImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta_Mazo.png" Width="100" Height="150"/>
-        </StackPanel>
-        <!-- Zona del escondite-->
-        <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
-            <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <Image x:Name="EsconditeImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta_Escondite.png" Width="100" Height="150"/>
-            <Button Content="Ver Escondite" Width="100" Height="30" Margin="0,10,0,0"/>
-        </StackPanel>
-        <!-- Aqui es donde se agregaran las cartas que se le repartan a cada jugador -->
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
-            <TextBlock Text="(Cartas que tenga en la mano)" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <ItemsControl x:Name="CartasManoItemsControl" HorizontalAlignment="Center">
+        <!-- Zona de fichas en juego -->
+        <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <ItemsControl x:Name="FichasItemsControl">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
+                        <UniformGrid Columns="3" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding RutaImagenFicha}" Stretch="Uniform" Margin="5"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock Text="Aquí irán las fichas" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Mazo de cartas -->
+        <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <TextBlock Text="Mazo de Cartas" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
+            <Image x:Name="MazoImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta_Mazo.png" Width="100" Height="150" Stretch="Uniform"/>
+        </StackPanel>
+
+        <!-- Escondite -->
+        <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <TextBlock Text="Escondite" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
+            <Image x:Name="EsconditeImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta_Escondite.png" Width="100" Height="150" Stretch="Uniform"/>
+            <Button Content="Ver Escondite" Width="100" Height="30" Margin="0,10,0,0"/>
+        </StackPanel>
+
+        <!-- Cartas en mano -->
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
+            <TextBlock Text="Cartas en mano" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
+            <ItemsControl x:Name="CartasManoItemsControl">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border MouseEnter="CartaMouseEnter" MouseLeave="CartaMouseLeave">
                             <StackPanel Margin="5">
-                                <Image Source="{Binding RutaImagen}" Width="100" Height="150" />
-                                <TextBlock Text="{Binding Tipo}" HorizontalAlignment="Center" FontSize="12" />
+                                <Image Source="{Binding RutaImagen}" Width="100" Height="150" Stretch="Uniform"/>
+                                <TextBlock Text="{Binding Tipo}" HorizontalAlignment="Center" FontSize="12"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-
         </StackPanel>
+
         <!-- Jugador 2 -->
         <StackPanel x:Name="AreaJugador2" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Visibility="Collapsed">
-            <TextBlock x:Name="NombreJugador2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <Image x:Name="Jugador2Imagen" Width="50" Height="50" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="NombreJugador2" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
+            <Image x:Name="Jugador2Imagen" Width="50" Height="50" Stretch="Uniform"/>
         </StackPanel>
+
         <!-- Jugador 3 -->
         <StackPanel x:Name="AreaJugador3" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Visibility="Collapsed">
-            <TextBlock x:Name="NombreJugador3" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <Image x:Name="Jugador3Imagen" Width="50" Height="50" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="NombreJugador3" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
+            <Image x:Name="Jugador3Imagen" Width="50" Height="50" Stretch="Uniform"/>
         </StackPanel>
+
         <!-- Jugador 4 -->
         <StackPanel x:Name="AreaJugador4" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Visibility="Collapsed">
-            <TextBlock x:Name="NombreJugador4" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <Image x:Name="Jugador4Imagen" Width="50" Height="50" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="NombreJugador4" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
+            <Image x:Name="Jugador4Imagen" Width="50" Height="50" Stretch="Uniform"/>
         </StackPanel>
-        <!--Dado-->
+
+        <!-- Dado -->
         <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
-            <TextBlock Text="Dado" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <Image x:Name="DadoImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Dado/Cara1.png" Width="100" Height="100" Cursor="Hand" MouseDown="ImagenDado_MouseDown"/>
+            <TextBlock Text="Dado" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
+            <Image x:Name="DadoImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Dado/Cara1.png" Width="100" Height="100" Stretch="Uniform" Cursor="Hand" MouseDown="ImagenDado_MouseDown"/>
         </StackPanel>
-        <Button Content="Iniciar juego" HorizontalAlignment="Center" Margin="0,285,0,0" VerticalAlignment="Top" Click="BtnClicIniciarJuego"/>
+
+        <Button Content="Iniciar juego" HorizontalAlignment="Left" Margin="39,46,0,0" VerticalAlignment="Top" Click="BtnClicIniciarJuego" Grid.Row="1" Grid.RowSpan="2"/>
     </Grid>
 </Page>
