@@ -618,6 +618,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="LanzarDado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NotificarTurnoIniciado">
     <xs:complexType>
       <xs:sequence>
@@ -663,6 +671,19 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="NotificarPartidaCreadaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarResultadoDado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="resultado" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarResultadoDadoResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

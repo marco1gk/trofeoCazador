@@ -967,6 +967,12 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/RegistrarJugador")]
         System.Threading.Tasks.Task RegistrarJugadorAsync(string nombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/LanzarDado")]
+        void LanzarDado(string idPartida, string nombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/LanzarDado")]
+        System.Threading.Tasks.Task LanzarDadoAsync(string idPartida, string nombreUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -983,6 +989,9 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarPartidaCreada", ReplyAction="http://tempuri.org/IServicioPartida/NotificarPartidaCreadaResponse")]
         void NotificarPartidaCreada(string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarResultadoDado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarResultadoDadoResponse")]
+        void NotificarResultadoDado(string nombreUsuario, int resultado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1043,6 +1052,14 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task RegistrarJugadorAsync(string nombreUsuario) {
             return base.Channel.RegistrarJugadorAsync(nombreUsuario);
+        }
+        
+        public void LanzarDado(string idPartida, string nombreUsuario) {
+            base.Channel.LanzarDado(idPartida, nombreUsuario);
+        }
+        
+        public System.Threading.Tasks.Task LanzarDadoAsync(string idPartida, string nombreUsuario) {
+            return base.Channel.LanzarDadoAsync(idPartida, nombreUsuario);
         }
     }
 }

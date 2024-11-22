@@ -27,6 +27,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
         public ObservableCollection<Ficha> Fichas { get; set; } = new ObservableCollection<Ficha>();
         private ObservableCollection<Ficha> FichasEnMano { get; set; } = new ObservableCollection<Ficha>();
 
+        private string jugadorTurnoActual;
         private Dado dado;
 
         public XAMLTablero(List<JugadorPartida> jugadores, string idPartida)
@@ -38,14 +39,16 @@ namespace trofeoCazador.Vistas.PartidaJuego
             mazo.InicializarMazo();
             CargarFichas();
             dado = new Dado(DadoImagen);
-            dado.DadoLanzado += ManejarResultadoDado;
+            //dado.DadoLanzado += ManejarResultadoDado;
             this.idPartida = idPartida;
             MostrarJugadores();
             cliente.RegistrarJugador(jugadorActual.NombreUsuario);
             DadoImagen.IsEnabled = false;
             //FichasItemsControl.ItemsSource = Fichas;
             FichasManoItemsControl.ItemsSource = FichasEnMano;
-
+            //ZonaFichasJugador2.ItemsSource = FichasEnMano;
+            //ZonaFichasJugador3.ItemsSource = FichasEnMano;
+            //ZonaFichasJugador4.ItemsSource = FichasEnMano;
         }
 
         private void SetupClient()
@@ -85,7 +88,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         private void BarajarYRepartirCartas(List<JugadorPartida> jugadores)
         {
-            Metodos.MostrarMensaje("Barajando el mazo de cartas...");
             mazo.Barajar();
 
             int[] cartasPorJugador = { 3, 4, 5, 6 };
@@ -101,12 +103,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 foreach (var carta in cartasRepartidas)
                 {
                     cartasDeJugadores[jugador.NombreUsuario].Add(carta);
-                }
-
-                Console.WriteLine($"Cartas repartidas a {jugador.NombreUsuario}:");
-                foreach (var carta in cartasDeJugadores[jugador.NombreUsuario])
-                {
-                    Console.WriteLine($"- {carta.Tipo}");
                 }
             }
 
@@ -138,36 +134,21 @@ namespace trofeoCazador.Vistas.PartidaJuego
             FichasItemsControl.ItemsSource = Fichas;
         }
 
-        private async void ImagenDado_MouseDown(object sender, MouseButtonEventArgs e)
+        private void ImagenDado_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            dado.LanzarDado();
-            MessageBoxResult decision = MessageBox.Show(
-                "Obtuviste... ¿Quieres continuar o parar?",
-                "Decisión de turno",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question
-            );
-
-            if (decision != MessageBoxResult.Yes)
-            {
-                //Metodos.MostrarMensaje("El jugador decide parar.");
-                //Metodos.MostrarMensaje($"IDPartida que se esta mandando: {idPartida}");
-                //Metodos.MostrarMensaje($"Jugador actual que se esta mandando: {jugadorActual.NombreUsuario}");
-                await Task.Run(() => cliente.FinalizarTurno(idPartida, jugadorActual.NombreUsuario));
-                ResetearFichas();
-            }
+            cliente.LanzarDado(idPartida, jugadorActual.NombreUsuario);
         }
 
         public void NotificarTurnoIniciado(string nombreUsuario)
         {
+            ResetearFichas();
+            jugadorTurnoActual = nombreUsuario;
             if (nombreUsuario == jugadorActual.NombreUsuario)
             {
-                Metodos.MostrarMensaje("Es tu turno.");
                 DadoImagen.IsEnabled = true;
             }
             else
             {
-                Metodos.MostrarMensaje($"Es el turno de {nombreUsuario}.");
                 DadoImagen.IsEnabled = false;
             }
         }
@@ -177,12 +158,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
             if (nombreUsuario == jugadorActual.NombreUsuario)
             {
                 DadoImagen.IsEnabled = false;
-                Console.WriteLine("Resetear fichas del jugador porque terminó su turno."); // Log
                 ResetearFichas();
-            }
-            else
-            {
-                Console.WriteLine($"El turno de {nombreUsuario} terminó, pero no es el jugador actual.");
             }
         }
 
@@ -195,6 +171,13 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             this.idPartida = idPartida;
             BarajarYRepartirCartas(jugadores);
+        }
+
+        public void NotificarResultadoDado(string nombreUsuario, int resultadoDado)
+        {
+            dado.LanzarDado(resultadoDado);
+            dado.DadoLanzado += ManejarResultadoDado;
+
         }
 
         private void BtnClicIniciarJuego(object sender, RoutedEventArgs e)
@@ -256,38 +239,70 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         private async void ManejarResultadoDado(int resultadoDado)
         {
-            Metodos.MostrarMensaje($"Número obtenido: {resultadoDado}");
+            await Task.Delay(500);
 
+            if (jugadorTurnoActual == jugadorActual.NombreUsuario)
             {
-                // Obtener ficha seleccionada
                 Ficha fichaSeleccionada = Fichas.FirstOrDefault(f => f.IdFicha == resultadoDado);
-
-                // Verificar si la ficha ya está en las manos del jugador
-                if (!FichasEnMano.Contains(fichaSeleccionada))
+                if (!FichasEnMano.Contains(fichaSeleccionada) && fichaSeleccionada != null)
                 {
-                    // Agregar ficha a la mano del jugador
                     FichasEnMano.Add(fichaSeleccionada);
                     Fichas.Remove(fichaSeleccionada);
-                    //Metodos.MostrarMensaje($"Ficha {resultadoDado} agregada a tu mano.");
+
+                    await Task.Delay(500);
+
+                    MessageBoxResult decision = MessageBox.Show(
+                        "Obtuviste una ficha. ¿Quieres continuar o parar?",
+                        "Decisión de turno",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question
+                    );
+
+                    if (decision != MessageBoxResult.Yes)
+                    {
+                        await Task.Run(() => cliente.FinalizarTurno(idPartida, jugadorActual.NombreUsuario));
+                        
+                    }
                 }
                 else
                 {
-                    // Finalizar turno si ya tiene la ficha
-                    //Metodos.MostrarMensaje("Ya tienes esta ficha. Finalizando tu turno...");
+                    Metodos.MostrarMensaje("Esta ficha ya la tenias, por lo que termina tu turno");
                     await Task.Run(() => cliente.FinalizarTurno(idPartida, jugadorActual.NombreUsuario));
                 }
+
+            }
+            else
+            {
+                ZonaFichasJugador2.ItemsSource = FichasEnMano;
+                Ficha fichaSeleccionada = Fichas.FirstOrDefault(f => f.IdFicha == resultadoDado);
+                Fichas.Remove(fichaSeleccionada);
+            }
+            
+        }
+
+        private void ActualizarZonaFichas()
+        {
+            Metodos.MostrarMensaje($"Nombre jugador 2: {NombreJugador2.Text}");
+            if(NombreJugador2.Text == jugadorTurnoActual)
+            {
+                ZonaFichasJugador2.ItemsSource = FichasEnMano;
+            }else if(NombreJugador3.Text == jugadorTurnoActual)
+            {
+                ZonaFichasJugador3.ItemsSource = FichasEnMano;
+            }else if(NombreJugador4.Text == jugadorTurnoActual)
+            {
+                ZonaFichasJugador4.ItemsSource = FichasEnMano;
             }
         }
 
+
         private void ResetearFichas()
         {
-            // Mover todas las fichas de la mano de regreso al área general
-            foreach (var ficha in FichasEnMano.ToList()) // Usar ToList para evitar modificaciones durante la iteración
+            foreach (var ficha in FichasEnMano.ToList()) 
             {
-                Fichas.Add(ficha); // Agregar ficha a la colección principal
+                Fichas.Add(ficha);
             }
 
-            // Limpiar la colección de fichas en mano
             FichasEnMano.Clear();
 
         }

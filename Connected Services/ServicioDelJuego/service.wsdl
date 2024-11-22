@@ -344,6 +344,9 @@
   <wsdl:message name="IServicioPartida_RegistrarJugador_InputMessage">
     <wsdl:part name="parameters" element="tns:RegistrarJugador" />
   </wsdl:message>
+  <wsdl:message name="IServicioPartida_LanzarDado_InputMessage">
+    <wsdl:part name="parameters" element="tns:LanzarDado" />
+  </wsdl:message>
   <wsdl:message name="IServicioPartida_NotificarTurnoIniciado_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarTurnoIniciado" />
   </wsdl:message>
@@ -367,6 +370,12 @@
   </wsdl:message>
   <wsdl:message name="IServicioPartida_NotificarPartidaCreada_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarPartidaCreadaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarResultadoDado_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarResultadoDado" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarResultadoDado_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarResultadoDadoResponse" />
   </wsdl:message>
   <wsdl:portType name="IGestionCuentaServicio">
     <wsdl:operation name="AgregarJugador">
@@ -581,6 +590,9 @@
     <wsdl:operation name="RegistrarJugador">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/RegistrarJugador" message="tns:IServicioPartida_RegistrarJugador_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="LanzarDado">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/LanzarDado" message="tns:IServicioPartida_LanzarDado_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotificarTurnoIniciado">
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado" message="tns:IServicioPartida_NotificarTurnoIniciado_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciadoResponse" message="tns:IServicioPartida_NotificarTurnoIniciado_InputCallbackMessage" />
@@ -596,6 +608,10 @@
     <wsdl:operation name="NotificarPartidaCreada">
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarPartidaCreada" message="tns:IServicioPartida_NotificarPartidaCreada_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarPartidaCreadaResponse" message="tns:IServicioPartida_NotificarPartidaCreada_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarResultadoDado">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarResultadoDado" message="tns:IServicioPartida_NotificarResultadoDado_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarResultadoDadoResponse" message="tns:IServicioPartida_NotificarResultadoDado_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionCuentaServicio" type="tns:IGestionCuentaServicio">
@@ -1068,6 +1084,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="LanzarDado">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/LanzarDado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="NotificarTurnoIniciado">
       <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado" style="document" />
       <wsdl:input>
@@ -1097,6 +1119,15 @@
     </wsdl:operation>
     <wsdl:operation name="NotificarPartidaCreada">
       <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarPartidaCreada" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarResultadoDado">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarResultadoDado" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
