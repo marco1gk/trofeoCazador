@@ -134,6 +134,12 @@
   <wsdl:message name="IGestionCuentaServicio_VerificarContrasena_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerificarContrasenaResponse" />
   </wsdl:message>
+  <wsdl:message name="ILobbyManager_InvitarAmigoASala_InputMessage">
+    <wsdl:part name="parameters" element="tns:InvitarAmigoASala" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyManager_InvitarAmigoASala_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InvitarAmigoASalaResponse" />
+  </wsdl:message>
   <wsdl:message name="ILobbyManager_CrearSalaEspera_InputMessage">
     <wsdl:part name="parameters" element="tns:CrearSalaEspera" />
   </wsdl:message>
@@ -302,6 +308,9 @@
   <wsdl:message name="IGestorUsuariosConectados_DesregistrarUsuarioDeUsuariosEnLinea_InputMessage">
     <wsdl:part name="parameters" element="tns:DesregistrarUsuarioDeUsuariosEnLinea" />
   </wsdl:message>
+  <wsdl:message name="IGestorUsuariosConectados_NotificarInvitacionSala_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarInvitacionSala" />
+  </wsdl:message>
   <wsdl:message name="IGestorUsuariosConectados_NotificarUsuarioConectado_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarUsuarioConectado" />
   </wsdl:message>
@@ -406,6 +415,10 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ILobbyManager">
+    <wsdl:operation name="InvitarAmigoASala">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/InvitarAmigoASala" message="tns:ILobbyManager_InvitarAmigoASala_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/InvitarAmigoASalaResponse" message="tns:ILobbyManager_InvitarAmigoASala_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CrearSalaEspera">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/CrearSalaEspera" message="tns:ILobbyManager_CrearSalaEspera_InputMessage" />
     </wsdl:operation>
@@ -535,6 +548,9 @@
     </wsdl:operation>
     <wsdl:operation name="DesregistrarUsuarioDeUsuariosEnLinea">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/DesregistrarUsuarioDeUsuariosEnLinea" message="tns:IGestorUsuariosConectados_DesregistrarUsuarioDeUsuariosEnLinea_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarInvitacionSala">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarInvitacionSala" message="tns:IGestorUsuariosConectados_NotificarInvitacionSala_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarUsuarioConectado">
       <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioConectado" message="tns:IGestorUsuariosConectados_NotificarUsuarioConectado_OutputCallbackMessage" />
@@ -690,6 +706,15 @@
     <wsp:PolicyReference URI="#NetTcpBinding_ILobbyManager_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="InvitarAmigoASala">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/InvitarAmigoASala" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CrearSalaEspera">
       <soap12:operation soapAction="http://tempuri.org/ILobbyManager/CrearSalaEspera" style="document" />
       <wsdl:input>
@@ -974,6 +999,12 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarInvitacionSala">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotificarInvitacionSala" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotificarUsuarioConectado">
       <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioConectado" style="document" />

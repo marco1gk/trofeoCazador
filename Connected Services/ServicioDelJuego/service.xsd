@@ -162,6 +162,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="InvitarAmigoASala">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codigoSalaEspera" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreAmigo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreInvitador" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InvitarAmigoASalaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CrearSalaEspera">
     <xs:complexType>
       <xs:sequence>
@@ -522,6 +536,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarInvitacionSala">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreInvitador" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="codigoSalaEspera" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

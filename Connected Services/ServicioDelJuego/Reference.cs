@@ -435,6 +435,12 @@ namespace trofeoCazador.ServicioDelJuego {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.ILobbyManager", CallbackContract=typeof(trofeoCazador.ServicioDelJuego.ILobbyManagerCallback))]
     public interface ILobbyManager {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/InvitarAmigoASala", ReplyAction="http://tempuri.org/ILobbyManager/InvitarAmigoASalaResponse")]
+        void InvitarAmigoASala(string codigoSalaEspera, string nombreAmigo, string nombreInvitador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/InvitarAmigoASala", ReplyAction="http://tempuri.org/ILobbyManager/InvitarAmigoASalaResponse")]
+        System.Threading.Tasks.Task InvitarAmigoASalaAsync(string codigoSalaEspera, string nombreAmigo, string nombreInvitador);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/CrearSalaEspera")]
         void CrearSalaEspera(trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador);
         
@@ -548,6 +554,14 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void InvitarAmigoASala(string codigoSalaEspera, string nombreAmigo, string nombreInvitador) {
+            base.Channel.InvitarAmigoASala(codigoSalaEspera, nombreAmigo, nombreInvitador);
+        }
+        
+        public System.Threading.Tasks.Task InvitarAmigoASalaAsync(string codigoSalaEspera, string nombreAmigo, string nombreInvitador) {
+            return base.Channel.InvitarAmigoASalaAsync(codigoSalaEspera, nombreAmigo, nombreInvitador);
         }
         
         public void CrearSalaEspera(trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador) {
@@ -863,6 +877,9 @@ namespace trofeoCazador.ServicioDelJuego {
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IGestorUsuariosConectadosCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/NotificarInvitacionSala")]
+        void NotificarInvitacionSala(string nombreInvitador, string codigoSalaEspera);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioConectado", ReplyAction="http://tempuri.org/IGestorUsuariosConectados/NotificarUsuarioConectadoResponse")]
         void NotificarUsuarioConectado(string nombreUsuario);

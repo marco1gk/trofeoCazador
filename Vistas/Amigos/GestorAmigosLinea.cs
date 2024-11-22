@@ -24,6 +24,7 @@ namespace trofeoCazador.Vistas.Amigos
        
         private void CargarAmigosJugador()
         {
+            stackPanelFriends.Children.Clear();
             GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
            
             string[] nombreUsuarioAmigosJugador = gestorAmistadCliente.ObtenerListaNombresUsuariosAmigos(sesion.JugadorId);
@@ -49,67 +50,101 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void CambiarEstadoJugador(string nombreUsuario, bool estaEnLinea)
         {
-              Console.WriteLine($"Cambiando estado de {nombreUsuario} a {(estaEnLinea ? "Conectado" : "Desconectado")}");
+            Console.WriteLine($"Cambiando estado de {nombreUsuario} a {(estaEnLinea ? "Conectado" : "Desconectado")}");
+
             string idLabel = "lb";
             string idUsuarioItem = idLabel + nombreUsuario;
-            XAMLActiveUserItemControl usuarionEnLineaItem = BuscarControlElementoUsuarioActivoPorId(idUsuarioItem);
 
-            if (usuarionEnLineaItem != null)
+            // Asegúrese de que estamos en el hilo de la UI antes de realizar cualquier cambio visual
+            Dispatcher.Invoke(() =>
             {
-                SolidColorBrush estadoJugadorColor;
+                XAMLActiveUserItemControl usuarioEnLineaItem = BuscarControlElementoUsuarioActivoPorId(idUsuarioItem);
 
-                if (estaEnLinea)
+                if (usuarioEnLineaItem != null)
                 {
-                    estadoJugadorColor = Utilities.CrearColorDeHexadecimal(ESTADOENLINEA);
+                    usuarioEnLineaItem.IsConnected = estaEnLinea;
+
+                    // Log para confirmar el cambio en el color
+                    Console.WriteLine($"Estado de conexión para {nombreUsuario}: {usuarioEnLineaItem.IsConnected}");
+                    Console.WriteLine($"Estado actualizado en GUI: {usuarioEnLineaItem.rectangleStatusPlayer.Fill}");
                 }
                 else
                 {
-                    estadoJugadorColor = Utilities.CrearColorDeHexadecimal(ESTADOFUERADELINEA);
+                    Console.WriteLine($"No se encontró el control para {nombreUsuario}");
                 }
+            });
 
-                usuarionEnLineaItem.rectangleStatusPlayer.Fill = estadoJugadorColor;
-            }
         }
+
+
+
+
 
 
         private XAMLActiveUserItemControl BuscarControlElementoUsuarioActivoPorId(string idUsuarioItem)
         {
-            foreach (XAMLActiveUserItemControl item in stackPanelFriends.Children)
+            foreach (XAMLActiveUserItemControl item in stackPanelFriends.Children.OfType<XAMLActiveUserItemControl>())
             {
                 if (item.Name == idUsuarioItem)
                 {
                     return item;
                 }
             }
-
             return null;
         }
+
+
 
         private void AñadirUsuariosListaAmigos(string[] nombresUsuarioEnLinea)
         {
             foreach (var nombreUsuario in nombresUsuarioEnLinea)
             {
+                Console.WriteLine($"Añadiendo usuario {nombreUsuario} a la lista de amigos");
                 AñadirUsuarioListaAmigos(nombreUsuario, ESTADOFUERADELINEA);
             }
         }
 
         private void AñadirUsuarioListaAmigos(string nombreUsuario, string estadoConexiónJugador)
         {
-            XAMLActiveUserItemControl elementoUsuarioEnLínea = CrearControlElementoUsuarioActivo(nombreUsuario, estadoConexiónJugador);
-            stackPanelFriends.Children.Add(elementoUsuarioEnLínea);
+            // Busca si el control ya existe en el StackPanel
+            var controlExistente = stackPanelFriends.Children
+                .OfType<XAMLActiveUserItemControl>()
+                .FirstOrDefault(ctrl => ctrl.Name == "lb" + nombreUsuario);
+
+            if (controlExistente != null)
+            {
+                Console.WriteLine($"El control para {nombreUsuario} ya existe. Actualizando estado.");
+                // Actualiza el estado si el control ya existe
+                controlExistente.IsConnected = estadoConexiónJugador == ESTADOENLINEA;
+            }
+            else
+            {
+                Console.WriteLine($"Creando control para {nombreUsuario}");
+                // Crea un nuevo control si no existe
+                XAMLActiveUserItemControl elementoUsuarioEnLínea = CrearControlElementoUsuarioActivo(nombreUsuario, estadoConexiónJugador);
+                stackPanelFriends.Children.Add(elementoUsuarioEnLínea);
+                Console.WriteLine($"Control añadido: {elementoUsuarioEnLínea.Name}");
+            }
         }
 
-        private XAMLActiveUserItemControl CrearControlElementoUsuarioActivo(string nombreUsuario, string colorHexadecimal)
+
+
+
+
+        XAMLActiveUserItemControl CrearControlElementoUsuarioActivo(string nombreUsuario, string colorHexadecimal)
         {
-            string idItem = "lb";
-            string idUsuarioItem = idItem + nombreUsuario;
-            XAMLActiveUserItemControl usuarioEnLineaItem = new XAMLActiveUserItemControl(nombreUsuario);
-            usuarioEnLineaItem.Name = idUsuarioItem;
+            XAMLActiveUserItemControl usuarioEnLineaItem = new XAMLActiveUserItemControl(nombreUsuario)
+            {
+                Name = "lb" + nombreUsuario
+            };
+
+            usuarioEnLineaItem.IsConnected = false; // Inicializa como desconectado
             usuarioEnLineaItem.ButtonClicked += ElementoUsuarioEnLínea_BotónEliminarAmigoClickeado;
-         
 
             return usuarioEnLineaItem;
         }
+
+
 
         private void ElementoUsuarioEnLínea_BotónEliminarAmigoClickeado(object sender, ArgumentosDeEventoDeClicDeBotón e)
         {
@@ -159,12 +194,14 @@ namespace trofeoCazador.Vistas.Amigos
         {
             bool esEnLinea = true;
             CambiarEstadoJugador(nombreUsuario, esEnLinea);
+            Console.WriteLine(nombreUsuario + " se ha conectado");
         }
 
         public void NotificarUsuarioDesconectado(string nombreUsuario)
         {
             bool esEnLinea = false;
             CambiarEstadoJugador(nombreUsuario, esEnLinea);
+            Console.WriteLine(nombreUsuario+" se ha desconectado");
         }
 
         public void NotificarAmigosEnLinea(string[] nombresUsuariosEnLinea)
@@ -175,31 +212,34 @@ namespace trofeoCazador.Vistas.Amigos
             SuscribirUsuarioAlDiccionarioDeAmigosEnLínea();
         }
 
+
+
         public void Ping()
         {
             Console.WriteLine("es el ping");
+        }
+
+        public void NotificarInvitacionSala(string nombreInvitador, string codigoSalaEspera)
+        {
+            Console.WriteLine("te invito un we");
+            MessageBox.Show($"{nombreInvitador} te ha invitado a a la sala con codigo " + codigoSalaEspera);
         }
     }
     public static class Utilities
     {
         public static SolidColorBrush CrearColorDeHexadecimal(string coloHexadecimal)
         {
-            SolidColorBrush solidColorBrush = null;
-
-            if (coloHexadecimal != null)
+            try
             {
-                try
-                {
-                    solidColorBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(coloHexadecimal));
-                }
-                catch (FormatException ex)
-                {
-                    Console.WriteLine(ex);
-                }
+                return new SolidColorBrush((Color)ColorConverter.ConvertFromString(coloHexadecimal));
             }
-
-            return solidColorBrush;
+            catch (FormatException ex)
+            {
+                Console.WriteLine($"Error al convertir el color {coloHexadecimal}: {ex.Message}");
+                return Brushes.Gray; // Color por defecto en caso de error
+            }
         }
+
 
         public static Image CrearImagenPorPath(string imagenPath)
         {
@@ -229,30 +269,3 @@ namespace trofeoCazador.Vistas.Amigos
 
 
 }
-//private void BtnSignOff_Click(object sender, RoutedEventArgs e)
-//{
-//    ExitGameFromLobby();
-//    NavigationService.Navigate(new XAMLInicioSesion());
-//}
-
-//public void BtnCloseWindow_Click()
-//{
-//    ExitGameFromLobby();
-//}
-
-//private void ExitGameFromLobby()
-//{
-//    InstanceContext context = new InstanceContext(this);
-//    GestorUsuariosConectadosClient client = new GestorUsuariosConectadosClient(context);
-
-
-//    try
-//    {
-//        // Asegurarse de eliminar correctamente al jugador de la lista de jugadores activos
-//        client.UnregisterUserToOnlineUsers(sesion.NombreUsuario);
-//    }
-//    catch (Exception ex)
-//    {
-//        Console.WriteLine(ex);
-//    }
-//}

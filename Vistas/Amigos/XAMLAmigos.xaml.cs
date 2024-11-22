@@ -54,13 +54,6 @@ namespace trofeoCazador.Vistas.Amigos
             });
         }
 
-
-        public void BtnCloseFriendsMenu_Click(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("este");
-        }
-
-
         private void ImagenCLicAtras(object sender, MouseButtonEventArgs e)
         {
             NavigationService.GoBack();
@@ -74,7 +67,7 @@ namespace trofeoCazador.Vistas.Amigos
             try
             {
                 
-              MostrarComoUsuarioActivo();
+             // MostrarComoUsuarioActivo();
                 CargarAmigosJugador();
 
             }

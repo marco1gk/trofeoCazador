@@ -7,6 +7,7 @@ using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Utilidades;
 using trofeoCazador.VentanasReutilizables;
 using trofeoCazador.Vistas.SalaEspera;
+using trofeoCazador.Vistas.Amigos;
 
 namespace trofeoCazador.Vistas.InicioSesion
 {
@@ -61,6 +62,10 @@ namespace trofeoCazador.Vistas.InicioSesion
                 sesion.NombreUsuario = jugador.NombreUsuario;
                 sesion.NumeroFotoPerfil = jugador.NumeroFotoPerfil;
                 sesion.Correo = jugador.Correo;
+
+
+                XAMLAmigos paginaAmigos = new XAMLAmigos();
+                paginaAmigos.MostrarComoUsuarioActivo();
 
                 this.NavigationService.Navigate(new Uri("Vistas/Menu/XAMLMenu.xaml", UriKind.Relative));
             }

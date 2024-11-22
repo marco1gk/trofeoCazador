@@ -30,19 +30,31 @@ namespace trofeoCazador.Vistas.Amigos
             get => _isConnected;
             set
             {
-                _isConnected = value;
-                // Cambiar el color de rectangleStatusPlayer dependiendo del estado.
-                rectangleStatusPlayer.Fill = _isConnected ? Brushes.Green : Brushes.Red;
+                if (_isConnected != value)
+                {
+                    _isConnected = value;
+                    Console.WriteLine("Estado actualizado: " + (_isConnected ? "Conectado" : "Desconectado"));
+
+                    // Cambiar el color aquí
+                    rectangleStatusPlayer.Fill = _isConnected ? Brushes.Green : Brushes.Red;
+
+                    Console.WriteLine($"Nuevo color en GUI: {rectangleStatusPlayer.Fill}");
+                }
             }
         }
+
+
+
+
 
         public XAMLActiveUserItemControl(string username)
         {
             InitializeComponent();
             _username = username;
             lbUsername.Content = _username;
+          
             // Inicializa con el color de desconectado (rojo).
-            rectangleStatusPlayer.Fill = Brushes.Red;
+           // rectangleStatusPlayer.Fill = Brushes.Red;
         }
 
         private void ImgOptionPlayer_Click(object sender, MouseButtonEventArgs e)

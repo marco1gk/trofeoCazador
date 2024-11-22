@@ -12,6 +12,7 @@ using trofeoCazador.Vistas.InicioSesion;
 using System.Windows.Media.Imaging;
 using trofeoCazador.Vistas.SalaEspera;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace trofeoCazador.Vistas.SalaEspera
 {
@@ -20,16 +21,42 @@ namespace trofeoCazador.Vistas.SalaEspera
         string anfitrion;
         private LobbyManagerClient cliente;
         private string codigoSalaEsperaActual;
+        private JugadorSalaEspera _selectedAmigo;
         private int numeroJugadoresSalaEspera = 1;
+        private GestorAmistadClient clienteAmistadClient;
+
         public ObservableCollection<JugadorSalaEspera> JugadoresEnSala { get; set; }
-       
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         public XAMLSalaEspera()
         {
             InitializeComponent();
             JugadoresEnSala = new ObservableCollection<JugadorSalaEspera>();
-            DataContext = this; 
+            AmigosDisponibles = new ObservableCollection<JugadorSalaEspera>();
+            DataContext = this; // Asegúrate de que el DataContext esté asignado
             SetupClient();
+            CargarAmigosJugador(); // Llamar a este método para cargar los amigos
         }
+
+        public JugadorSalaEspera SelectedAmigo
+        {
+            get { return _selectedAmigo; }
+            set
+            {
+                if (_selectedAmigo != value)
+                {
+                    _selectedAmigo = value;
+                    OnPropertyChanged(nameof(SelectedAmigo)); // Asegúrate de implementar INotifyPropertyChanged
+                }
+            }
+        }
+
+
         private void JugadorControl_JugadorExpulsado(object sender, string nombreUsuario)
         {
             ExpulsarJugadorSalaEsperaAsync(nombreUsuario);
@@ -44,6 +71,7 @@ namespace trofeoCazador.Vistas.SalaEspera
             gridChat.Visibility = Visibility.Visible;
             btnIniciarPartida.Visibility = Visibility.Visible;
             btnSalir.Visibility = Visibility.Visible;
+            stackPanelAmigos.Visibility = Visibility.Visible;
 
             SingletonSesion sesion = SingletonSesion.Instancia;
             string nombreUsuario = sesion.NombreUsuario;
@@ -100,6 +128,7 @@ namespace trofeoCazador.Vistas.SalaEspera
                 gridChat.Visibility = Visibility.Visible;
                 btnSalir.Visibility = Visibility.Visible;
                 btnIniciarPartida.Visibility = Visibility.Visible;
+
                 // Actualizar el código de la sala actual
                 codigoSalaEsperaActual = codigoLobby;
                 txtCodigoLobby.Visibility= Visibility.Collapsed;
@@ -370,7 +399,66 @@ namespace trofeoCazador.Vistas.SalaEspera
                 MessageBox.Show($"Error al salir del lobby: {ex.Message}");
             }
         }
+        public void NotificarInvitacionSala(string nombreInvitador, string codigoSalaEspera)
+        {
+            Console.WriteLine($"Has sido invitado por {nombreInvitador} a unirte a la sala: {codigoSalaEspera}.");
+            // Aquí podrías mostrar un cuadro de diálogo para aceptar o rechazar la invitación.
+        }
 
-       
+        private void BtnInvitarAmigo_Click(object sender, RoutedEventArgs e)
+        {
+            var amigoSeleccionado = comboBoxAmigos.SelectedItem as JugadorSalaEspera;
+
+            if (amigoSeleccionado != null)
+            {
+                try
+                {
+                    string codigoSala = txtCodigoLobby.Text; // Obtener el código de la sala actual
+                    string nombreUsuario = SingletonSesion.Instancia.NombreUsuario; // Nombre del invitador
+
+                    // Llamar al servicio para enviar la invitación
+                    cliente.InvitarAmigoASala(codigoSalaEsperaActual, amigoSeleccionado.NombreUsuario, nombreUsuario);
+
+                    MessageBox.Show($"Se envió la invitación a {amigoSeleccionado.NombreUsuario}.", "Invitación enviada", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (CommunicationException ex)
+                {
+                    MessageBox.Show($" primer catch---Error al enviar la invitación: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al enviar la invitación: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecciona un amigo para invitar.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+
+        public ObservableCollection<JugadorSalaEspera> AmigosDisponibles { get; set; } = new ObservableCollection<JugadorSalaEspera>();
+
+
+        private void CargarAmigosJugador()
+        {
+            GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
+            int idJugadorActual = SingletonSesion.Instancia.JugadorId;
+            SingletonSesion sesion = SingletonSesion.Instancia;
+            string[] nombreUsuarioAmigosJugador = gestorAmistadCliente.ObtenerListaNombresUsuariosAmigos(sesion.JugadorId);
+
+            // Agregar los amigos a la colección de amigos disponibles
+            AmigosDisponibles.Clear(); // Limpiar la lista anterior
+            foreach (var amigo in nombreUsuarioAmigosJugador)
+            {
+                // Crear un objeto JugadorSalaEspera para cada amigo y agregarlo a la lista
+                JugadorSalaEspera amigoSala = new JugadorSalaEspera { NombreUsuario = amigo };
+                AmigosDisponibles.Add(amigoSala);
+                Console.WriteLine($"Amigo: {amigo}");
+            }
+        }
+
+
+
     }
 }
