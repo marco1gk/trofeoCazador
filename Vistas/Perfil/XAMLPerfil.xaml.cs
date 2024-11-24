@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Recursos;
+using System.ServiceModel;
+using trofeoCazador.Utilidades;
 
 
 namespace trofeoCazador.Vistas.Perfil
@@ -32,16 +34,49 @@ namespace trofeoCazador.Vistas.Perfil
 
         private void CargarPerfil(int IdJugador)
         {
-            GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            JugadorDataContract jugador = proxy.ObtenerJugador(IdJugador);
-            if (jugador != null)
+            try
             {
-                UsuarioLabel.Content = jugador.NombreUsuario;
-                CorreoLabel.Content = jugador.Correo;
-            
-                string rutaImagen = ObtenerRutaImagenPerfil(jugador.NumeroFotoPerfil);
-                imgPerfil.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
+                GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
+                JugadorDataContract jugador = proxy.ObtenerJugador(IdJugador);
+                if (jugador != null)
+                {
+                    UsuarioLabel.Content = jugador.NombreUsuario;
+                    CorreoLabel.Content = jugador.Correo;
+
+                    string rutaImagen = ObtenerRutaImagenPerfil(jugador.NumeroFotoPerfil);
+                    imgPerfil.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
+                }
+
             }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+            }
+            catch (CommunicationException ex)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+            }
+            
             
         }
         private string ObtenerRutaImagenPerfil(int numeroFotoPerfil)

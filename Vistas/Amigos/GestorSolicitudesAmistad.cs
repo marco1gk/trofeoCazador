@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Utilidades;
+using trofeoCazador.Vistas.InicioSesion;
 
 namespace trofeoCazador.Vistas.Amigos
 {
@@ -28,23 +29,28 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (EndpointNotFoundException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
-            catch (FaultException ex)
+            catch (FaultException )
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
         }
 
@@ -57,23 +63,33 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (EndpointNotFoundException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
-            catch (FaultException ex)
+            catch (FaultException<HuntersTrophyExcepcion>)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
         }
 
@@ -89,15 +105,18 @@ namespace trofeoCazador.Vistas.Amigos
             {
                 AgregarSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
                 EnviarSolicitudAmistad(nombreDeUsuarioJugadorSolicitado);
-
-                Console.WriteLine("");
+                //todo, pasar a resources
+                VentanasEmergentes.CreateEmergentWindow("Solicitud de amistad",
+                     "La solicitud de amistad fue envíada a " + " " + nombreDeUsuarioJugadorSolicitado);
 
                 tbxNombreDeUsuarioEnviarSolicitud.Text = string.Empty;
             }
             else
             {
-             //   EmergentWindows.CreateEmergentWindow(Properties.Recursos.lbFriendRequest,
-               //     Properties.Resources.tbkFriendRequestErrorDescription);
+                //todo, pasar a resources
+                VentanasEmergentes.CreateEmergentWindow("Solicitud de amistad",
+                        "No fue posible enviar la solictud de amistad, inténtelo de nuevo");
+
             }
         }
 
@@ -145,7 +164,6 @@ namespace trofeoCazador.Vistas.Amigos
             
             string[] nombresAmigos = ObtenerListaAmigos();
 
-            // Agrega cada amigo a la lista en la interfaz
             if (nombresAmigos != null)
             {
                 foreach (string nombreUsuarioAmigo in nombresAmigos)
@@ -163,26 +181,36 @@ namespace trofeoCazador.Vistas.Amigos
             try
             {
                 nombresUsuarioAmigo = gestorAmistadCliente.ObtenerListaNombresUsuariosAmigos(sesion.JugadorId).ToArray();
-            }//GetListUsernameFriends
+            }
             catch (EndpointNotFoundException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (FaultException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
 
             return nombresUsuarioAmigo;
@@ -232,30 +260,40 @@ namespace trofeoCazador.Vistas.Amigos
             GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
             string[] nombreUsuarioJugadores = null;
 
-            try//GetUsernamePlayersRequesters
+            try
             {
                 nombreUsuarioJugadores = gestorAmistadCliente.ObtenerNombresUsuariosSolicitantes(sesion.JugadorId);
                 Console.WriteLine($"Solicitudes encontradas: {nombreUsuarioJugadores?.Length ?? 0}");
             }
             catch (EndpointNotFoundException ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (FaultException ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
 
             return nombreUsuarioJugadores;
@@ -326,23 +364,33 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (EndpointNotFoundException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
-            catch (FaultException ex)
+            catch (FaultException<HuntersTrophyExcepcion>)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (FaultException )
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
         }
 
@@ -358,23 +406,33 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (EndpointNotFoundException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
-            catch (FaultException ex)
+            catch (FaultException<HuntersTrophyExcepcion>)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (FaultException )
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
         }
 

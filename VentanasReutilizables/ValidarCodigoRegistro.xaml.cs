@@ -29,8 +29,8 @@ namespace trofeoCazador.VentanasReutilizables
         public ValidarCodigoRegistro(JugadorDataContract jugador, string correo, string codigoEnviado)
         {
             InitializeComponent();
-            _jugador = jugador;  // Guardamos la información del jugador
-            _codigoEnviado = codigoEnviado; // Guardamos el código enviado
+            _jugador = jugador;  
+            _codigoEnviado = codigoEnviado; 
             _correo = correo;
 
         }
@@ -39,16 +39,15 @@ namespace trofeoCazador.VentanasReutilizables
         {
             string codigoIngresado = tbxCode.Text.Trim();
 
-            // Validar si los códigos coinciden
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
             if (proxy.ValidarCodigo(codigoIngresado, _codigoEnviado))
             {
                 if(_jugador != null)
                 {
-                    // Si el código es correcto, creamos la cuenta
+                  
                     proxy.AgregarJugador(_jugador);
                     MessageBox.Show("Cuenta creada exitosamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close(); // Cerramos la ventana de validación
+                    this.Close(); 
                 }
                 else
                 {
@@ -65,10 +64,9 @@ namespace trofeoCazador.VentanasReutilizables
             }
         }
 
-        // Evento para cerrar la ventana
         private void CerrarVentana(object sender, MouseButtonEventArgs e)
         {
-            this.Close(); // Cerrar la ventana cuando el usuario hace clic en la imagen de "cerrar"
+            this.Close(); 
         }
     }
 

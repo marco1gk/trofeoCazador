@@ -26,6 +26,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="dd088ed1-024f-4f12-95bc-b7801cbfa7e3" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="f1f4cf70-76f5-458e-b54b-f75fa8ec6321" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
     <MetadataFile FileName="ServicioJuego.xsd" MetadataType="Schema" ID="f85dcdd3-15ec-4c77-a45e-bf0042498e95" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
+    <MetadataFile FileName="ServicioJuego.Excepciones.xsd" MetadataType="Schema" ID="18fb6286-970e-4065-91d8-730c18d31641" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
     <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="8deba70b-260d-4194-b6c0-88411e796acf" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
   </Metadata>
   <Extensions>

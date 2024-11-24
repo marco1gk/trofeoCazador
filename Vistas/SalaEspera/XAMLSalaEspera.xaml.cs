@@ -1,4 +1,4 @@
-﻿using System;
+﻿  using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using trofeoCazador.Vistas.SalaEspera;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.InteropServices.WindowsRuntime;
+using trofeoCazador.Utilidades;
 
 namespace trofeoCazador.Vistas.SalaEspera
 {
@@ -33,14 +35,15 @@ namespace trofeoCazador.Vistas.SalaEspera
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        
         public XAMLSalaEspera()
         {
             InitializeComponent();
             JugadoresEnSala = new ObservableCollection<JugadorSalaEspera>();
             AmigosDisponibles = new ObservableCollection<JugadorSalaEspera>();
-            DataContext = this; // Asegúrate de que el DataContext esté asignado
+            DataContext = this;
             SetupClient();
-            CargarAmigosJugador(); // Llamar a este método para cargar los amigos
+            CargarAmigosJugador();
         }
 
         public JugadorSalaEspera SelectedAmigo
@@ -51,7 +54,7 @@ namespace trofeoCazador.Vistas.SalaEspera
                 if (_selectedAmigo != value)
                 {
                     _selectedAmigo = value;
-                    OnPropertyChanged(nameof(SelectedAmigo)); // Asegúrate de implementar INotifyPropertyChanged
+                    OnPropertyChanged(nameof(SelectedAmigo));
                 }
             }
         }
@@ -61,8 +64,14 @@ namespace trofeoCazador.Vistas.SalaEspera
         {
             ExpulsarJugadorSalaEsperaAsync(nombreUsuario);
             MessageBox.Show($"{nombreUsuario} ha sido expulsado.");
-            
+
         }
+
+        public string getNombreAnfitrion()
+        {
+            return anfitrion;
+        }
+   
 
         private async void BtnCrearLobby_Click(object sender, RoutedEventArgs e)
         {
@@ -72,7 +81,7 @@ namespace trofeoCazador.Vistas.SalaEspera
             btnIniciarPartida.Visibility = Visibility.Visible;
             btnSalir.Visibility = Visibility.Visible;
             stackPanelAmigos.Visibility = Visibility.Visible;
-
+           
             SingletonSesion sesion = SingletonSesion.Instancia;
             string nombreUsuario = sesion.NombreUsuario;
             anfitrion = nombreUsuario;
@@ -85,12 +94,36 @@ namespace trofeoCazador.Vistas.SalaEspera
 
                 cliente.CrearSalaEspera(lb);
                 btnIniciarPartida.Visibility = Visibility.Visible;
-                MessageBox.Show("Se ha creado un nuevo lobby POR ."+nombreUsuario   );
+                MessageBox.Show("Se ha creado un nuevo lobby por "+nombreUsuario   );
 
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+            }
+            catch (CommunicationException ex)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al crear el lobby: {ex.Message}");
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
         }
         bool isJoiningLobby = false;
@@ -120,7 +153,6 @@ namespace trofeoCazador.Vistas.SalaEspera
             try
             {
                 Console.WriteLine("antes de unirse a sala");
-                // Intentar unirse a un lobby existente con el código proporcionado
                 cliente.UnirseSalaEspera(codigoLobby, lb);
                 Console.WriteLine("después de unirse a sala");
                 stackPanelOpciones.Visibility = Visibility.Collapsed;
@@ -129,19 +161,41 @@ namespace trofeoCazador.Vistas.SalaEspera
                 btnSalir.Visibility = Visibility.Visible;
                 btnIniciarPartida.Visibility = Visibility.Visible;
 
-                // Actualizar el código de la sala actual
                 codigoSalaEsperaActual = codigoLobby;
                 txtCodigoLobby.Visibility= Visibility.Collapsed;
                 MessageBox.Show($"Te has unido al lobby con código: {codigoLobby}");
             }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+            }
+            catch (CommunicationException ex)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
-                MessageBox.Show($"Error al unirse al lobby: {ex.Message}");
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
             finally
             {
-                isJoiningLobby = false;  // Resetear la bandera
+                isJoiningLobby = false;  
             }
 
         }
@@ -165,9 +219,33 @@ namespace trofeoCazador.Vistas.SalaEspera
                 await Task.Run(() => cliente.MandarMensaje(message)); 
                 tbxMessage.Clear();
             }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+            }
+            catch (CommunicationException ex)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al enviar mensaje: {ex.Message}");
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
         }
 
@@ -192,9 +270,33 @@ namespace trofeoCazador.Vistas.SalaEspera
                 cliente.UnirSalaEsperaComoAnfitrion(lobbyCode);
                 MessageBox.Show($"Intentando unirse al lobby {lobbyCode} como anfitrión...");
             }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+            }
+            catch (CommunicationException ex)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al unirse al lobby: {ex.Message}");
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
         }
 
@@ -205,9 +307,33 @@ namespace trofeoCazador.Vistas.SalaEspera
                 cliente.SalirSalaEspera(lobbyCode, username);
                 MessageBox.Show($"{username} ha salido del lobby {lobbyCode}.");
             }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+            }
+            catch (CommunicationException ex)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al salir del lobby: {ex.Message}");
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
         }
 
@@ -234,25 +360,33 @@ namespace trofeoCazador.Vistas.SalaEspera
             }
             catch (EndpointNotFoundException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
-            catch (FaultException ex)
+            catch (FaultException<HuntersTrophyExcepcion>)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
             }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
-    
+
         }
 
         public void NotificarJugadorSeUnioSalaEspera(JugadorSalaEspera jugador, int numOfPlayersInLobby)
@@ -271,17 +405,12 @@ namespace trofeoCazador.Vistas.SalaEspera
                 var jugador = JugadoresEnSala.FirstOrDefault(j => j.NombreUsuario == username);
                 if (jugador != null)
                 {
-                    JugadoresEnSala.Remove(jugador); // Eliminar al jugador de la colección
+                    JugadoresEnSala.Remove(jugador); 
                     numeroJugadoresSalaEspera--;
 
                 }
             });
         }
-
-
-
-
-
 
         public void NotificarIniciarPartida(JugadorPartida[] jugadores)
         {
@@ -349,9 +478,33 @@ namespace trofeoCazador.Vistas.SalaEspera
                     await Task.Run(() => cliente.IniciarPartida(codigoSalaEsperaActual));
                     
                 }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                    ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CreateTimeOutMessageWindow();
+                    ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+                }
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CreateServerErrorMessageWindow();
+                }
+                catch (CommunicationException ex)
+                {
+                    VentanasEmergentes.CreateServerErrorMessageWindow();
+                    ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error al iniciar la partida: {ex.Message}");
+                    VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                    ManejadorExcepciones.HandleFatalException(ex, NavigationService);
                 }
             }
             else
@@ -394,15 +547,39 @@ namespace trofeoCazador.Vistas.SalaEspera
                     NavigationService.Navigate(new XAMLInicioSesion());
                 }
             }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+            }
+            catch (CommunicationException ex)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al salir del lobby: {ex.Message}");
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
         }
         public void NotificarInvitacionSala(string nombreInvitador, string codigoSalaEspera)
         {
             Console.WriteLine($"Has sido invitado por {nombreInvitador} a unirte a la sala: {codigoSalaEspera}.");
-            // Aquí podrías mostrar un cuadro de diálogo para aceptar o rechazar la invitación.
+         
         }
 
         private void BtnInvitarAmigo_Click(object sender, RoutedEventArgs e)
@@ -413,21 +590,40 @@ namespace trofeoCazador.Vistas.SalaEspera
             {
                 try
                 {
-                    string codigoSala = txtCodigoLobby.Text; // Obtener el código de la sala actual
-                    string nombreUsuario = SingletonSesion.Instancia.NombreUsuario; // Nombre del invitador
+                    string codigoSala = txtCodigoLobby.Text; 
+                    string nombreUsuario = SingletonSesion.Instancia.NombreUsuario; 
 
-                    // Llamar al servicio para enviar la invitación
                     cliente.InvitarAmigoASala(codigoSalaEsperaActual, amigoSeleccionado.NombreUsuario, nombreUsuario);
 
                     MessageBox.Show($"Se envió la invitación a {amigoSeleccionado.NombreUsuario}.", "Invitación enviada", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                    ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CreateTimeOutMessageWindow();
+                    ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+                }
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CreateServerErrorMessageWindow();
+                }
                 catch (CommunicationException ex)
                 {
-                    MessageBox.Show($" primer catch---Error al enviar la invitación: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    VentanasEmergentes.CreateServerErrorMessageWindow();
+                    ManejadorExcepciones.HandleErrorException(ex, NavigationService);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error al enviar la invitación: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                    ManejadorExcepciones.HandleFatalException(ex, NavigationService);
                 }
             }
             else
@@ -447,11 +643,9 @@ namespace trofeoCazador.Vistas.SalaEspera
             SingletonSesion sesion = SingletonSesion.Instancia;
             string[] nombreUsuarioAmigosJugador = gestorAmistadCliente.ObtenerListaNombresUsuariosAmigos(sesion.JugadorId);
 
-            // Agregar los amigos a la colección de amigos disponibles
-            AmigosDisponibles.Clear(); // Limpiar la lista anterior
+            AmigosDisponibles.Clear(); 
             foreach (var amigo in nombreUsuarioAmigosJugador)
             {
-                // Crear un objeto JugadorSalaEspera para cada amigo y agregarlo a la lista
                 JugadorSalaEspera amigoSala = new JugadorSalaEspera { NombreUsuario = amigo };
                 AmigosDisponibles.Add(amigoSala);
                 Console.WriteLine($"Amigo: {amigo}");

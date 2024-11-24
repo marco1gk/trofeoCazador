@@ -8,6 +8,7 @@ using trofeoCazador.Utilidades;
 using trofeoCazador.VentanasReutilizables;
 using trofeoCazador.Vistas.SalaEspera;
 using trofeoCazador.Vistas.Amigos;
+using System.ServiceModel;
 
 namespace trofeoCazador.Vistas.InicioSesion
 {
@@ -40,40 +41,73 @@ namespace trofeoCazador.Vistas.InicioSesion
 
         private void BtnIniciarSesion(object sender, RoutedEventArgs e)
         {
-            lbCredencialesIncorrectas.Visibility = Visibility.Hidden;
-
-            if (!ValidarCampos())
+            try
             {
-                lbCredencialesIncorrectas.Visibility = Visibility.Visible;
-                return; 
+                lbCredencialesIncorrectas.Visibility = Visibility.Hidden;
+
+                if (!ValidarCampos())
+                {
+                    lbCredencialesIncorrectas.Visibility = Visibility.Visible;
+                    return;
+                }
+
+                string contraseña = ContrasenaPasswordBox.Password;
+                string usuario = UsuarioTextBox.Text;
+
+                GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
+                JugadorDataContract jugador = proxy.ValidarInicioSesion(usuario, contraseña);
+
+
+                if (jugador != null)
+                {
+                    SingletonSesion sesion = SingletonSesion.Instancia;
+                    sesion.JugadorId = jugador.JugadorId;
+                    sesion.NombreUsuario = jugador.NombreUsuario;
+                    sesion.NumeroFotoPerfil = jugador.NumeroFotoPerfil;
+                    sesion.Correo = jugador.Correo;
+
+
+                    XAMLAmigos paginaAmigos = new XAMLAmigos();
+                    paginaAmigos.MostrarComoUsuarioActivo();
+
+                    this.NavigationService.Navigate(new Uri("Vistas/Menu/XAMLMenu.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    lbCredencialesIncorrectas.Visibility = Visibility.Visible;
+                    Console.WriteLine("El inicio de sesión falló o los datos no fueron recuperados correctamente.");
+                }
+
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+            }
+            catch (CommunicationException ex)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
 
-            string contraseña = ContrasenaPasswordBox.Password;
-            string usuario = UsuarioTextBox.Text;
-
-            GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            JugadorDataContract jugador = proxy.ValidarInicioSesion(usuario, contraseña);
-            
-
-            if (jugador != null)
-            {
-                SingletonSesion sesion = SingletonSesion.Instancia;
-                sesion.JugadorId = jugador.JugadorId;
-                sesion.NombreUsuario = jugador.NombreUsuario;
-                sesion.NumeroFotoPerfil = jugador.NumeroFotoPerfil;
-                sesion.Correo = jugador.Correo;
-
-
-                XAMLAmigos paginaAmigos = new XAMLAmigos();
-                paginaAmigos.MostrarComoUsuarioActivo();
-
-                this.NavigationService.Navigate(new Uri("Vistas/Menu/XAMLMenu.xaml", UriKind.Relative));
-            }
-            else
-            {
-                lbCredencialesIncorrectas.Visibility = Visibility.Visible;
-                Console.WriteLine("El inicio de sesión falló o los datos no fueron recuperados correctamente.");
-            }
         }
 
 

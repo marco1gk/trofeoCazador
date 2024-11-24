@@ -307,6 +307,10 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         }
 
+        public void NotificarResultadoDado(string nombreUsuario, int resultado)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

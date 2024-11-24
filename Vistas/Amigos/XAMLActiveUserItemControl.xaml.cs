@@ -22,8 +22,6 @@ namespace trofeoCazador.Vistas.Amigos
         private readonly string _username;
 
         public event EventHandler<ArgumentosDeEventoDeClicDeBotón> ButtonClicked;
-
-        // Propiedad IsConnected para cambiar el color según el estado.
         private bool _isConnected;
         public bool IsConnected
         {
@@ -35,7 +33,6 @@ namespace trofeoCazador.Vistas.Amigos
                     _isConnected = value;
                     Console.WriteLine("Estado actualizado: " + (_isConnected ? "Conectado" : "Desconectado"));
 
-                    // Cambiar el color aquí
                     rectangleStatusPlayer.Fill = _isConnected ? Brushes.Green : Brushes.Red;
 
                     Console.WriteLine($"Nuevo color en GUI: {rectangleStatusPlayer.Fill}");

@@ -28,7 +28,7 @@ namespace trofeoCazador.Vistas.Amigos
             GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
            
             string[] nombreUsuarioAmigosJugador = gestorAmistadCliente.ObtenerListaNombresUsuariosAmigos(sesion.JugadorId);
-            AñadirUsuariosListaAmigos(nombreUsuarioAmigosJugador);//GetListUsernameFriends
+            AñadirUsuariosListaAmigos(nombreUsuarioAmigosJugador);
         }
 
         public void MostrarComoUsuarioActivo()
@@ -55,7 +55,6 @@ namespace trofeoCazador.Vistas.Amigos
             string idLabel = "lb";
             string idUsuarioItem = idLabel + nombreUsuario;
 
-            // Asegúrese de que estamos en el hilo de la UI antes de realizar cualquier cambio visual
             Dispatcher.Invoke(() =>
             {
                 XAMLActiveUserItemControl usuarioEnLineaItem = BuscarControlElementoUsuarioActivoPorId(idUsuarioItem);
@@ -64,7 +63,7 @@ namespace trofeoCazador.Vistas.Amigos
                 {
                     usuarioEnLineaItem.IsConnected = estaEnLinea;
 
-                    // Log para confirmar el cambio en el color
+              
                     Console.WriteLine($"Estado de conexión para {nombreUsuario}: {usuarioEnLineaItem.IsConnected}");
                     Console.WriteLine($"Estado actualizado en GUI: {usuarioEnLineaItem.rectangleStatusPlayer.Fill}");
                 }
@@ -75,11 +74,6 @@ namespace trofeoCazador.Vistas.Amigos
             });
 
         }
-
-
-
-
-
 
         private XAMLActiveUserItemControl BuscarControlElementoUsuarioActivoPorId(string idUsuarioItem)
         {
@@ -94,7 +88,6 @@ namespace trofeoCazador.Vistas.Amigos
         }
 
 
-
         private void AñadirUsuariosListaAmigos(string[] nombresUsuarioEnLinea)
         {
             foreach (var nombreUsuario in nombresUsuarioEnLinea)
@@ -106,7 +99,7 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void AñadirUsuarioListaAmigos(string nombreUsuario, string estadoConexiónJugador)
         {
-            // Busca si el control ya existe en el StackPanel
+            
             var controlExistente = stackPanelFriends.Children
                 .OfType<XAMLActiveUserItemControl>()
                 .FirstOrDefault(ctrl => ctrl.Name == "lb" + nombreUsuario);
@@ -114,13 +107,13 @@ namespace trofeoCazador.Vistas.Amigos
             if (controlExistente != null)
             {
                 Console.WriteLine($"El control para {nombreUsuario} ya existe. Actualizando estado.");
-                // Actualiza el estado si el control ya existe
+            
                 controlExistente.IsConnected = estadoConexiónJugador == ESTADOENLINEA;
             }
             else
             {
                 Console.WriteLine($"Creando control para {nombreUsuario}");
-                // Crea un nuevo control si no existe
+                
                 XAMLActiveUserItemControl elementoUsuarioEnLínea = CrearControlElementoUsuarioActivo(nombreUsuario, estadoConexiónJugador);
                 stackPanelFriends.Children.Add(elementoUsuarioEnLínea);
                 Console.WriteLine($"Control añadido: {elementoUsuarioEnLínea.Name}");
@@ -138,7 +131,7 @@ namespace trofeoCazador.Vistas.Amigos
                 Name = "lb" + nombreUsuario
             };
 
-            usuarioEnLineaItem.IsConnected = false; // Inicializa como desconectado
+            usuarioEnLineaItem.IsConnected = false; 
             usuarioEnLineaItem.ButtonClicked += ElementoUsuarioEnLínea_BotónEliminarAmigoClickeado;
 
             return usuarioEnLineaItem;
@@ -168,25 +161,35 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (EndpointNotFoundException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
-            
-            catch (FaultException ex)
+            catch (FaultException<HuntersTrophyExcepcion>)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException )
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException ex)
             {
 
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
         }
 
@@ -236,7 +239,7 @@ namespace trofeoCazador.Vistas.Amigos
             catch (FormatException ex)
             {
                 Console.WriteLine($"Error al convertir el color {coloHexadecimal}: {ex.Message}");
-                return Brushes.Gray; // Color por defecto en caso de error
+                return Brushes.Gray; 
             }
         }
 

@@ -17,11 +17,13 @@ using System.Xml.Linq;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Utilidades;
 using trofeoCazador.VentanasReutilizables;
+using System.ServiceModel;
 
 namespace trofeoCazador.Vistas.RegistroUsuario
 {
     public partial class XAMLRegistroUsuario : Page
     {
+        string codigoEnviado;
         public XAMLRegistroUsuario()
         {
             InitializeComponent();
@@ -53,6 +55,7 @@ namespace trofeoCazador.Vistas.RegistroUsuario
 
         private void BtnCrearCuenta(object sender, RoutedEventArgs e)
         {
+            
             string errores = ValidarCampos();
 
             if (!string.IsNullOrEmpty(errores))
@@ -74,8 +77,38 @@ namespace trofeoCazador.Vistas.RegistroUsuario
                 MessageBox.Show("Este nombre de usuario ya está en uso. Por favor, elige otro.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return; 
             }
-
-            string codigoEnviado = proxy.EnviarCodigoConfirmacion(tbCorreo.Text);
+            try
+            {
+               codigoEnviado = proxy.EnviarCodigoConfirmacion(tbCorreo.Text);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CreateTimeOutMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+            }
+            catch (CommunicationException ex)
+            {
+                VentanasEmergentes.CreateServerErrorMessageWindow();
+                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+            }
 
             if (string.IsNullOrEmpty(codigoEnviado))
             {

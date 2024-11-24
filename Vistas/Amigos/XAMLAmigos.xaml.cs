@@ -39,12 +39,12 @@ namespace trofeoCazador.Vistas.Amigos
 
                 if (amigoControl != null)
                 {
-                    // Actualiza el estado de conexión, lo que cambiará el color.
+ 
                     amigoControl.IsConnected = conectado;
                 }
                 else
                 {
-                    // Crea un nuevo control para el usuario si no existe en la lista.
+
                     var nuevoAmigoControl = new XAMLActiveUserItemControl(nombreUsuario)
                     {
                         IsConnected = conectado
