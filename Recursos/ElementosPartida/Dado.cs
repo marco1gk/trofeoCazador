@@ -71,6 +71,7 @@ namespace trofeoCazador.Recursos.ElementosPartida
             {
                 animacionTimer.Stop();
                 int caraFinal = resultadoDado - 1;
+                Metodos.MostrarMensaje($"La cara final es: {caraFinal + 1}");
                 dadoImagen.Source = new BitmapImage(new Uri(carasDado[caraFinal], UriKind.Relative));
                 DadoLanzado?.Invoke(caraFinal + 1);
                 DoubleAnimation fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));

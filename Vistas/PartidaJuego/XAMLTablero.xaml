@@ -25,8 +25,8 @@
         </Grid.ColumnDefinitions>
 
         <!-- Zona de fichas en mano -->
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-            <TextBlock Text="Fichas en Mano" FontSize="20" FontWeight="Bold" TextAlignment="Center" />
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
+            <TextBlock Text="Fichas en Mano" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
             <ItemsControl x:Name="FichasManoItemsControl">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -35,7 +35,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Width="50" Height="50" CornerRadius="25" BorderBrush="Black" BorderThickness="2" Background="LightGray">
+                        <Border Width="50" Height="50" CornerRadius="25" BorderBrush="Black" BorderThickness="2" Background="LightGray" MouseDown="Ficha_MouseDown">
                             <Image Source="{Binding RutaImagenFicha}" Stretch="Uniform" />
                         </Border>
                     </DataTemplate>
@@ -45,7 +45,7 @@
 
         <!-- Zona de fichas en juego -->
         <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-            <TextBlock Text="" FontSize="20" FontWeight="Bold" TextAlignment="Center" />
+            <TextBlock Text="Fichas en Juego" FontSize="20" FontWeight="Bold" TextAlignment="Center" />
             <ItemsControl x:Name="FichasItemsControl">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -64,21 +64,57 @@
 
         <!-- Mazo de cartas -->
         <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-            <TextBlock Text="" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
-            <Image x:Name="MazoImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta_Mazo.png" Width="100" Height="150" Stretch="Uniform"/>
-        </StackPanel>
-
-        <!-- Escondite -->
-        <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,157,0,0" Grid.RowSpan="2">
-            <TextBlock Text="" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
-            <Image x:Name="EsconditeImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta_Escondite.png" Width="100" Height="150" Stretch="Uniform"/>
-            <Button Content="Ver Escondite" Width="100" Height="30" Margin="0,10,0,0"/>
+            <TextBlock Text="Mazo" FontSize="20" FontWeight="Bold" TextAlignment="Center" />
+            <ItemsControl x:Name="ZonaMazoCartas" MouseDown="Mazo_MouseDown">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding RutaImagen}" Width="100" Height="150" Stretch="Uniform" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="{x:Type ContentPresenter}">
+                        <Setter Property="Canvas.Left" Value="{Binding PosicionX}" />
+                        <Setter Property="Canvas.Top" Value="{Binding PosicionY}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
         </StackPanel>
 
         <!-- Cartas en mano -->
         <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
-            <TextBlock Text="" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
+            <TextBlock Text="Cartas en Mano" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
             <ItemsControl x:Name="CartasManoItemsControl">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel ItemWidth="100" ItemHeight="150" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border MouseEnter="CartaMouseEnter" MouseLeave="CartaMouseLeave" MouseDown="SeleccionarCarta">
+                            <StackPanel Margin="5">
+                                <Image Source="{Binding RutaImagen}" Width="100" Height="150" Stretch="Uniform"/>
+                                <TextBlock Text="{Binding Tipo}" HorizontalAlignment="Center" FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+
+
+        <!-- Escondite -->
+        <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,157,0,0" Grid.RowSpan="2">
+            <TextBlock Text="Escondite" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
+            <Image x:Name="EsconditeImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta_Escondite.png" Width="100" Height="150" Stretch="Uniform"/>
+            <Button Content="Ver Escondite" Width="100" Height="30" Margin="0,10,0,0" Click="VerEscondite_Click"/>
+            <ItemsControl x:Name="CartasEsconditeItemsControl" Visibility="Collapsed">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -86,12 +122,10 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border MouseEnter="CartaMouseEnter" MouseLeave="CartaMouseLeave">
-                            <StackPanel Margin="5">
-                                <Image Source="{Binding RutaImagen}" Width="100" Height="150" Stretch="Uniform"/>
-                                <TextBlock Text="{Binding Tipo}" HorizontalAlignment="Center" FontSize="12"/>
-                            </StackPanel>
-                        </Border>
+                        <StackPanel>
+                            <Image Source="{Binding RutaImagen}" Width="100" Height="150" Stretch="Uniform"/>
+                            <TextBlock Text="{Binding Tipo}" HorizontalAlignment="Center" FontSize="12"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -160,13 +194,37 @@
             </ItemsControl>
         </StackPanel>
 
-        <!-- Dado -->
-        <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
-            <TextBlock Text="" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
-            <Image x:Name="DadoImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Dado/Cara1.png" Width="100" Height="100" Stretch="Uniform" Cursor="Hand" MouseDown="ImagenDado_MouseDown"/>
+        <!-- Dado-->
+        <Border Background="LightBlue" Grid.Row="1" Grid.Column="1" Margin="10" BorderBrush="Black" BorderThickness="2">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image x:Name="DadoImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Dado/Cara1.png" Width="100" Height="100" Stretch="Uniform" Cursor="Hand" MouseDown="ImagenDado_MouseDown"/>
+                <TextBlock Text="Tira el dado" FontSize="16" FontWeight="Bold" TextAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,284,0,0">
+            <ItemsControl x:Name="ZonaDescarte">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding RutaImagen}" Width="100" Height="150" Stretch="Uniform" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding PosicionX}" />
+                        <Setter Property="Canvas.Top" Value="{Binding PosicionY}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
         </StackPanel>
 
         <Button Content="Iniciar juego" HorizontalAlignment="Left" Margin="39,46,0,0" VerticalAlignment="Top" Click="BtnClicIniciarJuego" Grid.Row="1" Grid.RowSpan="2"/>
+        <TextBlock Text="Descarte" FontSize="16" FontWeight="Bold" TextAlignment="Center" Margin="137,12,137,12" Grid.Row="1" />
     </Grid>
 </Page>
 

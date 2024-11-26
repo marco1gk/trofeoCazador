@@ -11,11 +11,16 @@ namespace trofeoCazador.Recursos.ElementosPartida
         public string Tipo { get; set; }
         public int Cantidad { get; set; }
         public string RutaImagen { get; set; }
+        public double PosicionX { get; set; } 
+        public double PosicionY { get; set; } 
+
         public Carta(string tipo, int cantidad, string rutaImagen)
         {
             Tipo = tipo;
             Cantidad = cantidad;
             RutaImagen = rutaImagen;
+            PosicionX = 0;
+            PosicionY = 0;
         }
     }
 }
