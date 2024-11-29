@@ -60,6 +60,16 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IGestorInvitacion_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
@@ -152,6 +162,12 @@
   </wsdl:message>
   <wsdl:message name="ILobbyManager_CrearSalaEspera_InputMessage">
     <wsdl:part name="parameters" element="tns:CrearSalaEspera" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyManager_ObtenerCodigosGenerados_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerCodigosGenerados" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyManager_ObtenerCodigosGenerados_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerCodigosGeneradosResponse" />
   </wsdl:message>
   <wsdl:message name="ILobbyManager_UnirseSalaEspera_InputMessage">
     <wsdl:part name="parameters" element="tns:UnirseSalaEspera" />
@@ -399,6 +415,12 @@
   <wsdl:message name="IServicioPartida_NotificarResultadoDado_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarResultadoDadoResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestorInvitacion_EnviarInvitacionCorreo_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnviarInvitacionCorreo" />
+  </wsdl:message>
+  <wsdl:message name="IGestorInvitacion_EnviarInvitacionCorreo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnviarInvitacionCorreoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGestionCuentaServicio">
     <wsdl:operation name="AgregarJugador">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/AgregarJugador" message="tns:IGestionCuentaServicio_AgregarJugador_InputMessage" />
@@ -455,6 +477,10 @@
     </wsdl:operation>
     <wsdl:operation name="CrearSalaEspera">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/CrearSalaEspera" message="tns:ILobbyManager_CrearSalaEspera_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCodigosGenerados">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/ObtenerCodigosGenerados" message="tns:ILobbyManager_ObtenerCodigosGenerados_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/ObtenerCodigosGeneradosResponse" message="tns:ILobbyManager_ObtenerCodigosGenerados_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UnirseSalaEspera">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/UnirseSalaEspera" message="tns:ILobbyManager_UnirseSalaEspera_InputMessage" />
@@ -643,6 +669,12 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarResultadoDadoResponse" message="tns:IServicioPartida_NotificarResultadoDado_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
+  <wsdl:portType name="IGestorInvitacion">
+    <wsdl:operation name="EnviarInvitacionCorreo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorInvitacion/EnviarInvitacionCorreo" message="tns:IGestorInvitacion_EnviarInvitacionCorreo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorInvitacion/EnviarInvitacionCorreoResponse" message="tns:IGestorInvitacion_EnviarInvitacionCorreo_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionCuentaServicio" type="tns:IGestionCuentaServicio">
     <wsp:PolicyReference URI="#NetTcpBinding_IGestionCuentaServicio_policy">
     </wsp:PolicyReference>
@@ -774,6 +806,15 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCodigosGenerados">
+      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/ObtenerCodigosGenerados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="UnirseSalaEspera">
       <soap12:operation soapAction="http://tempuri.org/ILobbyManager/UnirseSalaEspera" style="document" />
@@ -1186,6 +1227,20 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IGestorInvitacion" type="tns:IGestorInvitacion">
+    <wsp:PolicyReference URI="#NetTcpBinding_IGestorInvitacion_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="EnviarInvitacionCorreo">
+      <soap12:operation soapAction="http://tempuri.org/IGestorInvitacion/EnviarInvitacionCorreo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ImplementacionServicio">
     <wsdl:port name="NetTcpBinding_IGestionCuentaServicio" binding="tns:NetTcpBinding_IGestionCuentaServicio">
       <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
@@ -1218,6 +1273,12 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IServicioPartida" binding="tns:NetTcpBinding_IServicioPartida">
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IGestorInvitacion" binding="tns:NetTcpBinding_IGestorInvitacion">
       <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>

@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace trofeoCazador.Vistas.Amigos
 {
-    /// <summary>
-    /// Lógica de interacción para XAMLFriendRequestItemComponent.xaml
-    /// </summary>
+   
     public partial class XAMLFriendRequestItemComponent : UserControl
     {
         private const string BTNACEPTAR = "Accept";

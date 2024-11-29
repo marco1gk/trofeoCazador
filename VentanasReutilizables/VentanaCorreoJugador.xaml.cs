@@ -16,18 +16,17 @@ using trofeoCazador.ServicioDelJuego;
 
 namespace trofeoCazador.VentanasReutilizables
 {
-    /// <summary>
-    /// Lógica de interacción para CorreoJugador.xaml
-    /// </summary>
     public partial class VentanaCorreoJugador : Window
     {
         public VentanaCorreoJugador()
         {
             InitializeComponent();
         }
-        private void btnClicIngresarCorreo(object sender, RoutedEventArgs e)
+        private void BtnClicIngresarCorreo(object sender, RoutedEventArgs e)
         {
             string correo = CorreoTextBox.Text.Trim();
+
+
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
             string codigoRecuperacion = proxy.EnviarCodigoConfirmacion(correo);
             if (!string.IsNullOrEmpty(codigoRecuperacion))

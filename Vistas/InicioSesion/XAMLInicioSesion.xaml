@@ -6,7 +6,7 @@
       xmlns:p="clr-namespace:trofeoCazador.Properties"
       xmlns:local="clr-namespace:trofeoCazador.Vistas.InicioSesion"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="770" d:DesignWidth="1200"
       Title="XAMLInicioSesion">
 
     <Grid Background="White">

@@ -742,10 +742,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
             dado.LanzarDado(resultadoDado);
         }
 
-        public void NotificarResultadoDado(string nombreUsuario, int resultado)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
 

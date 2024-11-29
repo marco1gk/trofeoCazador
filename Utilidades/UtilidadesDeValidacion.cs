@@ -9,7 +9,6 @@ namespace trofeoCazador.Utilidades
 {
     public static class UtilidadesDeValidacion
     {
-        private const string INFORMACION_PERSONAL_VALIDA = "^[A-Za-zÀ-ÖØ-öø-ÿ' ]{2,50}$";
         private const string NOMBRE_USUARIO_VALIDO = "^[a-zA-Z0-9_]+$";
         private const string CORREO_VALIDO = "^(?=.{5,100}$)[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         private const string CONTRASENA_VALIDA = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_])[A-Za-z\\d\\W_]{12,32}$";

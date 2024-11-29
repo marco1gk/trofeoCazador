@@ -48,36 +48,41 @@ namespace trofeoCazador.Vistas.Amigos
             }
         }
 
-        private void CambiarEstadoJugador(string nombreUsuario, bool estaEnLinea)
+        private void CambiarEstadoJugador(string username, bool isOnline)
         {
-            Console.WriteLine($"Cambiando estado de {nombreUsuario} a {(estaEnLinea ? "Conectado" : "Desconectado")}");
-
             string idLabel = "lb";
-            string idUsuarioItem = idLabel + nombreUsuario;
+            string idUserItem = idLabel + username;
+            XAMLActiveUserItemControl userOnlineItem = BuscarControlElementoUsuarioActivoPorId(idUserItem);
 
-            Dispatcher.Invoke(() =>
+            if (userOnlineItem == null)
             {
-                XAMLActiveUserItemControl usuarioEnLineaItem = BuscarControlElementoUsuarioActivoPorId(idUsuarioItem);
+                Console.WriteLine($"Control no encontrado para el usuario: {username}");
+                return;
+            }
 
-                if (usuarioEnLineaItem != null)
+            SolidColorBrush statusPlayerColor = isOnline
+                ? Utilities.CreateColorFromHexadecimal(ESTADOENLINEA)
+                : Utilities.CreateColorFromHexadecimal(ESTADOFUERADELINEA);
+
+            // Usar Dispatcher para asegurar que se ejecute en el hilo de la UI
+            userOnlineItem.Dispatcher.Invoke(() =>
+            {
+                if (userOnlineItem.rectangleStatusPlayer != null)
                 {
-                    usuarioEnLineaItem.IsConnected = estaEnLinea;
-
-              
-                    Console.WriteLine($"Estado de conexión para {nombreUsuario}: {usuarioEnLineaItem.IsConnected}");
-                    Console.WriteLine($"Estado actualizado en GUI: {usuarioEnLineaItem.rectangleStatusPlayer.Fill}");
+                    Console.WriteLine("Se está cambiando el color en el hilo de la UI.");
+                    userOnlineItem.rectangleStatusPlayer.Fill = statusPlayerColor;
                 }
                 else
                 {
-                    Console.WriteLine($"No se encontró el control para {nombreUsuario}");
+                    Console.WriteLine("El rectángulo de estado es nulo.");
                 }
             });
-
         }
+
 
         private XAMLActiveUserItemControl BuscarControlElementoUsuarioActivoPorId(string idUsuarioItem)
         {
-            foreach (XAMLActiveUserItemControl item in stackPanelFriends.Children.OfType<XAMLActiveUserItemControl>())
+            foreach (XAMLActiveUserItemControl item in stackPanelFriends.Children)
             {
                 if (item.Name == idUsuarioItem)
                 {
@@ -93,31 +98,15 @@ namespace trofeoCazador.Vistas.Amigos
             foreach (var nombreUsuario in nombresUsuarioEnLinea)
             {
                 Console.WriteLine($"Añadiendo usuario {nombreUsuario} a la lista de amigos");
-                AñadirUsuarioListaAmigos(nombreUsuario, ESTADOFUERADELINEA);
+                AddUserToFriendsList(nombreUsuario, ESTADOFUERADELINEA);
             }
         }
 
-        private void AñadirUsuarioListaAmigos(string nombreUsuario, string estadoConexiónJugador)
-        {
-            
-            var controlExistente = stackPanelFriends.Children
-                .OfType<XAMLActiveUserItemControl>()
-                .FirstOrDefault(ctrl => ctrl.Name == "lb" + nombreUsuario);
 
-            if (controlExistente != null)
-            {
-                Console.WriteLine($"El control para {nombreUsuario} ya existe. Actualizando estado.");
-            
-                controlExistente.IsConnected = estadoConexiónJugador == ESTADOENLINEA;
-            }
-            else
-            {
-                Console.WriteLine($"Creando control para {nombreUsuario}");
-                
-                XAMLActiveUserItemControl elementoUsuarioEnLínea = CrearControlElementoUsuarioActivo(nombreUsuario, estadoConexiónJugador);
-                stackPanelFriends.Children.Add(elementoUsuarioEnLínea);
-                Console.WriteLine($"Control añadido: {elementoUsuarioEnLínea.Name}");
-            }
+        private void AddUserToFriendsList(string username, string connectionStatusPlayer)
+        {
+            XAMLActiveUserItemControl userOnlineItem = CrearControlElementoUsuarioActivo(username, connectionStatusPlayer);
+            stackPanelFriends.Children.Add(userOnlineItem);
         }
 
 
@@ -126,15 +115,15 @@ namespace trofeoCazador.Vistas.Amigos
 
         XAMLActiveUserItemControl CrearControlElementoUsuarioActivo(string nombreUsuario, string colorHexadecimal)
         {
-            XAMLActiveUserItemControl usuarioEnLineaItem = new XAMLActiveUserItemControl(nombreUsuario)
-            {
-                Name = "lb" + nombreUsuario
-            };
+            string idItem = "lb";
+            string idUserItem = idItem + nombreUsuario;
+            XAMLActiveUserItemControl userOnlineItem = new XAMLActiveUserItemControl(nombreUsuario);
+            userOnlineItem.Name = idUserItem;
+            userOnlineItem.ButtonClicked += ElementoUsuarioEnLínea_BotónEliminarAmigoClickeado;
+            SolidColorBrush onlinePlayerColor = Utilities.CreateColorFromHexadecimal(colorHexadecimal);
+            userOnlineItem.rectangleStatusPlayer.Fill = onlinePlayerColor;
 
-            usuarioEnLineaItem.IsConnected = false; 
-            usuarioEnLineaItem.ButtonClicked += ElementoUsuarioEnLínea_BotónEliminarAmigoClickeado;
-
-            return usuarioEnLineaItem;
+            return userOnlineItem;
         }
 
 
@@ -161,50 +150,50 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (EndpointNotFoundException ex)
             {
-                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
                 ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
-                VentanasEmergentes.CreateTimeOutMessageWindow();
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
                 ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
-                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
                 NavigationService.Navigate(new XAMLInicioSesion());
             }
 
             catch (FaultException )
             {
-                VentanasEmergentes.CreateServerErrorMessageWindow();
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
                 NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException ex)
             {
 
-                VentanasEmergentes.CreateServerErrorMessageWindow();
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
                 ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                VentanasEmergentes.CrearMensajeVentanaInesperadoError();
                 ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
         }
 
         public void NotificarUsuarioConectado(string nombreUsuario)
         {
-            bool esEnLinea = true;
-            CambiarEstadoJugador(nombreUsuario, esEnLinea);
-            Console.WriteLine(nombreUsuario + " se ha conectado");
+            bool conectado=true;
+            Console.WriteLine($"Recibida notificación de conexión para {nombreUsuario}");
+            CambiarEstadoJugador(nombreUsuario, conectado);
         }
 
         public void NotificarUsuarioDesconectado(string nombreUsuario)
         {
-            bool esEnLinea = false;
-            CambiarEstadoJugador(nombreUsuario, esEnLinea);
-            Console.WriteLine(nombreUsuario+" se ha desconectado");
+            bool conectado = false;
+            Console.WriteLine($"Recibida notificación de desconexión para {nombreUsuario}");
+            CambiarEstadoJugador(nombreUsuario, conectado);
         }
 
         public void NotificarAmigosEnLinea(string[] nombresUsuariosEnLinea)
@@ -215,7 +204,7 @@ namespace trofeoCazador.Vistas.Amigos
             SuscribirUsuarioAlDiccionarioDeAmigosEnLínea();
         }
 
-
+        
 
         public void Ping()
         {
@@ -230,31 +219,28 @@ namespace trofeoCazador.Vistas.Amigos
     }
     public static class Utilities
     {
-        public static SolidColorBrush CrearColorDeHexadecimal(string coloHexadecimal)
-        {
-            try
+        
+        
+            public static SolidColorBrush CreateColorFromHexadecimal(string hexadecimalColor)
             {
-                return new SolidColorBrush((Color)ColorConverter.ConvertFromString(coloHexadecimal));
+                SolidColorBrush solidColorBrush = null;
+
+                if (hexadecimalColor != null)
+                {
+                    try
+                    {
+                        solidColorBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(hexadecimalColor));
+                    }
+                    catch (FormatException ex)
+                    {
+                    Console.WriteLine($"Error al convertir color: {ex.Message}");
+                    ManejadorExcepciones.HandleComponentErrorException(ex);
+                    }catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                }
+
+                return solidColorBrush;
             }
-            catch (FormatException ex)
-            {
-                Console.WriteLine($"Error al convertir el color {coloHexadecimal}: {ex.Message}");
-                return Brushes.Gray; 
-            }
-        }
-
-
-        public static Image CrearImagenPorPath(string imagenPath)
-        {
-            string pathAbsoluto = ConstruirPathAbsoluto(imagenPath);
-
-            Image estiloImagen = new Image();
-            BitmapImage bitmapImage = new BitmapImage(new Uri(pathAbsoluto));
-            estiloImagen.Source = bitmapImage;
-
-            return estiloImagen;
-        }
-
+       
         public static string ConstruirPathAbsoluto(string pathRelativo)
         {
             string pathAbsoluto = "";

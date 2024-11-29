@@ -514,6 +514,12 @@ namespace trofeoCazador.ServicioDelJuego {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/CrearSalaEspera")]
         System.Threading.Tasks.Task CrearSalaEsperaAsync(trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ObtenerCodigosGenerados", ReplyAction="http://tempuri.org/ILobbyManager/ObtenerCodigosGeneradosResponse")]
+        string[] ObtenerCodigosGenerados();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ObtenerCodigosGenerados", ReplyAction="http://tempuri.org/ILobbyManager/ObtenerCodigosGeneradosResponse")]
+        System.Threading.Tasks.Task<string[]> ObtenerCodigosGeneradosAsync();
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/UnirseSalaEspera")]
         void UnirseSalaEspera(string codigoSalaEspera, trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador);
         
@@ -637,6 +643,14 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task CrearSalaEsperaAsync(trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador) {
             return base.Channel.CrearSalaEsperaAsync(jugador);
+        }
+        
+        public string[] ObtenerCodigosGenerados() {
+            return base.Channel.ObtenerCodigosGenerados();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> ObtenerCodigosGeneradosAsync() {
+            return base.Channel.ObtenerCodigosGeneradosAsync();
         }
         
         public void UnirseSalaEspera(string codigoSalaEspera, trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador) {
@@ -1135,6 +1149,53 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task LanzarDadoAsync(string idPartida, string nombreUsuario) {
             return base.Channel.LanzarDadoAsync(idPartida, nombreUsuario);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IGestorInvitacion")]
+    public interface IGestorInvitacion {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorInvitacion/EnviarInvitacionCorreo", ReplyAction="http://tempuri.org/IGestorInvitacion/EnviarInvitacionCorreoResponse")]
+        bool EnviarInvitacionCorreo(string codigoSalaEspera, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorInvitacion/EnviarInvitacionCorreo", ReplyAction="http://tempuri.org/IGestorInvitacion/EnviarInvitacionCorreoResponse")]
+        System.Threading.Tasks.Task<bool> EnviarInvitacionCorreoAsync(string codigoSalaEspera, string correo);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IGestorInvitacionChannel : trofeoCazador.ServicioDelJuego.IGestorInvitacion, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GestorInvitacionClient : System.ServiceModel.ClientBase<trofeoCazador.ServicioDelJuego.IGestorInvitacion>, trofeoCazador.ServicioDelJuego.IGestorInvitacion {
+        
+        public GestorInvitacionClient() {
+        }
+        
+        public GestorInvitacionClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public GestorInvitacionClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public GestorInvitacionClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public GestorInvitacionClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public bool EnviarInvitacionCorreo(string codigoSalaEspera, string correo) {
+            return base.Channel.EnviarInvitacionCorreo(codigoSalaEspera, correo);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EnviarInvitacionCorreoAsync(string codigoSalaEspera, string correo) {
+            return base.Channel.EnviarInvitacionCorreoAsync(codigoSalaEspera, correo);
         }
     }
 }

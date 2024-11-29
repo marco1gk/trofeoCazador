@@ -20,7 +20,7 @@ namespace trofeoCazador.Vistas.InicioSesion
         public XAMLInicioSesion()
         {
             InitializeComponent();
-        }
+          }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -81,30 +81,30 @@ namespace trofeoCazador.Vistas.InicioSesion
             }
             catch (EndpointNotFoundException ex)
             {
-                VentanasEmergentes.CreateConnectionFailedMessageWindow();
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
                 ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
-                VentanasEmergentes.CreateTimeOutMessageWindow();
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
                 ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
-                VentanasEmergentes.CreateDataBaseErrorMessageWindow();
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
             }
             catch (FaultException)
             {
-                VentanasEmergentes.CreateServerErrorMessageWindow();
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
             catch (CommunicationException ex)
             {
-                VentanasEmergentes.CreateServerErrorMessageWindow();
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
                 ManejadorExcepciones.HandleErrorException(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CreateUnexpectedErrorMessageWindow();
+                VentanasEmergentes.CrearMensajeVentanaInesperadoError();
                 ManejadorExcepciones.HandleFatalException(ex, NavigationService);
             }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trofeoCazador.Vistas.Amigos;
 
 
 namespace trofeoCazador.Vistas.Amigos
@@ -22,36 +24,13 @@ namespace trofeoCazador.Vistas.Amigos
         private readonly string _username;
 
         public event EventHandler<ArgumentosDeEventoDeClicDeBotón> ButtonClicked;
-        private bool _isConnected;
-        public bool IsConnected
-        {
-            get => _isConnected;
-            set
-            {
-                if (_isConnected != value)
-                {
-                    _isConnected = value;
-                    Console.WriteLine("Estado actualizado: " + (_isConnected ? "Conectado" : "Desconectado"));
-
-                    rectangleStatusPlayer.Fill = _isConnected ? Brushes.Green : Brushes.Red;
-
-                    Console.WriteLine($"Nuevo color en GUI: {rectangleStatusPlayer.Fill}");
-                }
-            }
-        }
-
-
-
-
 
         public XAMLActiveUserItemControl(string username)
         {
             InitializeComponent();
+
             _username = username;
             lbUsername.Content = _username;
-          
-            // Inicializa con el color de desconectado (rojo).
-           // rectangleStatusPlayer.Fill = Brushes.Red;
         }
 
         private void ImgOptionPlayer_Click(object sender, MouseButtonEventArgs e)

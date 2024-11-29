@@ -13,45 +13,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trofeoCazador.ServicioDelJuego;
+using trofeoCazador.Utilidades;
 using trofeoCazador.Vistas;
 
 namespace trofeoCazador.Vistas.Amigos
 {
-    /// <summary>
-    /// Lógica de interacción para XAMLAmigos.xaml
-    /// </summary>
+
     public partial class XAMLAmigos : Page
     {
         public XAMLAmigos()
         {
             InitializeComponent();
             MostrarDatos();
-        }
-
-
-        private void CambiarEstadoEnUI(string nombreUsuario, bool conectado)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                var amigoControl = stackPanelFriends.Children
-                    .OfType<XAMLActiveUserItemControl>()
-                    .FirstOrDefault(control => control.lbUsername.Content.ToString() == nombreUsuario);
-
-                if (amigoControl != null)
-                {
- 
-                    amigoControl.IsConnected = conectado;
-                }
-                else
-                {
-
-                    var nuevoAmigoControl = new XAMLActiveUserItemControl(nombreUsuario)
-                    {
-                        IsConnected = conectado
-                    };
-                    stackPanelFriends.Children.Add(nuevoAmigoControl);
-                }
-            });
+            
         }
 
         private void ImagenCLicAtras(object sender, MouseButtonEventArgs e)
@@ -92,5 +67,5 @@ namespace trofeoCazador.Vistas.Amigos
 
 
         }
-}
+    }
 }

@@ -9,7 +9,7 @@
         <Rectangle Fill="white" Height="50" RadiusX="25" RadiusY="25" Width="248" Opacity="0.75" Margin="-8,10,8,6" />
         <Label x:Name="lbUsername" Content="usuario" Foreground="black" FontSize="16" FontFamily="Inter" FontWeight="Bold" Margin="20,0,37,0" VerticalAlignment="Center"/>
         <Image Source="/Recursos/Configuracion.png" Margin="179,16,42,13" MouseLeftButtonDown="ImgOptionPlayer_Click" Cursor="Hand"/>
-        <Rectangle x:Name="rectangleStatusPlayer" Width="15" Height="15" RadiusX="7.5" RadiusY="7.5"  Margin="5,22,228,22" />
+        <Rectangle x:Name="rectangleStatusPlayer" Fill="#FF5A5E59" Width="15" Height="15" RadiusX="7.5" RadiusY="7.5"  Margin="5,22,228,22" Visibility="Visible"/>
         <Grid Margin="68,-10,-68,10" x:Name="gridOptionsPlayer" Visibility="Collapsed">
             <Border Background="#5E7682" BorderThickness="1" CornerRadius="15, 15, 0, 15" Margin="9,0,103,33" />
             <Button Content="Eliminar Amigo" Margin="15,5,107,37" Background="#FF435B67" BorderBrush="{x:Null}" FontFamily="Inter" Foreground="White" Cursor="Hand" Click="BtnDeleteFriend_Click" />

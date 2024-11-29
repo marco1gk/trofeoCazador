@@ -18,9 +18,6 @@ using trofeoCazador.Vistas.Perfil;
 
 namespace trofeoCazador.VentanasReutilizables
 {
-    /// <summary>
-    /// Lógica de interacción para ValidarCodigoRegistro.xaml
-    /// </summary>
     public partial class ValidarCodigoRegistro : Window
     {
         private JugadorDataContract _jugador;

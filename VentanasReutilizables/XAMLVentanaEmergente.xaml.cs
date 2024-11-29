@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace trofeoCazador.VentanasReutilizables
 {
-    /// <summary>
-    /// Lógica de interacción para XAMLVentanaEmergente.xaml
-    /// </summary>
     public partial class XAMLVentanaEmergente : Window
     {
         private readonly Window _mainWindow;

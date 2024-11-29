@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using trofeoCazador.VentanasReutilizables;
 using System.Windows;
+using trofeoCazador.Componentes.SalaEspera;
 
 namespace trofeoCazador.Utilidades
 {//todo
@@ -12,177 +13,182 @@ namespace trofeoCazador.Utilidades
     //asi se hace Properties.Resources.lb...
     public static class VentanasEmergentes
     {
-        public static void CreateEmergentWindow(string titleEmergentWindow, string descriptionEmergentWindow)
+        public static void CrearVentanaEmergente(string tituloVentanaEmergente, string descripcionVentanaEmergente)
         {
-            XAMLVentanaEmergente emergentWindow = new XAMLVentanaEmergente(
-                titleEmergentWindow,
-                descriptionEmergentWindow
+            XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
+                tituloVentanaEmergente,
+                descripcionVentanaEmergente
             );
 
-            emergentWindow.Show();
+            ventanaEmergente.Show();
         }
-
-        public static void CreateEmergentWindowNoModal(string titleEmergentWindow, string descriptionEmergentWindow)
+        public static void CrearVentanaInvitacionSalaEspera(string codigoSalaEspera)
         {
-            XAMLVentanaEmergente emergentWindowNoModal = new XAMLVentanaEmergente(
-                titleEmergentWindow,
-                descriptionEmergentWindow
+            XAMLInvitacionSala componenteInvitacionSalaEspera = new XAMLInvitacionSala(codigoSalaEspera);
+
+            componenteInvitacionSalaEspera.Show();
+        }
+        public static void CrearVentanaEmergenteNoModal(string tituloVentanaEmergente, string descripcionVentanaEmergente)
+        {
+            XAMLVentanaEmergente ventanaEmergenteNoModal = new XAMLVentanaEmergente(
+                tituloVentanaEmergente,
+                descripcionVentanaEmergente
             );
 
-            emergentWindowNoModal.Show();
+            ventanaEmergenteNoModal.Show();
         }
 
-        public static void CreateConnectionFailedMessageWindow()
+        public static void CrearConexionFallidaMensajeVentana()
         {
-            string titleEmergentWindow = "Fallo la conexion";
-            string descriptionEmergentWindow = "No se pudo conectar con el servidor. Por favor, Inténtelo más tarde.";
+            string tituloVentanaEmergente = "Fallo la conexion";
+            string descripcionVentanaEmergente = "No se pudo conectar con el servidor. Por favor, Inténtelo más tarde.";
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                XAMLVentanaEmergente emergentWindow = new XAMLVentanaEmergente(
-                    titleEmergentWindow,
-                    descriptionEmergentWindow
+                XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
+                    tituloVentanaEmergente,
+                    descripcionVentanaEmergente
                 );
 
-                emergentWindow.Show();
+                ventanaEmergente.Show();
             });
         }
 
-        public static void CreateTimeOutMessageWindow()
+        public static void CrearVentanaMensajeTimeOut()
         {
-            string titleEmergentWindow = "Tiempo de espera excedido";
+            string tituloVentanaEmergente = "Tiempo de espera excedido";
             string descriptionEmergentWindow = "La operación ha excedido el tiempo de espera. Por favor, inténtelo más tarde.";
 
-            XAMLVentanaEmergente emergentWindow = new XAMLVentanaEmergente(
-                titleEmergentWindow,
+            XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
+                tituloVentanaEmergente,
                 descriptionEmergentWindow
             );
 
-            emergentWindow.Show();
+            ventanaEmergente.Show();
         }
 
-        public static void CreateDataBaseErrorMessageWindow()
+        public static void CrearErrorMensajeVentanaBaseDatos()
         {
-            string titleEmergentWindow = "Error de la base de datos";
+            string tituloVentanaEmergente = "Error de la base de datos";
             string descriptionEmergentWindow = "Upss... Ocurrió un error en la base de datos. Porfavor, inténtelo más tarde";
 
-            XAMLVentanaEmergente emergentWindow = new XAMLVentanaEmergente(
-                titleEmergentWindow,
+            XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
+                tituloVentanaEmergente,
                 descriptionEmergentWindow
             );
 
-            emergentWindow.Show();
+            ventanaEmergente.Show();
         }
 
-        public static void CreateServerErrorMessageWindow()
+        public static void CrearMensajeVentanaServidorError()
         {
-            string titleEmergentWindow = "Error en el servidor";
+            string tituloVentanaEmergente = "Error en el servidor";
             string descriptionEmergentWindow = "Upss... Ocurrió un error en el servidor. Por favor, inténtelo más tarde";
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                XAMLVentanaEmergente emergentWindow = new XAMLVentanaEmergente(
-                    titleEmergentWindow,
+                XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
+                    tituloVentanaEmergente,
                     descriptionEmergentWindow
                 );
 
-                emergentWindow.Show();
+                ventanaEmergente.Show();
             });
         }
 
-        public static void CreateUnexpectedErrorMessageWindow()
+        public static void CrearMensajeVentanaInesperadoError()
         {
-            string titleEmergentWindow = "Error inesperado";
+            string tituloVentanaEmergente = "Error inesperado";
             string descriptionEmergentWindow = "Upss... Ocurrió un error inesperado. Por favor, inténtelo más tarde";
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                XAMLVentanaEmergente emergentWindow = new XAMLVentanaEmergente(
-                    titleEmergentWindow,
+                XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
+                    tituloVentanaEmergente,
                     descriptionEmergentWindow
                 );
 
-                emergentWindow.Show();
+                ventanaEmergente.Show();
             });
         }
 
 
-        public static void CreateLobbyNotFoundMessageWindow()
+        public static void CrearSalaEsperaNoEncontradaMensajeVentana()
         {
-            string titleEmergentWindow = "Lobby no encontrado";
+            string tituloVentanaEmergente = "Lobby no encontrado";
             string descriptionEmergentWindow = "El lobby al que estas intentando entrar no existe.";
 
-            XAMLVentanaEmergente emergentWindow = new XAMLVentanaEmergente(
-                titleEmergentWindow,
+            XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
+                tituloVentanaEmergente,
                 descriptionEmergentWindow
             );
 
-            emergentWindow.Show();
+            ventanaEmergente.Show();
         }
 
-        public static void CreateSuccesfulReportMessageWindow()
+        public static void CrearVentanaMensajeReporteExitoso()
         {
-            string titleEmergentWindow = "Reporte exitoso";
+            string tituloVentanaEmergente = "Reporte exitoso";
             string descriptionEmergentWindow = "El jugador ha sido reportado. Agradecemos tu apoyo.";
 
-            XAMLVentanaEmergente emergentWindow = new XAMLVentanaEmergente(
-                titleEmergentWindow,
+            XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
+                tituloVentanaEmergente,
                 descriptionEmergentWindow
             );
 
-            emergentWindow.Show();
+            ventanaEmergente.Show();
         }
 
-        public static void CreateReportedPlayerMessageWindow()
+        public static void CrearVentanaMensajeJugadorReportado()
         {
-            string titleEmergentWindow = "Jugador ya reportado";
+            string tituloVentanaEmergente = "Jugador ya reportado";
             string descriptionEmergentWindow = "Ya has reportado a este jugador.";
 
-            XAMLVentanaEmergente emergentWindow = new XAMLVentanaEmergente(
-                titleEmergentWindow,
+            XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
+                tituloVentanaEmergente,
                 descriptionEmergentWindow
             );
 
-            emergentWindow.Show();
+            ventanaEmergente.Show();
         }
 
-        public static void CreateBannedPlayerMessageWindow()
+        public static void CrearVentanaMensajeJugadorBanneado()
         {
-            string titleEmergentWindow = "Has sido baneado";
+            string tituloVentanaEmergente = "Has sido baneado";
             string descriptionEmergentWindow = "Has acumulado el máximo de reportes permitidos. Se restringirá tu cuenta por un tiempo establecido.";
 
-            XAMLVentanaEmergente emergentWindow = new XAMLVentanaEmergente(
-                titleEmergentWindow,
+            XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
+                tituloVentanaEmergente,
                 descriptionEmergentWindow
             );
 
-            emergentWindow.Show();
+            ventanaEmergente.Show();
         }
 
-        public static void CreateHostLeftLobbyMessageWindow()
+        public static void CrearVentanaMensajeAnfitrionDejoSalaEspera()
         {
-            string titleEmergentWindow = "Lobby eliminado";
+            string tituloVentanaEmergente = "Lobby eliminado";
             string descriptionEmergentWindow = "El host salio del lobby. Regresaras al menú principal.";
 
-            XAMLVentanaEmergente emergentWindow = new XAMLVentanaEmergente(
-                titleEmergentWindow,
+            XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
+                tituloVentanaEmergente,
                 descriptionEmergentWindow
             );
 
-            emergentWindow.Show();
+            ventanaEmergente.Show();
         }
 
-        public static void CreateLobbyIsFullMessageWindow()
+        public static void CrearVentanaMensajeSalaEsperaLlena()
         {
-            string titleEmergentWindow = "Lobby lleno";
+            string tituloVentanaEmergente = "Lobby lleno";
             string descriptionEmergentWindow = "El lobby al que estas intentando entrar esta lleno.";
 
-            XAMLVentanaEmergente emergentWindow = new XAMLVentanaEmergente(
-                titleEmergentWindow,
+            XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
+                tituloVentanaEmergente,
                 descriptionEmergentWindow
             );
 
-            emergentWindow.Show();
+            ventanaEmergente.Show();
         }
 
 
