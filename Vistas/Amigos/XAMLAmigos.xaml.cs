@@ -41,8 +41,6 @@ namespace trofeoCazador.Vistas.Amigos
 
             try
             {
-                
-             // MostrarComoUsuarioActivo();
                 CargarAmigosJugador();
 
             }

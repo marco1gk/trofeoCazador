@@ -35,38 +35,23 @@
 
     <Viewbox Stretch="Fill">
         <Grid Height="770" Width="1200">
-            <!-- Fondo de la caja de login -->
             <Image Source="../Recursos/negroo.png" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill" Height="524" Width="511" Margin="337,71,0,0" Grid.RowSpan="2"/>
-
-            <!-- Título de la ventana -->
             <Label FontFamily="Titan One" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="68" Foreground="White" Margin="0,85,0,0">Validar Código</Label>
-
-            <!-- Texto explicativo -->
             <TextBlock Text="Ingresa el código de verificación que recibiste por correo" 
                        Margin="417,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" 
                        Height="54" Width="385" FontFamily="Inter" FontSize="16" 
                        Foreground="White" HorizontalAlignment="Left"/>
-
-            <!-- Etiqueta del código -->
             <Label FontFamily="Titan One" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
                    FontSize="24" Foreground="White" Content="Código" Margin="417,0,0,483"/>
-
-            <!-- Cuadro de texto para ingresar el código -->
             <TextBox x:Name="tbxCode" FontFamily="Titan One" FontSize="26" Foreground="Black" 
                      VerticalContentAlignment="Center" Margin="422,300,404,423"/>
-
-            <!-- Botón para enviar el código -->
             <Button Background="gray" Foreground="White" BorderThickness="0" 
                     FontFamily="Titan One" FontSize="24" Content="Enviar" 
                     Click="BtnEnviar" Margin="416,455,410,268" Cursor="Hand"/>
-
-            <!-- Mensaje de error para código incorrecto -->
             <TextBlock x:Name="lbCodeError" Text="Código incorrecto, verifica el código o vuelve a generar uno nuevo" 
                        HorizontalAlignment="Left" Margin="422,507,0,0" VerticalAlignment="Top" 
                        Width="368" Foreground="Red" FontFamily="Inter" FontSize="16" 
                        Background="{x:Null}" Height="51" TextWrapping="Wrap" Visibility="Collapsed"/>
-
-            <!-- Botón para cerrar la ventana -->
             <Image HorizontalAlignment="Left" Cursor="Hand" Height="37" Margin="351,85,0,0" 
                    VerticalAlignment="Top" Width="33" Source="/Recursos/close.png" 
                    MouseDown="CerrarVentana"/>

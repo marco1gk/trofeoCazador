@@ -27,9 +27,6 @@ namespace trofeoCazador.Vistas.SalaEspera
         private JugadorSalaEspera _selectedAmigo;
         private int numeroJugadoresSalaEspera = 1;
 
-        bool bandera=false;
-
-        //guardarlos en un diccionario y buscar el codigo
 
         public ObservableCollection<JugadorSalaEspera> JugadoresEnSala { get; set; }
 
@@ -58,8 +55,6 @@ namespace trofeoCazador.Vistas.SalaEspera
             });
         }
 
-
-
         private void JugadorControl_JugadorExpulsado(object sender, string nombreUsuario)
         {
             ExpulsarJugadorSalaEsperaAsync(nombreUsuario);
@@ -68,12 +63,12 @@ namespace trofeoCazador.Vistas.SalaEspera
         }
         public async Task ExpulsarJugadorSalaEsperaAsync(string nombreUsuario)
         {
-            InstanceContext context = new InstanceContext(this);
-            LobbyManagerClient lobbyManagerClientExpulse = new LobbyManagerClient(context);
+            InstanceContext contexto = new InstanceContext(this);
+            LobbyManagerClient lobbyManagerClientExpulsar = new LobbyManagerClient(contexto);
 
             try
             {
-                await lobbyManagerClientExpulse.ExpulsarJugadorSalaEsperaAsync(codigoSalaEsperaActual, nombreUsuario);
+                await lobbyManagerClientExpulsar.ExpulsarJugadorSalaEsperaAsync(codigoSalaEsperaActual, nombreUsuario);
                 SingletonSesion sesion = SingletonSesion.Instancia;
                 if (sesion.NombreUsuario == nombreUsuario)
                 {
@@ -84,12 +79,12 @@ namespace trofeoCazador.Vistas.SalaEspera
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -102,12 +97,12 @@ namespace trofeoCazador.Vistas.SalaEspera
             catch (CommunicationException ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
 
         }
@@ -121,12 +116,12 @@ namespace trofeoCazador.Vistas.SalaEspera
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -139,12 +134,12 @@ namespace trofeoCazador.Vistas.SalaEspera
             catch (CommunicationException ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
         private async void BtnCrearLobby_Click(object sender, RoutedEventArgs e)
@@ -174,12 +169,12 @@ namespace trofeoCazador.Vistas.SalaEspera
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -192,12 +187,12 @@ namespace trofeoCazador.Vistas.SalaEspera
             catch (CommunicationException ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
         bool isJoiningLobby = false;
@@ -218,33 +213,29 @@ namespace trofeoCazador.Vistas.SalaEspera
                 int numeroFotoPerfil = sesion.NumeroFotoPerfil;
                 JugadorSalaEspera lb = new JugadorSalaEspera { NombreUsuario = nombreUsuario, NumeroFotoPerfil = numeroFotoPerfil };
 
-                string codigoLobby = txtCodigoLobby.Text.Trim();
+                string codigoSalaEspera = txtCodigoLobby.Text.Trim();
 
-                if (string.IsNullOrEmpty(codigoLobby))
+                if (string.IsNullOrEmpty(codigoSalaEspera))
                 {
                     VentanasEmergentes.CrearSalaEsperaNoEncontradaMensajeVentana();
                     return;
                 }
                 List<string> codigos = (await Task.Run(() => cliente.ObtenerCodigosGenerados())).ToList();
 
-                // Verifica si el código existe.
-                if (codigos.Contains(codigoLobby))
+                if (codigos.Contains(codigoSalaEspera))
                 {
-                    // Unirse al lobby.
-                    cliente.UnirseSalaEspera(codigoLobby, lb);
+                    cliente.UnirseSalaEspera(codigoSalaEspera, lb);
 
-                    // Actualiza la interfaz.
                     stackPanelOpciones.Visibility = Visibility.Collapsed;
                     stackPanelJugadores.Visibility = Visibility.Visible;
                     gridChat.Visibility = Visibility.Visible;
                     btnSalir.Visibility = Visibility.Visible;
                     btnIniciarPartida.Visibility = Visibility.Visible;
 
-                    codigoSalaEsperaActual = codigoLobby;
+                    codigoSalaEsperaActual = codigoSalaEspera;
                     txtCodigoLobby.Visibility = Visibility.Collapsed;
 
-                    // Notifica al usuario.
-                    MessageBox.Show($"Te has unido al lobby con código: {codigoLobby}");
+                    MessageBox.Show($"Te has unido al lobby con código: {codigoSalaEspera}");
                 }
                 else
                 {
@@ -254,12 +245,12 @@ namespace trofeoCazador.Vistas.SalaEspera
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -272,24 +263,24 @@ namespace trofeoCazador.Vistas.SalaEspera
             catch (CommunicationException ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
             finally
             {
-                isJoiningLobby = false; // Restablecer el estado de unión.
+                isJoiningLobby = false; 
             }
         }
 
         private async void BtnEnviarMensaje(object sender, RoutedEventArgs e)
         {
-            string message = tbxMessage.Text.Trim();
+            string mensaje = tbxMessage.Text.Trim();
 
-            if (string.IsNullOrEmpty(message))
+            if (string.IsNullOrEmpty(mensaje))
             {
                 MessageBox.Show("Por favor, escribe un mensaje antes de enviar.");
                 return;
@@ -302,18 +293,18 @@ namespace trofeoCazador.Vistas.SalaEspera
                     SetupClient(); 
                 }
 
-                await Task.Run(() => cliente.MandarMensaje(message)); 
+                await Task.Run(() => cliente.MandarMensaje(mensaje)); 
                 tbxMessage.Clear();
             }
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -326,12 +317,12 @@ namespace trofeoCazador.Vistas.SalaEspera
             catch (CommunicationException ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
@@ -339,8 +330,8 @@ namespace trofeoCazador.Vistas.SalaEspera
         private void SetupClient()
         {
             
-            InstanceContext instanceContext = new InstanceContext(this);
-            cliente = new LobbyManagerClient(instanceContext);
+            InstanceContext instanciaContexto = new InstanceContext(this);
+            cliente = new LobbyManagerClient(instanciaContexto);
         }
 
         public void UnirseSalaEsperaComoHost(string codigoSalaEspera)
@@ -353,12 +344,12 @@ namespace trofeoCazador.Vistas.SalaEspera
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -371,12 +362,12 @@ namespace trofeoCazador.Vistas.SalaEspera
             catch (CommunicationException ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
@@ -469,12 +460,12 @@ namespace trofeoCazador.Vistas.SalaEspera
                 catch (EndpointNotFoundException ex)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
                 catch (TimeoutException ex)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
                 catch (FaultException<HuntersTrophyExcepcion>)
                 {
@@ -487,12 +478,12 @@ namespace trofeoCazador.Vistas.SalaEspera
                 catch (CommunicationException ex)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
                 catch (Exception ex)
                 {
                     VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                    ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
             }
             else
@@ -506,7 +497,7 @@ namespace trofeoCazador.Vistas.SalaEspera
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                NavigationService.Navigate(new XAMLSalaEspera()); // Realiza la navegación en el hilo de la UI
+                NavigationService.Navigate(new XAMLSalaEspera()); 
             });
         }
 
@@ -543,12 +534,12 @@ namespace trofeoCazador.Vistas.SalaEspera
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -561,12 +552,12 @@ namespace trofeoCazador.Vistas.SalaEspera
             catch (CommunicationException ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
         public void NotificarInvitacionSala(string nombreInvitador, string codigoSalaEspera)
@@ -593,12 +584,12 @@ namespace trofeoCazador.Vistas.SalaEspera
                 catch (EndpointNotFoundException ex)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
                 catch (TimeoutException ex)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
                 catch (FaultException<HuntersTrophyExcepcion>)
                 {
@@ -611,12 +602,12 @@ namespace trofeoCazador.Vistas.SalaEspera
                 catch (CommunicationException ex)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
                 catch (Exception ex)
                 {
                     VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                    ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
             }
             else
@@ -645,7 +636,7 @@ namespace trofeoCazador.Vistas.SalaEspera
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BotonCrearVentanaInvitacion_Click(object sender, RoutedEventArgs e)
         {
             VentanasEmergentes.CrearVentanaInvitacionSalaEspera(codigoSalaEsperaActual);
         }

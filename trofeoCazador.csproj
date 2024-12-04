@@ -418,6 +418,15 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Recursos\emailIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\invitationByEmailBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\copyToClipboardIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServicioDelJuego\" />
   </ItemGroup>
   <ItemGroup>
@@ -431,15 +440,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Recursos\emailIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Recursos\invitationByEmailBackground.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Recursos\copyToClipboardIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

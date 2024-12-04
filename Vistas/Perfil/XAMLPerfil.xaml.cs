@@ -51,12 +51,12 @@ namespace trofeoCazador.Vistas.Perfil
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -69,12 +69,12 @@ namespace trofeoCazador.Vistas.Perfil
             catch (CommunicationException ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
             
             

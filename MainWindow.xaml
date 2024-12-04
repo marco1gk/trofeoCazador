@@ -9,10 +9,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
 
-        <!-- Frame para manejar la navegación entre páginas -->
         <Frame Name="MainFrame" NavigationUIVisibility="Hidden" />
-
-        <!-- Botón de ejemplo que ya tienes -->
 
     </Grid>
 </Window>

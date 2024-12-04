@@ -11,34 +11,33 @@ namespace trofeoCazador.Utilidades
 {
     public static class ManejadorExcepciones
     {
-        private static readonly ILogger _logger = ManejadorLogger.GetLogger();
+        private static readonly ILogger _logger = ManejadorLogger.ObtenerLogger();
 
-        public static void HandleErrorException(Exception ex, NavigationService navigationService)
+        public static void ManejarErrorExcepcion(Exception ex, NavigationService servicioNavegacion)
         {
             _logger.Error(ex.Message + "\n" + ex.StackTrace + "\n");
 
-            if (navigationService != null)
+            if (servicioNavegacion != null)
             {
-                navigationService.Navigate(new XAMLInicioSesion());
+                servicioNavegacion.Navigate(new XAMLInicioSesion());
             }
         }
 
-        public static void HandleFatalException(Exception ex, NavigationService navigationService)
+        public static void ManejarFatalExcepcion(Exception ex, NavigationService servicioNavegacion)
         {
             _logger.Fatal(ex.Message + "\n" + ex.StackTrace + "\n");
 
-            if (navigationService != null)
+            if (servicioNavegacion != null)
             {
-                navigationService.Navigate(new XAMLInicioSesion());
+                servicioNavegacion.Navigate(new XAMLInicioSesion());
             }
-        }
-
-        public static void HandleComponentErrorException(Exception ex)
+        } 
+        public static void ManejarComponenteErrorExcepcion(Exception ex)
         {
             _logger.Error(ex.Message + "\n" + ex.StackTrace + "\n");
         }
 
-        public static void HandleComponentFatalException(Exception ex)
+        public static void ManejarComponenteFatalExcepcion(Exception ex)
         {
             _logger.Fatal(ex.Message + "\n" + ex.StackTrace + "\n");
         }

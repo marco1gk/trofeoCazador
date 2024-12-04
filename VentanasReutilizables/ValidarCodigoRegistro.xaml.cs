@@ -20,9 +20,9 @@ namespace trofeoCazador.VentanasReutilizables
 {
     public partial class ValidarCodigoRegistro : Window
     {
-        private JugadorDataContract _jugador;
-        private string _codigoEnviado;
-        private string _correo;
+        private readonly JugadorDataContract _jugador;
+        private readonly string _codigoEnviado;
+        private readonly string _correo;
         public ValidarCodigoRegistro(JugadorDataContract jugador, string correo, string codigoEnviado)
         {
             InitializeComponent();
@@ -48,8 +48,10 @@ namespace trofeoCazador.VentanasReutilizables
                 }
                 else
                 {
-                    NavigationWindow navigationWindow = new NavigationWindow();
-                    navigationWindow.Content = new EditarContrasenia(_correo);
+                    NavigationWindow navigationWindow = new NavigationWindow
+                    {
+                        Content = new EditarContrasenia(_correo)
+                    };
                     navigationWindow.Show();
                     this.Close();
                 }

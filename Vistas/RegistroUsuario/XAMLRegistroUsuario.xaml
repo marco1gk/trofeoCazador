@@ -8,15 +8,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="XAMLRegistroUsuario">
-
     <Grid>
-        <!-- Aquí se agrega la imagen de fondo -->
         <Grid.Background>
             <ImageBrush ImageSource="/Recursos/otoñoCrearPerfil.jpg"/>
         </Grid.Background>
-
         <Grid.RowDefinitions>
-
             <RowDefinition Height="*" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
@@ -32,9 +28,6 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-
-
-        <!-- Los controles existentes no se moverán -->
         <Label x:Name = "lbCrearCuenta" Content="{x:Static p:Resources.lbCreateAccount}" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,54,0,0" FontSize="29" VerticalAlignment="Top"/>
         <Label x:Name="lbCreaTuCuenta" Content="{x:Static p:Resources.lbCreateYourAccount}" HorizontalAlignment="Left" FontWeight="Bold" Margin="112,112,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Label x:Name = "lbPoliticaContraseña" Content="{x:Static p:Resources.lbPasswordPolitic}" HorizontalAlignment="Left" FontWeight="Bold" Margin="327,132,0,0" Grid.Row="1" VerticalAlignment="Top"/>

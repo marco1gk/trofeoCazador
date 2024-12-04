@@ -20,34 +20,34 @@ namespace trofeoCazador.Vistas.Amigos
 {
     public partial class XAMLActiveUserItemControl : UserControl
     {
-        private const string BTN_DELETE_FRIEND = "DeleteFriend";
-        private readonly string _username;
+        private const string BTN_BORRAR_AMIGO = "DeleteFriend";
+        private readonly string _nombreUsuario;
 
-        public event EventHandler<ArgumentosDeEventoDeClicDeBotón> ButtonClicked;
+        public event EventHandler<ArgumentosDeEventoDeClicDeBotón> BotonUsado;
 
-        public XAMLActiveUserItemControl(string username)
+        public XAMLActiveUserItemControl(string nombreUsuario)
         {
             InitializeComponent();
 
-            _username = username;
-            lbUsername.Content = _username;
+            _nombreUsuario = nombreUsuario;
+            lbnombreUsuario.Content = _nombreUsuario;
         }
 
-        private void ImgOptionPlayer_Click(object sender, MouseButtonEventArgs e)
+        private void ImgOpcionesJugador_Click(object sender, MouseButtonEventArgs e)
         {
-            if (gridOptionsPlayer.Visibility == Visibility.Visible)
+            if (gridOpcionesJugador.Visibility == Visibility.Visible)
             {
-                gridOptionsPlayer.Visibility = Visibility.Collapsed;
+                gridOpcionesJugador.Visibility = Visibility.Collapsed;
             }
             else
             {
-                gridOptionsPlayer.Visibility = Visibility.Visible;
+                gridOpcionesJugador.Visibility = Visibility.Visible;
             }
         }
 
-        private void BtnDeleteFriend_Click(object sender, RoutedEventArgs e)
+        private void BtnBorrarAmigo_Click(object sender, RoutedEventArgs e)
         {
-            ButtonClicked?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTN_DELETE_FRIEND, _username));
+            BotonUsado?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTN_BORRAR_AMIGO, _nombreUsuario));
         }
     }
 }

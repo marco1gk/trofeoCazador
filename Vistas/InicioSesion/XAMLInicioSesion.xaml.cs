@@ -22,7 +22,7 @@ namespace trofeoCazador.Vistas.InicioSesion
             InitializeComponent();
           }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnCorreo_Click(object sender, RoutedEventArgs e)
         {
             VentanaCorreoJugador ventanaCorreo = new VentanaCorreoJugador();
             ventanaCorreo.Show();
@@ -82,12 +82,12 @@ namespace trofeoCazador.Vistas.InicioSesion
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -100,12 +100,12 @@ namespace trofeoCazador.Vistas.InicioSesion
             catch (CommunicationException ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
 
         }

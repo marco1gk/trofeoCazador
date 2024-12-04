@@ -16,7 +16,6 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Imagen de fondo -->
         <Grid Grid.RowSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="31*"/>
@@ -26,10 +25,6 @@
                 <ImageBrush ImageSource="/Recursos/landsCape.png"/>
             </Grid.Background>
         </Grid>
-
-        <!-- Imagen del login -->
-
-        <!-- Título -->
         <TextBlock FontSize="28"
                    FontWeight="Bold"
                    HorizontalAlignment="Center"
@@ -39,8 +34,6 @@
                    Foreground="Black">
             <Run Language="es-mx" Text="Hunter´s Trophy"/>
         </TextBlock>
-
-        <!-- Campos de entrada -->
         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
             <TextBox x:Name="UsuarioTextBox"
                      Text="Correo"
@@ -53,8 +46,8 @@
                      GotFocus="TbxUsuarioObtenerFoco"
                     LostFocus="TbxUsuarioPerderFoco"
                      Foreground="Black" />
-    
-            
+
+
             <PasswordBox x:Name="ContrasenaPasswordBox"
                          Margin="0,10"
                          Padding="10"
@@ -67,7 +60,7 @@
                          LostFocus="PbContraseñaPerderFoco"
                          BorderBrush="Transparent"
                          Foreground="black" />
-          
+
             <Button Content="Iniciar Sesión"
                     Background="#007ACC"
                     Foreground="Black"
@@ -78,8 +71,6 @@
                     Height="40" 
                     Click="BtnIniciarSesion"/>
         </StackPanel>
-
-        <!-- Etiquetas de texto -->
         <Label Content="{x:Static p:Resources.lbLogin_}" 
                Foreground="Black" 
                FontSize="18" 
@@ -111,8 +102,6 @@
                Grid.Row="1" 
                VerticalAlignment="Top" 
                Grid.RowSpan="2"/>
-
-        <!-- Mensaje de credenciales incorrectas (sin transformación) -->
         <Label x:Name="lbCredencialesIncorrectas" 
                Content="Credenciales incorrectas" 
                Visibility="Collapsed" 
@@ -128,7 +117,6 @@
                Foreground="#FFFF5959" 
                Height="28"/>
 
-        <!-- Enlace a recuperar contraseña -->
         <Label FontFamily="Inter" 
                FontSize="14" 
                VerticalAlignment="Top" 
@@ -139,7 +127,6 @@
                Grid.Row="1"
                MouseLeftButtonUp="lbClicRecuperarContrasena"/>
 
-        <!-- Botón para jugar como invitado -->
         <Button Content="{x:Static p:Resources.Guest_}" 
                 HorizontalAlignment="Left" 
                 Margin="353,70,0,0" 
@@ -152,7 +139,6 @@
                 VerticalAlignment="Top" 
                 Click="Button_Click_2"/>
 
-        <!-- Botón vacío (si es necesario) -->
         <Button Content="" 
                 Margin="254,134,0,0" 
                 HorizontalAlignment="Left" 
@@ -160,11 +146,10 @@
                 BorderThickness="0" 
                 Grid.Row="1" 
                 VerticalAlignment="Top" 
-                Click="Button_Click" 
+                Click="BtnCorreo_Click" 
                 Height="22" 
                 Width="175"/>
 
-        <!-- Botón para registrarse -->
         <Button Content="{x:Static p:Resources.lbRegister_}" 
                 HorizontalAlignment="Center" 
                 Margin="0,16,0,0" 

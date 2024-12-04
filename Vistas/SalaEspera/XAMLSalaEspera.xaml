@@ -8,7 +8,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SalaEspera">
     <Page.Resources>
-        <!-- Estilo global para botones -->
         <Style x:Key="CustomButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="120"/>
             <Setter Property="Height" Value="35"/>
@@ -17,7 +16,6 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="LightGreen"/>
-
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -42,22 +40,15 @@
             </Setter>
         </Style>
     </Page.Resources>
-
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Recursos/4867851.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-
-        <!-- Botones principales -->
         <StackPanel x:Name="stackPanelOpciones" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Orientation="Horizontal" >
             <Button x:Name="btnCrearLobby" Content="Crear Lobby" Click="BtnCrearLobby_Click" Style="{StaticResource CustomButtonStyle}" Background="LightGreen"/>
             <Button x:Name="btnUnirseLobby" Content="Unirse a Lobby" Click="BtnUnirseLobby_Click" Style="{StaticResource CustomButtonStyle}" Background="LightBlue"/>
         </StackPanel>
-
-        <!-- Código de lobby -->
         <TextBox x:Name="txtCodigoLobby" Width="150" Height="30" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="331,66,0,0" />
-
-        <!-- Jugadores en el lobby -->
         <StackPanel x:Name="stackPanelJugadores" Orientation="Vertical" Width="300" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0" Visibility="Collapsed">
             <Label Content="Jugadores en el Lobby" FontFamily="Titan One" Foreground="White" FontSize="16"/>
             <ListBox x:Name="listBoxJugadores"
@@ -77,8 +68,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
-
-        <!-- Amigos -->
         <StackPanel x:Name="stackPanelAmigos" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,238,287,0" Width="183" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5" Height="88">
             <StackPanel.RenderTransform>
                 <TransformGroup>
@@ -95,8 +84,6 @@
                       SelectedItem="{Binding SelectedAmigo}"/>
             <Button Name="btnInvitarAmigo" Content="Invitar Amigo" Click="BtnInvitarAmigo_Click" Style="{StaticResource CustomButtonStyle}" Background="LightGreen"/>
         </StackPanel>
-
-        <!-- Chat -->
         <Grid x:Name="gridChat" Width="225" Height="349" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="545,0,0,0"  Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="24*"/>
@@ -126,10 +113,8 @@
             <Rectangle Fill="White" RadiusX="12" RadiusY="12" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,10" Width="160" Grid.RowSpan="2" />
             <TextBox x:Name="tbxMessage" FontFamily="Inter" FontSize="14" VerticalContentAlignment="Center" Margin="10,305,0,10" Width="160" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" Grid.RowSpan="2" />
         </Grid>
-
-        <!-- Botones adicionales -->
         <Button Name="btnIniciarPartida" Content="Iniciar Partida" Width="120" Height="30" Background="LightCoral" Visibility="Collapsed" HorizontalAlignment="Center" Click="BtnClicIniciarPartida" Margin="0,344,0,76" Style="{StaticResource CustomButtonStyle}"/>
         <Button Name="btnSalir" Content="Salir" HorizontalAlignment="Left" Margin="30,400,0,0" VerticalAlignment="Top" Height="35" Width="156" Click="BtnSalirLobby" Visibility="Collapsed" Style="{StaticResource CustomButtonStyle}"/>
-        <Button Name="btnEnviarInvitacion" Content="Invitar amigo"  Style="{StaticResource CustomButtonStyle}" Background="LightYellow" HorizontalAlignment="Left" Margin="346,400,0,0" VerticalAlignment="Top" Visibility="Collapsed" Click="Button_Click"/>
+        <Button Name="btnEnviarInvitacion" Content="Invitar amigo"  Style="{StaticResource CustomButtonStyle}" Background="LightYellow" HorizontalAlignment="Left" Margin="346,400,0,0" VerticalAlignment="Top" Visibility="Collapsed" Click="BotonCrearVentanaInvitacion_Click"/>
     </Grid>
 </Page>

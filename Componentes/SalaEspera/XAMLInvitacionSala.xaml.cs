@@ -38,7 +38,7 @@ namespace trofeoCazador.Componentes.SalaEspera
         private void ConfigurarVentanaEmergente()
         {
             this.Owner = _ventanaPrincipal;
-            tbkcodigoSalaEspera.Text = _salaEsperaCodigo;
+            tbkCodigoSalaEspera.Text = _salaEsperaCodigo;
             EstablecerMedidasVentana();
             EstablecerCentroVentana();
         }
@@ -86,12 +86,12 @@ namespace trofeoCazador.Componentes.SalaEspera
                 catch (EndpointNotFoundException ex)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.HandleComponentErrorException(ex);
+                    ManejadorExcepciones.ManejarComponenteErrorExcepcion(ex);
                 }
                 catch (TimeoutException ex)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.HandleComponentErrorException(ex);
+                    ManejadorExcepciones.ManejarComponenteErrorExcepcion(ex);
                 }
                 catch (FaultException)
                 {
@@ -100,12 +100,12 @@ namespace trofeoCazador.Componentes.SalaEspera
                 catch (CommunicationException ex)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.HandleComponentErrorException(ex);
+                    ManejadorExcepciones.ManejarComponenteErrorExcepcion(ex);
                 }
                 catch (Exception ex)
                 {
                     VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                    ManejadorExcepciones.HandleComponentFatalException(ex);
+                    ManejadorExcepciones.ManejarComponenteFatalExcepcion(ex);
                 }
             }
         }

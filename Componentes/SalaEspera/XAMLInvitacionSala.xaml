@@ -46,7 +46,7 @@
                         <TextBlock Text="Pong el correito" TextWrapping="Wrap" FontFamily="Inter" Foreground="White" 
                                 FontSize="26" TextAlignment="Center" Margin="0,45,0,0" />
                         <Grid>
-                            <TextBlock x:Name="tbkcodigoSalaEspera" Text="Y2F96A" FontFamily="Titan One" Foreground="White" FontSize="34" HorizontalAlignment="Center" Margin="40"/>
+                            <TextBlock x:Name="tbkCodigoSalaEspera" Text="Y2F96A" FontFamily="Titan One" Foreground="White" FontSize="34" HorizontalAlignment="Center" Margin="40"/>
                             <Image Source="../../Recursos/copyToClipboardIcon.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="399,0,0,0" Height="32" Width="35" 
                                 MouseLeftButtonDown="BtnCopiarCodigo_Click" Cursor="Hand"/>
                         </Grid>

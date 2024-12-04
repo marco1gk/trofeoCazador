@@ -24,7 +24,7 @@ namespace trofeoCazador.Vistas.Amigos
        
         private void CargarAmigosJugador()
         {
-            stackPanelFriends.Children.Clear();
+            stackPanelAmigos.Children.Clear();
             GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
            
             string[] nombreUsuarioAmigosJugador = gestorAmistadCliente.ObtenerListaNombresUsuariosAmigos(sesion.JugadorId);
@@ -48,29 +48,28 @@ namespace trofeoCazador.Vistas.Amigos
             }
         }
 
-        private void CambiarEstadoJugador(string username, bool isOnline)
+        private void CambiarEstadoJugador(string nombreUsuario, bool enLinea)
         {
             string idLabel = "lb";
-            string idUserItem = idLabel + username;
-            XAMLActiveUserItemControl userOnlineItem = BuscarControlElementoUsuarioActivoPorId(idUserItem);
+            string idUsuarioItem = idLabel + nombreUsuario;
+            XAMLActiveUserItemControl usuarioLineaItem = BuscarControlElementoUsuarioActivoPorId(idUsuarioItem);
 
-            if (userOnlineItem == null)
+            if (usuarioLineaItem == null)
             {
-                Console.WriteLine($"Control no encontrado para el usuario: {username}");
+                Console.WriteLine($"Control no encontrado para el usuario: {nombreUsuario}");
                 return;
             }
 
-            SolidColorBrush statusPlayerColor = isOnline
+            SolidColorBrush statusPlayerColor = enLinea
                 ? Utilities.CreateColorFromHexadecimal(ESTADOENLINEA)
                 : Utilities.CreateColorFromHexadecimal(ESTADOFUERADELINEA);
 
-            // Usar Dispatcher para asegurar que se ejecute en el hilo de la UI
-            userOnlineItem.Dispatcher.Invoke(() =>
+            usuarioLineaItem.Dispatcher.Invoke(() =>
             {
-                if (userOnlineItem.rectangleStatusPlayer != null)
+                if (usuarioLineaItem.rectanguloEstadoJugador != null)
                 {
                     Console.WriteLine("Se está cambiando el color en el hilo de la UI.");
-                    userOnlineItem.rectangleStatusPlayer.Fill = statusPlayerColor;
+                    usuarioLineaItem.rectanguloEstadoJugador.Fill = statusPlayerColor;
                 }
                 else
                 {
@@ -82,7 +81,7 @@ namespace trofeoCazador.Vistas.Amigos
 
         private XAMLActiveUserItemControl BuscarControlElementoUsuarioActivoPorId(string idUsuarioItem)
         {
-            foreach (XAMLActiveUserItemControl item in stackPanelFriends.Children)
+            foreach (XAMLActiveUserItemControl item in stackPanelAmigos.Children)
             {
                 if (item.Name == idUsuarioItem)
                 {
@@ -98,32 +97,29 @@ namespace trofeoCazador.Vistas.Amigos
             foreach (var nombreUsuario in nombresUsuarioEnLinea)
             {
                 Console.WriteLine($"Añadiendo usuario {nombreUsuario} a la lista de amigos");
-                AddUserToFriendsList(nombreUsuario, ESTADOFUERADELINEA);
+                AñadirUsuarioListaAmigos(nombreUsuario, ESTADOFUERADELINEA);
             }
         }
 
 
-        private void AddUserToFriendsList(string username, string connectionStatusPlayer)
+        private void AñadirUsuarioListaAmigos(string nombreUsuario, string estadoConexionJugador)
         {
-            XAMLActiveUserItemControl userOnlineItem = CrearControlElementoUsuarioActivo(username, connectionStatusPlayer);
-            stackPanelFriends.Children.Add(userOnlineItem);
+            XAMLActiveUserItemControl usuarioConectadoItem = CrearControlElementoUsuarioActivo(nombreUsuario, estadoConexionJugador);
+            stackPanelAmigos.Children.Add(usuarioConectadoItem);
         }
-
-
-
 
 
         XAMLActiveUserItemControl CrearControlElementoUsuarioActivo(string nombreUsuario, string colorHexadecimal)
         {
             string idItem = "lb";
-            string idUserItem = idItem + nombreUsuario;
-            XAMLActiveUserItemControl userOnlineItem = new XAMLActiveUserItemControl(nombreUsuario);
-            userOnlineItem.Name = idUserItem;
-            userOnlineItem.ButtonClicked += ElementoUsuarioEnLínea_BotónEliminarAmigoClickeado;
-            SolidColorBrush onlinePlayerColor = Utilities.CreateColorFromHexadecimal(colorHexadecimal);
-            userOnlineItem.rectangleStatusPlayer.Fill = onlinePlayerColor;
+            string idUsuarioItem = idItem + nombreUsuario;
+            XAMLActiveUserItemControl usuarioConectadoItem = new XAMLActiveUserItemControl(nombreUsuario);
+            usuarioConectadoItem.Name = idUsuarioItem;
+            usuarioConectadoItem.BotonUsado += ElementoUsuarioEnLínea_BotónEliminarAmigoClickeado;
+            SolidColorBrush colorJugadorConectado = Utilities.CreateColorFromHexadecimal(colorHexadecimal);
+            usuarioConectadoItem.rectanguloEstadoJugador.Fill = colorJugadorConectado;
 
-            return userOnlineItem;
+            return usuarioConectadoItem;
         }
 
 
@@ -151,12 +147,12 @@ namespace trofeoCazador.Vistas.Amigos
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -173,12 +169,12 @@ namespace trofeoCazador.Vistas.Amigos
             {
 
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.HandleErrorException(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                ManejadorExcepciones.HandleFatalException(ex, NavigationService);
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
@@ -234,7 +230,7 @@ namespace trofeoCazador.Vistas.Amigos
                     catch (FormatException ex)
                     {
                     Console.WriteLine($"Error al convertir color: {ex.Message}");
-                    ManejadorExcepciones.HandleComponentErrorException(ex);
+                    ManejadorExcepciones.ManejarComponenteErrorExcepcion(ex);
                     }catch (Exception ex) { Console.WriteLine(ex.ToString()); }
                 }
 

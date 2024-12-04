@@ -9,16 +9,16 @@ namespace trofeoCazador.Utilidades
 {
     public static class Utilidades
     {
-        public static string BuildAbsolutePath(string relativePath)
+        public static string ConstruirRutaAbsoluta(string rutaRelativa)
         {
-            string absolutePath = "";
+            string rutaAbsoluta = "";
 
-            if (relativePath != null)
+            if (rutaRelativa != null)
             {
-                absolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
+                rutaAbsoluta = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, rutaRelativa);
             }
 
-            return absolutePath;
+            return rutaAbsoluta;
         }
 
 

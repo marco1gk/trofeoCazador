@@ -22,7 +22,7 @@ namespace trofeoCazador.Vistas.Amigos
         private const string BTNRECHAZAR = "Reject";
         private readonly string _nombreUsuario;
 
-        public event EventHandler<ArgumentosDeEventoDeClicDeBotón> ButtonClicked;
+        public event EventHandler<ArgumentosDeEventoDeClicDeBotón> BotonUsado;
 
         public XAMLFriendRequestItemComponent(string nombreUsuario)
         {
@@ -34,12 +34,12 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void ImgAceptarSolicitudAmistad_Click(object sender, MouseButtonEventArgs e)
         {
-            ButtonClicked?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTNACEPTAR, _nombreUsuario));
+            BotonUsado?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTNACEPTAR, _nombreUsuario));
         }
 
         private void ImgRechazarSolicitudAmistad_Click(object sender, MouseButtonEventArgs e)
         {
-            ButtonClicked?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTNRECHAZAR, _nombreUsuario));
+            BotonUsado?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTNRECHAZAR, _nombreUsuario));
         }
 
 

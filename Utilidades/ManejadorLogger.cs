@@ -12,45 +12,45 @@ namespace trofeoCazador.Utilidades
     {
         private static ILogger _logger;
 
-        private static void ConfigureLogger(string logFilePath)
+        private static void ConfigurarLogger(string rutaDelArchivoDeRegistro)
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
-                .WriteTo.File(@logFilePath)
+                .WriteTo.File(rutaDelArchivoDeRegistro)
                 .CreateLogger();
         }
 
-        private static string BuildLogFilePath()
+        private static string ConstruirRutaDelArchivoDeRegistro()
         {
-            string dateFormat = "dd-MM-yyyy";
-            string idFileName = "Log";
-            string characterSeparation = "_";
-            string fileExtension = ".txt";
-            string relativeLogFilePath = "../../Logs\\";
+            string formatoFecha = "dd-MM-yyyy";
+            string idArchivoNombre = "Log";
+            string caracterSeparador = "_";
+            string extensionArchivo = ".txt";
+            string rutaRelativaDelArchivoRegistro = "../../Logs\\";
 
-            DateTime currentDate = DateTime.Today;
-            string date = currentDate.ToString(dateFormat);
+            DateTime fechaActual = DateTime.Today;
+            string fecha = fechaActual.ToString(formatoFecha);
 
-            string logFileName = idFileName + characterSeparation + date + fileExtension;
-            string absoluteLogFilePath = Utilidades.BuildAbsolutePath(relativeLogFilePath);
-            string logPath = absoluteLogFilePath + logFileName;
+            string nombreDelArchivoDeRegistro = idArchivoNombre + caracterSeparador + fecha + extensionArchivo;
+            string rutaAbsolutaDelArchivoDeRegistro = Utilidades.ConstruirRutaAbsoluta(rutaRelativaDelArchivoRegistro);
+            string rutaDeRegistro = rutaAbsolutaDelArchivoDeRegistro + nombreDelArchivoDeRegistro;
 
-            return logPath;
+            return rutaDeRegistro;
         }
 
-        public static ILogger GetLogger()
+        public static ILogger ObtenerLogger()
         {
             if (_logger == null)
             {
-                string logPath = BuildLogFilePath();
-                ConfigureLogger(logPath);
+                string rutaDeRegistro = ConstruirRutaDelArchivoDeRegistro();
+                ConfigurarLogger(rutaDeRegistro);
             }
 
             _logger = Log.Logger;
             return _logger;
         }
 
-        public static void CloseAndFlush()
+        public static void CerrarYVaciar()
         {
             (_logger as IDisposable)?.Dispose();
             Log.CloseAndFlush();

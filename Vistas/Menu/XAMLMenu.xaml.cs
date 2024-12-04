@@ -22,12 +22,9 @@ namespace trofeoCazador.Vistas.Menu
         {
             InitializeComponent();
         }
-        private void BtnSendMessage_Click(object sender, RoutedEventArgs e)
-        {
+       
 
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnPerfil(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService == null)
             {
@@ -50,11 +47,6 @@ namespace trofeoCazador.Vistas.Menu
         {
             SingletonSesion.Instancia.LimpiarSesion();
             NavigationService.GoBack();
-        }
-
-        private void BtnUnirseSalaEspera(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void BtnAmigos(object sender, RoutedEventArgs e)

@@ -16,48 +16,48 @@ namespace trofeoCazador.VentanasReutilizables
 {
     public partial class XAMLVentanaEmergente : Window
     {
-        private readonly Window _mainWindow;
+        private readonly Window _ventanaPrincipal;
 
         public XAMLVentanaEmergente()
         {
             InitializeComponent();
         }
 
-        public XAMLVentanaEmergente(string title, string description)
+        public XAMLVentanaEmergente(string titulo, string descripcion)
         {
             InitializeComponent();
 
-            _mainWindow = Application.Current.MainWindow;
-            lbTitleEmergentWindow.Content = title;
-            tbkDescriptionEmergentWindow.Text = description;
+            _ventanaPrincipal = Application.Current.MainWindow;
+            lbTitleEmergentWindow.Content = titulo;
+            tbkDescriptionEmergentWindow.Text = descripcion;
 
-            ConfigureEmergentWindow();
+            ConfigurarVentanaEmergente();
 
         }
 
-        private void ConfigureEmergentWindow()
+        private void ConfigurarVentanaEmergente()
         {
-            this.Owner = _mainWindow;
+            this.Owner = _ventanaPrincipal;
 
-            SetSizeWindow();
-            SetCenterWindow();
+            AjustarDimensionesVentana();
+            EstablecerCentroVentana();
         }
 
-        private void SetSizeWindow()
+        private void AjustarDimensionesVentana()
         {
-            this.Width = _mainWindow.Width;
-            this.Height = _mainWindow.Height;
+            this.Width = _ventanaPrincipal.Width;
+            this.Height = _ventanaPrincipal.Height;
         }
 
-        private void SetCenterWindow()
+        private void EstablecerCentroVentana()
         {
-            double centerX = _mainWindow.Left + (_mainWindow.Width - this.Width) / 2;
-            double centerY = _mainWindow.Top + (_mainWindow.Height - this.Height) / 2;
+            double centerX = _ventanaPrincipal.Left + (_ventanaPrincipal.Width - this.Width) / 2;
+            double centerY = _ventanaPrincipal.Top + (_ventanaPrincipal.Height - this.Height) / 2;
             this.Left = centerX;
             this.Top = centerY;
         }
 
-        private void BtnAccept_Click(object sender, RoutedEventArgs e)
+        private void BtnAceptar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
