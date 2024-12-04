@@ -305,6 +305,131 @@ namespace trofeoCazador.ServicioDelJuego {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Carta", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego")]
+    [System.SerializableAttribute()]
+    public partial class Carta : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool AsignadaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdCartaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double PosicionXField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double PosicionYField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RutaImagenField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TipoField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Asignada {
+            get {
+                return this.AsignadaField;
+            }
+            set {
+                if ((this.AsignadaField.Equals(value) != true)) {
+                    this.AsignadaField = value;
+                    this.RaisePropertyChanged("Asignada");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdCarta {
+            get {
+                return this.IdCartaField;
+            }
+            set {
+                if ((this.IdCartaField.Equals(value) != true)) {
+                    this.IdCartaField = value;
+                    this.RaisePropertyChanged("IdCarta");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double PosicionX {
+            get {
+                return this.PosicionXField;
+            }
+            set {
+                if ((this.PosicionXField.Equals(value) != true)) {
+                    this.PosicionXField = value;
+                    this.RaisePropertyChanged("PosicionX");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double PosicionY {
+            get {
+                return this.PosicionYField;
+            }
+            set {
+                if ((this.PosicionYField.Equals(value) != true)) {
+                    this.PosicionYField = value;
+                    this.RaisePropertyChanged("PosicionY");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RutaImagen {
+            get {
+                return this.RutaImagenField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RutaImagenField, value) != true)) {
+                    this.RutaImagenField = value;
+                    this.RaisePropertyChanged("RutaImagen");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Tipo {
+            get {
+                return this.TipoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TipoField, value) != true)) {
+                    this.TipoField = value;
+                    this.RaisePropertyChanged("Tipo");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IGestionCuentaServicio")]
     public interface IGestionCuentaServicio {
@@ -1062,6 +1187,72 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/LanzarDado")]
         System.Threading.Tasks.Task LanzarDadoAsync(string idPartida, string nombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/RepartirCartas")]
+        void RepartirCartas(string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/RepartirCartas")]
+        System.Threading.Tasks.Task RepartirCartasAsync(string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/TomarCartaDeMazo")]
+        void TomarCartaDeMazo(string idPartida, string nombreUsuario, int idCarta);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/TomarCartaDeMazo")]
+        System.Threading.Tasks.Task TomarCartaDeMazoAsync(string idPartida, string nombreUsuario, int idCarta);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/AgregarCartaACartasEnMano")]
+        void AgregarCartaACartasEnMano(string nombreUsuario, trofeoCazador.ServicioDelJuego.Carta carta, string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/AgregarCartaACartasEnMano")]
+        System.Threading.Tasks.Task AgregarCartaACartasEnManoAsync(string nombreUsuario, trofeoCazador.ServicioDelJuego.Carta carta, string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/TomarFichaMesa")]
+        void TomarFichaMesa(string idPartida, int idFicha);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/TomarFichaMesa")]
+        System.Threading.Tasks.Task TomarFichaMesaAsync(string idPartida, int idFicha);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/UtilizarCarta")]
+        void UtilizarCarta(string idPartida, int idCarta, string nombreJugador);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/UtilizarCarta")]
+        System.Threading.Tasks.Task UtilizarCartaAsync(string idPartida, int idCarta, string nombreJugador);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/AgregarCartaADescarte")]
+        void AgregarCartaADescarte(trofeoCazador.ServicioDelJuego.Carta carta, trofeoCazador.ServicioDelJuego.JugadorPartida[] jugadores);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/AgregarCartaADescarte")]
+        System.Threading.Tasks.Task AgregarCartaADescarteAsync(trofeoCazador.ServicioDelJuego.Carta carta, trofeoCazador.ServicioDelJuego.JugadorPartida[] jugadores);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/DevolverFichaAMesa")]
+        void DevolverFichaAMesa(int idFicha, string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/DevolverFichaAMesa")]
+        System.Threading.Tasks.Task DevolverFichaAMesaAsync(int idFicha, string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/AgregarCartaAEscondite")]
+        void AgregarCartaAEscondite(string nombreUsuario, int idCarta, string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/AgregarCartaAEscondite")]
+        System.Threading.Tasks.Task AgregarCartaAEsconditeAsync(string nombreUsuario, int idCarta, string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NumeroCartasEnMano", ReplyAction="http://tempuri.org/IServicioPartida/NumeroCartasEnManoResponse")]
+        int NumeroCartasEnMano(string nombreUsuario, string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NumeroCartasEnMano", ReplyAction="http://tempuri.org/IServicioPartida/NumeroCartasEnManoResponse")]
+        System.Threading.Tasks.Task<int> NumeroCartasEnManoAsync(string nombreUsuario, string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/RobarCartaAJugador")]
+        void RobarCartaAJugador(string nombreUsuario, string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/RobarCartaAJugador")]
+        System.Threading.Tasks.Task RobarCartaAJugadorAsync(string nombreUsuario, string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/RobarCarta")]
+        void RobarCarta(string nombreJugadorObjetivoRobo, string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/RobarCarta")]
+        System.Threading.Tasks.Task RobarCartaAsync(string nombreJugadorObjetivoRobo, string idPartida);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1081,6 +1272,39 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarResultadoDado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarResultadoDadoResponse")]
         void NotificarResultadoDado(string nombreUsuario, int resultado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartasEnMano", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartasEnManoResponse")]
+        void NotificarCartasEnMano(trofeoCazador.ServicioDelJuego.Carta[] cartasRepartidas);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartasEnMazo", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartasEnMazoResponse")]
+        void NotificarCartasEnMazo(trofeoCazador.ServicioDelJuego.Carta[] cartasEnMazo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartaTomadaMazo", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartaTomadaMazoResponse")]
+        void NotificarCartaTomadaMazo(int idCarta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAMano", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAManoResponse")]
+        void NotificarCartaAgregadaAMano(trofeoCazador.ServicioDelJuego.Carta carta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarFichaTomadaMesa", ReplyAction="http://tempuri.org/IServicioPartida/NotificarFichaTomadaMesaResponse")]
+        void NotificarFichaTomadaMesa(string nombreUsuario, int idFicha);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartaUtilizada", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartaUtilizadaResponse")]
+        void NotificarCartaUtilizada(int idCarta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaADescarte", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaADescarteResponse")]
+        void NotificarCartaAgregadaADescarte(trofeoCazador.ServicioDelJuego.Carta carta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarFichaDevuelta", ReplyAction="http://tempuri.org/IServicioPartida/NotificarFichaDevueltaResponse")]
+        void NotificarFichaDevuelta(int idFicha, string nombreJugadorTurnoActual);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAEscondite", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAEsconditeResponse")]
+        void NotificarCartaAgregadaAEscondite(int idCarta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCarta", ReplyAction="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCartaResponse")]
+        void NotificarIntentoRoboCarta(string nombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartaRobada", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartaRobadaResponse")]
+        void NotificarCartaRobada(trofeoCazador.ServicioDelJuego.Carta cartaRobada, string nombreJugadorObjetivoRobo, string nombreJugadorTurnoActual);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1149,6 +1373,94 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task LanzarDadoAsync(string idPartida, string nombreUsuario) {
             return base.Channel.LanzarDadoAsync(idPartida, nombreUsuario);
+        }
+        
+        public void RepartirCartas(string idPartida) {
+            base.Channel.RepartirCartas(idPartida);
+        }
+        
+        public System.Threading.Tasks.Task RepartirCartasAsync(string idPartida) {
+            return base.Channel.RepartirCartasAsync(idPartida);
+        }
+        
+        public void TomarCartaDeMazo(string idPartida, string nombreUsuario, int idCarta) {
+            base.Channel.TomarCartaDeMazo(idPartida, nombreUsuario, idCarta);
+        }
+        
+        public System.Threading.Tasks.Task TomarCartaDeMazoAsync(string idPartida, string nombreUsuario, int idCarta) {
+            return base.Channel.TomarCartaDeMazoAsync(idPartida, nombreUsuario, idCarta);
+        }
+        
+        public void AgregarCartaACartasEnMano(string nombreUsuario, trofeoCazador.ServicioDelJuego.Carta carta, string idPartida) {
+            base.Channel.AgregarCartaACartasEnMano(nombreUsuario, carta, idPartida);
+        }
+        
+        public System.Threading.Tasks.Task AgregarCartaACartasEnManoAsync(string nombreUsuario, trofeoCazador.ServicioDelJuego.Carta carta, string idPartida) {
+            return base.Channel.AgregarCartaACartasEnManoAsync(nombreUsuario, carta, idPartida);
+        }
+        
+        public void TomarFichaMesa(string idPartida, int idFicha) {
+            base.Channel.TomarFichaMesa(idPartida, idFicha);
+        }
+        
+        public System.Threading.Tasks.Task TomarFichaMesaAsync(string idPartida, int idFicha) {
+            return base.Channel.TomarFichaMesaAsync(idPartida, idFicha);
+        }
+        
+        public void UtilizarCarta(string idPartida, int idCarta, string nombreJugador) {
+            base.Channel.UtilizarCarta(idPartida, idCarta, nombreJugador);
+        }
+        
+        public System.Threading.Tasks.Task UtilizarCartaAsync(string idPartida, int idCarta, string nombreJugador) {
+            return base.Channel.UtilizarCartaAsync(idPartida, idCarta, nombreJugador);
+        }
+        
+        public void AgregarCartaADescarte(trofeoCazador.ServicioDelJuego.Carta carta, trofeoCazador.ServicioDelJuego.JugadorPartida[] jugadores) {
+            base.Channel.AgregarCartaADescarte(carta, jugadores);
+        }
+        
+        public System.Threading.Tasks.Task AgregarCartaADescarteAsync(trofeoCazador.ServicioDelJuego.Carta carta, trofeoCazador.ServicioDelJuego.JugadorPartida[] jugadores) {
+            return base.Channel.AgregarCartaADescarteAsync(carta, jugadores);
+        }
+        
+        public void DevolverFichaAMesa(int idFicha, string idPartida) {
+            base.Channel.DevolverFichaAMesa(idFicha, idPartida);
+        }
+        
+        public System.Threading.Tasks.Task DevolverFichaAMesaAsync(int idFicha, string idPartida) {
+            return base.Channel.DevolverFichaAMesaAsync(idFicha, idPartida);
+        }
+        
+        public void AgregarCartaAEscondite(string nombreUsuario, int idCarta, string idPartida) {
+            base.Channel.AgregarCartaAEscondite(nombreUsuario, idCarta, idPartida);
+        }
+        
+        public System.Threading.Tasks.Task AgregarCartaAEsconditeAsync(string nombreUsuario, int idCarta, string idPartida) {
+            return base.Channel.AgregarCartaAEsconditeAsync(nombreUsuario, idCarta, idPartida);
+        }
+        
+        public int NumeroCartasEnMano(string nombreUsuario, string idPartida) {
+            return base.Channel.NumeroCartasEnMano(nombreUsuario, idPartida);
+        }
+        
+        public System.Threading.Tasks.Task<int> NumeroCartasEnManoAsync(string nombreUsuario, string idPartida) {
+            return base.Channel.NumeroCartasEnManoAsync(nombreUsuario, idPartida);
+        }
+        
+        public void RobarCartaAJugador(string nombreUsuario, string idPartida) {
+            base.Channel.RobarCartaAJugador(nombreUsuario, idPartida);
+        }
+        
+        public System.Threading.Tasks.Task RobarCartaAJugadorAsync(string nombreUsuario, string idPartida) {
+            return base.Channel.RobarCartaAJugadorAsync(nombreUsuario, idPartida);
+        }
+        
+        public void RobarCarta(string nombreJugadorObjetivoRobo, string idPartida) {
+            base.Channel.RobarCarta(nombreJugadorObjetivoRobo, idPartida);
+        }
+        
+        public System.Threading.Tasks.Task RobarCartaAsync(string nombreJugadorObjetivoRobo, string idPartida) {
+            return base.Channel.RobarCartaAsync(nombreJugadorObjetivoRobo, idPartida);
         }
     }
     

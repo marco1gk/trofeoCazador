@@ -8,58 +8,51 @@ using trofeoCazador.ServicioDelJuego;
 
 namespace trofeoCazador.Recursos.ElementosPartida
 {
-    public class Mazo
+    /*public class Mazo
     {
         public List<Carta> Cartas { get; set; }
         public Mazo()
         {
             Cartas = new List<Carta>();
         }
-        /*public void InicializarMazo()
-        {
-            Cartas.Add(new Carta("Carta1", 3, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta1.png"));
-            Cartas.Add(new Carta("Carta2", 5, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta2.png"));
-            Cartas.Add(new Carta("Carta3", 7, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta3.png"));
-            Cartas.Add(new Carta("Carta4", 9, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta4.png"));
-            Cartas.Add(new Carta("Carta5", 11, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta5.png"));
-            Cartas.Add(new Carta("Carta6", 13, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta6.png"));
-            Cartas.Add(new Carta("Carta7", 3, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta7.png"));
-            Cartas.Add(new Carta("Carta8", 2, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta8.png"));
-            Cartas = Cartas.SelectMany(carta => Enumerable.Repeat(carta, carta.Cantidad)).ToList();
-        }*/
 
         public void InicializarMazo()
         {
             // Lista temporal para crear todas las cartas como instancias separadas
             var cartasTemporales = new List<Carta>();
 
-            cartasTemporales.AddRange(Enumerable.Repeat(new Carta("Carta1", 3, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta1.png"), 3)
-                                                 .Select(_ => new Carta("Carta1", 1, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta1.png")));
+            // Contador para los IDs de las cartas
+            int idCounter = 1;
 
-            cartasTemporales.AddRange(Enumerable.Repeat(new Carta("Carta2", 5, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta2.png"), 5)
-                                                 .Select(_ => new Carta("Carta2", 1, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta2.png")));
+            // Agregar cartas al mazo asignando IDs únicos
+            cartasTemporales.AddRange(Enumerable.Repeat(0, 3)
+                                                 .Select(_ => new Carta("Carta1", idCounter++, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta1.png")));
 
-            cartasTemporales.AddRange(Enumerable.Repeat(new Carta("Carta3", 7, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta3.png"), 7)
-                                                 .Select(_ => new Carta("Carta3", 1, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta3.png")));
-            
-            cartasTemporales.AddRange(Enumerable.Repeat(new Carta("Carta4", 9, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta4.png"), 9)
-                                                 .Select(_ => new Carta("Carta4", 1, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta4.png")));
+            cartasTemporales.AddRange(Enumerable.Repeat(0, 5)
+                                                 .Select(_ => new Carta("Carta2", idCounter++, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta2.png")));
 
-            cartasTemporales.AddRange(Enumerable.Repeat(new Carta("Carta5", 11, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta5.png"), 11)
-                                                 .Select(_ => new Carta("Carta5", 1, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta5.png")));
+            cartasTemporales.AddRange(Enumerable.Repeat(0, 7)
+                                                 .Select(_ => new Carta("Carta3", idCounter++, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta3.png")));
 
-            cartasTemporales.AddRange(Enumerable.Repeat(new Carta("Carta6", 13, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta6.png"), 13)
-                                                 .Select(_ => new Carta("Carta6", 1, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta6.png")));
+            cartasTemporales.AddRange(Enumerable.Repeat(0, 9)
+                                                 .Select(_ => new Carta("Carta4", idCounter++, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta4.png")));
 
-            cartasTemporales.AddRange(Enumerable.Repeat(new Carta("Carta7", 3, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta7.png"), 3)
-                                                .Select(_ => new Carta("Carta7", 1, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta7.png")));
+            cartasTemporales.AddRange(Enumerable.Repeat(0, 11)
+                                                 .Select(_ => new Carta("Carta5", idCounter++, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta5.png")));
 
-            cartasTemporales.AddRange(Enumerable.Repeat(new Carta("Carta8", 2, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta8.png"), 2)
-                                                 .Select(_ => new Carta("Carta8", 1, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta8.png")));
+            cartasTemporales.AddRange(Enumerable.Repeat(0, 13)
+                                                 .Select(_ => new Carta("Carta6", idCounter++, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta6.png")));
 
+            cartasTemporales.AddRange(Enumerable.Repeat(0, 3)
+                                                 .Select(_ => new Carta("Carta7", idCounter++, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta7.png")));
 
+            cartasTemporales.AddRange(Enumerable.Repeat(0, 2)
+                                                 .Select(_ => new Carta("Carta8", idCounter++, "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta8.png")));
+
+            // Asignar el mazo completo
             Cartas = cartasTemporales;
         }
+
         public void Barajar()
         {
             Random random = new Random();
@@ -78,5 +71,5 @@ namespace trofeoCazador.Recursos.ElementosPartida
             Cartas = Cartas.Skip(cantidad).ToList();
             return cartasRepartidas;
         }
-    }
+    }*/
 }

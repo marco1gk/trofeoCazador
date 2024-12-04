@@ -22,43 +22,43 @@ namespace trofeoCazador.Vistas.PartidaJuego
         private List<JugadorPartida> jugadores;
         private string idPartida;
         private JugadorDataContract jugadorActual = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
-        private Mazo mazo;
-        private Dictionary<string, ObservableCollection<Carta>> cartasDeJugadores = new Dictionary<string, ObservableCollection<Carta>>();
-        public ObservableCollection<Ficha> Fichas { get; set; } = new ObservableCollection<Ficha>();
+        private ObservableCollection<CartaCliente> CartasEnMano { get; set; } = new ObservableCollection<CartaCliente>();
+        private ObservableCollection<Ficha> Fichas { get; set; } = new ObservableCollection<Ficha>();
+        private ObservableCollection<Ficha> FichasEstaticas { get; set; } = new ObservableCollection<Ficha>();
         private ObservableCollection<Ficha> FichasEnMano { get; set; } = new ObservableCollection<Ficha>();
-        private ObservableCollection<Carta> CartasDescarte { get; set; } = new ObservableCollection<Carta>();
-        private ObservableCollection<Carta> CartasEnMazo { get; set; } = new ObservableCollection<Carta>();
-        private ObservableCollection<Carta> CartasEnEscondite { get; set; } = new ObservableCollection<Carta>();
+        private ObservableCollection<CartaCliente> CartasDescarte { get; set; } = new ObservableCollection<CartaCliente>();
+        private ObservableCollection<CartaCliente> CartasEnMazo { get; set; } = new ObservableCollection<CartaCliente>();
+        private ObservableCollection<CartaCliente> CartasEnEscondite { get; set; } = new ObservableCollection<CartaCliente>();
 
-        private string jugadorTurnoActual;
         private Dado dado;
+        private enum ModoSeleccionCarta
+        {
+            MoverAlEscondite,
+            DefenderRobo
+        }
+
+        private ModoSeleccionCarta modoSeleccionActual;
 
         public XAMLTablero(List<JugadorPartida> jugadores, string idPartida)
         {
             InitializeComponent();
             SetupClient();
             this.jugadores = jugadores;
-            mazo = new Mazo();
-            mazo.InicializarMazo();
-            CargarFichas();
+            //CargarFichas();
+            CargarFichasEstaticas();
             dado = new Dado(DadoImagen);
-            dado.DadoLanzado += ManejarResultadoDado;
             this.idPartida = idPartida;
             MostrarJugadores();
             cliente.RegistrarJugador(jugadorActual.NombreUsuario);
-            DadoImagen.IsEnabled = false;
+            
             FichasItemsControl.ItemsSource = Fichas;
             FichasManoItemsControl.ItemsSource = FichasEnMano;
             ZonaDescarte.ItemsSource = CartasDescarte;
-            CartasManoItemsControl.ItemsSource = cartasDeJugadores;
+            CartasManoItemsControl.ItemsSource = CartasEnMano;
             ZonaMazoCartas.ItemsSource = CartasEnMazo;
-            ZonaMazoCartas.IsEnabled = false;
-            FichasManoItemsControl.IsEnabled = false;
+            
             CartasEsconditeItemsControl.ItemsSource = CartasEnEscondite;
-            CartasManoItemsControl.IsEnabled = false;
-            //ZonaFichasJugador2.ItemsSource = FichasEnMano;
-            //ZonaFichasJugador3.ItemsSource = FichasEnMano;
-            //ZonaFichasJugador4.ItemsSource = FichasEnMano;
+            
 
         }
 
@@ -99,6 +99,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
             try
             {
                 cliente.CrearPartida(jugadores.ToArray(), idPartida);
+                cliente.RepartirCartas(idPartida);
                 cliente.EmpezarTurno(idPartida);
             }
             catch (Exception ex)
@@ -107,60 +108,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
             }
         }
 
-        //CARTAS
-
-        private void BarajarYRepartirCartas(List<JugadorPartida> jugadores)
-        {
-            BarajarMazo();
-            RepartirCartasAJugadores(jugadores);
-            ConfigurarCartasDeMano();
-            AgregarCartasAPilaMazo(mazo);
-        }
-
-        private void BarajarMazo()
-        {
-            mazo.Barajar();
-        }
-
-        private void RepartirCartasAJugadores(List<JugadorPartida> jugadores)
-        {
-            int[] cartasPorJugador = { 3, 4, 5, 6 };
-
-            for (int i = 0; i < jugadores.Count; i++)
-            {
-                var jugador = jugadores[i];
-                int cantidadCartas = cartasPorJugador[i];
-
-                cartasDeJugadores[jugador.NombreUsuario] = new ObservableCollection<Carta>();
-
-                var cartasRepartidas = mazo.RepartirCartas(cantidadCartas);
-                foreach (var carta in cartasRepartidas)
-                {
-                    AsignarCartaAJugador(carta);
-                }
-            }
-        }
-
-        private void ConfigurarCartasDeMano()
-        {
-            if (cartasDeJugadores.ContainsKey(jugadorActual.NombreUsuario))
-            {
-                CartasManoItemsControl.ItemsSource = cartasDeJugadores[jugadorActual.NombreUsuario];
-            }
-        }
-
-        private void AgregarCartasAPilaMazo(Mazo mazo)
-        {
-            mazo.Barajar();
-
-            foreach (var carta in mazo.Cartas)
-            {
-                double desplazamiento = CartasEnMazo.Count/4;
-                carta.PosicionX = desplazamiento;
-                carta.PosicionY = desplazamiento;
-                CartasEnMazo.Add(carta);
-            }            
-        }
 
         private Thickness margenInicialCarta = new Thickness();
 
@@ -216,6 +163,14 @@ namespace trofeoCazador.Vistas.PartidaJuego
             }
         }
 
+        private void CargarFichasEstaticas()
+        {
+            for (int i = 1; i <= 6; i++)
+            {
+                FichasEstaticas.Add(new Ficha { IdFicha = i, RutaImagenFicha = $"/Recursos/ElementosPartida/ImagenesPartida/Fichas/Ficha{i}.png" });
+            }
+        }
+
         private void ResetearFichas()
         {
             foreach (var ficha in FichasEnMano.ToList())
@@ -267,17 +222,14 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             await Task.Delay(1000);
             Ficha fichaSeleccionada = SeleccionarFichaPorResultado(resultadoDado);
-
-            if (jugadorTurnoActual == jugadorActual.NombreUsuario)
+            
+            if (PuedeTomarFicha(fichaSeleccionada))
             {
-                if (PuedeTomarFicha(fichaSeleccionada))
-                {
-                    await TomarFicha(fichaSeleccionada);
-                }
-                else
-                {
-                    await ManejarFichaDuplicada();
-                }
+                await TomarFicha(fichaSeleccionada);
+            }
+            else
+            {
+                await ManejarFichaDuplicada();
             }
         }
 
@@ -288,13 +240,12 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         private bool PuedeTomarFicha(Ficha fichaSeleccionada)
         {
-            return fichaSeleccionada != null && !FichasEnMano.Contains(fichaSeleccionada);
+            return fichaSeleccionada != null;
         }
 
         private async Task TomarFicha(Ficha fichaSeleccionada)
         {
-            FichasEnMano.Add(fichaSeleccionada);
-            Fichas.Remove(fichaSeleccionada);
+            cliente.TomarFichaMesa(idPartida, fichaSeleccionada.IdFicha);
             await Task.Delay(1000);
 
             MessageBoxResult decision = MostrarDialogoDecision();
@@ -310,7 +261,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
         private MessageBoxResult MostrarDialogoDecision()
         {
             return MessageBox.Show(
-                "Obtuviste una ficha. ¿Quieres continuar o parar?",
+                "Obtuviste una ficha. ¿Quieres continuar tirando?",
                 "Decisión de turno",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question
@@ -335,7 +286,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         private bool VerificarCartaEnMano(string tipoCarta)
         {
-            return cartasDeJugadores[jugadorActual.NombreUsuario].Any(c => c.Tipo == tipoCarta);
+            return CartasEnMano.Any(c => c.Tipo == tipoCarta);
         }
 
         private async Task ManejarTurnoSinOpciones()
@@ -411,16 +362,15 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         private void UsarCarta(string tipoCarta)
         {
-            var carta = cartasDeJugadores[jugadorActual.NombreUsuario].FirstOrDefault(c => c.Tipo == tipoCarta);
+            var carta = CartasEnMano.FirstOrDefault(c => c.Tipo == tipoCarta);
             if (carta != null)
             {
-                cartasDeJugadores[jugadorActual.NombreUsuario].Remove(carta);
-                AgregarCartaAPilaDescarte(carta);
+                cliente.UtilizarCarta(idPartida, carta.IdCarta, jugadorActual.NombreUsuario);
                 MessageBox.Show($"Usaste una carta {tipoCarta}.");
             }
         }
 
-        private void AgregarCartaAPilaDescarte(Carta carta)
+        private void AgregarCartaAPilaDescarte(CartaCliente carta)
         {
             double desplazamiento = CartasDescarte.Count * 2;
             carta.PosicionX = desplazamiento;
@@ -434,7 +384,18 @@ namespace trofeoCazador.Vistas.PartidaJuego
             var cartaSeleccionada = ObtenerCartaSeleccionada(sender);
             if (cartaSeleccionada != null)
             {
-                MoverCartaAEscondite(cartaSeleccionada);
+                switch (modoSeleccionActual)
+                {
+                    case ModoSeleccionCarta.MoverAlEscondite:
+                        MoverCartaAEscondite(cartaSeleccionada);
+                        break;
+                    case ModoSeleccionCarta.DefenderRobo:
+                        UsarCartaBloqueoRobo(cartaSeleccionada);
+                        break;
+                    default:
+                        Metodos.MostrarMensaje("Acción no válida.");
+                        break;
+                }
             }
             else
             {
@@ -442,15 +403,14 @@ namespace trofeoCazador.Vistas.PartidaJuego
             }
         }
 
-        private Carta ObtenerCartaSeleccionada(object sender)
+        private CartaCliente ObtenerCartaSeleccionada(object sender)
         {
-            return (sender as Border)?.DataContext as Carta;
+            return (sender as Border)?.DataContext as CartaCliente;
         }
 
-        private void MoverCartaAEscondite(Carta carta)
+        private void MoverCartaAEscondite(CartaCliente carta)
         {
-            cartasDeJugadores[jugadorActual.NombreUsuario].Remove(carta);
-            CartasEnEscondite.Add(carta);
+            cliente.AgregarCartaAEscondite(jugadorActual.NombreUsuario, carta.IdCarta, idPartida);
         }
 
 
@@ -463,7 +423,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
             else
             {
                 var cartaSuperior = ObtenerCartaSuperiorDelMazo();
-                AsignarCartaAJugador(cartaSuperior);
+                cliente.TomarCartaDeMazo(idPartida, jugadorActual.NombreUsuario, cartaSuperior.IdCarta);
             }
         }
 
@@ -472,25 +432,11 @@ namespace trofeoCazador.Vistas.PartidaJuego
             return CartasEnMazo == null || !CartasEnMazo.Any();
         }
 
-        private Carta ObtenerCartaSuperiorDelMazo()
+        private CartaCliente ObtenerCartaSuperiorDelMazo()
         {
             var cartaSuperior = CartasEnMazo.Last();
-            CartasEnMazo.Remove(cartaSuperior);
             return cartaSuperior;
         }
-
-        private void AsignarCartaAJugador(Carta carta)
-        {
-            if (cartasDeJugadores.ContainsKey(jugadorActual.NombreUsuario))
-            {
-                cartasDeJugadores[jugadorActual.NombreUsuario].Add(carta);
-            }
-            else
-            {
-                cartasDeJugadores[jugadorActual.NombreUsuario] = new ObservableCollection<Carta> { carta };
-            }
-        }
-
 
         private void Ficha_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -543,15 +489,14 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 FichasItemsControl.IsEnabled = true;
                 FichasItemsControl.MouseDown += async (s, e) =>
                 {
-                    var fichaEnMesa = (e.OriginalSource as FrameworkElement)?.DataContext as Ficha;
+                    var fichaEnMesaSeleccionada = (e.OriginalSource as FrameworkElement)?.DataContext as Ficha;
 
-                    if (fichaEnMesa != null)
+                    if (fichaEnMesaSeleccionada != null)
                     {
-                        FichasEnMano.Add(fichaEnMesa);
-                        Fichas.Remove(fichaEnMesa);
-                        FichaResuelta(fichaSeleccionada);
+                        cliente.TomarFichaMesa(idPartida, fichaEnMesaSeleccionada.IdFicha);
+                        cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
 
-                        Metodos.MostrarMensaje($"Intercambiaste la ficha {fichaSeleccionada.IdFicha} por la ficha {fichaEnMesa.IdFicha}.");
+                        Metodos.MostrarMensaje($"Intercambiaste la ficha {fichaSeleccionada.IdFicha} por la ficha {fichaEnMesaSeleccionada.IdFicha}.");
                         FichasItemsControl.IsEnabled = false;
                     }
                 };
@@ -560,21 +505,62 @@ namespace trofeoCazador.Vistas.PartidaJuego
             else
             {
                 Metodos.MostrarMensaje("Esta ficha no tiene efecto ya que no queda alguna ficha por la cual intercambiarla.");
-                FichaResuelta(fichaSeleccionada);
+                cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
             }
 
             
         }
 
+        private void HabilitarClickEnAreasJugadores(bool habilitar)
+        {
+            AreaJugador2.IsEnabled = habilitar;
+            AreaJugador3.IsEnabled = habilitar;
+            AreaJugador4.IsEnabled = habilitar;
+        }
+
+        private void RobarCartaDeJugador(object sender, MouseButtonEventArgs e)
+        {
+            var areaSeleccionada = sender as StackPanel;
+            if (areaSeleccionada != null)
+            {
+                var jugadorObjetivo = ObtenerJugadorDesdeArea(areaSeleccionada);
+                if (jugadorObjetivo != null)
+                {
+                    // Deshabilitar clicks para evitar múltiples selecciones
+                    HabilitarClickEnAreasJugadores(false);
+                    cliente.RobarCartaAJugador(jugadorObjetivo.NombreUsuario, idPartida);
+                }
+            }
+        }
+
+        private JugadorPartida ObtenerJugadorDesdeArea(StackPanel area)
+        {
+            if (area == AreaJugador2) return jugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador2.Text);
+            if (area == AreaJugador3) return jugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador3.Text);
+            if (area == AreaJugador4) return jugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador4.Text);
+            return null;
+        }
 
         private void AccionFichaRevelarCarta(Ficha fichaSeleccionada)
         {
-            FichaResuelta(fichaSeleccionada);
+            cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
 
         }
         private void AccionFichaRobarCartaAJugador(Ficha fichaSeleccionada)
         {
-            FichaResuelta(fichaSeleccionada);
+            // Desuscribirse para evitar duplicados
+            AreaJugador2.MouseDown -= RobarCartaDeJugador;
+            AreaJugador3.MouseDown -= RobarCartaDeJugador;
+            AreaJugador4.MouseDown -= RobarCartaDeJugador;
+
+            // Mostrar mensaje y habilitar áreas
+            Metodos.MostrarMensaje("Haz clic en el jugador al que deseas robar una carta.");
+            HabilitarClickEnAreasJugadores(true);
+
+            // Asignar eventos una vez
+            AreaJugador2.MouseDown += RobarCartaDeJugador;
+            AreaJugador3.MouseDown += RobarCartaDeJugador;
+            AreaJugador4.MouseDown += RobarCartaDeJugador;
         }
 
         private void AccionFichaRobarOGuardar(Ficha fichaSeleccionada)
@@ -582,6 +568,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
             Metodos.MostrarMensaje("Puedes hacer 1 de las siguientes opciones:\n1) Robar una carta del mazo\n2) Guardar una carta en el escondite.");
             ZonaMazoCartas.IsEnabled = true;
             CartasManoItemsControl.IsEnabled = true;
+            modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
 
             bool accionRealizada = false;
 
@@ -594,7 +581,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                         Metodos.MostrarMensaje("Has robado una carta del mazo.");
                         accionRealizada = true;
 
-                        FichaResuelta(fichaSeleccionada);
+                        cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
 
                         ZonaMazoCartas.IsEnabled = false;
                         CartasManoItemsControl.IsEnabled = false;
@@ -610,12 +597,12 @@ namespace trofeoCazador.Vistas.PartidaJuego
             {
                 if (!accionRealizada)
                 {
-                    if (cartasDeJugadores[jugadorActual.NombreUsuario].Any())
+                    if (CartasEnMano.Any())
                     {
                         Metodos.MostrarMensaje("Has guardado una carta en el escondite.");
                         accionRealizada = true;
 
-                        FichaResuelta(fichaSeleccionada);
+                        cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
 
                         ZonaMazoCartas.IsEnabled = false;
                         CartasManoItemsControl.IsEnabled = false;
@@ -631,10 +618,11 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         private void AccionFichaGuardarCartasEscondite(Ficha fichaSeleccionada)
         {
-            if (cartasDeJugadores[jugadorActual.NombreUsuario].Count >= 2)
+            if (CartasEnMano.Count >= 2)
             {
                 Metodos.MostrarMensaje("Puedes guardar 2 cartas en el escondite, selecciona las que deseas agregar al escondite.");
                 CartasManoItemsControl.IsEnabled = true;
+                modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
                 int cartasGuardadasEscondite = 0;
 
                 CartasManoItemsControl.MouseDown += async (s, e) =>
@@ -643,7 +631,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     if (cartasGuardadasEscondite == 2)
                     {
                         CartasManoItemsControl.IsEnabled = false;
-                        FichaResuelta(fichaSeleccionada);
+                        cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
                     }
                 };
             }
@@ -667,7 +655,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     if (cartasTomadasMazo == 2)
                     {
                         ZonaMazoCartas.IsEnabled = false;
-                        FichaResuelta(fichaSeleccionada);
+                        cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
                     }
                 };
 
@@ -678,12 +666,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 Metodos.MostrarMensaje("No hay cartas suficientes en el Mazo.");
             }
             
-        }
-
-        private void FichaResuelta(Ficha fichaSeleccionada)
-        {
-            Fichas.Add(fichaSeleccionada);
-            FichasEnMano.Remove(fichaSeleccionada);
         }
 
         private void VerEscondite_Click(object sender, RoutedEventArgs e)
@@ -703,27 +685,33 @@ namespace trofeoCazador.Vistas.PartidaJuego
             }
         }
 
+        /*public Mazo CrearMazoCartas(List<int> idCartas)
+        {
+            Mazo mazoActual = new Mazo();
+            foreach (var idCarta in idCartas)
+            {
+                var carta = mazo.Cartas.FirstOrDefault(c => c.IdCarta == idCarta);
+                mazoActual.Cartas.Add(carta);
+            }
+            return mazoActual;
+        }*/
+
         //NOTIFICACIONES
         public void NotificarTurnoIniciado(string nombreUsuario)
         {
-            ResetearFichas();
-            jugadorTurnoActual = nombreUsuario;
-            if (nombreUsuario == jugadorActual.NombreUsuario)
-            {
-                DadoImagen.IsEnabled = true;
-            }
-            else
-            {
-                DadoImagen.IsEnabled = false;
-            }
+            dado.DadoLanzado -= ManejarResultadoDado;
+            dado.DadoLanzado += ManejarResultadoDado;
+            DadoImagen.IsEnabled = true;
         }
         public void NotificarTurnoTerminado(string nombreUsuario)
         {
-            if (nombreUsuario == jugadorActual.NombreUsuario)
+            foreach (var ficha in FichasEnMano)
             {
-                DadoImagen.IsEnabled = false;
-                ResetearFichas();
+                cliente.DevolverFichaAMesa(ficha.IdFicha, idPartida);
             }
+            DadoImagen.IsEnabled = false;
+            dado.DadoLanzado -= ManejarResultadoDado;
+            
         }
 
         public void NotificarResultadoAccion(string action, bool success)
@@ -734,15 +722,192 @@ namespace trofeoCazador.Vistas.PartidaJuego
         public void NotificarPartidaCreada(string idPartida)
         {
             this.idPartida = idPartida;
-            BarajarYRepartirCartas(jugadores);
+            DadoImagen.IsEnabled = false;
+            ZonaMazoCartas.IsEnabled = false;
+            FichasManoItemsControl.IsEnabled = false;
+            CartasManoItemsControl.IsEnabled = false;
+            CargarFichas();
         }
 
         public void NotificarResultadoDado(string nombreUsuario, int resultadoDado)
         {
             dado.LanzarDado(resultadoDado);
         }
+        public void NotificarCartasEnMano(Carta[] cartasRepartidas)
+        {
+            foreach(var carta in cartasRepartidas)
+            {
+                CartaCliente cartaCliente = new CartaCliente { Tipo = carta.Tipo, IdCarta = carta.IdCarta, RutaImagen = carta.RutaImagen, Asignada = true};
+                CartasEnMano.Add(cartaCliente);
+            }
+            foreach(var carta in CartasEnMano)
+            {
+                Console.WriteLine($"IDCarta: {carta.IdCarta} RutaImagen: {carta.RutaImagen}");
+            }
+        }
 
-        
+        public void NotificarCartasEnMazo(Carta[] cartasEnMazo)
+        {
+            foreach(var carta in cartasEnMazo)
+            {
+                CartaCliente cartaCliente = new CartaCliente { Tipo = carta.Tipo, IdCarta = carta.IdCarta, RutaImagen = carta.RutaImagen, Asignada = false};
+                CartasEnMazo.Add(cartaCliente);
+            }
+            foreach (var carta in CartasEnMazo)
+            {
+                Console.WriteLine($"Carta en mazo: {carta.IdCarta}");
+            }
+        }
+
+        public void NotificarCartaAgregadaAMano(Carta carta)
+        {
+            CartaCliente cartaCliente = new CartaCliente { Tipo = carta.Tipo, IdCarta = carta.IdCarta, RutaImagen = carta.RutaImagen, Asignada = true };
+            CartasEnMano.Add(cartaCliente);
+        }
+
+        public void NotificarCartaTomadaMazo(int idCarta)
+        {
+            var cartaTomada = CartasEnMazo.FirstOrDefault(c => c.IdCarta == idCarta);
+            CartasEnMazo.Remove(cartaTomada);
+        }
+
+        public void NotificarFichaTomadaMesa(string jugadorTurnoActual, int idFicha)
+        {
+            //Metodos.MostrarMensaje($"Jugador turno actual: {jugadorTurnoActual}\nJugador Actual: {jugadorActual.NombreUsuario}");
+            var fichaSeleccionada = Fichas.FirstOrDefault(f => f.IdFicha == idFicha);
+            Fichas.Remove(fichaSeleccionada);
+
+            if(jugadorActual.NombreUsuario == jugadorTurnoActual)
+            {
+                FichasEnMano.Add(fichaSeleccionada);
+            }
+        }
+
+        public void NotificarCartaAgregadaADescarte(Carta cartaUtilizada)
+        {
+            CartaCliente carta = new CartaCliente { IdCarta = cartaUtilizada.IdCarta, RutaImagen = cartaUtilizada.RutaImagen, Tipo = cartaUtilizada.Tipo, Asignada = false};
+            CartasDescarte.Add(carta);
+        }
+
+        public void NotificarCartaUtilizada(int idCartaUtilizada)
+        {
+            var cartaUtilizada = CartasEnMano.FirstOrDefault(c => c.IdCarta == idCartaUtilizada);
+            CartasEnMano.Remove(cartaUtilizada);
+        }
+
+        public void NotificarFichaDevuelta(int idFicha, string nombreJugadorTurnoActual)
+        {
+            if(jugadorActual.NombreUsuario == nombreJugadorTurnoActual)
+            {
+                var ficha = FichasEnMano.FirstOrDefault(f => f.IdFicha == idFicha);
+                FichasEnMano.Remove(ficha);
+                Fichas.Add(ficha);
+            }
+            else
+            {
+                var fichaDevuelta = FichasEstaticas.FirstOrDefault(f => f.IdFicha == idFicha);
+                Fichas.Add(fichaDevuelta);
+            }
+        }
+
+        public void NotificarCartaAgregadaAEscondite(int idCarta)
+        {
+            var carta = CartasEnMano.FirstOrDefault(c => c.IdCarta == idCarta);
+            CartasEnMano.Remove(carta);
+            CartasEnEscondite.Add(carta);
+        }
+
+        public void NotificarIntentoRoboCarta(string jugadorObjetivoRobo)
+        {
+            if (jugadorActual.NombreUsuario == jugadorObjetivoRobo)
+            {
+                MessageBoxResult decision = DecisionDefenderseRobo();
+
+                if (decision == MessageBoxResult.Yes)
+                {
+                    CartasManoItemsControl.IsEnabled = true;
+                    modoSeleccionActual = ModoSeleccionCarta.DefenderRobo;
+                }
+                else
+                {
+                    cliente.RobarCarta(jugadorObjetivoRobo, idPartida);
+                }
+            }
+        }
+
+        public void NotificarCartaRobada(Carta carta, string jugadorObjetivoRobo, string jugadorTurnoActual)
+        {
+            if(jugadorActual.NombreUsuario == jugadorObjetivoRobo)
+            {
+                var cartaRobada = CartasEnMano.FirstOrDefault(c => c.IdCarta == carta.IdCarta);
+                CartasEnMano.Remove(cartaRobada);
+            }
+
+            if(jugadorActual.NombreUsuario == jugadorTurnoActual)
+            {
+                CartaCliente cartaRobada = new CartaCliente { IdCarta = carta.IdCarta, Tipo = carta.Tipo, RutaImagen = carta.RutaImagen, Asignada = true};
+                CartasEnMano.Add(cartaRobada);
+                //cliente.DevolverFichaAMesa(4, idPartida);
+            }
+            
+        }
+
+        private void UsarCartaBloqueoRobo(CartaCliente cartaSeleccionada)
+        {
+            switch (cartaSeleccionada.Tipo)
+            {
+                case "Carta7":
+                    UsarCarta7(cartaSeleccionada.IdCarta);
+                    break;
+                case "Carta8":
+                    UsarCarta8(cartaSeleccionada);
+                    break;
+                default:
+                    Metodos.MostrarMensaje("La carta seleccionada no sirve para bloquear un robo.");
+                    break;
+
+            }
+        }
+
+        private void UsarCarta7(int idCarta)
+        {
+            if (CartasEnMazo.Count >= 2)
+            {
+                cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+                Metodos.MostrarMensaje("Puedes tomar 2 cartas del Mazo, da clic 2 veces en el.");
+                ZonaMazoCartas.IsEnabled = true;
+                int cartasTomadasMazo = 0;
+
+                ZonaMazoCartas.MouseDown += async (s, e) =>
+                {
+                    cartasTomadasMazo++;
+                    if (cartasTomadasMazo == 2)
+                    {
+                        ZonaMazoCartas.IsEnabled = false;
+                        //cliente.DevolverFichaAMesa(4, idPartida);
+                    }
+                };
+                
+            }
+            else
+            {
+                Metodos.MostrarMensaje("No hay cartas suficientes en el Mazo.");
+            }
+        }
+
+        private void UsarCarta8(CartaCliente carta)
+        {
+
+        }
+        private MessageBoxResult DecisionDefenderseRobo()
+        {
+            return MessageBox.Show(
+                "Has sido elegido como objeto de robo. ¿Quieres defenderte?",
+                "Decision de defensa",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+            );
+        }
     }
 }
 

@@ -183,23 +183,11 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ObtenerCodigosGenerados">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ObtenerCodigosGeneradosResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerCodigosGeneradosResult" nillable="true" type="q5:ArrayOfstring" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="UnirseSalaEspera">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="codigoSalaEspera" nillable="true" type="xs:string" />
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugador" nillable="true" type="q6:JugadorSalaEspera" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugador" nillable="true" type="q5:JugadorSalaEspera" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -283,7 +271,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="codigoSalaEspera" nillable="true" type="xs:string" />
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugador" nillable="true" type="q7:ArrayOfJugadorSalaEspera" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugador" nillable="true" type="q6:ArrayOfJugadorSalaEspera" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -295,7 +283,7 @@
   <xs:element name="NotificarJugadorSeUnioSalaEspera">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugador" nillable="true" type="q8:JugadorSalaEspera" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugador" nillable="true" type="q7:JugadorSalaEspera" />
         <xs:element minOccurs="0" name="numeroJugadoresSalaEspera" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -330,7 +318,7 @@
   <xs:element name="NotificarIniciarPartida">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugadoresPartida" nillable="true" type="q9:ArrayOfJugadorPartida" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugadoresPartida" nillable="true" type="q8:ArrayOfJugadorPartida" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -404,7 +392,7 @@
   <xs:element name="ObtenerListaNombresUsuariosAmigosResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerListaNombresUsuariosAmigosResult" nillable="true" type="q10:ArrayOfstring" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerListaNombresUsuariosAmigosResult" nillable="true" type="q9:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -448,7 +436,7 @@
   <xs:element name="ObtenerNombresUsuariosSolicitantesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerNombresUsuariosSolicitantesResult" nillable="true" type="q11:ArrayOfstring" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerNombresUsuariosSolicitantesResult" nillable="true" type="q10:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -586,7 +574,7 @@
   <xs:element name="NotificarAmigosEnLinea">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="nombresUsuariosEnLinea" nillable="true" type="q12:ArrayOfstring" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="nombresUsuariosEnLinea" nillable="true" type="q11:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -618,7 +606,7 @@
   <xs:element name="CrearPartida">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugadores" nillable="true" type="q13:ArrayOfJugadorPartida" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugadores" nillable="true" type="q12:ArrayOfJugadorPartida" />
         <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -635,6 +623,104 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RepartirCartas">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TomarCartaDeMazo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idCarta" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AgregarCartaACartasEnMano">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="carta" nillable="true" type="q13:Carta" />
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TomarFichaMesa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idFicha" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UtilizarCarta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idCarta" type="xs:int" />
+        <xs:element minOccurs="0" name="nombreJugador" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AgregarCartaADescarte">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="carta" nillable="true" type="q14:Carta" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="jugadores" nillable="true" type="q15:ArrayOfJugadorPartida" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DevolverFichaAMesa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idFicha" type="xs:int" />
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AgregarCartaAEscondite">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idCarta" type="xs:int" />
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NumeroCartasEnMano">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NumeroCartasEnManoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NumeroCartasEnManoResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RobarCartaAJugador">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RobarCarta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreJugadorObjetivoRobo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -700,19 +786,140 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="EnviarInvitacionCorreo">
+  <xs:element name="NotificarCartasEnMano">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="codigoSalaEspera" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="correo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="cartasRepartidas" nillable="true" type="q16:ArrayOfCarta" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="EnviarInvitacionCorreoResponse">
+  <xs:element name="NotificarCartasEnManoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartasEnMazo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EnviarInvitacionCorreoResult" type="xs:boolean" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="cartasEnMazo" nillable="true" type="q17:ArrayOfCarta" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartasEnMazoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartaTomadaMazo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idCarta" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartaTomadaMazoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartaAgregadaAMano">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="carta" nillable="true" type="q18:Carta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartaAgregadaAManoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarFichaTomadaMesa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idFicha" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarFichaTomadaMesaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartaUtilizada">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idCarta" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartaUtilizadaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartaAgregadaADescarte">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="carta" nillable="true" type="q19:Carta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartaAgregadaADescarteResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarFichaDevuelta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idFicha" type="xs:int" />
+        <xs:element minOccurs="0" name="nombreJugadorTurnoActual" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarFichaDevueltaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartaAgregadaAEscondite">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idCarta" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartaAgregadaAEsconditeResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarIntentoRoboCarta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarIntentoRoboCartaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartaRobada">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="cartaRobada" nillable="true" type="q20:Carta" />
+        <xs:element minOccurs="0" name="nombreJugadorObjetivoRobo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreJugadorTurnoActual" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarCartaRobadaResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

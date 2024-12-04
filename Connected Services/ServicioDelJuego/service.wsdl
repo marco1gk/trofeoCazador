@@ -60,16 +60,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_IGestorInvitacion_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
-        </msb:BinaryEncoding>
-        <wsaw:UsingAddressing>
-        </wsaw:UsingAddressing>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
@@ -162,12 +152,6 @@
   </wsdl:message>
   <wsdl:message name="ILobbyManager_CrearSalaEspera_InputMessage">
     <wsdl:part name="parameters" element="tns:CrearSalaEspera" />
-  </wsdl:message>
-  <wsdl:message name="ILobbyManager_ObtenerCodigosGenerados_InputMessage">
-    <wsdl:part name="parameters" element="tns:ObtenerCodigosGenerados" />
-  </wsdl:message>
-  <wsdl:message name="ILobbyManager_ObtenerCodigosGenerados_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ObtenerCodigosGeneradosResponse" />
   </wsdl:message>
   <wsdl:message name="ILobbyManager_UnirseSalaEspera_InputMessage">
     <wsdl:part name="parameters" element="tns:UnirseSalaEspera" />
@@ -385,6 +369,42 @@
   <wsdl:message name="IServicioPartida_LanzarDado_InputMessage">
     <wsdl:part name="parameters" element="tns:LanzarDado" />
   </wsdl:message>
+  <wsdl:message name="IServicioPartida_RepartirCartas_InputMessage">
+    <wsdl:part name="parameters" element="tns:RepartirCartas" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_TomarCartaDeMazo_InputMessage">
+    <wsdl:part name="parameters" element="tns:TomarCartaDeMazo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_AgregarCartaACartasEnMano_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarCartaACartasEnMano" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_TomarFichaMesa_InputMessage">
+    <wsdl:part name="parameters" element="tns:TomarFichaMesa" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_UtilizarCarta_InputMessage">
+    <wsdl:part name="parameters" element="tns:UtilizarCarta" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_AgregarCartaADescarte_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarCartaADescarte" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_DevolverFichaAMesa_InputMessage">
+    <wsdl:part name="parameters" element="tns:DevolverFichaAMesa" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_AgregarCartaAEscondite_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarCartaAEscondite" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NumeroCartasEnMano_InputMessage">
+    <wsdl:part name="parameters" element="tns:NumeroCartasEnMano" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NumeroCartasEnMano_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NumeroCartasEnManoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_RobarCartaAJugador_InputMessage">
+    <wsdl:part name="parameters" element="tns:RobarCartaAJugador" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_RobarCarta_InputMessage">
+    <wsdl:part name="parameters" element="tns:RobarCarta" />
+  </wsdl:message>
   <wsdl:message name="IServicioPartida_NotificarTurnoIniciado_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarTurnoIniciado" />
   </wsdl:message>
@@ -415,11 +435,71 @@
   <wsdl:message name="IServicioPartida_NotificarResultadoDado_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarResultadoDadoResponse" />
   </wsdl:message>
-  <wsdl:message name="IGestorInvitacion_EnviarInvitacionCorreo_InputMessage">
-    <wsdl:part name="parameters" element="tns:EnviarInvitacionCorreo" />
+  <wsdl:message name="IServicioPartida_NotificarCartasEnMano_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartasEnMano" />
   </wsdl:message>
-  <wsdl:message name="IGestorInvitacion_EnviarInvitacionCorreo_OutputMessage">
-    <wsdl:part name="parameters" element="tns:EnviarInvitacionCorreoResponse" />
+  <wsdl:message name="IServicioPartida_NotificarCartasEnMano_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartasEnManoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartasEnMazo_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartasEnMazo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartasEnMazo_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartasEnMazoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaTomadaMazo_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaTomadaMazo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaTomadaMazo_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaTomadaMazoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaAgregadaAMano_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaAgregadaAMano" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaAgregadaAMano_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaAgregadaAManoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarFichaTomadaMesa_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarFichaTomadaMesa" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarFichaTomadaMesa_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarFichaTomadaMesaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaUtilizada_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaUtilizada" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaUtilizada_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaUtilizadaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaAgregadaADescarte_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaAgregadaADescarte" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaAgregadaADescarte_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaAgregadaADescarteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarFichaDevuelta_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarFichaDevuelta" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarFichaDevuelta_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarFichaDevueltaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaAgregadaAEscondite_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaAgregadaAEscondite" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaAgregadaAEscondite_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaAgregadaAEsconditeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarIntentoRoboCarta_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarIntentoRoboCarta" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarIntentoRoboCarta_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarIntentoRoboCartaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaRobada_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaRobada" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaRobada_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaRobadaResponse" />
   </wsdl:message>
   <wsdl:portType name="IGestionCuentaServicio">
     <wsdl:operation name="AgregarJugador">
@@ -477,10 +557,6 @@
     </wsdl:operation>
     <wsdl:operation name="CrearSalaEspera">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/CrearSalaEspera" message="tns:ILobbyManager_CrearSalaEspera_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ObtenerCodigosGenerados">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/ObtenerCodigosGenerados" message="tns:ILobbyManager_ObtenerCodigosGenerados_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/ObtenerCodigosGeneradosResponse" message="tns:ILobbyManager_ObtenerCodigosGenerados_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UnirseSalaEspera">
       <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/UnirseSalaEspera" message="tns:ILobbyManager_UnirseSalaEspera_InputMessage" />
@@ -648,6 +724,40 @@
     <wsdl:operation name="LanzarDado">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/LanzarDado" message="tns:IServicioPartida_LanzarDado_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RepartirCartas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/RepartirCartas" message="tns:IServicioPartida_RepartirCartas_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TomarCartaDeMazo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/TomarCartaDeMazo" message="tns:IServicioPartida_TomarCartaDeMazo_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarCartaACartasEnMano">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/AgregarCartaACartasEnMano" message="tns:IServicioPartida_AgregarCartaACartasEnMano_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TomarFichaMesa">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/TomarFichaMesa" message="tns:IServicioPartida_TomarFichaMesa_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UtilizarCarta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/UtilizarCarta" message="tns:IServicioPartida_UtilizarCarta_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarCartaADescarte">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/AgregarCartaADescarte" message="tns:IServicioPartida_AgregarCartaADescarte_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DevolverFichaAMesa">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/DevolverFichaAMesa" message="tns:IServicioPartida_DevolverFichaAMesa_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarCartaAEscondite">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/AgregarCartaAEscondite" message="tns:IServicioPartida_AgregarCartaAEscondite_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NumeroCartasEnMano">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NumeroCartasEnMano" message="tns:IServicioPartida_NumeroCartasEnMano_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NumeroCartasEnManoResponse" message="tns:IServicioPartida_NumeroCartasEnMano_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RobarCartaAJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/RobarCartaAJugador" message="tns:IServicioPartida_RobarCartaAJugador_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RobarCarta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/RobarCarta" message="tns:IServicioPartida_RobarCarta_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotificarTurnoIniciado">
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado" message="tns:IServicioPartida_NotificarTurnoIniciado_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciadoResponse" message="tns:IServicioPartida_NotificarTurnoIniciado_InputCallbackMessage" />
@@ -668,11 +778,49 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarResultadoDado" message="tns:IServicioPartida_NotificarResultadoDado_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarResultadoDadoResponse" message="tns:IServicioPartida_NotificarResultadoDado_InputCallbackMessage" />
     </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:portType name="IGestorInvitacion">
-    <wsdl:operation name="EnviarInvitacionCorreo">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestorInvitacion/EnviarInvitacionCorreo" message="tns:IGestorInvitacion_EnviarInvitacionCorreo_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestorInvitacion/EnviarInvitacionCorreoResponse" message="tns:IGestorInvitacion_EnviarInvitacionCorreo_OutputMessage" />
+    <wsdl:operation name="NotificarCartasEnMano">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartasEnMano" message="tns:IServicioPartida_NotificarCartasEnMano_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartasEnManoResponse" message="tns:IServicioPartida_NotificarCartasEnMano_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartasEnMazo">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartasEnMazo" message="tns:IServicioPartida_NotificarCartasEnMazo_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartasEnMazoResponse" message="tns:IServicioPartida_NotificarCartasEnMazo_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaTomadaMazo">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaTomadaMazo" message="tns:IServicioPartida_NotificarCartaTomadaMazo_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaTomadaMazoResponse" message="tns:IServicioPartida_NotificarCartaTomadaMazo_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaAgregadaAMano">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAMano" message="tns:IServicioPartida_NotificarCartaAgregadaAMano_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAManoResponse" message="tns:IServicioPartida_NotificarCartaAgregadaAMano_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarFichaTomadaMesa">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarFichaTomadaMesa" message="tns:IServicioPartida_NotificarFichaTomadaMesa_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarFichaTomadaMesaResponse" message="tns:IServicioPartida_NotificarFichaTomadaMesa_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaUtilizada">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaUtilizada" message="tns:IServicioPartida_NotificarCartaUtilizada_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaUtilizadaResponse" message="tns:IServicioPartida_NotificarCartaUtilizada_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaAgregadaADescarte">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaADescarte" message="tns:IServicioPartida_NotificarCartaAgregadaADescarte_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaADescarteResponse" message="tns:IServicioPartida_NotificarCartaAgregadaADescarte_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarFichaDevuelta">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarFichaDevuelta" message="tns:IServicioPartida_NotificarFichaDevuelta_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarFichaDevueltaResponse" message="tns:IServicioPartida_NotificarFichaDevuelta_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaAgregadaAEscondite">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAEscondite" message="tns:IServicioPartida_NotificarCartaAgregadaAEscondite_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAEsconditeResponse" message="tns:IServicioPartida_NotificarCartaAgregadaAEscondite_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarIntentoRoboCarta">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCarta" message="tns:IServicioPartida_NotificarIntentoRoboCarta_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCartaResponse" message="tns:IServicioPartida_NotificarIntentoRoboCarta_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaRobada">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaRobada" message="tns:IServicioPartida_NotificarCartaRobada_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaRobadaResponse" message="tns:IServicioPartida_NotificarCartaRobada_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionCuentaServicio" type="tns:IGestionCuentaServicio">
@@ -806,15 +954,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="ObtenerCodigosGenerados">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/ObtenerCodigosGenerados" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="UnirseSalaEspera">
       <soap12:operation soapAction="http://tempuri.org/ILobbyManager/UnirseSalaEspera" style="document" />
@@ -1181,6 +1320,75 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="RepartirCartas">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/RepartirCartas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="TomarCartaDeMazo">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/TomarCartaDeMazo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarCartaACartasEnMano">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/AgregarCartaACartasEnMano" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="TomarFichaMesa">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/TomarFichaMesa" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UtilizarCarta">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/UtilizarCarta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarCartaADescarte">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/AgregarCartaADescarte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DevolverFichaAMesa">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/DevolverFichaAMesa" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarCartaAEscondite">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/AgregarCartaAEscondite" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NumeroCartasEnMano">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NumeroCartasEnMano" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RobarCartaAJugador">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/RobarCartaAJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RobarCarta">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/RobarCarta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="NotificarTurnoIniciado">
       <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado" style="document" />
       <wsdl:input>
@@ -1226,13 +1434,98 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_IGestorInvitacion" type="tns:IGestorInvitacion">
-    <wsp:PolicyReference URI="#NetTcpBinding_IGestorInvitacion_policy">
-    </wsp:PolicyReference>
-    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="EnviarInvitacionCorreo">
-      <soap12:operation soapAction="http://tempuri.org/IGestorInvitacion/EnviarInvitacionCorreo" style="document" />
+    <wsdl:operation name="NotificarCartasEnMano">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarCartasEnMano" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartasEnMazo">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarCartasEnMazo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaTomadaMazo">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarCartaTomadaMazo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaAgregadaAMano">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAMano" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarFichaTomadaMesa">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarFichaTomadaMesa" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaUtilizada">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarCartaUtilizada" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaAgregadaADescarte">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaADescarte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarFichaDevuelta">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarFichaDevuelta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaAgregadaAEscondite">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAEscondite" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarIntentoRoboCarta">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCarta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaRobada">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarCartaRobada" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1273,12 +1566,6 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IServicioPartida" binding="tns:NetTcpBinding_IServicioPartida">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
-      <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
-      </wsa10:EndpointReference>
-    </wsdl:port>
-    <wsdl:port name="NetTcpBinding_IGestorInvitacion" binding="tns:NetTcpBinding_IGestorInvitacion">
       <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>

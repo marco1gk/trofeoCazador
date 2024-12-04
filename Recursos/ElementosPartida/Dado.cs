@@ -65,7 +65,7 @@ namespace trofeoCazador.Recursos.ElementosPartida
             };
             dadoImagen.BeginAnimation(Image.OpacityProperty, fadeOut);
         }
-        private void DetenerAnimacion(int resultadoDado)
+        private async void DetenerAnimacion(int resultadoDado)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -77,6 +77,7 @@ namespace trofeoCazador.Recursos.ElementosPartida
                 DoubleAnimation fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
                 dadoImagen.BeginAnimation(Image.OpacityProperty, fadeIn);
             });
+            await Task.Delay(1000);
         }
     }
 }
