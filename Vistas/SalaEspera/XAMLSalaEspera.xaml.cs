@@ -390,7 +390,7 @@ namespace trofeoCazador.Vistas.SalaEspera
                 this.numeroJugadoresSalaEspera = ++numeroJugadoresSalaEspera;
     });
         }
-      
+
         public void NotificarIniciarPartida(JugadorPartida[] jugadores)
         {
             Console.WriteLine("Jugadores recibidos en el cliente:");
@@ -400,8 +400,12 @@ namespace trofeoCazador.Vistas.SalaEspera
                 Console.WriteLine($"Foto de perfil: {jugador.NumeroFotoPerfil}");
             }
 
-            XAMLTablero tablero = new XAMLTablero(jugadores.ToList(), codigoSalaEsperaActual);
-            this.NavigationService.Navigate(tablero);
+            // Usar Dispatcher para asegurar que XAMLTablero se cree en el hilo principal STA
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                XAMLTablero tablero = new XAMLTablero(jugadores.ToList(), codigoSalaEsperaActual);
+                this.NavigationService.Navigate(tablero);
+            });
         }
 
         public void NotificarSalaEsperaLlena()

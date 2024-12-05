@@ -13,6 +13,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using trofeoCazador.Recursos.ElementosPartida;
 using System.Windows.Media;
+using System.Threading;
 
 namespace trofeoCazador.Vistas.PartidaJuego
 {
@@ -41,26 +42,33 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         public XAMLTablero(List<JugadorPartida> jugadores, string idPartida)
         {
+            if (!Thread.CurrentThread.IsBackground && Thread.CurrentThread.GetApartmentState() != ApartmentState.STA)
+            {
+                throw new InvalidOperationException("El constructor XAMLTablero debe ejecutarse en un subproceso STA.");
+            }
+
+            Console.WriteLine("Entra al método que causa error");
             InitializeComponent();
             SetupClient();
-            this.jugadores = jugadores;
-            //CargarFichas();
-            CargarFichasEstaticas();
-            dado = new Dado(DadoImagen);
-            this.idPartida = idPartida;
-            MostrarJugadores();
-            cliente.RegistrarJugador(jugadorActual.NombreUsuario);
-            
-            FichasItemsControl.ItemsSource = Fichas;
-            FichasManoItemsControl.ItemsSource = FichasEnMano;
-            ZonaDescarte.ItemsSource = CartasDescarte;
-            CartasManoItemsControl.ItemsSource = CartasEnMano;
-            ZonaMazoCartas.ItemsSource = CartasEnMazo;
-            
-            CartasEsconditeItemsControl.ItemsSource = CartasEnEscondite;
-            
 
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                this.jugadores = jugadores;
+                CargarFichasEstaticas();
+                dado = new Dado(DadoImagen);
+                this.idPartida = idPartida;
+                MostrarJugadores();
+                cliente.RegistrarJugador(jugadorActual.NombreUsuario);
+
+                FichasItemsControl.ItemsSource = Fichas;
+                FichasManoItemsControl.ItemsSource = FichasEnMano;
+                ZonaDescarte.ItemsSource = CartasDescarte;
+                CartasManoItemsControl.ItemsSource = CartasEnMano;
+                ZonaMazoCartas.ItemsSource = CartasEnMazo;
+                CartasEsconditeItemsControl.ItemsSource = CartasEnEscondite;
+            });
         }
+
 
         private void SetupClient()
         {
