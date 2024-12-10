@@ -115,6 +115,7 @@
     <Compile Include="Recursos\ElementosPartida\Mazo.cs" />
     <Compile Include="Recursos\Metodos.cs" />
     <Compile Include="SingletonSesion.cs" />
+    <Compile Include="Utilidades\App .cs" />
     <Compile Include="Utilidades\ImagenPerfil.cs" />
     <Compile Include="Utilidades\ManejadorExcepciones.cs" />
     <Compile Include="Utilidades\ManejadorLogger.cs" />
@@ -140,6 +141,9 @@
     </Compile>
     <Compile Include="Vistas\Amigos\XAMLFriendRequestItemComponent.xaml.cs">
       <DependentUpon>XAMLFriendRequestItemComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Estadisticas\XAMLEstadisticas.xaml.cs">
+      <DependentUpon>XAMLEstadisticas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\InicioSesion\XAMLInicioSesion.xaml.cs">
       <DependentUpon>XAMLInicioSesion.xaml</DependentUpon>
@@ -168,6 +172,7 @@
     <Compile Include="Vistas\Menu\XAMLMenu.xaml.cs">
       <DependentUpon>XAMLMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\SalaEspera\AnfitrionVisibilityConverter .cs" />
     <Compile Include="Vistas\SalaEspera\XAMLSalaEspera.xaml.cs">
       <DependentUpon>XAMLSalaEspera.xaml</DependentUpon>
     </Compile>
@@ -211,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\Amigos\XAMLFriendRequestItemComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\Estadisticas\XAMLEstadisticas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -274,8 +283,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Connected Services\ServicioDelJuego\Arrays.xsd">
       <SubType>Designer</SubType>

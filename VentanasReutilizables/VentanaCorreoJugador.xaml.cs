@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
+using trofeoCazador.Utilidades;
 
 namespace trofeoCazador.VentanasReutilizables
 {
@@ -24,8 +25,7 @@ namespace trofeoCazador.VentanasReutilizables
         }
         private void BtnClicIngresarCorreo(object sender, RoutedEventArgs e)
         {
-            string correo = CorreoTextBox.Text.Trim();
-
+            string correo = tbCorreo.Text.Trim();
 
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
             string codigoRecuperacion = proxy.EnviarCodigoConfirmacion(correo);
@@ -37,7 +37,8 @@ namespace trofeoCazador.VentanasReutilizables
             }
             else
             {
-                MessageBox.Show("No se encontró ninguna cuenta asociada a este correo.");
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloCorreoNoReconocido,Properties.Resources.lbDescripcionCorreoIncorrecto);
+          
             }
         }
     }

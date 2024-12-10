@@ -18,9 +18,9 @@ namespace trofeoCazador.Vistas.Amigos
    
     public partial class XAMLFriendRequestItemComponent : UserControl
     {
-        private const string BTNACEPTAR = "Accept";
-        private const string BTNRECHAZAR = "Reject";
-        private readonly string _nombreUsuario;
+        private const string BTN_ACEPTAR = "Accept";
+        private const string BTN_RECHAZAR = "Reject";
+        private readonly string nombreUsuario;
 
         public event EventHandler<ArgumentosDeEventoDeClicDeBotón> BotonUsado;
 
@@ -28,18 +28,18 @@ namespace trofeoCazador.Vistas.Amigos
         {
             InitializeComponent();
 
-            _nombreUsuario = nombreUsuario;
-            lbUsername.Content = nombreUsuario;
+            this.nombreUsuario = nombreUsuario;
+            lbnombreUsuario.Content = nombreUsuario;
         }
 
         private void ImgAceptarSolicitudAmistad_Click(object sender, MouseButtonEventArgs e)
         {
-            BotonUsado?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTNACEPTAR, _nombreUsuario));
+            BotonUsado?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTN_ACEPTAR, nombreUsuario));
         }
 
         private void ImgRechazarSolicitudAmistad_Click(object sender, MouseButtonEventArgs e)
         {
-            BotonUsado?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTNRECHAZAR, _nombreUsuario));
+            BotonUsado?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTN_RECHAZAR, nombreUsuario));
         }
 
 

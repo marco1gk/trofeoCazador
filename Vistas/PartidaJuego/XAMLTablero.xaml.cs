@@ -877,6 +877,14 @@ namespace trofeoCazador.Vistas.PartidaJuego
             }
         }
 
+        private void UsarCarta3(int idCarta)
+        {
+
+
+
+
+        }
+
         private void UsarCarta7(int idCarta)
         {
             if (CartasEnMazo.Count >= 2)

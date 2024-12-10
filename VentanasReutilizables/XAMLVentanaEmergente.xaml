@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p="clr-namespace:trofeoCazador.Properties"
         xmlns:local="clr-namespace:trofeoCazador.VentanasReutilizables"
         mc:Ignorable="d"
       WindowState="Normal" ResizeMode="NoResize" WindowStyle="None" 
@@ -20,11 +21,11 @@
     </Window.Resources>
     <Viewbox Stretch="Fill">
         <Grid Height="770" Width="1200">
-            <Border CornerRadius="25" Background="LightGreen" Margin="304,265,304,267">
+            <Border CornerRadius="25" Background="MintCream" Margin="304,265,304,267">
                 <Grid Height="244" Width="594" Background="Transparent">
-                    <Label x:Name="lbTitleEmergentWindow" HorizontalAlignment="Left" Margin="22,21,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Titan One" FontSize="32" Width="562" HorizontalContentAlignment="Center"/>
-                    <Label x:Name="lbDescriptionEmergentWindow" HorizontalAlignment="Left" Margin="26,89,0,0" VerticalAlignment="Top" Foreground="White" Width="547" Height="83" FontFamily="Inter" FontSize="16" Focusable="True">
-                        <TextBlock x:Name="tbkDescriptionEmergentWindow" TextWrapping="Wrap"/>
+                    <Label x:Name="lbTituloVentanaEmergente" HorizontalAlignment="Left" Margin="22,21,0,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Titan One" FontSize="32" Width="562" HorizontalContentAlignment="Center"/>
+                    <Label x:Name="lbDescriptionEmergentWindow" HorizontalAlignment="Left" Margin="26,89,0,0" VerticalAlignment="Top" Foreground="Black" Width="547" Height="83" FontFamily="Inter" FontSize="16" Focusable="True">
+                        <TextBlock x:Name="tbDescripcionVentanaEmergente" TextWrapping="Wrap"/>
                     </Label>
                     <Separator RenderTransformOrigin="0.5,0.5" Margin="0,71,16,145" HorizontalAlignment="Right" Width="562" Background="Black">
                         <Separator.RenderTransform>
@@ -36,14 +37,9 @@
                             </TransformGroup>
                         </Separator.RenderTransform>
                     </Separator>
-                    <Button x:Name ="BtnPrincipalVentanaEmergente" Content="Aceptar" HorizontalAlignment="Left" Margin="242,177,0,0" VerticalAlignment="Top" Height="48" Width="124" FontFamily="Titan One" Foreground="White" Background="Black" BorderBrush="{x:Null}" FontSize="18" Click="BtnAceptar_Click" Cursor="Hand"/>
+                    <Button x:Name ="btnPrincipalVentanaEmergente" Content="{x:Static p:Resources.btnAceptar}" HorizontalAlignment="Left" Margin="242,177,0,0" VerticalAlignment="Top" Height="48" Width="124" FontFamily="Titan One" Foreground="White" Background="Black" BorderBrush="{x:Null}" FontSize="18" Click="BtnAceptar_Click" Cursor="Hand"/>
                 </Grid>
             </Border>
         </Grid>
     </Viewbox>
-
-
-
-
-
 </Window>

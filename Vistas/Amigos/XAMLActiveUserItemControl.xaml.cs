@@ -21,7 +21,7 @@ namespace trofeoCazador.Vistas.Amigos
     public partial class XAMLActiveUserItemControl : UserControl
     {
         private const string BTN_BORRAR_AMIGO = "DeleteFriend";
-        private readonly string _nombreUsuario;
+        private readonly string nombreUsuario;
 
         public event EventHandler<ArgumentosDeEventoDeClicDeBotón> BotonUsado;
 
@@ -29,8 +29,8 @@ namespace trofeoCazador.Vistas.Amigos
         {
             InitializeComponent();
 
-            _nombreUsuario = nombreUsuario;
-            lbnombreUsuario.Content = _nombreUsuario;
+            this.nombreUsuario = nombreUsuario;
+            lbnombreUsuario.Content = this.nombreUsuario;
         }
 
         private void ImgOpcionesJugador_Click(object sender, MouseButtonEventArgs e)
@@ -47,7 +47,7 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void BtnBorrarAmigo_Click(object sender, RoutedEventArgs e)
         {
-            BotonUsado?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTN_BORRAR_AMIGO, _nombreUsuario));
+            BotonUsado?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTN_BORRAR_AMIGO, nombreUsuario));
         }
     }
 }

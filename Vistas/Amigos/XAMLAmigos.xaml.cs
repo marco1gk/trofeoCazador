@@ -22,9 +22,13 @@ namespace trofeoCazador.Vistas.Amigos
 
     public partial class XAMLAmigos : Page
     {
+        private readonly GestorUsuariosConectadosClient cliente;
         public XAMLAmigos()
         {
             InitializeComponent();
+            InstanceContext contexto = new InstanceContext(this);
+            cliente = new GestorUsuariosConectadosClient(contexto);
+            MostrarComoUsuarioActivo();
             MostrarDatos();
             
         }
@@ -33,8 +37,18 @@ namespace trofeoCazador.Vistas.Amigos
         {
             NavigationService.GoBack();
         }
-
-
+        public void DesregistrarUsuarioActual()
+        {
+            if (cliente != null)
+            {
+                cliente.DesregistrarUsuarioDeUsuariosEnLinea(SingletonSesion.Instancia.NombreUsuario);
+                Console.WriteLine($"Usuario {SingletonSesion.Instancia.NombreUsuario} desregistrado.");
+            }
+        }
+        public void MostrarComoUsuarioActivo()
+        {
+            cliente.RegistrarUsuarioAUsuariosConectados(SingletonSesion.Instancia.JugadorId, SingletonSesion.Instancia.NombreUsuario);
+        }
 
         private void MostrarDatos()
         {

@@ -25,28 +25,28 @@
         </Grid.RowDefinitions>
 
         <!-- Título -->
-        <TextBlock Text="Editar usuario" FontSize="40" FontWeight="Bold"
+        <TextBlock Text="{x:Static p:Resources.tbEditarNombreUsuario}" FontSize="40" FontWeight="Bold"
                    HorizontalAlignment="Center" VerticalAlignment="Top"
                    Margin="0,10,0,0" Grid.Row="0" />
 
         <!-- Contenido de edición -->
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="400" Margin="0,71,0,0">
             <!-- Nombre de usuario actual -->
-            <TextBlock Text="Nombre de usuario actual:" FontSize="16" FontWeight="Bold"/>
+            <TextBlock Text="{x:Static p:Resources.tbNombreUsuarioActual}" FontSize="16" FontWeight="Bold"/>
             <Label Name="NombreUsuarioActualLabel" FontSize="12" Foreground="Black" Margin="0,5" />
 
             <!-- Nuevo nombre de usuario -->
-            <TextBlock Text="Nuevo nombre de usuario:" FontSize="16" FontWeight="Bold" Margin="0,15,0,5"/>
+            <TextBlock Text="{x:Static p:Resources.tbNuevoNombreUsuario}" FontSize="16" FontWeight="Bold" Margin="0,15,0,5"/>
             <TextBox Name="NuevoNombreUsuarioTextBox" Width="300" Height="30" FontSize="14" />
         </StackPanel>
 
         <!-- Botones Guardar y Cancelar en la nueva fila -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Margin="10">
-            <Button Content="{x:Static p:Resources.btnGlobalSave}" Width="100" Height="40" Margin="10,0" Click="BtnClicGuardar" />
-            <Button Content="{x:Static p:Resources.btnGlobalCancel}" Width="100" Height="40" Margin="10,0" />
+            <Button Content="{x:Static p:Resources.btnGuardar}" Width="100" Height="40" Margin="10,0" Click="BtnClicGuardar" />
+            <Button Content="{x:Static p:Resources.btnCancelar}" Width="100" Height="40" Margin="10,0" />
         </StackPanel>
 
         <!-- Botón Atrás en la última fila -->
-        <Button Content="{x:Static p:Resources.btnGlobalBack}" Width="80" Height="40" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="30,0,0,30" VerticalAlignment="Bottom" Grid.Row="3"/>
+        <Button Content="{x:Static p:Resources.btnAtras}" Width="80" Height="40" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="30,0,0,30" VerticalAlignment="Bottom" Grid.Row="3"/>
     </Grid>
 </Page>

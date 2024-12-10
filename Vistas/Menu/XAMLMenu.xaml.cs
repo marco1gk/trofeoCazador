@@ -18,11 +18,12 @@ namespace trofeoCazador.Vistas.Menu
 {
     public partial class XAMLMenu : Page
     {
-        public XAMLMenu()
+        private readonly XAMLAmigos amigosPage;
+        public XAMLMenu(XAMLAmigos amigosPage)
         {
             InitializeComponent();
+            this.amigosPage = amigosPage;
         }
-       
 
         private void BtnPerfil(object sender, RoutedEventArgs e)
         {
@@ -45,10 +46,10 @@ namespace trofeoCazador.Vistas.Menu
 
         private void BtnSalir(object sender, RoutedEventArgs e)
         {
+            amigosPage?.DesregistrarUsuarioActual();
             SingletonSesion.Instancia.LimpiarSesion();
-            NavigationService.GoBack();
+            NavigationService.Navigate(new Uri("Vistas/InicioSesion/XAMLInicioSesion.xaml", UriKind.Relative));
         }
-
         private void BtnAmigos(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService == null)
@@ -56,6 +57,11 @@ namespace trofeoCazador.Vistas.Menu
                 return;
             }
             this.NavigationService.Navigate(new Uri("Vistas/Amigos/XAMLAmigos.xaml", UriKind.Relative));
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

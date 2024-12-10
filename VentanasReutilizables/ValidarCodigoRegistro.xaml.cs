@@ -14,43 +14,42 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Vistas.Perfil;
-
+using trofeoCazador.Utilidades;
 
 namespace trofeoCazador.VentanasReutilizables
 {
     public partial class ValidarCodigoRegistro : Window
     {
-        private readonly JugadorDataContract _jugador;
-        private readonly string _codigoEnviado;
-        private readonly string _correo;
+        private readonly JugadorDataContract jugador;
+        private readonly string codigoEnviado;
+        private readonly string correo;
         public ValidarCodigoRegistro(JugadorDataContract jugador, string correo, string codigoEnviado)
         {
             InitializeComponent();
-            _jugador = jugador;  
-            _codigoEnviado = codigoEnviado; 
-            _correo = correo;
+            this.jugador = jugador;  
+            this.codigoEnviado = codigoEnviado; 
+            this.correo = correo;
 
         }
-
         private void BtnEnviar(object sender, RoutedEventArgs e)
         {
-            string codigoIngresado = tbxCode.Text.Trim();
+            string codigoIngresado = tbCode.Text.Trim();
 
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            if (proxy.ValidarCodigo(codigoIngresado, _codigoEnviado))
+            if (proxy.ValidarCodigo(codigoIngresado, codigoEnviado))
             {
-                if(_jugador != null)
+                if (jugador != null)
                 {
-                  
-                    proxy.AgregarJugador(_jugador);
-                    MessageBox.Show("Cuenta creada exitosamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close(); 
+
+                    proxy.AgregarJugador(jugador);
+                    this.Close();
+                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloExito, Properties.Resources.lbDescripcionCuentaCreada);
                 }
                 else
                 {
                     NavigationWindow navigationWindow = new NavigationWindow
                     {
-                        Content = new EditarContrasenia(_correo)
+                        Content = new EditarContrasenia(correo)
                     };
                     navigationWindow.Show();
                     this.Close();
@@ -59,7 +58,7 @@ namespace trofeoCazador.VentanasReutilizables
             }
             else
             {
-                MessageBox.Show("El código ingresado es incorrecto. Inténtalo nuevamente.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+               lbCodigoError.Visibility = Visibility.Visible;
             }
         }
 

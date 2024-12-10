@@ -5,6 +5,7 @@ C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\Ficha.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\Mazo.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\Metodos.cs
 C:\Users\vaoma\source\repos\trofeoCazador\SingletonSesion.cs
+C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\App .cs
 C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\ImagenPerfil.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\ManejadorExcepciones.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\ManejadorLogger.cs
@@ -28,6 +29,7 @@ C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\EditarUsuarioNombre.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\XAMLPerfil.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\RegistroUsuario\XAMLRegistroUsuario.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Menu\XAMLMenu.xaml.cs
+C:\Users\vaoma\source\repos\trofeoCazador\Vistas\SalaEspera\AnfitrionVisibilityConverter .cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\SalaEspera\XAMLSalaEspera.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\SalaEspera\XAMLUsuario.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\App.xaml.cs

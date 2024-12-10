@@ -26,6 +26,7 @@ namespace trofeoCazador.Vistas.Amigos
             try
             {
                 gestorSolicitudesAmistadCliente.AgregarADiccionarioAmistadesEnLinea(sesion.NombreUsuario);
+                
             }
             catch (EndpointNotFoundException ex)
             {
@@ -36,6 +37,7 @@ namespace trofeoCazador.Vistas.Amigos
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
                 ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+
             }
             catch (FaultException )
             {
@@ -49,7 +51,7 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CrearMensajeVentanaInesperadoError();
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
@@ -88,7 +90,7 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CrearMensajeVentanaInesperadoError();
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
@@ -98,24 +100,20 @@ namespace trofeoCazador.Vistas.Amigos
         {
             lbErrorNombreDeUsuarioSolicitudAmistad.Visibility = Visibility.Visible;
 
-            string nombreDeUsuarioJugadorSolicitado = tbxNombreDeUsuarioEnviarSolicitud.Text.Trim();
+            string nombreDeUsuarioJugadorSolicitado = tbNombreDeUsuarioEnviarSolicitud.Text.Trim();
             int idJugador = sesion.JugadorId;
-
+            string mensaje;
             if (ValidarEnviarSolicitud(idJugador, nombreDeUsuarioJugadorSolicitado))
             {
                 AgregarSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
                 EnviarSolicitudAmistad(nombreDeUsuarioJugadorSolicitado);
-                //todo, pasar a resources
-                VentanasEmergentes.CrearVentanaEmergente("Solicitud de amistad",
-                     "La solicitud de amistad fue envíada a " + " " + nombreDeUsuarioJugadorSolicitado);
-
-                tbxNombreDeUsuarioEnviarSolicitud.Text = string.Empty;
+                mensaje = Properties.Resources.lbInvitacionEnviada + " " + nombreDeUsuarioJugadorSolicitado;
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloSolicitudAmistad,mensaje);
+                tbNombreDeUsuarioEnviarSolicitud.Text = string.Empty;
             }
             else
             {
-                //todo, pasar a resources
-                VentanasEmergentes.CrearVentanaEmergente("Solicitud de amistad",
-                        "No fue posible enviar la solictud de amistad, inténtelo de nuevo");
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloSolicitudAmistad,Properties.Resources.lbProblemasInvitacion);
 
             }
         }
@@ -209,7 +207,7 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CrearMensajeVentanaInesperadoError();
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
 
@@ -290,7 +288,7 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CrearMensajeVentanaInesperadoError();
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
 
@@ -387,7 +385,7 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CrearMensajeVentanaInesperadoError();
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
@@ -429,7 +427,7 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CrearMensajeVentanaInesperadoError();
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }

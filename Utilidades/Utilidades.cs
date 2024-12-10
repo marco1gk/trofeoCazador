@@ -21,6 +21,5 @@ namespace trofeoCazador.Utilidades
             return rutaAbsoluta;
         }
 
-
     }
 }

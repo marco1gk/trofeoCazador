@@ -19,8 +19,8 @@ namespace trofeoCazador.Vistas.Amigos
     public partial class XAMLAmigos : Page, IGestorUsuariosConectadosCallback
     {
       
-        private const string ESTADOENLINEA = "#61FF00";
-        private const string ESTADOFUERADELINEA = "#FF5A5E59";
+        private const string ESTADO_EN_LINEA = "#61FF00";
+        private const string ESTADO_FUERA_DE_LINEA = "#FF5A5E59";
        
         private void CargarAmigosJugador()
         {
@@ -30,15 +30,6 @@ namespace trofeoCazador.Vistas.Amigos
             string[] nombreUsuarioAmigosJugador = gestorAmistadCliente.ObtenerListaNombresUsuariosAmigos(sesion.JugadorId);
             AñadirUsuariosListaAmigos(nombreUsuarioAmigosJugador);
         }
-
-        public void MostrarComoUsuarioActivo()
-        {
-            InstanceContext contexto = new InstanceContext(this);
-            GestorUsuariosConectadosClient cliente = new GestorUsuariosConectadosClient(contexto);
-
-            cliente.RegistrarUsuarioAUsuariosConectados(sesion.JugadorId, sesion.NombreUsuario);
-        }
-
 
         private void CambiarEstadoAmigos(string[] nombreLinea, bool estaEnLinea)
         {
@@ -61,15 +52,18 @@ namespace trofeoCazador.Vistas.Amigos
             }
 
             SolidColorBrush statusPlayerColor = enLinea
-                ? Utilities.CreateColorFromHexadecimal(ESTADOENLINEA)
-                : Utilities.CreateColorFromHexadecimal(ESTADOFUERADELINEA);
+                ? Utilities.CreateColorFromHexadecimal(ESTADO_EN_LINEA)
+                : Utilities.CreateColorFromHexadecimal(ESTADO_FUERA_DE_LINEA);
+            Console.WriteLine($"Estado de {nombreUsuario}: {(enLinea ? "En línea" : "Fuera de línea")}, Color: {statusPlayerColor}");
 
             usuarioLineaItem.Dispatcher.Invoke(() =>
             {
                 if (usuarioLineaItem.rectanguloEstadoJugador != null)
                 {
-                    Console.WriteLine("Se está cambiando el color en el hilo de la UI.");
+                    Console.WriteLine("Actualizando color del rectángulo...");
                     usuarioLineaItem.rectanguloEstadoJugador.Fill = statusPlayerColor;
+                    usuarioLineaItem.rectanguloEstadoJugador.InvalidateVisual();
+
                 }
                 else
                 {
@@ -77,7 +71,6 @@ namespace trofeoCazador.Vistas.Amigos
                 }
             });
         }
-
 
         private XAMLActiveUserItemControl BuscarControlElementoUsuarioActivoPorId(string idUsuarioItem)
         {
@@ -97,7 +90,7 @@ namespace trofeoCazador.Vistas.Amigos
             foreach (var nombreUsuario in nombresUsuarioEnLinea)
             {
                 Console.WriteLine($"Añadiendo usuario {nombreUsuario} a la lista de amigos");
-                AñadirUsuarioListaAmigos(nombreUsuario, ESTADOFUERADELINEA);
+                AñadirUsuarioListaAmigos(nombreUsuario, ESTADO_FUERA_DE_LINEA);
             }
         }
 
@@ -173,7 +166,7 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CrearMensajeVentanaInesperadoError();
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
@@ -200,17 +193,15 @@ namespace trofeoCazador.Vistas.Amigos
             SuscribirUsuarioAlDiccionarioDeAmigosEnLínea();
         }
 
-        
-
+  
         public void Ping()
         {
-            Console.WriteLine("es el ping");
         }
 
         public void NotificarInvitacionSala(string nombreInvitador, string codigoSalaEspera)
         {
-            Console.WriteLine("te invito un we");
-            MessageBox.Show($"{nombreInvitador} te ha invitado a a la sala con codigo " + codigoSalaEspera);
+            string descripcionVentana = Properties.Resources.lbDescripcionInvitacion+" "+nombreInvitador+" "+"a la sala "+codigoSalaEspera;
+            VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloInvitacionAmigo, descripcionVentana);
         }
     }
     public static class Utilities

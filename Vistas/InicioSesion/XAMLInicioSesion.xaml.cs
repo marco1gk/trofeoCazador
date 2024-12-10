@@ -9,18 +9,23 @@ using trofeoCazador.VentanasReutilizables;
 using trofeoCazador.Vistas.SalaEspera;
 using trofeoCazador.Vistas.Amigos;
 using System.ServiceModel;
+using trofeoCazador.Vistas.Menu;
 
 namespace trofeoCazador.Vistas.InicioSesion
 {
- 
     public partial class XAMLInicioSesion : Page
     {
         private const string FUENTE_SECUNDARIA = "Inter";
-
-        public XAMLInicioSesion()
+        private void IdiomaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            InitializeComponent();
-          }
+            if (cbIdioma.SelectedItem is ComboBoxItem item)
+            {
+                string codigoCultura = item.Tag.ToString();
+                App.CambiarIdioma(codigoCultura);
+                this.NavigationService.Refresh();
+            }
+        }
+
 
         private void BtnCorreo_Click(object sender, RoutedEventArgs e)
         {
@@ -51,12 +56,11 @@ namespace trofeoCazador.Vistas.InicioSesion
                     return;
                 }
 
-                string contraseña = ContrasenaPasswordBox.Password;
-                string usuario = UsuarioTextBox.Text;
+                string contraseña = tpContraseña.Password;
+                string usuario = tbUsuario.Text;
 
                 GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
                 JugadorDataContract jugador = proxy.ValidarInicioSesion(usuario, contraseña);
-
 
                 if (jugador != null)
                 {
@@ -66,23 +70,30 @@ namespace trofeoCazador.Vistas.InicioSesion
                     sesion.NumeroFotoPerfil = jugador.NumeroFotoPerfil;
                     sesion.Correo = jugador.Correo;
 
+                    sesion.EstaActivo = true; 
 
                     XAMLAmigos paginaAmigos = new XAMLAmigos();
-                    paginaAmigos.MostrarComoUsuarioActivo();
+                    paginaAmigos.MostrarComoUsuarioActivo(); 
 
-                    this.NavigationService.Navigate(new Uri("Vistas/Menu/XAMLMenu.xaml", UriKind.Relative));
+                    XAMLAmigos amigosPage = new XAMLAmigos();
+
+                    this.NavigationService.Navigate(new XAMLMenu(amigosPage));
                 }
                 else
                 {
                     lbCredencialesIncorrectas.Visibility = Visibility.Visible;
-                    Console.WriteLine("El inicio de sesión falló o los datos no fueron recuperados correctamente.");
+                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbCredencialesIncorrectas, Properties.Resources.lbDescripcionCredencialesIncorrectas);
                 }
-
             }
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                Console.WriteLine($"Excepción de conexión: {ex.Message}");
+                if (this.NavigationService != null)
+                {
+                    this.NavigationService.RemoveBackEntry(); 
+                }
+                return; 
             }
             catch (TimeoutException ex)
             {
@@ -104,7 +115,7 @@ namespace trofeoCazador.Vistas.InicioSesion
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CrearMensajeVentanaInesperadoError();
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
 
@@ -116,13 +127,13 @@ namespace trofeoCazador.Vistas.InicioSesion
             bool esValido = true;
             Console.WriteLine("Validar campos antes de entrar a condicion" + esValido);
 
-            if (!UtilidadesDeValidacion.EsCorreoValido(UsuarioTextBox.Text) || UsuarioTextBox.Text.Equals(UsuarioTextBox.Tag))
+            if (!UtilidadesDeValidacion.EsCorreoValido(tbUsuario.Text) || tbUsuario.Text.Equals(tbUsuario.Tag))
             {
                 esValido = false;
                 Console.WriteLine("Validar campos correo" + esValido);
             }
 
-            if (!UtilidadesDeValidacion.EsContrasenaValida(ContrasenaPasswordBox.Password) || ContrasenaPasswordBox.Password.Equals(ContrasenaPasswordBox.Tag))
+            if (!UtilidadesDeValidacion.EsContrasenaValida(tpContraseña.Password) || tpContraseña.Password.Equals(tpContraseña.Tag))
             {
                 esValido = false;
                 Console.WriteLine("Validar campos contraseña" + esValido);
@@ -132,42 +143,42 @@ namespace trofeoCazador.Vistas.InicioSesion
         }
         private void TbxUsuarioObtenerFoco(object sender, RoutedEventArgs e)
         {
-            if (UsuarioTextBox.Text == (string)UsuarioTextBox.Tag)
+            if (tbUsuario.Text == (string)tbUsuario.Tag)
             {
-                UsuarioTextBox.Text = string.Empty;
-                UsuarioTextBox.Foreground = Brushes.Black;
-                UsuarioTextBox.FontFamily = new FontFamily(FUENTE_SECUNDARIA);
-                UsuarioTextBox.FontWeight = FontWeights.Bold;
+                tbUsuario.Text = string.Empty;
+                tbUsuario.Foreground = Brushes.Black;
+                tbUsuario.FontFamily = new FontFamily(FUENTE_SECUNDARIA);
+                tbUsuario.FontWeight = FontWeights.Bold;
             }
         }
         private void TbxUsuarioPerderFoco(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(UsuarioTextBox.Text))
+            if (string.IsNullOrWhiteSpace(tbUsuario.Text))
             {
-                UsuarioTextBox.Text = (string)UsuarioTextBox.Tag;
+                tbUsuario.Text = (string)tbUsuario.Tag;
             }
         }
 
         private void PbContraseñaObtenerFoco(object sender, RoutedEventArgs e)
         {
-            if (ContrasenaPasswordBox.Password == (string)ContrasenaPasswordBox.Tag)
+            if (tpContraseña.Password == (string)tpContraseña.Tag)
             {
-                ContrasenaPasswordBox.Password = string.Empty;
-                ContrasenaPasswordBox.Foreground = Brushes.Black;
+                tpContraseña.Password = string.Empty;
+                tpContraseña.Foreground = Brushes.Black;
             }
         }
 
         private void PbContraseñaPerderFoco(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(ContrasenaPasswordBox.Password))
+            if (string.IsNullOrWhiteSpace(tpContraseña.Password))
             {
-                ContrasenaPasswordBox.Password = (string)ContrasenaPasswordBox.Tag;
+                tpContraseña.Password = (string)tpContraseña.Tag;
             }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            //TODO
+           
         }
 
         private void lbClicRecuperarContrasena(object sender, MouseButtonEventArgs e)

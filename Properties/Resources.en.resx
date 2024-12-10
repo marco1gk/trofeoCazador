@@ -117,181 +117,466 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="hola" xml:space="preserve">
-    <value>ESTADOSUNIDOS</value>
-  </data>
-  <data name="vtLogin" xml:space="preserve">
+  <data name="vtInicioSesion" xml:space="preserve">
     <value>Login </value>
   </data>
-  <data name="TitleGame " xml:space="preserve">
+  <data name="lbTituloJuego" xml:space="preserve">
     <value>Hunter´s Tropy </value>
   </data>
-  <data name="lbLogin " xml:space="preserve">
+  <data name="lbInicioSesion" xml:space="preserve">
     <value>Login</value>
   </data>
-  <data name="lbPassword " xml:space="preserve">
+  <data name="lbContraseña" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="lbForgotPassword " xml:space="preserve">
+  <data name="lbContraseniaOlvidada" xml:space="preserve">
     <value>I forgot my password</value>
   </data>
-  <data name="NewInGame " xml:space="preserve">
+  <data name="lbNuevoEnjuego" xml:space="preserve">
     <value>New in game? </value>
   </data>
-  <data name="btnLogin " xml:space="preserve">
+  <data name="btnInicioSesion" xml:space="preserve">
     <value>Login </value>
   </data>
-  <data name="lbRegister " xml:space="preserve">
+  <data name="lbRegistrarse" xml:space="preserve">
     <value>Register</value>
   </data>
-  <data name="Guest " xml:space="preserve">
+  <data name="lbInvitado" xml:space="preserve">
     <value>Guest </value>
   </data>
-  <data name="vtWarningLogin " xml:space="preserve">
-    <value>Warning</value>
-  </data>
-  <data name="lbWLogin " xml:space="preserve">
-    <value>You have left empty fields, complete all </value>
-  </data>
-  <data name="lbWLoginWrongData" xml:space="preserve">
-    <value>The data entered is incorrect, please try again </value>
-  </data>
-  <data name="UserName " xml:space="preserve">
+  <data name="nombreUsuario " xml:space="preserve">
     <value>User</value>
   </data>
-  <data name="Login " xml:space="preserve">
+  <data name="inicioSesion" xml:space="preserve">
     <value>Login </value>
   </data>
-  <data name="Password " xml:space="preserve">
+  <data name="contraseña" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="forgotPassword " xml:space="preserve">
+  <data name="contraseñaOlvidada" xml:space="preserve">
     <value>Forgot password </value>
   </data>
-  <data name="Register " xml:space="preserve">
+  <data name="Registrarse" xml:space="preserve">
     <value>Register</value>
   </data>
-  <data name="btnRegister" xml:space="preserve">
+  <data name="btnRegistrarse" xml:space="preserve">
     <value>Create account</value>
   </data>
-  <data name="lbCreateAccount" xml:space="preserve">
+  <data name="lbCrearCuenta" xml:space="preserve">
     <value>Create account</value>
   </data>
-  <data name="lbCreateYourAccount" xml:space="preserve">
+  <data name="lbCreaTuCuenta" xml:space="preserve">
     <value>Create your account</value>
   </data>
-  <data name="lbInsertData" xml:space="preserve">
+  <data name="lbIngresarInformacion" xml:space="preserve">
     <value>Insert your data</value>
   </data>
-  <data name="lbPasswordPolitic" xml:space="preserve">
+  <data name="lbPoliticaContraseña" xml:space="preserve">
     <value>Your passwod must have</value>
   </data>
   <data name="lbUppercaseLetterRequirement " xml:space="preserve">
     <value>One uppercase letter </value>
   </data>
-  <data name="lbLowercaseLetterRequirement " xml:space="preserve">
+  <data name="lbRequerimientoMinuscula" xml:space="preserve">
     <value>One lowercase letter </value>
   </data>
-  <data name="lbAtLeast12Characters" xml:space="preserve">
+  <data name="lbPorLoMenos12Caracteres" xml:space="preserve">
     <value>At least 12 characters</value>
+  </data>
+  <data name="lbCaracterEspecialRequisito" xml:space="preserve">
+    <value>Missing special letter</value>
+  </data>
+  <data name="lbPorLoMenosUnNumero" xml:space="preserve">
+    <value>At least one number</value>
+  </data>
+  <data name="lbNombre" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lbApellido" xml:space="preserve">
+    <value>First last name</value>
+  </data>
+  <data name="lbSegundoApellido" xml:space="preserve">
+    <value>Second last name </value>
+  </data>
+  <data name="lbDiaDeNacimiento" xml:space="preserve">
+    <value>BirthDay</value>
+  </data>
+  <data name="lbCorreo" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="lbNombreUsuario" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="lbLlenarCamposObligatorios" xml:space="preserve">
+    <value>Must fill all fields</value>
+  </data>
+  <data name="btnCrearCuenta" xml:space="preserve">
+    <value>Create Account</value>
+  </data>
+  <data name="lbnombreUsuarioActual" xml:space="preserve">
+    <value>Current username:</value>
+  </data>
+  <data name="lbNuevoNombreUsuario" xml:space="preserve">
+    <value>New username</value>
+  </data>
+  <data name="lbNuevoNombre" xml:space="preserve">
+    <value>New name</value>
+  </data>
+  <data name="lbNuevoApellido" xml:space="preserve">
+    <value>New last name:</value>
+  </data>
+  <data name="lbNombreActual" xml:space="preserve">
+    <value>Current name:</value>
+  </data>
+  <data name="btnGuardar" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="btnCancelar" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="btnAtras" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="lbTituloCambiarCorreo" xml:space="preserve">
+    <value>Edit mail</value>
+  </data>
+  <data name="lbCorreoActual" xml:space="preserve">
+    <value>Current email:</value>
+  </data>
+  <data name="lbNuevoCorreo" xml:space="preserve">
+    <value>New mail</value>
+  </data>
+  <data name="lbCambiarContraseña" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="lbContraseñaActual" xml:space="preserve">
+    <value>Current password:</value>
+  </data>
+  <data name="lbNuevaContraseña" xml:space="preserve">
+    <value>New password:</value>
+  </data>
+  <data name="lbVerificacionCambioCorreo" xml:space="preserve">
+    <value>Verify mail</value>
+  </data>
+  <data name="lbIngresarCodigoVerificación" xml:space="preserve">
+    <value>Enter the code that was sent to your email</value>
+  </data>
+  <data name="btnEnviarCodigo" xml:space="preserve">
+    <value>Send code</value>
+  </data>
+  <data name="btnSolicitarNuevoCodigo" xml:space="preserve">
+    <value>Request new code</value>
+  </data>
+  <data name="lbEditarNombreUsuario" xml:space="preserve">
+    <value>Change username</value>
+  </data>
+  <data name="lbTituloEditarNombre" xml:space="preserve">
+    <value>Edit name</value>
   </data>
   <data name="lbSpecialCharacterRequirement " xml:space="preserve">
     <value>At least one special character</value>
   </data>
-  <data name="lbAtLeastOneNumber" xml:space="preserve">
-    <value>At least one number</value>
-  </data>
-  <data name="lbGlobalName " xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="lbGlobalFirstLastName " xml:space="preserve">
-    <value>First last name</value>
-  </data>
-  <data name="lbGlobalFirstSecondLastName " xml:space="preserve">
-    <value>Second last name </value>
-  </data>
-  <data name="lbDateOfTheBird " xml:space="preserve">
-    <value>BirthDay</value>
-  </data>
-  <data name="lbEmail " xml:space="preserve">
-    <value>E-mail</value>
-  </data>
-  <data name="lbGlobalUsername " xml:space="preserve">
-    <value>User</value>
-  </data>
-  <data name="lbGlobalPassword " xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="lbMustFillFields" xml:space="preserve">
-    <value>You must fill all fields</value>
-  </data>
-  <data name="btnCreateAccount" xml:space="preserve">
-    <value>Create Account</value>
-  </data>
-  <data name="lbCurrentUsername" xml:space="preserve">
-    <value>Current username:</value>
-  </data>
-  <data name="lbNewUsername" xml:space="preserve">
-    <value>New username:</value>
-  </data>
-  <data name="lbNewName" xml:space="preserve">
-    <value>New name:</value>
-  </data>
   <data name="lbNewLastName" xml:space="preserve">
     <value>New last name:</value>
-  </data>
-  <data name="lbCurrentName" xml:space="preserve">
-    <value>Current name:</value>
-  </data>
-  <data name="btnGlobalSave" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="btnGlobalCancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="btnGlobalBack" xml:space="preserve">
-    <value>Back</value>
   </data>
   <data name="lbTitleChangeEmail" xml:space="preserve">
     <value>Change email address</value>
   </data>
-  <data name="lbCurrentEmail" xml:space="preserve">
-    <value>Current email:</value>
-  </data>
   <data name="lbNewEmail" xml:space="preserve">
     <value>New email adress:</value>
-  </data>
-  <data name="lbTitleChangePassword" xml:space="preserve">
-    <value>Change password</value>
-  </data>
-  <data name="lbCurrentPassword" xml:space="preserve">
-    <value>Current password:</value>
-  </data>
-  <data name="lbNewPassword" xml:space="preserve">
-    <value>New password:</value>
   </data>
   <data name="lbTitleEmailChangeConfirmation" xml:space="preserve">
     <value>Email change confirmation</value>
   </data>
-  <data name="lbEnterVerificationCode" xml:space="preserve">
-    <value>Enter the code that was sent to your email</value>
-  </data>
-  <data name="btnSendCode" xml:space="preserve">
-    <value>Send code</value>
-  </data>
-  <data name="btnRequestNewCode" xml:space="preserve">
-    <value>Request new code</value>
-  </data>
-  <data name="lbTitleEditUsername" xml:space="preserve">
-    <value>Change username</value>
-  </data>
   <data name="lbTitleEditName" xml:space="preserve">
     <value>Change name</value>
   </data>
-  <data name="lbUserName" xml:space="preserve">
-    <value>Username</value>
-  </data>
   <data name="lbUsuario" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="btnInvitado" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+  <data name="lbCredencialesIncorrectas" xml:space="preserve">
+    <value>Wrong data</value>
+  </data>
+  <data name="lbPorLoMenosUnaMayuscula" xml:space="preserve">
+    <value>A uppercase</value>
+  </data>
+  <data name="lbPorLoMenosUnaMinuscula" xml:space="preserve">
+    <value>A lowercase</value>
+  </data>
+  <data name="lbSeleccionarFoto" xml:space="preserve">
+    <value>Choose a profile picture:</value>
+  </data>
+  <data name="lbGestorAmigos" xml:space="preserve">
+    <value>Friends</value>
+  </data>
+  <data name="lbSolicitudesAmistad" xml:space="preserve">
+    <value>Friend request</value>
+  </data>
+  <data name="lbAmigos" xml:space="preserve">
+    <value>Friends</value>
+  </data>
+  <data name="btnSolicitudes" xml:space="preserve">
+    <value>Show friend request </value>
+  </data>
+  <data name="btnAmigos" xml:space="preserve">
+    <value>Show friends</value>
+  </data>
+  <data name="tbEnviarSolicitud" xml:space="preserve">
+    <value>Send friend request</value>
+  </data>
+  <data name="lbErrorNombreDeUsuarioSolicitudAmistad" xml:space="preserve">
+    <value>Error: Username is not valid or you already send a friend request to him/her</value>
+  </data>
+  <data name="btnEnviarSolicitud" xml:space="preserve">
+    <value>Send friend request</value>
+  </data>
+  <data name="btnSalasEspera" xml:space="preserve">
+    <value>Lobbies</value>
+  </data>
+  <data name="tbMenuPrincipal" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="btnEstadisticas" xml:space="preserve">
+    <value>Estadistics</value>
+  </data>
+  <data name="btnPerfil" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="btnSalir" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="btnCrearSalaEspera" xml:space="preserve">
+    <value>Create lobby</value>
+  </data>
+  <data name="btnUnirseSalaEspera" xml:space="preserve">
+    <value>Join</value>
+  </data>
+  <data name="lbJugadoresEnSalaEspera" xml:space="preserve">
+    <value>Players in lobby</value>
+  </data>
+  <data name="btnInvitarAmigo" xml:space="preserve">
+    <value>Invite friend</value>
+  </data>
+  <data name="lbChat" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+  <data name="btnIniciarPartida" xml:space="preserve">
+    <value>Start match</value>
+  </data>
+  <data name="btnEnviarInvitacion" xml:space="preserve">
+    <value>Invite friend</value>
+  </data>
+  <data name="tbCambiarContraseña" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="tbCambiarCorreo" xml:space="preserve">
+    <value>Change mail</value>
+  </data>
+  <data name="tbEditarNombreUsuario" xml:space="preserve">
+    <value>Edit username</value>
+  </data>
+  <data name="tbNombreUsuarioActual" xml:space="preserve">
+    <value>Current username</value>
+  </data>
+  <data name="tbNuevoNombreUsuario" xml:space="preserve">
+    <value>New username</value>
+  </data>
+  <data name="tbCorreoCodigoConfirmacion" xml:space="preserve">
+    <value>Verification code</value>
+  </data>
+  <data name="tbCuenta" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="tbNombreUsuario" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="tbCorreo" xml:space="preserve">
+    <value>Mail</value>
+  </data>
+  <data name="tbContraseña" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="tbFotoPerfil" xml:space="preserve">
+    <value>Profile picture</value>
+  </data>
+  <data name="lbConexionFallida" xml:space="preserve">
+    <value>Connection Failed</value>
+  </data>
+  <data name="lbDetallesConexionFallida" xml:space="preserve">
+    <value>Could not connect to the server. Please try again later.</value>
+  </data>
+  <data name="lbTituloExcepcionTimeOut" xml:space="preserve">
+    <value>Waiting time exceeded</value>
+  </data>
+  <data name="lbDetallesExcepcionTimeOut" xml:space="preserve">
+    <value>The operation has timed out. Please try again later.</value>
+  </data>
+  <data name="lbTituloExcepcionBaseDeDatos" xml:space="preserve">
+    <value>Database error</value>
+  </data>
+  <data name="lbDescripcionExcepcionBaseDeDatos" xml:space="preserve">
+    <value>An error occurred in the database. Please try again later</value>
+  </data>
+  <data name="lbTituloExcepcionServidor" xml:space="preserve">
+    <value>Server error</value>
+  </data>
+  <data name="lbDescripcionExcepcionServidor" xml:space="preserve">
+    <value>A server error occurred. Please try again later</value>
+  </data>
+  <data name="lbTituloExcepcionInesperada" xml:space="preserve">
+    <value>Unexpected error</value>
+  </data>
+  <data name="lbDescripcionExcepcionInesperada" xml:space="preserve">
+    <value>An unexpected error occurred. Please try again later</value>
+  </data>
+  <data name="lbTituloSalaEsperaNoEncotrada" xml:space="preserve">
+    <value>Lobby not found</value>
+  </data>
+  <data name="lbDescripcionSalaEsperaNoEncotrada" xml:space="preserve">
+    <value>The lobby you are trying to enter does not exist.</value>
+  </data>
+  <data name="lbTituloReporteExitoso" xml:space="preserve">
+    <value>Successful report</value>
+  </data>
+  <data name="lbDescripcionReporteExitoso" xml:space="preserve">
+    <value>The player has been reported.</value>
+  </data>
+  <data name="lbTituloSalaEsperaLlena" xml:space="preserve">
+    <value>Full lobby</value>
+  </data>
+  <data name="lbDescripcionSalaEsperaLlena" xml:space="preserve">
+    <value>The lobby you are trying to enter is full.</value>
+  </data>
+  <data name="lbTituloAnfitrionSalioSalaEspera" xml:space="preserve">
+    <value>Lobby removed</value>
+  </data>
+  <data name="lbDescripcionAnfitrionDejoSalaEsperra" xml:space="preserve">
+    <value>The host left the lobby. You will return to the main menu.</value>
+  </data>
+  <data name="lbTituloJugadorCastigado" xml:space="preserve">
+    <value>You have been banned</value>
+  </data>
+  <data name="lbDescripcionJugadorCastigado" xml:space="preserve">
+    <value>You have accumulated the maximum number of reports allowed. Your account will be restricted for a set time.</value>
+  </data>
+  <data name="lbTituloJugadorReportado" xml:space="preserve">
+    <value>Player already reported</value>
+  </data>
+  <data name="lbDescripcionJugadorReportado" xml:space="preserve">
+    <value>You have already reported this player.</value>
+  </data>
+  <data name="lbValidarCodigo" xml:space="preserve">
+    <value>Validate code</value>
+  </data>
+  <data name="btnEnviar" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="lbCodigo" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="tbDescripcionCodigo" xml:space="preserve">
+    <value>Enter the verification code you received via email.</value>
+  </data>
+  <data name="btnAceptar" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="tituloRecuperarContraseña" xml:space="preserve">
+    <value>Recover password</value>
+  </data>
+  <data name="tbDescripcionRecuperarContraseña" xml:space="preserve">
+    <value>Enter your email to recover your password.</value>
+  </data>
+  <data name="lbInvitarAmigos" xml:space="preserve">
+    <value>Invite friends</value>
+  </data>
+  <data name="tbCopiaCodigo" xml:space="preserve">
+    <value>The code is</value>
+  </data>
+  <data name="tbInvitarPorCorreo" xml:space="preserve">
+    <value>Invite by mail</value>
+  </data>
+  <data name="tbIngresaCorreo" xml:space="preserve">
+    <value>Give us the mail</value>
+  </data>
+  <data name="lbEnviarInvitacion" xml:space="preserve">
+    <value>Send invitation</value>
+  </data>
+  <data name="tbEjemploCorreo" xml:space="preserve">
+    <value>friend@gmail.com</value>
+  </data>
+  <data name="lbLlenarCamposObligatorios1" xml:space="preserve">
+    <value>Must fill all fields</value>
+  </data>
+  <data name="lbCodigoError" xml:space="preserve">
+    <value>Incorrect code, please check the code or regenerate a new one</value>
+  </data>
+  <data name="lbTituloExito" xml:space="preserve">
+    <value>Succesful</value>
+  </data>
+  <data name="lbDescripcionCuentaCreada" xml:space="preserve">
+    <value>Enjoy, you have an account</value>
+  </data>
+  <data name="lbTituloCorreoNoReconocido" xml:space="preserve">
+    <value>Ups problems</value>
+  </data>
+  <data name="lbDescripcionCorreoIncorrecto" xml:space="preserve">
+    <value>No account was found associated with this email</value>
+  </data>
+  <data name="lbTituloGenerico" xml:space="preserve">
+    <value>Hey, it seems that</value>
+  </data>
+  <data name="lbTituloInvitacionAmigo" xml:space="preserve">
+    <value>Invitation</value>
+  </data>
+  <data name="lbDescripcionInvitacion" xml:space="preserve">
+    <value>You have received an invitation from</value>
+  </data>
+  <data name="lbTituloSolicitudAmistad" xml:space="preserve">
+    <value>¿Friendship?</value>
+  </data>
+  <data name="lbInvitacionEnviada" xml:space="preserve">
+    <value>The friend request wast sent to</value>
+  </data>
+  <data name="lbProblemasInvitacion" xml:space="preserve">
+    <value>We can send a friend request to this user, try it again</value>
+  </data>
+  <data name="lbDescripcionCredencialesIncorrectas" xml:space="preserve">
+    <value>Loggin failed or you entered wrong data</value>
+  </data>
+  <data name="lbSeleccionaAmigo" xml:space="preserve">
+    <value>Please, select a friend</value>
+  </data>
+  <data name="lbTituloInvitacionEnviada" xml:space="preserve">
+    <value>Invitation sent</value>
+  </data>
+  <data name="lbInvitarAmigoSala" xml:space="preserve">
+    <value>The invitation was sent to</value>
+  </data>
+  <data name="lbNoSalaEspera" xml:space="preserve">
+    <value>Problems with a lobby</value>
+  </data>
+  <data name="lbDescripcionNoHaySalaEspera" xml:space="preserve">
+    <value>You are not in a lobby</value>
+  </data>
+  <data name="lbTituloExpulsion" xml:space="preserve">
+    <value>Expelled</value>
+  </data>
+  <data name="lbDetallesExpulsion" xml:space="preserve">
+    <value>You have been kicked from lobby</value>
+  </data>
+  <data name="lbSalaEsperaLlena" xml:space="preserve">
+    <value>Lobby is full</value>
+  </data>
+  <data name="lbSalaEsperaInexistente" xml:space="preserve">
+    <value>Lobby does not exist</value>
+  </data>
+  <data name="lbNotificarSalaEsperaCreada" xml:space="preserve">
+    <value>A lobby has been created</value>
+  </data>
+  <data name="lbSalaEsperaCreada" xml:space="preserve">
+    <value>Lobby created, lobby code: </value>
   </data>
 </root>

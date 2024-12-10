@@ -35,6 +35,7 @@ namespace trofeoCazador
         public string NuevoCorreo { get; set; } 
         public string CodigoVerificacion { get; set; } 
 
+        public bool EstaActivo { get; set; } = false; 
         public void LimpiarSesion()
         {
             JugadorId = 0;

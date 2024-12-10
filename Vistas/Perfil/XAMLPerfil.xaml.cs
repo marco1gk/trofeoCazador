@@ -73,7 +73,7 @@ namespace trofeoCazador.Vistas.Perfil
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CrearMensajeVentanaInesperadoError();
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
             

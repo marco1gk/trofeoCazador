@@ -20,8 +20,8 @@ namespace trofeoCazador.Vistas.Perfil
 {
     public partial class EditarContrasenia : Page
     {
-        JugadorDataContract jugador = new JugadorDataContract();
-        private string correo;
+        readonly JugadorDataContract jugador = new JugadorDataContract();
+        private readonly string correo;
         public EditarContrasenia(string correo)
         {
             InitializeComponent();

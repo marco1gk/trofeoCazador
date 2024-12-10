@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p="clr-namespace:trofeoCazador.Properties"
         xmlns:local="clr-namespace:trofeoCazador.Componentes.SalaEspera"
         mc:Ignorable="d"
          WindowState="Normal" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterOwner" 
@@ -25,12 +26,12 @@
 
     <Viewbox Stretch="Fill">
         <Grid Height="770" Width="1200">
-            <Border x:Name="borderInviteByCode" CornerRadius="25" Background="#49BF36" Margin="304,170,304,170" Visibility="Visible">
+            <Border x:Name="bordeInvitarPorCodigo" CornerRadius="25" Background="CadetBlue" Margin="304,170,304,170" Visibility="Visible">
                 <Grid Margin="7" Background="Transparent">
                     <StackPanel Cursor="Hand">
                         <Grid>
                             <Image HorizontalAlignment="Left" Cursor="Hand" MouseLeftButtonDown="ImgCerrar_Click" Margin="5" Height="37" VerticalAlignment="Top" Width="33" Source="/Recursos/close.png"/>
-                            <Label Content="Invitar Amigos" Margin="43,0,43,0" VerticalAlignment="Center" Foreground="White" FontFamily="Titan One" FontSize="40" HorizontalContentAlignment="Center"/>
+                            <Label Content="{x:Static p:Resources.lbInvitarAmigos }" Margin="43,0,43,0" VerticalAlignment="Center" Foreground="White" FontFamily="Titan One" FontSize="40" HorizontalContentAlignment="Center"/>
 
                         </Grid>
                         <Separator RenderTransformOrigin="0.5,0.5" Width="562" Background="#0C9029" Margin="5,10,5,5">
@@ -43,10 +44,10 @@
                                 </TransformGroup>
                             </Separator.RenderTransform>
                         </Separator>
-                        <TextBlock Text="Pong el correito" TextWrapping="Wrap" FontFamily="Inter" Foreground="White" 
+                        <TextBlock Text="{x:Static p:Resources.tbCopiaCodigo}" TextWrapping="Wrap" FontFamily="Inter" Foreground="White" 
                                 FontSize="26" TextAlignment="Center" Margin="0,45,0,0" />
                         <Grid>
-                            <TextBlock x:Name="tbkCodigoSalaEspera" Text="Y2F96A" FontFamily="Titan One" Foreground="White" FontSize="34" HorizontalAlignment="Center" Margin="40"/>
+                            <TextBlock x:Name="tbCodigoSalaEspera" Text="Y2F96A" FontFamily="Titan One" Foreground="White" FontSize="34" HorizontalAlignment="Center" Margin="40"/>
                             <Image Source="../../Recursos/copyToClipboardIcon.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="399,0,0,0" Height="32" Width="35" 
                                 MouseLeftButtonDown="BtnCopiarCodigo_Click" Cursor="Hand"/>
                         </Grid>
@@ -55,19 +56,19 @@
                             <Rectangle Fill="#E4FFE5" Margin="160,0,160,0" RadiusX="10" RadiusY="10"/>
                             <Grid Margin="160,0,160, 0">
                                 <Image Source="../../Recursos/emailIcon.png" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="25,20,25,45"/>
-                                <TextBlock Text="btnInviteByEmail}" FontFamily="Titan One" Foreground="#0C9029" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="15"/>
+                                <TextBlock Text="{x:Static p:Resources.tbInvitarPorCorreo}" FontFamily="Titan One" Foreground="#0C9029" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="15"/>
                             </Grid>
-                            <Button x:Name="btnInviteByEmail" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" Margin="160,0,160, 0" 
+                            <Button x:Name="btnInvitarPorCorreo" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" Margin="160,0,160, 0" 
                                  Click="BtnInvitarPorCorreo_Click"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
             </Border>
 
-            <Border x:Name="borderInviteByEmail" CornerRadius="25" Background="#49BF36" Margin="304,170,304,170" Visibility="Collapsed">
+            <Border x:Name="bordeInvitarPorCorrreo" CornerRadius="25" Background="MintCream" Margin="304,170,304,170" Visibility="Collapsed">
                 <Grid Margin="5,55,5,24" Background="Transparent">
                     <Image HorizontalAlignment="Left" Cursor="Hand" MouseLeftButtonDown="ImgCerrar_Click" Margin="7,-36,0,0" Height="37" VerticalAlignment="Top" Width="33" Source="/Recursos/close.png"/>
-                    <Image Source="../../Recursos/invitationByEmailBackground.png" />
+                   
                     <Grid Margin="44,0,44,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -76,13 +77,13 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <Label Content="lbInviteFriends}" Grid.Row="0" Margin="58,0,-15,0" VerticalAlignment="Center" Foreground="Black" FontFamily="Titan One" 
+                        <Label Content="{x:Static p:Resources.lbInvitarAmigos}" Grid.Row="0" Margin="58,0,-15,0" VerticalAlignment="Center" Foreground="Black" FontFamily="Titan One" 
                             FontSize="40" HorizontalContentAlignment="Center"/>
-                        <TextBlock Text="lbEnterEmail}" Grid.Row="1" Margin="10,0,0,0" TextWrapping="Wrap" FontFamily="Inter" FontSize="20" Foreground="Black" VerticalAlignment="Center"/>
-                        <TextBox x:Name="tbxCorreoAmigo" Grid.Row="2" Text="tbxEmailExample}" Tag="tbxEmailExample}" Margin="10,15,10,15" BorderThickness="0,0,0,2" BorderBrush="Black" 
-                              Background="#29971F" FontFamily="Inter" FontSize="24" TextAlignment="Justify" VerticalContentAlignment="Center" GotFocus="TbxCorreoAmigo_ObtenerFoco" LostFocus="TbxCorreoAmigo_PerderFoco"/>
-                        <Rectangle Fill="#29971F" Grid.Row="4" Margin="130,15,130,15" RadiusX="15" RadiusY="15"/>
-                        <Label Content="btnSendInvitation}" Grid.Row="4" Margin="130,15,130,15" VerticalAlignment="Center" Foreground="White" FontFamily="Titan One" 
+                        <TextBlock Text="{x:Static p:Resources.tbIngresaCorreo}" Grid.Row="1" Margin="10,0,0,0" TextWrapping="Wrap" FontFamily="Inter" FontSize="20" Foreground="Black" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tbCorreoAmigo" Grid.Row="2" Text="{x:Static p:Resources.tbEjemploCorreo}" Tag="tbxEmailExample}" Margin="10,15,10,15" BorderThickness="0,0,0,2" BorderBrush="Black" 
+                              Background="AliceBlue" FontFamily="Inter" FontSize="24" TextAlignment="Justify" VerticalContentAlignment="Center" GotFocus="TbCorreoAmigo_ObtenerFoco" LostFocus="TbCorreoAmigo_PerderFoco"/>
+                        <Rectangle Fill="black" Grid.Row="4" Margin="130,15,130,15" RadiusX="15" RadiusY="15"/>
+                        <Label Content="{x:Static p:Resources.lbEnviarInvitacion}" Grid.Row="4" Margin="130,15,130,15" VerticalAlignment="Center" Foreground="White" FontFamily="Titan One" 
                          FontSize="22" HorizontalContentAlignment="Center"/>
                         <Button Grid.Row="4" Margin="130,15,130,15" Focusable="False" Background="Transparent" BorderBrush="Transparent" Click="BtnEnviarInvitacion_Click"/>
                     </Grid>

@@ -30,8 +30,8 @@ namespace trofeoCazador.Vistas.RegistroUsuario
 
             List<ImagenPerfil> imagenesPerfil = new List<ImagenPerfil>
             {
-                new ImagenPerfil { Id = 1, NombreImagen = "Perfil 1", RutaImagen = "/Recursos/FotosPerfil/abeja.jpg" },
-                new ImagenPerfil { Id = 2, NombreImagen = "Perfil 2", RutaImagen = "/Recursos/FotosPerfil/cazador.jpg" },
+                new ImagenPerfil { Id = 1, NombreImagen = "", RutaImagen = "/Recursos/FotosPerfil/abeja.jpg" },
+                new ImagenPerfil { Id = 2, NombreImagen = "", RutaImagen = "/Recursos/FotosPerfil/cazador.jpg" },
         
             };
 
@@ -55,59 +55,49 @@ namespace trofeoCazador.Vistas.RegistroUsuario
 
         private void BtnCrearCuenta(object sender, RoutedEventArgs e)
         {
-            
             string errores = ValidarCampos();
 
             if (!string.IsNullOrEmpty(errores))
             {
                 MessageBox.Show(errores, "Errores en la validación", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return; 
+                return;
             }
 
-            GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-
-            if (proxy.ExisteCorreo(tbCorreo.Text.Trim()))
-            {
-                MessageBox.Show("Este correo ya está registrado. Por favor, elige otro.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return; 
-            }
-
-            if (proxy.ExisteNombreUsuario(tbUsuario.Text.Trim()))
-            {
-                MessageBox.Show("Este nombre de usuario ya está en uso. Por favor, elige otro.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return; 
-            }
             try
             {
-               codigoEnviado = proxy.EnviarCodigoConfirmacion(tbCorreo.Text);
+                GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
+
+                if (proxy.ExisteCorreo(tbCorreo.Text.Trim()))
+                {
+                    MessageBox.Show("Este correo ya está registrado. Por favor, elige otro.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                if (proxy.ExisteNombreUsuario(tbUsuario.Text.Trim()))
+                {
+                    MessageBox.Show("Este nombre de usuario ya está en uso. Por favor, elige otro.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                codigoEnviado = proxy.EnviarCodigoConfirmacion(tbCorreo.Text);
             }
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                Console.WriteLine($"Error de conexión: {ex.Message}");
+                return;
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
-            }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-            }
-            catch (FaultException)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-            }
-            catch (CommunicationException ex)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                Console.WriteLine($"Timeout: {ex.Message}");
+                return;
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CrearMensajeVentanaInesperadoError();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                Console.WriteLine($"Error inesperado: {ex.Message}");
+                return;
             }
 
             if (string.IsNullOrEmpty(codigoEnviado))
@@ -116,15 +106,16 @@ namespace trofeoCazador.Vistas.RegistroUsuario
                 return;
             }
 
-            int numeroImagenPerfil = cbImagenPerfil.SelectedIndex + 1; 
+            int numeroImagenPerfil = cbImagenPerfil.SelectedIndex + 1;
 
             JugadorDataContract jugador = new JugadorDataContract
             {
                 NombreUsuario = tbUsuario.Text,
-                NumeroFotoPerfil = numeroImagenPerfil, 
+                NumeroFotoPerfil = numeroImagenPerfil,
                 ContraseniaHash = PbContraseña.Password,
                 Correo = tbCorreo.Text
             };
+
             ValidarCodigoRegistro ventanaValidacion = new ValidarCodigoRegistro(jugador, null, codigoEnviado);
             bool? resultadoValidacion = ventanaValidacion.ShowDialog();
 
@@ -132,7 +123,14 @@ namespace trofeoCazador.Vistas.RegistroUsuario
             {
                 MessageBox.Show("Cuenta creada exitosamente. Ahora puedes iniciar sesión.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                NavigationService.Navigate(new Uri("Vistas/InicioSesion/XAMLInicioSesion.xaml", UriKind.Relative));
+                try
+                {
+                    NavigationService.Navigate(new Uri("Vistas/InicioSesion/XAMLInicioSesion.xaml", UriKind.Relative));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al navegar: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

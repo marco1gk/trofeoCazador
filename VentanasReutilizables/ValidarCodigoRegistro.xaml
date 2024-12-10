@@ -32,23 +32,31 @@
             </Style.Resources>
         </Style>
     </Window.Resources>
-
     <Viewbox Stretch="Fill">
         <Grid Height="770" Width="1200">
             <Image Source="../Recursos/negroo.png" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill" Height="524" Width="511" Margin="337,71,0,0" Grid.RowSpan="2"/>
-            <Label FontFamily="Titan One" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="68" Foreground="White" Margin="0,85,0,0">Validar Código</Label>
-            <TextBlock Text="Ingresa el código de verificación que recibiste por correo" 
+            <Label FontFamily="Titan One"
+       HorizontalAlignment="Center"
+       VerticalAlignment="Top"
+       FontSize="68"
+       Foreground="White"
+       Margin="0,85,0,0"
+       Height="94"
+       Width="446"
+       Content="{x:Static p:Resources.lbValidarCodigo}" />
+
+            <TextBlock Text="{x:Static p:Resources.tbDescripcionCodigo}" 
                        Margin="417,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" 
                        Height="54" Width="385" FontFamily="Inter" FontSize="16" 
                        Foreground="White" HorizontalAlignment="Left"/>
             <Label FontFamily="Titan One" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
-                   FontSize="24" Foreground="White" Content="Código" Margin="417,0,0,483"/>
-            <TextBox x:Name="tbxCode" FontFamily="Titan One" FontSize="26" Foreground="Black" 
+                   FontSize="24" Foreground="White" Content="{x:Static p:Resources.lbCodigo}" Margin="417,0,0,483"/>
+            <TextBox x:Name="tbCode" FontFamily="Titan One" FontSize="26" Foreground="Black" 
                      VerticalContentAlignment="Center" Margin="422,300,404,423"/>
             <Button Background="gray" Foreground="White" BorderThickness="0" 
-                    FontFamily="Titan One" FontSize="24" Content="Enviar" 
+                    FontFamily="Titan One" FontSize="24" Content="{x:Static p:Resources.btnEnviar}" 
                     Click="BtnEnviar" Margin="416,455,410,268" Cursor="Hand"/>
-            <TextBlock x:Name="lbCodeError" Text="Código incorrecto, verifica el código o vuelve a generar uno nuevo" 
+            <TextBlock x:Name="lbCodigoError" Text="{x:Static p:Resources.lbCodigoError}" 
                        HorizontalAlignment="Left" Margin="422,507,0,0" VerticalAlignment="Top" 
                        Width="368" Foreground="Red" FontFamily="Inter" FontSize="16" 
                        Background="{x:Null}" Height="51" TextWrapping="Wrap" Visibility="Collapsed"/>

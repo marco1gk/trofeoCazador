@@ -17,42 +17,37 @@ using trofeoCazador.Vistas.Amigos;
 
 namespace trofeoCazador.Componentes.SalaEspera
 {
-    /// <summary>
-    /// Lógica de interacción para XAMLInvitacionSala.xaml
-    /// </summary>
     public partial class XAMLInvitacionSala : Window
     {
-        private readonly Window _ventanaPrincipal;
-        private readonly string _salaEsperaCodigo;
+        private readonly Window ventanaPrincipal;
+        private readonly string salaEsperaCodigo;
 
         public XAMLInvitacionSala(string codigoSalaEspera)
         {
             InitializeComponent();
-
-            _ventanaPrincipal = Application.Current.MainWindow;
-            _salaEsperaCodigo = codigoSalaEspera;
-
+            ventanaPrincipal = Application.Current.MainWindow;
+            salaEsperaCodigo = codigoSalaEspera;
             ConfigurarVentanaEmergente();
         }
 
         private void ConfigurarVentanaEmergente()
         {
-            this.Owner = _ventanaPrincipal;
-            tbkCodigoSalaEspera.Text = _salaEsperaCodigo;
+            this.Owner = ventanaPrincipal;
+            tbCodigoSalaEspera.Text = salaEsperaCodigo;
             EstablecerMedidasVentana();
             EstablecerCentroVentana();
         }
 
         private void EstablecerMedidasVentana()
         {
-            this.Width = _ventanaPrincipal.Width;
-            this.Height = _ventanaPrincipal.Height;
+            this.Width = ventanaPrincipal.Width;
+            this.Height = ventanaPrincipal.Height;
         }
 
         private void EstablecerCentroVentana()
         {
-            double centroX = _ventanaPrincipal.Left + (_ventanaPrincipal.Width - this.Width) / 2;
-            double centroY = _ventanaPrincipal.Top + (_ventanaPrincipal.Height - this.Height) / 2;
+            double centroX = ventanaPrincipal.Left + (ventanaPrincipal.Width - this.Width) / 2;
+            double centroY = ventanaPrincipal.Top + (ventanaPrincipal.Height - this.Height) / 2;
             this.Left = centroX;
             this.Top = centroY;
         }
@@ -64,13 +59,13 @@ namespace trofeoCazador.Componentes.SalaEspera
 
         private void BtnInvitarPorCorreo_Click(object sender, RoutedEventArgs e)
         {
-            borderInviteByCode.Visibility = Visibility.Collapsed;
-            borderInviteByEmail.Visibility = Visibility.Visible;
+            bordeInvitarPorCodigo.Visibility = Visibility.Collapsed;
+            bordeInvitarPorCorrreo.Visibility = Visibility.Visible;
         }
 
         private void BtnCopiarCodigo_Click(object sender, RoutedEventArgs e)
         {
-            Clipboard.SetText(_salaEsperaCodigo);
+            Clipboard.SetText(salaEsperaCodigo);
         }
 
         private void BtnEnviarInvitacion_Click(object sender, RoutedEventArgs e)
@@ -81,7 +76,7 @@ namespace trofeoCazador.Componentes.SalaEspera
 
                 try
                 {
-                    invitacionGestionCliente.EnviarInvitacionCorreo(_salaEsperaCodigo, tbxCorreoAmigo.Text.Trim());
+                    invitacionGestionCliente.EnviarInvitacionCorreo(salaEsperaCodigo, tbCorreoAmigo.Text.Trim());
                 }
                 catch (EndpointNotFoundException ex)
                 {
@@ -104,26 +99,26 @@ namespace trofeoCazador.Componentes.SalaEspera
                 }
                 catch (Exception ex)
                 {
-                    VentanasEmergentes.CrearMensajeVentanaInesperadoError();
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                     ManejadorExcepciones.ManejarComponenteFatalExcepcion(ex);
                 }
             }
         }
 
-        private void TbxCorreoAmigo_ObtenerFoco(object sender, RoutedEventArgs e)
+        private void TbCorreoAmigo_ObtenerFoco(object sender, RoutedEventArgs e)
         {
-            if (tbxCorreoAmigo.Text == (string)tbxCorreoAmigo.Tag)
+            if (tbCorreoAmigo.Text == (string)tbCorreoAmigo.Tag)
             {
-                tbxCorreoAmigo.Text = string.Empty;
-                tbxCorreoAmigo.Foreground = Brushes.Black;
+                tbCorreoAmigo.Text = string.Empty;
+                tbCorreoAmigo.Foreground = Brushes.Black;
             }
         }
 
-        private void TbxCorreoAmigo_PerderFoco(object sender, RoutedEventArgs e)
+        private void TbCorreoAmigo_PerderFoco(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbxCorreoAmigo.Text))
+            if (string.IsNullOrWhiteSpace(tbCorreoAmigo.Text))
             {
-                tbxCorreoAmigo.Text = (string)tbxCorreoAmigo.Tag;
+                tbCorreoAmigo.Text = (string)tbCorreoAmigo.Tag;
             }
         }
 
@@ -133,9 +128,9 @@ namespace trofeoCazador.Componentes.SalaEspera
             bool valido = true;
             string errorTextBoxEstilo = "errorTextBoxEstilo";
 
-            if (!UtilidadesDeValidacion.EsCorreoValido(tbxCorreoAmigo.Text) || tbxCorreoAmigo.Text.Equals(tbxCorreoAmigo.Tag))
+            if (!UtilidadesDeValidacion.EsCorreoValido(tbCorreoAmigo.Text) || tbCorreoAmigo.Text.Equals(tbCorreoAmigo.Tag))
             {
-                tbxCorreoAmigo.Style = (Style)FindResource(errorTextBoxEstilo);
+                tbCorreoAmigo.Style = (Style)FindResource(errorTextBoxEstilo);
                 valido = false;
             }
 
@@ -145,7 +140,7 @@ namespace trofeoCazador.Componentes.SalaEspera
         private void EstablecerEstilosPorDefecto()
         {
             string estiloNormalTextBox = "estiloNormalTextBox";
-            tbxCorreoAmigo.Style = (Style)FindResource(estiloNormalTextBox);
+            tbCorreoAmigo.Style = (Style)FindResource(estiloNormalTextBox);
         }
     }
 }

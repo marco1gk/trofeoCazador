@@ -16,7 +16,7 @@ namespace trofeoCazador.VentanasReutilizables
 {
     public partial class XAMLVentanaEmergente : Window
     {
-        private readonly Window _ventanaPrincipal;
+        private readonly Window ventanaPrincipal;
 
         public XAMLVentanaEmergente()
         {
@@ -27,9 +27,9 @@ namespace trofeoCazador.VentanasReutilizables
         {
             InitializeComponent();
 
-            _ventanaPrincipal = Application.Current.MainWindow;
-            lbTitleEmergentWindow.Content = titulo;
-            tbkDescriptionEmergentWindow.Text = descripcion;
+            ventanaPrincipal = Application.Current.MainWindow;
+            lbTituloVentanaEmergente.Content = titulo;
+            tbDescripcionVentanaEmergente.Text = descripcion;
 
             ConfigurarVentanaEmergente();
 
@@ -37,7 +37,7 @@ namespace trofeoCazador.VentanasReutilizables
 
         private void ConfigurarVentanaEmergente()
         {
-            this.Owner = _ventanaPrincipal;
+            this.Owner = ventanaPrincipal;
 
             AjustarDimensionesVentana();
             EstablecerCentroVentana();
@@ -45,16 +45,16 @@ namespace trofeoCazador.VentanasReutilizables
 
         private void AjustarDimensionesVentana()
         {
-            this.Width = _ventanaPrincipal.Width;
-            this.Height = _ventanaPrincipal.Height;
+            this.Width = ventanaPrincipal.Width;
+            this.Height = ventanaPrincipal.Height;
         }
 
         private void EstablecerCentroVentana()
         {
-            double centerX = _ventanaPrincipal.Left + (_ventanaPrincipal.Width - this.Width) / 2;
-            double centerY = _ventanaPrincipal.Top + (_ventanaPrincipal.Height - this.Height) / 2;
-            this.Left = centerX;
-            this.Top = centerY;
+            double centroX = ventanaPrincipal.Left + (ventanaPrincipal.Width - this.Width) / 2;
+            double centroY = ventanaPrincipal.Top + (ventanaPrincipal.Height - this.Height) / 2;
+            this.Left = centroX;
+            this.Top = centroY;
         }
 
         private void BtnAceptar_Click(object sender, RoutedEventArgs e)

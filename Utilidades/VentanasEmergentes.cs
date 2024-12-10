@@ -8,9 +8,7 @@ using System.Windows;
 using trofeoCazador.Componentes.SalaEspera;
 
 namespace trofeoCazador.Utilidades
-{//todo
-    //falta pasar los mensajes a resources
-    //asi se hace Properties.Resources.lb...
+{
     public static class VentanasEmergentes
     {
         public static void CrearVentanaEmergente(string tituloVentanaEmergente, string descripcionVentanaEmergente)
@@ -40,8 +38,8 @@ namespace trofeoCazador.Utilidades
 
         public static void CrearConexionFallidaMensajeVentana()
         {
-            string tituloVentanaEmergente = "Fallo la conexion";
-            string descripcionVentanaEmergente = "No se pudo conectar con el servidor. Por favor, Inténtelo más tarde.";
+            string tituloVentanaEmergente = Properties.Resources.lbConexionFallida;
+            string descripcionVentanaEmergente = Properties.Resources.lbDetallesConexionFallida;
 
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -56,8 +54,8 @@ namespace trofeoCazador.Utilidades
 
         public static void CrearVentanaMensajeTimeOut()
         {
-            string tituloVentanaEmergente = "Tiempo de espera excedido";
-            string descriptionEmergentWindow = "La operación ha excedido el tiempo de espera. Por favor, inténtelo más tarde.";
+            string tituloVentanaEmergente = Properties.Resources.lbTituloExcepcionTimeOut;
+            string descriptionEmergentWindow = Properties.Resources.lbDetallesExcepcionTimeOut;
 
             XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
                 tituloVentanaEmergente,
@@ -69,8 +67,8 @@ namespace trofeoCazador.Utilidades
 
         public static void CrearErrorMensajeVentanaBaseDatos()
         {
-            string tituloVentanaEmergente = "Error de la base de datos";
-            string descriptionEmergentWindow = "Upss... Ocurrió un error en la base de datos. Porfavor, inténtelo más tarde";
+            string tituloVentanaEmergente = Properties.Resources.lbTituloExcepcionBaseDeDatos;
+            string descriptionEmergentWindow = Properties.Resources.lbDescripcionExcepcionBaseDeDatos;
 
             XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
                 tituloVentanaEmergente,
@@ -82,8 +80,8 @@ namespace trofeoCazador.Utilidades
 
         public static void CrearMensajeVentanaServidorError()
         {
-            string tituloVentanaEmergente = "Error en el servidor";
-            string descriptionEmergentWindow = "Upss... Ocurrió un error en el servidor. Por favor, inténtelo más tarde";
+            string tituloVentanaEmergente = Properties.Resources.lbTituloExcepcionServidor;
+            string descriptionEmergentWindow = Properties.Resources.lbDescripcionExcepcionServidor;
 
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -96,10 +94,10 @@ namespace trofeoCazador.Utilidades
             });
         }
 
-        public static void CrearMensajeVentanaInesperadoError()
+        public static void CrearMensajeVentanaErrorInesperado()
         {
-            string tituloVentanaEmergente = "Error inesperado";
-            string descriptionEmergentWindow = "Upss... Ocurrió un error inesperado. Por favor, inténtelo más tarde";
+            string tituloVentanaEmergente = Properties.Resources.lbTituloExcepcionInesperada;
+            string descriptionEmergentWindow = Properties.Resources.lbDescripcionExcepcionInesperada;
 
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -115,8 +113,8 @@ namespace trofeoCazador.Utilidades
 
         public static void CrearSalaEsperaNoEncontradaMensajeVentana()
         {
-            string tituloVentanaEmergente = "Lobby no encontrado";
-            string descriptionEmergentWindow = "El lobby al que estas intentando entrar no existe.";
+            string tituloVentanaEmergente = Properties.Resources.lbTituloSalaEsperaNoEncotrada;
+            string descriptionEmergentWindow = Properties.Resources.lbDescripcionSalaEsperaNoEncotrada;
 
             XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
                 tituloVentanaEmergente,
@@ -128,8 +126,8 @@ namespace trofeoCazador.Utilidades
 
         public static void CrearVentanaMensajeReporteExitoso()
         {
-            string tituloVentanaEmergente = "Reporte exitoso";
-            string descriptionEmergentWindow = "El jugador ha sido reportado. Agradecemos tu apoyo.";
+            string tituloVentanaEmergente = Properties.Resources.lbTituloReporteExitoso;
+            string descriptionEmergentWindow = Properties.Resources.lbDescripcionReporteExitoso;
 
             XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
                 tituloVentanaEmergente,
@@ -141,8 +139,8 @@ namespace trofeoCazador.Utilidades
 
         public static void CrearVentanaMensajeJugadorReportado()
         {
-            string tituloVentanaEmergente = "Jugador ya reportado";
-            string descriptionEmergentWindow = "Ya has reportado a este jugador.";
+            string tituloVentanaEmergente = Properties.Resources.lbTituloJugadorReportado;
+            string descriptionEmergentWindow = Properties.Resources.lbDescripcionJugadorReportado;
 
             XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
                 tituloVentanaEmergente,
@@ -154,8 +152,8 @@ namespace trofeoCazador.Utilidades
 
         public static void CrearVentanaMensajeJugadorBanneado()
         {
-            string tituloVentanaEmergente = "Has sido baneado";
-            string descriptionEmergentWindow = "Has acumulado el máximo de reportes permitidos. Se restringirá tu cuenta por un tiempo establecido.";
+            string tituloVentanaEmergente = Properties.Resources.lbTituloJugadorCastigado;
+            string descriptionEmergentWindow = Properties.Resources.lbDescripcionJugadorCastigado;
 
             XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
                 tituloVentanaEmergente,
@@ -167,8 +165,8 @@ namespace trofeoCazador.Utilidades
 
         public static void CrearVentanaMensajeAnfitrionDejoSalaEspera()
         {
-            string tituloVentanaEmergente = "Lobby eliminado";
-            string descriptionEmergentWindow = "El host salio del lobby. Regresaras al menú principal.";
+            string tituloVentanaEmergente = Properties.Resources.lbTituloAnfitrionSalioSalaEspera;
+            string descriptionEmergentWindow = Properties.Resources.lbDescripcionAnfitrionDejoSalaEsperra;
 
             XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
                 tituloVentanaEmergente,
@@ -180,8 +178,8 @@ namespace trofeoCazador.Utilidades
 
         public static void CrearVentanaMensajeSalaEsperaLlena()
         {
-            string tituloVentanaEmergente = "Lobby lleno";
-            string descriptionEmergentWindow = "El lobby al que estas intentando entrar esta lleno.";
+            string tituloVentanaEmergente = Properties.Resources.lbTituloSalaEsperaLlena;
+            string descriptionEmergentWindow = Properties.Resources.lbDescripcionSalaEsperaLlena;
 
             XAMLVentanaEmergente ventanaEmergente = new XAMLVentanaEmergente(
                 tituloVentanaEmergente,
