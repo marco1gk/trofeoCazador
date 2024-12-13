@@ -154,6 +154,12 @@
   <wsdl:message name="IGestionCuentaServicio_VerificarContrasena_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerificarContrasenaResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ValidarUsuarioEnLinea_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarUsuarioEnLinea" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ValidarUsuarioEnLinea_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidarUsuarioEnLineaResponse" />
+  </wsdl:message>
   <wsdl:message name="ILobbyManager_InvitarAmigoASala_InputMessage">
     <wsdl:part name="parameters" element="tns:InvitarAmigoASala" />
   </wsdl:message>
@@ -571,6 +577,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/VerificarContrasena" message="tns:IGestionCuentaServicio_VerificarContrasena_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/VerificarContrasenaResponse" message="tns:IGestionCuentaServicio_VerificarContrasena_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ValidarUsuarioEnLinea">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarUsuarioEnLinea" message="tns:IGestionCuentaServicio_ValidarUsuarioEnLinea_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarUsuarioEnLineaResponse" message="tns:IGestionCuentaServicio_ValidarUsuarioEnLinea_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ILobbyManager">
     <wsdl:operation name="InvitarAmigoASala">
@@ -960,6 +970,15 @@
     </wsdl:operation>
     <wsdl:operation name="VerificarContrasena">
       <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/VerificarContrasena" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarUsuarioEnLinea">
+      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ValidarUsuarioEnLinea" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

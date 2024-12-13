@@ -162,6 +162,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ValidarUsuarioEnLinea">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ValidarUsuarioEnLineaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ValidarUsuarioEnLineaResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="InvitarAmigoASala">
     <xs:complexType>
       <xs:sequence>

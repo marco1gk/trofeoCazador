@@ -505,6 +505,12 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/VerificarContrasena", ReplyAction="http://tempuri.org/IGestionCuentaServicio/VerificarContrasenaResponse")]
         System.Threading.Tasks.Task<bool> VerificarContrasenaAsync(string contraseniaIngresada, string correo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ValidarUsuarioEnLinea", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ValidarUsuarioEnLineaResponse")]
+        bool ValidarUsuarioEnLinea(string nombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ValidarUsuarioEnLinea", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ValidarUsuarioEnLineaResponse")]
+        System.Threading.Tasks.Task<bool> ValidarUsuarioEnLineaAsync(string nombreUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -620,6 +626,14 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task<bool> VerificarContrasenaAsync(string contraseniaIngresada, string correo) {
             return base.Channel.VerificarContrasenaAsync(contraseniaIngresada, correo);
+        }
+        
+        public bool ValidarUsuarioEnLinea(string nombreUsuario) {
+            return base.Channel.ValidarUsuarioEnLinea(nombreUsuario);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ValidarUsuarioEnLineaAsync(string nombreUsuario) {
+            return base.Channel.ValidarUsuarioEnLineaAsync(nombreUsuario);
         }
     }
     

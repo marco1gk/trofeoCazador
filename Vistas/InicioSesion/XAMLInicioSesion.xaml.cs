@@ -48,78 +48,122 @@ namespace trofeoCazador.Vistas.InicioSesion
         {
             try
             {
-                lbCredencialesIncorrectas.Visibility = Visibility.Hidden;
+                OcultarMensajesDeError();
 
                 if (!ValidarCampos())
                 {
-                    lbCredencialesIncorrectas.Visibility = Visibility.Visible;
+                    MostrarMensajeCredencialesIncorrectas();
+                    return;
+                }
+                string contraseña = tpContraseña.Password;
+                string usuario = tbUsuario.Text;
+                JugadorDataContract jugador = AutenticarUsuario(usuario, contraseña);
+         
+                if (EsUsuarioEnLinea(jugador.NombreUsuario))
+                {
+                    VentanasEmergentes.CrearVentanaEmergente("Usuario en línea", "Esta cuenta ya ha iniciado sesión desde otro dispositivo.");
                     return;
                 }
 
-                string contraseña = tpContraseña.Password;
-                string usuario = tbUsuario.Text;
-
-                GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-                JugadorDataContract jugador = proxy.ValidarInicioSesion(usuario, contraseña);
+                
 
                 if (jugador != null)
                 {
-                    SingletonSesion sesion = SingletonSesion.Instancia;
-                    sesion.JugadorId = jugador.JugadorId;
-                    sesion.NombreUsuario = jugador.NombreUsuario;
-                    sesion.NumeroFotoPerfil = jugador.NumeroFotoPerfil;
-                    sesion.Correo = jugador.Correo;
-
-                    sesion.EstaActivo = true; 
-
-                    XAMLAmigos paginaAmigos = new XAMLAmigos();
-                    paginaAmigos.MostrarComoUsuarioActivo(); 
-
-                    XAMLAmigos amigosPage = new XAMLAmigos();
-
-                    this.NavigationService.Navigate(new XAMLMenu(amigosPage));
+                    IniciarSesion(jugador);
                 }
                 else
                 {
-                    lbCredencialesIncorrectas.Visibility = Visibility.Visible;
-                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbCredencialesIncorrectas, Properties.Resources.lbDescripcionCredencialesIncorrectas);
+                    ManejarCredencialesInvalidas();
                 }
-            }
-            catch (EndpointNotFoundException ex)
-            {
-                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                Console.WriteLine($"Excepción de conexión: {ex.Message}");
-                if (this.NavigationService != null)
-                {
-                    this.NavigationService.RemoveBackEntry(); 
-                }
-                return; 
-            }
-            catch (TimeoutException ex)
-            {
-                VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
-            }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-            }
-            catch (FaultException)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-            }
-            catch (CommunicationException ex)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                ManejarExcepciones(ex);
             }
-
         }
+
+        private void OcultarMensajesDeError()
+        {
+            lbCredencialesIncorrectas.Visibility = Visibility.Hidden;
+        }
+
+        private void MostrarMensajeCredencialesIncorrectas()
+        {
+            lbCredencialesIncorrectas.Visibility = Visibility.Visible;
+        }
+
+        private bool EsUsuarioEnLinea(string nombreUsuario)
+        {
+            GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
+            return proxy.ValidarUsuarioEnLinea(nombreUsuario);
+        }
+
+        private JugadorDataContract AutenticarUsuario(string usuario, string contraseña)
+        {
+            GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
+            return proxy.ValidarInicioSesion(usuario, contraseña);
+        }
+
+        private void IniciarSesion(JugadorDataContract jugador)
+        {
+            ConfigurarSesion(jugador);
+            NavegarAMenuPrincipal();
+        }
+
+        private void ConfigurarSesion(JugadorDataContract jugador)
+        {
+            SingletonSesion sesion = SingletonSesion.Instancia;
+            sesion.JugadorId = jugador.JugadorId;
+            sesion.NombreUsuario = jugador.NombreUsuario;
+            sesion.NumeroFotoPerfil = jugador.NumeroFotoPerfil;
+            sesion.Correo = jugador.Correo;
+            sesion.EstaActivo = true;
+
+            XAMLAmigos paginaAmigos = new XAMLAmigos();
+            paginaAmigos.MostrarComoUsuarioActivo();
+        }
+
+        private void NavegarAMenuPrincipal()
+        {
+            XAMLAmigos amigosPage = new XAMLAmigos();
+            this.NavigationService.Navigate(new XAMLMenu(amigosPage));
+        }
+
+        private void ManejarCredencialesInvalidas()
+        {
+            MostrarMensajeCredencialesIncorrectas();
+            VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbCredencialesIncorrectas, Properties.Resources.lbDescripcionCredencialesIncorrectas);
+        }
+
+        private void ManejarExcepciones(Exception ex)
+        {
+            switch (ex)
+            {
+                case EndpointNotFoundException endpointEx:
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    Console.WriteLine($"Excepción de conexión: {endpointEx.Message}");
+                    this.NavigationService?.RemoveBackEntry();
+                    break;
+
+                case TimeoutException timeoutEx:
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcion(timeoutEx, NavigationService);
+                    break;
+
+                
+
+                case CommunicationException commEx:
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcion(commEx, NavigationService);
+                    break;
+
+                default:
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                    break;
+            }
+        }
+
 
 
         private bool ValidarCampos()
