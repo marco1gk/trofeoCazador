@@ -1,0 +1,28 @@
+﻿<Window x:Class="trofeoCazador.Vistas.PartidaJuego.DialogoSeleccionCarta"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Seleccionar Carta" Height="400" Width="600">
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Selecciona una carta del descarte" 
+                       FontSize="16" 
+                       HorizontalAlignment="Center" Margin="10"/>
+            <ItemsControl ItemsSource="{Binding Cartas}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding DataContext.SeleccionarCartaCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                CommandParameter="{Binding}">
+                            <Image Source="{Binding RutaImagen}" Width="100" Height="150" />
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+</Window>
+

@@ -63,6 +63,7 @@
         </StackPanel>
 
         <!-- Mazo de cartas -->
+        
         <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
             <TextBlock Text="Mazo" FontSize="20" FontWeight="Bold" TextAlignment="Center" />
             <ItemsControl x:Name="ZonaMazoCartas" MouseDown="Mazo_MouseDown">

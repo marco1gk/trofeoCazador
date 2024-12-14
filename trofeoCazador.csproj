@@ -148,6 +148,11 @@
     <Compile Include="Vistas\InicioSesion\XAMLInicioSesion.xaml.cs">
       <DependentUpon>XAMLInicioSesion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\PartidaJuego\DialogoSeleccionCarta.xaml.cs">
+      <DependentUpon>DialogoSeleccionCarta.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\PartidaJuego\DialogoSeleccionCartaViewModel.cs" />
+    <Compile Include="Vistas\PartidaJuego\RelayCommand.cs" />
     <Compile Include="Vistas\PartidaJuego\XAMLTablero.xaml.cs">
       <DependentUpon>XAMLTablero.xaml</DependentUpon>
     </Compile>
@@ -224,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\InicioSesion\XAMLInicioSesion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\PartidaJuego\DialogoSeleccionCarta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -427,6 +427,36 @@
   <wsdl:message name="IServicioPartida_RobarCarta_InputMessage">
     <wsdl:part name="parameters" element="tns:RobarCarta" />
   </wsdl:message>
+  <wsdl:message name="IServicioPartida_UtilizarCartaDefensiva_InputMessage">
+    <wsdl:part name="parameters" element="tns:UtilizarCartaDefensiva" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_RobarCartaEsconditeAJugador_InputMessage">
+    <wsdl:part name="parameters" element="tns:RobarCartaEsconditeAJugador" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_RobarCartaEscondite_InputMessage">
+    <wsdl:part name="parameters" element="tns:RobarCartaEscondite" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_TomarCartaDeDescarte_InputMessage">
+    <wsdl:part name="parameters" element="tns:TomarCartaDeDescarte" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_ObligarATirarDado_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObligarATirarDado" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_PreguntarGuardarCartaEnEscondite_InputMessage">
+    <wsdl:part name="parameters" element="tns:PreguntarGuardarCartaEnEscondite" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_EnviarDecision_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnviarDecision" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_RevelarCartaMazo_InputMessage">
+    <wsdl:part name="parameters" element="tns:RevelarCartaMazo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_OcultarCartaMazo_InputMessage">
+    <wsdl:part name="parameters" element="tns:OcultarCartaMazo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_FinalizarJuego_InputMessage">
+    <wsdl:part name="parameters" element="tns:FinalizarJuego" />
+  </wsdl:message>
   <wsdl:message name="IServicioPartida_NotificarTurnoIniciado_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarTurnoIniciado" />
   </wsdl:message>
@@ -522,6 +552,60 @@
   </wsdl:message>
   <wsdl:message name="IServicioPartida_NotificarCartaRobada_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarCartaRobadaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarIntentoRoboCartaEscondite_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarIntentoRoboCartaEscondite" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarIntentoRoboCartaEscondite_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarIntentoRoboCartaEsconditeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaEsconditeRobada_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaEsconditeRobada" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaEsconditeRobada_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaEsconditeRobadaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaTomadaDescarte_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaTomadaDescarte" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarCartaTomadaDescarte_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarCartaTomadaDescarteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarTiroDadoForzado_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarTiroDadoForzado" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarTiroDadoForzado_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarTiroDadoForzadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarPreguntaJugadores_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarPreguntaJugadores" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarPreguntaJugadores_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarPreguntaJugadoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarNumeroJugadoresGuardaronCarta_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarNumeroJugadoresGuardaronCarta" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarNumeroJugadoresGuardaronCarta_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarNumeroJugadoresGuardaronCartaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarMazoRevelado_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarMazoRevelado" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarMazoRevelado_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarMazoReveladoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarMazoOculto_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarMazoOculto" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarMazoOculto_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarMazoOcultoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarResultadosJuego_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarResultadosJuego" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarResultadosJuego_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarResultadosJuegoResponse" />
   </wsdl:message>
   <wsdl:message name="IGestorInvitacion_EnviarInvitacionCorreo_InputMessage">
     <wsdl:part name="parameters" element="tns:EnviarInvitacionCorreo" />
@@ -794,6 +878,36 @@
     <wsdl:operation name="RobarCarta">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/RobarCarta" message="tns:IServicioPartida_RobarCarta_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UtilizarCartaDefensiva">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/UtilizarCartaDefensiva" message="tns:IServicioPartida_UtilizarCartaDefensiva_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RobarCartaEsconditeAJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/RobarCartaEsconditeAJugador" message="tns:IServicioPartida_RobarCartaEsconditeAJugador_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RobarCartaEscondite">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/RobarCartaEscondite" message="tns:IServicioPartida_RobarCartaEscondite_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TomarCartaDeDescarte">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/TomarCartaDeDescarte" message="tns:IServicioPartida_TomarCartaDeDescarte_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObligarATirarDado">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/ObligarATirarDado" message="tns:IServicioPartida_ObligarATirarDado_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PreguntarGuardarCartaEnEscondite">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/PreguntarGuardarCartaEnEscondite" message="tns:IServicioPartida_PreguntarGuardarCartaEnEscondite_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarDecision">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/EnviarDecision" message="tns:IServicioPartida_EnviarDecision_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RevelarCartaMazo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/RevelarCartaMazo" message="tns:IServicioPartida_RevelarCartaMazo_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OcultarCartaMazo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/OcultarCartaMazo" message="tns:IServicioPartida_OcultarCartaMazo_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizarJuego">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/FinalizarJuego" message="tns:IServicioPartida_FinalizarJuego_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotificarTurnoIniciado">
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado" message="tns:IServicioPartida_NotificarTurnoIniciado_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciadoResponse" message="tns:IServicioPartida_NotificarTurnoIniciado_InputCallbackMessage" />
@@ -857,6 +971,42 @@
     <wsdl:operation name="NotificarCartaRobada">
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaRobada" message="tns:IServicioPartida_NotificarCartaRobada_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaRobadaResponse" message="tns:IServicioPartida_NotificarCartaRobada_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarIntentoRoboCartaEscondite">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCartaEscondite" message="tns:IServicioPartida_NotificarIntentoRoboCartaEscondite_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCartaEsconditeResponse" message="tns:IServicioPartida_NotificarIntentoRoboCartaEscondite_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaEsconditeRobada">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaEsconditeRobada" message="tns:IServicioPartida_NotificarCartaEsconditeRobada_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaEsconditeRobadaResponse" message="tns:IServicioPartida_NotificarCartaEsconditeRobada_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaTomadaDescarte">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaTomadaDescarte" message="tns:IServicioPartida_NotificarCartaTomadaDescarte_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaTomadaDescarteResponse" message="tns:IServicioPartida_NotificarCartaTomadaDescarte_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarTiroDadoForzado">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTiroDadoForzado" message="tns:IServicioPartida_NotificarTiroDadoForzado_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTiroDadoForzadoResponse" message="tns:IServicioPartida_NotificarTiroDadoForzado_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarPreguntaJugadores">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarPreguntaJugadores" message="tns:IServicioPartida_NotificarPreguntaJugadores_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarPreguntaJugadoresResponse" message="tns:IServicioPartida_NotificarPreguntaJugadores_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarNumeroJugadoresGuardaronCarta">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarNumeroJugadoresGuardaronCarta" message="tns:IServicioPartida_NotificarNumeroJugadoresGuardaronCarta_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarNumeroJugadoresGuardaronCartaResponse" message="tns:IServicioPartida_NotificarNumeroJugadoresGuardaronCarta_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarMazoRevelado">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarMazoRevelado" message="tns:IServicioPartida_NotificarMazoRevelado_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarMazoReveladoResponse" message="tns:IServicioPartida_NotificarMazoRevelado_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarMazoOculto">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarMazoOculto" message="tns:IServicioPartida_NotificarMazoOculto_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarMazoOcultoResponse" message="tns:IServicioPartida_NotificarMazoOculto_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarResultadosJuego">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarResultadosJuego" message="tns:IServicioPartida_NotificarResultadosJuego_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarResultadosJuegoResponse" message="tns:IServicioPartida_NotificarResultadosJuego_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IGestorInvitacion">
@@ -1449,6 +1599,66 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="UtilizarCartaDefensiva">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/UtilizarCartaDefensiva" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RobarCartaEsconditeAJugador">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/RobarCartaEsconditeAJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RobarCartaEscondite">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/RobarCartaEscondite" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="TomarCartaDeDescarte">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/TomarCartaDeDescarte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ObligarATirarDado">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/ObligarATirarDado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="PreguntarGuardarCartaEnEscondite">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/PreguntarGuardarCartaEnEscondite" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarDecision">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/EnviarDecision" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RevelarCartaMazo">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/RevelarCartaMazo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="OcultarCartaMazo">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/OcultarCartaMazo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizarJuego">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/FinalizarJuego" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="NotificarTurnoIniciado">
       <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado" style="document" />
       <wsdl:input>
@@ -1586,6 +1796,87 @@
     </wsdl:operation>
     <wsdl:operation name="NotificarCartaRobada">
       <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarCartaRobada" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarIntentoRoboCartaEscondite">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCartaEscondite" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaEsconditeRobada">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarCartaEsconditeRobada" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarCartaTomadaDescarte">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarCartaTomadaDescarte" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarTiroDadoForzado">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarTiroDadoForzado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarPreguntaJugadores">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarPreguntaJugadores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarNumeroJugadoresGuardaronCarta">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarNumeroJugadoresGuardaronCarta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarMazoRevelado">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarMazoRevelado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarMazoOculto">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarMazoOculto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarResultadosJuego">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarResultadosJuego" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
