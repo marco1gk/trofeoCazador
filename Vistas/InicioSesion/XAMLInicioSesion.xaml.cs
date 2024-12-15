@@ -16,6 +16,7 @@ namespace trofeoCazador.Vistas.InicioSesion
     public partial class XAMLInicioSesion : Page
     {
         private const string FUENTE_SECUNDARIA = "Inter";
+
         private void IdiomaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbIdioma.SelectedItem is ComboBoxItem item)
@@ -26,17 +27,14 @@ namespace trofeoCazador.Vistas.InicioSesion
             }
         }
 
-
         private void BtnCorreo_Click(object sender, RoutedEventArgs e)
         {
             VentanaCorreoJugador ventanaCorreo = new VentanaCorreoJugador();
             ventanaCorreo.Show();
-
         }
 
         private void BtnRegistrarCuenta(object sender, RoutedEventArgs e)
         {
-
             if (this.NavigationService == null)
             {
                 return; 
@@ -55,17 +53,13 @@ namespace trofeoCazador.Vistas.InicioSesion
                     MostrarMensajeCredencialesIncorrectas();
                     return;
                 }
-                string contraseña = tpContraseña.Password;
-                string usuario = tbUsuario.Text;
-                JugadorDataContract jugador = AutenticarUsuario(usuario, contraseña);
+                JugadorDataContract jugador = AutenticarUsuario(tbUsuario.Text, tpContraseña.Password);
          
                 if (EsUsuarioEnLinea(jugador.NombreUsuario))
                 {
                     VentanasEmergentes.CrearVentanaEmergente("Usuario en línea", "Esta cuenta ya ha iniciado sesión desde otro dispositivo.");
                     return;
                 }
-
-                
 
                 if (jugador != null)
                 {
@@ -122,7 +116,6 @@ namespace trofeoCazador.Vistas.InicioSesion
             XAMLAmigos paginaAmigos = new XAMLAmigos();
             paginaAmigos.MostrarComoUsuarioActivo();
         }
-
         private void NavegarAMenuPrincipal()
         {
             XAMLAmigos amigosPage = new XAMLAmigos();
@@ -150,8 +143,6 @@ namespace trofeoCazador.Vistas.InicioSesion
                     ManejadorExcepciones.ManejarErrorExcepcion(timeoutEx, NavigationService);
                     break;
 
-                
-
                 case CommunicationException commEx:
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
                     ManejadorExcepciones.ManejarErrorExcepcion(commEx, NavigationService);
@@ -163,8 +154,6 @@ namespace trofeoCazador.Vistas.InicioSesion
                     break;
             }
         }
-
-
 
         private bool ValidarCampos()
         {
@@ -195,7 +184,7 @@ namespace trofeoCazador.Vistas.InicioSesion
                 tbUsuario.FontWeight = FontWeights.Bold;
             }
         }
-        private void TbxUsuarioPerderFoco(object sender, RoutedEventArgs e)
+        private void TbUsuarioPerderFoco(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tbUsuario.Text))
             {

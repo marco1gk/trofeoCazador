@@ -495,7 +495,7 @@ namespace trofeoCazador.Vistas.SalaEspera
        
 
         public void NotificarSalaEsperaCreada(string codigoSalaEspera)
-        {//lbNotificarSalaEsperaCreada,lbSalaEsperaCreada
+        {
             codigoSalaEsperaActual = codigoSalaEspera;
             MessageBox.Show($"Lobby creado con el código: {codigoSalaEspera}");
         }

@@ -44,7 +44,7 @@
                      Height="40"
                      FontSize="16"
                      GotFocus="TbxUsuarioObtenerFoco"
-                    LostFocus="TbxUsuarioPerderFoco"
+                    LostFocus="TbUsuarioPerderFoco"
                      Foreground="Black" />
             <PasswordBox x:Name="tpContraseña"            
                          Margin="0,10"

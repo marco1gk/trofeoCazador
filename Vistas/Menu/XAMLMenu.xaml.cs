@@ -60,9 +60,13 @@ namespace trofeoCazador.Vistas.Menu
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnEstadisticas(object sender, RoutedEventArgs e)
         {
-
+            if (this.NavigationService == null)
+            {
+                return;
+            }
+            this.NavigationService.Navigate(new Uri("Vistas/Estadisticas/XAMLEstadisticas.xaml", UriKind.Relative));
         }
     }
 }

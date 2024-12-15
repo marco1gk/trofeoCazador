@@ -20,6 +20,7 @@ C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\GestorSolicitudesAmistad
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\XAMLActiveUserItemControl.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\XAMLAmigos.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\XAMLFriendRequestItemComponent.xaml.cs
+C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Estadisticas\XAMLEstadisticas.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\InicioSesion\XAMLInicioSesion.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\XAMLTablero.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\EditarContrasenia.xaml.cs
