@@ -24,6 +24,7 @@
             <Grid.Background>
                 <ImageBrush ImageSource="/Recursos/landsCape.png"/>
             </Grid.Background>
+            <TextBox Name="tbInvitado" HorizontalAlignment="Center" Margin="0,435,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" FontStyle="Italic" VerticalAlignment="Top" Width="120"/>
         </Grid>
         <TextBlock FontSize="28"
                    FontWeight="Bold"
@@ -116,7 +117,7 @@
         </Label>
         <Button Content="{x:Static p:Resources.btnInvitado}" 
                 HorizontalAlignment="Left" 
-                Margin="353,70,0,0" 
+                Margin="398,62,0,0" 
                 Foreground="Black" 
                 FontWeight="Bold" 
                 FontSize="30" 
@@ -124,7 +125,7 @@
                 Background="Transparent" 
                 Grid.Row="2" 
                 VerticalAlignment="Top" 
-                Click="Button_Click_2"/>
+                Click="BtnUnirseComoInvitado_Click"/>
         <Button Content="{x:Static p:Resources.lbContraseniaOlvidada}" 
                 Name="lbCredencialesIncorrectas"
                 Margin="254,134,0,0" 

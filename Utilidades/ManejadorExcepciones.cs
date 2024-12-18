@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
 using trofeoCazador.Vistas.InicioSesion;
+using System.Windows;
 
 namespace trofeoCazador.Utilidades
 {
@@ -42,6 +43,27 @@ namespace trofeoCazador.Utilidades
             logger.Fatal(ex.Message + "\n" + ex.StackTrace + "\n");
         }
 
+        public static void ManejarErrorExcepcion(Exception ex, Window ventana)
+        {
+            logger.Error(ex.Message + "\n" + ex.StackTrace + "\n");
+
+            if (ventana != null)
+            {
+                ventana.Close(); 
+                ventana.Show(); 
+            }
+        }
+
+        public static void ManejarFatalExcepcion(Exception ex, Window ventana)
+        {
+            logger.Fatal(ex.Message + "\n" + ex.StackTrace + "\n");
+
+            if (ventana != null)
+            {
+                ventana.Close();
+                ventana.Show();  
+            }
+        }
 
 
     }

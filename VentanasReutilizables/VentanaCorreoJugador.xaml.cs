@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,18 +29,51 @@ namespace trofeoCazador.VentanasReutilizables
             string correo = tbCorreo.Text.Trim();
 
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            string codigoRecuperacion = proxy.EnviarCodigoConfirmacion(correo);
-            if (!string.IsNullOrEmpty(codigoRecuperacion))
+            try
             {
-                ValidarCodigoRegistro validarCodigo = new ValidarCodigoRegistro(null, correo, codigoRecuperacion);
-                validarCodigo.Show();
-                this.Close();
+                string codigoRecuperacion = proxy.EnviarCodigoConfirmacion(correo);
+                if (!string.IsNullOrEmpty(codigoRecuperacion))
+                {
+                    ValidarCodigoRegistro validarCodigo = new ValidarCodigoRegistro(null, correo, codigoRecuperacion);
+                    validarCodigo.Show();
+                    this.Close();
+                }
+                else
+                {
+                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloCorreoNoReconocido, Properties.Resources.lbDescripcionCorreoIncorrecto);
+
+                }
             }
-            else
+            catch (EndpointNotFoundException ex)
             {
-                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloCorreoNoReconocido,Properties.Resources.lbDescripcionCorreoIncorrecto);
-          
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, this);
             }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, this);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, this);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, this);
+            }
+
+            
         }
     }
 }

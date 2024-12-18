@@ -1,0 +1,78 @@
+﻿<Page x:Class="trofeoCazador.Vistas.Victoria.XAMLVictoria"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:p="clr-namespace:trofeoCazador.Properties"
+      xmlns:local="clr-namespace:trofeoCazador.Vistas.Victoria"
+      mc:Ignorable="d" 
+      d:DesignHeight="770" d:DesignWidth="1200" Background="LightGreen"
+      Title="XAMLVictoria">
+
+    <Viewbox Stretch="Fill">
+        <Grid>
+
+            <Grid Margin="374,140,374,140">
+                <Label x:Name="lbVictoria" Content="{x:Static p:Resources.lbVictoria}" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Titan One" Foreground="White" FontSize="150" Visibility="Collapsed"/>
+                <Label x:Name="lbDerrota" Content="{x:Static p:Resources.lbDerrota}" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Titan One" Foreground="White" FontSize="150" Visibility="Visible"/>
+
+                <TextBlock x:Name="lbPrimerLugar" Visibility="Collapsed" Text="1°" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Titan One" Foreground="#FF9D0A" FontSize="150" Margin="0,230,0,0"/>
+                <TextBlock x:Name="lbSegundoLugar" Visibility="Collapsed" Text="2°" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Titan One" Foreground="#E3E4E5" FontSize="150" Margin="0,230,0,0"/>
+                <TextBlock x:Name="lbTercerLugar" Visibility="Collapsed" Text="3°" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Titan One" Foreground="#CD5715" FontSize="150" Margin="0,230,0,0"/>
+                <TextBlock x:Name="lbCuartoLugat" Visibility="Collapsed" Text="4°" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Titan One" Foreground="#B92828" FontSize="150" Margin="0,230,0,0"/>
+
+                <Label x:Name="lbnombreUsuario" Content="Invitado" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Inter" Foreground="White"
+                    FontSize="80" FontWeight="Bold"/>
+                <Grid Margin="38,546,613,47">
+                    <Rectangle Fill="#056EA1" Opacity=".55" RadiusX="25" RadiusY="25"/>
+                    <StackPanel x:Name="stackPanelMarcador" Orientation="Vertical" Margin="20,33,20,32">
+                        <Grid Height="72">
+                            <TextBlock Text="1°" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Titan One" Foreground="#FF9D0A" FontSize="42" Margin="10,0,0,0"/>
+                            <Border x:Name="borderFirstPlace" BorderBrush="LightGray" Background="#EDEDED" BorderThickness="1" CornerRadius="7" Padding="5" Width="425" Height="65" HorizontalAlignment="Right">
+                                <Grid>
+                                    <TextBlock x:Name="tbPrimerLugarNombreUsuario" Text="" FontFamily="Inter" FontWeight="Bold" FontSize="24" Margin="17,0,68,0" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="tbPrimerLugarPuntos" Text="0" FontFamily="Inter" FontWeight="Bold" FontSize="24" Margin="235,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <Grid Height="72">
+                            <TextBlock Text="2°" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Titan One" Foreground="#E3E4E5" FontSize="42" Margin="10,0,0,0"/>
+                            <Border x:Name="borderSecondPlace" BorderBrush="LightGray" Background="#EDEDED" BorderThickness="1" CornerRadius="7" Padding="5" Width="425" Height="65" HorizontalAlignment="Right">
+                                <Grid>
+                                    <TextBlock x:Name="tbSegundoLugarNombreUsuario" Text="" FontFamily="Inter" FontWeight="Bold" FontSize="24" Margin="17,0,68,0" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="tbSegundoLugarPuntos" Text="0" FontFamily="Inter" FontWeight="Bold" FontSize="24" Margin="235,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <Grid x:Name="gridTercerLugar" Height="72" Visibility="Collapsed">
+                            <TextBlock Text="3°" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Titan One" Foreground="#CD5715" FontSize="42" Margin="10,0,0,0"/>
+                            <Border x:Name="borderThirdPlace" BorderBrush="LightGray" Background="#EDEDED" BorderThickness="1" CornerRadius="7" Padding="5" Width="425" Height="65" HorizontalAlignment="Right">
+                                <Grid>
+                                    <TextBlock x:Name="tbTercerLugarNombreUsuario" Text="" FontFamily="Inter" FontWeight="Bold" FontSize="24" Margin="17,0,68,0" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="tbTercerLugarPuntos" Text="0" FontFamily="Inter" FontWeight="Bold" FontSize="24" Margin="235,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <Grid x:Name="gridCuartoLugar" Height="72" Visibility="Collapsed">
+                            <TextBlock Text="4°" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Titan One" Foreground="#B92828" FontSize="42" Margin="10,0,0,0"/>
+                            <Border x:Name="borderFourthPlace" BorderBrush="LightGray" Background="#EDEDED" BorderThickness="1" CornerRadius="7" Padding="5" Width="425" Height="65" HorizontalAlignment="Right">
+                                <Grid>
+                                    <TextBlock x:Name="tbCuartoLugarNombreUsuario" Text="" FontFamily="Inter" FontWeight="Bold" FontSize="24" Margin="17,0,68,0" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="tbCuartoLugarPuntos" Text="0" FontFamily="Inter" FontWeight="Bold" FontSize="24" Margin="235,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+                <Grid Margin="624,578,62,47">
+
+                    <Rectangle Fill="#F61D1D" RadiusX="15" RadiusY="15" Margin="325,253,0,0"/>
+                    <Label Content="Exit" Margin="325,253,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Titan One" Foreground="White" FontSize="28" />
+                    <Button Margin="325,253,0,0" Background="Transparent" BorderBrush="Transparent" Content="{x:Static p:Resources.btnSalir}" Focusable="False" Click="BtnSalir_Click" Height="44" VerticalAlignment="Top"/>
+
+                </Grid>
+            </Grid>
+
+        </Grid>
+    </Viewbox>
+</Page>

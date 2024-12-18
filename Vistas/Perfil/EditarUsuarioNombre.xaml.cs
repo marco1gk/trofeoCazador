@@ -16,6 +16,9 @@ using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Recursos;
 using System.Collections;
 using System.Runtime.Remoting.Proxies;
+using System.ServiceModel;
+using trofeoCazador.Utilidades;
+using trofeoCazador.Vistas.InicioSesion;
 
 namespace trofeoCazador.Vistas.Perfil
 {
@@ -77,9 +80,37 @@ namespace trofeoCazador.Vistas.Perfil
                     Metodos.MostrarMensaje("Hubo un problema al actualizar el nombre de usuario.");
                 }
             }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+            }
             catch (Exception ex)
             {
-                Metodos.MostrarMensaje("Error al conectar con el servicio: " + ex.Message);
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
     }

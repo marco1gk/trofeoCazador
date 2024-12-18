@@ -75,7 +75,6 @@ namespace trofeoCazador.Vistas.Perfil
             }
             else
             {
-                // Validar la contraseña actual y la nueva
                 string contraseniaIngresada = ContraseniaActualTextBox.Password.Trim();
 
                 if (Metodos.ValidarEntradaVacia(contraseniaIngresada) == false || Metodos.ValidarEntradaVacia(contraseniaNueva) == false)

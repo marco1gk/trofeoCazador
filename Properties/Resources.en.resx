@@ -579,4 +579,28 @@
   <data name="lbSalaEsperaCreada" xml:space="preserve">
     <value>Lobby created, lobby code: </value>
   </data>
+  <data name="lbVictoria" xml:space="preserve">
+    <value>Won</value>
+  </data>
+  <data name="lbDerrota" xml:space="preserve">
+    <value>Loose</value>
+  </data>
+  <data name="lbTituloErroresValidacion" xml:space="preserve">
+    <value>Incorrect data </value>
+  </data>
+  <data name="lbTituloCorreoEligido" xml:space="preserve">
+    <value>Problems with mail</value>
+  </data>
+  <data name="lbDescripcionCorreoUsado" xml:space="preserve">
+    <value>This mail is already used, use other</value>
+  </data>
+  <data name="lbDescripcionNombreUsado" xml:space="preserve">
+    <value>Name already used, chose other</value>
+  </data>
+  <data name="lbDescripcionProblemasCodigo" xml:space="preserve">
+    <value>Code verefication was not sent</value>
+  </data>
+  <data name="lbCuentaCreada" xml:space="preserve">
+    <value>Now you have an account!!</value>
+  </data>
 </root>

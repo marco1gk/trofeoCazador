@@ -177,12 +177,14 @@
     <Compile Include="Vistas\Menu\XAMLMenu.xaml.cs">
       <DependentUpon>XAMLMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\SalaEspera\AnfitrionVisibilityConverter .cs" />
     <Compile Include="Vistas\SalaEspera\XAMLSalaEspera.xaml.cs">
       <DependentUpon>XAMLSalaEspera.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\SalaEspera\XAMLUsuario.xaml.cs">
       <DependentUpon>XAMLUsuario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Victoria\XAMLVictoria.xaml.cs">
+      <DependentUpon>XAMLVictoria.xaml</DependentUpon>
     </Compile>
     <Page Include="Componentes\SalaEspera\XAMLInvitacionSala.xaml">
       <SubType>Designer</SubType>
@@ -276,6 +278,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Vistas\Victoria\XAMLVictoria.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -295,21 +301,27 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\ServicioDelJuego\Arrays.xsd">
+    <None Include="Connected Services\ServicioDelJuego\AccesoDatos.Modelo1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioDelJuego\service.wsdl" />
-    <None Include="Connected Services\ServicioDelJuego\service.xsd">
+    <None Include="Connected Services\ServicioDelJuego\Arrays1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioDelJuego\service1.xsd">
+    <None Include="Connected Services\ServicioDelJuego\service1.wsdl" />
+    <None Include="Connected Services\ServicioDelJuego\service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioDelJuego\ServicioJuego.Excepciones.xsd">
+    <None Include="Connected Services\ServicioDelJuego\service21.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioDelJuego\ServicioJuego.xsd">
+    <None Include="Connected Services\ServicioDelJuego\ServicioJuego.Excepciones1.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioDelJuego\ServicioJuego1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicioDelJuego\trofeoCazador.ServicioDelJuego.Estadisticas.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServicioDelJuego\trofeoCazador.ServicioDelJuego.JugadorDataContract.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -347,9 +359,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\verde.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Vistas\RestablecerConstraseña\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\fondoMenu.jpg" />

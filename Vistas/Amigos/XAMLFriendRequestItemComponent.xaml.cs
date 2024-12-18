@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace trofeoCazador.Vistas.Amigos
 {
    
-    public partial class XAMLFriendRequestItemComponent : UserControl
+    public partial class XAMLSolicitudAmistad : UserControl
     {
         private const string BTN_ACEPTAR = "Accept";
         private const string BTN_RECHAZAR = "Reject";
@@ -24,7 +24,7 @@ namespace trofeoCazador.Vistas.Amigos
 
         public event EventHandler<ArgumentosDeEventoDeClicDeBotón> BotonUsado;
 
-        public XAMLFriendRequestItemComponent(string nombreUsuario)
+        public XAMLSolicitudAmistad(string nombreUsuario)
         {
             InitializeComponent();
 

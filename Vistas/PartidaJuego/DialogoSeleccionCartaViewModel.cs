@@ -14,8 +14,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
         public ObservableCollection<CartaCliente> Cartas { get; }
         public ICommand SeleccionarCartaCommand { get; }
 
-        private readonly Action<CartaCliente> seleccionarCartaCallback;
-
         public DialogoSeleccionCartaViewModel(IEnumerable<CartaCliente> cartas, Action<CartaCliente> seleccionarCartaCallback)
         {
             Cartas = new ObservableCollection<CartaCliente>(cartas);

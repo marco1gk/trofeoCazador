@@ -18,9 +18,33 @@ namespace trofeoCazador.Recursos
 
         public static JugadorDataContract ObtenerDatosJugador(int idJugador)
         {
+            if (EsJugadorInvitado(idJugador)) // Método para identificar si es un invitado
+            {
+                return CrearJugadorInvitado();
+            }
+
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
             return proxy.ObtenerJugador(idJugador);
         }
+
+        // Método para identificar jugadores invitados
+        private static bool EsJugadorInvitado(int idJugador)
+        {
+            return idJugador <= 0; // Define un criterio claro; por ejemplo, IDs negativos o 0 para invitados
+        }
+
+        // Método para crear datos ficticios para invitados
+        private static JugadorDataContract CrearJugadorInvitado()
+        {
+            return new JugadorDataContract
+            {
+                JugadorId = -1, // ID ficticio
+                NombreUsuario = "Invitado", // Nombre genérico
+                EsInvitado = true, // Marca como invitado
+                NumeroFotoPerfil = 2 // Imagen de perfil predeterminada
+            };
+        }
+
 
         public static bool ValidarEntradaVacia(string cadena)
         {

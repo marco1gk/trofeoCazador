@@ -439,6 +439,24 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cuenta creada exitosamente. Ahora puedes iniciar sesión..
+        /// </summary>
+        public static string lbCuentaCreada {
+            get {
+                return ResourceManager.GetString("lbCuentaCreada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Perdió.
+        /// </summary>
+        public static string lbDerrota {
+            get {
+                return ResourceManager.GetString("lbDerrota", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El anfitrion salio de la sala de espera. Regresaras al menú principal..
         /// </summary>
         public static string lbDescripcionAnfitrionDejoSalaEsperra {
@@ -453,6 +471,15 @@ namespace trofeoCazador.Properties {
         public static string lbDescripcionCorreoIncorrecto {
             get {
                 return ResourceManager.GetString("lbDescripcionCorreoIncorrecto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Este correo ya está registrado. Por favor, elige otro..
+        /// </summary>
+        public static string lbDescripcionCorreoUsado {
+            get {
+                return ResourceManager.GetString("lbDescripcionCorreoUsado", resourceCulture);
             }
         }
         
@@ -534,6 +561,24 @@ namespace trofeoCazador.Properties {
         public static string lbDescripcionNoHaySalaEspera {
             get {
                 return ResourceManager.GetString("lbDescripcionNoHaySalaEspera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Este nombre de usuario ya está en uso. Por favor, elige otro.
+        /// </summary>
+        public static string lbDescripcionNombreUsado {
+            get {
+                return ResourceManager.GetString("lbDescripcionNombreUsado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo enviar el código de verificación. Intenta de nuevo..
+        /// </summary>
+        public static string lbDescripcionProblemasCodigo {
+            get {
+                return ResourceManager.GetString("lbDescripcionProblemasCodigo", resourceCulture);
             }
         }
         
@@ -1042,6 +1087,15 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Problemas con correo.
+        /// </summary>
+        public static string lbTituloCorreoEligido {
+            get {
+                return ResourceManager.GetString("lbTituloCorreoEligido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ups tenemos problemas.
         /// </summary>
         public static string lbTituloCorreoNoReconocido {
@@ -1056,6 +1110,15 @@ namespace trofeoCazador.Properties {
         public static string lbTituloEditarNombre {
             get {
                 return ResourceManager.GetString("lbTituloEditarNombre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Errores en la validación.
+        /// </summary>
+        public static string lbTituloErroresValidacion {
+            get {
+                return ResourceManager.GetString("lbTituloErroresValidacion", resourceCulture);
             }
         }
         
@@ -1236,6 +1299,15 @@ namespace trofeoCazador.Properties {
         public static string lbVerificacionCambioCorreo {
             get {
                 return ResourceManager.GetString("lbVerificacionCambioCorreo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Win.
+        /// </summary>
+        public static string lbVictoria {
+            get {
+                return ResourceManager.GetString("lbVictoria", resourceCulture);
             }
         }
         

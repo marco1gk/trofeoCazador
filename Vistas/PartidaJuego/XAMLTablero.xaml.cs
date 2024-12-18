@@ -15,36 +15,38 @@ using trofeoCazador.Recursos.ElementosPartida;
 using System.Windows.Media;
 using System.Threading;
 using System.Text;
+using trofeoCazador.Vistas.Victoria;
+using trofeoCazador.Utilidades;
+using trofeoCazador.Vistas.InicioSesion;
 
-namespace trofeoCazador.Vistas.PartidaJuego
-{
-    public partial class XAMLTablero : Page, IServicioPartidaCallback
+    namespace trofeoCazador.Vistas.PartidaJuego
     {
-        private ServicioPartidaClient cliente;
-        private List<JugadorPartida> jugadores;
-        private string idPartida;
-        private JugadorDataContract jugadorActual = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
-        private ObservableCollection<CartaCliente> CartasEnMano { get; set; } = new ObservableCollection<CartaCliente>();
-        private ObservableCollection<Ficha> Fichas { get; set; } = new ObservableCollection<Ficha>();
-        private ObservableCollection<Ficha> FichasEstaticas { get; set; } = new ObservableCollection<Ficha>();
-        private ObservableCollection<Ficha> FichasEnMano { get; set; } = new ObservableCollection<Ficha>();
-        private ObservableCollection<CartaCliente> CartasDescarte { get; set; } = new ObservableCollection<CartaCliente>();
-        private ObservableCollection<CartaCliente> CartasEnMazo { get; set; } = new ObservableCollection<CartaCliente>();
-        private ObservableCollection<CartaCliente> CartasEnEscondite { get; set; } = new ObservableCollection<CartaCliente>();
-        private Dado dado;
-        private string jugadorTurnoActual;
-        private bool CartaDuplicacionActiva = false;
-        private enum ModoSeleccionCarta
+        public partial class XAMLTablero : Page, IServicioPartidaCallback
         {
-            MoverAlEscondite,
-            DefenderRobo,
-            SalvarTurno,
-            AccionCartasEnTurno,
-            MoverCartaTipoEspecificoAEscondite
-        }
+            private ServicioPartidaClient cliente;
+            private List<JugadorPartida> jugadores;
+            private string idPartida;
+            private JugadorDataContract jugadorActual = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
+            private ObservableCollection<CartaCliente> CartasEnMano { get; set; } = new ObservableCollection<CartaCliente>();
+            private ObservableCollection<Ficha> Fichas { get; set; } = new ObservableCollection<Ficha>();
+            private ObservableCollection<Ficha> FichasEstaticas { get; set; } = new ObservableCollection<Ficha>();
+            private ObservableCollection<Ficha> FichasEnMano { get; set; } = new ObservableCollection<Ficha>();
+            private ObservableCollection<CartaCliente> CartasDescarte { get; set; } = new ObservableCollection<CartaCliente>();
+            private ObservableCollection<CartaCliente> CartasEnMazo { get; set; } = new ObservableCollection<CartaCliente>();
+            private ObservableCollection<CartaCliente> CartasEnEscondite { get; set; } = new ObservableCollection<CartaCliente>();
+            private Dado dado;
+            private string jugadorTurnoActual;
+            private bool CartaDuplicacionActiva = false;
+            private enum ModoSeleccionCarta
+            {
+                MoverAlEscondite,
+                DefenderRobo,
+                SalvarTurno,
+                AccionCartasEnTurno,
+                MoverCartaTipoEspecificoAEscondite
+            }
 
-        private ModoSeleccionCarta modoSeleccionActual;
-
+            private ModoSeleccionCarta modoSeleccionActual;
         public XAMLTablero(List<JugadorPartida> jugadores, string idPartida)
         {
             if (!Thread.CurrentThread.IsBackground && Thread.CurrentThread.GetApartmentState() != ApartmentState.STA)
@@ -52,7 +54,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 throw new InvalidOperationException("El constructor XAMLTablero debe ejecutarse en un subproceso STA.");
             }
 
-            Console.WriteLine("Entra al método que causa error");
             InitializeComponent();
             SetupClient();
 
@@ -62,8 +63,25 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 CargarFichasEstaticas();
                 dado = new Dado(DadoImagen);
                 this.idPartida = idPartida;
+
+                if (jugadorActual.EsInvitado)
+                {
+
+
+                    JugadorPartida invitado = new JugadorPartida
+                    {
+                        NombreUsuario = jugadorActual.NombreUsuario,
+                        EsInvitado = true
+                    };
+
+                    cliente.RegistrarJugadorInvitado(invitado); 
+                }
+                else
+                {
+                    cliente.RegistrarJugador(jugadorActual.NombreUsuario); 
+                }
+
                 MostrarJugadores();
-                cliente.RegistrarJugador(jugadorActual.NombreUsuario);
 
                 FichasItemsControl.ItemsSource = Fichas;
                 FichasManoItemsControl.ItemsSource = FichasEnMano;
@@ -75,98 +93,166 @@ namespace trofeoCazador.Vistas.PartidaJuego
         }
 
 
+
+
         private void SetupClient()
-        {
-            InstanceContext instanceContext = new InstanceContext(this);
-            cliente = new ServicioPartidaClient(instanceContext);
-        }
-
-        public void MostrarJugadores()
-        {
-            var jugadoresEnPartida = jugadores
-                .Where(j => j.NombreUsuario != jugadorActual.NombreUsuario)
-                .ToList();
-
-            var areasJugadores = new[]
             {
-                new { Nombre = NombreJugador2, Imagen = Jugador2Imagen, Area = AreaJugador2 },
-                new { Nombre = NombreJugador3, Imagen = Jugador3Imagen, Area = AreaJugador3 },
-                new { Nombre = NombreJugador4, Imagen = Jugador4Imagen, Area = AreaJugador4 }
-            };
-
-            for (int i = 0; i < jugadoresEnPartida.Count && i < areasJugadores.Length; i++)
-            {
-                var jugador = jugadoresEnPartida[i];
-                var area = areasJugadores[i];
-
-                area.Nombre.Text = jugador.NombreUsuario;
-                string rutaImagen = ObtenerRutaImagenPerfil(jugador.NumeroFotoPerfil);
-                area.Imagen.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
-                area.Area.Visibility = Visibility.Visible;
+                InstanceContext instanceContext = new InstanceContext(this);
+                cliente = new ServicioPartidaClient(instanceContext);
             }
-        }
 
 
-        private void BtnClicIniciarJuego(object sender, RoutedEventArgs e)
-        {
-            try
+            public void NotificarResultadosJuego(Dictionary<string, int> puntajes, string ganador, int puntajeGanador)
             {
-                cliente.CrearPartida(jugadores.ToArray(), idPartida);
-                cliente.RepartirCartas(idPartida);
-                cliente.EmpezarTurno(idPartida);
+            
+                var servicioDelJuegoClient = new GestionCuentaServicioClient();
+
+                var scoreboard = puntajes
+                    .Select(kv =>
+                    {
+                        int idJugador = servicioDelJuegoClient.ObtenerIdJugadorPorNombreUsuario(kv.Key);
+
+                        return new KeyValuePair<JugadorDataContract, int>(
+                            new JugadorDataContract
+                            {
+                                JugadorId = idJugador,
+                                NombreUsuario = kv.Key
+                            },
+                            kv.Value
+                        );
+                    })
+                    .ToArray();
+
+                var paginaVictoria = new XAMLVictoria(idPartida, scoreboard, puntajeGanador);
+                NavigationService?.Navigate(paginaVictoria);
             }
-            catch (Exception ex)
+
+
+
+            private void Mazo_MouseDown(object sender, MouseButtonEventArgs e)
             {
-                MessageBox.Show("Error al crear la partida: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-
-        private Thickness margenInicialCarta = new Thickness();
-
-        private void CartaMouseEnter(object sender, MouseEventArgs e)
-        {
-            if (sender is Border border)
-            {
-                if (margenInicialCarta == new Thickness())
+                if (EsMazoVacio())
                 {
-                    margenInicialCarta = border.Margin;
+                    cliente.FinalizarJuego(idPartida);
+                }
+                else
+                {
+                    var cartaSuperior = ObtenerCartaSuperiorDelMazo();
+                    cliente.TomarCartaDeMazo(idPartida, jugadorActual.NombreUsuario, cartaSuperior.IdCarta);
+                }
+            }
+            public void MostrarJugadores()
+            {
+                var jugadoresEnPartida = jugadores
+                    .Where(j => j.NombreUsuario != jugadorActual.NombreUsuario)
+                    .ToList();
+
+                var areasJugadores = new[]
+                {
+                    new { Nombre = NombreJugador2, Imagen = Jugador2Imagen, Area = AreaJugador2 },
+                    new { Nombre = NombreJugador3, Imagen = Jugador3Imagen, Area = AreaJugador3 },
+                    new { Nombre = NombreJugador4, Imagen = Jugador4Imagen, Area = AreaJugador4 }
+                };
+
+                for (int i = 0; i < jugadoresEnPartida.Count && i < areasJugadores.Length; i++)
+                {
+                    var jugador = jugadoresEnPartida[i];
+                    var area = areasJugadores[i];
+
+                    area.Nombre.Text = jugador.NombreUsuario;
+                    string rutaImagen = ObtenerRutaImagenPerfil(jugador.NumeroFotoPerfil);
+                    area.Imagen.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
+                    area.Area.Visibility = Visibility.Visible;
+                }
+            }
+
+
+            private void BtnClicIniciarJuego(object sender, RoutedEventArgs e)
+            {
+                try
+                {
+                    cliente.CrearPartida(jugadores.ToArray(), idPartida);
+                    cliente.RepartirCartas(idPartida);
+                    cliente.EmpezarTurno(idPartida);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
                 }
 
-                ThicknessAnimation animacionMargen = new ThicknessAnimation
+                catch (FaultException)
                 {
-                    From = border.Margin,
-                    To = new Thickness(margenInicialCarta.Left, margenInicialCarta.Top - 20, margenInicialCarta.Right, margenInicialCarta.Bottom),
-                    Duration = TimeSpan.FromSeconds(0.3)
-                };
-                border.BeginAnimation(Border.MarginProperty, animacionMargen);
-            }
-        }
-
-        private void CartaMouseLeave(object sender, MouseEventArgs e)
-        {
-            if (sender is Border border)
-            {
-                ThicknessAnimation animacionMargen = new ThicknessAnimation
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
                 {
-                    From = border.Margin,
-                    To = margenInicialCarta,
-                    Duration = TimeSpan.FromSeconds(0.3)
-                };
-                border.BeginAnimation(Border.MarginProperty, animacionMargen);
-            }
-        }
 
-        private void CartaMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is Border border)
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                }
+                catch (Exception ex)
             {
-                border.BorderBrush = border.BorderBrush == Brushes.Blue ? Brushes.Transparent : Brushes.Blue;
-                border.BorderThickness = new Thickness(border.BorderThickness == new Thickness(0) ? 2 : 0);
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
             }
-        }
 
-        //FICHAS
+
+            private Thickness margenInicialCarta = new Thickness();
+
+            private void CartaMouseEnter(object sender, MouseEventArgs e)
+            {
+                if (sender is Border border)
+                {
+                    if (margenInicialCarta == new Thickness())
+                    {
+                        margenInicialCarta = border.Margin;
+                    }
+
+                    ThicknessAnimation animacionMargen = new ThicknessAnimation
+                    {
+                        From = border.Margin,
+                        To = new Thickness(margenInicialCarta.Left, margenInicialCarta.Top - 20, margenInicialCarta.Right, margenInicialCarta.Bottom),
+                        Duration = TimeSpan.FromSeconds(0.3)
+                    };
+                    border.BeginAnimation(Border.MarginProperty, animacionMargen);
+                }
+            }
+
+            private void CartaMouseLeave(object sender, MouseEventArgs e)
+            { 
+                if (sender is Border border)
+                {
+                    ThicknessAnimation animacionMargen = new ThicknessAnimation
+                    {
+                        From = border.Margin,
+                        To = margenInicialCarta,
+                        Duration = TimeSpan.FromSeconds(0.3)
+                    };
+                    border.BeginAnimation(Border.MarginProperty, animacionMargen);
+                }
+            }
+
+            private void CartaMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+            {
+                if (sender is Border border)
+                {
+                    border.BorderBrush = border.BorderBrush == Brushes.Blue ? Brushes.Transparent : Brushes.Blue;
+                    border.BorderThickness = new Thickness(border.BorderThickness == new Thickness(0) ? 2 : 0);
+                }
+            }
 
         private void CargarFichas()
         {
@@ -451,18 +537,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
         }
 
 
-        private void Mazo_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (EsMazoVacio())
-            {
-                cliente.FinalizarJuego(idPartida);
-            }
-            else
-            {
-                var cartaSuperior = ObtenerCartaSuperiorDelMazo();
-                cliente.TomarCartaDeMazo(idPartida, jugadorActual.NombreUsuario, cartaSuperior.IdCarta);
-            }
-        }
 
         private bool EsMazoVacio()
         {
@@ -830,11 +904,11 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             this.idPartida = idPartida;
             DadoImagen.IsEnabled = false;
-            ZonaMazoCartas.IsEnabled = false;
+            //  ZonaMazoCartas.IsEnabled = false;
             FichasManoItemsControl.IsEnabled = false;
             //CartasManoItemsControl.IsEnabled = false;
             CargarFichas();
-            modoSeleccionActual = ModoSeleccionCarta.AccionCartasEnTurno;
+            modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
         }
 
         public void NotificarResultadoDado(string nombreUsuario, int resultadoDado)
@@ -1063,20 +1137,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
             CartasEnMazo.Add(carta);
         }
 
-        public void NotificarResultadosJuego(Dictionary<string, int> puntajes, string ganador, int puntajeGanador)
-        {
-            // Mostrar resultados en la interfaz de usuario
-            StringBuilder resultados = new StringBuilder("Resultados del juego:\n");
-
-            foreach (var jugador in puntajes)
-            {
-                resultados.AppendLine($"{jugador.Key}: {jugador.Value} puntos");
-            }
-
-            resultados.AppendLine($"\nGanador: {ganador} con {puntajeGanador} puntos!");
-
-            MessageBox.Show(resultados.ToString(), "Fin del Juego");
-        }
+       
 
         private async void ManejarDecisionGuardarCartaEnEscondite()
         {

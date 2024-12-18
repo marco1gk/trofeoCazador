@@ -16,6 +16,20 @@ namespace trofeoCazador.Vistas.InicioSesion
     public partial class XAMLInicioSesion : Page
     {
         private const string FUENTE_SECUNDARIA = "Inter";
+        private void BtnUnirseComoInvitado_Click(object sender, RoutedEventArgs e)
+        {
+            string codigoSala = tbInvitado.Text.Trim();
+            if (string.IsNullOrEmpty(codigoSala))
+            {
+                VentanasEmergentes.CrearVentanaEmergente("Error", "Debes ingresar un código de sala.");
+                return;
+            }
+
+            var salaEspera = new XAMLSalaEspera();
+            NavigationService?.Navigate(salaEspera);
+            salaEspera.UnirseComoInvitado(codigoSala);
+        }
+
 
         private void IdiomaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -70,9 +84,37 @@ namespace trofeoCazador.Vistas.InicioSesion
                     ManejarCredencialesInvalidas();
                 }
             }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+            }
             catch (Exception ex)
             {
-                ManejarExcepciones(ex);
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
@@ -128,32 +170,6 @@ namespace trofeoCazador.Vistas.InicioSesion
             VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbCredencialesIncorrectas, Properties.Resources.lbDescripcionCredencialesIncorrectas);
         }
 
-        private void ManejarExcepciones(Exception ex)
-        {
-            switch (ex)
-            {
-                case EndpointNotFoundException endpointEx:
-                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    Console.WriteLine($"Excepción de conexión: {endpointEx.Message}");
-                    this.NavigationService?.RemoveBackEntry();
-                    break;
-
-                case TimeoutException timeoutEx:
-                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcion(timeoutEx, NavigationService);
-                    break;
-
-                case CommunicationException commEx:
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcion(commEx, NavigationService);
-                    break;
-
-                default:
-                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-                    break;
-            }
-        }
 
         private bool ValidarCampos()
         {
@@ -209,10 +225,7 @@ namespace trofeoCazador.Vistas.InicioSesion
             }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-           
-        }
+        
 
         private void lbClicRecuperarContrasena(object sender, MouseButtonEventArgs e)
         {

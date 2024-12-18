@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 
 namespace trofeoCazador
 {
@@ -6,6 +7,8 @@ namespace trofeoCazador
     {
         private static SingletonSesion instanciaUnica = null;
         private static readonly object bloqueo = new object();
+        public static ServicioDelJuego.JugadorDataContract Player { get; set; }
+
 
         private SingletonSesion() { }
         public static SingletonSesion Instancia

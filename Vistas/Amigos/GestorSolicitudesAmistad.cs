@@ -309,7 +309,7 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void AgregarUsuariosALaListaDeSolicitudesDeAmigos(string nombreUsuario)
         {
-            XAMLFriendRequestItemComponent solicitudAmistadItem = CrearSolicitudAmistadItemControl(nombreUsuario);
+            XAMLSolicitudAmistad solicitudAmistadItem = CrearSolicitudAmistadItemControl(nombreUsuario);
 
             if (solicitudAmistadItem != null)
             {
@@ -322,11 +322,11 @@ namespace trofeoCazador.Vistas.Amigos
             }
         }
 
-        private XAMLFriendRequestItemComponent CrearSolicitudAmistadItemControl(string nombreUsuario)
+        private XAMLSolicitudAmistad CrearSolicitudAmistadItemControl(string nombreUsuario)
         {
             string idItem = "lbRequest";
             string idUsuarioItem = idItem + nombreUsuario;
-            XAMLFriendRequestItemComponent solicitudAmistadItem = new XAMLFriendRequestItemComponent(nombreUsuario);
+            XAMLSolicitudAmistad solicitudAmistadItem = new XAMLSolicitudAmistad(nombreUsuario);
             solicitudAmistadItem.Name = idUsuarioItem;
             solicitudAmistadItem.BotonUsado += SolicitudAmistradItem_BtnClicked;
 
@@ -437,7 +437,7 @@ namespace trofeoCazador.Vistas.Amigos
             string idItem = "lbRequest";
             string idSolicitudAmistadItem = idItem + nombreUsuario;
 
-            XAMLFriendRequestItemComponent solicitudAmistadItemRemover = BuscarControlElementoSolicitudDeAmistadPorId(idSolicitudAmistadItem);
+            XAMLSolicitudAmistad solicitudAmistadItemRemover = BuscarControlElementoSolicitudDeAmistadPorId(idSolicitudAmistadItem);
 
             if (solicitudAmistadItemRemover != null)
             {
@@ -445,9 +445,9 @@ namespace trofeoCazador.Vistas.Amigos
             }
         }
 
-        private XAMLFriendRequestItemComponent BuscarControlElementoSolicitudDeAmistadPorId(string idSolicitudAmistadItem)
+        private XAMLSolicitudAmistad BuscarControlElementoSolicitudDeAmistadPorId(string idSolicitudAmistadItem)
         {
-            foreach (XAMLFriendRequestItemComponent item in stackPanelSolicitudesAmistad.Children)
+            foreach (XAMLSolicitudAmistad item in stackPanelSolicitudesAmistad.Children)
             {
                 if (item.Name == idSolicitudAmistadItem)
                 {

@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Utilidades;
 using trofeoCazador.Vistas;
+using trofeoCazador.Vistas.InicioSesion;
 
 namespace trofeoCazador.Vistas.Amigos
 {
@@ -60,20 +61,35 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (EndpointNotFoundException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
             catch (CommunicationException ex)
             {
-                Console.WriteLine(ex);
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
 
 

@@ -4,6 +4,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ContraseniaHash" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Correo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EsInvitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="JugadorId" type="xs:int" />
       <xs:element minOccurs="0" name="NombreUsuario" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NumeroFotoPerfil" type="xs:int" />
@@ -12,6 +13,7 @@
   <xs:element name="JugadorDataContract" nillable="true" type="tns:JugadorDataContract" />
   <xs:complexType name="JugadorSalaEspera">
     <xs:sequence>
+      <xs:element minOccurs="0" name="EsInvitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="NombreUsuario" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NumeroFotoPerfil" type="xs:int" />
     </xs:sequence>
@@ -31,6 +33,7 @@
   <xs:element name="ArrayOfJugadorPartida" nillable="true" type="tns:ArrayOfJugadorPartida" />
   <xs:complexType name="JugadorPartida">
     <xs:sequence>
+      <xs:element minOccurs="0" name="EsInvitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="NombreUsuario" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NumeroFotoPerfil" type="xs:int" />
     </xs:sequence>

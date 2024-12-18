@@ -29,6 +29,9 @@ namespace trofeoCazador.ServicioDelJuego {
         private string CorreoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool EsInvitadoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int JugadorIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -69,6 +72,19 @@ namespace trofeoCazador.ServicioDelJuego {
                 if ((object.ReferenceEquals(this.CorreoField, value) != true)) {
                     this.CorreoField = value;
                     this.RaisePropertyChanged("Correo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool EsInvitado {
+            get {
+                return this.EsInvitadoField;
+            }
+            set {
+                if ((this.EsInvitadoField.Equals(value) != true)) {
+                    this.EsInvitadoField = value;
+                    this.RaisePropertyChanged("EsInvitado");
                 }
             }
         }
@@ -193,6 +209,9 @@ namespace trofeoCazador.ServicioDelJuego {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool EsInvitadoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NombreUsuarioField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -205,6 +224,19 @@ namespace trofeoCazador.ServicioDelJuego {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool EsInvitado {
+            get {
+                return this.EsInvitadoField;
+            }
+            set {
+                if ((this.EsInvitadoField.Equals(value) != true)) {
+                    this.EsInvitadoField = value;
+                    this.RaisePropertyChanged("EsInvitado");
+                }
             }
         }
         
@@ -254,6 +286,9 @@ namespace trofeoCazador.ServicioDelJuego {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool EsInvitadoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NombreUsuarioField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -266,6 +301,19 @@ namespace trofeoCazador.ServicioDelJuego {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool EsInvitado {
+            get {
+                return this.EsInvitadoField;
+            }
+            set {
+                if ((this.EsInvitadoField.Equals(value) != true)) {
+                    this.EsInvitadoField = value;
+                    this.RaisePropertyChanged("EsInvitado");
+                }
             }
         }
         
@@ -430,6 +478,301 @@ namespace trofeoCazador.ServicioDelJuego {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Estadisticas", Namespace="http://schemas.datacontract.org/2004/07/AccesoDatos.Modelo")]
+    [System.SerializableAttribute()]
+    public partial class Estadisticas : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdEstadisticasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdJugadorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.ServicioDelJuego.Jugador JugadorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumeroVictoriasField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdEstadisticas {
+            get {
+                return this.IdEstadisticasField;
+            }
+            set {
+                if ((this.IdEstadisticasField.Equals(value) != true)) {
+                    this.IdEstadisticasField = value;
+                    this.RaisePropertyChanged("IdEstadisticas");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdJugador {
+            get {
+                return this.IdJugadorField;
+            }
+            set {
+                if ((this.IdJugadorField.Equals(value) != true)) {
+                    this.IdJugadorField = value;
+                    this.RaisePropertyChanged("IdJugador");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.ServicioDelJuego.Jugador Jugador {
+            get {
+                return this.JugadorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.JugadorField, value) != true)) {
+                    this.JugadorField = value;
+                    this.RaisePropertyChanged("Jugador");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumeroVictorias {
+            get {
+                return this.NumeroVictoriasField;
+            }
+            set {
+                if ((this.NumeroVictoriasField.Equals(value) != true)) {
+                    this.NumeroVictoriasField = value;
+                    this.RaisePropertyChanged("NumeroVictorias");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Jugador", Namespace="http://schemas.datacontract.org/2004/07/AccesoDatos.Modelo")]
+    [System.SerializableAttribute()]
+    public partial class Jugador : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.ServicioDelJuego.Cuenta CuentaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int JugadorIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NombreUsuarioField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumeroFotoPerfilField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.ServicioDelJuego.Cuenta Cuenta {
+            get {
+                return this.CuentaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CuentaField, value) != true)) {
+                    this.CuentaField = value;
+                    this.RaisePropertyChanged("Cuenta");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int JugadorId {
+            get {
+                return this.JugadorIdField;
+            }
+            set {
+                if ((this.JugadorIdField.Equals(value) != true)) {
+                    this.JugadorIdField = value;
+                    this.RaisePropertyChanged("JugadorId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NombreUsuario {
+            get {
+                return this.NombreUsuarioField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NombreUsuarioField, value) != true)) {
+                    this.NombreUsuarioField = value;
+                    this.RaisePropertyChanged("NombreUsuario");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumeroFotoPerfil {
+            get {
+                return this.NumeroFotoPerfilField;
+            }
+            set {
+                if ((this.NumeroFotoPerfilField.Equals(value) != true)) {
+                    this.NumeroFotoPerfilField = value;
+                    this.RaisePropertyChanged("NumeroFotoPerfil");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Cuenta", Namespace="http://schemas.datacontract.org/2004/07/AccesoDatos.Modelo")]
+    [System.SerializableAttribute()]
+    public partial class Cuenta : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ContraseniaHashField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorreoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private trofeoCazador.ServicioDelJuego.Jugador JugadorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int JugadorIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SaltField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ContraseniaHash {
+            get {
+                return this.ContraseniaHashField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContraseniaHashField, value) != true)) {
+                    this.ContraseniaHashField = value;
+                    this.RaisePropertyChanged("ContraseniaHash");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Correo {
+            get {
+                return this.CorreoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorreoField, value) != true)) {
+                    this.CorreoField = value;
+                    this.RaisePropertyChanged("Correo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public trofeoCazador.ServicioDelJuego.Jugador Jugador {
+            get {
+                return this.JugadorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.JugadorField, value) != true)) {
+                    this.JugadorField = value;
+                    this.RaisePropertyChanged("Jugador");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int JugadorId {
+            get {
+                return this.JugadorIdField;
+            }
+            set {
+                if ((this.JugadorIdField.Equals(value) != true)) {
+                    this.JugadorIdField = value;
+                    this.RaisePropertyChanged("JugadorId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Salt {
+            get {
+                return this.SaltField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SaltField, value) != true)) {
+                    this.SaltField = value;
+                    this.RaisePropertyChanged("Salt");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IGestionCuentaServicio")]
     public interface IGestionCuentaServicio {
@@ -441,6 +784,14 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/AgregarJugador", ReplyAction="http://tempuri.org/IGestionCuentaServicio/AgregarJugadorResponse")]
         System.Threading.Tasks.Task<bool> AgregarJugadorAsync(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugador", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugadorRespons" +
+            "e")]
+        string ObtenerNombreUsuarioPorIdJugador(int idJugador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugador", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugadorRespons" +
+            "e")]
+        System.Threading.Tasks.Task<string> ObtenerNombreUsuarioPorIdJugadorAsync(int idJugador);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EditarContraseña", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EditarContraseñaResponse")]
         bool EditarContraseña(string correo, string nuevaContraseña);
@@ -511,6 +862,14 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ValidarUsuarioEnLinea", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ValidarUsuarioEnLineaResponse")]
         System.Threading.Tasks.Task<bool> ValidarUsuarioEnLineaAsync(string nombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuario", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuarioRespons" +
+            "e")]
+        int ObtenerIdJugadorPorNombreUsuario(string nombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuario", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuarioRespons" +
+            "e")]
+        System.Threading.Tasks.Task<int> ObtenerIdJugadorPorNombreUsuarioAsync(string nombreUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -546,6 +905,14 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task<bool> AgregarJugadorAsync(trofeoCazador.ServicioDelJuego.JugadorDataContract jugador) {
             return base.Channel.AgregarJugadorAsync(jugador);
+        }
+        
+        public string ObtenerNombreUsuarioPorIdJugador(int idJugador) {
+            return base.Channel.ObtenerNombreUsuarioPorIdJugador(idJugador);
+        }
+        
+        public System.Threading.Tasks.Task<string> ObtenerNombreUsuarioPorIdJugadorAsync(int idJugador) {
+            return base.Channel.ObtenerNombreUsuarioPorIdJugadorAsync(idJugador);
         }
         
         public bool EditarContraseña(string correo, string nuevaContraseña) {
@@ -635,136 +1002,144 @@ namespace trofeoCazador.ServicioDelJuego {
         public System.Threading.Tasks.Task<bool> ValidarUsuarioEnLineaAsync(string nombreUsuario) {
             return base.Channel.ValidarUsuarioEnLineaAsync(nombreUsuario);
         }
+        
+        public int ObtenerIdJugadorPorNombreUsuario(string nombreUsuario) {
+            return base.Channel.ObtenerIdJugadorPorNombreUsuario(nombreUsuario);
+        }
+        
+        public System.Threading.Tasks.Task<int> ObtenerIdJugadorPorNombreUsuarioAsync(string nombreUsuario) {
+            return base.Channel.ObtenerIdJugadorPorNombreUsuarioAsync(nombreUsuario);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.ILobbyManager", CallbackContract=typeof(trofeoCazador.ServicioDelJuego.ILobbyManagerCallback))]
-    public interface ILobbyManager {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.ISalaEsperaServicio", CallbackContract=typeof(trofeoCazador.ServicioDelJuego.ISalaEsperaServicioCallback))]
+    public interface ISalaEsperaServicio {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/InvitarAmigoASala", ReplyAction="http://tempuri.org/ILobbyManager/InvitarAmigoASalaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/InvitarAmigoASala", ReplyAction="http://tempuri.org/ISalaEsperaServicio/InvitarAmigoASalaResponse")]
         void InvitarAmigoASala(string codigoSalaEspera, string nombreAmigo, string nombreInvitador);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/InvitarAmigoASala", ReplyAction="http://tempuri.org/ILobbyManager/InvitarAmigoASalaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/InvitarAmigoASala", ReplyAction="http://tempuri.org/ISalaEsperaServicio/InvitarAmigoASalaResponse")]
         System.Threading.Tasks.Task InvitarAmigoASalaAsync(string codigoSalaEspera, string nombreAmigo, string nombreInvitador);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/CrearSalaEspera")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ISalaEsperaServicio/CrearSalaEspera")]
         void CrearSalaEspera(trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/CrearSalaEspera")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ISalaEsperaServicio/CrearSalaEspera")]
         System.Threading.Tasks.Task CrearSalaEsperaAsync(trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ObtenerCodigosGenerados", ReplyAction="http://tempuri.org/ILobbyManager/ObtenerCodigosGeneradosResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/ObtenerCodigosGenerados", ReplyAction="http://tempuri.org/ISalaEsperaServicio/ObtenerCodigosGeneradosResponse")]
         string[] ObtenerCodigosGenerados();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ObtenerCodigosGenerados", ReplyAction="http://tempuri.org/ILobbyManager/ObtenerCodigosGeneradosResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/ObtenerCodigosGenerados", ReplyAction="http://tempuri.org/ISalaEsperaServicio/ObtenerCodigosGeneradosResponse")]
         System.Threading.Tasks.Task<string[]> ObtenerCodigosGeneradosAsync();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/UnirseSalaEspera")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ISalaEsperaServicio/UnirseSalaEspera")]
         void UnirseSalaEspera(string codigoSalaEspera, trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/UnirseSalaEspera")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ISalaEsperaServicio/UnirseSalaEspera")]
         System.Threading.Tasks.Task UnirseSalaEsperaAsync(string codigoSalaEspera, trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/UnirSalaEsperaComoAnfitrion")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ISalaEsperaServicio/UnirSalaEsperaComoAnfitrion")]
         void UnirSalaEsperaComoAnfitrion(string codigoSalaEspera);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/UnirSalaEsperaComoAnfitrion")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ISalaEsperaServicio/UnirSalaEsperaComoAnfitrion")]
         System.Threading.Tasks.Task UnirSalaEsperaComoAnfitrionAsync(string codigoSalaEspera);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/SalirSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/SalirSalaEsperaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/SalirSalaEspera", ReplyAction="http://tempuri.org/ISalaEsperaServicio/SalirSalaEsperaResponse")]
         void SalirSalaEspera(string codigoSalaEspera, string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/SalirSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/SalirSalaEsperaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/SalirSalaEspera", ReplyAction="http://tempuri.org/ISalaEsperaServicio/SalirSalaEsperaResponse")]
         System.Threading.Tasks.Task SalirSalaEsperaAsync(string codigoSalaEspera, string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/MandarMensaje", ReplyAction="http://tempuri.org/ILobbyManager/MandarMensajeResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/MandarMensaje", ReplyAction="http://tempuri.org/ISalaEsperaServicio/MandarMensajeResponse")]
         void MandarMensaje(string mensaje);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/MandarMensaje", ReplyAction="http://tempuri.org/ILobbyManager/MandarMensajeResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/MandarMensaje", ReplyAction="http://tempuri.org/ISalaEsperaServicio/MandarMensajeResponse")]
         System.Threading.Tasks.Task MandarMensajeAsync(string mensaje);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponible", ReplyAction="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponibleResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponible", ReplyAction="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponibleResponse")]
         string BuscarSalaEsperaDisponible();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponible", ReplyAction="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponibleResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponible", ReplyAction="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponibleResponse")]
         System.Threading.Tasks.Task<string> BuscarSalaEsperaDisponibleAsync();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/IniciarPartida")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ISalaEsperaServicio/IniciarPartida")]
         void IniciarPartida(string codigoSalaEspera);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ILobbyManager/IniciarPartida")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ISalaEsperaServicio/IniciarPartida")]
         System.Threading.Tasks.Task IniciarPartidaAsync(string codigoSalaEspera);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ExpulsarJugadorSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/ExpulsarJugadorSalaEsperaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/ExpulsarJugadorSalaEspera", ReplyAction="http://tempuri.org/ISalaEsperaServicio/ExpulsarJugadorSalaEsperaResponse")]
         void ExpulsarJugadorSalaEspera(string lobbyCode, string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/ExpulsarJugadorSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/ExpulsarJugadorSalaEsperaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/ExpulsarJugadorSalaEspera", ReplyAction="http://tempuri.org/ISalaEsperaServicio/ExpulsarJugadorSalaEsperaResponse")]
         System.Threading.Tasks.Task ExpulsarJugadorSalaEsperaAsync(string lobbyCode, string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ILobbyManagerCallback {
+    public interface ISalaEsperaServicioCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaCreada", ReplyAction="http://tempuri.org/ILobbyManager/NotificarSalaEsperaCreadaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaCreada", ReplyAction="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaCreadaResponse")]
         void NotificarSalaEsperaCreada(string codigoSalaEspera);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarJugadoresEnSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/NotificarJugadoresEnSalaEsperaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/NotificarJugadoresEnSalaEspera", ReplyAction="http://tempuri.org/ISalaEsperaServicio/NotificarJugadoresEnSalaEsperaResponse")]
         void NotificarJugadoresEnSalaEspera(string codigoSalaEspera, trofeoCazador.ServicioDelJuego.JugadorSalaEspera[] jugador);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarJugadorSeUnioSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/NotificarJugadorSeUnioSalaEsperaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/NotificarJugadorSeUnioSalaEspera", ReplyAction="http://tempuri.org/ISalaEsperaServicio/NotificarJugadorSeUnioSalaEsperaResponse")]
         void NotificarJugadorSeUnioSalaEspera(trofeoCazador.ServicioDelJuego.JugadorSalaEspera jugador, int numeroJugadoresSalaEspera);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarJugadorSalioSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/NotificarJugadorSalioSalaEsperaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/NotificarJugadorSalioSalaEspera", ReplyAction="http://tempuri.org/ISalaEsperaServicio/NotificarJugadorSalioSalaEsperaResponse")]
         void NotificarJugadorSalioSalaEspera(string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarAnfritionJugadorSalioSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/NotificarAnfritionJugadorSalioSalaEsperaResponse" +
-            "")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/NotificarAnfritionJugadorSalioSalaEspera", ReplyAction="http://tempuri.org/ISalaEsperaServicio/NotificarAnfritionJugadorSalioSalaEsperaRe" +
+            "sponse")]
         void NotificarAnfritionJugadorSalioSalaEspera();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarIniciarPartida", ReplyAction="http://tempuri.org/ILobbyManager/NotificarIniciarPartidaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/NotificarIniciarPartida", ReplyAction="http://tempuri.org/ISalaEsperaServicio/NotificarIniciarPartidaResponse")]
         void NotificarIniciarPartida(trofeoCazador.ServicioDelJuego.JugadorPartida[] jugadoresPartida);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaLlena", ReplyAction="http://tempuri.org/ILobbyManager/NotificarSalaEsperaLlenaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaLlena", ReplyAction="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaLlenaResponse")]
         void NotificarSalaEsperaLlena();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaNoExiste", ReplyAction="http://tempuri.org/ILobbyManager/NotificarSalaEsperaNoExisteResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaNoExiste", ReplyAction="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaNoExisteResponse")]
         void NotificarSalaEsperaNoExiste();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarExpulsadoSalaEspera", ReplyAction="http://tempuri.org/ILobbyManager/NotificarExpulsadoSalaEsperaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/NotificarExpulsadoSalaEspera", ReplyAction="http://tempuri.org/ISalaEsperaServicio/NotificarExpulsadoSalaEsperaResponse")]
         void NotificarExpulsadoSalaEspera();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/RecibirMensaje", ReplyAction="http://tempuri.org/ILobbyManager/RecibirMensajeResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/RecibirMensaje", ReplyAction="http://tempuri.org/ISalaEsperaServicio/RecibirMensajeResponse")]
         void RecibirMensaje(string nombreUsuario, string mensaje);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/NotificarPuedeIniciarPartida", ReplyAction="http://tempuri.org/ILobbyManager/NotificarPuedeIniciarPartidaResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/NotificarPuedeIniciarPartida", ReplyAction="http://tempuri.org/ISalaEsperaServicio/NotificarPuedeIniciarPartidaResponse")]
         void NotificarPuedeIniciarPartida(bool puedeIniciar);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ILobbyManagerChannel : trofeoCazador.ServicioDelJuego.ILobbyManager, System.ServiceModel.IClientChannel {
+    public interface ISalaEsperaServicioChannel : trofeoCazador.ServicioDelJuego.ISalaEsperaServicio, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class LobbyManagerClient : System.ServiceModel.DuplexClientBase<trofeoCazador.ServicioDelJuego.ILobbyManager>, trofeoCazador.ServicioDelJuego.ILobbyManager {
+    public partial class SalaEsperaServicioClient : System.ServiceModel.DuplexClientBase<trofeoCazador.ServicioDelJuego.ISalaEsperaServicio>, trofeoCazador.ServicioDelJuego.ISalaEsperaServicio {
         
-        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance) : 
+        public SalaEsperaServicioClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
         }
         
-        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+        public SalaEsperaServicioClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
                 base(callbackInstance, endpointConfigurationName) {
         }
         
-        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+        public SalaEsperaServicioClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
                 base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public SalaEsperaServicioClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public SalaEsperaServicioClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(callbackInstance, binding, remoteAddress) {
         }
         
@@ -1327,6 +1702,12 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/FinalizarJuego")]
         System.Threading.Tasks.Task FinalizarJuegoAsync(string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/RegistrarJugadorInvitado", ReplyAction="http://tempuri.org/IServicioPartida/RegistrarJugadorInvitadoResponse")]
+        void RegistrarJugadorInvitado(trofeoCazador.ServicioDelJuego.JugadorPartida invitado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/RegistrarJugadorInvitado", ReplyAction="http://tempuri.org/IServicioPartida/RegistrarJugadorInvitadoResponse")]
+        System.Threading.Tasks.Task RegistrarJugadorInvitadoAsync(trofeoCazador.ServicioDelJuego.JugadorPartida invitado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1644,6 +2025,14 @@ namespace trofeoCazador.ServicioDelJuego {
         public System.Threading.Tasks.Task FinalizarJuegoAsync(string idPartida) {
             return base.Channel.FinalizarJuegoAsync(idPartida);
         }
+        
+        public void RegistrarJugadorInvitado(trofeoCazador.ServicioDelJuego.JugadorPartida invitado) {
+            base.Channel.RegistrarJugadorInvitado(invitado);
+        }
+        
+        public System.Threading.Tasks.Task RegistrarJugadorInvitadoAsync(trofeoCazador.ServicioDelJuego.JugadorPartida invitado) {
+            return base.Channel.RegistrarJugadorInvitadoAsync(invitado);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1690,6 +2079,71 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task<bool> EnviarInvitacionCorreoAsync(string codigoSalaEspera, string correo) {
             return base.Channel.EnviarInvitacionCorreoAsync(codigoSalaEspera, correo);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioDelJuego.IEstadisticasGlobales")]
+    public interface IEstadisticasGlobales {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobales", ReplyAction="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobalesResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobalesHuntersTrophy" +
+            "ExcepcionFault", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
+        trofeoCazador.ServicioDelJuego.Estadisticas[] ObtenerEstadisticasGlobales();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobales", ReplyAction="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobalesResponse")]
+        System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.Estadisticas[]> ObtenerEstadisticasGlobalesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasGlobales/ActualizarVictorias", ReplyAction="http://tempuri.org/IEstadisticasGlobales/ActualizarVictoriasResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IEstadisticasGlobales/ActualizarVictoriasHuntersTrophyExcepcio" +
+            "nFault", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
+        int ActualizarVictorias(int idJugador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasGlobales/ActualizarVictorias", ReplyAction="http://tempuri.org/IEstadisticasGlobales/ActualizarVictoriasResponse")]
+        System.Threading.Tasks.Task<int> ActualizarVictoriasAsync(int idJugador);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IEstadisticasGlobalesChannel : trofeoCazador.ServicioDelJuego.IEstadisticasGlobales, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class EstadisticasGlobalesClient : System.ServiceModel.ClientBase<trofeoCazador.ServicioDelJuego.IEstadisticasGlobales>, trofeoCazador.ServicioDelJuego.IEstadisticasGlobales {
+        
+        public EstadisticasGlobalesClient() {
+        }
+        
+        public EstadisticasGlobalesClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public EstadisticasGlobalesClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public EstadisticasGlobalesClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public EstadisticasGlobalesClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public trofeoCazador.ServicioDelJuego.Estadisticas[] ObtenerEstadisticasGlobales() {
+            return base.Channel.ObtenerEstadisticasGlobales();
+        }
+        
+        public System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.Estadisticas[]> ObtenerEstadisticasGlobalesAsync() {
+            return base.Channel.ObtenerEstadisticasGlobalesAsync();
+        }
+        
+        public int ActualizarVictorias(int idJugador) {
+            return base.Channel.ActualizarVictorias(idJugador);
+        }
+        
+        public System.Threading.Tasks.Task<int> ActualizarVictoriasAsync(int idJugador) {
+            return base.Channel.ActualizarVictoriasAsync(idJugador);
         }
     }
 }

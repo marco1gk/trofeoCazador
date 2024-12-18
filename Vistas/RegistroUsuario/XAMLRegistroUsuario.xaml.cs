@@ -56,56 +56,75 @@ namespace trofeoCazador.Vistas.RegistroUsuario
         private void BtnCrearCuenta(object sender, RoutedEventArgs e)
         {
             string errores = ValidarCampos();
-
             if (!string.IsNullOrEmpty(errores))
             {
-                MessageBox.Show(errores, "Errores en la validación", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MostrarVentanaErroresValidacion();
                 return;
             }
 
+            string codigoEnviado = ProcesarCuenta();
+
+            if (string.IsNullOrEmpty(codigoEnviado))
+            {
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbDescripcionProblemasCodigo);
+                return;
+            }
+
+            bool? resultadoValidacion = ValidarCodigo(codigoEnviado);
+
+            if (resultadoValidacion == true)
+            {
+                CrearCuentaExitosa();
+            }
+        }
+
+        private void MostrarVentanaErroresValidacion()
+        {
+            VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbTituloErroresValidacion);
+        }
+
+        private string ProcesarCuenta()
+        {
             try
             {
-                GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-
-                if (proxy.ExisteCorreo(tbCorreo.Text.Trim()))
+                using (GestionCuentaServicioClient proxy = new GestionCuentaServicioClient())
                 {
-                    MessageBox.Show("Este correo ya está registrado. Por favor, elige otro.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
+                    if (proxy.ExisteCorreo(tbCorreo.Text.Trim()))
+                    {
+                        VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloCorreoEligido, Properties.Resources.lbTituloErroresValidacion);
+                        return null;
+                    }
 
-                if (proxy.ExisteNombreUsuario(tbUsuario.Text.Trim()))
-                {
-                    MessageBox.Show("Este nombre de usuario ya está en uso. Por favor, elige otro.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
+                    if (proxy.ExisteNombreUsuario(tbUsuario.Text.Trim()))
+                    {
+                        VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbDescripcionNombreUsado);
+                        return null;
+                    }
 
-                codigoEnviado = proxy.EnviarCodigoConfirmacion(tbCorreo.Text);
+                    return proxy.EnviarCodigoConfirmacion(tbCorreo.Text);
+                }
             }
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
                 Console.WriteLine($"Error de conexión: {ex.Message}");
-                return;
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
                 Console.WriteLine($"Timeout: {ex.Message}");
-                return;
             }
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 Console.WriteLine($"Error inesperado: {ex.Message}");
-                return;
             }
 
-            if (string.IsNullOrEmpty(codigoEnviado))
-            {
-                MessageBox.Show("No se pudo enviar el código de verificación. Intenta de nuevo.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            return null;
+        }
 
+        private bool? ValidarCodigo(string codigoEnviado)
+        {
             int numeroImagenPerfil = cbImagenPerfil.SelectedIndex + 1;
 
             JugadorDataContract jugador = new JugadorDataContract
@@ -117,22 +136,23 @@ namespace trofeoCazador.Vistas.RegistroUsuario
             };
 
             ValidarCodigoRegistro ventanaValidacion = new ValidarCodigoRegistro(jugador, null, codigoEnviado);
-            bool? resultadoValidacion = ventanaValidacion.ShowDialog();
+            return ventanaValidacion.ShowDialog();
+        }
 
-            if (resultadoValidacion == true)
+        private void CrearCuentaExitosa()
+        {
+            VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbCuentaCreada);
+
+            try
             {
-                MessageBox.Show("Cuenta creada exitosamente. Ahora puedes iniciar sesión.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                try
-                {
-                    NavigationService.Navigate(new Uri("Vistas/InicioSesion/XAMLInicioSesion.xaml", UriKind.Relative));
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al navegar: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                NavigationService.Navigate(new Uri("Vistas/InicioSesion/XAMLInicioSesion.xaml", UriKind.Relative));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al navegar: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
 
         public string ValidarCampos()

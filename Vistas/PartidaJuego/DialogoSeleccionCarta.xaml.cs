@@ -15,9 +15,6 @@ using trofeoCazador.Recursos.ElementosPartida;
 
 namespace trofeoCazador.Vistas.PartidaJuego
 {
-    /// <summary>
-    /// Lógica de interacción para DialogoSeleccionCarta.xaml
-    /// </summary>
     public partial class DialogoSeleccionCarta : Window
     {
         public CartaCliente CartaSeleccionada { get; private set; }
@@ -31,7 +28,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
         private void SeleccionarCarta(CartaCliente carta)
         {
             CartaSeleccionada = carta;
-            DialogResult = true; // Cierra el diálogo
+            DialogResult = true; 
         }
     }
 

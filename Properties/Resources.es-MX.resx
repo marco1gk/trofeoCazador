@@ -579,4 +579,28 @@
   <data name="lbSalaEsperaCreada" xml:space="preserve">
     <value>Sala de espera creada con el código:</value>
   </data>
+  <data name="lbVictoria" xml:space="preserve">
+    <value>Ganó</value>
+  </data>
+  <data name="lbDerrota" xml:space="preserve">
+    <value>Perdió</value>
+  </data>
+  <data name="lbTituloErroresValidacion" xml:space="preserve">
+    <value>Errores en la validación</value>
+  </data>
+  <data name="lbTituloCorreoEligido" xml:space="preserve">
+    <value>Problemas con el correo</value>
+  </data>
+  <data name="lbDescripcionCorreoUsado" xml:space="preserve">
+    <value>Este correo ya está registrado. Por favor, elige otro.</value>
+  </data>
+  <data name="lbDescripcionNombreUsado" xml:space="preserve">
+    <value>Este nombre de usuario ya está en uso. Por favor, elige otro</value>
+  </data>
+  <data name="lbDescripcionProblemasCodigo" xml:space="preserve">
+    <value>No se pudo enviar el código de verificación. Intenta de nuevo.</value>
+  </data>
+  <data name="lbCuentaCreada" xml:space="preserve">
+    <value>Cuenta creada exitosamente. Ahora puedes iniciar sesión.</value>
+  </data>
 </root>

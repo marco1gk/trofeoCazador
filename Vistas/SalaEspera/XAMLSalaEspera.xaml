@@ -118,6 +118,6 @@
         </Grid>
         <Button Name="btnIniciarPartida" Content="{x:Static p:Resources.btnIniciarPartida}" Width="120" Height="30" Background="LightCoral" Visibility="Collapsed" HorizontalAlignment="Center" Click="BtnClicIniciarPartida" Margin="0,344,0,76" Style="{StaticResource CustomButtonStyle}"/>
         <Button Name="btnSalir" Content="{x:Static p:Resources.btnSalir}" HorizontalAlignment="Left" Margin="30,400,0,0" VerticalAlignment="Top" Height="35" Width="156" Click="BtnSalirLobby" Visibility="Collapsed" Style="{StaticResource CustomButtonStyle}"/>
-        <Button Name="btnEnviarInvitacion" Content="{x:Static p:Resources.btnEnviarInvitacion}"  Style="{StaticResource CustomButtonStyle}" Background="LightYellow" HorizontalAlignment="Left" Margin="346,400,0,0" VerticalAlignment="Top" Visibility="Collapsed" Click="BotonCrearVentanaInvitacion_Click"/>
+        <Button Name="btnEnviarInvitacion" Content="{x:Static p:Resources.btnEnviarInvitacion}"  Style="{StaticResource CustomButtonStyle}" Background="LightYellow" HorizontalAlignment="Left" Margin="346,400,0,0" VerticalAlignment="Top" Visibility="Collapsed" Click="BtnCrearVentanaInvitacion_Click"/>
     </Grid>
 </Page>

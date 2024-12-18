@@ -10,7 +10,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_ILobbyManager_policy">
+  <wsp:Policy wsu:Id="NetTcpBinding_ISalaEsperaServicio_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
@@ -70,6 +70,16 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IEstadisticasGlobales_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
@@ -77,6 +87,7 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServicioJuego" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/AccesoDatos.Modelo" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGestionCuentaServicio_AgregarJugador_InputMessage">
@@ -87,6 +98,12 @@
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_AgregarJugador_HuntersTrophyExcepcionFault_FaultMessage">
     <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q1:HuntersTrophyExcepcion" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ObtenerNombreUsuarioPorIdJugador_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerNombreUsuarioPorIdJugador" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ObtenerNombreUsuarioPorIdJugador_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerNombreUsuarioPorIdJugadorResponse" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_EditarContraseña_InputMessage">
     <wsdl:part name="parameters" element="tns:EditarContraseña" />
@@ -160,118 +177,124 @@
   <wsdl:message name="IGestionCuentaServicio_ValidarUsuarioEnLinea_OutputMessage">
     <wsdl:part name="parameters" element="tns:ValidarUsuarioEnLineaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_InvitarAmigoASala_InputMessage">
+  <wsdl:message name="IGestionCuentaServicio_ObtenerIdJugadorPorNombreUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerIdJugadorPorNombreUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ObtenerIdJugadorPorNombreUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerIdJugadorPorNombreUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISalaEsperaServicio_InvitarAmigoASala_InputMessage">
     <wsdl:part name="parameters" element="tns:InvitarAmigoASala" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_InvitarAmigoASala_OutputMessage">
+  <wsdl:message name="ISalaEsperaServicio_InvitarAmigoASala_OutputMessage">
     <wsdl:part name="parameters" element="tns:InvitarAmigoASalaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_CrearSalaEspera_InputMessage">
+  <wsdl:message name="ISalaEsperaServicio_CrearSalaEspera_InputMessage">
     <wsdl:part name="parameters" element="tns:CrearSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_ObtenerCodigosGenerados_InputMessage">
+  <wsdl:message name="ISalaEsperaServicio_ObtenerCodigosGenerados_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerCodigosGenerados" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_ObtenerCodigosGenerados_OutputMessage">
+  <wsdl:message name="ISalaEsperaServicio_ObtenerCodigosGenerados_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerCodigosGeneradosResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_UnirseSalaEspera_InputMessage">
+  <wsdl:message name="ISalaEsperaServicio_UnirseSalaEspera_InputMessage">
     <wsdl:part name="parameters" element="tns:UnirseSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_UnirSalaEsperaComoAnfitrion_InputMessage">
+  <wsdl:message name="ISalaEsperaServicio_UnirSalaEsperaComoAnfitrion_InputMessage">
     <wsdl:part name="parameters" element="tns:UnirSalaEsperaComoAnfitrion" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_SalirSalaEspera_InputMessage">
+  <wsdl:message name="ISalaEsperaServicio_SalirSalaEspera_InputMessage">
     <wsdl:part name="parameters" element="tns:SalirSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_SalirSalaEspera_OutputMessage">
+  <wsdl:message name="ISalaEsperaServicio_SalirSalaEspera_OutputMessage">
     <wsdl:part name="parameters" element="tns:SalirSalaEsperaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_MandarMensaje_InputMessage">
+  <wsdl:message name="ISalaEsperaServicio_MandarMensaje_InputMessage">
     <wsdl:part name="parameters" element="tns:MandarMensaje" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_MandarMensaje_OutputMessage">
+  <wsdl:message name="ISalaEsperaServicio_MandarMensaje_OutputMessage">
     <wsdl:part name="parameters" element="tns:MandarMensajeResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_BuscarSalaEsperaDisponible_InputMessage">
+  <wsdl:message name="ISalaEsperaServicio_BuscarSalaEsperaDisponible_InputMessage">
     <wsdl:part name="parameters" element="tns:BuscarSalaEsperaDisponible" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_BuscarSalaEsperaDisponible_OutputMessage">
+  <wsdl:message name="ISalaEsperaServicio_BuscarSalaEsperaDisponible_OutputMessage">
     <wsdl:part name="parameters" element="tns:BuscarSalaEsperaDisponibleResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_IniciarPartida_InputMessage">
+  <wsdl:message name="ISalaEsperaServicio_IniciarPartida_InputMessage">
     <wsdl:part name="parameters" element="tns:IniciarPartida" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_ExpulsarJugadorSalaEspera_InputMessage">
+  <wsdl:message name="ISalaEsperaServicio_ExpulsarJugadorSalaEspera_InputMessage">
     <wsdl:part name="parameters" element="tns:ExpulsarJugadorSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_ExpulsarJugadorSalaEspera_OutputMessage">
+  <wsdl:message name="ISalaEsperaServicio_ExpulsarJugadorSalaEspera_OutputMessage">
     <wsdl:part name="parameters" element="tns:ExpulsarJugadorSalaEsperaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarSalaEsperaCreada_OutputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarSalaEsperaCreada_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarSalaEsperaCreada" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarSalaEsperaCreada_InputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarSalaEsperaCreada_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarSalaEsperaCreadaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarJugadoresEnSalaEspera_OutputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarJugadoresEnSalaEspera_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarJugadoresEnSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarJugadoresEnSalaEspera_InputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarJugadoresEnSalaEspera_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarJugadoresEnSalaEsperaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarJugadorSeUnioSalaEspera_OutputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarJugadorSeUnioSalaEspera_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarJugadorSeUnioSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarJugadorSeUnioSalaEspera_InputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarJugadorSeUnioSalaEspera_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarJugadorSeUnioSalaEsperaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarJugadorSalioSalaEspera_OutputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarJugadorSalioSalaEspera_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarJugadorSalioSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarJugadorSalioSalaEspera_InputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarJugadorSalioSalaEspera_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarJugadorSalioSalaEsperaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarAnfritionJugadorSalioSalaEspera_OutputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarAnfritionJugadorSalioSalaEspera_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarAnfritionJugadorSalioSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarAnfritionJugadorSalioSalaEspera_InputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarAnfritionJugadorSalioSalaEspera_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarAnfritionJugadorSalioSalaEsperaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarIniciarPartida_OutputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarIniciarPartida_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarIniciarPartida" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarIniciarPartida_InputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarIniciarPartida_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarIniciarPartidaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarSalaEsperaLlena_OutputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarSalaEsperaLlena_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarSalaEsperaLlena" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarSalaEsperaLlena_InputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarSalaEsperaLlena_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarSalaEsperaLlenaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarSalaEsperaNoExiste_OutputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarSalaEsperaNoExiste_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarSalaEsperaNoExiste" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarSalaEsperaNoExiste_InputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarSalaEsperaNoExiste_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarSalaEsperaNoExisteResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarExpulsadoSalaEspera_OutputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarExpulsadoSalaEspera_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarExpulsadoSalaEspera" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarExpulsadoSalaEspera_InputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarExpulsadoSalaEspera_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarExpulsadoSalaEsperaResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_RecibirMensaje_OutputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_RecibirMensaje_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RecibirMensaje" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_RecibirMensaje_InputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_RecibirMensaje_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RecibirMensajeResponse" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarPuedeIniciarPartida_OutputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarPuedeIniciarPartida_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarPuedeIniciarPartida" />
   </wsdl:message>
-  <wsdl:message name="ILobbyManager_NotificarPuedeIniciarPartida_InputCallbackMessage">
+  <wsdl:message name="ISalaEsperaServicio_NotificarPuedeIniciarPartida_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarPuedeIniciarPartidaResponse" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_ObtenerListaNombresUsuariosAmigos_InputMessage">
@@ -457,6 +480,12 @@
   <wsdl:message name="IServicioPartida_FinalizarJuego_InputMessage">
     <wsdl:part name="parameters" element="tns:FinalizarJuego" />
   </wsdl:message>
+  <wsdl:message name="IServicioPartida_RegistrarJugadorInvitado_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrarJugadorInvitado" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_RegistrarJugadorInvitado_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrarJugadorInvitadoResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioPartida_NotificarTurnoIniciado_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarTurnoIniciado" />
   </wsdl:message>
@@ -613,11 +642,33 @@
   <wsdl:message name="IGestorInvitacion_EnviarInvitacionCorreo_OutputMessage">
     <wsdl:part name="parameters" element="tns:EnviarInvitacionCorreoResponse" />
   </wsdl:message>
+  <wsdl:message name="IEstadisticasGlobales_ObtenerEstadisticasGlobales_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEstadisticasGlobales" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasGlobales_ObtenerEstadisticasGlobales_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEstadisticasGlobalesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasGlobales_ObtenerEstadisticasGlobales_HuntersTrophyExcepcionFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q8:HuntersTrophyExcepcion" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasGlobales_ActualizarVictorias_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarVictorias" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasGlobales_ActualizarVictorias_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarVictoriasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEstadisticasGlobales_ActualizarVictorias_HuntersTrophyExcepcionFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q9:HuntersTrophyExcepcion" />
+  </wsdl:message>
   <wsdl:portType name="IGestionCuentaServicio">
     <wsdl:operation name="AgregarJugador">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/AgregarJugador" message="tns:IGestionCuentaServicio_AgregarJugador_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/AgregarJugadorResponse" message="tns:IGestionCuentaServicio_AgregarJugador_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IGestionCuentaServicio/AgregarJugadorHuntersTrophyExcepcionFault" name="HuntersTrophyExcepcionFault" message="tns:IGestionCuentaServicio_AgregarJugador_HuntersTrophyExcepcionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerNombreUsuarioPorIdJugador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugador" message="tns:IGestionCuentaServicio_ObtenerNombreUsuarioPorIdJugador_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugadorResponse" message="tns:IGestionCuentaServicio_ObtenerNombreUsuarioPorIdJugador_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="EditarContraseña">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarContraseña" message="tns:IGestionCuentaServicio_EditarContraseña_InputMessage" />
@@ -665,87 +716,91 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarUsuarioEnLinea" message="tns:IGestionCuentaServicio_ValidarUsuarioEnLinea_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarUsuarioEnLineaResponse" message="tns:IGestionCuentaServicio_ValidarUsuarioEnLinea_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ObtenerIdJugadorPorNombreUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuario" message="tns:IGestionCuentaServicio_ObtenerIdJugadorPorNombreUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuarioResponse" message="tns:IGestionCuentaServicio_ObtenerIdJugadorPorNombreUsuario_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
-  <wsdl:portType name="ILobbyManager">
+  <wsdl:portType name="ISalaEsperaServicio">
     <wsdl:operation name="InvitarAmigoASala">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/InvitarAmigoASala" message="tns:ILobbyManager_InvitarAmigoASala_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/InvitarAmigoASalaResponse" message="tns:ILobbyManager_InvitarAmigoASala_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/InvitarAmigoASala" message="tns:ISalaEsperaServicio_InvitarAmigoASala_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/InvitarAmigoASalaResponse" message="tns:ISalaEsperaServicio_InvitarAmigoASala_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CrearSalaEspera">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/CrearSalaEspera" message="tns:ILobbyManager_CrearSalaEspera_InputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/CrearSalaEspera" message="tns:ISalaEsperaServicio_CrearSalaEspera_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ObtenerCodigosGenerados">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/ObtenerCodigosGenerados" message="tns:ILobbyManager_ObtenerCodigosGenerados_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/ObtenerCodigosGeneradosResponse" message="tns:ILobbyManager_ObtenerCodigosGenerados_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/ObtenerCodigosGenerados" message="tns:ISalaEsperaServicio_ObtenerCodigosGenerados_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/ObtenerCodigosGeneradosResponse" message="tns:ISalaEsperaServicio_ObtenerCodigosGenerados_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UnirseSalaEspera">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/UnirseSalaEspera" message="tns:ILobbyManager_UnirseSalaEspera_InputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/UnirseSalaEspera" message="tns:ISalaEsperaServicio_UnirseSalaEspera_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UnirSalaEsperaComoAnfitrion">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/UnirSalaEsperaComoAnfitrion" message="tns:ILobbyManager_UnirSalaEsperaComoAnfitrion_InputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/UnirSalaEsperaComoAnfitrion" message="tns:ISalaEsperaServicio_UnirSalaEsperaComoAnfitrion_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SalirSalaEspera">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/SalirSalaEspera" message="tns:ILobbyManager_SalirSalaEspera_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/SalirSalaEsperaResponse" message="tns:ILobbyManager_SalirSalaEspera_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/SalirSalaEspera" message="tns:ISalaEsperaServicio_SalirSalaEspera_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/SalirSalaEsperaResponse" message="tns:ISalaEsperaServicio_SalirSalaEspera_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="MandarMensaje">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/MandarMensaje" message="tns:ILobbyManager_MandarMensaje_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/MandarMensajeResponse" message="tns:ILobbyManager_MandarMensaje_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/MandarMensaje" message="tns:ISalaEsperaServicio_MandarMensaje_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/MandarMensajeResponse" message="tns:ISalaEsperaServicio_MandarMensaje_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="BuscarSalaEsperaDisponible">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponible" message="tns:ILobbyManager_BuscarSalaEsperaDisponible_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponibleResponse" message="tns:ILobbyManager_BuscarSalaEsperaDisponible_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponible" message="tns:ISalaEsperaServicio_BuscarSalaEsperaDisponible_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponibleResponse" message="tns:ISalaEsperaServicio_BuscarSalaEsperaDisponible_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="IniciarPartida">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/IniciarPartida" message="tns:ILobbyManager_IniciarPartida_InputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/IniciarPartida" message="tns:ISalaEsperaServicio_IniciarPartida_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ExpulsarJugadorSalaEspera">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/ExpulsarJugadorSalaEspera" message="tns:ILobbyManager_ExpulsarJugadorSalaEspera_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/ExpulsarJugadorSalaEsperaResponse" message="tns:ILobbyManager_ExpulsarJugadorSalaEspera_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/ExpulsarJugadorSalaEspera" message="tns:ISalaEsperaServicio_ExpulsarJugadorSalaEspera_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/ExpulsarJugadorSalaEsperaResponse" message="tns:ISalaEsperaServicio_ExpulsarJugadorSalaEspera_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarSalaEsperaCreada">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaCreada" message="tns:ILobbyManager_NotificarSalaEsperaCreada_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaCreadaResponse" message="tns:ILobbyManager_NotificarSalaEsperaCreada_InputCallbackMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaCreada" message="tns:ISalaEsperaServicio_NotificarSalaEsperaCreada_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaCreadaResponse" message="tns:ISalaEsperaServicio_NotificarSalaEsperaCreada_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarJugadoresEnSalaEspera">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarJugadoresEnSalaEspera" message="tns:ILobbyManager_NotificarJugadoresEnSalaEspera_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarJugadoresEnSalaEsperaResponse" message="tns:ILobbyManager_NotificarJugadoresEnSalaEspera_InputCallbackMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarJugadoresEnSalaEspera" message="tns:ISalaEsperaServicio_NotificarJugadoresEnSalaEspera_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarJugadoresEnSalaEsperaResponse" message="tns:ISalaEsperaServicio_NotificarJugadoresEnSalaEspera_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarJugadorSeUnioSalaEspera">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarJugadorSeUnioSalaEspera" message="tns:ILobbyManager_NotificarJugadorSeUnioSalaEspera_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarJugadorSeUnioSalaEsperaResponse" message="tns:ILobbyManager_NotificarJugadorSeUnioSalaEspera_InputCallbackMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarJugadorSeUnioSalaEspera" message="tns:ISalaEsperaServicio_NotificarJugadorSeUnioSalaEspera_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarJugadorSeUnioSalaEsperaResponse" message="tns:ISalaEsperaServicio_NotificarJugadorSeUnioSalaEspera_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarJugadorSalioSalaEspera">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarJugadorSalioSalaEspera" message="tns:ILobbyManager_NotificarJugadorSalioSalaEspera_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarJugadorSalioSalaEsperaResponse" message="tns:ILobbyManager_NotificarJugadorSalioSalaEspera_InputCallbackMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarJugadorSalioSalaEspera" message="tns:ISalaEsperaServicio_NotificarJugadorSalioSalaEspera_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarJugadorSalioSalaEsperaResponse" message="tns:ISalaEsperaServicio_NotificarJugadorSalioSalaEspera_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarAnfritionJugadorSalioSalaEspera">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarAnfritionJugadorSalioSalaEspera" message="tns:ILobbyManager_NotificarAnfritionJugadorSalioSalaEspera_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarAnfritionJugadorSalioSalaEsperaResponse" message="tns:ILobbyManager_NotificarAnfritionJugadorSalioSalaEspera_InputCallbackMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarAnfritionJugadorSalioSalaEspera" message="tns:ISalaEsperaServicio_NotificarAnfritionJugadorSalioSalaEspera_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarAnfritionJugadorSalioSalaEsperaResponse" message="tns:ISalaEsperaServicio_NotificarAnfritionJugadorSalioSalaEspera_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarIniciarPartida">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarIniciarPartida" message="tns:ILobbyManager_NotificarIniciarPartida_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarIniciarPartidaResponse" message="tns:ILobbyManager_NotificarIniciarPartida_InputCallbackMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarIniciarPartida" message="tns:ISalaEsperaServicio_NotificarIniciarPartida_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarIniciarPartidaResponse" message="tns:ISalaEsperaServicio_NotificarIniciarPartida_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarSalaEsperaLlena">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaLlena" message="tns:ILobbyManager_NotificarSalaEsperaLlena_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaLlenaResponse" message="tns:ILobbyManager_NotificarSalaEsperaLlena_InputCallbackMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaLlena" message="tns:ISalaEsperaServicio_NotificarSalaEsperaLlena_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaLlenaResponse" message="tns:ISalaEsperaServicio_NotificarSalaEsperaLlena_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarSalaEsperaNoExiste">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaNoExiste" message="tns:ILobbyManager_NotificarSalaEsperaNoExiste_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarSalaEsperaNoExisteResponse" message="tns:ILobbyManager_NotificarSalaEsperaNoExiste_InputCallbackMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaNoExiste" message="tns:ISalaEsperaServicio_NotificarSalaEsperaNoExiste_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaNoExisteResponse" message="tns:ISalaEsperaServicio_NotificarSalaEsperaNoExiste_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarExpulsadoSalaEspera">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarExpulsadoSalaEspera" message="tns:ILobbyManager_NotificarExpulsadoSalaEspera_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarExpulsadoSalaEsperaResponse" message="tns:ILobbyManager_NotificarExpulsadoSalaEspera_InputCallbackMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarExpulsadoSalaEspera" message="tns:ISalaEsperaServicio_NotificarExpulsadoSalaEspera_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarExpulsadoSalaEsperaResponse" message="tns:ISalaEsperaServicio_NotificarExpulsadoSalaEspera_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="RecibirMensaje">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/RecibirMensaje" message="tns:ILobbyManager_RecibirMensaje_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/RecibirMensajeResponse" message="tns:ILobbyManager_RecibirMensaje_InputCallbackMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/RecibirMensaje" message="tns:ISalaEsperaServicio_RecibirMensaje_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/RecibirMensajeResponse" message="tns:ISalaEsperaServicio_RecibirMensaje_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarPuedeIniciarPartida">
-      <wsdl:output wsaw:Action="http://tempuri.org/ILobbyManager/NotificarPuedeIniciarPartida" message="tns:ILobbyManager_NotificarPuedeIniciarPartida_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/ILobbyManager/NotificarPuedeIniciarPartidaResponse" message="tns:ILobbyManager_NotificarPuedeIniciarPartida_InputCallbackMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarPuedeIniciarPartida" message="tns:ISalaEsperaServicio_NotificarPuedeIniciarPartida_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/NotificarPuedeIniciarPartidaResponse" message="tns:ISalaEsperaServicio_NotificarPuedeIniciarPartida_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IGestorAmistad">
@@ -908,6 +963,10 @@
     <wsdl:operation name="FinalizarJuego">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/FinalizarJuego" message="tns:IServicioPartida_FinalizarJuego_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RegistrarJugadorInvitado">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/RegistrarJugadorInvitado" message="tns:IServicioPartida_RegistrarJugadorInvitado_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/RegistrarJugadorInvitadoResponse" message="tns:IServicioPartida_RegistrarJugadorInvitado_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotificarTurnoIniciado">
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado" message="tns:IServicioPartida_NotificarTurnoIniciado_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciadoResponse" message="tns:IServicioPartida_NotificarTurnoIniciado_InputCallbackMessage" />
@@ -1015,6 +1074,18 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IGestorInvitacion/EnviarInvitacionCorreoResponse" message="tns:IGestorInvitacion_EnviarInvitacionCorreo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
+  <wsdl:portType name="IEstadisticasGlobales">
+    <wsdl:operation name="ObtenerEstadisticasGlobales">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobales" message="tns:IEstadisticasGlobales_ObtenerEstadisticasGlobales_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobalesResponse" message="tns:IEstadisticasGlobales_ObtenerEstadisticasGlobales_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobalesHuntersTrophyExcepcionFault" name="HuntersTrophyExcepcionFault" message="tns:IEstadisticasGlobales_ObtenerEstadisticasGlobales_HuntersTrophyExcepcionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarVictorias">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEstadisticasGlobales/ActualizarVictorias" message="tns:IEstadisticasGlobales_ActualizarVictorias_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEstadisticasGlobales/ActualizarVictoriasResponse" message="tns:IEstadisticasGlobales_ActualizarVictorias_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IEstadisticasGlobales/ActualizarVictoriasHuntersTrophyExcepcionFault" name="HuntersTrophyExcepcionFault" message="tns:IEstadisticasGlobales_ActualizarVictorias_HuntersTrophyExcepcionFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGestionCuentaServicio" type="tns:IGestionCuentaServicio">
     <wsp:PolicyReference URI="#NetTcpBinding_IGestionCuentaServicio_policy">
     </wsp:PolicyReference>
@@ -1030,6 +1101,15 @@
       <wsdl:fault name="HuntersTrophyExcepcionFault">
         <soap12:fault use="literal" name="HuntersTrophyExcepcionFault" namespace="" />
       </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerNombreUsuarioPorIdJugador">
+      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EditarContraseña">
       <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/EditarContraseña" style="document" />
@@ -1136,13 +1216,22 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ObtenerIdJugadorPorNombreUsuario">
+      <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_ILobbyManager" type="tns:ILobbyManager">
-    <wsp:PolicyReference URI="#NetTcpBinding_ILobbyManager_policy">
+  <wsdl:binding name="NetTcpBinding_ISalaEsperaServicio" type="tns:ISalaEsperaServicio">
+    <wsp:PolicyReference URI="#NetTcpBinding_ISalaEsperaServicio_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="InvitarAmigoASala">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/InvitarAmigoASala" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/InvitarAmigoASala" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1151,13 +1240,13 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CrearSalaEspera">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/CrearSalaEspera" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/CrearSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
     <wsdl:operation name="ObtenerCodigosGenerados">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/ObtenerCodigosGenerados" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/ObtenerCodigosGenerados" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1166,19 +1255,19 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="UnirseSalaEspera">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/UnirseSalaEspera" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/UnirseSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
     <wsdl:operation name="UnirSalaEsperaComoAnfitrion">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/UnirSalaEsperaComoAnfitrion" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/UnirSalaEsperaComoAnfitrion" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
     <wsdl:operation name="SalirSalaEspera">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/SalirSalaEspera" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/SalirSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1187,7 +1276,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="MandarMensaje">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/MandarMensaje" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/MandarMensaje" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1196,7 +1285,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="BuscarSalaEsperaDisponible">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/BuscarSalaEsperaDisponible" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponible" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1205,13 +1294,13 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="IniciarPartida">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/IniciarPartida" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/IniciarPartida" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
     <wsdl:operation name="ExpulsarJugadorSalaEspera">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/ExpulsarJugadorSalaEspera" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/ExpulsarJugadorSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1220,7 +1309,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotificarSalaEsperaCreada">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarSalaEsperaCreada" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaCreada" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1229,7 +1318,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotificarJugadoresEnSalaEspera">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarJugadoresEnSalaEspera" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/NotificarJugadoresEnSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1238,7 +1327,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotificarJugadorSeUnioSalaEspera">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarJugadorSeUnioSalaEspera" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/NotificarJugadorSeUnioSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1247,7 +1336,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotificarJugadorSalioSalaEspera">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarJugadorSalioSalaEspera" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/NotificarJugadorSalioSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1256,7 +1345,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotificarAnfritionJugadorSalioSalaEspera">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarAnfritionJugadorSalioSalaEspera" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/NotificarAnfritionJugadorSalioSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1265,7 +1354,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotificarIniciarPartida">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarIniciarPartida" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/NotificarIniciarPartida" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1274,7 +1363,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotificarSalaEsperaLlena">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarSalaEsperaLlena" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaLlena" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1283,7 +1372,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotificarSalaEsperaNoExiste">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarSalaEsperaNoExiste" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/NotificarSalaEsperaNoExiste" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1292,7 +1381,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotificarExpulsadoSalaEspera">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarExpulsadoSalaEspera" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/NotificarExpulsadoSalaEspera" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1301,7 +1390,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="RecibirMensaje">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/RecibirMensaje" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/RecibirMensaje" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1310,7 +1399,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NotificarPuedeIniciarPartida">
-      <soap12:operation soapAction="http://tempuri.org/ILobbyManager/NotificarPuedeIniciarPartida" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/NotificarPuedeIniciarPartida" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1659,6 +1748,15 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="RegistrarJugadorInvitado">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/RegistrarJugadorInvitado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="NotificarTurnoIniciado">
       <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado" style="document" />
       <wsdl:input>
@@ -1899,47 +1997,82 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IEstadisticasGlobales" type="tns:IEstadisticasGlobales">
+    <wsp:PolicyReference URI="#NetTcpBinding_IEstadisticasGlobales_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="ObtenerEstadisticasGlobales">
+      <soap12:operation soapAction="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobales" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HuntersTrophyExcepcionFault">
+        <soap12:fault use="literal" name="HuntersTrophyExcepcionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarVictorias">
+      <soap12:operation soapAction="http://tempuri.org/IEstadisticasGlobales/ActualizarVictorias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="HuntersTrophyExcepcionFault">
+        <soap12:fault use="literal" name="HuntersTrophyExcepcionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ImplementacionServicio">
     <wsdl:port name="NetTcpBinding_IGestionCuentaServicio" binding="tns:NetTcpBinding_IGestionCuentaServicio">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.244.224:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
-    <wsdl:port name="NetTcpBinding_ILobbyManager" binding="tns:NetTcpBinding_ILobbyManager">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+    <wsdl:port name="NetTcpBinding_ISalaEsperaServicio" binding="tns:NetTcpBinding_ISalaEsperaServicio">
+      <soap12:address location="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.244.224:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorAmistad" binding="tns:NetTcpBinding_IGestorAmistad">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.244.224:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorDeSolicitudesDeAmistad" binding="tns:NetTcpBinding_IGestorDeSolicitudesDeAmistad">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.244.224:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorUsuariosConectados" binding="tns:NetTcpBinding_IGestorUsuariosConectados">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.244.224:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IServicioPartida" binding="tns:NetTcpBinding_IServicioPartida">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.244.224:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorInvitacion" binding="tns:NetTcpBinding_IGestorInvitacion">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.244.224:8000/ServiceImplementation/Service</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IEstadisticasGlobales" binding="tns:NetTcpBinding_IEstadisticasGlobales">
+      <soap12:address location="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://192.168.244.224:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
