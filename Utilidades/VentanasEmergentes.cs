@@ -189,6 +189,14 @@ namespace trofeoCazador.Utilidades
             ventanaEmergente.Show();
         }
 
-
+        public static XAMLVentanaDeDecision CrearVentanaDeDecision(string tituloVentana, string descripcionVentana)
+        {
+            XAMLVentanaDeDecision ventanaDeDecision = new XAMLVentanaDeDecision(
+                tituloVentana,
+                descripcionVentana
+            );
+            ventanaDeDecision.Show();
+            return ventanaDeDecision;
+        }
     }
 }

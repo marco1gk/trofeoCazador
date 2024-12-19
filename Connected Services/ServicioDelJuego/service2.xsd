@@ -857,6 +857,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="DejarTirarDado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EstablecerModoSeleccionCarta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idModoSeleccion" type="xs:int" />
+        <xs:element minOccurs="0" name="nombreJugador" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RegistrarJugadorInvitado">
     <xs:complexType>
       <xs:sequence>
@@ -1173,6 +1189,28 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="NotificarResultadosJuegoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarPararTirarDado">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarPararTirarDadoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarModoSeleccionCarta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idModoSeleccion" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarModoSeleccionCartaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

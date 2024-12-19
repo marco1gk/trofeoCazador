@@ -363,19 +363,16 @@ namespace trofeoCazador.ServicioDelJuego {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool AsignadaField;
+        private int IdCartaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdCartaField;
+        private int IdRutaImagenField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double PosicionXField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double PosicionYField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RutaImagenField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TipoField;
@@ -391,19 +388,6 @@ namespace trofeoCazador.ServicioDelJuego {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Asignada {
-            get {
-                return this.AsignadaField;
-            }
-            set {
-                if ((this.AsignadaField.Equals(value) != true)) {
-                    this.AsignadaField = value;
-                    this.RaisePropertyChanged("Asignada");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public int IdCarta {
             get {
                 return this.IdCartaField;
@@ -412,6 +396,19 @@ namespace trofeoCazador.ServicioDelJuego {
                 if ((this.IdCartaField.Equals(value) != true)) {
                     this.IdCartaField = value;
                     this.RaisePropertyChanged("IdCarta");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdRutaImagen {
+            get {
+                return this.IdRutaImagenField;
+            }
+            set {
+                if ((this.IdRutaImagenField.Equals(value) != true)) {
+                    this.IdRutaImagenField = value;
+                    this.RaisePropertyChanged("IdRutaImagen");
                 }
             }
         }
@@ -438,19 +435,6 @@ namespace trofeoCazador.ServicioDelJuego {
                 if ((this.PosicionYField.Equals(value) != true)) {
                     this.PosicionYField = value;
                     this.RaisePropertyChanged("PosicionY");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RutaImagen {
-            get {
-                return this.RutaImagenField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RutaImagenField, value) != true)) {
-                    this.RutaImagenField = value;
-                    this.RaisePropertyChanged("RutaImagen");
                 }
             }
         }
@@ -1703,6 +1687,18 @@ namespace trofeoCazador.ServicioDelJuego {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/FinalizarJuego")]
         System.Threading.Tasks.Task FinalizarJuegoAsync(string idPartida);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/DejarTirarDado")]
+        void DejarTirarDado(string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/DejarTirarDado")]
+        System.Threading.Tasks.Task DejarTirarDadoAsync(string idPartida);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCarta")]
+        void EstablecerModoSeleccionCarta(string idPartida, int idModoSeleccion, string nombreJugador);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCarta")]
+        System.Threading.Tasks.Task EstablecerModoSeleccionCartaAsync(string idPartida, int idModoSeleccion, string nombreJugador);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/RegistrarJugadorInvitado", ReplyAction="http://tempuri.org/IServicioPartida/RegistrarJugadorInvitadoResponse")]
         void RegistrarJugadorInvitado(trofeoCazador.ServicioDelJuego.JugadorPartida invitado);
         
@@ -1788,6 +1784,12 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarResultadosJuego", ReplyAction="http://tempuri.org/IServicioPartida/NotificarResultadosJuegoResponse")]
         void NotificarResultadosJuego(System.Collections.Generic.Dictionary<string, int> puntajes, string ganador, int puntajeGanador);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarPararTirarDado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarPararTirarDadoResponse")]
+        void NotificarPararTirarDado();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarModoSeleccionCarta", ReplyAction="http://tempuri.org/IServicioPartida/NotificarModoSeleccionCartaResponse")]
+        void NotificarModoSeleccionCarta(int idModoSeleccion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2024,6 +2026,22 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task FinalizarJuegoAsync(string idPartida) {
             return base.Channel.FinalizarJuegoAsync(idPartida);
+        }
+        
+        public void DejarTirarDado(string idPartida) {
+            base.Channel.DejarTirarDado(idPartida);
+        }
+        
+        public System.Threading.Tasks.Task DejarTirarDadoAsync(string idPartida) {
+            return base.Channel.DejarTirarDadoAsync(idPartida);
+        }
+        
+        public void EstablecerModoSeleccionCarta(string idPartida, int idModoSeleccion, string nombreJugador) {
+            base.Channel.EstablecerModoSeleccionCarta(idPartida, idModoSeleccion, nombreJugador);
+        }
+        
+        public System.Threading.Tasks.Task EstablecerModoSeleccionCartaAsync(string idPartida, int idModoSeleccion, string nombreJugador) {
+            return base.Channel.EstablecerModoSeleccionCartaAsync(idPartida, idModoSeleccion, nombreJugador);
         }
         
         public void RegistrarJugadorInvitado(trofeoCazador.ServicioDelJuego.JugadorPartida invitado) {

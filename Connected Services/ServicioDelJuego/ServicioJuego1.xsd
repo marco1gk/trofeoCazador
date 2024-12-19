@@ -41,11 +41,10 @@
   <xs:element name="JugadorPartida" nillable="true" type="tns:JugadorPartida" />
   <xs:complexType name="Carta">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Asignada" type="xs:boolean" />
       <xs:element minOccurs="0" name="IdCarta" type="xs:int" />
+      <xs:element minOccurs="0" name="IdRutaImagen" type="xs:int" />
       <xs:element minOccurs="0" name="PosicionX" type="xs:double" />
       <xs:element minOccurs="0" name="PosicionY" type="xs:double" />
-      <xs:element minOccurs="0" name="RutaImagen" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Tipo" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

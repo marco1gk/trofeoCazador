@@ -128,6 +128,9 @@
     <Compile Include="VentanasReutilizables\VentanaCorreoJugador.xaml.cs">
       <DependentUpon>VentanaCorreoJugador.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VentanasReutilizables\XAMLVentanaDeDecision.xaml.cs">
+      <DependentUpon>XAMLVentanaDeDecision.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VentanasReutilizables\XAMLVentanaEmergente.xaml.cs">
       <DependentUpon>XAMLVentanaEmergente.xaml</DependentUpon>
     </Compile>
@@ -207,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VentanasReutilizables\VentanaCorreoJugador.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanasReutilizables\XAMLVentanaDeDecision.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -311,7 +318,7 @@
     <None Include="Connected Services\ServicioDelJuego\service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioDelJuego\service21.xsd">
+    <None Include="Connected Services\ServicioDelJuego\service3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServicioDelJuego\ServicioJuego.Excepciones1.xsd">
@@ -400,14 +407,6 @@
     <Resource Include="Recursos\Configuracion.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta1.png" />
-    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta2.png" />
-    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta3.png" />
-    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta4.png" />
-    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta5.png" />
-    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta6.png" />
-    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta7.png" />
-    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta8.png" />
     <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta_Escondite.png" />
     <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta_Mazo.png" />
     <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta_Reglas.png" />
@@ -467,6 +466,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta1.jpg" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta2.jpg" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta3.jpg" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta4.jpg" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta5.jpg" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta6.jpg" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta7.jpg" />
+    <Resource Include="Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta8.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

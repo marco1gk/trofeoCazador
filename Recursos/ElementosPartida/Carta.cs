@@ -16,15 +16,31 @@ namespace trofeoCazador.Recursos.ElementosPartida
         public double PosicionY { get; set; }
         public bool Asignada { get; set; }
 
-        /*public CartaCliente(string tipo, int idCarta, string rutaImagen)
+        public static string ObtenerRutaImagenCarta(int idRutaImagen)
         {
-            IdCarta = idCarta;
-            Tipo = tipo;
-            //Cantidad = cantidad;
-            RutaImagen = rutaImagen;
-            PosicionX = 0;
-            PosicionY = 0;
-            Asignada = false;
-        }*/
+            switch (idRutaImagen)
+            {
+                case 1:
+                    return "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta1.jpg";
+                case 2:
+                    return "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta2.jpg";
+                case 3:
+                    return "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta3.jpg";
+                case 4:
+                    return "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta4.jpg";
+                case 5:
+                    return "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta5.jpg";
+                case 6:
+                    return "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta6.jpg";
+                case 7:
+                    return "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta7.jpg";
+                case 8:
+                    return "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta8.jpg";
+                case 9:
+                    return "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta_Mazo.png";
+                default:
+                    return "/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta_Mazo.png";
+            }
+        }
     }
 }
