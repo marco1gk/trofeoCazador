@@ -1693,11 +1693,23 @@ namespace trofeoCazador.ServicioDelJuego {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/DejarTirarDado")]
         System.Threading.Tasks.Task DejarTirarDadoAsync(string idPartida);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCarta")]
-        void EstablecerModoSeleccionCarta(string idPartida, int idModoSeleccion, string nombreJugador);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCartaJugadorEnTurno")]
+        void EstablecerModoSeleccionCartaJugadorEnTurno(string idPartida, int idModoSeleccion);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCarta")]
-        System.Threading.Tasks.Task EstablecerModoSeleccionCartaAsync(string idPartida, int idModoSeleccion, string nombreJugador);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCartaJugadorEnTurno")]
+        System.Threading.Tasks.Task EstablecerModoSeleccionCartaJugadorEnTurnoAsync(string idPartida, int idModoSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCartaJugador")]
+        void EstablecerModoSeleccionCartaJugador(string idPartida, int idModoSeleccionar);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCartaJugador")]
+        System.Threading.Tasks.Task EstablecerModoSeleccionCartaJugadorAsync(string idPartida, int idModoSeleccionar);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionarCartaJugadores")]
+        void EstablecerModoSeleccionarCartaJugadores(string idPartida, int idModoSeleccionar, string[] nombresJugadores);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionarCartaJugadores")]
+        System.Threading.Tasks.Task EstablecerModoSeleccionarCartaJugadoresAsync(string idPartida, int idModoSeleccionar, string[] nombresJugadores);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/RegistrarJugadorInvitado", ReplyAction="http://tempuri.org/IServicioPartida/RegistrarJugadorInvitadoResponse")]
         void RegistrarJugadorInvitado(trofeoCazador.ServicioDelJuego.JugadorPartida invitado);
@@ -2026,22 +2038,6 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task FinalizarJuegoAsync(string idPartida) {
             return base.Channel.FinalizarJuegoAsync(idPartida);
-        }
-        
-        public void DejarTirarDado(string idPartida) {
-            base.Channel.DejarTirarDado(idPartida);
-        }
-        
-        public System.Threading.Tasks.Task DejarTirarDadoAsync(string idPartida) {
-            return base.Channel.DejarTirarDadoAsync(idPartida);
-        }
-        
-        public void EstablecerModoSeleccionCarta(string idPartida, int idModoSeleccion, string nombreJugador) {
-            base.Channel.EstablecerModoSeleccionCarta(idPartida, idModoSeleccion, nombreJugador);
-        }
-        
-        public System.Threading.Tasks.Task EstablecerModoSeleccionCartaAsync(string idPartida, int idModoSeleccion, string nombreJugador) {
-            return base.Channel.EstablecerModoSeleccionCartaAsync(idPartida, idModoSeleccion, nombreJugador);
         }
         
         public void RegistrarJugadorInvitado(trofeoCazador.ServicioDelJuego.JugadorPartida invitado) {

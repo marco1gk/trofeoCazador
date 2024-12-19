@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="yGYX/GnzmPw4ojpdzhxT+/i2BWgKHgUUDrwkgkBKPkI=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="ufZE8lCx3j4XfOQK6yePKuBlrxvocadB6b6z+BdUGz4=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IGestionCuentaServicio">
+    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IGestionCuentaServicio1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestionCuentaServicio</serializedValue>
+          <serializedValue>NetTcpBinding_IGestionCuentaServicio1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -119,10 +119,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_ISalaEsperaServicio">
+    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_ISalaEsperaServicio1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_ISalaEsperaServicio</serializedValue>
+          <serializedValue>NetTcpBinding_ISalaEsperaServicio1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -237,10 +237,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IGestorAmistad">
+    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IGestorAmistad1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestorAmistad</serializedValue>
+          <serializedValue>NetTcpBinding_IGestorAmistad1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -355,10 +355,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IGestorDeSolicitudesDeAmistad">
+    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IGestorDeSolicitudesDeAmistad1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestorDeSolicitudesDeAmistad</serializedValue>
+          <serializedValue>NetTcpBinding_IGestorDeSolicitudesDeAmistad1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -473,10 +473,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IGestorUsuariosConectados">
+    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IGestorUsuariosConectados1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestorUsuariosConectados</serializedValue>
+          <serializedValue>NetTcpBinding_IGestorUsuariosConectados1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -591,10 +591,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IServicioPartida">
+    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IServicioPartida1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IServicioPartida</serializedValue>
+          <serializedValue>NetTcpBinding_IServicioPartida1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -709,10 +709,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IGestorInvitacion">
+    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IGestorInvitacion1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestorInvitacion</serializedValue>
+          <serializedValue>NetTcpBinding_IGestorInvitacion1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -827,10 +827,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IEstadisticasGlobales">
+    <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IEstadisticasGlobales1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IEstadisticasGlobales</serializedValue>
+          <serializedValue>NetTcpBinding_IEstadisticasGlobales1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -947,7 +947,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IGestionCuentaServicio" contract="ServicioDelJuego.IGestionCuentaServicio" bindingType="netTcpBinding" address="net.tcp://localhost:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IGestionCuentaServicio">
+    <endpoint name="NetTcpBinding_IGestionCuentaServicio" contract="ServicioDelJuego.IGestionCuentaServicio" bindingType="netTcpBinding" address="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IGestionCuentaServicio">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:8000/ServiceImplementation/Service</serializedValue>
@@ -959,7 +959,7 @@
           <serializedValue>netTcpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestionCuentaServicio</serializedValue>
+          <serializedValue>NetTcpBinding_IGestionCuentaServicio1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServicioDelJuego.IGestionCuentaServicio</serializedValue>
@@ -1022,7 +1022,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestionCuentaServicio</serializedValue>
+          <serializedValue>NetTcpBinding_IGestionCuentaServicio1</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -1032,7 +1032,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_ISalaEsperaServicio" contract="ServicioDelJuego.ISalaEsperaServicio" bindingType="netTcpBinding" address="net.tcp://localhost:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_ISalaEsperaServicio">
+    <endpoint name="NetTcpBinding_ISalaEsperaServicio" contract="ServicioDelJuego.ISalaEsperaServicio" bindingType="netTcpBinding" address="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_ISalaEsperaServicio">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:8000/ServiceImplementation/Service</serializedValue>
@@ -1044,7 +1044,7 @@
           <serializedValue>netTcpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_ISalaEsperaServicio</serializedValue>
+          <serializedValue>NetTcpBinding_ISalaEsperaServicio1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServicioDelJuego.ISalaEsperaServicio</serializedValue>
@@ -1107,7 +1107,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_ISalaEsperaServicio</serializedValue>
+          <serializedValue>NetTcpBinding_ISalaEsperaServicio1</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -1117,7 +1117,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IGestorAmistad" contract="ServicioDelJuego.IGestorAmistad" bindingType="netTcpBinding" address="net.tcp://localhost:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IGestorAmistad">
+    <endpoint name="NetTcpBinding_IGestorAmistad" contract="ServicioDelJuego.IGestorAmistad" bindingType="netTcpBinding" address="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IGestorAmistad">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:8000/ServiceImplementation/Service</serializedValue>
@@ -1129,7 +1129,7 @@
           <serializedValue>netTcpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestorAmistad</serializedValue>
+          <serializedValue>NetTcpBinding_IGestorAmistad1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServicioDelJuego.IGestorAmistad</serializedValue>
@@ -1192,7 +1192,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestorAmistad</serializedValue>
+          <serializedValue>NetTcpBinding_IGestorAmistad1</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -1202,7 +1202,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IGestorDeSolicitudesDeAmistad" contract="ServicioDelJuego.IGestorDeSolicitudesDeAmistad" bindingType="netTcpBinding" address="net.tcp://localhost:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IGestorDeSolicitudesDeAmistad">
+    <endpoint name="NetTcpBinding_IGestorDeSolicitudesDeAmistad" contract="ServicioDelJuego.IGestorDeSolicitudesDeAmistad" bindingType="netTcpBinding" address="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IGestorDeSolicitudesDeAmistad">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:8000/ServiceImplementation/Service</serializedValue>
@@ -1214,7 +1214,7 @@
           <serializedValue>netTcpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestorDeSolicitudesDeAmistad</serializedValue>
+          <serializedValue>NetTcpBinding_IGestorDeSolicitudesDeAmistad1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServicioDelJuego.IGestorDeSolicitudesDeAmistad</serializedValue>
@@ -1277,7 +1277,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestorDeSolicitudesDeAmistad</serializedValue>
+          <serializedValue>NetTcpBinding_IGestorDeSolicitudesDeAmistad1</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -1287,7 +1287,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IGestorUsuariosConectados" contract="ServicioDelJuego.IGestorUsuariosConectados" bindingType="netTcpBinding" address="net.tcp://localhost:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IGestorUsuariosConectados">
+    <endpoint name="NetTcpBinding_IGestorUsuariosConectados" contract="ServicioDelJuego.IGestorUsuariosConectados" bindingType="netTcpBinding" address="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IGestorUsuariosConectados">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:8000/ServiceImplementation/Service</serializedValue>
@@ -1299,7 +1299,7 @@
           <serializedValue>netTcpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestorUsuariosConectados</serializedValue>
+          <serializedValue>NetTcpBinding_IGestorUsuariosConectados1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServicioDelJuego.IGestorUsuariosConectados</serializedValue>
@@ -1362,7 +1362,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestorUsuariosConectados</serializedValue>
+          <serializedValue>NetTcpBinding_IGestorUsuariosConectados1</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -1372,7 +1372,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IServicioPartida" contract="ServicioDelJuego.IServicioPartida" bindingType="netTcpBinding" address="net.tcp://localhost:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IServicioPartida">
+    <endpoint name="NetTcpBinding_IServicioPartida" contract="ServicioDelJuego.IServicioPartida" bindingType="netTcpBinding" address="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IServicioPartida">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:8000/ServiceImplementation/Service</serializedValue>
@@ -1384,7 +1384,7 @@
           <serializedValue>netTcpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IServicioPartida</serializedValue>
+          <serializedValue>NetTcpBinding_IServicioPartida1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServicioDelJuego.IServicioPartida</serializedValue>
@@ -1447,7 +1447,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IServicioPartida</serializedValue>
+          <serializedValue>NetTcpBinding_IServicioPartida1</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -1457,7 +1457,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IGestorInvitacion" contract="ServicioDelJuego.IGestorInvitacion" bindingType="netTcpBinding" address="net.tcp://localhost:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IGestorInvitacion">
+    <endpoint name="NetTcpBinding_IGestorInvitacion" contract="ServicioDelJuego.IGestorInvitacion" bindingType="netTcpBinding" address="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IGestorInvitacion">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:8000/ServiceImplementation/Service</serializedValue>
@@ -1469,7 +1469,7 @@
           <serializedValue>netTcpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestorInvitacion</serializedValue>
+          <serializedValue>NetTcpBinding_IGestorInvitacion1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServicioDelJuego.IGestorInvitacion</serializedValue>
@@ -1532,7 +1532,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IGestorInvitacion</serializedValue>
+          <serializedValue>NetTcpBinding_IGestorInvitacion1</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -1542,7 +1542,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IEstadisticasGlobales" contract="ServicioDelJuego.IEstadisticasGlobales" bindingType="netTcpBinding" address="net.tcp://localhost:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IEstadisticasGlobales">
+    <endpoint name="NetTcpBinding_IEstadisticasGlobales" contract="ServicioDelJuego.IEstadisticasGlobales" bindingType="netTcpBinding" address="net.tcp://192.168.244.224:8000/ServiceImplementation/Service" bindingConfiguration="NetTcpBinding_IEstadisticasGlobales">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.tcp://localhost:8000/ServiceImplementation/Service</serializedValue>
@@ -1554,7 +1554,7 @@
           <serializedValue>netTcpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IEstadisticasGlobales</serializedValue>
+          <serializedValue>NetTcpBinding_IEstadisticasGlobales1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServicioDelJuego.IEstadisticasGlobales</serializedValue>
@@ -1617,7 +1617,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NetTcpBinding_IEstadisticasGlobales</serializedValue>
+          <serializedValue>NetTcpBinding_IEstadisticasGlobales1</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
