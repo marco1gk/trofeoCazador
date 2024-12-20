@@ -113,6 +113,7 @@ namespace trofeoCazador.Vistas.InicioSesion
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }

@@ -483,14 +483,8 @@
   <wsdl:message name="IServicioPartida_DejarTirarDado_InputMessage">
     <wsdl:part name="parameters" element="tns:DejarTirarDado" />
   </wsdl:message>
-  <wsdl:message name="IServicioPartida_EstablecerModoSeleccionCartaJugadorEnTurno_InputMessage">
-    <wsdl:part name="parameters" element="tns:EstablecerModoSeleccionCartaJugadorEnTurno" />
-  </wsdl:message>
-  <wsdl:message name="IServicioPartida_EstablecerModoSeleccionCartaJugador_InputMessage">
-    <wsdl:part name="parameters" element="tns:EstablecerModoSeleccionCartaJugador" />
-  </wsdl:message>
-  <wsdl:message name="IServicioPartida_EstablecerModoSeleccionarCartaJugadores_InputMessage">
-    <wsdl:part name="parameters" element="tns:EstablecerModoSeleccionarCartaJugadores" />
+  <wsdl:message name="IServicioPartida_EstablecerModoSeleccionCarta_InputMessage">
+    <wsdl:part name="parameters" element="tns:EstablecerModoSeleccionCarta" />
   </wsdl:message>
   <wsdl:message name="IServicioPartida_RegistrarJugadorInvitado_InputMessage">
     <wsdl:part name="parameters" element="tns:RegistrarJugadorInvitado" />
@@ -990,14 +984,8 @@
     <wsdl:operation name="DejarTirarDado">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/DejarTirarDado" message="tns:IServicioPartida_DejarTirarDado_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="EstablecerModoSeleccionCartaJugadorEnTurno">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCartaJugadorEnTurno" message="tns:IServicioPartida_EstablecerModoSeleccionCartaJugadorEnTurno_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="EstablecerModoSeleccionCartaJugador">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCartaJugador" message="tns:IServicioPartida_EstablecerModoSeleccionCartaJugador_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="EstablecerModoSeleccionarCartaJugadores">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionarCartaJugadores" message="tns:IServicioPartida_EstablecerModoSeleccionarCartaJugadores_InputMessage" />
+    <wsdl:operation name="EstablecerModoSeleccionCarta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCarta" message="tns:IServicioPartida_EstablecerModoSeleccionCarta_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="RegistrarJugadorInvitado">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/RegistrarJugadorInvitado" message="tns:IServicioPartida_RegistrarJugadorInvitado_InputMessage" />
@@ -1798,20 +1786,8 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="EstablecerModoSeleccionCartaJugadorEnTurno">
-      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCartaJugadorEnTurno" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="EstablecerModoSeleccionCartaJugador">
-      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCartaJugador" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="EstablecerModoSeleccionarCartaJugadores">
-      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionarCartaJugadores" style="document" />
+    <wsdl:operation name="EstablecerModoSeleccionCarta">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/EstablecerModoSeleccionCarta" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
