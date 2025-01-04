@@ -183,6 +183,9 @@
   <wsdl:message name="IGestionCuentaServicio_ObtenerIdJugadorPorNombreUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerIdJugadorPorNombreUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ObtenerIdJugadorPorNombreUsuario_HuntersTrophyExcepcionFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q4:HuntersTrophyExcepcion" />
+  </wsdl:message>
   <wsdl:message name="ISalaEsperaServicio_InvitarAmigoASala_InputMessage">
     <wsdl:part name="parameters" element="tns:InvitarAmigoASala" />
   </wsdl:message>
@@ -304,7 +307,7 @@
     <wsdl:part name="parameters" element="tns:ObtenerListaNombresUsuariosAmigosResponse" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_ObtenerListaNombresUsuariosAmigos_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q4:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q5:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_ValidarEnvioSolicitudAmistad_InputMessage">
     <wsdl:part name="parameters" element="tns:ValidarEnvioSolicitudAmistad" />
@@ -313,7 +316,7 @@
     <wsdl:part name="parameters" element="tns:ValidarEnvioSolicitudAmistadResponse" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_ValidarEnvioSolicitudAmistad_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q5:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q6:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_AgregarSolicitudAmistad_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarSolicitudAmistad" />
@@ -322,7 +325,7 @@
     <wsdl:part name="parameters" element="tns:AgregarSolicitudAmistadResponse" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_AgregarSolicitudAmistad_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q6:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q7:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_ObtenerNombresUsuariosSolicitantes_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerNombresUsuariosSolicitantes" />
@@ -331,7 +334,7 @@
     <wsdl:part name="parameters" element="tns:ObtenerNombresUsuariosSolicitantesResponse" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_ObtenerNombresUsuariosSolicitantes_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q7:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q8:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestorDeSolicitudesDeAmistad_AgregarADiccionarioAmistadesEnLinea_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarADiccionarioAmistadesEnLinea" />
@@ -375,6 +378,12 @@
   <wsdl:message name="IGestorUsuariosConectados_DesregistrarUsuarioDeUsuariosEnLinea_InputMessage">
     <wsdl:part name="parameters" element="tns:DesregistrarUsuarioDeUsuariosEnLinea" />
   </wsdl:message>
+  <wsdl:message name="IGestorUsuariosConectados_ReconectarUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReconectarUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IGestorUsuariosConectados_ReconectarUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReconectarUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="IGestorUsuariosConectados_NotificarInvitacionSala_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarInvitacionSala" />
   </wsdl:message>
@@ -398,6 +407,9 @@
   </wsdl:message>
   <wsdl:message name="IGestorUsuariosConectados_Ping_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="IGestorUsuariosConectados_SincronizarEstado_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SincronizarEstado" />
   </wsdl:message>
   <wsdl:message name="IServicioPartida_EmpezarTurno_InputMessage">
     <wsdl:part name="parameters" element="tns:EmpezarTurno" />
@@ -667,7 +679,7 @@
     <wsdl:part name="parameters" element="tns:ObtenerEstadisticasGlobalesResponse" />
   </wsdl:message>
   <wsdl:message name="IEstadisticasGlobales_ObtenerEstadisticasGlobales_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q8:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q9:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IEstadisticasGlobales_ActualizarVictorias_InputMessage">
     <wsdl:part name="parameters" element="tns:ActualizarVictorias" />
@@ -676,7 +688,7 @@
     <wsdl:part name="parameters" element="tns:ActualizarVictoriasResponse" />
   </wsdl:message>
   <wsdl:message name="IEstadisticasGlobales_ActualizarVictorias_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q9:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q10:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:portType name="IGestionCuentaServicio">
     <wsdl:operation name="AgregarJugador">
@@ -737,6 +749,7 @@
     <wsdl:operation name="ObtenerIdJugadorPorNombreUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuario" message="tns:IGestionCuentaServicio_ObtenerIdJugadorPorNombreUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuarioResponse" message="tns:IGestionCuentaServicio_ObtenerIdJugadorPorNombreUsuario_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuarioHuntersTrophyExcepcionFault" name="HuntersTrophyExcepcionFault" message="tns:IGestionCuentaServicio_ObtenerIdJugadorPorNombreUsuario_HuntersTrophyExcepcionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ISalaEsperaServicio">
@@ -882,6 +895,10 @@
     <wsdl:operation name="DesregistrarUsuarioDeUsuariosEnLinea">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/DesregistrarUsuarioDeUsuariosEnLinea" message="tns:IGestorUsuariosConectados_DesregistrarUsuarioDeUsuariosEnLinea_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ReconectarUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/ReconectarUsuario" message="tns:IGestorUsuariosConectados_ReconectarUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/ReconectarUsuarioResponse" message="tns:IGestorUsuariosConectados_ReconectarUsuario_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotificarInvitacionSala">
       <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/NotificarInvitacionSala" message="tns:IGestorUsuariosConectados_NotificarInvitacionSala_OutputCallbackMessage" />
     </wsdl:operation>
@@ -899,6 +916,9 @@
     </wsdl:operation>
     <wsdl:operation name="Ping">
       <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/Ping" message="tns:IGestorUsuariosConectados_Ping_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SincronizarEstado">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestorUsuariosConectados/SincronizarEstado" message="tns:IGestorUsuariosConectados_SincronizarEstado_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IServicioPartida">
@@ -1256,6 +1276,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="HuntersTrophyExcepcionFault">
+        <soap12:fault use="literal" name="HuntersTrophyExcepcionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_ISalaEsperaServicio" type="tns:ISalaEsperaServicio">
@@ -1577,6 +1600,15 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="ReconectarUsuario">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/ReconectarUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="NotificarInvitacionSala">
       <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/NotificarInvitacionSala" style="document" />
       <wsdl:output>
@@ -1612,6 +1644,12 @@
     </wsdl:operation>
     <wsdl:operation name="Ping">
       <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/Ping" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SincronizarEstado">
+      <soap12:operation soapAction="http://tempuri.org/IGestorUsuariosConectados/SincronizarEstado" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -2090,51 +2128,51 @@
   </wsdl:binding>
   <wsdl:service name="ImplementacionServicio">
     <wsdl:port name="NetTcpBinding_IGestionCuentaServicio" binding="tns:NetTcpBinding_IGestionCuentaServicio">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_ISalaEsperaServicio" binding="tns:NetTcpBinding_ISalaEsperaServicio">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorAmistad" binding="tns:NetTcpBinding_IGestorAmistad">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorDeSolicitudesDeAmistad" binding="tns:NetTcpBinding_IGestorDeSolicitudesDeAmistad">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorUsuariosConectados" binding="tns:NetTcpBinding_IGestorUsuariosConectados">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IServicioPartida" binding="tns:NetTcpBinding_IServicioPartida">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorInvitacion" binding="tns:NetTcpBinding_IGestorInvitacion">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IEstadisticasGlobales" binding="tns:NetTcpBinding_IEstadisticasGlobales">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

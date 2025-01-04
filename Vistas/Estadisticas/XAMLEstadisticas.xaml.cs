@@ -58,13 +58,13 @@ namespace trofeoCazador.Vistas.Estadisticas
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
+               // NavigationService.Navigate(new XAMLInicioSesion());
             }
 
             catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
+             //   NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException ex)
             {

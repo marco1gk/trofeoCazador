@@ -18,119 +18,113 @@ namespace trofeoCazador.Vistas.Amigos
     {
         public SingletonSesion sesion = SingletonSesion.Instancia;
 
-        private void SuscribirUsuarioAlDiccionarioDeAmigosEnLínea()
+        private bool ComprobarEstadoRed()
         {
-            InstanceContext contexto = new InstanceContext(this);
-            GestorDeSolicitudesDeAmistadClient gestorSolicitudesAmistadCliente = new GestorDeSolicitudesDeAmistadClient(contexto);
-           
-            try
-            {
-                gestorSolicitudesAmistadCliente.AgregarADiccionarioAmistadesEnLinea(sesion.NombreUsuario);
-                
-            }
-            catch (EndpointNotFoundException ex)
-            {
-                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
-            }
-            catch (TimeoutException ex)
-            {
-                VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
-
-            }
-            catch (FaultException )
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-            catch (CommunicationException ex)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
-            }
-            catch (Exception ex)
-            {
-                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-            }
+            return System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
         }
 
-
-        private void BtnEnviarSolicitud_Click(object sender, RoutedEventArgs e)
+        private async Task EjecutarAccionConSeguridad(Func<Task> accion, string mensajeError = "Error inesperado")
         {
             try
             {
-                EnviarSolicitud();
+                await accion();
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-            catch (CommunicationException ex)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
-                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                VentanasEmergentes.CrearVentanaEmergente("Error", mensajeError);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
         }
 
+        private async void SuscribirUsuarioAlDiccionarioDeAmigosEnLínea()
+        {
+            if (!ComprobarEstadoRed())
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                return;
+            }
+
+            await EjecutarAccionConSeguridad(async () =>
+            {
+                InstanceContext contexto = new InstanceContext(this);
+                GestorDeSolicitudesDeAmistadClient gestorSolicitudesAmistadCliente = new GestorDeSolicitudesDeAmistadClient(contexto);
+                await gestorSolicitudesAmistadCliente.AgregarADiccionarioAmistadesEnLineaAsync(sesion.NombreUsuario);
+            }, "No se pudo suscribir al diccionario de amigos en línea.");
+        }
+
+        private async void BtnEnviarSolicitud_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ComprobarEstadoRed())
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                return;
+            }
+
+            await EjecutarAccionConSeguridad(async () =>
+            {
+                await Task.Run(() => EnviarSolicitud());
+            }, "No se pudo enviar la solicitud.");
+        }
 
         private void EnviarSolicitud()
         {
-            lbErrorNombreDeUsuarioSolicitudAmistad.Visibility = Visibility.Visible;
+            // Leer el texto del TextBox usando el Dispatcher.
+            string nombreDeUsuarioJugadorSolicitado = string.Empty;
+            tbNombreDeUsuarioEnviarSolicitud.Dispatcher.Invoke(() =>
+            {
+                nombreDeUsuarioJugadorSolicitado = tbNombreDeUsuarioEnviarSolicitud.Text.Trim();
+            });
 
-            string nombreDeUsuarioJugadorSolicitado = tbNombreDeUsuarioEnviarSolicitud.Text.Trim();
+            lbErrorNombreDeUsuarioSolicitudAmistad.Dispatcher.Invoke(() =>
+            {
+                lbErrorNombreDeUsuarioSolicitudAmistad.Visibility = Visibility.Visible;
+            });
+
             int idJugador = sesion.JugadorId;
             string mensaje;
+
             if (ValidarEnviarSolicitud(idJugador, nombreDeUsuarioJugadorSolicitado))
             {
                 AgregarSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
                 EnviarSolicitudAmistad(nombreDeUsuarioJugadorSolicitado);
                 mensaje = Properties.Resources.lbInvitacionEnviada + " " + nombreDeUsuarioJugadorSolicitado;
-                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloSolicitudAmistad,mensaje);
-                tbNombreDeUsuarioEnviarSolicitud.Text = string.Empty;
+            //    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloSolicitudAmistad, mensaje);
+
+                tbNombreDeUsuarioEnviarSolicitud.Dispatcher.Invoke(() =>
+                {
+                    tbNombreDeUsuarioEnviarSolicitud.Text = string.Empty;
+                });
             }
             else
             {
-                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloSolicitudAmistad,Properties.Resources.lbProblemasInvitacion);
-
+              //  VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloSolicitudAmistad, Properties.Resources.lbProblemasInvitacion);
             }
         }
+
+
 
         private static void AgregarSolicitudAmistad(int idJugador, string nombreDeUsuarioJugadorSolicitado)
         {
             GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
-
             gestorAmistadCliente.AgregarSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
         }
-
 
         private void EnviarSolicitudAmistad(string nombreDeUsuarioJugadorSolicitado)
         {
             InstanceContext contexto = new InstanceContext(this);
             GestorDeSolicitudesDeAmistadClient gestorAmistadCliente = new GestorDeSolicitudesDeAmistadClient(contexto);
-
             gestorAmistadCliente.EnviarSolicitudAmistad(sesion.NombreUsuario, nombreDeUsuarioJugadorSolicitado);
         }
 
@@ -141,8 +135,40 @@ namespace trofeoCazador.Vistas.Amigos
             if (UtilidadesDeValidacion.EsNombreUsuarioValido(nombreDeUsuarioJugadorSolicitado))
             {
                 GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
-
-                esSolicitudValida = gestorAmistadCliente.ValidarEnvioSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
+                try
+                {
+                    esSolicitudValida = gestorAmistadCliente.ValidarEnvioSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                  //  ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    //  ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    //NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    //NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    //ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    //    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
             }
             else
             {

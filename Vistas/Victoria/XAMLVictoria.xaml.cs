@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
+using trofeoCazador.Utilidades;
 using trofeoCazador.Vistas.Menu;
 using trofeoCazador.Vistas.SalaEspera;
 
@@ -47,15 +48,53 @@ namespace trofeoCazador.Vistas.Victoria
                 try
                 {
                     marcadorGestor.ActualizarVictorias(idJugador);
+                    Console.WriteLine("Las victorias se actualizaron correctamente.");
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                 //   NavigationService.Navigate(new XAMLLogin());
+                }
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    //   NavigationService.Navigate(new XAMLLogin());
+                }
+                catch (CommunicationException ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error al actualizar las victorias: {ex.Message}");
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+                finally
+                {
+                    if (marcadorGestor.State == System.ServiceModel.CommunicationState.Faulted)
+                    {
+                        marcadorGestor.Abort();
+                    }
+                    else
+                    {
+                        marcadorGestor.Close();
+                    }
                 }
             }
             else
             {
-                Console.WriteLine("ID del jugador ganador no válido.");
+                Console.WriteLine("ID del jugador no válido.");
             }
         }
 

@@ -103,8 +103,6 @@ using trofeoCazador.Vistas.InicioSesion;
         }
 
 
-
-
         private void SetupClient()
             {
                 InstanceContext instanceContext = new InstanceContext(this);
@@ -112,34 +110,95 @@ using trofeoCazador.Vistas.InicioSesion;
             }
 
 
-            public void NotificarResultadosJuego(Dictionary<string, int> puntajes, string ganador, int puntajeGanador)
+        public void NotificarResultadosJuego(Dictionary<string, int> puntajes, string ganador, int puntajeGanador)
+        {
+            if (puntajes == null || !puntajes.Any())
+                throw new ArgumentException("El diccionario de puntajes no puede ser nulo o vacío.");
+            if (string.IsNullOrEmpty(ganador))
+                throw new ArgumentException("El nombre del ganador no puede ser nulo o vacío.");
+
+            var servicioDelJuegoClient = new GestionCuentaServicioClient();
+
+            try
             {
-            
-                var servicioDelJuegoClient = new GestionCuentaServicioClient();
+                var jugadores = puntajes.Keys
+                    .ToDictionary(
+                        nombreUsuario => nombreUsuario,
+                        nombreUsuario => GetIdPlayer(nombreUsuario)
+                    );
 
-                var scoreboard = puntajes
-                    .Select(kv =>
-                    {
-                        int idJugador = servicioDelJuegoClient.ObtenerIdJugadorPorNombreUsuario(kv.Key);
-
-                        return new KeyValuePair<JugadorDataContract, int>(
-                            new JugadorDataContract
-                            {
-                                JugadorId = idJugador,
-                                NombreUsuario = kv.Key
-                            },
-                            kv.Value
-                        );
-                    })
+                var scoreboard = jugadores
+                    .Select(kv => new KeyValuePair<JugadorDataContract, int>(
+                        new JugadorDataContract
+                        {
+                            JugadorId = kv.Value,
+                            NombreUsuario = kv.Key
+                        },
+                        puntajes[kv.Key]
+                    ))
                     .ToArray();
 
                 var paginaVictoria = new XAMLVictoria(idPartida, scoreboard, puntajeGanador);
                 NavigationService?.Navigate(paginaVictoria);
             }
+            catch (FaultException ex)
+            {
+                Console.WriteLine($"Error del servicio: {ex.Message}");
+                // Manejar error según sea necesario (mostrar mensaje al usuario, reintentar, etc.)
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inesperado: {ex.Message}");
+            }
+        }
+        private int GetIdPlayer(string username)
+        {
+            Console.WriteLine("SE ENTRA A GetIdPlayer");
+            GestionCuentaServicioClient userManagerClient = new GestionCuentaServicioClient();
+            int idPlayer = -1;
+
+            try
+            {
+                idPlayer = userManagerClient.ObtenerIdJugadorPorNombreUsuario(username);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                //  NavigationService.Navigate(new XAMLLogin());
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                // NavigationService.Navigate(new XAMLLogin());
+            }
+            catch (CommunicationException ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+
+            return idPlayer;
+        }
 
 
 
-            private void Mazo_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private void Mazo_MouseDown(object sender, MouseButtonEventArgs e)
             {
                 if (EsMazoVacio())
                 {
@@ -854,16 +913,17 @@ using trofeoCazador.Vistas.InicioSesion;
         {
             this.idPartida = idPartida;
             DadoImagen.IsEnabled = false;
-            ZonaMazoCartas.IsEnabled = false;
+       //     ZonaMazoCartas.IsEnabled = false;
             FichasManoItemsControl.IsEnabled = false;
             CargarFichas();
+            modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
         }
 
         public void NotificarResultadoDado(string nombreUsuario, int resultadoDado)
         {
             dado.LanzarDado(resultadoDado);
         }
-
+ 
         public void NotificarCartasEnMano(Carta[] cartasRepartidas)
         {
             foreach(var carta in cartasRepartidas)

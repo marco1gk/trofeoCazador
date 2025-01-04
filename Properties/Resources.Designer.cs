@@ -556,6 +556,15 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El anfitrión no puede expulsarse a sí mismo.
+        /// </summary>
+        public static string lbDescripcionNoExpulsarAnfitrion {
+            get {
+                return ResourceManager.GetString("lbDescripcionNoExpulsarAnfitrion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No estas en una sala de espera.
         /// </summary>
         public static string lbDescripcionNoHaySalaEspera {
@@ -1267,6 +1276,15 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ups.
+        /// </summary>
+        public static string lbTituloUps {
+            get {
+                return ResourceManager.GetString("lbTituloUps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Una mayúscula .
         /// </summary>
         public static string lbUppercaseLetterRequirement_ {
@@ -1281,6 +1299,24 @@ namespace trofeoCazador.Properties {
         public static string lbUsuario {
             get {
                 return ResourceManager.GetString("lbUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Usuario en línea.
+        /// </summary>
+        public static string lbUsuarioLinea {
+            get {
+                return ResourceManager.GetString("lbUsuarioLinea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Esta cuenta ya ha iniciado sesión desde otro dispositivo.
+        /// </summary>
+        public static string lbUsuarioYaEstaEnLinea {
+            get {
+                return ResourceManager.GetString("lbUsuarioYaEstaEnLinea", resourceCulture);
             }
         }
         

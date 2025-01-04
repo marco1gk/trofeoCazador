@@ -603,4 +603,16 @@
   <data name="lbCuentaCreada" xml:space="preserve">
     <value>Now you have an account!!</value>
   </data>
+  <data name="lbTituloUps" xml:space="preserve">
+    <value>Ups</value>
+  </data>
+  <data name="lbDescripcionNoExpulsarAnfitrion" xml:space="preserve">
+    <value>You can´t kick off yourself</value>
+  </data>
+  <data name="lbUsuarioLinea" xml:space="preserve">
+    <value>User already online</value>
+  </data>
+  <data name="lbUsuarioYaEstaEnLinea" xml:space="preserve">
+    <value>This account has already been used</value>
+  </data>
 </root>

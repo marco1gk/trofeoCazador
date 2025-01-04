@@ -6,54 +6,63 @@
       xmlns:local="clr-namespace:trofeoCazador.Vistas.Estadisticas"
       mc:Ignorable="d" 
       Title="Estadísticas"
-      Background="#F5F5F5">
+      Background="#F0F4F8">
 
-    <Grid Margin="10">
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <!-- Encabezado con botón de navegación -->
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,0,0,20">
+            <Button Content="Atrás" 
+                    Width="100" 
+                    Height="40" 
+                    Background="#0078D7" 
+                    Foreground="White" 
+                    FontWeight="Bold" 
+                    BorderBrush="#005A9E" 
+                    
+                    Click="OnBackButtonClick" />
+            <TextBlock Text="Estadísticas de Jugadores" 
+                       FontSize="28" 
+                       FontWeight="Bold" 
+                       Foreground="#333333" 
+                       Margin="20,0,0,0" 
+                       VerticalAlignment="Center" />
+        </StackPanel>
 
-        <!-- Botón para navegar hacia atrás -->
-        <Button Content="Atrás" 
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Width="80" 
-                Margin="0,0,0,10" 
-                Click="OnBackButtonClick"/>
-
-        <TextBlock Text="Estadísticas de Jugadores" 
-                   FontSize="24" 
-                   FontWeight="Bold" 
-                   Foreground="#333333" 
-                   Margin="116,-5,0,15" 
-                   HorizontalAlignment="Left"/>
-
+        <!-- Tabla de estadísticas -->
         <DataGrid ItemsSource="{Binding Estadisticas}" 
                   AutoGenerateColumns="False" 
                   CanUserAddRows="False" 
                   IsReadOnly="True" 
-                  HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Stretch" 
                   Grid.Row="1" 
-                  Grid.Column="0" 
-                  Background="#FFFFFF" 
-                  BorderBrush="#CCCCCC" 
-                  BorderThickness="1"
-                  AlternatingRowBackground="#F9F9F9">
+                  Background="White" 
+                  BorderBrush="#D1D5DB" 
+                  BorderThickness="1" 
+                  AlternatingRowBackground="#F3F4F6" 
+                  RowBackground="White" 
+                  HorizontalGridLinesBrush="#E5E7EB" 
+                  VerticalGridLinesBrush="#E5E7EB" 
+                  Margin="0,10,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Jugador" 
                                     Binding="{Binding NombreJugador}" 
-                                    Width="*" />
+                                    Width="*" 
+                                    FontFamily="Segoe UI" 
+                                    FontSize="14" 
+                                     />
                 <DataGridTextColumn Header="Victorias" 
                                     Binding="{Binding NumeroVictorias}" 
-                                    Width="*" />
+                                    Width="*" 
+                                    FontFamily="Segoe UI" 
+                                    FontSize="14" 
+                                    />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Page>
+
 

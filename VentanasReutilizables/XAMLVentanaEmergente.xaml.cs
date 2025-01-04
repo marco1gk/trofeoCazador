@@ -16,12 +16,8 @@ namespace trofeoCazador.VentanasReutilizables
 {
     public partial class XAMLVentanaEmergente : Window
     {
-        private readonly Window ventanaPrincipal;
+        private  Window ventanaPrincipal;
 
-        public XAMLVentanaEmergente()
-        {
-            InitializeComponent();
-        }
 
         public XAMLVentanaEmergente(string titulo, string descripcion)
         {
@@ -32,7 +28,6 @@ namespace trofeoCazador.VentanasReutilizables
             tbDescripcionVentanaEmergente.Text = descripcion;
 
             ConfigurarVentanaEmergente();
-
         }
 
         private void ConfigurarVentanaEmergente()

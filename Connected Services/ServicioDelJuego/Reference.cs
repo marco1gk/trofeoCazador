@@ -849,6 +849,8 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuario", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuarioRespons" +
             "e")]
+        [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuarioHunters" +
+            "TrophyExcepcionFault", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
         int ObtenerIdJugadorPorNombreUsuario(string nombreUsuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuario", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ObtenerIdJugadorPorNombreUsuarioRespons" +
@@ -1460,6 +1462,12 @@ namespace trofeoCazador.ServicioDelJuego {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/DesregistrarUsuarioDeUsuariosEnLinea" +
             "")]
         System.Threading.Tasks.Task DesregistrarUsuarioDeUsuariosEnLineaAsync(string nombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorUsuariosConectados/ReconectarUsuario", ReplyAction="http://tempuri.org/IGestorUsuariosConectados/ReconectarUsuarioResponse")]
+        bool ReconectarUsuario(int idJugador, string nombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorUsuariosConectados/ReconectarUsuario", ReplyAction="http://tempuri.org/IGestorUsuariosConectados/ReconectarUsuarioResponse")]
+        System.Threading.Tasks.Task<bool> ReconectarUsuarioAsync(int idJugador, string nombreUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1480,6 +1488,9 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/Ping")]
         void Ping();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGestorUsuariosConectados/SincronizarEstado")]
+        void SincronizarEstado(System.Collections.Generic.Dictionary<string, string> estadoJuego);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1524,6 +1535,14 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task DesregistrarUsuarioDeUsuariosEnLineaAsync(string nombreUsuario) {
             return base.Channel.DesregistrarUsuarioDeUsuariosEnLineaAsync(nombreUsuario);
+        }
+        
+        public bool ReconectarUsuario(int idJugador, string nombreUsuario) {
+            return base.Channel.ReconectarUsuario(idJugador, nombreUsuario);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ReconectarUsuarioAsync(int idJugador, string nombreUsuario) {
+            return base.Channel.ReconectarUsuarioAsync(idJugador, nombreUsuario);
         }
     }
     

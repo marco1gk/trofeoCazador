@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Vistas.Perfil;
 using trofeoCazador.Utilidades;
+using System.ServiceModel;
 
 namespace trofeoCazador.VentanasReutilizables
 {
@@ -31,36 +32,73 @@ namespace trofeoCazador.VentanasReutilizables
             this.correo = correo;
 
         }
-        private void BtnEnviar(object sender, RoutedEventArgs e)
-        {
-            string codigoIngresado = tbCode.Text.Trim();
-
-            GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            if (proxy.ValidarCodigo(codigoIngresado, codigoEnviado))
+            private void BtnEnviar(object sender, RoutedEventArgs e)
             {
-                if (jugador != null)
-                {
+                string codigoIngresado = tbCode.Text.Trim();
 
-                    proxy.AgregarJugador(jugador);
-                    this.Close();
-                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloExito, Properties.Resources.lbDescripcionCuentaCreada);
-                }
-                else
+                GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
+                try
                 {
-                    NavigationWindow navigationWindow = new NavigationWindow
+                    if (proxy.ValidarCodigo(codigoIngresado, codigoEnviado))
                     {
-                        Content = new EditarContrasenia(correo)
-                    };
-                    navigationWindow.Show();
-                    this.Close();
+                        if (jugador != null)
+                        {
+                            try
+                            {
+                                proxy.AgregarJugador(jugador);
+                                this.Close();
+                                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloExito, Properties.Resources.lbDescripcionCuentaCreada);
+                            }
+                            catch (FaultException<HuntersTrophyExcepcion> faultEx)
+                            {
+                            VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbCodigoError, faultEx.Detail.Mensaje);
+                        }
+
+                        }
+                        else
+                        {
+                            NavigationWindow navigationWindow = new NavigationWindow
+                            {
+                                Content = new EditarContrasenia(correo)
+                            };
+                            navigationWindow.Show();
+                            this.Close();
+                        }
+                    }
+                    else
+                    {
+                        lbCodigoError.Visibility = Visibility.Visible;
+                    }
                 }
-                
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                }
+                catch (FaultException<HuntersTrophyExcepcion> faultEx)
+                {
+                    // Muestra el mensaje amigable definido en el servidor
+                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbCodigoError, faultEx.Detail.Mensaje);
+                }
+                catch (FaultException ex)
+                {
+                    // Para otros errores de servicio, muestra mensaje de error general
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                }
+                catch (CommunicationException ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                }
             }
-            else
-            {
-               lbCodigoError.Visibility = Visibility.Visible;
-            }
-        }
+
+
 
         private void CerrarVentana(object sender, MouseButtonEventArgs e)
         {

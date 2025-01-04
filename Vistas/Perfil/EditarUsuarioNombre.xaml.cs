@@ -63,12 +63,12 @@ namespace trofeoCazador.Vistas.Perfil
                 return;
             }
 
-            SingletonSesion sesion = SingletonSesion.Instancia;
-            GestionCuentaServicioClient proxy = Metodos.EstablecerConexionServidor();
-            bool resultado = proxy.EditarNombreUsuario(sesion.JugadorId, nuevoNombreUsuario);
-
             try
             {
+
+                SingletonSesion sesion = SingletonSesion.Instancia;
+            GestionCuentaServicioClient proxy = Metodos.EstablecerConexionServidor();
+            bool resultado = proxy.EditarNombreUsuario(sesion.JugadorId, nuevoNombreUsuario);
 
                 if (resultado)
                 {
@@ -83,12 +83,12 @@ namespace trofeoCazador.Vistas.Perfil
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+          //      ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                //       ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -105,12 +105,12 @@ namespace trofeoCazador.Vistas.Perfil
             {
 
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                // ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                //ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
     }

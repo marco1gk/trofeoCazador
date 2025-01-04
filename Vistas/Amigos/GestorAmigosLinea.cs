@@ -203,6 +203,11 @@ namespace trofeoCazador.Vistas.Amigos
             string descripcionVentana = Properties.Resources.lbDescripcionInvitacion+" "+nombreInvitador+" "+"a la sala "+codigoSalaEspera;
             VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloInvitacionAmigo, descripcionVentana);
         }
+
+        public void SincronizarEstado(Dictionary<string, string> estadoJuego)
+        {
+            throw new NotImplementedException();
+        }
     }
     public static class Utilities
     {

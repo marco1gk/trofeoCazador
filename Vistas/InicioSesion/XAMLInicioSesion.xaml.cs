@@ -67,32 +67,33 @@ namespace trofeoCazador.Vistas.InicioSesion
                     MostrarMensajeCredencialesIncorrectas();
                     return;
                 }
+
                 JugadorDataContract jugador = AutenticarUsuario(tbUsuario.Text, tpContraseña.Password);
-         
-                if (EsUsuarioEnLinea(jugador.NombreUsuario))
+
+                if (jugador == null)
                 {
-                    VentanasEmergentes.CrearVentanaEmergente("Usuario en línea", "Esta cuenta ya ha iniciado sesión desde otro dispositivo.");
+                    ManejarCredencialesInvalidas();
                     return;
                 }
 
-                if (jugador != null)
+                if (EsUsuarioEnLinea(jugador.NombreUsuario))
                 {
-                    IniciarSesion(jugador);
+                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbUsuarioLinea,Properties.Resources.lbUsuarioYaEstaEnLinea);
+                    return;
                 }
-                else
-                {
-                    ManejarCredencialesInvalidas();
-                }
+
+                IniciarSesion(jugador);
             }
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+             //   ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                Console.WriteLine("");
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                //   ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -109,13 +110,13 @@ namespace trofeoCazador.Vistas.InicioSesion
             {
 
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                //ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.StackTrace);
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                //ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 

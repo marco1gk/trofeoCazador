@@ -603,4 +603,16 @@
   <data name="lbCuentaCreada" xml:space="preserve">
     <value>Cuenta creada exitosamente. Ahora puedes iniciar sesión.</value>
   </data>
+  <data name="lbTituloUps" xml:space="preserve">
+    <value>Ups</value>
+  </data>
+  <data name="lbDescripcionNoExpulsarAnfitrion" xml:space="preserve">
+    <value>El anfitrión no puede expulsarse a sí mismo.</value>
+  </data>
+  <data name="lbUsuarioLinea" xml:space="preserve">
+    <value>Usuario en línea</value>
+  </data>
+  <data name="lbUsuarioYaEstaEnLinea" xml:space="preserve">
+    <value>Esta cuenta ya ha iniciado sesión desde otro dispositivo</value>
+  </data>
 </root>
