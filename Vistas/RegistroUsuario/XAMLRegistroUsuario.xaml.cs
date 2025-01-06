@@ -53,7 +53,7 @@ namespace trofeoCazador.Vistas.RegistroUsuario
                 NavigationService.GoBack();
         }
 
-        private void BtnCrearCuenta(object sender, RoutedEventArgs e)
+        private void BtnCrearCuenta_Click(object sender, RoutedEventArgs e)
         {
             string errores = ValidarCampos();
             if (!string.IsNullOrEmpty(errores))

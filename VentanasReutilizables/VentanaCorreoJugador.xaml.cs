@@ -24,7 +24,7 @@ namespace trofeoCazador.VentanasReutilizables
         {
             InitializeComponent();
         }
-        private void BtnClicIngresarCorreo(object sender, RoutedEventArgs e)
+        private void BtnClicIngresarCorreo_Click(object sender, RoutedEventArgs e)
         {
             string correo = tbCorreo.Text.Trim();
 

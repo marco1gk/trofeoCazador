@@ -90,7 +90,7 @@
                         Margin="0,20,0,0"
                         Padding="10"
                         Height="40" 
-                        Click="BtnIniciarSesion"/>
+                        Click="BtnIniciarSesion_Click"/>
                 <TextBlock FontFamily="Inter" 
                            FontSize="14" 
                            VerticalAlignment="Top" 

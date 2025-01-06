@@ -16,7 +16,7 @@ namespace trofeoCazador.VentanasReutilizables
 {
     public partial class XAMLVentanaEmergente : Window
     {
-        private  Window ventanaPrincipal;
+        private readonly Window ventanaPrincipal;
 
 
         public XAMLVentanaEmergente(string titulo, string descripcion)

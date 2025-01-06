@@ -23,15 +23,12 @@ namespace trofeoCazador
     {
         public MainWindow()
         {
-           
             InitializeComponent();
             MainFrame.NavigationService.Navigate(new Uri("Vistas/InicioSesion/XAMLInicioSesion.xaml", UriKind.Relative));
-         
-            
-    
         }
+
     }
 
-        
-    }
+
+}
 

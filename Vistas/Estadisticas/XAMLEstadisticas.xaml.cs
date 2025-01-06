@@ -58,13 +58,11 @@ namespace trofeoCazador.Vistas.Estadisticas
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-               // NavigationService.Navigate(new XAMLInicioSesion());
             }
 
             catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-             //   NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException ex)
             {
@@ -85,7 +83,7 @@ namespace trofeoCazador.Vistas.Estadisticas
             return servicio.ObtenerNombreUsuarioPorIdJugador(idJugador);
         }
 
-        private void OnBackButtonClick(object sender, RoutedEventArgs e)
+        private void BtnAtras_Click(object sender, RoutedEventArgs e)
         {
                 NavigationService.GoBack();   
         }

@@ -13,8 +13,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-        <!-- Encabezado con botón de navegación -->
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,0,0,20">
             <Button Content="Atrás" 
                     Width="100" 
@@ -24,7 +22,7 @@
                     FontWeight="Bold" 
                     BorderBrush="#005A9E" 
                     
-                    Click="OnBackButtonClick" />
+                    Click="BtnAtras_Click" />
             <TextBlock Text="Estadísticas de Jugadores" 
                        FontSize="28" 
                        FontWeight="Bold" 
@@ -33,7 +31,6 @@
                        VerticalAlignment="Center" />
         </StackPanel>
 
-        <!-- Tabla de estadísticas -->
         <DataGrid ItemsSource="{Binding Estadisticas}" 
                   AutoGenerateColumns="False" 
                   CanUserAddRows="False" 

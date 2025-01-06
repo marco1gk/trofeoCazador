@@ -35,7 +35,7 @@ namespace trofeoCazador.Vistas.Menu
 
         }
        
-        private void BtnSalaEspera(object sender, RoutedEventArgs e)
+        private void BtnSalaEspera_Click(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService == null)
             {
@@ -44,7 +44,7 @@ namespace trofeoCazador.Vistas.Menu
 
         }
 
-        private void BtnSalir(object sender, RoutedEventArgs e)
+        private void BtnSalir_Click(object sender, RoutedEventArgs e)
         {
             amigosPage?.DesregistrarUsuarioActual();
             SingletonSesion.Instancia.LimpiarSesion();
@@ -60,7 +60,7 @@ namespace trofeoCazador.Vistas.Menu
 
         }
 
-        private void BtnEstadisticas(object sender, RoutedEventArgs e)
+        private void BtnEstadisticas_Click(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService == null)
             {

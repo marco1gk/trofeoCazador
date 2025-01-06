@@ -14,6 +14,7 @@ C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\UtilidadesDeValidacion.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\VentanasEmergentes.cs
 C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\ValidarCodigoRegistro.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\VentanaCorreoJugador.xaml.cs
+C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\XAMLVentanaDeDecision.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\XAMLVentanaEmergente.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\GestorAmigosLinea.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\GestorSolicitudesAmistad.cs
@@ -22,6 +23,9 @@ C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\XAMLAmigos.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\XAMLFriendRequestItemComponent.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Estadisticas\XAMLEstadisticas.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\InicioSesion\XAMLInicioSesion.xaml.cs
+C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\DialogoSeleccionCarta.xaml.cs
+C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\DialogoSeleccionCartaViewModel.cs
+C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\RelayCommand.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\XAMLTablero.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\EditarContrasenia.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\EditarCorreo.xaml.cs
@@ -30,21 +34,23 @@ C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\EditarUsuarioNombre.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\XAMLPerfil.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\RegistroUsuario\XAMLRegistroUsuario.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Menu\XAMLMenu.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\SalaEspera\AnfitrionVisibilityConverter .cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\SalaEspera\XAMLSalaEspera.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\SalaEspera\XAMLUsuario.xaml.cs
+C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Victoria\XAMLVictoria.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\App.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\MainWindow.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Properties\AssemblyInfo.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Properties\Resources.en.resx
 C:\Users\vaoma\source\repos\trofeoCazador\Properties\Resources.es-MX.resx
 C:\Users\vaoma\source\repos\trofeoCazador\Properties\Resources.resx
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\Arrays.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service.wsdl
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service1.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\ServicioJuego.Excepciones.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\ServicioJuego.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\AccesoDatos.Modelo1.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\Arrays1.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service1.wsdl
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service2.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service21.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\ServicioJuego.Excepciones1.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\ServicioJuego1.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\trofeoCazador.ServicioDelJuego.Estadisticas.datasource
 C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\trofeoCazador.ServicioDelJuego.JugadorDataContract.datasource
 C:\Users\vaoma\source\repos\trofeoCazador\packages.config
 C:\Users\vaoma\source\repos\trofeoCazador\Properties\Settings.settings

@@ -57,7 +57,7 @@
 
         <!-- Jugadores -->
         <StackPanel x:Name="stackPanelJugadores" Orientation="Vertical" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,140,0,0" Visibility="Visible">
-            <Label Content="{x:Static p:Resources.lbJugadoresEnSalaEspera}" FontFamily="Titan One" Foreground="White" FontSize="16"/>
+            <Label Name ="lbJugadores" Content="{x:Static p:Resources.lbJugadoresEnSalaEspera}" FontFamily="Titan One" Foreground="White" FontSize="16"/>
             <ListBox x:Name="listBoxJugadores" ItemsSource="{Binding JugadoresEnSala}" Background="Transparent" Width="200" Height="300" BorderThickness="0" Margin="10">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -83,7 +83,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Content="{x:Static p:Resources.lbChat}" FontFamily="Titan One" Foreground="Black" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+            <Label Name="lbChat" Content="{x:Static p:Resources.lbChat}" FontFamily="Titan One" Foreground="Black" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0"/>
             <ScrollViewer Grid.Row="1" Margin="10">
                 <StackPanel x:Name="stackPanelMessages" />
             </ScrollViewer>

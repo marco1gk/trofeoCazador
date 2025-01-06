@@ -28,7 +28,6 @@ namespace trofeoCazador.Vistas.Victoria
         private int idGanador;
         
 
-
         public XAMLVictoria(string idPartida, KeyValuePair<JugadorDataContract, int>[] marcador, int puntajeGanador)
         {
             InitializeComponent();
@@ -37,8 +36,6 @@ namespace trofeoCazador.Vistas.Victoria
             MostrarResultados();
             PosicionesJuego();
         }
-
-
         private void ActualizarVictorias(int idJugador)
         {
             if (idJugador > 0)
@@ -63,12 +60,10 @@ namespace trofeoCazador.Vistas.Victoria
                 catch (FaultException<HuntersTrophyExcepcion>)
                 {
                     VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                 //   NavigationService.Navigate(new XAMLLogin());
                 }
                 catch (FaultException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    //   NavigationService.Navigate(new XAMLLogin());
                 }
                 catch (CommunicationException ex)
                 {

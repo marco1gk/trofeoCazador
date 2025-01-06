@@ -56,7 +56,7 @@ namespace trofeoCazador.Vistas.InicioSesion
             this.NavigationService.Navigate(new Uri("Vistas/RegistroUsuario/XAMLRegistroUsuario.xaml", UriKind.Relative));
         }
 
-        private void BtnIniciarSesion(object sender, RoutedEventArgs e)
+        private void BtnIniciarSesion_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -84,16 +84,13 @@ namespace trofeoCazador.Vistas.InicioSesion
 
                 IniciarSesion(jugador);
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException )
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-             //   ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
-                Console.WriteLine("");
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException )
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                //   ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -110,13 +107,11 @@ namespace trofeoCazador.Vistas.InicioSesion
             {
 
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                //ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.StackTrace);
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                //ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 

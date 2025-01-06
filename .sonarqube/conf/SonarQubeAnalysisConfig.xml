@@ -9,7 +9,7 @@
   <HasBeginStepCommandLineCredentials>true</HasBeginStepCommandLineCredentials>
   <SonarQubeHostUrl>http://localhost:9000</SonarQubeHostUrl>
   <SonarQubeVersion>10.7.0.96327</SonarQubeVersion>
-  <SonarProjectKey>cliente</SonarProjectKey>
+  <SonarProjectKey>clienteUltim</SonarProjectKey>
   <AdditionalConfig>
     <ConfigSetting Id="BuildUri" />
     <ConfigSetting Id="TfsUri" />
@@ -139,7 +139,7 @@
     <Property Name="sonar.java.jvmframeworkconfig.activate">true</Property>
     <Property Name="sonar.updatecenter.url">https://downloads.sonarsource.com/sonarqube/update/update-center.properties</Property>
     <Property Name="sonar.core.id">147B411E-AZNLKf48_IBuhGS5bCSt</Property>
-    <Property Name="sonar.core.startTime">13/12/2024 11:15:50 p. m.</Property>
+    <Property Name="sonar.core.startTime">06/01/2025 05:41:57 a. m.</Property>
   </ServerSettings>
   <LocalSettings>
     <Property Name="sonar.host.url">http://localhost:9000</Property>
@@ -152,22 +152,22 @@
       <AnalyzerPlugins>
         <AnalyzerPlugin Key="csharp" Version="9.32.0.97167" StaticResourceName="SonarAnalyzer-9.32.0.97167.zip">
           <AssemblyPaths>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\2\Google.Protobuf.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.CFG.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.CSharp.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.ShimLayer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\2\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\Google.Protobuf.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.CFG.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.CSharp.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.ShimLayer.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
         <AnalyzerPlugin Key="vbnet" Version="9.32.0.97167" StaticResourceName="SonarAnalyzer-9.32.0.97167.zip">
           <AssemblyPaths>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\3\Google.Protobuf.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.CFG.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.ShimLayer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.VisualBasic.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\3\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\Google.Protobuf.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.CFG.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.ShimLayer.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.VisualBasic.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
       </AnalyzerPlugins>
@@ -182,22 +182,22 @@
       <AnalyzerPlugins>
         <AnalyzerPlugin Key="csharp" Version="9.32.0.97167" StaticResourceName="SonarAnalyzer-9.32.0.97167.zip">
           <AssemblyPaths>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\2\Google.Protobuf.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.CFG.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.CSharp.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.ShimLayer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\2\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\Google.Protobuf.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.CFG.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.CSharp.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.ShimLayer.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
         <AnalyzerPlugin Key="vbnet" Version="9.32.0.97167" StaticResourceName="SonarAnalyzer-9.32.0.97167.zip">
           <AssemblyPaths>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\3\Google.Protobuf.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.CFG.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.ShimLayer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.VisualBasic.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\3\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\Google.Protobuf.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.CFG.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.ShimLayer.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.VisualBasic.dll</Path>
+            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
       </AnalyzerPlugins>

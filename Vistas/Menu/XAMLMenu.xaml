@@ -18,11 +18,11 @@
             <Button Content="{x:Static p:Resources.btnSalasEspera}" Width="200" Height="50" 
                     Background="#FF2C3E50" Foreground="White" 
                     FontSize="18" FontWeight="SemiBold" 
-                    BorderBrush="#FF34495E" BorderThickness="2" Click="BtnSalaEspera" />
+                    BorderBrush="#FF34495E" BorderThickness="2" Click="BtnSalaEspera_Click" />
             <Button Content="{x:Static p:Resources.btnEstadisticas}" Width="200" Height="50" 
                     Background="#FF2C3E50" Foreground="White" 
                     FontSize="18" FontWeight="SemiBold" 
-                    BorderBrush="#FF34495E" BorderThickness="2" Click="BtnEstadisticas" />
+                    BorderBrush="#FF34495E" BorderThickness="2" Click="BtnEstadisticas_Click" />
             <Button Content="{x:Static p:Resources.btnPerfil}" Width="200" Height="50" 
                     Background="#FF2C3E50" Foreground="White" 
                     FontSize="18" FontWeight="SemiBold" 
@@ -34,7 +34,7 @@
             <Button Content="{x:Static p:Resources.btnSalir}" Width="200" Height="50" 
                     Background="#FF2C3E50" Foreground="White" 
                     FontSize="18" FontWeight="SemiBold" 
-                    BorderBrush="#FF34495E" BorderThickness="2" Click="BtnSalir" />
+                    BorderBrush="#FF34495E" BorderThickness="2" Click="BtnSalir_Click" />
         </StackPanel>
     </Grid>
 </Page>

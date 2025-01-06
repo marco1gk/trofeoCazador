@@ -48,7 +48,45 @@ namespace trofeoCazador.Vistas.Amigos
         }
         public void MostrarComoUsuarioActivo()
         {
-            cliente.RegistrarUsuarioAUsuariosConectados(SingletonSesion.Instancia.JugadorId, SingletonSesion.Instancia.NombreUsuario);
+
+            try
+            {
+                cliente.RegistrarUsuarioAUsuariosConectados(SingletonSesion.Instancia.JugadorId, SingletonSesion.Instancia.NombreUsuario);
+
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+               // VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+            
         }
 
         private void MostrarDatos()

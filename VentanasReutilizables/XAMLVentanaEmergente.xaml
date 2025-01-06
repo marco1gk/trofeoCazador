@@ -37,7 +37,7 @@
                             </TransformGroup>
                         </Separator.RenderTransform>
                     </Separator>
-                    <Button x:Name ="btnPrincipalVentanaEmergente" Content="{x:Static p:Resources.btnAceptar}" HorizontalAlignment="Left" Margin="242,177,0,0" VerticalAlignment="Top" Height="48" Width="124" FontFamily="Titan One" Foreground="White" Background="Black" BorderBrush="{x:Null}" FontSize="18" Click="BtnAceptar_Click" Cursor="Hand"/>
+                    <Button x:Name ="btnPrincipalVentanaEmergente" Content="{x:Static p:Resources.btnAceptar}" HorizontalAlignment="Left" Margin="242,177,0,19" Width="124" FontFamily="Titan One" Foreground="White" Background="Black" BorderBrush="{x:Null}" FontSize="18" Click="BtnAceptar_Click" Cursor="Hand"/>
                 </Grid>
             </Border>
         </Grid>

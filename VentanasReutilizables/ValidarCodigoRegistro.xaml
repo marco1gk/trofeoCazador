@@ -55,7 +55,7 @@
                      VerticalContentAlignment="Center" Margin="422,300,404,423"/>
             <Button Background="gray" Foreground="White" BorderThickness="0" 
                     FontFamily="Titan One" FontSize="24" Content="{x:Static p:Resources.btnEnviar}" 
-                    Click="BtnEnviar" Margin="416,455,410,268" Cursor="Hand"/>
+                    Click="BtnEnviar_Click" Margin="416,455,410,268" Cursor="Hand"/>
             <TextBlock x:Name="lbCodigoError" Text="{x:Static p:Resources.lbCodigoError}" 
                        HorizontalAlignment="Left" Margin="422,507,0,0" VerticalAlignment="Top" 
                        Width="368" Foreground="Red" FontFamily="Inter" FontSize="16" 

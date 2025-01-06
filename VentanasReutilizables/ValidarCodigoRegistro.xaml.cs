@@ -32,7 +32,7 @@ namespace trofeoCazador.VentanasReutilizables
             this.correo = correo;
 
         }
-            private void BtnEnviar(object sender, RoutedEventArgs e)
+            private void BtnEnviar_Click(object sender, RoutedEventArgs e)
             {
                 string codigoIngresado = tbCode.Text.Trim();
 
@@ -74,31 +74,27 @@ namespace trofeoCazador.VentanasReutilizables
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
                 }
                 catch (FaultException<HuntersTrophyExcepcion> faultEx)
                 {
-                    // Muestra el mensaje amigable definido en el servidor
                     VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbCodigoError, faultEx.Detail.Mensaje);
                 }
-                catch (FaultException ex)
-                {
-                    // Para otros errores de servicio, muestra mensaje de error general
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                }
-                catch (CommunicationException ex)
+                catch (FaultException )
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
                 }
-                catch (Exception ex)
+                catch (CommunicationException )
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                }
+                catch (Exception )
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 }
             }
-
-
 
         private void CerrarVentana(object sender, MouseButtonEventArgs e)
         {

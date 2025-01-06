@@ -42,7 +42,7 @@
                     <StackPanel x:Name="stackPanelSolicitudesAmistad" />
                 </ScrollViewer>
 
-                <Button Content="{x:Static p:Resources.btnSolicitudes}" Click="BtnSolicitudDeAmigos_Click" Margin="245,10,0,0" Width="200" HorizontalAlignment="Left" Background="#00796B" Foreground="White" BorderBrush="Transparent" BorderThickness="1" Padding="10" Grid.Row="2" Height="38" VerticalAlignment="Top" Grid.Column="1"/>
+                <Button Content="{x:Static p:Resources.btnSolicitudes}" Click="BtnSolicitudDeAmigos_Click" Margin="245,10,0,0" Width="200" HorizontalAlignment="Left" Background="#00796B" Foreground="White" BorderBrush="Transparent" BorderThickness="1" Padding="10" Grid.Row="2" Grid.Column="1"/>
             </Grid>
         </Border>
         <Border Grid.Row="1" Grid.Column="1" Margin="10" Padding="10" Background="White" CornerRadius="10" BorderBrush="#B2DFDB" BorderThickness="1">

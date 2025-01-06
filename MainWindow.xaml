@@ -7,10 +7,8 @@
         xmlns:local="clr-namespace:trofeoCazador"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
     <Grid>
-
         <Frame Name="MainFrame" NavigationUIVisibility="Hidden" />
-
     </Grid>
 </Window>
-

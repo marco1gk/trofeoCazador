@@ -13,6 +13,6 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="{x:Static p:Resources.tbDescripcionRecuperarContraseña}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,20,0,0" Grid.Column="3" />
         <TextBox x:Name="tbCorreo" Width="250" Height="30" Margin="12,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="3" />
-        <Button Content="{x:Static p:Resources.btnAceptar}" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BtnClicIngresarCorreo" Margin="87,122,0,0" Grid.Column="3"/>
+        <Button Content="{x:Static p:Resources.btnAceptar}" Width="100" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BtnClicIngresarCorreo_Click" Margin="87,122,0,0" Grid.Column="3"/>
     </Grid>
 </Window>

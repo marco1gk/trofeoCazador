@@ -45,6 +45,6 @@
         <TextBox Name="tbUsuario" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="158,64,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" />
         <TextBox Name="tbCorreo" HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="158,116,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
         <PasswordBox Name="PbContraseña" HorizontalAlignment="Left" BorderBrush="{x:Null}" Margin="530,118,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120"/>
-        <Button BorderBrush="{x:Null}" Content="{x:Static p:Resources.btnRegistrarse}" Background="SaddleBrown" FontWeight="Bold" HorizontalAlignment="Left" Margin="613,50,0,0" Grid.Row="2" VerticalAlignment="Top" Width="156" Height="26" Click="BtnCrearCuenta"/>
+        <Button BorderBrush="{x:Null}" Content="{x:Static p:Resources.btnRegistrarse}" Background="SaddleBrown" FontWeight="Bold" HorizontalAlignment="Left" Margin="613,50,0,0" Grid.Row="2" VerticalAlignment="Top" Width="156" Height="26" Click="BtnCrearCuenta_Click"/>
     </Grid>
 </Page>

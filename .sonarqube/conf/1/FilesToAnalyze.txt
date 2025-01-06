@@ -15,6 +15,7 @@ C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\UtilidadesDeValidacion.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\VentanasEmergentes.cs
 C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\ValidarCodigoRegistro.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\VentanaCorreoJugador.xaml.cs
+C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\XAMLVentanaDeDecision.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\XAMLVentanaEmergente.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\GestorAmigosLinea.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\GestorSolicitudesAmistad.cs
@@ -23,6 +24,9 @@ C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\XAMLAmigos.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\XAMLFriendRequestItemComponent.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Estadisticas\XAMLEstadisticas.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\InicioSesion\XAMLInicioSesion.xaml.cs
+C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\DialogoSeleccionCarta.xaml.cs
+C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\DialogoSeleccionCartaViewModel.cs
+C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\RelayCommand.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\XAMLTablero.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\EditarContrasenia.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\EditarCorreo.xaml.cs
@@ -31,21 +35,23 @@ C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\EditarUsuarioNombre.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\XAMLPerfil.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\RegistroUsuario\XAMLRegistroUsuario.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Menu\XAMLMenu.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\SalaEspera\AnfitrionVisibilityConverter .cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\SalaEspera\XAMLSalaEspera.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\SalaEspera\XAMLUsuario.xaml.cs
+C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Victoria\XAMLVictoria.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\App.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\MainWindow.xaml.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Properties\AssemblyInfo.cs
 C:\Users\vaoma\source\repos\trofeoCazador\Properties\Resources.resx
 C:\Users\vaoma\source\repos\trofeoCazador\Properties\Resources.en.resx
 C:\Users\vaoma\source\repos\trofeoCazador\Properties\Resources.es-MX.resx
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\Arrays.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service.wsdl
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service1.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\ServicioJuego.Excepciones.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\ServicioJuego.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\AccesoDatos.Modelo1.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\Arrays1.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service1.wsdl
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service2.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service21.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\ServicioJuego.Excepciones1.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\ServicioJuego1.xsd
+C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\trofeoCazador.ServicioDelJuego.Estadisticas.datasource
 C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\trofeoCazador.ServicioDelJuego.JugadorDataContract.datasource
 C:\Users\vaoma\source\repos\trofeoCazador\packages.config
 C:\Users\vaoma\source\repos\trofeoCazador\Properties\Settings.settings
@@ -58,12 +64,14 @@ C:\Users\vaoma\source\repos\trofeoCazador\Componentes\SalaEspera\XAMLInvitacionS
 C:\Users\vaoma\source\repos\trofeoCazador\MainWindow.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\ValidarCodigoRegistro.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\VentanaCorreoJugador.xaml
+C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\XAMLVentanaDeDecision.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\XAMLVentanaEmergente.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\XAMLActiveUserItemControl.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\XAMLAmigos.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\XAMLFriendRequestItemComponent.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Estadisticas\XAMLEstadisticas.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\InicioSesion\XAMLInicioSesion.xaml
+C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\DialogoSeleccionCarta.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\XAMLTablero.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\EditarContrasenia.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\EditarCorreo.xaml
@@ -74,6 +82,7 @@ C:\Users\vaoma\source\repos\trofeoCazador\Vistas\RegistroUsuario\XAMLRegistroUsu
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Menu\XAMLMenu.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\SalaEspera\XAMLSalaEspera.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Vistas\SalaEspera\XAMLUsuario.xaml
+C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Victoria\XAMLVictoria.xaml
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\loginBox.png
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\landsCape.png
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\fondoCrearPerfil.png
@@ -94,14 +103,6 @@ C:\Users\vaoma\source\repos\trofeoCazador\Recursos\rejectFriendRequestIcon.png.p
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\friendItemButton.png
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\configuraciones.png
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\Configuracion.png
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta1.png
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta2.png
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta3.png
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta4.png
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta5.png
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta6.png
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta7.png
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta8.png
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta_Escondite.png
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta_Mazo.png
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta_Reglas.png
@@ -121,3 +122,12 @@ C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPart
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\emailIcon.png
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\invitationByEmailBackground.png
 C:\Users\vaoma\source\repos\trofeoCazador\Recursos\copyToClipboardIcon.png
+C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta1.jpg
+C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta2.jpg
+C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta3.jpg
+C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta4.jpg
+C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta5.jpg
+C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta6.jpg
+C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta7.jpg
+C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\ImagenesPartida\Cartas\Carta8.jpg
+C:\Users\vaoma\source\repos\trofeoCazador\Recursos\fondoInicio.jpg

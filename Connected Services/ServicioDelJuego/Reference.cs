@@ -1057,10 +1057,10 @@ namespace trofeoCazador.ServicioDelJuego {
         System.Threading.Tasks.Task IniciarPartidaAsync(string codigoSalaEspera);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/ExpulsarJugadorSalaEspera", ReplyAction="http://tempuri.org/ISalaEsperaServicio/ExpulsarJugadorSalaEsperaResponse")]
-        void ExpulsarJugadorSalaEspera(string lobbyCode, string username);
+        void ExpulsarJugadorSalaEspera(string codigoSalaEspera, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/ExpulsarJugadorSalaEspera", ReplyAction="http://tempuri.org/ISalaEsperaServicio/ExpulsarJugadorSalaEsperaResponse")]
-        System.Threading.Tasks.Task ExpulsarJugadorSalaEsperaAsync(string lobbyCode, string username);
+        System.Threading.Tasks.Task ExpulsarJugadorSalaEsperaAsync(string codigoSalaEspera, string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1201,12 +1201,12 @@ namespace trofeoCazador.ServicioDelJuego {
             return base.Channel.IniciarPartidaAsync(codigoSalaEspera);
         }
         
-        public void ExpulsarJugadorSalaEspera(string lobbyCode, string username) {
-            base.Channel.ExpulsarJugadorSalaEspera(lobbyCode, username);
+        public void ExpulsarJugadorSalaEspera(string codigoSalaEspera, string username) {
+            base.Channel.ExpulsarJugadorSalaEspera(codigoSalaEspera, username);
         }
         
-        public System.Threading.Tasks.Task ExpulsarJugadorSalaEsperaAsync(string lobbyCode, string username) {
-            return base.Channel.ExpulsarJugadorSalaEsperaAsync(lobbyCode, username);
+        public System.Threading.Tasks.Task ExpulsarJugadorSalaEsperaAsync(string codigoSalaEspera, string username) {
+            return base.Channel.ExpulsarJugadorSalaEsperaAsync(codigoSalaEspera, username);
         }
     }
     
@@ -1217,34 +1217,34 @@ namespace trofeoCazador.ServicioDelJuego {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ObtenerListaNombresUsuariosAmigos", ReplyAction="http://tempuri.org/IGestorAmistad/ObtenerListaNombresUsuariosAmigosResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestorAmistad/ObtenerListaNombresUsuariosAmigosHuntersTrophyE" +
             "xcepcionFault", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
-        string[] ObtenerListaNombresUsuariosAmigos(int idPlayer);
+        string[] ObtenerListaNombresUsuariosAmigos(int idJugador);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ObtenerListaNombresUsuariosAmigos", ReplyAction="http://tempuri.org/IGestorAmistad/ObtenerListaNombresUsuariosAmigosResponse")]
-        System.Threading.Tasks.Task<string[]> ObtenerListaNombresUsuariosAmigosAsync(int idPlayer);
+        System.Threading.Tasks.Task<string[]> ObtenerListaNombresUsuariosAmigosAsync(int idJugador);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ValidarEnvioSolicitudAmistad", ReplyAction="http://tempuri.org/IGestorAmistad/ValidarEnvioSolicitudAmistadResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestorAmistad/ValidarEnvioSolicitudAmistadHuntersTrophyExcepc" +
             "ionFault", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
-        bool ValidarEnvioSolicitudAmistad(int idPlayerSender, string usernamePlayerRequested);
+        bool ValidarEnvioSolicitudAmistad(int idJugadorEnviador, string nombreUsuarioSolicitado);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ValidarEnvioSolicitudAmistad", ReplyAction="http://tempuri.org/IGestorAmistad/ValidarEnvioSolicitudAmistadResponse")]
-        System.Threading.Tasks.Task<bool> ValidarEnvioSolicitudAmistadAsync(int idPlayerSender, string usernamePlayerRequested);
+        System.Threading.Tasks.Task<bool> ValidarEnvioSolicitudAmistadAsync(int idJugadorEnviador, string nombreUsuarioSolicitado);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/AgregarSolicitudAmistad", ReplyAction="http://tempuri.org/IGestorAmistad/AgregarSolicitudAmistadResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestorAmistad/AgregarSolicitudAmistadHuntersTrophyExcepcionFa" +
             "ult", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
-        int AgregarSolicitudAmistad(int idPlayerSender, string usernamePlayerRequested);
+        int AgregarSolicitudAmistad(int idJugadorEnvia, string nombreUsuarioSolicitado);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/AgregarSolicitudAmistad", ReplyAction="http://tempuri.org/IGestorAmistad/AgregarSolicitudAmistadResponse")]
-        System.Threading.Tasks.Task<int> AgregarSolicitudAmistadAsync(int idPlayerSender, string usernamePlayerRequested);
+        System.Threading.Tasks.Task<int> AgregarSolicitudAmistadAsync(int idJugadorEnvia, string nombreUsuarioSolicitado);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ObtenerNombresUsuariosSolicitantes", ReplyAction="http://tempuri.org/IGestorAmistad/ObtenerNombresUsuariosSolicitantesResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestorAmistad/ObtenerNombresUsuariosSolicitantesHuntersTrophy" +
             "ExcepcionFault", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
-        string[] ObtenerNombresUsuariosSolicitantes(int idPlayer);
+        string[] ObtenerNombresUsuariosSolicitantes(int idJugador);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestorAmistad/ObtenerNombresUsuariosSolicitantes", ReplyAction="http://tempuri.org/IGestorAmistad/ObtenerNombresUsuariosSolicitantesResponse")]
-        System.Threading.Tasks.Task<string[]> ObtenerNombresUsuariosSolicitantesAsync(int idPlayer);
+        System.Threading.Tasks.Task<string[]> ObtenerNombresUsuariosSolicitantesAsync(int idJugador);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1274,36 +1274,36 @@ namespace trofeoCazador.ServicioDelJuego {
                 base(binding, remoteAddress) {
         }
         
-        public string[] ObtenerListaNombresUsuariosAmigos(int idPlayer) {
-            return base.Channel.ObtenerListaNombresUsuariosAmigos(idPlayer);
+        public string[] ObtenerListaNombresUsuariosAmigos(int idJugador) {
+            return base.Channel.ObtenerListaNombresUsuariosAmigos(idJugador);
         }
         
-        public System.Threading.Tasks.Task<string[]> ObtenerListaNombresUsuariosAmigosAsync(int idPlayer) {
-            return base.Channel.ObtenerListaNombresUsuariosAmigosAsync(idPlayer);
+        public System.Threading.Tasks.Task<string[]> ObtenerListaNombresUsuariosAmigosAsync(int idJugador) {
+            return base.Channel.ObtenerListaNombresUsuariosAmigosAsync(idJugador);
         }
         
-        public bool ValidarEnvioSolicitudAmistad(int idPlayerSender, string usernamePlayerRequested) {
-            return base.Channel.ValidarEnvioSolicitudAmistad(idPlayerSender, usernamePlayerRequested);
+        public bool ValidarEnvioSolicitudAmistad(int idJugadorEnviador, string nombreUsuarioSolicitado) {
+            return base.Channel.ValidarEnvioSolicitudAmistad(idJugadorEnviador, nombreUsuarioSolicitado);
         }
         
-        public System.Threading.Tasks.Task<bool> ValidarEnvioSolicitudAmistadAsync(int idPlayerSender, string usernamePlayerRequested) {
-            return base.Channel.ValidarEnvioSolicitudAmistadAsync(idPlayerSender, usernamePlayerRequested);
+        public System.Threading.Tasks.Task<bool> ValidarEnvioSolicitudAmistadAsync(int idJugadorEnviador, string nombreUsuarioSolicitado) {
+            return base.Channel.ValidarEnvioSolicitudAmistadAsync(idJugadorEnviador, nombreUsuarioSolicitado);
         }
         
-        public int AgregarSolicitudAmistad(int idPlayerSender, string usernamePlayerRequested) {
-            return base.Channel.AgregarSolicitudAmistad(idPlayerSender, usernamePlayerRequested);
+        public int AgregarSolicitudAmistad(int idJugadorEnvia, string nombreUsuarioSolicitado) {
+            return base.Channel.AgregarSolicitudAmistad(idJugadorEnvia, nombreUsuarioSolicitado);
         }
         
-        public System.Threading.Tasks.Task<int> AgregarSolicitudAmistadAsync(int idPlayerSender, string usernamePlayerRequested) {
-            return base.Channel.AgregarSolicitudAmistadAsync(idPlayerSender, usernamePlayerRequested);
+        public System.Threading.Tasks.Task<int> AgregarSolicitudAmistadAsync(int idJugadorEnvia, string nombreUsuarioSolicitado) {
+            return base.Channel.AgregarSolicitudAmistadAsync(idJugadorEnvia, nombreUsuarioSolicitado);
         }
         
-        public string[] ObtenerNombresUsuariosSolicitantes(int idPlayer) {
-            return base.Channel.ObtenerNombresUsuariosSolicitantes(idPlayer);
+        public string[] ObtenerNombresUsuariosSolicitantes(int idJugador) {
+            return base.Channel.ObtenerNombresUsuariosSolicitantes(idJugador);
         }
         
-        public System.Threading.Tasks.Task<string[]> ObtenerNombresUsuariosSolicitantesAsync(int idPlayer) {
-            return base.Channel.ObtenerNombresUsuariosSolicitantesAsync(idPlayer);
+        public System.Threading.Tasks.Task<string[]> ObtenerNombresUsuariosSolicitantesAsync(int idJugador) {
+            return base.Channel.ObtenerNombresUsuariosSolicitantesAsync(idJugador);
         }
     }
     

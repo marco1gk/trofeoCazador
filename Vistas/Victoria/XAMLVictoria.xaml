@@ -67,8 +67,8 @@
                 <Grid Margin="624,578,62,47">
 
                     <Rectangle Fill="#F61D1D" RadiusX="15" RadiusY="15" Margin="325,253,0,0"/>
-                    <Label Content="Exit" Margin="325,253,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Titan One" Foreground="White" FontSize="28" />
-                    <Button Margin="325,253,0,0" Background="Transparent" BorderBrush="Transparent" Content="{x:Static p:Resources.btnSalir}" Focusable="False" Click="BtnSalir_Click" Height="44" VerticalAlignment="Top"/>
+                    <Label  Margin="325,253,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Titan One" Content="{x:Static p:Resources.btnSalir}" Foreground="White" FontSize="28" />
+                    <Button Margin="325,253,0,0" Background="Transparent" BorderBrush="Transparent"  Focusable="False" Click="BtnSalir_Click" Height="44" VerticalAlignment="Top"/>
 
                 </Grid>
             </Grid>
