@@ -18,13 +18,14 @@ using System.Text;
 using trofeoCazador.Vistas.Victoria;
 using trofeoCazador.Utilidades;
 using trofeoCazador.Vistas.InicioSesion;
+using trofeoCazador.Vistas.SalaEspera;
 
-    namespace trofeoCazador.Vistas.PartidaJuego
+namespace trofeoCazador.Vistas.PartidaJuego
     {
         public partial class XAMLTablero : Page, IServicioPartidaCallback
         {
             private ServicioPartidaClient cliente;
-            private List<JugadorPartida> jugadores;
+            private List<JugadorPartida> listaDeJugadores;
             private string idPartida;
             private JugadorDataContract jugadorActual = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
             private ObservableCollection<CartaCliente> CartasEnMano { get; set; } = new ObservableCollection<CartaCliente>();
@@ -45,6 +46,7 @@ using trofeoCazador.Vistas.InicioSesion;
             private int cartasGuardadasEscondite = 0;
             private ModoSeleccionCarta[] modosSeleccionCarta = Enum.GetValues(typeof(ModoSeleccionCarta)).Cast<ModoSeleccionCarta>().ToArray();
             private string[] nombresJugadoresModoSeleccion;
+            private bool cartaTomada = false;
 
         private enum ModoSeleccionCarta
             {
@@ -69,7 +71,7 @@ using trofeoCazador.Vistas.InicioSesion;
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                this.jugadores = jugadores;
+                this.listaDeJugadores = jugadores;
                 CargarFichasEstaticas();
                 dado = new Dado(DadoImagen);
                 this.idPartida = idPartida;
@@ -83,12 +85,68 @@ using trofeoCazador.Vistas.InicioSesion;
                         NombreUsuario = jugadorActual.NombreUsuario,
                         EsInvitado = true
                     };
+                    try
+                    {
+                        cliente.RegistrarJugadorInvitado(invitado);
+                    }
+                    catch (EndpointNotFoundException ex)
+                    {
+                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (TimeoutException ex)
+                    {
+                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (FaultException ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (CommunicationException ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (Exception ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
 
-                    cliente.RegistrarJugadorInvitado(invitado); 
                 }
                 else
                 {
-                    cliente.RegistrarJugador(jugadorActual.NombreUsuario); 
+                    try
+                    {
+                        cliente.RegistrarJugador(jugadorActual.NombreUsuario);
+                    }
+                    catch (EndpointNotFoundException ex)
+                    {
+                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (TimeoutException ex)
+                    {
+                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (FaultException ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (CommunicationException ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (Exception ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
                 }
 
                 MostrarJugadores();
@@ -104,10 +162,10 @@ using trofeoCazador.Vistas.InicioSesion;
 
 
         private void SetupClient()
-            {
-                InstanceContext instanceContext = new InstanceContext(this);
-                cliente = new ServicioPartidaClient(instanceContext);
-            }
+        {
+            InstanceContext instanceContext = new InstanceContext(this);
+            cliente = new ServicioPartidaClient(instanceContext);
+        }
 
 
         public void NotificarResultadosJuego(Dictionary<string, int> puntajes, string ganador, int puntajeGanador)
@@ -144,7 +202,6 @@ using trofeoCazador.Vistas.InicioSesion;
             catch (FaultException ex)
             {
                 Console.WriteLine($"Error del servicio: {ex.Message}");
-                // Manejar error según sea necesario (mostrar mensaje al usuario, reintentar, etc.)
             }
             catch (Exception ex)
             {
@@ -164,32 +221,32 @@ using trofeoCazador.Vistas.InicioSesion;
             catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                //  NavigationService.Navigate(new XAMLLogin());
+                NavigationService.Navigate(new XAMLSalaEspera());
             }
             catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                // NavigationService.Navigate(new XAMLLogin());
+                NavigationService.Navigate(new XAMLSalaEspera());
             }
             catch (CommunicationException ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
 
             return idPlayer;
@@ -202,81 +259,143 @@ using trofeoCazador.Vistas.InicioSesion;
             {
                 if (EsMazoVacio())
                 {
-                    cliente.FinalizarJuego(idPartida);
+                    try
+                    {
+                        cliente.FinalizarJuego(idPartida);
+                    }
+                    catch (EndpointNotFoundException ex)
+                    {
+                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (TimeoutException ex)
+                    {
+                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (FaultException<HuntersTrophyExcepcion>)
+                    {
+                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                        NavigationService.Navigate(new XAMLSalaEspera());
+                    }
+                    catch (FaultException)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        NavigationService.Navigate(new XAMLSalaEspera());
+                    }
+                    catch (CommunicationException ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (Exception ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+
                 }
                 else
                 {
                     var cartaSuperior = ObtenerCartaSuperiorDelMazo();
-                    cliente.TomarCartaDeMazo(idPartida, jugadorActual.NombreUsuario, cartaSuperior.IdCarta);
+                    try
+                    {
+                        cliente.TomarCartaDeMazo(idPartida, jugadorActual.NombreUsuario, cartaSuperior.IdCarta);
+                    }
+                    catch (EndpointNotFoundException ex)
+                    {
+                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (TimeoutException ex)
+                    {
+                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (FaultException)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        NavigationService.Navigate(new XAMLSalaEspera());
+                    }
+                    catch (CommunicationException ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (Exception ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+
                 }
             }
             public void MostrarJugadores()
             {
-                var jugadoresEnPartida = jugadores
+                var jugadoresEnPartida = listaDeJugadores
                     .Where(j => j.NombreUsuario != jugadorActual.NombreUsuario)
                     .ToList();
 
-                var areasJugadores = new[]
+                var areasDeJugadores = new[]
                 {
                     new { Nombre = NombreJugador2, Imagen = Jugador2Imagen, Area = AreaJugador2 },
                     new { Nombre = NombreJugador3, Imagen = Jugador3Imagen, Area = AreaJugador3 },
                     new { Nombre = NombreJugador4, Imagen = Jugador4Imagen, Area = AreaJugador4 }
                 };
 
-                for (int i = 0; i < jugadoresEnPartida.Count && i < areasJugadores.Length; i++)
+                for (int i = 0; i < jugadoresEnPartida.Count && i < areasDeJugadores.Length; i++)
                 {
                     var jugador = jugadoresEnPartida[i];
-                    var area = areasJugadores[i];
+                    var areaDeJugador = areasDeJugadores[i];
 
-                    area.Nombre.Text = jugador.NombreUsuario;
+                    areaDeJugador.Nombre.Text = jugador.NombreUsuario;
                     string rutaImagen = ObtenerRutaImagenPerfil(jugador.NumeroFotoPerfil);
-                    area.Imagen.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
-                    area.Area.Visibility = Visibility.Visible;
+                    areaDeJugador.Imagen.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
+                    areaDeJugador.Area.Visibility = Visibility.Visible;
                 }
             }
-
 
             private void BtnClicIniciarJuego(object sender, RoutedEventArgs e)
             {
                 try
                 {
-                    cliente.CrearPartida(jugadores.ToArray(), idPartida);
+                    cliente.CrearPartida(listaDeJugadores.ToArray(), idPartida);
                     cliente.RepartirCartas(idPartida);
                     cliente.EmpezarTurno(idPartida);
                 }
                 catch (EndpointNotFoundException ex)
                 {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                //ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
-            }
-            catch (TimeoutException ex)
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
                 {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                //ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
-            }
-            catch (FaultException<HuntersTrophyExcepcion>)
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
                 {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                //NavigationService.Navigate(new XAMLInicioSesion());
+                NavigationService.Navigate(new XAMLInicioSesion());
                 }
 
                 catch (FaultException)
                 {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                //NavigationService.Navigate(new XAMLInicioSesion());
+                NavigationService.Navigate(new XAMLInicioSesion());
                 }
                 catch (CommunicationException ex)
                 {
 
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                //ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
-            }
-            catch (Exception ex)
-            {
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                //ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
             }
-        }
 
 
             private Thickness margenInicialCarta = new Thickness();
@@ -338,30 +457,44 @@ using trofeoCazador.Vistas.InicioSesion;
                 FichasEstaticas.Add(new Ficha { IdFicha = i, RutaImagenFicha = $"/Recursos/ElementosPartida/ImagenesPartida/Fichas/Ficha{i}.png" });
             }
         }
-
-
-        /*private void ActualizarZonaFichas()
-        {
-            Metodos.MostrarMensaje($"Nombre jugador 2: {NombreJugador2.Text}");
-            if (NombreJugador2.Text == jugadorTurnoActual)
-            {
-                ZonaFichasJugador2.ItemsSource = FichasEnMano;
-            }
-            else if (NombreJugador3.Text == jugadorTurnoActual)
-            {
-                ZonaFichasJugador3.ItemsSource = FichasEnMano;
-            }
-            else if (NombreJugador4.Text == jugadorTurnoActual)
-            {
-                ZonaFichasJugador4.ItemsSource = FichasEnMano;
-            }
-        }*/
-
-        //DADO
-
         private void ImagenDado_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            cliente.LanzarDado(idPartida, jugadorActual.NombreUsuario);
+            try
+            {
+                cliente.LanzarDado(idPartida, jugadorActual.NombreUsuario);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
         }
         private string ObtenerRutaImagenPerfil(int numeroFotoPerfil)
         {
@@ -403,7 +536,42 @@ using trofeoCazador.Vistas.InicioSesion;
 
         private async Task TomarFicha(Ficha fichaSeleccionada)
         {
-            cliente.TomarFichaMesa(idPartida, fichaSeleccionada.IdFicha);
+            try
+            {
+                cliente.TomarFichaMesa(idPartida, fichaSeleccionada.IdFicha);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
             await Task.Delay(1000);
 
             ManejarDecisionContinuarTurno();
@@ -411,15 +579,13 @@ using trofeoCazador.Vistas.InicioSesion;
         private async Task ManejarFichaDuplicada()
         {
             await Task.Delay(1000);
-            bool tieneBlammo = VerificarCartaEnMano("Carta6");
-            bool tieneNanners = VerificarCartaEnMano("Carta5");
 
-            if (tieneBlammo || tieneNanners)
+            if (JugadorTieneCartasClave())
             {
-                bool decision = await DecisionSalvarTurno();
-                if(decision)
+                bool decision = await SolicitarDecisionSalvarTurno();
+                if (decision)
                 {
-                    cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.SalvarTurno), jugadorTurnoActual);
+                    SalvarTurno();
                 }
                 else
                 {
@@ -431,6 +597,62 @@ using trofeoCazador.Vistas.InicioSesion;
                 await ManejarTurnoSinOpciones();
             }
         }
+
+        private bool JugadorTieneCartasClave()
+        {
+            return VerificarCartaEnMano("Carta6") || VerificarCartaEnMano("Carta5");
+        }
+
+        private async Task<bool> SolicitarDecisionSalvarTurno()
+        {
+            return await DecisionSalvarTurno();
+        }
+
+        private void SalvarTurno()
+        {
+            try
+            {
+                cliente.EstablecerModoSeleccionCarta(
+                idPartida,
+                Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.SalvarTurno),
+                jugadorTurnoActual
+            );
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+            
+        }
+
 
         private bool VerificarCartaEnMano(string tipoCarta)
         {
@@ -450,28 +672,80 @@ using trofeoCazador.Vistas.InicioSesion;
 
         private async Task<bool> EsperarTomaDeCarta()
         {
-            bool cartaTomada = false;
-            MouseButtonEventHandler mouseDownHandler = null;
+            SuscribirEventoTomaDeCarta();
 
-            mouseDownHandler = (s, e) =>
-            {
-                cartaTomada = true;
-                ZonaMazoCartas.MouseDown -= mouseDownHandler;
-            };
-            ZonaMazoCartas.MouseDown += mouseDownHandler;
+            bool cartaTomada = await EsperarCartaTomada();
 
-            while (!cartaTomada)
-            {
-                await Task.Delay(100);
-            }
+            DesuscribirEventoTomaDeCarta();
 
             return cartaTomada;
         }
 
+        private void SuscribirEventoTomaDeCarta()
+        {
+            ZonaMazoCartas.MouseDown += CartaTomada;
+        }
+
+        private void DesuscribirEventoTomaDeCarta()
+        {
+            ZonaMazoCartas.MouseDown -= CartaTomada;
+        }
+
+        private async Task<bool> EsperarCartaTomada()
+        {
+            while (!cartaTomada)
+            {
+                await Task.Delay(100);
+            }
+            return cartaTomada;
+        }
+
+        private void CartaTomada(object sender, MouseButtonEventArgs e)
+        {
+            cartaTomada = true;
+        }
+
+
 
         private async Task FinalizarTurno()
         {
-            await Task.Run(() => cliente.FinalizarTurno(idPartida, jugadorActual.NombreUsuario));
+            try
+            {
+                await Task.Run(() => cliente.FinalizarTurno(idPartida, jugadorActual.NombreUsuario));
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+            
         }
 
 
@@ -544,7 +818,43 @@ using trofeoCazador.Vistas.InicioSesion;
 
         private void MoverCartaAEscondite(CartaCliente carta)
         {
-            cliente.AgregarCartaAEscondite(jugadorActual.NombreUsuario, carta.IdCarta, idPartida);
+            try
+            {
+                cliente.AgregarCartaAEscondite(jugadorActual.NombreUsuario, carta.IdCarta, idPartida);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+            
         }
 
 
@@ -622,7 +932,43 @@ using trofeoCazador.Vistas.InicioSesion;
             else
             {
                 VentanasEmergentes.CrearVentanaEmergente("Ficha sin efecto", "Esta ficha no tiene efecto ya que no queda alguna ficha por la cual intercambiarla.");
-                cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+                try
+                {
+                    cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+                
             }
         }
 
@@ -632,8 +978,44 @@ using trofeoCazador.Vistas.InicioSesion;
 
             if (fichaEnMesaSeleccionada != null)
             {
-                cliente.TomarFichaMesa(idPartida, fichaEnMesaSeleccionada.IdFicha);
-                cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+                try
+                {
+                    cliente.TomarFichaMesa(idPartida, fichaEnMesaSeleccionada.IdFicha);
+                    cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+
                 FichasItemsControl.IsEnabled = false;
                 FichasItemsControl.MouseDown -= FichasItemsControl_MouseDown;
             }
@@ -656,34 +1038,139 @@ using trofeoCazador.Vistas.InicioSesion;
                 {
                     // Deshabilitar clicks para evitar múltiples selecciones
                     HabilitarClickEnAreasJugadores(false);
-                    cliente.RobarCartaAJugador(jugadorObjetivo.NombreUsuario, idPartida, CartaDuplicacionActiva);
+                    try
+                    {
+                        cliente.RobarCartaAJugador(jugadorObjetivo.NombreUsuario, idPartida, CartaDuplicacionActiva);
+                    }
+                    catch (EndpointNotFoundException ex)
+                    {
+                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (TimeoutException ex)
+                    {
+                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (FaultException<HuntersTrophyExcepcion>)
+                    {
+                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+
+                    catch (FaultException)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+                    catch (CommunicationException ex)
+                    {
+
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (Exception ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                    }
                 }
             }
         }
 
         private JugadorPartida ObtenerJugadorDesdeArea(StackPanel area)
         {
-            if (area == AreaJugador2) return jugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador2.Text);
-            if (area == AreaJugador3) return jugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador3.Text);
-            if (area == AreaJugador4) return jugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador4.Text);
+            if (area == AreaJugador2) return listaDeJugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador2.Text);
+            if (area == AreaJugador3) return listaDeJugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador3.Text);
+            if (area == AreaJugador4) return listaDeJugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador4.Text);
             return null;
         }
 
         private async void AccionFichaRevelarCarta()
         {
-            cliente.RevelarCartaMazo(idPartida);
-            await Task.Delay(100);
-            cliente.PreguntarGuardarCartaEnEscondite(idPartida);
-            //cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+            try
+            {
+                cliente.RevelarCartaMazo(idPartida);
+                await Task.Delay(100);
+                cliente.PreguntarGuardarCartaEnEscondite(idPartida);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
 
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+  
         }
 
         private void MoverCartaTipoEspecificoAEscondite(CartaCliente cartaSeleccionada, string tipoCartaRevelada)
         {
             if(cartaSeleccionada.Tipo == tipoCartaRevelada)
             {
-                cliente.AgregarCartaAEscondite(jugadorActual.NombreUsuario, cartaSeleccionada.IdCarta, idPartida);
-                cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.CartasSinTurno), jugadorActual.NombreUsuario);
+                try
+                {
+                    cliente.AgregarCartaAEscondite(jugadorActual.NombreUsuario, cartaSeleccionada.IdCarta, idPartida);
+                    cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.CartasSinTurno), jugadorActual.NombreUsuario);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+                
             }
             else
             {
@@ -692,112 +1179,399 @@ using trofeoCazador.Vistas.InicioSesion;
         }
         private void AccionFichaRobarCartaAJugador()
         {
-            // Desuscribirse para evitar duplicados
+            DesuscribirEventosRobarCarta();
+            VentanasEmergentes.CrearVentanaEmergente("Selecciona un jugador", "Haz clic en el jugador al que deseas robar una carta.");
+            HabilitarClickEnAreasJugadores(true);
+            SuscribirEventosRobarCarta();
+        }
+
+        private void DesuscribirEventosRobarCarta()
+        {
             AreaJugador2.MouseDown -= RobarCartaDeJugador;
             AreaJugador3.MouseDown -= RobarCartaDeJugador;
             AreaJugador4.MouseDown -= RobarCartaDeJugador;
             AreaJugador2.MouseDown -= RobarCartaEsconditeDeJugador;
             AreaJugador3.MouseDown -= RobarCartaEsconditeDeJugador;
             AreaJugador4.MouseDown -= RobarCartaEsconditeDeJugador;
+        }
 
-            // Mostrar mensaje y habilitar áreas
-            VentanasEmergentes.CrearVentanaEmergente("Selecciona un jugador", "Haz clic en el jugador al que deseas robar una carta.");
-            HabilitarClickEnAreasJugadores(true);
-
-            // Asignar eventos una vez
+        private void SuscribirEventosRobarCarta()
+        {
             AreaJugador2.MouseDown += RobarCartaDeJugador;
             AreaJugador3.MouseDown += RobarCartaDeJugador;
             AreaJugador4.MouseDown += RobarCartaDeJugador;
         }
 
+
         private void AccionFichaRobarOGuardar()
         {
-            cartasATomarMazo = CartaDuplicacionActiva ? 2 : 1;
-            cartasAGuardarEscondite = CartaDuplicacionActiva ? 2 : 1;
-
+            ConfigurarAccionFicha();
             VentanasEmergentes.CrearVentanaEmergente(
                 "Acción de ficha",
                 $"Puedes realizar 1 de las siguientes acciones:\n1) Tomar {cartasATomarMazo} carta(s) del mazo\n2) Guardar {cartasAGuardarEscondite} carta(s) en el escondite."
             );
+            HabilitarInteraccionMazo();
+            SuscribirEventosAccionFicha();
 
-            ZonaMazoCartas.IsEnabled = true;
+            try
+            {
+                cliente.EstablecerModoSeleccionCarta(
+                idPartida,
+                Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverAlEscondite),
+                jugadorTurnoActual
+            );
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+            
+        }
+
+        private void ConfigurarAccionFicha()
+        {
+            cartasATomarMazo = CartaDuplicacionActiva ? 2 : 1;
+            cartasAGuardarEscondite = CartaDuplicacionActiva ? 2 : 1;
             cartasTomadasMazo = 0;
             cartasGuardadasEscondite = 0;
+        }
+        private void HabilitarInteraccionMazo()
+        {
+            ZonaMazoCartas.IsEnabled = true;
+        }
+
+        private void SuscribirEventosAccionFicha()
+        {
             ZonaMazoCartas.MouseDown += ZonaMazoCartas_MouseDown;
             CartasManoItemsControl.MouseDown += CartasManoItemsControl_MouseDown;
-            cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverAlEscondite), jugadorTurnoActual);
         }
 
         private void ZonaMazoCartas_MouseDown(object sender, MouseButtonEventArgs e)
         {
             cartasTomadasMazo++;
-            if (cartasTomadasMazo == cartasATomarMazo)
+            if (SeHanTomadoTodasLasCartasMazo())
+            {
+                FinalizarAccionRobarCartas();
+            }
+        }
+
+        private bool SeHanTomadoTodasLasCartasMazo()
+        {
+            return cartasTomadasMazo == cartasATomarMazo;
+        }
+
+        private void FinalizarAccionRobarCartas()
+        {
+            try
             {
                 cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
-                ZonaMazoCartas.IsEnabled = false;
-                ZonaMazoCartas.MouseDown -= ZonaMazoCartas_MouseDown;
-                CartasManoItemsControl.MouseDown -= CartasManoItemsControl_MouseDown;
-                cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
+                DeshabilitarInteraccionMazo();
+                DesuscribirEventos();
+                cliente.EstablecerModoSeleccionCarta(
+                    idPartida,
+                    Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno),
+                    jugadorTurnoActual
+                );
+                CartaDuplicacionActiva = false;
             }
-            CartaDuplicacionActiva = false;
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+            
+        }
+
+        private void DeshabilitarInteraccionMazo()
+        {
+            ZonaMazoCartas.IsEnabled = false;
+        }
+
+        private void DesuscribirEventos()
+        {
+            ZonaMazoCartas.MouseDown -= ZonaMazoCartas_MouseDown;
+            CartasManoItemsControl.MouseDown -= CartasManoItemsControl_MouseDown;
         }
 
         private void CartasManoItemsControl_MouseDown(object sender, MouseButtonEventArgs e)
         {
             cartasGuardadasEscondite++;
-            if (cartasGuardadasEscondite == cartasAGuardarEscondite)
+            if (SeHanGuardadoTodasLasCartas())
             {
-                cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
-                ZonaMazoCartas.IsEnabled = false;
-                ZonaMazoCartas.MouseDown -= ZonaMazoCartas_MouseDown;
-                CartasManoItemsControl.MouseDown -= CartasManoItemsControl_MouseDown;
-                cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
-
+                FinalizarAccionGuardarCartas();
             }
-            CartaDuplicacionActiva = false;
         }
 
+        private bool SeHanGuardadoTodasLasCartas()
+        {
+            return cartasGuardadasEscondite == cartasAGuardarEscondite;
+        }
 
+        private void FinalizarAccionGuardarCartas()
+        {
+            try
+            {
+                cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+                DeshabilitarInteraccionMazo();
+                DesuscribirEventos();
+                cliente.EstablecerModoSeleccionCarta(
+                   idPartida,
+                   Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno),
+                   jugadorTurnoActual
+               );
+                CartaDuplicacionActiva = false;
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+        }
 
         private void AccionFichaGuardarCartasEscondite()
         {
             if (CartasEnMano.Any())
             {
-                cartasAGuardarEscondite = CartaDuplicacionActiva ? 4 : 2;
-                cartasGuardadasEscondite = 0;
-
+                ConfigurarCartasAGuardar();
                 VentanasEmergentes.CrearVentanaEmergente(
-                    "Acción ficha",
-                    $"Puedes guardar {cartasAGuardarEscondite} cartas en el escondite."
-                );
+                "Acción ficha",
+                $"Puedes guardar {cartasAGuardarEscondite} cartas en el escondite."
+            );
+                try
+                {
+                    cliente.EstablecerModoSeleccionCarta(
+                        idPartida,
+                        Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverAlEscondite),
+                        jugadorTurnoActual
+                    );
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
 
-                cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverAlEscondite), jugadorTurnoActual);
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+
                 CartasManoItemsControl.MouseDown += CartasManoItemsControl_MouseDown1;
             }
             else
             {
                 VentanasEmergentes.CrearVentanaEmergente(
-                    "Sin cartas en mano",
-                    "No tiene cartas que pueda guardar en el escondite."
+                "Sin cartas en mano",
+                "No tiene cartas que pueda guardar en el escondite."
                 );
-                cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+
+                try
+                {
+                    cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+                
                 CartaDuplicacionActiva = false;
             }
         }
 
-        // Método explícito para manejar MouseDown
+        private void ConfigurarCartasAGuardar()
+        {
+            cartasAGuardarEscondite = CartaDuplicacionActiva ? 4 : 2;
+            cartasGuardadasEscondite = 0;
+        }
+
         private void CartasManoItemsControl_MouseDown1(object sender, MouseButtonEventArgs e)
         {
             cartasGuardadasEscondite++;
-
             if (cartasGuardadasEscondite == cartasAGuardarEscondite || !CartasEnMano.Any())
             {
-                // Desuscripción del evento
-                CartasManoItemsControl.MouseDown -= CartasManoItemsControl_MouseDown1;
+                FinalizarAccionGuardarCartasEscondite();
+            }
+        }
+
+        private void FinalizarAccionGuardarCartasEscondite()
+        {
+            CartasManoItemsControl.MouseDown -= CartasManoItemsControl_MouseDown1;
+
+            try
+            {
                 cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
                 CartaDuplicacionActiva = false;
-                cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
+                cliente.EstablecerModoSeleccionCarta(
+                    idPartida,
+                    Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno),
+                    jugadorTurnoActual
+                );
             }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+            
         }
 
         private void TomarCartasMazo()
@@ -805,37 +1579,73 @@ using trofeoCazador.Vistas.InicioSesion;
             if (cartasATomarMazo == 0)
             {
                 VentanasEmergentes.CrearVentanaEmergente(
-                    "",
-                    "Nadie guardó una carta en el escondite, por lo que no puedes tomar cartas del mazo."
+                "",
+                "Nadie guardó una carta en el escondite, por lo que no puedes tomar cartas del mazo."
                 );
 
                 if (fichaSeleccionada != null)
                 {
-                    cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+                    try
+                    {
+                        cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+                    }
+                    catch (EndpointNotFoundException ex)
+                    {
+                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (TimeoutException ex)
+                    {
+                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (FaultException<HuntersTrophyExcepcion>)
+                    {
+                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+
+                    catch (FaultException)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+                    catch (CommunicationException ex)
+                    {
+
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (Exception ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                    }
+                    
                 }
             }
             else
             {
-                if (CartaDuplicacionActiva)
-                {
-                    cartasATomarMazo = cartasATomarMazo * 2;
-                }
-
-                cartasTomadasMazo = 0;
-
+                ConfigurarCartasParaTomar();
                 VentanasEmergentes.CrearVentanaEmergente(
-                    "Tomar cartas del mazo",
-                    $"Puedes tomar {cartasATomarMazo} cartas del mazo."
+                "Tomar cartas del mazo",
+                $"Puedes tomar {cartasATomarMazo} cartas del mazo."
                 );
-
-                ZonaMazoCartas.IsEnabled = true;
-
-                // Suscribir el evento
+                HabilitarInteraccionMazo();
                 ZonaMazoCartas.MouseDown += ZonaMazoCartas_MouseDown1;
             }
         }
 
-        // Método explícito para manejar MouseDown
+        private void ConfigurarCartasParaTomar()
+        {
+            if (CartaDuplicacionActiva)
+            {
+                cartasATomarMazo *= 2;
+            }
+
+            cartasTomadasMazo = 0;
+        }
+
         private void ZonaMazoCartas_MouseDown1(object sender, MouseButtonEventArgs e)
         {
             cartasTomadasMazo++;
@@ -849,7 +1659,43 @@ using trofeoCazador.Vistas.InicioSesion;
 
                 if (fichaSeleccionada != null)
                 {
-                    cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+                    try
+                    {
+                        cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+                    }
+                    catch (EndpointNotFoundException ex)
+                    {
+                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (TimeoutException ex)
+                    {
+                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (FaultException<HuntersTrophyExcepcion>)
+                    {
+                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+
+                    catch (FaultException)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+                    catch (CommunicationException ex)
+                    {
+
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (Exception ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                    }
+                    
                 }
 
                 CartaDuplicacionActiva = false;
@@ -896,7 +1742,43 @@ using trofeoCazador.Vistas.InicioSesion;
         {
             foreach (var ficha in FichasEnMano)
             {
-                cliente.DevolverFichaAMesa(ficha.IdFicha, idPartida);
+                try
+                {
+                    cliente.DevolverFichaAMesa(ficha.IdFicha, idPartida);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+                
             }
             DadoImagen.IsEnabled = false;
             dado.DadoLanzado -= ManejarResultadoDado;
@@ -904,19 +1786,14 @@ using trofeoCazador.Vistas.InicioSesion;
             
         }
 
-        public void NotificarResultadoAccion(string action, bool success)
-        {
-            //TODO
-        }
-
         public void NotificarPartidaCreada(string idPartida)
         {
             this.idPartida = idPartida;
             DadoImagen.IsEnabled = false;
-       //     ZonaMazoCartas.IsEnabled = false;
+            ZonaMazoCartas.IsEnabled = false;
             FichasManoItemsControl.IsEnabled = false;
             CargarFichas();
-            modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
+            modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
         }
 
         public void NotificarResultadoDado(string nombreUsuario, int resultadoDado)
@@ -1013,24 +1890,6 @@ using trofeoCazador.Vistas.InicioSesion;
             CartasEnEscondite.Add(carta);
         }
 
-        /*public void NotificarIntentoRoboCarta(string jugadorObjetivoRobo)
-        {
-            if (jugadorActual.NombreUsuario == jugadorObjetivoRobo)
-            {
-                MessageBoxResult decision = DecisionDefenderseRobo();
-
-                if (decision == MessageBoxResult.Yes)
-                {
-                    CartasManoItemsControl.IsEnabled = true;
-                    modoSeleccionActual = ModoSeleccionCarta.DefenderRobo;
-                }
-                else
-                {
-                    cliente.RobarCarta(jugadorObjetivoRobo, idPartida);
-                }
-            }
-        }*/
-
         public async void NotificarIntentoRoboCarta(string nombreUsuarioAtacante)
         {
             if (jugadorActual.NombreUsuario == nombreUsuarioAtacante)
@@ -1039,7 +1898,43 @@ using trofeoCazador.Vistas.InicioSesion;
 
                 if (decision)
                 {
-                    cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.DefenderRobo), jugadorActual.NombreUsuario);
+                    try
+                    {
+                        cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.DefenderRobo), jugadorActual.NombreUsuario);
+                    }
+                    catch (EndpointNotFoundException ex)
+                    {
+                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (TimeoutException ex)
+                    {
+                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (FaultException<HuntersTrophyExcepcion>)
+                    {
+                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+
+                    catch (FaultException)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+                    catch (CommunicationException ex)
+                    {
+
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (Exception ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                    }
+                    
                 }
                 else
                 {
@@ -1050,7 +1945,43 @@ using trofeoCazador.Vistas.InicioSesion;
                     }
                     for (int i = 0; i < cartasARobar; i++)
                     {
-                        cliente.RobarCarta(idPartida, nombreUsuarioAtacante); // Continúa con el flujo de robo en el servidor.
+                        try
+                        {
+                            cliente.RobarCarta(idPartida, nombreUsuarioAtacante);
+                        }
+                        catch (EndpointNotFoundException ex)
+                        {
+                            VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                            ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                        }
+                        catch (TimeoutException ex)
+                        {
+                            VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                            ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                        }
+                        catch (FaultException<HuntersTrophyExcepcion>)
+                        {
+                            VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                            NavigationService.Navigate(new XAMLInicioSesion());
+                        }
+
+                        catch (FaultException)
+                        {
+                            VentanasEmergentes.CrearMensajeVentanaServidorError();
+                            NavigationService.Navigate(new XAMLInicioSesion());
+                        }
+                        catch (CommunicationException ex)
+                        {
+
+                            VentanasEmergentes.CrearMensajeVentanaServidorError();
+                            ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                        }
+                        catch (Exception ex)
+                        {
+                            VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                            ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                        }
+                        
                     }
                 }
             }
@@ -1069,7 +2000,44 @@ using trofeoCazador.Vistas.InicioSesion;
             {
                 CartaCliente cartaRobada = new CartaCliente { IdCarta = carta.IdCarta, Tipo = carta.Tipo, RutaImagen = CartaCliente.ObtenerRutaImagenCarta(carta.IdRutaImagen) };
                 CartasEnMano.Add(cartaRobada);
-                cliente.DevolverFichaAMesa(4, idPartida);
+
+                try
+                {
+                    cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+                
             }
             CartaDuplicacionActiva = false;
         }
@@ -1082,11 +2050,83 @@ using trofeoCazador.Vistas.InicioSesion;
 
                 if (decision)
                 {
-                    cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.DefenderRobo), jugadorActual.NombreUsuario);
+                    try
+                    {
+                        cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.DefenderRobo), jugadorActual.NombreUsuario);
+                    }
+                    catch (EndpointNotFoundException ex)
+                    {
+                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (TimeoutException ex)
+                    {
+                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (FaultException<HuntersTrophyExcepcion>)
+                    {
+                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+
+                    catch (FaultException)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+                    catch (CommunicationException ex)
+                    {
+
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (Exception ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                    }
+                    
                 }
                 else
                 {
-                    cliente.RobarCartaEscondite(idPartida, nombreUsuarioAtacante); // Continúa con el flujo de robo en el servidor.
+                    try
+                    {
+                        cliente.RobarCartaEscondite(idPartida, nombreUsuarioAtacante);
+                    }
+                    catch (EndpointNotFoundException ex)
+                    {
+                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (TimeoutException ex)
+                    {
+                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (FaultException<HuntersTrophyExcepcion>)
+                    {
+                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+
+                    catch (FaultException)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+                    catch (CommunicationException ex)
+                    {
+
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (Exception ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                    }
+                    
                 }
             }
             CartaDuplicacionActiva = false;
@@ -1113,7 +2153,43 @@ using trofeoCazador.Vistas.InicioSesion;
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                cliente.LanzarDado(idPartida, jugadorTurnoActual);
+                try
+                {
+                    cliente.LanzarDado(idPartida, jugadorTurnoActual);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+                
             });
         }
 
@@ -1124,8 +2200,44 @@ using trofeoCazador.Vistas.InicioSesion;
 
         public void NotificarNumeroJugadoresGuardaronCarta(int numeroJugadores)
         {
-            cliente.TomarCartaDeMazo(idPartida, jugadorActual.NombreUsuario, CartasEnMazo.Last().IdCarta);
-            cliente.OcultarCartaMazo(idPartida);
+            try
+            {
+                cliente.TomarCartaDeMazo(idPartida, jugadorActual.NombreUsuario, CartasEnMazo.Last().IdCarta);
+                cliente.OcultarCartaMazo(idPartida);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+            
             cartasATomarMazo = numeroJugadores;
             TomarCartasMazo();
         }
@@ -1154,6 +2266,11 @@ using trofeoCazador.Vistas.InicioSesion;
             CartasEnMazo.Add(carta);
         }
 
+        public void NotificarResultadoAccion(string accion, bool resultado)
+        {
+
+        }
+
        
 
         private async void ManejarDecisionGuardarCartaEnEscondite()
@@ -1162,13 +2279,86 @@ using trofeoCazador.Vistas.InicioSesion;
 
             if (decision)
             {
-                cliente.EnviarDecision(idPartida, true);
-                cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverCartaTipoEspecificoAEscondite), jugadorActual.NombreUsuario);
+                try
+                {
+                    cliente.EnviarDecision(idPartida, true);
+                    cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverCartaTipoEspecificoAEscondite), jugadorActual.NombreUsuario);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+                
             }
             else
             {
-                cliente.EnviarDecision(idPartida, false);
-                modoSeleccionActual = ModoSeleccionCarta.AccionCartasEnTurno;
+                try
+                {
+                    cliente.EnviarDecision(idPartida, false);
+                    cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverCartaTipoEspecificoAEscondite), jugadorTurnoActual);
+
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+   
             }
         }
 
@@ -1265,7 +2455,43 @@ using trofeoCazador.Vistas.InicioSesion;
         }
         private void UsarCarta1(int idCarta)
         {
-            cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+            try
+            {
+                cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+            
             RobarCartaEsconditeAJugador();
 
         }
@@ -1274,8 +2500,44 @@ using trofeoCazador.Vistas.InicioSesion;
         {
             if (jugadorDecidioParar)
             {
-                cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
-                cliente.ObligarATirarDado(idPartida);
+                try
+                {
+                    cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+                    cliente.ObligarATirarDado(idPartida);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+                
                 jugadorDecidioParar = false;
             }
             else
@@ -1288,7 +2550,42 @@ using trofeoCazador.Vistas.InicioSesion;
         {
             if (CartasDescarte.Any())
             {
-                cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+                try
+                {
+                    cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
                 SeleccionarCartaDescarte(idCarta);
             }
             else
@@ -1299,74 +2596,382 @@ using trofeoCazador.Vistas.InicioSesion;
 
         private void UsarCarta4(int idCarta)
         {
-            cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+            try
+            {
+                cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
             CartaDuplicacionActiva = true;
         }
 
         private async void UsarCarta5(int idCarta)
         {
-            cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
-            DadoImagen.IsEnabled = false;
-            cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
+            try
+            {
+                cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+                DadoImagen.IsEnabled = false;
+                cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+            
             await ResolverFichas();
             await FinalizarTurno();
         }
 
         private void UsarCarta6(int idCarta)
         {
-            cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
-            cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
+            try
+            {
+                cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+                cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
+                
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
             ManejarDecisionContinuarTurno();
+
         }
 
 
         private void UsarCarta7(int idCarta)
         {
-            cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+            try
+            {
+                cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
 
-            VentanasEmergentes.CrearVentanaEmergente("Acción de carta", "Puedes tomar 2 cartas del Mazo, da clic 2 veces en él.");
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+            }
+            
+            VentanasEmergentes.CrearVentanaEmergente(
+                "Acción de carta",
+                "Puedes tomar 2 cartas del Mazo, da clic 2 veces en él."
+            );
+            ConfigurarZonaMazoParaTomaDeCartas();
+        }
+
+        private void ConfigurarZonaMazoParaTomaDeCartas()
+        {
             ZonaMazoCartas.IsEnabled = true;
             cartasTomadasMazo = 0;
 
             void OnMouseDownHandler(object sender, MouseButtonEventArgs e)
             {
                 cartasTomadasMazo++;
-
                 if (cartasTomadasMazo == 2)
                 {
-                    ZonaMazoCartas.IsEnabled = false;
-                    if(jugadorActual.NombreUsuario == jugadorTurnoActual)
-                    {
-                        cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
-                    }
-                    else
-                    {
-                        cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.CartasSinTurno), jugadorActual.NombreUsuario);
-                    }
-
+                    FinalizarTomaDeCartas();
                     ZonaMazoCartas.MouseDown -= OnMouseDownHandler;
-
-                    if(fichaSeleccionada != null)
-                    {
-                        cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
-                    }
                 }
             }
+
             ZonaMazoCartas.MouseDown += OnMouseDownHandler;
         }
 
-        private void UsarCarta8(int idCarta)
+        private void FinalizarTomaDeCartas()
         {
-            cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
-            cliente.UtilizarCartaDefensiva(idPartida, jugadorActual.NombreUsuario);
+            ZonaMazoCartas.IsEnabled = false;
 
             if (jugadorActual.NombreUsuario == jugadorTurnoActual)
             {
-                cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
+                try
+                {
+                    cliente.EstablecerModoSeleccionCarta(
+                    idPartida,
+                    Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno),
+                    jugadorTurnoActual
+                );
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+                
             }
             else
             {
-                cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.CartasSinTurno), jugadorActual.NombreUsuario);
+                try
+                {
+                    cliente.EstablecerModoSeleccionCarta(
+                    idPartida,
+                    Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.CartasSinTurno),
+                    jugadorActual.NombreUsuario
+                );
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+                
+            }
+
+            if (fichaSeleccionada != null)
+            {
+                try
+                {
+                    cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+                
+            }
+        }
+
+
+        private void UsarCarta8(int idCarta)
+        {
+            try
+            {
+                cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+                cliente.UtilizarCartaDefensiva(idPartida, jugadorActual.NombreUsuario);
+
+                if (jugadorActual.NombreUsuario == jugadorTurnoActual)
+                {
+                    cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
+                }
+                else
+                {
+                    cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.CartasSinTurno), jugadorActual.NombreUsuario);
+                }
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
@@ -1378,7 +2983,6 @@ using trofeoCazador.Vistas.InicioSesion;
 
         private void RobarCartaEsconditeAJugador()
         {
-            // Desuscribirse para evitar duplicados
             AreaJugador2.MouseDown -= RobarCartaEsconditeDeJugador;
             AreaJugador3.MouseDown -= RobarCartaEsconditeDeJugador;
             AreaJugador4.MouseDown -= RobarCartaEsconditeDeJugador;
@@ -1386,11 +2990,9 @@ using trofeoCazador.Vistas.InicioSesion;
             AreaJugador3.MouseDown -= RobarCartaDeJugador;
             AreaJugador4.MouseDown -= RobarCartaDeJugador;
 
-            // Mostrar mensaje y habilitar áreas
             Metodos.MostrarMensaje("Haz clic en el jugador al que deseas robar una carta de su escondite.");
             HabilitarClickEnAreasJugadores(true);
 
-            // Asignar eventos una vez
             AreaJugador2.MouseDown += RobarCartaEsconditeDeJugador;
             AreaJugador3.MouseDown += RobarCartaEsconditeDeJugador;
             AreaJugador4.MouseDown += RobarCartaEsconditeDeJugador;
@@ -1404,16 +3006,50 @@ using trofeoCazador.Vistas.InicioSesion;
                 var jugadorObjetivo = ObtenerJugadorDesdeArea(areaSeleccionada);
                 if (jugadorObjetivo != null)
                 {
-                    // Deshabilitar clicks para evitar múltiples selecciones
                     HabilitarClickEnAreasJugadores(false);
-                    cliente.RobarCartaEsconditeAJugador(jugadorObjetivo.NombreUsuario, idPartida, CartaDuplicacionActiva);
+                    try
+                    {
+                        cliente.RobarCartaEsconditeAJugador(jugadorObjetivo.NombreUsuario, idPartida, CartaDuplicacionActiva);
+                    }
+                    catch (EndpointNotFoundException ex)
+                    {
+                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (TimeoutException ex)
+                    {
+                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (FaultException<HuntersTrophyExcepcion>)
+                    {
+                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+
+                    catch (FaultException)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        NavigationService.Navigate(new XAMLInicioSesion());
+                    }
+                    catch (CommunicationException ex)
+                    {
+
+                        VentanasEmergentes.CrearMensajeVentanaServidorError();
+                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    }
+                    catch (Exception ex)
+                    {
+                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                    }
+                    
                 }
             }
         }
 
         private void SeleccionarCartaDescarte(int idCartaRecientementeDescartada)
         {
-            // Filtrar cartas elegibles
             var cartasElegibles = CartasDescarte.Where(c => c.IdCarta != idCartaRecientementeDescartada).ToList();
 
             if (!cartasElegibles.Any())
@@ -1422,13 +3058,49 @@ using trofeoCazador.Vistas.InicioSesion;
                 return;
             }
 
-            // Mostrar el diálogo
             var dialogo = new DialogoSeleccionCarta(cartasElegibles);
             if (dialogo.ShowDialog() == true)
             {
                 var cartaSeleccionada = dialogo.CartaSeleccionada;
                 Metodos.MostrarMensaje($"Carta seleccionada: {cartaSeleccionada.Tipo}");
-                cliente.TomarCartaDeDescarte(idPartida, jugadorActual.NombreUsuario, cartaSeleccionada.IdCarta);
+
+                try
+                {
+                    cliente.TomarCartaDeDescarte(idPartida, jugadorActual.NombreUsuario, cartaSeleccionada.IdCarta);
+                }
+                catch (EndpointNotFoundException ex)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (TimeoutException ex)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    NavigationService.Navigate(new XAMLInicioSesion());
+                }
+                catch (CommunicationException ex)
+                {
+
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                }
+                catch (Exception ex)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                }
+                
             }
         }
     }

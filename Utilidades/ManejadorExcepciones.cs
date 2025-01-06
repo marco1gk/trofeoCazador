@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Navigation;
 using trofeoCazador.Vistas.InicioSesion;
 using System.Windows;
+using trofeoCazador.Vistas.SalaEspera;
 
 namespace trofeoCazador.Utilidades
 {
@@ -24,6 +25,16 @@ namespace trofeoCazador.Utilidades
             }
         }
 
+        public static void ManejarErrorExcepcionPartida(Exception ex, NavigationService servicioNavegacion)
+        {
+            logger.Error(ex.Message + "\n" + ex.StackTrace + "\n");
+
+            if (servicioNavegacion != null)
+            {
+                servicioNavegacion.Navigate(new XAMLSalaEspera());
+            }
+        }
+
         public static void ManejarFatalExcepcion(Exception ex, NavigationService servicioNavegacion)
         {
             logger.Fatal(ex.Message + "\n" + ex.StackTrace + "\n");
@@ -33,6 +44,8 @@ namespace trofeoCazador.Utilidades
                 servicioNavegacion.Navigate(new XAMLInicioSesion());
             }
         } 
+
+
         public static void ManejarComponenteErrorExcepcion(Exception ex)
         {
             logger.Error(ex.Message + "\n" + ex.StackTrace + "\n");
@@ -64,7 +77,5 @@ namespace trofeoCazador.Utilidades
                 ventana.Show();  
             }
         }
-
-
     }
 }
