@@ -322,6 +322,15 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El nombre de usuario no puede tener más de 50 caracteres..
+        /// </summary>
+        public static string lbCaracteresNombreUsuario {
+            get {
+                return ResourceManager.GetString("lbCaracteresNombreUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Por le menos un caracter especial.
         /// </summary>
         public static string lbCaracterEspecialRequisito {
@@ -345,6 +354,15 @@ namespace trofeoCazador.Properties {
         public static string lbCodigo {
             get {
                 return ResourceManager.GetString("lbCodigo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El código debe ser un número de 6 dígitos..
+        /// </summary>
+        public static string lbCodigoDigitos {
+            get {
+                return ResourceManager.GetString("lbCodigoDigitos", resourceCulture);
             }
         }
         
@@ -385,6 +403,42 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña ha sido actualizada con éxito..
+        /// </summary>
+        public static string lbContraseñaActualizada {
+            get {
+                return ResourceManager.GetString("lbContraseñaActualizada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña ingresada no coincide con la actual..
+        /// </summary>
+        public static string lbContraseñaNoCoincide {
+            get {
+                return ResourceManager.GetString("lbContraseñaNoCoincide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Su contraseña ha sido reestablecida..
+        /// </summary>
+        public static string lbContraseñaRestablecida {
+            get {
+                return ResourceManager.GetString("lbContraseñaRestablecida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña ingresada no cumple con los requisitos de contraseña segura..
+        /// </summary>
+        public static string lbContraseñaSegura {
+            get {
+                return ResourceManager.GetString("lbContraseñaSegura", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Olvide mi contraseña .
         /// </summary>
         public static string lbContraseniaOlvidada {
@@ -408,6 +462,42 @@ namespace trofeoCazador.Properties {
         public static string lbCorreoActual {
             get {
                 return ResourceManager.GetString("lbCorreoActual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El correo ha sido actualizado con éxito..
+        /// </summary>
+        public static string lbCorreoCambiado {
+            get {
+                return ResourceManager.GetString("lbCorreoCambiado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El correo no puede exceder los 50 caracteres..
+        /// </summary>
+        public static string lbCorreoExceso {
+            get {
+                return ResourceManager.GetString("lbCorreoExceso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El nuevo correo no puede ser el mismo que el actual..
+        /// </summary>
+        public static string lbCorreoIgual {
+            get {
+                return ResourceManager.GetString("lbCorreoIgual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El correo no puede estar vacío..
+        /// </summary>
+        public static string lbCorreoVacio {
+            get {
+                return ResourceManager.GetString("lbCorreoVacio", resourceCulture);
             }
         }
         
@@ -534,6 +624,15 @@ namespace trofeoCazador.Properties {
         public static string lbDescripcionInvitacion {
             get {
                 return ResourceManager.GetString("lbDescripcionInvitacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a a unirte a la sala:.
+        /// </summary>
+        public static string lbDescripcionInvitacionsala {
+            get {
+                return ResourceManager.GetString("lbDescripcionInvitacionsala", resourceCulture);
             }
         }
         
@@ -673,6 +772,24 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al intentar reestablecer la contraseña, inténtelo de nuevo más tarde..
+        /// </summary>
+        public static string lbErrorActualizarContraseña {
+            get {
+                return ResourceManager.GetString("lbErrorActualizarContraseña", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Código incorrecto, por favor intenta de nuevo..
+        /// </summary>
+        public static string lbErrorInesperadoCorreo {
+            get {
+                return ResourceManager.GetString("lbErrorInesperadoCorreo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Error: Usuario no válido o solicitud ya enviada.
         /// </summary>
         public static string lbErrorNombreDeUsuarioSolicitudAmistad {
@@ -687,6 +804,15 @@ namespace trofeoCazador.Properties {
         public static string lbGestorAmigos {
             get {
                 return ResourceManager.GetString("lbGestorAmigos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingresa codigo.
+        /// </summary>
+        public static string lbIngresaCodigo {
+            get {
+                return ResourceManager.GetString("lbIngresaCodigo", resourceCulture);
             }
         }
         
@@ -709,11 +835,29 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Por favor, debe ingresar un nuevo nombre de usuario..
+        /// </summary>
+        public static string lbIngresarUsuario {
+            get {
+                return ResourceManager.GetString("lbIngresarUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Inicio de sesión .
         /// </summary>
         public static string lbInicioSesion {
             get {
                 return ResourceManager.GetString("lbInicioSesion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Has sido invitado por.
+        /// </summary>
+        public static string lbInvitacionAmigoRecibida {
+            get {
+                return ResourceManager.GetString("lbInvitacionAmigoRecibida", resourceCulture);
             }
         }
         
@@ -732,6 +876,24 @@ namespace trofeoCazador.Properties {
         public static string lbInvitado {
             get {
                 return ResourceManager.GetString("lbInvitado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Te has unido al lobby como invitado con el nombre.
+        /// </summary>
+        public static string lbInvitadoUnido {
+            get {
+                return ResourceManager.GetString("lbInvitadoUnido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invitado.
+        /// </summary>
+        public static string lbInvitadoUnion {
+            get {
+                return ResourceManager.GetString("lbInvitadoUnion", resourceCulture);
             }
         }
         
@@ -781,6 +943,24 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Mensaje.
+        /// </summary>
+        public static string lbMensajeFaltante {
+            get {
+                return ResourceManager.GetString("lbMensajeFaltante", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Por favor, escribe un mensaje antes de enviar.
+        /// </summary>
+        public static string lbMensajeFaltanteDescripcion {
+            get {
+                return ResourceManager.GetString("lbMensajeFaltanteDescripcion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nuevo correo.
         /// </summary>
         public static string lbNewEmail {
@@ -817,6 +997,15 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Nombre de usuario actualizado con éxito..
+        /// </summary>
+        public static string lbNombreNuevoExitoso {
+            get {
+                return ResourceManager.GetString("lbNombreNuevoExitoso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Usuario.
         /// </summary>
         public static string lbNombreUsuario {
@@ -831,6 +1020,15 @@ namespace trofeoCazador.Properties {
         public static string lbnombreUsuarioActual {
             get {
                 return ResourceManager.GetString("lbnombreUsuarioActual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El nuevo nombre de usuario es igual al actual..
+        /// </summary>
+        public static string lbNombreUsuarioRepetido {
+            get {
+                return ResourceManager.GetString("lbNombreUsuarioRepetido", resourceCulture);
             }
         }
         
@@ -948,6 +1146,33 @@ namespace trofeoCazador.Properties {
         public static string lbPorLoMenosUnNumero {
             get {
                 return ResourceManager.GetString("lbPorLoMenosUnNumero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un error al intentar actualizar la contraseña, inténtelo de nuevo más tarde..
+        /// </summary>
+        public static string lbProblemaActualizandoContraseña {
+            get {
+                return ResourceManager.GetString("lbProblemaActualizandoContraseña", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un problema al actualizar el nombre de usuario..
+        /// </summary>
+        public static string lbProblemasActualizarNombre {
+            get {
+                return ResourceManager.GetString("lbProblemasActualizarNombre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un problema al intentar actualizar el correo, intentelo de nuevo más tarde..
+        /// </summary>
+        public static string lbProblemasCorreo {
+            get {
+                return ResourceManager.GetString("lbProblemasCorreo", resourceCulture);
             }
         }
         

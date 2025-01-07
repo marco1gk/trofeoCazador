@@ -89,9 +89,5 @@ namespace trofeoCazador.Vistas.Estadisticas
         }
     }
 
-    public class JugadorEstadisticas
-    {
-        public string NombreJugador { get; set; }
-        public int NumeroVictorias { get; set; }
-    }
+  
 }

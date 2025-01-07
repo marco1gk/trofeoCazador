@@ -12,14 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using trofeoCazador.Utilidades;
 
 namespace trofeoCazador.Vistas.Amigos
 {
    
     public partial class XAMLSolicitudAmistad : UserControl
     {
-        private const string BTN_ACEPTAR = "Accept";
-        private const string BTN_RECHAZAR = "Reject";
+        private const string BTN_ACEPTAR = "Aceptar";
+        private const string BTN_RECHAZAR = "Rechazar";
         private readonly string nombreUsuario;
 
         public event EventHandler<ArgumentosDeEventoDeClicDeBotón> BotonUsado;
@@ -27,7 +28,6 @@ namespace trofeoCazador.Vistas.Amigos
         public XAMLSolicitudAmistad(string nombreUsuario)
         {
             InitializeComponent();
-
             this.nombreUsuario = nombreUsuario;
             lbnombreUsuario.Content = nombreUsuario;
         }
@@ -41,19 +41,6 @@ namespace trofeoCazador.Vistas.Amigos
         {
             BotonUsado?.Invoke(this, new ArgumentosDeEventoDeClicDeBotón(BTN_RECHAZAR, nombreUsuario));
         }
-
-
     }
 
-    public class ArgumentosDeEventoDeClicDeBotón : EventArgs
-    {
-        public string NombreBoton { get; private set; }
-        public string NombreUsuario { get; private set; }
-
-        public ArgumentosDeEventoDeClicDeBotón(string nombreBoton, string nombreUsuario)
-        {
-            NombreBoton = nombreBoton;
-            NombreUsuario = nombreUsuario;
-        }
-    }
 }

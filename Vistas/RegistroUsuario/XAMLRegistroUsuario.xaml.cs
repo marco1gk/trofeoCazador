@@ -23,7 +23,7 @@ namespace trofeoCazador.Vistas.RegistroUsuario
 {
     public partial class XAMLRegistroUsuario : Page
     {
-        string codigoEnviado;
+        private readonly string codigoEnviado;
         public XAMLRegistroUsuario()
         {
             InitializeComponent();
@@ -83,6 +83,7 @@ namespace trofeoCazador.Vistas.RegistroUsuario
             VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbTituloErroresValidacion);
         }
 
+        //Se decidio que este metodo regrese null debido a que solo tiene un sentido, si es nulo es porque no existe
         private string ProcesarCuenta()
         {
             try
@@ -138,7 +139,6 @@ namespace trofeoCazador.Vistas.RegistroUsuario
             ValidarCodigoRegistro ventanaValidacion = new ValidarCodigoRegistro(jugador, null, codigoEnviado);
             return ventanaValidacion.ShowDialog();
         }
-
         private void CrearCuentaExitosa()
         {
             VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbCuentaCreada);
@@ -147,12 +147,19 @@ namespace trofeoCazador.Vistas.RegistroUsuario
             {
                 NavigationService.Navigate(new Uri("Vistas/InicioSesion/XAMLInicioSesion.xaml", UriKind.Relative));
             }
-            catch (Exception ex)
+            catch (UriFormatException uriEx)
             {
-                Console.WriteLine($"Error al navegar: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.WriteLine($"Error en el formato de la URI: {uriEx.Message}");
+            }
+            catch (InvalidOperationException invOpEx)
+            {
+                Console.WriteLine($"Operación de navegación no válida: {invOpEx.Message}");
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine($"Error inesperado al navegar: {ex.Message}");
             }
         }
-
 
 
         public string ValidarCampos()

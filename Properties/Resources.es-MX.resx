@@ -615,4 +615,79 @@
   <data name="lbUsuarioYaEstaEnLinea" xml:space="preserve">
     <value>Esta cuenta ya ha iniciado sesión desde otro dispositivo</value>
   </data>
+  <data name="lbMensajeFaltante" xml:space="preserve">
+    <value>Mensaje</value>
+  </data>
+  <data name="lbMensajeFaltanteDescripcion" xml:space="preserve">
+    <value>Por favor, escribe un mensaje antes de enviar</value>
+  </data>
+  <data name="lbInvitadoUnion" xml:space="preserve">
+    <value>Invitado</value>
+  </data>
+  <data name="lbInvitadoUnido" xml:space="preserve">
+    <value>Te has unido al lobby como invitado con el nombre</value>
+  </data>
+  <data name="lbInvitacionAmigoRecibida" xml:space="preserve">
+    <value>Has sido invitado por</value>
+  </data>
+  <data name="lbDescripcionInvitacionsala" xml:space="preserve">
+    <value>a unirte a la sala:</value>
+  </data>
+  <data name="lbIngresaCodigo" xml:space="preserve">
+    <value>Please enter a code</value>
+  </data>
+  <data name="lbCodigoDigitos" xml:space="preserve">
+    <value>El código debe ser un número de 6 dígitos.</value>
+  </data>
+  <data name="lbCorreoCambiado" xml:space="preserve">
+    <value>El correo ha sido actualizado con éxito.</value>
+  </data>
+  <data name="lbProblemasCorreo" xml:space="preserve">
+    <value>Hubo un problema al intentar actualizar el correo, intentelo de nuevo más tarde.</value>
+  </data>
+  <data name="lbErrorInesperadoCorreo" xml:space="preserve">
+    <value>Código incorrecto, por favor intenta de nuevo.</value>
+  </data>
+  <data name="lbCorreoVacio" xml:space="preserve">
+    <value>El correo no puede estar vacío.</value>
+  </data>
+  <data name="lbCorreoIgual" xml:space="preserve">
+    <value>El nuevo correo no puede ser el mismo que el actual.</value>
+  </data>
+  <data name="lbCorreoExceso" xml:space="preserve">
+    <value>El correo no puede exceder los 50 caracteres.</value>
+  </data>
+  <data name="lbIngresarUsuario" xml:space="preserve">
+    <value>Por favor, debe ingresar un nuevo nombre de usuario.</value>
+  </data>
+  <data name="lbCaracteresNombreUsuario" xml:space="preserve">
+    <value>El nombre de usuario no puede tener más de 50 caracteres.</value>
+  </data>
+  <data name="lbNombreUsuarioRepetido" xml:space="preserve">
+    <value>El nuevo nombre de usuario es igual al actual.</value>
+  </data>
+  <data name="lbNombreNuevoExitoso" xml:space="preserve">
+    <value>Nombre de usuario actualizado con éxito.</value>
+  </data>
+  <data name="lbProblemasActualizarNombre" xml:space="preserve">
+    <value>Hubo un problema al actualizar el nombre de usuario.</value>
+  </data>
+  <data name="lbErrorActualizarContraseña" xml:space="preserve">
+    <value>Hubo un error al intentar reestablecer la contraseña, inténtelo de nuevo más tarde.</value>
+  </data>
+  <data name="lbContraseñaRestablecida" xml:space="preserve">
+    <value>Su contraseña ha sido reestablecida.</value>
+  </data>
+  <data name="lbContraseñaSegura" xml:space="preserve">
+    <value>La contraseña ingresada no cumple con los requisitos de contraseña segura.</value>
+  </data>
+  <data name="lbContraseñaNoCoincide" xml:space="preserve">
+    <value>La contraseña ingresada no coincide con la actual.</value>
+  </data>
+  <data name="lbContraseñaActualizada" xml:space="preserve">
+    <value>La contraseña ha sido actualizada con éxito.</value>
+  </data>
+  <data name="lbProblemaActualizandoContraseña" xml:space="preserve">
+    <value>Hubo un error al intentar actualizar la contraseña, inténtelo de nuevo más tarde.</value>
+  </data>
 </root>

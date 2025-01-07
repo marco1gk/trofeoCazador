@@ -615,4 +615,79 @@
   <data name="lbUsuarioYaEstaEnLinea" xml:space="preserve">
     <value>This account has already been used</value>
   </data>
+  <data name="lbMensajeFaltante" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="lbMensajeFaltanteDescripcion" xml:space="preserve">
+    <value>Please write a message</value>
+  </data>
+  <data name="lbInvitadoUnion" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+  <data name="lbInvitadoUnido" xml:space="preserve">
+    <value>You have joined as guest, your name is</value>
+  </data>
+  <data name="lbInvitacionAmigoRecibida" xml:space="preserve">
+    <value>You have been invited by </value>
+  </data>
+  <data name="lbDescripcionInvitacionsala" xml:space="preserve">
+    <value>join to</value>
+  </data>
+  <data name="lbIngresaCodigo" xml:space="preserve">
+    <value>Por favor ingresa codigo</value>
+  </data>
+  <data name="lbCodigoDigitos" xml:space="preserve">
+    <value>The code must have digits</value>
+  </data>
+  <data name="lbCorreoCambiado" xml:space="preserve">
+    <value>Your mail has been updated</value>
+  </data>
+  <data name="lbProblemasCorreo" xml:space="preserve">
+    <value>Theres is a problem trying to update your mail</value>
+  </data>
+  <data name="lbErrorInesperadoCorreo" xml:space="preserve">
+    <value>Incorrect code, please try again</value>
+  </data>
+  <data name="lbCorreoVacio" xml:space="preserve">
+    <value>The field for mail is empty</value>
+  </data>
+  <data name="lbCorreoIgual" xml:space="preserve">
+    <value>The mail is the same that you used</value>
+  </data>
+  <data name="lbCorreoExceso" xml:space="preserve">
+    <value>The new mail can use mora than 50 simbols</value>
+  </data>
+  <data name="lbIngresarUsuario" xml:space="preserve">
+    <value>Please write a new username</value>
+  </data>
+  <data name="lbCaracteresNombreUsuario" xml:space="preserve">
+    <value>The username can exceed 50 characters</value>
+  </data>
+  <data name="lbNombreUsuarioRepetido" xml:space="preserve">
+    <value>The new username is the same that the actual</value>
+  </data>
+  <data name="lbNombreNuevoExitoso" xml:space="preserve">
+    <value>Your name is updated</value>
+  </data>
+  <data name="lbProblemasActualizarNombre" xml:space="preserve">
+    <value>Theres is a problem trying to update your name</value>
+  </data>
+  <data name="lbErrorActualizarContraseña" xml:space="preserve">
+    <value>Theres is a problem trying to update your password</value>
+  </data>
+  <data name="lbContraseñaRestablecida" xml:space="preserve">
+    <value>Your password has been change</value>
+  </data>
+  <data name="lbContraseñaSegura" xml:space="preserve">
+    <value>Your password doesnt allow the password politcs</value>
+  </data>
+  <data name="lbContraseñaNoCoincide" xml:space="preserve">
+    <value>Passwords doesnt match</value>
+  </data>
+  <data name="lbContraseñaActualizada" xml:space="preserve">
+    <value>Password has been updated</value>
+  </data>
+  <data name="lbProblemaActualizandoContraseña" xml:space="preserve">
+    <value>There is a problem trying to update your password</value>
+  </data>
 </root>

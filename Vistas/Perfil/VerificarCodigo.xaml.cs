@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using trofeoCazador.ServicioDelJuego;
 using trofeoCazador.Vistas.Perfil;
 using trofeoCazador.Recursos;
+using trofeoCazador.Utilidades;
 
 namespace trofeoCazador.Vistas.Perfil
 {
@@ -26,7 +27,7 @@ namespace trofeoCazador.Vistas.Perfil
             InitializeComponent();
         }
         GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-        SingletonSesion sesion = SingletonSesion.Instancia;
+        private readonly SingletonSesion sesion = SingletonSesion.Instancia;
 
         private void BtnClicEnviarCodigo(object sender, RoutedEventArgs e)
         {
@@ -37,13 +38,13 @@ namespace trofeoCazador.Vistas.Perfil
 
             if (!Metodos.ValidarEntradaVacia(codigoIngresado))
             {
-                Metodos.MostrarMensaje("Por favor, ingrese el código.");
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbIngresaCodigo);
                 return;
             }
 
             if(!Metodos.ValidarLongitudDeEntrada(codigoIngresado, longitudMaximaCodigo))
             {
-                Metodos.MostrarMensaje("El código debe ser un número de 6 dígitos.");
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbCodigoDigitos);
                 return;
             }
 
@@ -51,15 +52,15 @@ namespace trofeoCazador.Vistas.Perfil
             {
                 if (proxy.EditarCorreo(sesion.JugadorId, sesion.NuevoCorreo))
                 {
-                    Metodos.MostrarMensaje("El correo ha sido actualizado con éxito.");
+                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloExito, Properties.Resources.lbCorreoCambiado);
                     this.NavigationService.Navigate(new Uri("Vistas/Perfil/XAMLPerfil.xaml", UriKind.Relative));
                 }
                 else
-                    Metodos.MostrarMensaje("Hubo un problema al intentar actualizar el correo, intentelo de nuevo más tarde.");      
+                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbProblemasCorreo);
             }
             else
             {
-                Metodos.MostrarMensaje("Código incorrecto, por favor intenta de nuevo.");
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbErrorInesperadoCorreo);
             }
         }
 

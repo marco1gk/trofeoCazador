@@ -21,7 +21,7 @@ namespace trofeoCazador.Vistas.InicioSesion
             string codigoSala = tbInvitado.Text.Trim();
             if (string.IsNullOrEmpty(codigoSala))
             {
-                VentanasEmergentes.CrearVentanaEmergente("Error", "Debes ingresar un código de sala.");
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbCodigo, Properties.Resources.lbCodigoError);
                 return;
             }
 
@@ -29,7 +29,6 @@ namespace trofeoCazador.Vistas.InicioSesion
             NavigationService?.Navigate(salaEspera);
             salaEspera.UnirseComoInvitado(codigoSala);
         }
-
 
         private void IdiomaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -103,9 +102,8 @@ namespace trofeoCazador.Vistas.InicioSesion
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
                 NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException )
             {
-
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
             catch (Exception ex)
@@ -131,10 +129,41 @@ namespace trofeoCazador.Vistas.InicioSesion
             return proxy.ValidarUsuarioEnLinea(nombreUsuario);
         }
 
+        //Se decidio que este metodo regrese null debido a que solo tiene un sentido, si es nulo es porque no existe
         private JugadorDataContract AutenticarUsuario(string usuario, string contraseña)
         {
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            return proxy.ValidarInicioSesion(usuario, contraseña);
+            try
+            {
+                return proxy.ValidarInicioSesion(usuario, contraseña);
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+            }
+
+            return null;
         }
 
         private void IniciarSesion(JugadorDataContract jugador)
@@ -171,18 +200,15 @@ namespace trofeoCazador.Vistas.InicioSesion
         private bool ValidarCampos()
         {
             bool esValido = true;
-            Console.WriteLine("Validar campos antes de entrar a condicion" + esValido);
 
             if (!UtilidadesDeValidacion.EsCorreoValido(tbUsuario.Text) || tbUsuario.Text.Equals(tbUsuario.Tag))
             {
                 esValido = false;
-                Console.WriteLine("Validar campos correo" + esValido);
             }
 
             if (!UtilidadesDeValidacion.EsContrasenaValida(tpContraseña.Password) || tpContraseña.Password.Equals(tpContraseña.Tag))
             {
                 esValido = false;
-                Console.WriteLine("Validar campos contraseña" + esValido);
             }
 
             return esValido;
@@ -222,9 +248,7 @@ namespace trofeoCazador.Vistas.InicioSesion
             }
         }
 
-        
-
-        private void lbClicRecuperarContrasena(object sender, MouseButtonEventArgs e)
+        private void BtnRecuperarContraseña_Click(object sender, MouseButtonEventArgs e)
         {
             VentanaCorreoJugador ventanaCorreo = new VentanaCorreoJugador();
             ventanaCorreo.Show();

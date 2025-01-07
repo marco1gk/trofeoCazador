@@ -70,7 +70,7 @@ namespace trofeoCazador.VentanasReutilizables
                         lbCodigoError.Visibility = Visibility.Visible;
                     }
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException )
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
                 }

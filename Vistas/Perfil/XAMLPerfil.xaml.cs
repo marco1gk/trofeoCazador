@@ -32,12 +32,12 @@ namespace trofeoCazador.Vistas.Perfil
 
         }
 
-        private void CargarPerfil(int IdJugador)
+        private void CargarPerfil(int idJugador)
         {
             try
             {
                 GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-                JugadorDataContract jugador = proxy.ObtenerJugador(IdJugador);
+                JugadorDataContract jugador = proxy.ObtenerJugador(idJugador);
                 if (jugador != null)
                 {
                     UsuarioLabel.Content = jugador.NombreUsuario;

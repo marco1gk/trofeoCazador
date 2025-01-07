@@ -70,8 +70,6 @@
                             Content="✏️" Click="BtnClicEditarContrasenia" />
                     <Label Content="**********" FontSize="14" Foreground="Black" Margin="-5,17,5,-11" Grid.ColumnSpan="2" />
                 </Grid>
-
-                <!-- Correo -->
                 <Grid Margin="0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -83,8 +81,6 @@
                             Content="✏️" Click="BtnClicEditarCorreo" />
                     <Label Name="CorreoLabel"  FontSize="14" Foreground="Black" Margin="-4,16,4,-11" />
                 </Grid>
-
-                <!-- Imagen de perfil -->
                 <Grid Margin="0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -93,8 +89,6 @@
                     <Image x:Name="imgPerfil" Width="100" Height="100" Margin="0,5,10,0" />
                 </Grid>
             </StackPanel>
-
-            <!-- Botón Atrás -->
             <Image Name="ImgBack" HorizontalAlignment="Left" Height="56" Margin="49,32,0,0" VerticalAlignment="Top" Width="88" Source="/Recursos/regresar.png" Cursor="Hand" MouseLeftButtonDown="ImagenCLicAtras" RenderTransformOrigin="0.83,1.2" Grid.RowSpan="2"/>
         </Grid>
     </ScrollViewer>

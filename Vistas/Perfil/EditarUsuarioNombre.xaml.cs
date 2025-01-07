@@ -45,73 +45,77 @@ namespace trofeoCazador.Vistas.Perfil
             string nuevoNombreUsuario = NuevoNombreUsuarioTextBox.Text.Trim();
             int longitudValidaNombreUsuario = 50;
 
-            if (!Metodos.ValidarEntradaVacia(nuevoNombreUsuario))
+            if (!ValidarNombreUsuario(nuevoNombreUsuario, longitudValidaNombreUsuario))
             {
-                Metodos.MostrarMensaje("Por favor, debe ingresar un nuevo nombre de usuario.");
-                return;
-            }
-
-            if (!Metodos.ValidarLongitudDeEntrada(nuevoNombreUsuario, longitudValidaNombreUsuario))
-            {
-                Metodos.MostrarMensaje("El nombre de usuario no puede tener más de 50 caracteres.");
-                return;
-            }
-
-            if (!Metodos.ValidarEntradaIgual(Jugador.NombreUsuario, nuevoNombreUsuario))
-            {
-                Metodos.MostrarMensaje("El nuevo nombre de usuario es igual al actual.");
                 return;
             }
 
             try
             {
-
                 SingletonSesion sesion = SingletonSesion.Instancia;
-            GestionCuentaServicioClient proxy = Metodos.EstablecerConexionServidor();
-            bool resultado = proxy.EditarNombreUsuario(sesion.JugadorId, nuevoNombreUsuario);
+                GestionCuentaServicioClient proxy = Metodos.EstablecerConexionServidor();
+                bool resultado = proxy.EditarNombreUsuario(sesion.JugadorId, nuevoNombreUsuario);
 
                 if (resultado)
                 {
-                    Metodos.MostrarMensaje("Nombre de usuario actualizado con éxito.");
+                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbNombreNuevoExitoso);
                     this.NavigationService.Navigate(new Uri("Vistas/Perfil/XAMLPerfil.xaml", UriKind.Relative));
                 }
                 else
                 {
-                    Metodos.MostrarMensaje("Hubo un problema al actualizar el nombre de usuario.");
+                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbProblemasActualizarNombre);
                 }
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-          //      ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                //       ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
                 NavigationService.Navigate(new XAMLInicioSesion());
             }
-
             catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
                 NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
-
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                // ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                //ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
+
+        private bool ValidarNombreUsuario(string nombreUsuario, int longitudMaxima)
+        {
+            if (!Metodos.ValidarEntradaVacia(nombreUsuario))
+            {
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbIngresarUsuario);
+                return false;
+            }
+
+            if (!Metodos.ValidarLongitudDeEntrada(nombreUsuario, longitudMaxima))
+            {
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbCaracteresNombreUsuario);
+                return false;
+            }
+
+            if (!Metodos.ValidarEntradaIgual(Jugador.NombreUsuario, nombreUsuario))
+            {
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbNombreUsuarioRepetido);
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }

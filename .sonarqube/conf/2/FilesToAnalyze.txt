@@ -1,6 +1,0 @@
-﻿C:\Users\vaoma\source\repos\trofeoCazador\Pruebas\Properties\AssemblyInfo.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Pruebas\Pruebas\PruebasUtilidades.cs
-C:\Users\vaoma\source\repos\trofeoCazador\packages\xunit.runner.visualstudio.3.0.0\build\net472\xunit.abstractions.dll
-C:\Users\vaoma\source\repos\trofeoCazador\packages\xunit.runner.visualstudio.3.0.0\build\net472\xunit.runner.visualstudio.testadapter.dll
-C:\Users\vaoma\source\repos\trofeoCazador\Pruebas\app.config
-C:\Users\vaoma\source\repos\trofeoCazador\Pruebas\packages.config

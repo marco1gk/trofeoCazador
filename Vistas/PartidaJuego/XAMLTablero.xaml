@@ -23,8 +23,6 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
-        <!-- Zona de fichas en mano -->
         <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
             <TextBlock Text="Fichas en Mano" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
             <ItemsControl x:Name="FichasManoItemsControl">
@@ -42,8 +40,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-
-        <!-- Zona de fichas en juego -->
         <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
             <TextBlock Text="Fichas en Juego" FontSize="20" FontWeight="Bold" TextAlignment="Center" />
             <ItemsControl x:Name="FichasItemsControl">
@@ -61,9 +57,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-
-        <!-- Mazo de cartas -->
-        
         <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
             <TextBlock Text="Mazo" FontSize="20" FontWeight="Bold" TextAlignment="Center" />
             <ItemsControl x:Name="ZonaMazoCartas" MouseDown="Mazo_MouseDown">
@@ -85,8 +78,6 @@
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>
         </StackPanel>
-
-        <!-- Cartas en mano -->
         <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
             <TextBlock Text="Cartas en Mano" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
             <ItemsControl x:Name="CartasManoItemsControl">
@@ -107,10 +98,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-
-
-
-        <!-- Escondite -->
         <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,157,0,0" Grid.RowSpan="2">
             <TextBlock Text="Escondite" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
             <Image x:Name="EsconditeImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Cartas/Carta_Escondite.png" Width="100" Height="150" Stretch="Uniform"/>
@@ -131,8 +118,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-
-        <!-- Jugador 2 -->
         <StackPanel x:Name="AreaJugador2" MouseDown="RobarCartaDeJugador" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Visibility="Collapsed">
             <TextBlock x:Name="NombreJugador2" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
             <Image x:Name="Jugador2Imagen" Width="50" Height="50" Stretch="Uniform"/>
@@ -152,8 +137,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-
-        <!-- Jugador 3 -->
         <StackPanel x:Name="AreaJugador3" MouseDown="RobarCartaDeJugador" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Visibility="Collapsed">
             <TextBlock x:Name="NombreJugador3" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
             <Image x:Name="Jugador3Imagen" Width="50" Height="50" Stretch="Uniform"/>
@@ -173,8 +156,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-
-        <!-- Jugador 4 -->
         <StackPanel x:Name="AreaJugador4" MouseDown="RobarCartaDeJugador" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Visibility="Collapsed">
             <TextBlock x:Name="NombreJugador4" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
             <Image x:Name="Jugador4Imagen" Width="50" Height="50" Stretch="Uniform"/>
@@ -194,8 +175,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-
-        <!-- Dado-->
         <Border Background="LightBlue" Grid.Row="1" Grid.Column="1" Margin="10" BorderBrush="Black" BorderThickness="2">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image x:Name="DadoImagen" Source="/Recursos/ElementosPartida/ImagenesPartida/Dado/Cara1.png" Width="100" Height="100" Stretch="Uniform" Cursor="Hand" MouseDown="ImagenDado_MouseDown"/>

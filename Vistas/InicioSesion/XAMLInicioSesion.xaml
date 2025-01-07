@@ -99,7 +99,7 @@
                            Text="{x:Static p:Resources.lbContraseniaOlvidada}"
                            TextAlignment="Center"
                            Margin="0,10,0,0"
-                           MouseLeftButtonUp="lbClicRecuperarContrasena" />
+                           MouseLeftButtonUp="BtnRecuperarContraseña_Click" />
 
                 <Button Content="{x:Static p:Resources.lbRegistrarse}"
                         HorizontalAlignment="Center" 

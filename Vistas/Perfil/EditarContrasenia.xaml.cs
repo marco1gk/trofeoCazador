@@ -46,72 +46,114 @@ namespace trofeoCazador.Vistas.Perfil
 
             if (correo != null)
             {
-                if (Metodos.ValidarEntradaVacia(contraseniaNueva) == false)
-                {
-                    Metodos.MostrarMensaje("Por favor, debe llenar todos los campos.");
-                    return false;
-                }
-
-                if (UtilidadesDeValidacion.EsContrasenaValida(contraseniaNueva))
-                {
-                    if (proxy.EditarContraseña(correo, contraseniaNueva))
-                    {
-                        Metodos.MostrarMensaje("Su contraseña ha sido reestablecida.");
-                        NavigationWindow navigationWindow = (NavigationWindow)Window.GetWindow(this);
-                        navigationWindow?.Close();
-                        return true;
-                    }
-                    else
-                    {
-                        Metodos.MostrarMensaje("Hubo un error al intentar reestablecer la contraseña, inténtelo de nuevo más tarde.");
-                        return false;
-                    }
-                }
-                else
-                {
-                    Metodos.MostrarMensaje("La contraseña ingresada no cumple con los requisitos de contraseña segura.");
-                    return false;
-                }
+                return EditarContraseñaConCorreo(proxy, contraseniaNueva);
             }
             else
             {
                 string contraseniaIngresada = ContraseniaActualTextBox.Password.Trim();
+                return EditarContraseñaSinCorreo(proxy, contraseniaIngresada, contraseniaNueva);
+            }
+        }
 
-                if (Metodos.ValidarEntradaVacia(contraseniaIngresada) == false || Metodos.ValidarEntradaVacia(contraseniaNueva) == false)
+        private bool EditarContraseñaConCorreo(GestionCuentaServicioClient proxy, string contraseniaNueva)
+        {
+            if (EsEntradaValida(contraseniaNueva))
+            {
+                if (UtilidadesDeValidacion.EsContrasenaValida(contraseniaNueva))
                 {
-                    Metodos.MostrarMensaje("Por favor, debe llenar todos los campos.");
+                    return ProcesarEdicionConCorreo(proxy, contraseniaNueva);
+                }
+                else
+                {
+                    MostrarError(Properties.Resources.lbContraseñaSegura);
                     return false;
                 }
+            }
+            return false;
+        }
 
+        private bool EditarContraseñaSinCorreo(GestionCuentaServicioClient proxy, string contraseniaIngresada, string contraseniaNueva)
+        {
+            if (EsEntradaValida(contraseniaIngresada, contraseniaNueva))
+            {
                 if (!proxy.VerificarContrasena(contraseniaIngresada, jugador.Correo))
                 {
-                    Metodos.MostrarMensaje("La contraseña ingresada no coincide con la actual.");
+                    MostrarError(Properties.Resources.lbContraseñaNoCoincide);
                     return false;
                 }
 
                 if (UtilidadesDeValidacion.EsContrasenaValida(contraseniaNueva))
                 {
-                    if (proxy.EditarContraseña(jugador.Correo, contraseniaNueva))
-                    {
-                        Metodos.MostrarMensaje("La contraseña ha sido actualizada con éxito.");
-                        NavigationWindow navigationWindow = (NavigationWindow)Window.GetWindow(this);
-                        navigationWindow?.Close();
-                        return true;
-                    }
-                    else
-                    {
-                        Metodos.MostrarMensaje("Hubo un error al intentar actualizar la contraseña, inténtelo de nuevo más tarde.");
-                        return false;
-                    }
+                    return ProcesarEdicionSinCorreo(proxy, contraseniaNueva);
                 }
                 else
                 {
-                    Metodos.MostrarMensaje("La contraseña ingresada no cumple con los requisitos de contraseña segura.");
+                    MostrarError(Properties.Resources.lbContraseñaSegura);
                     return false;
                 }
             }
+            return false;
         }
 
+        private bool EsEntradaValida(string contraseniaNueva)
+        {
+            if (Metodos.ValidarEntradaVacia(contraseniaNueva))
+            {
+                MostrarError(Properties.Resources.lbLlenarCamposObligatorios);
+                return false;
+            }
+            return true;
+        }
+
+        private bool EsEntradaValida(string contraseniaIngresada, string contraseniaNueva)
+        {
+            if (Metodos.ValidarEntradaVacia(contraseniaIngresada) || Metodos.ValidarEntradaVacia(contraseniaNueva))
+            {
+                MostrarError(Properties.Resources.lbLlenarCamposObligatorios);
+                return false;
+            }
+            return true;
+        }
+
+        private void MostrarError(string mensaje)
+        {
+            VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, mensaje);
+        }
+
+        private bool ProcesarEdicionConCorreo(GestionCuentaServicioClient proxy, string contraseniaNueva)
+        {
+            if (proxy.EditarContraseña(correo, contraseniaNueva))
+            {
+                MostrarExito(Properties.Resources.lbContraseñaRestablecida);
+                return true;
+            }
+            else
+            {
+                MostrarError(Properties.Resources.lbErrorActualizarContraseña);
+                return false;
+            }
+        }
+
+        private bool ProcesarEdicionSinCorreo(GestionCuentaServicioClient proxy, string contraseniaNueva)
+        {
+            if (proxy.EditarContraseña(jugador.Correo, contraseniaNueva))
+            {
+                MostrarExito(Properties.Resources.lbContraseñaActualizada);
+                return true;
+            }
+            else
+            {
+                MostrarError(Properties.Resources.lbProblemaActualizandoContraseña);
+                return false;
+            }
+        }
+
+        private void MostrarExito(string mensaje)
+        {
+            VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, mensaje);
+            NavigationWindow navigationWindow = (NavigationWindow)Window.GetWindow(this);
+            navigationWindow?.Close();
+        }
 
 
         private void Button_Click(object sender, RoutedEventArgs e)

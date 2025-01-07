@@ -1036,7 +1036,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 var jugadorObjetivo = ObtenerJugadorDesdeArea(areaSeleccionada);
                 if (jugadorObjetivo != null)
                 {
-                    // Deshabilitar clicks para evitar múltiples selecciones
                     HabilitarClickEnAreasJugadores(false);
                     try
                     {

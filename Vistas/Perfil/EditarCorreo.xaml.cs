@@ -42,37 +42,24 @@ namespace trofeoCazador.Vistas.Perfil
         {
             string nuevoCorreo = NuevoCorreoTextBox.Text.Trim();
             int longitudMaximaCorreo = 100;
+
             try
             {
-                if (!Metodos.ValidarEntradaVacia(nuevoCorreo))
+                if (!ValidarCorreo(nuevoCorreo, longitudMaximaCorreo))
                 {
-                    Metodos.MostrarMensaje("El correo no puede estar vacío.");
                     return;
                 }
-
-                if (!Metodos.ValidarEntradaIgual(jugador.Correo, nuevoCorreo))
-                {
-                    Metodos.MostrarMensaje("El nuevo correo no puede ser el mismo que el actual.");
-                    return;
-                }
-
-                if (!Metodos.ValidarLongitudDeEntrada(nuevoCorreo, longitudMaximaCorreo))
-                {
-                    Metodos.MostrarMensaje("El correo no puede exceder los 50 caracteres.");
-                    return;
-                }
-
-                GestionCuentaServicioClient proxy = Metodos.EstablecerConexionServidor();
 
                 if (jugador != null)
                 {
-                    string correoActual = jugador.Correo;
-                    string codigoVerificacion = proxy.EnviarCodigoConfirmacion(correoActual);
+                    GestionCuentaServicioClient proxy = Metodos.EstablecerConexionServidor();
+                    string codigoVerificacion = proxy.EnviarCodigoConfirmacion(jugador.Correo);
+
                     if (!string.IsNullOrEmpty(codigoVerificacion))
                     {
                         SingletonSesion.Instancia.NuevoCorreo = nuevoCorreo;
                         SingletonSesion.Instancia.CodigoVerificacion = codigoVerificacion;
-                        this.NavigationService.Navigate(new Uri("Vistas/Perfil/EditarCorreoCodigo.xaml", UriKind.Relative));
+                        NavigationService.Navigate(new Uri("Vistas/Perfil/EditarCorreoCodigo.xaml", UriKind.Relative));
                     }
                 }
             }
@@ -91,7 +78,6 @@ namespace trofeoCazador.Vistas.Perfil
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
                 NavigationService.Navigate(new XAMLInicioSesion());
             }
-
             catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
@@ -99,7 +85,6 @@ namespace trofeoCazador.Vistas.Perfil
             }
             catch (CommunicationException ex)
             {
-
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
                 ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
@@ -109,5 +94,29 @@ namespace trofeoCazador.Vistas.Perfil
                 ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
+
+        private bool ValidarCorreo(string correo, int longitudMaxima)
+        {
+            if (!Metodos.ValidarEntradaVacia(correo))
+            {
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbCorreoVacio);
+                return false;
+            }
+
+            if (!Metodos.ValidarEntradaIgual(jugador.Correo, correo))
+            {
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbCorreoIgual);
+                return false;
+            }
+
+            if (!Metodos.ValidarLongitudDeEntrada(correo, longitudMaxima))
+            {
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbCorreoExceso);
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }

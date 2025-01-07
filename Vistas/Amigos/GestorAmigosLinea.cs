@@ -26,7 +26,6 @@ namespace trofeoCazador.Vistas.Amigos
         {
             stackPanelAmigos.Children.Clear();
             GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
-           
             string[] nombreUsuarioAmigosJugador = gestorAmistadCliente.ObtenerListaNombresUsuariosAmigos(sesion.JugadorId);
             AñadirUsuariosListaAmigos(nombreUsuarioAmigosJugador);
         }
@@ -43,7 +42,7 @@ namespace trofeoCazador.Vistas.Amigos
         {
             string idLabel = "lb";
             string idUsuarioItem = idLabel + nombreUsuario;
-            XAMLActiveUserItemControl usuarioLineaItem = BuscarControlElementoUsuarioActivoPorId(idUsuarioItem);
+            XAMLUsuarioConectadoControl usuarioLineaItem = BuscarControlElementoUsuarioActivoPorId(idUsuarioItem);
 
             if (usuarioLineaItem == null)
             {
@@ -51,17 +50,17 @@ namespace trofeoCazador.Vistas.Amigos
                 return;
             }
 
-            SolidColorBrush statusPlayerColor = enLinea
-                ? Utilities.CreateColorFromHexadecimal(ESTADO_EN_LINEA)
-                : Utilities.CreateColorFromHexadecimal(ESTADO_FUERA_DE_LINEA);
-            Console.WriteLine($"Estado de {nombreUsuario}: {(enLinea ? "En línea" : "Fuera de línea")}, Color: {statusPlayerColor}");
+            SolidColorBrush colorEstadoJugador = enLinea
+                ? GestorColores.CreateColorFromHexadecimal(ESTADO_EN_LINEA)
+                : GestorColores.CreateColorFromHexadecimal(ESTADO_FUERA_DE_LINEA);
+            Console.WriteLine($"Estado de {nombreUsuario}: {(enLinea ? "En línea" : "Fuera de línea")}, Color: {colorEstadoJugador}");
 
             usuarioLineaItem.Dispatcher.Invoke(() =>
             {
                 if (usuarioLineaItem.rectanguloEstadoJugador != null)
                 {
                     Console.WriteLine("Actualizando color del rectángulo...");
-                    usuarioLineaItem.rectanguloEstadoJugador.Fill = statusPlayerColor;
+                    usuarioLineaItem.rectanguloEstadoJugador.Fill = colorEstadoJugador;
                     usuarioLineaItem.rectanguloEstadoJugador.InvalidateVisual();
 
                 }
@@ -72,9 +71,11 @@ namespace trofeoCazador.Vistas.Amigos
             });
         }
 
-        private XAMLActiveUserItemControl BuscarControlElementoUsuarioActivoPorId(string idUsuarioItem)
+        //Se decidio que este metodo regrese null debido a que solo tiene un sentido, si es nulo es porque no existe
+        private XAMLUsuarioConectadoControl BuscarControlElementoUsuarioActivoPorId(string idUsuarioItem)
         {
-            foreach (XAMLActiveUserItemControl item in stackPanelAmigos.Children)
+
+            foreach (XAMLUsuarioConectadoControl item in stackPanelAmigos.Children)
             {
                 if (item.Name == idUsuarioItem)
                 {
@@ -97,25 +98,23 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void AñadirUsuarioListaAmigos(string nombreUsuario, string estadoConexionJugador)
         {
-            XAMLActiveUserItemControl usuarioConectadoItem = CrearControlElementoUsuarioActivo(nombreUsuario, estadoConexionJugador);
+            XAMLUsuarioConectadoControl usuarioConectadoItem = CrearControlElementoUsuarioActivo(nombreUsuario, estadoConexionJugador);
             stackPanelAmigos.Children.Add(usuarioConectadoItem);
         }
 
 
-        XAMLActiveUserItemControl CrearControlElementoUsuarioActivo(string nombreUsuario, string colorHexadecimal)
+        XAMLUsuarioConectadoControl CrearControlElementoUsuarioActivo(string nombreUsuario, string colorHexadecimal)
         {
             string idItem = "lb";
             string idUsuarioItem = idItem + nombreUsuario;
-            XAMLActiveUserItemControl usuarioConectadoItem = new XAMLActiveUserItemControl(nombreUsuario);
+            XAMLUsuarioConectadoControl usuarioConectadoItem = new XAMLUsuarioConectadoControl(nombreUsuario);
             usuarioConectadoItem.Name = idUsuarioItem;
             usuarioConectadoItem.BotonUsado += ElementoUsuarioEnLínea_BotónEliminarAmigoClickeado;
-            SolidColorBrush colorJugadorConectado = Utilities.CreateColorFromHexadecimal(colorHexadecimal);
+            SolidColorBrush colorJugadorConectado = GestorColores.CreateColorFromHexadecimal(colorHexadecimal);
             usuarioConectadoItem.rectanguloEstadoJugador.Fill = colorJugadorConectado;
 
             return usuarioConectadoItem;
         }
-
-
 
         private void ElementoUsuarioEnLínea_BotónEliminarAmigoClickeado(object sender, ArgumentosDeEventoDeClicDeBotón e)
         {
@@ -134,7 +133,6 @@ namespace trofeoCazador.Vistas.Amigos
 
             try
             {
-                
                 gestorSolicitudesAmistadCliente.EliminarAmigo(sesion.JugadorId, sesion.NombreUsuario, nombreUsuarioAmigoEliminar);
             }
             catch (EndpointNotFoundException ex)
@@ -192,8 +190,6 @@ namespace trofeoCazador.Vistas.Amigos
             CambiarEstadoAmigos(nombresUsuariosEnLinea, esEnLinea);
             SuscribirUsuarioAlDiccionarioDeAmigosEnLínea();
         }
-
-  
         public void Ping()
         {
         }
@@ -209,43 +205,7 @@ namespace trofeoCazador.Vistas.Amigos
             throw new NotImplementedException();
         }
     }
-    public static class Utilities
-    {
-        
-        
-            public static SolidColorBrush CreateColorFromHexadecimal(string hexadecimalColor)
-            {
-                SolidColorBrush solidColorBrush = null;
-
-                if (hexadecimalColor != null)
-                {
-                    try
-                    {
-                        solidColorBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(hexadecimalColor));
-                    }
-                    catch (FormatException ex)
-                    {
-                    Console.WriteLine($"Error al convertir color: {ex.Message}");
-                    ManejadorExcepciones.ManejarComponenteErrorExcepcion(ex);
-                    }catch (Exception ex) { Console.WriteLine(ex.ToString()); }
-                }
-
-                return solidColorBrush;
-            }
-       
-        public static string ConstruirPathAbsoluto(string pathRelativo)
-        {
-            string pathAbsoluto = "";
-
-            if (pathRelativo != null)
-            {
-                pathAbsoluto = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathRelativo);
-            }
-
-            return pathAbsoluto;
-        }
-
-    }
+  
 
 
 

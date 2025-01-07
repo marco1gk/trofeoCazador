@@ -81,17 +81,15 @@ namespace trofeoCazador.Vistas.Amigos
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
                 ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-               // VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
             }
             
         }
 
         private void MostrarDatos()
         {
-
             try
             {
                 CargarAmigosJugador();

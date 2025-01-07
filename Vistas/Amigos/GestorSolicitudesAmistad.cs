@@ -80,6 +80,8 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void EnviarSolicitud()
         {
+            int idJugador = sesion.JugadorId;
+            string mensaje;
             string nombreDeUsuarioJugadorSolicitado = string.Empty;
             tbNombreDeUsuarioEnviarSolicitud.Dispatcher.Invoke(() =>
             {
@@ -90,9 +92,6 @@ namespace trofeoCazador.Vistas.Amigos
             {
                 lbErrorNombreDeUsuarioSolicitudAmistad.Visibility = Visibility.Visible;
             });
-
-            int idJugador = sesion.JugadorId;
-            string mensaje;
 
             if (ValidarEnviarSolicitud(idJugador, nombreDeUsuarioJugadorSolicitado))
             {
@@ -107,11 +106,9 @@ namespace trofeoCazador.Vistas.Amigos
             }
             else
             {
-              //  VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloSolicitudAmistad, Properties.Resources.lbProblemasInvitacion);
+               VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloSolicitudAmistad, Properties.Resources.lbProblemasInvitacion);
             }
         }
-
-
 
         private static void AgregarSolicitudAmistad(int idJugador, string nombreDeUsuarioJugadorSolicitado)
         {
@@ -137,11 +134,11 @@ namespace trofeoCazador.Vistas.Amigos
                 {
                     esSolicitudValida = gestorAmistadCliente.ValidarEnvioSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
                 }
@@ -153,11 +150,11 @@ namespace trofeoCazador.Vistas.Amigos
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
                 }
-                catch (CommunicationException ex)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 }
@@ -174,10 +171,7 @@ namespace trofeoCazador.Vistas.Amigos
         {
             vistaDesplazableAmigos.Visibility = Visibility.Visible;
             vistaDesplazableSolicitudesAmistad.Visibility = Visibility.Visible; 
-            
             stackPanelAmigos.Children.Clear();
-
-            
             string[] nombresAmigos = ObtenerListaAmigos();
 
             if (nombresAmigos != null)
@@ -234,7 +228,7 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void AgregarUsuarioListaAmigos(string nombreUsuario)
         {
-            XAMLActiveUserItemControl AmigoItem = new XAMLActiveUserItemControl(nombreUsuario);
+            XAMLUsuarioConectadoControl AmigoItem = new XAMLUsuarioConectadoControl(nombreUsuario);
             stackPanelAmigos.Children.Add(AmigoItem);
         }
 
@@ -266,7 +260,6 @@ namespace trofeoCazador.Vistas.Amigos
                 Console.WriteLine("No hay solicitudes de amistad pendientes.");
             }
         }
-
 
 
         private string[] ObtenerSolicitudesAmistadActuales()
@@ -342,19 +335,19 @@ namespace trofeoCazador.Vistas.Amigos
 
         private XAMLSolicitudAmistad CrearSolicitudAmistadItemControl(string nombreUsuario)
         {
-            string idItem = "lbRequest";
+            string idItem = "lbSolicitud";
             string idUsuarioItem = idItem + nombreUsuario;
             XAMLSolicitudAmistad solicitudAmistadItem = new XAMLSolicitudAmistad(nombreUsuario);
             solicitudAmistadItem.Name = idUsuarioItem;
-            solicitudAmistadItem.BotonUsado += SolicitudAmistradItem_BtnClicked;
+            solicitudAmistadItem.BotonUsado += SolicitudAmistrarItem_BtnClicked;
 
             return solicitudAmistadItem;
         }
 
-        private void SolicitudAmistradItem_BtnClicked(object sender, ArgumentosDeEventoDeClicDeBotón e)
+        private void SolicitudAmistrarItem_BtnClicked(object sender, ArgumentosDeEventoDeClicDeBotón e)
         {
-            string btnAceptar = "Accept";
-            string btnRechazar = "Reject";
+            string btnAceptar = "Aceptar";
+            string btnRechazar = "Rechazar";
 
             if (e.NombreBoton.Equals(btnAceptar))
             {
@@ -452,7 +445,7 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void RemoverSolicitudAmistadStackPanel(string nombreUsuario)
         {
-            string idItem = "lbRequest";
+            string idItem = "lbSolicitud";
             string idSolicitudAmistadItem = idItem + nombreUsuario;
 
             XAMLSolicitudAmistad solicitudAmistadItemRemover = BuscarControlElementoSolicitudDeAmistadPorId(idSolicitudAmistadItem);
@@ -463,6 +456,7 @@ namespace trofeoCazador.Vistas.Amigos
             }
         }
 
+        //Se decidio que este metodo regrese null debido a que solo tiene un sentido, si es nulo es porque no existe
         private XAMLSolicitudAmistad BuscarControlElementoSolicitudDeAmistadPorId(string idSolicitudAmistadItem)
         {
             foreach (XAMLSolicitudAmistad item in stackPanelSolicitudesAmistad.Children)
@@ -497,7 +491,7 @@ namespace trofeoCazador.Vistas.Amigos
             string idItem = "lb";
             string idUsuarioItem = idItem + nombreUsuario;
 
-            XAMLActiveUserItemControl elementoUsuarioEnLíneaParaEliminar = BuscarControlElementoUsuarioActivoPorId(idUsuarioItem);
+            XAMLUsuarioConectadoControl elementoUsuarioEnLíneaParaEliminar = BuscarControlElementoUsuarioActivoPorId(idUsuarioItem);
 
             if (elementoUsuarioEnLíneaParaEliminar != null)
             {

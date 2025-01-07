@@ -14,18 +14,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using trofeoCazador.Vistas.Amigos;
-
+using trofeoCazador.Utilidades;
 
 namespace trofeoCazador.Vistas.Amigos
 {
-    public partial class XAMLActiveUserItemControl : UserControl
+    public partial class XAMLUsuarioConectadoControl : UserControl
     {
-        private const string BTN_BORRAR_AMIGO = "DeleteFriend";
+        private const string BTN_BORRAR_AMIGO = "BorrarAmigo";
         private readonly string nombreUsuario;
 
         public event EventHandler<ArgumentosDeEventoDeClicDeBotón> BotonUsado;
 
-        public XAMLActiveUserItemControl(string nombreUsuario)
+        public XAMLUsuarioConectadoControl(string nombreUsuario)
         {
             InitializeComponent();
 

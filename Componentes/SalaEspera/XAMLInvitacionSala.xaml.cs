@@ -124,7 +124,6 @@ namespace trofeoCazador.Componentes.SalaEspera
 
         private bool ValidarCorreo()
         {
-            EstablecerEstilosPorDefecto();
             bool valido = true;
             string errorTextBoxEstilo = "errorTextBoxEstilo";
 
@@ -137,10 +136,5 @@ namespace trofeoCazador.Componentes.SalaEspera
             return valido;
         }
 
-        private void EstablecerEstilosPorDefecto()
-        {
-            string estiloNormalTextBox = "estiloNormalTextBox";
-            tbCorreoAmigo.Style = (Style)FindResource(estiloNormalTextBox);
-        }
     }
 }

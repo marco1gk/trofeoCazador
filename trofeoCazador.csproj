@@ -129,7 +129,10 @@
     <Compile Include="Recursos\Metodos.cs" />
     <Compile Include="SingletonSesion.cs" />
     <Compile Include="Utilidades\App .cs" />
+    <Compile Include="Utilidades\ArgumentosDeEventoDeClicDeBotón.cs" />
+    <Compile Include="Utilidades\GestorColores.cs" />
     <Compile Include="Utilidades\ImagenPerfil.cs" />
+    <Compile Include="Utilidades\JugadorEstadisticas.cs" />
     <Compile Include="Utilidades\ManejadorExcepciones.cs" />
     <Compile Include="Utilidades\ManejadorLogger.cs" />
     <Compile Include="Utilidades\Utilidades.cs" />
@@ -149,14 +152,14 @@
     </Compile>
     <Compile Include="Vistas\Amigos\GestorAmigosLinea.cs" />
     <Compile Include="Vistas\Amigos\GestorSolicitudesAmistad.cs" />
-    <Compile Include="Vistas\Amigos\XAMLActiveUserItemControl.xaml.cs">
-      <DependentUpon>XAMLActiveUserItemControl.xaml</DependentUpon>
+    <Compile Include="Vistas\Amigos\XAMLUsuarioConectadoControl.xaml.cs">
+      <DependentUpon>XAMLUsuarioConectadoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Amigos\XAMLAmigos.xaml.cs">
       <DependentUpon>XAMLAmigos.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Amigos\XAMLFriendRequestItemComponent.xaml.cs">
-      <DependentUpon>XAMLFriendRequestItemComponent.xaml</DependentUpon>
+    <Compile Include="Vistas\Amigos\XAMLSolicitudAmistad.xaml.cs">
+      <DependentUpon>XAMLSolicitudAmistad.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Estadisticas\XAMLEstadisticas.xaml.cs">
       <DependentUpon>XAMLEstadisticas.xaml</DependentUpon>
@@ -234,7 +237,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vistas\Amigos\XAMLActiveUserItemControl.xaml">
+    <Page Include="Vistas\Amigos\XAMLUsuarioConectadoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -242,7 +245,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vistas\Amigos\XAMLFriendRequestItemComponent.xaml">
+    <Page Include="Vistas\Amigos\XAMLSolicitudAmistad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
