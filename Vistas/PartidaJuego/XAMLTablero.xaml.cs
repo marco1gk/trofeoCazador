@@ -47,6 +47,8 @@ namespace trofeoCazador.Vistas.PartidaJuego
             private ModoSeleccionCarta[] modosSeleccionCarta = Enum.GetValues(typeof(ModoSeleccionCarta)).Cast<ModoSeleccionCarta>().ToArray();
             private string[] nombresJugadoresModoSeleccion;
             private bool cartaTomada = false;
+            private TaskCompletionSource<bool> jugadorGuardoCartaEnEscondite;
+            private string tipoCartaRevelada;
 
         private enum ModoSeleccionCarta
             {
@@ -793,7 +795,8 @@ namespace trofeoCazador.Vistas.PartidaJuego
                         break;
 
                     case ModoSeleccionCarta.MoverCartaTipoEspecificoAEscondite:
-                        MoverCartaTipoEspecificoAEscondite(cartaSeleccionada, CartasEnMazo.Last().Tipo);
+                        MoverCartaTipoEspecificoAEscondite(cartaSeleccionada, tipoCartaRevelada);
+                        CompletarGuardarCartaEscondite();
                         break;
 
                     case ModoSeleccionCarta.CartasSinTurno:
@@ -1130,6 +1133,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         private void MoverCartaTipoEspecificoAEscondite(CartaCliente cartaSeleccionada, string tipoCartaRevelada)
         {
+            Console.WriteLine($"Carta seleccionada tipo = {cartaSeleccionada.Tipo} /nTipo carta revelada: {tipoCartaRevelada}");
             if(cartaSeleccionada.Tipo == tipoCartaRevelada)
             {
                 try
@@ -1651,7 +1655,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
             if (cartasTomadasMazo == cartasATomarMazo || EsMazoVacio())
             {
-                // Desuscribir el evento
                 ZonaMazoCartas.MouseDown -= ZonaMazoCartas_MouseDown1;
 
                 ZonaMazoCartas.IsEnabled = false;
@@ -1724,11 +1727,11 @@ namespace trofeoCazador.Vistas.PartidaJuego
             }
         }
 
-        //NOTIFICACIONES
         public void NotificarTurnoIniciado(string jugadorTurnoActual)
         {
             this.jugadorTurnoActual = jugadorTurnoActual;
             modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
+            jugadorDecidioParar = false;
             if(jugadorActual.NombreUsuario == jugadorTurnoActual)
             {
                 dado.DadoLanzado -= ManejarResultadoDado;
@@ -2192,12 +2195,13 @@ namespace trofeoCazador.Vistas.PartidaJuego
             });
         }
 
-        public void NotificarPreguntaJugadores(string jugadorTurnoActual)
+        public void NotificarPreguntaJugadores(string jugadorTurnoActual, string tipoCartaRevelada)
         {
+            this.tipoCartaRevelada = tipoCartaRevelada;
             ManejarDecisionGuardarCartaEnEscondite();
         }
 
-        public void NotificarNumeroJugadoresGuardaronCarta(int numeroJugadores)
+        public void NotificarNumeroJugadoresGuardaronCarta(int numeroJugadoresGuardaronCarta)
         {
             try
             {
@@ -2237,7 +2241,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
             
-            cartasATomarMazo = numeroJugadores;
+            cartasATomarMazo = numeroJugadoresGuardaronCarta;
             TomarCartasMazo();
         }
 
@@ -2248,6 +2252,11 @@ namespace trofeoCazador.Vistas.PartidaJuego
             {
                 VentanasEmergentes.CrearVentanaEmergente("Jugador paro de tirar", "El jugador en turno ha decidido dejar de tirar el dado.");
             }
+        }
+
+        public void NotificarActualizacionDecisionTurno()
+        {
+            jugadorDecidioParar = false;
         }
 
         public void NotificarModoSeleccionCarta(int idModoSeleccionCarta)
@@ -2270,18 +2279,27 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         }
 
-       
-
+        public void CompletarGuardarCartaEscondite()
+        {
+            if (jugadorGuardoCartaEnEscondite != null && jugadorGuardoCartaEnEscondite.Task.IsCompleted)
+            {
+                jugadorGuardoCartaEnEscondite.SetResult(true); // Completa la tarea indicando que la carta ha sido guardada
+            }
+        }
         private async void ManejarDecisionGuardarCartaEnEscondite()
         {
             bool decision = await DecisionGuardarCartaEnEscondite();
-
+            
             if (decision)
             {
+                jugadorGuardoCartaEnEscondite = new TaskCompletionSource<bool>();
                 try
                 {
                     cliente.EnviarDecision(idPartida, true);
                     cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverCartaTipoEspecificoAEscondite), jugadorActual.NombreUsuario);
+                    await jugadorGuardoCartaEnEscondite.Task;
+                    cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.CartasSinTurno), jugadorActual.NombreUsuario);
+
                 }
                 catch (EndpointNotFoundException ex)
                 {
@@ -2441,6 +2459,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
             bool decision = await DecisionContinuarTurno();
             if (!decision)
             {
+                cliente.DejarTirarDado(idPartida);
                 DadoImagen.IsEnabled = false;
                 await ResolverFichas();
                 await FinalizarTurno();
@@ -2503,6 +2522,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 {
                     cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
                     cliente.ObligarATirarDado(idPartida);
+                    cliente.ActualizarDecisionTurno(idPartida);
                 }
                 catch (EndpointNotFoundException ex)
                 {
@@ -2536,8 +2556,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                     ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
-                
-                jugadorDecidioParar = false;
             }
             else
             {

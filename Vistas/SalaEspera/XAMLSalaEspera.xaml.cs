@@ -42,6 +42,7 @@ using System.Diagnostics;
         }
         public void NotificarIniciarPartida(JugadorPartida[] jugadores)
         {
+
             Console.WriteLine("NotificarIniciarPartida");
             Console.WriteLine("Jugadores recibidos en el cliente:");
             foreach (var jugador in jugadores)
@@ -78,6 +79,8 @@ using System.Diagnostics;
                 }
             });
         }
+
+
 
         public XAMLSalaEspera()
             {

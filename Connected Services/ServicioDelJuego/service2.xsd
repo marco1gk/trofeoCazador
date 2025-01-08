@@ -907,6 +907,13 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ActualizarDecisionTurno">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPartida" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NotificarTurnoIniciado">
     <xs:complexType>
       <xs:sequence>
@@ -1159,6 +1166,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="jugadorTurnoActual" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tipoCartaRevelada" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1233,6 +1241,16 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="NotificarModoSeleccionCartaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarActualizacionDecisionTurno">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarActualizacionDecisionTurnoResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
