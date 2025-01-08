@@ -278,18 +278,6 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="BuscarSalaEsperaDisponible">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="BuscarSalaEsperaDisponibleResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="BuscarSalaEsperaDisponibleResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="IniciarPartida">
     <xs:complexType>
       <xs:sequence>

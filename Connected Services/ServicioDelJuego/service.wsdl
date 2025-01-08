@@ -219,12 +219,6 @@
   <wsdl:message name="ISalaEsperaServicio_MandarMensaje_OutputMessage">
     <wsdl:part name="parameters" element="tns:MandarMensajeResponse" />
   </wsdl:message>
-  <wsdl:message name="ISalaEsperaServicio_BuscarSalaEsperaDisponible_InputMessage">
-    <wsdl:part name="parameters" element="tns:BuscarSalaEsperaDisponible" />
-  </wsdl:message>
-  <wsdl:message name="ISalaEsperaServicio_BuscarSalaEsperaDisponible_OutputMessage">
-    <wsdl:part name="parameters" element="tns:BuscarSalaEsperaDisponibleResponse" />
-  </wsdl:message>
   <wsdl:message name="ISalaEsperaServicio_IniciarPartida_InputMessage">
     <wsdl:part name="parameters" element="tns:IniciarPartida" />
   </wsdl:message>
@@ -787,10 +781,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/MandarMensaje" message="tns:ISalaEsperaServicio_MandarMensaje_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/MandarMensajeResponse" message="tns:ISalaEsperaServicio_MandarMensaje_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="BuscarSalaEsperaDisponible">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponible" message="tns:ISalaEsperaServicio_BuscarSalaEsperaDisponible_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponibleResponse" message="tns:ISalaEsperaServicio_BuscarSalaEsperaDisponible_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="IniciarPartida">
       <wsdl:input wsaw:Action="http://tempuri.org/ISalaEsperaServicio/IniciarPartida" message="tns:ISalaEsperaServicio_IniciarPartida_InputMessage" />
     </wsdl:operation>
@@ -1348,15 +1338,6 @@
     </wsdl:operation>
     <wsdl:operation name="MandarMensaje">
       <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/MandarMensaje" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="BuscarSalaEsperaDisponible">
-      <soap12:operation soapAction="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponible" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2159,51 +2140,51 @@
   </wsdl:binding>
   <wsdl:service name="ImplementacionServicio">
     <wsdl:port name="NetTcpBinding_IGestionCuentaServicio" binding="tns:NetTcpBinding_IGestionCuentaServicio">
-      <soap12:address location="net.tcp://192.168.48.57:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.48.57:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_ISalaEsperaServicio" binding="tns:NetTcpBinding_ISalaEsperaServicio">
-      <soap12:address location="net.tcp://192.168.48.57:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.48.57:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorAmistad" binding="tns:NetTcpBinding_IGestorAmistad">
-      <soap12:address location="net.tcp://192.168.48.57:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.48.57:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorDeSolicitudesDeAmistad" binding="tns:NetTcpBinding_IGestorDeSolicitudesDeAmistad">
-      <soap12:address location="net.tcp://192.168.48.57:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.48.57:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorUsuariosConectados" binding="tns:NetTcpBinding_IGestorUsuariosConectados">
-      <soap12:address location="net.tcp://192.168.48.57:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.48.57:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IServicioPartida" binding="tns:NetTcpBinding_IServicioPartida">
-      <soap12:address location="net.tcp://192.168.48.57:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.48.57:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorInvitacion" binding="tns:NetTcpBinding_IGestorInvitacion">
-      <soap12:address location="net.tcp://192.168.48.57:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.48.57:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IEstadisticasGlobales" binding="tns:NetTcpBinding_IEstadisticasGlobales">
-      <soap12:address location="net.tcp://192.168.48.57:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.48.57:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

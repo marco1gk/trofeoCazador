@@ -1044,12 +1044,6 @@ namespace trofeoCazador.ServicioDelJuego {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/MandarMensaje", ReplyAction="http://tempuri.org/ISalaEsperaServicio/MandarMensajeResponse")]
         System.Threading.Tasks.Task MandarMensajeAsync(string mensaje);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponible", ReplyAction="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponibleResponse")]
-        string BuscarSalaEsperaDisponible();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponible", ReplyAction="http://tempuri.org/ISalaEsperaServicio/BuscarSalaEsperaDisponibleResponse")]
-        System.Threading.Tasks.Task<string> BuscarSalaEsperaDisponibleAsync();
-        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ISalaEsperaServicio/IniciarPartida")]
         void IniciarPartida(string codigoSalaEspera);
         
@@ -1183,14 +1177,6 @@ namespace trofeoCazador.ServicioDelJuego {
         
         public System.Threading.Tasks.Task MandarMensajeAsync(string mensaje) {
             return base.Channel.MandarMensajeAsync(mensaje);
-        }
-        
-        public string BuscarSalaEsperaDisponible() {
-            return base.Channel.BuscarSalaEsperaDisponible();
-        }
-        
-        public System.Threading.Tasks.Task<string> BuscarSalaEsperaDisponibleAsync() {
-            return base.Channel.BuscarSalaEsperaDisponibleAsync();
         }
         
         public void IniciarPartida(string codigoSalaEspera) {
