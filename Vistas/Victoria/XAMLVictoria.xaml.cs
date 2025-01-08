@@ -23,10 +23,10 @@ namespace trofeoCazador.Vistas.Victoria
     public partial class XAMLVictoria : Page
     {
         private readonly KeyValuePair<JugadorDataContract, int>[] marcador;
-        public SingletonSesion sesion = SingletonSesion.Instancia;
+        private SingletonSesion sesion = SingletonSesion.Instancia;
         private readonly int puntajeGanador;
         private int idGanador;
-        
+        private readonly string invitado="Invitado";
 
         public XAMLVictoria(string idPartida, KeyValuePair<JugadorDataContract, int>[] marcador, int puntajeGanador)
         {
@@ -166,9 +166,9 @@ namespace trofeoCazador.Vistas.Victoria
                         lbVictoria.Visibility = Visibility.Visible; 
                         lbDerrota.Visibility = Visibility.Collapsed; 
                     }
-                    else if (jugador.Key.NombreUsuario == "Invitado")
+                    else if (jugador.Key.NombreUsuario == invitado)
                     {
-                        lbnombreUsuario.Content = "Invitado";
+                        lbnombreUsuario.Content = invitado;
                         lbVictoria.Visibility = Visibility.Visible; 
                         lbDerrota.Visibility = Visibility.Collapsed; 
                     }
@@ -181,9 +181,9 @@ namespace trofeoCazador.Vistas.Victoria
                         lbDerrota.Visibility = Visibility.Visible;
                         lbVictoria.Visibility = Visibility.Collapsed; 
                     }
-                    else if (jugador.Key.NombreUsuario == "Invitado")
+                    else if (jugador.Key.NombreUsuario == invitado)
                     {
-                        lbnombreUsuario.Content = "Invitado";
+                        lbnombreUsuario.Content = invitado;
                         lbDerrota.Visibility = Visibility.Visible;
                         lbVictoria.Visibility = Visibility.Collapsed;
                     }

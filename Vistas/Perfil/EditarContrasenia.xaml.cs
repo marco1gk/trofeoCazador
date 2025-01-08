@@ -20,7 +20,7 @@ namespace trofeoCazador.Vistas.Perfil
 {
     public partial class EditarContrasenia : Page
     {
-        readonly JugadorDataContract jugador = new JugadorDataContract();
+        readonly JugadorDataContract jugador;
         private readonly string correo;
         public EditarContrasenia(string correo)
         {
@@ -115,7 +115,7 @@ namespace trofeoCazador.Vistas.Perfil
             return true;
         }
 
-        private void MostrarError(string mensaje)
+        private static void MostrarError(string mensaje)
         {
             VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, mensaje);
         }

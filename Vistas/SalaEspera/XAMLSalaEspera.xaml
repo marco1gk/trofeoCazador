@@ -45,7 +45,7 @@
             <ImageBrush ImageSource="/Recursos/4867851.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <StackPanel x:Name="stackPanelOpciones" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">
-            <Button x:Name="btnCrearLobby" Content="{x:Static p:Resources.btnCrearSalaEspera}" Click="BtnCrearLobby_Click" Style="{StaticResource CustomButtonStyle}" Background="LightGreen"/>
+            <Button x:Name="btnCrearLobby" Content="{x:Static p:Resources.btnCrearSalaEspera}" Click="BtnCrearSalaEspera_Click" Style="{StaticResource CustomButtonStyle}" Background="LightGreen"/>
             <Button x:Name="btnUnirseLobby" Content="{x:Static p:Resources.btnUnirseSalaEspera}" Click="BtnUnirseLobby_Click" Style="{StaticResource CustomButtonStyle}" Background="LightBlue" Margin="10,0,0,0"/>
         </StackPanel>
         <TextBox x:Name="txtCodigoLobby" Width="150" Height="30" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,80,0,0"/>
@@ -78,11 +78,11 @@
             </ScrollViewer>
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
                 <TextBox x:Name="tbxMessage" FontFamily="Inter" FontSize="14" VerticalContentAlignment="Center" Width="160" Background="White" BorderBrush="Gray" Margin="0,0,10,0"/>
-                <Button Background="LightGreen" Click="BtnEnviarMensaje" Width="50" Content="Enviar"/>
+                <Button Background="LightGreen" Click="BtnEnviarMensaje_Click" Width="50" Content="Enviar"/>
             </StackPanel>
         </Grid>
-        <Button Name="btnIniciarPartida" Content="{x:Static p:Resources.btnIniciarPartida}" Width="120" Height="30" Background="LightCoral" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,10,0,50" Click ="BtnClicIniciarPartida" Style="{StaticResource CustomButtonStyle}"/>
-        <Button Name="btnSalir" Content="{x:Static p:Resources.btnSalir}" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Bottom" Height="35" Width="156" Click="BtnSalirLobby" Visibility="Collapsed" Style="{StaticResource CustomButtonStyle}"/>
+        <Button Name="btnIniciarPartida" Content="{x:Static p:Resources.btnIniciarPartida}" Width="120" Height="30" Background="LightCoral" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,10,0,50" Click ="BtnClicIniciarPartida_Click" Style="{StaticResource CustomButtonStyle}"/>
+        <Button Name="btnSalir" Content="{x:Static p:Resources.btnSalir}" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Bottom" Height="35" Width="156" Click="BtnSalirSalaEspera_Click" Visibility="Collapsed" Style="{StaticResource CustomButtonStyle}"/>
         <Button Name="btnEnviarInvitacion" Content="{x:Static p:Resources.btnEnviarInvitacion}" Style="{StaticResource CustomButtonStyle}" Background="LightYellow" HorizontalAlignment="Left" Margin="200,10,0,0" VerticalAlignment="Bottom" Visibility="Collapsed" Click="BtnCrearVentanaInvitacion_Click"/>
     </Grid>
 </Page>

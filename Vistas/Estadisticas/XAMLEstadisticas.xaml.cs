@@ -77,7 +77,7 @@ namespace trofeoCazador.Vistas.Estadisticas
             }
         }
 
-        private string ObtenerNombreUsuarioPorIdJugador(int idJugador)
+        private static string ObtenerNombreUsuarioPorIdJugador(int idJugador)
         {
             GestionCuentaServicioClient servicio = new GestionCuentaServicioClient();
             return servicio.ObtenerNombreUsuarioPorIdJugador(idJugador);

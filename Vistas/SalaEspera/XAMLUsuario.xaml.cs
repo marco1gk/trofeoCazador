@@ -20,7 +20,6 @@ namespace trofeoCazador.Vistas.SalaEspera
         }
         private static void OnEsAnfitrionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = d as XAMLSalaEspera;
         }
 
 

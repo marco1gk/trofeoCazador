@@ -28,8 +28,6 @@ namespace trofeoCazador.Vistas.Perfil
             SingletonSesion sesion = SingletonSesion.Instancia;
             InitializeComponent();
             CargarPerfil(sesion.JugadorId);
-
-
         }
 
         private void CargarPerfil(int idJugador)
@@ -79,7 +77,7 @@ namespace trofeoCazador.Vistas.Perfil
             
             
         }
-        private string ObtenerRutaImagenPerfil(int numeroFotoPerfil)
+        private static string ObtenerRutaImagenPerfil(int numeroFotoPerfil)
         {
             switch (numeroFotoPerfil)
             {

@@ -914,6 +914,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="NotificarJugadorDesconectado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarJugadorDesconectadoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NotificarTurnoTerminado">
     <xs:complexType>
       <xs:sequence>

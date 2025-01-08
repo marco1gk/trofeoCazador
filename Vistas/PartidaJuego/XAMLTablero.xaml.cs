@@ -67,7 +67,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
             {
                 throw new InvalidOperationException("El constructor XAMLTablero debe ejecutarse en un subproceso STA.");
             }
-
             InitializeComponent();
             SetupClient();
 
@@ -162,6 +161,48 @@ namespace trofeoCazador.Vistas.PartidaJuego
             });
         }
 
+        public void NotificarJugadorDesconectado(string nombreUsuario)
+        {
+            MessageBox.Show("se salio el cabron de " + nombreUsuario);
+            listaDeJugadores = listaDeJugadores.Where(j => j.NombreUsuario != nombreUsuario).ToList();
+
+            MostrarJugadores();
+
+        }
+        public void MostrarJugadores()
+        {
+            var jugadoresEnPartida = listaDeJugadores
+                .Where(j => j.NombreUsuario != jugadorActual.NombreUsuario)
+                .ToList();
+
+            var areasDeJugadores = new[]
+            {
+        new { Nombre = NombreJugador2, Imagen = Jugador2Imagen, Area = AreaJugador2 },
+        new { Nombre = NombreJugador3, Imagen = Jugador3Imagen, Area = AreaJugador3 },
+        new { Nombre = NombreJugador4, Imagen = Jugador4Imagen, Area = AreaJugador4 }
+             };
+
+            for (int i = 0; i < areasDeJugadores.Length; i++)
+            {
+                var areaDeJugador = areasDeJugadores[i];
+
+                if (i < jugadoresEnPartida.Count)
+                {
+                    var jugador = jugadoresEnPartida[i];
+
+                    areaDeJugador.Nombre.Text = jugador.NombreUsuario;
+                    string rutaImagen = ObtenerRutaImagenPerfil(jugador.NumeroFotoPerfil);
+                    areaDeJugador.Imagen.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
+                    areaDeJugador.Area.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    areaDeJugador.Nombre.Text = string.Empty;
+                    areaDeJugador.Imagen.Source = null;
+                    areaDeJugador.Area.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
 
         private void SetupClient()
         {
@@ -184,7 +225,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 var jugadores = puntajes.Keys
                     .ToDictionary(
                         nombreUsuario => nombreUsuario,
-                        nombreUsuario => GetIdPlayer(nombreUsuario)
+                        nombreUsuario => ObtenerJugadorId(nombreUsuario)
                     );
 
                 var scoreboard = jugadores
@@ -210,15 +251,14 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 Console.WriteLine($"Error inesperado: {ex.Message}");
             }
         }
-        private int GetIdPlayer(string username)
+        private int ObtenerJugadorId(string nombreUsuario)
         {
-            Console.WriteLine("SE ENTRA A GetIdPlayer");
-            GestionCuentaServicioClient userManagerClient = new GestionCuentaServicioClient();
-            int idPlayer = -1;
+            GestionCuentaServicioClient gestorAmigos = new GestionCuentaServicioClient();
+            int idJugador = -1;
 
             try
             {
-                idPlayer = userManagerClient.ObtenerIdJugadorPorNombreUsuario(username);
+                idJugador = gestorAmigos.ObtenerIdJugadorPorNombreUsuario(nombreUsuario);
             }
             catch (EndpointNotFoundException ex)
             {
@@ -251,7 +291,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
 
-            return idPlayer;
+            return idJugador;
         }
 
 
@@ -332,31 +372,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
                 }
             }
-            public void MostrarJugadores()
-            {
-                var jugadoresEnPartida = listaDeJugadores
-                    .Where(j => j.NombreUsuario != jugadorActual.NombreUsuario)
-                    .ToList();
-
-                var areasDeJugadores = new[]
-                {
-                    new { Nombre = NombreJugador2, Imagen = Jugador2Imagen, Area = AreaJugador2 },
-                    new { Nombre = NombreJugador3, Imagen = Jugador3Imagen, Area = AreaJugador3 },
-                    new { Nombre = NombreJugador4, Imagen = Jugador4Imagen, Area = AreaJugador4 }
-                };
-
-                for (int i = 0; i < jugadoresEnPartida.Count && i < areasDeJugadores.Length; i++)
-                {
-                    var jugador = jugadoresEnPartida[i];
-                    var areaDeJugador = areasDeJugadores[i];
-
-                    areaDeJugador.Nombre.Text = jugador.NombreUsuario;
-                    string rutaImagen = ObtenerRutaImagenPerfil(jugador.NumeroFotoPerfil);
-                    areaDeJugador.Imagen.Source = new BitmapImage(new Uri(rutaImagen, UriKind.Relative));
-                    areaDeJugador.Area.Visibility = Visibility.Visible;
-                }
-            }
-
+          
             private void BtnClicIniciarJuego(object sender, RoutedEventArgs e)
             {
                 try
@@ -2283,7 +2299,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             if (jugadorGuardoCartaEnEscondite != null && jugadorGuardoCartaEnEscondite.Task.IsCompleted)
             {
-                jugadorGuardoCartaEnEscondite.SetResult(true); // Completa la tarea indicando que la carta ha sido guardada
+                jugadorGuardoCartaEnEscondite.SetResult(true); 
             }
         }
         private async void ManejarDecisionGuardarCartaEnEscondite()
@@ -3120,6 +3136,9 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 
             }
         }
+
+
+
     }
 }
 

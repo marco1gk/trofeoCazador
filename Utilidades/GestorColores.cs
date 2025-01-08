@@ -16,7 +16,7 @@ using trofeoCazador.Vistas.InicioSesion;
 
 namespace trofeoCazador.Utilidades
 {
-    public class GestorColores
+    public static class GestorColores
     {
         public static SolidColorBrush CreateColorFromHexadecimal(string hexadecimalColor)
         {

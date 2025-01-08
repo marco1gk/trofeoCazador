@@ -29,7 +29,7 @@ using System.Diagnostics;
             private SalaEsperaServicioClient cliente;
             private string codigoSalaEsperaActual;
             private int numeroJugadoresSalaEspera;
-            public ObservableCollection<JugadorSalaEspera> AmigosDisponibles { get; set; } = new ObservableCollection<JugadorSalaEspera>();
+            public ObservableCollection<JugadorSalaEspera> AmigosDisponibles { get; set; }
             public ObservableCollection<JugadorSalaEspera> JugadoresEnSala { get; set; }
 
 
@@ -40,12 +40,12 @@ using System.Diagnostics;
                 codigoLobbyGuardado = codigoSalaEsperaActual;
             }
         }
-        public void NotificarIniciarPartida(JugadorPartida[] jugadores)
+        public void NotificarIniciarPartida(JugadorPartida[] jugadoresPartida)
         {
 
-            Console.WriteLine("NotificarIniciarPartida");
+            Console.WriteLine("NotificarIniciarPartida"+numeroJugadoresSalaEspera);
             Console.WriteLine("Jugadores recibidos en el cliente:");
-            foreach (var jugador in jugadores)
+            foreach (var jugador in jugadoresPartida)
             {
                 Console.WriteLine($"Jugador: {jugador.NombreUsuario}");
                 Console.WriteLine($"Foto de perfil: {jugador.NumeroFotoPerfil}");
@@ -63,7 +63,7 @@ using System.Diagnostics;
                     if (frame != null)
                     {
                         Console.WriteLine("Frame principal encontrado, navegando al tablero.");
-                        XAMLTablero tablero = new XAMLTablero(jugadores.ToList(), codigoSalaEsperaActual);
+                        XAMLTablero tablero = new XAMLTablero(jugadoresPartida.ToList(), codigoSalaEsperaActual);
                         frame.Navigate(tablero);
                     }
                     else
@@ -74,7 +74,7 @@ using System.Diagnostics;
                 else
                 {
                     Console.WriteLine("NavigationService está disponible, navegando al tablero.");
-                    XAMLTablero tablero = new XAMLTablero(jugadores.ToList(), codigoSalaEsperaActual);
+                    XAMLTablero tablero = new XAMLTablero(jugadoresPartida.ToList(), codigoSalaEsperaActual);
                     this.NavigationService.Navigate(tablero);
                 }
             });
@@ -93,7 +93,7 @@ using System.Diagnostics;
 
             }
 
-        private async void BtnEnviarMensaje(object sender, RoutedEventArgs e)
+        private async void BtnEnviarMensaje_Click(object sender, RoutedEventArgs e)
         {
             string mensaje = tbxMessage.Text.Trim();
 
@@ -139,7 +139,7 @@ using System.Diagnostics;
             }
         }
 
-        private void CloseClient()
+        private void CerrarCliente()
         {
             if (cliente != null)
             {
@@ -165,7 +165,7 @@ using System.Diagnostics;
             }
         }
 
-        private void BtnCrearLobby_Click(object sender, RoutedEventArgs e)
+        private void BtnCrearSalaEspera_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -183,6 +183,7 @@ using System.Diagnostics;
 
                 cliente.CrearSalaEspera(jugador);
                 AjustarVisibilidadAfitrion();
+                numeroJugadoresSalaEspera++;
             }
             catch (EndpointNotFoundException)
             {
@@ -252,11 +253,11 @@ using System.Diagnostics;
                         stackPanelJugadores.Visibility = Visibility.Visible;
                         gridChat.Visibility = Visibility.Visible;
                         btnSalir.Visibility = Visibility.Visible;
-                        btnIniciarPartida.Visibility = Visibility.Visible;
+                        btnIniciarPartida.Visibility = Visibility.Collapsed;
 
                         codigoSalaEsperaActual = codigoSalaEspera;
                         txtCodigoLobby.Visibility = Visibility.Collapsed;
-
+                        numeroJugadoresSalaEspera++;
                     }
                     else
                     {
@@ -370,7 +371,7 @@ using System.Diagnostics;
                     {
                         Debug.WriteLine("Cliente en estado Faulted. Cerrando...");
                         GuardarEstadoLobby();
-                        CloseClient();
+                        CerrarCliente();
                     }
                     else
                     {
@@ -384,10 +385,10 @@ using System.Diagnostics;
                 cliente.Open();
                 Debug.WriteLine("Cliente abierto correctamente.");
 
-                RestaurarEstadoLobby();
+                RestaurarEstadoSalaEspera();
             }
 
-            private void RestaurarEstadoLobby()
+            private void RestaurarEstadoSalaEspera()
             {
                 Debug.WriteLine($"Intentando restaurar estado del lobby con código: {codigoLobbyGuardado}");
 
@@ -421,7 +422,7 @@ using System.Diagnostics;
                     Debug.WriteLine("No hay código de lobby guardado para restaurar.");
                 }
             }
-        private async void BtnClicIniciarPartida(object sender, RoutedEventArgs e)
+        private async void BtnClicIniciarPartida_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(codigoSalaEsperaActual))
             {
@@ -439,7 +440,7 @@ using System.Diagnostics;
                     {
                         cliente.IniciarPartida(codigoSalaEsperaActual);
                     }
-                    catch (EndpointNotFoundException ex)
+                    catch (EndpointNotFoundException)
                     {
                         VentanasEmergentes.CrearConexionFallidaMensajeVentana();
                     }
@@ -517,7 +518,7 @@ using System.Diagnostics;
                 }
             });
         }
-
+        //jsandkndaksndak
         public async Task ExpulsarJugadorSalaEsperaAsync(string nombreUsuario)
         {
 
@@ -565,6 +566,20 @@ using System.Diagnostics;
             }
 
         }
+        public void NotificarExpulsadoSalaEspera()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloExpulsion, Properties.Resources.lbDetallesExpulsion);
+                NavigationService.Navigate(new XAMLSalaEspera());
+            });
+        }
+
+        private void JugadorControl_JugadorExpulsado(object sender, string nombreUsuario)
+        {
+            ExpulsarJugadorSalaEsperaAsync(nombreUsuario);
+
+        }
         public void SalirSalaEspera(string codigoSalaEspera, string nombreUsuario)
         {
             try
@@ -600,13 +615,8 @@ using System.Diagnostics;
                 ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
-   
-        private void JugadorControl_JugadorExpulsado(object sender, string nombreUsuario)
-        {
-            ExpulsarJugadorSalaEsperaAsync(nombreUsuario);
 
-        }
-
+        
         public void UnirseComoInvitado(string codigoSalaEspera)
         {
             AjustarVisibilidad();
@@ -671,12 +681,12 @@ using System.Diagnostics;
             stackPanelJugadores.Visibility = Visibility.Visible;
             gridChat.Visibility = Visibility.Visible;
             btnSalir.Visibility = Visibility.Visible;
-            btnIniciarPartida.Visibility = Visibility.Visible;
+            btnIniciarPartida.Visibility = Visibility.Collapsed;
         }
 
 
 
-        public void UnirseSalaEsperaComoHost(string codigoSalaEspera)
+        public void UnirseSalaEsperaComoAnfitrion(string codigoSalaEspera)
         {
             try
             {
@@ -721,15 +731,15 @@ using System.Diagnostics;
                 stackPanelMessages.Children.Add(new TextBlock { Text = $"{nombreUsuario}: {mensaje}" });
             });
         }
-        public void NotificarJugadoresEnSalaEspera(string codigoSalaEspera, JugadorSalaEspera[] jugadores)
+        public void NotificarJugadoresEnSalaEspera(string codigoSalaEspera, JugadorSalaEspera[] jugador)
         {
             Dispatcher.Invoke(() =>
             {
                
                 JugadoresEnSala.Clear(); 
-                foreach (var jugador in jugadores)
+                foreach (var jugadorActual in jugador)
                 {
-                    JugadoresEnSala.Add(jugador); 
+                    JugadoresEnSala.Add(jugadorActual); 
                 }
             });
         }
@@ -746,7 +756,7 @@ using System.Diagnostics;
 
 
 
-        private async void BtnSalirLobby(object sender, RoutedEventArgs e)
+        private async void BtnSalirSalaEspera_Click(object sender, RoutedEventArgs e)
         {
             SingletonSesion sesion = SingletonSesion.Instancia;
             string nombreUsuario = sesion.NombreUsuario;
@@ -817,7 +827,6 @@ using System.Diagnostics;
             {
                 try
                 {
-                    string codigoSala = txtCodigoLobby.Text;
                     string nombreUsuario = SingletonSesion.Instancia.NombreUsuario;
                     string detallesVentana;
                     cliente.InvitarAmigoASala(codigoSalaEsperaActual, amigoSeleccionado.NombreUsuario, nombreUsuario);
@@ -862,7 +871,6 @@ using System.Diagnostics;
         private void CargarAmigosJugador()
         {
             GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
-            int idJugadorActual = SingletonSesion.Instancia.JugadorId;
             SingletonSesion sesion = SingletonSesion.Instancia;
             try
             {
@@ -934,15 +942,7 @@ using System.Diagnostics;
             VentanasEmergentes.CrearSalaEsperaNoEncontradaMensajeVentana();
         }
 
-        public void NotificarExpulsadoSalaEspera()
-        {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloExpulsion, Properties.Resources.lbDetallesExpulsion);
-                NavigationService.Navigate(new XAMLSalaEspera());
-            });
-        }
-
+       
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

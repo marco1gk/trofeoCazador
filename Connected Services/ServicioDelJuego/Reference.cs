@@ -1723,6 +1723,9 @@ namespace trofeoCazador.ServicioDelJuego {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarTurnoIniciadoResponse")]
         void NotificarTurnoIniciado(string nombreUsuario);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarJugadorDesconectado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarJugadorDesconectadoResponse")]
+        void NotificarJugadorDesconectado(string nombreUsuario);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarTurnoTerminado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarTurnoTerminadoResponse")]
         void NotificarTurnoTerminado(string nombreUsuario);
         

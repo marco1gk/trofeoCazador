@@ -16,9 +16,9 @@ namespace trofeoCazador.Vistas.Amigos
 {
     public partial class XAMLAmigos : Page, IGestorDeSolicitudesDeAmistadCallback
     {
-        public SingletonSesion sesion = SingletonSesion.Instancia;
+        private SingletonSesion sesion = SingletonSesion.Instancia;
 
-        private bool ComprobarEstadoRed()
+        private static bool ComprobarEstadoRed()
         {
             return System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
         }
@@ -48,7 +48,7 @@ namespace trofeoCazador.Vistas.Amigos
             }
         }
 
-        private async void SuscribirUsuarioAlDiccionarioDeAmigosEnLínea()
+        private async Task SuscribirUsuarioAlDiccionarioDeAmigosEnLínea()
         {
             if (!ComprobarEstadoRed())
             {
@@ -80,35 +80,30 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void EnviarSolicitud()
         {
-            int idJugador = sesion.JugadorId;
-            string mensaje;
-            string nombreDeUsuarioJugadorSolicitado = string.Empty;
-            tbNombreDeUsuarioEnviarSolicitud.Dispatcher.Invoke(() =>
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                nombreDeUsuarioJugadorSolicitado = tbNombreDeUsuarioEnviarSolicitud.Text.Trim();
-            });
-
-            lbErrorNombreDeUsuarioSolicitudAmistad.Dispatcher.Invoke(() =>
-            {
+                int idJugador = sesion.JugadorId;
+                string mensaje;
+                string nombreDeUsuarioJugadorSolicitado = tbNombreDeUsuarioEnviarSolicitud.Text.Trim();
                 lbErrorNombreDeUsuarioSolicitudAmistad.Visibility = Visibility.Visible;
-            });
 
-            if (ValidarEnviarSolicitud(idJugador, nombreDeUsuarioJugadorSolicitado))
-            {
-                AgregarSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
-                EnviarSolicitudAmistad(nombreDeUsuarioJugadorSolicitado);
-                mensaje = Properties.Resources.lbInvitacionEnviada + " " + nombreDeUsuarioJugadorSolicitado;
-
-                tbNombreDeUsuarioEnviarSolicitud.Dispatcher.Invoke(() =>
+                if (ValidarEnviarSolicitud(idJugador, nombreDeUsuarioJugadorSolicitado))
                 {
+                    AgregarSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
+                    EnviarSolicitudAmistad(nombreDeUsuarioJugadorSolicitado);
+
+                    mensaje = Properties.Resources.lbInvitacionEnviada + " " + nombreDeUsuarioJugadorSolicitado;
+                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, mensaje);
+
                     tbNombreDeUsuarioEnviarSolicitud.Text = string.Empty;
-                });
-            }
-            else
-            {
-               VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloSolicitudAmistad, Properties.Resources.lbProblemasInvitacion);
-            }
+                }
+                else
+                {
+                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloSolicitudAmistad, Properties.Resources.lbProblemasInvitacion);
+                }
+            });
         }
+
 
         private static void AgregarSolicitudAmistad(int idJugador, string nombreDeUsuarioJugadorSolicitado)
         {
@@ -118,9 +113,37 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void EnviarSolicitudAmistad(string nombreDeUsuarioJugadorSolicitado)
         {
-            InstanceContext contexto = new InstanceContext(this);
-            GestorDeSolicitudesDeAmistadClient gestorAmistadCliente = new GestorDeSolicitudesDeAmistadClient(contexto);
-            gestorAmistadCliente.EnviarSolicitudAmistad(sesion.NombreUsuario, nombreDeUsuarioJugadorSolicitado);
+            
+            try
+            {
+                InstanceContext contexto = new InstanceContext(this);
+                GestorDeSolicitudesDeAmistadClient gestorAmistadCliente = new GestorDeSolicitudesDeAmistadClient(contexto);
+                gestorAmistadCliente.EnviarSolicitudAmistad(sesion.NombreUsuario, nombreDeUsuarioJugadorSolicitado);
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (Exception)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+            }
         }
 
         private bool ValidarEnviarSolicitud(int idJugador, string nombreDeUsuarioJugadorSolicitado)

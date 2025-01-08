@@ -23,7 +23,6 @@ namespace trofeoCazador.Vistas.RegistroUsuario
 {
     public partial class XAMLRegistroUsuario : Page
     {
-        private readonly string codigoEnviado;
         public XAMLRegistroUsuario()
         {
             InitializeComponent();

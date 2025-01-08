@@ -13,9 +13,9 @@ namespace trofeoCazador.Recursos.ElementosPartida
 {
     public class Dado
     {
-        private Image dadoImagen;
-        private DispatcherTimer animacionTimer;
-        private string[] carasDado;
+        private readonly Image dadoImagen;
+        private readonly DispatcherTimer animacionTimer;
+        private readonly string[] carasDado;
         public event Action<int> DadoLanzado;
         public Dado(Image dadoImagenControl)
         {
@@ -29,7 +29,6 @@ namespace trofeoCazador.Recursos.ElementosPartida
                 "/Recursos/ElementosPartida/ImagenesPartida/Dado/Cara5.png",
                 "/Recursos/ElementosPartida/ImagenesPartida/Dado/Cara6.png"
             };
-            // Configurar el temporizador de animación
             animacionTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMilliseconds(300)
@@ -65,13 +64,12 @@ namespace trofeoCazador.Recursos.ElementosPartida
             };
             dadoImagen.BeginAnimation(Image.OpacityProperty, fadeOut);
         }
-        private async void DetenerAnimacion(int resultadoDado)
+        private async Task DetenerAnimacion(int resultadoDado)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 animacionTimer.Stop();
                 int caraFinal = resultadoDado - 1;
-                //Metodos.MostrarMensaje($"La cara final es: {caraFinal + 1}");
                 dadoImagen.Source = new BitmapImage(new Uri(carasDado[caraFinal], UriKind.Relative));
                 DadoLanzado?.Invoke(caraFinal + 1);
                 DoubleAnimation fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));

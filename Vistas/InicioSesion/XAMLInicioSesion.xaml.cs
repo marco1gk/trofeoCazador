@@ -40,7 +40,7 @@ namespace trofeoCazador.Vistas.InicioSesion
             }
         }
 
-        private void BtnCorreo_Click(object sender, RoutedEventArgs e)
+        private static void BtnCorreo_Click(object sender, RoutedEventArgs e)
         {
             VentanaCorreoJugador ventanaCorreo = new VentanaCorreoJugador();
             ventanaCorreo.Show();
@@ -123,14 +123,14 @@ namespace trofeoCazador.Vistas.InicioSesion
             lbCredencialesIncorrectas.Visibility = Visibility.Visible;
         }
 
-        private bool EsUsuarioEnLinea(string nombreUsuario)
+        private static bool EsUsuarioEnLinea(string nombreUsuario)
         {
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
             return proxy.ValidarUsuarioEnLinea(nombreUsuario);
         }
 
         //Se decidio que este metodo regrese null debido a que solo tiene un sentido, si es nulo es porque no existe
-        private JugadorDataContract AutenticarUsuario(string usuario, string contraseña)
+        private static JugadorDataContract AutenticarUsuario(string usuario, string contraseña)
         {
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
             try
@@ -172,7 +172,7 @@ namespace trofeoCazador.Vistas.InicioSesion
             NavegarAMenuPrincipal();
         }
 
-        private void ConfigurarSesion(JugadorDataContract jugador)
+        private static void ConfigurarSesion(JugadorDataContract jugador)
         {
             SingletonSesion sesion = SingletonSesion.Instancia;
             sesion.JugadorId = jugador.JugadorId;
@@ -248,7 +248,7 @@ namespace trofeoCazador.Vistas.InicioSesion
             }
         }
 
-        private void BtnRecuperarContraseña_Click(object sender, MouseButtonEventArgs e)
+        private  void BtnRecuperarContraseña_Click(object sender, MouseButtonEventArgs e)
         {
             VentanaCorreoJugador ventanaCorreo = new VentanaCorreoJugador();
             ventanaCorreo.Show();

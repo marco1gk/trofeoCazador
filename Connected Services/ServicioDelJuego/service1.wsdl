@@ -507,6 +507,12 @@
   <wsdl:message name="IServicioPartida_NotificarTurnoIniciado_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarTurnoIniciadoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarJugadorDesconectado_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarJugadorDesconectado" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarJugadorDesconectado_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarJugadorDesconectadoResponse" />
+  </wsdl:message>
   <wsdl:message name="IServicioPartida_NotificarTurnoTerminado_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarTurnoTerminado" />
   </wsdl:message>
@@ -1016,6 +1022,10 @@
     <wsdl:operation name="NotificarTurnoIniciado">
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado" message="tns:IServicioPartida_NotificarTurnoIniciado_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciadoResponse" message="tns:IServicioPartida_NotificarTurnoIniciado_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarJugadorDesconectado">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarJugadorDesconectado" message="tns:IServicioPartida_NotificarJugadorDesconectado_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarJugadorDesconectadoResponse" message="tns:IServicioPartida_NotificarJugadorDesconectado_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarTurnoTerminado">
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoTerminado" message="tns:IServicioPartida_NotificarTurnoTerminado_OutputCallbackMessage" />
@@ -1851,6 +1861,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="NotificarJugadorDesconectado">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarJugadorDesconectado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="NotificarTurnoTerminado">
       <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarTurnoTerminado" style="document" />
       <wsdl:input>
@@ -2140,51 +2159,51 @@
   </wsdl:binding>
   <wsdl:service name="ImplementacionServicio">
     <wsdl:port name="NetTcpBinding_IGestionCuentaServicio" binding="tns:NetTcpBinding_IGestionCuentaServicio">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_ISalaEsperaServicio" binding="tns:NetTcpBinding_ISalaEsperaServicio">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorAmistad" binding="tns:NetTcpBinding_IGestorAmistad">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorDeSolicitudesDeAmistad" binding="tns:NetTcpBinding_IGestorDeSolicitudesDeAmistad">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorUsuariosConectados" binding="tns:NetTcpBinding_IGestorUsuariosConectados">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IServicioPartida" binding="tns:NetTcpBinding_IServicioPartida">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorInvitacion" binding="tns:NetTcpBinding_IGestorInvitacion">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IEstadisticasGlobales" binding="tns:NetTcpBinding_IEstadisticasGlobales">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
