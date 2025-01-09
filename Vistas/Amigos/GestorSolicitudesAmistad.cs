@@ -112,7 +112,6 @@ namespace trofeoCazador.Vistas.Amigos
                 int idJugador = sesion.JugadorId;
                 string mensaje;
                 string nombreDeUsuarioJugadorSolicitado = tbNombreDeUsuarioEnviarSolicitud.Text.Trim();
-                lbErrorNombreDeUsuarioSolicitudAmistad.Visibility = Visibility.Visible;
 
                 if (ValidarEnviarSolicitud(idJugador, nombreDeUsuarioJugadorSolicitado))
                 {
@@ -238,7 +237,7 @@ namespace trofeoCazador.Vistas.Amigos
             }
             else
             {
-                lbErrorNombreDeUsuarioSolicitudAmistad.Visibility = Visibility.Visible;
+                
             }
 
             return esSolicitudValida;
