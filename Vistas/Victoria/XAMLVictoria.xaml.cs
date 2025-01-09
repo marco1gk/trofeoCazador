@@ -48,6 +48,7 @@ namespace trofeoCazador.Vistas.Victoria
                 {
                     marcadorGestor.ActualizarVictorias(idJugador);
                     Console.WriteLine("Las victorias se actualizaron correctamente.");
+                    return true;
                 }
                 catch (EndpointNotFoundException)
                 {
@@ -59,12 +60,8 @@ namespace trofeoCazador.Vistas.Victoria
                 }
                 catch (FaultException<HuntersTrophyExcepcion>)
                 {
+                    Console.WriteLine("hay un error.");
                     VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    return false;
-                }
-                catch (FaultException)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
                     return false;
                 }
                 catch (CommunicationException)
@@ -216,14 +213,21 @@ namespace trofeoCazador.Vistas.Victoria
 
         private void BtnSalir_Click(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine("la seseion es de "+sesion.JugadorId);
+            Console.WriteLine("El ganador es "+idGanador);
+            Console.WriteLine(sesion.JugadorId == idGanador);
             if (sesion.JugadorId == idGanador)
             {
                 if (ActualizarVictorias(idGanador))
                 {
-
+                    Console.WriteLine("entro actualizar victorias");
                     this.NavigationService.Navigate(new XAMLSalaEspera());
 
                 }
+            }
+            else
+            {
+                this.NavigationService.Navigate(new XAMLSalaEspera());
             }
         }
 
