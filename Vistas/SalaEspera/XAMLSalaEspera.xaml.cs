@@ -560,11 +560,13 @@ using trofeoCazador.Vistas.Menu;
             });
         }
 
-        private async Task JugadorControl_JugadorExpulsado(object sender, string nombreUsuario)
+       
+        private void JugadorControl_JugadorExpulsado(object sender, string nombreUsuario)
         {
-            await ExpulsarJugadorSalaEsperaAsync(nombreUsuario);
+            ExpulsarJugadorSalaEsperaAsync(nombreUsuario);
 
         }
+
         public void SalirSalaEspera(string codigoSalaEspera, string nombreUsuario)
         {
             try
@@ -927,6 +929,7 @@ using trofeoCazador.Vistas.Menu;
             }
         }
 
+       
         public void NotificarPuedeIniciarPartida(bool puedeIniciar)
         {
             Dispatcher.Invoke(() => {

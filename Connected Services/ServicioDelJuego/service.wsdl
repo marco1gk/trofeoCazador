@@ -594,12 +594,6 @@
   <wsdl:message name="IServicioPartida_NotificarTurnoTerminado_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarTurnoTerminadoResponse" />
   </wsdl:message>
-  <wsdl:message name="IServicioPartida_NotificarResultadoAccion_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotificarResultadoAccion" />
-  </wsdl:message>
-  <wsdl:message name="IServicioPartida_NotificarResultadoAccion_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotificarResultadoAccionResponse" />
-  </wsdl:message>
   <wsdl:message name="IServicioPartida_NotificarPartidaCreada_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarPartidaCreada" />
   </wsdl:message>
@@ -665,12 +659,6 @@
   </wsdl:message>
   <wsdl:message name="IServicioPartida_NotificarCartaAgregadaAEscondite_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarCartaAgregadaAEsconditeResponse" />
-  </wsdl:message>
-  <wsdl:message name="IServicioPartida_NotificarIntentoRoboCarta_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotificarIntentoRoboCarta" />
-  </wsdl:message>
-  <wsdl:message name="IServicioPartida_NotificarIntentoRoboCarta_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotificarIntentoRoboCartaResponse" />
   </wsdl:message>
   <wsdl:message name="IServicioPartida_NotificarCartaRobada_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarCartaRobada" />
@@ -749,6 +737,12 @@
   </wsdl:message>
   <wsdl:message name="IServicioPartida_NotificarActualizacionDecisionTurno_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarActualizacionDecisionTurnoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarIntentoRobo_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarIntentoRobo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPartida_NotificarIntentoRobo_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarIntentoRoboResponse" />
   </wsdl:message>
   <wsdl:message name="IGestorInvitacion_EnviarInvitacionCorreo_InputMessage">
     <wsdl:part name="parameters" element="tns:EnviarInvitacionCorreo" />
@@ -1115,10 +1109,6 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoTerminado" message="tns:IServicioPartida_NotificarTurnoTerminado_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarTurnoTerminadoResponse" message="tns:IServicioPartida_NotificarTurnoTerminado_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotificarResultadoAccion">
-      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarResultadoAccion" message="tns:IServicioPartida_NotificarResultadoAccion_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarResultadoAccionResponse" message="tns:IServicioPartida_NotificarResultadoAccion_InputCallbackMessage" />
-    </wsdl:operation>
     <wsdl:operation name="NotificarPartidaCreada">
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarPartidaCreada" message="tns:IServicioPartida_NotificarPartidaCreada_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarPartidaCreadaResponse" message="tns:IServicioPartida_NotificarPartidaCreada_InputCallbackMessage" />
@@ -1162,10 +1152,6 @@
     <wsdl:operation name="NotificarCartaAgregadaAEscondite">
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAEscondite" message="tns:IServicioPartida_NotificarCartaAgregadaAEscondite_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAEsconditeResponse" message="tns:IServicioPartida_NotificarCartaAgregadaAEscondite_InputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="NotificarIntentoRoboCarta">
-      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCarta" message="tns:IServicioPartida_NotificarIntentoRoboCarta_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCartaResponse" message="tns:IServicioPartida_NotificarIntentoRoboCarta_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarCartaRobada">
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarCartaRobada" message="tns:IServicioPartida_NotificarCartaRobada_OutputCallbackMessage" />
@@ -1218,6 +1204,10 @@
     <wsdl:operation name="NotificarActualizacionDecisionTurno">
       <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarActualizacionDecisionTurno" message="tns:IServicioPartida_NotificarActualizacionDecisionTurno_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarActualizacionDecisionTurnoResponse" message="tns:IServicioPartida_NotificarActualizacionDecisionTurno_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarIntentoRobo">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPartida/NotificarIntentoRobo" message="tns:IServicioPartida_NotificarIntentoRobo_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPartida/NotificarIntentoRoboResponse" message="tns:IServicioPartida_NotificarIntentoRobo_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IGestorInvitacion">
@@ -1990,15 +1980,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotificarResultadoAccion">
-      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarResultadoAccion" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="NotificarPartidaCreada">
       <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarPartidaCreada" style="document" />
       <wsdl:input>
@@ -2091,15 +2072,6 @@
     </wsdl:operation>
     <wsdl:operation name="NotificarCartaAgregadaAEscondite">
       <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAEscondite" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="NotificarIntentoRoboCarta">
-      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCarta" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2224,6 +2196,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="NotificarIntentoRobo">
+      <soap12:operation soapAction="http://tempuri.org/IServicioPartida/NotificarIntentoRobo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IGestorInvitacion" type="tns:IGestorInvitacion">
     <wsp:PolicyReference URI="#NetTcpBinding_IGestorInvitacion_policy">
@@ -2270,51 +2251,51 @@
   </wsdl:binding>
   <wsdl:service name="ImplementacionServicio">
     <wsdl:port name="NetTcpBinding_IGestionCuentaServicio" binding="tns:NetTcpBinding_IGestionCuentaServicio">
-      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_ISalaEsperaServicio" binding="tns:NetTcpBinding_ISalaEsperaServicio">
-      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorAmistad" binding="tns:NetTcpBinding_IGestorAmistad">
-      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorDeSolicitudesDeAmistad" binding="tns:NetTcpBinding_IGestorDeSolicitudesDeAmistad">
-      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorUsuariosConectados" binding="tns:NetTcpBinding_IGestorUsuariosConectados">
-      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IServicioPartida" binding="tns:NetTcpBinding_IServicioPartida">
-      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Servicio" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Servicio" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Servicio</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Servicio</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorInvitacion" binding="tns:NetTcpBinding_IGestorInvitacion">
-      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IEstadisticasGlobales" binding="tns:NetTcpBinding_IEstadisticasGlobales">
-      <soap12:address location="net.tcp://192.168.1.68:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://192.168.1.68:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
