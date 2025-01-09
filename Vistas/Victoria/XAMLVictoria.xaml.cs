@@ -27,6 +27,8 @@ namespace trofeoCazador.Vistas.Victoria
         private readonly int puntajeGanador;
         private int idGanador;
         private readonly string invitado="Invitado";
+       
+
 
         public XAMLVictoria(string idPartida, KeyValuePair<JugadorDataContract, int>[] marcador, int puntajeGanador)
         {
@@ -36,7 +38,7 @@ namespace trofeoCazador.Vistas.Victoria
             MostrarResultados();
             PosicionesJuego();
         }
-        private void ActualizarVictorias(int idJugador)
+        private bool ActualizarVictorias(int idJugador)
         {
             if (idJugador > 0)
             {
@@ -58,10 +60,12 @@ namespace trofeoCazador.Vistas.Victoria
                 catch (FaultException<HuntersTrophyExcepcion>)
                 {
                     VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    return false;
                 }
                 catch (FaultException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    return false;
                 }
                 catch (CommunicationException)
                 {
@@ -82,11 +86,9 @@ namespace trofeoCazador.Vistas.Victoria
                         marcadorGestor.Close();
                     }
                 }
+                return true;
             }
-            else
-            {
-                Console.WriteLine("ID del jugador no válido.");
-            }
+            return false;
         }
 
 
@@ -214,8 +216,18 @@ namespace trofeoCazador.Vistas.Victoria
 
         private void BtnSalir_Click(object sender, RoutedEventArgs e)
         {
-            ActualizarVictorias(idGanador);
-            this.NavigationService.Navigate(new XAMLSalaEspera());
+            if (sesion.JugadorId == idGanador)
+            {
+                if (ActualizarVictorias(idGanador))
+                {
+
+                    this.NavigationService.Navigate(new XAMLSalaEspera());
+
+                }
+            }
         }
+
+
+
     }
 }
