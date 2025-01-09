@@ -204,12 +204,12 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         public void NotificarJugadorDesconectado(string nombreUsuario)
         {
-            MessageBox.Show("se salio el cabron de " + nombreUsuario);
+            string mensaje = Properties.Resources.lbAbandonarPartida + " " + nombreUsuario;
+            VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, mensaje);
             listaDeJugadores = listaDeJugadores.Where(j => j.NombreUsuario != nombreUsuario).ToList();
-
             MostrarJugadores();
-
         }
+
         public void MostrarJugadores()
         {
             var jugadoresEnPartida = listaDeJugadores
@@ -1750,14 +1750,16 @@ namespace trofeoCazador.Vistas.PartidaJuego
         public void NotificarTurnoIniciado(string jugadorTurnoActual)
         {
             this.jugadorTurnoActual = jugadorTurnoActual;
-            modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
+            //modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
+            modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
             jugadorDecidioParar = false;
             if (jugadorActual.NombreUsuario == jugadorTurnoActual)
             {
                 dado.DadoLanzado -= ManejarResultadoDado;
                 dado.DadoLanzado += ManejarResultadoDado;
                 DadoImagen.IsEnabled = true;
-                modoSeleccionActual = ModoSeleccionCarta.AccionCartasEnTurno;
+                //modoSeleccionActual = ModoSeleccionCarta.AccionCartasEnTurno;
+                modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
             }
         }
         public void NotificarTurnoTerminado(string nombreUsuario)
@@ -1812,10 +1814,11 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             this.idPartida = idPartida;
             DadoImagen.IsEnabled = false;
-            ZonaMazoCartas.IsEnabled = false;
+            //ZonaMazoCartas.IsEnabled = false;
             FichasManoItemsControl.IsEnabled = false;
             CargarFichas();
-            modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
+            //modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
+            modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
         }
 
         public void NotificarResultadoDado(string nombreUsuario, int resultadoDado)
