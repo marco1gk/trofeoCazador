@@ -19,16 +19,16 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="net.tcp://localhost:8000/ServiceImplementation/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="net.tcp://10.50.19.46:8000/ServiceImplementation/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="a8df33c0-8810-48a4-99a8-26aca78101d7" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="8b812f83-ba6e-419e-9da9-45e5d590a902" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="85d0e195-8299-4761-b331-994009a5bd14" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
-    <MetadataFile FileName="ServicioJuego.xsd" MetadataType="Schema" ID="d54f613b-1ad8-46cb-9b99-f5ced5193cc9" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
-    <MetadataFile FileName="ServicioJuego.Excepciones.xsd" MetadataType="Schema" ID="27f9053c-5817-42d6-bc5d-d48b04d75703" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
-    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="96a2f15a-0e69-46f0-a1c7-f8ea04f2c99c" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
-    <MetadataFile FileName="AccesoDatos.Modelo.xsd" MetadataType="Schema" ID="9ec425fa-1dba-4e39-b550-e658d45264c3" SourceId="1" SourceUrl="net.tcp://localhost:8000/ServiceImplementation/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="38012813-a555-4fb5-a5ad-d5ccd16dad2b" SourceId="1" SourceUrl="net.tcp://10.50.19.46:8000/ServiceImplementation/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="391f3784-8a06-4e70-9abb-0b06eec7d1d4" SourceId="1" SourceUrl="net.tcp://10.50.19.46:8000/ServiceImplementation/mex" />
+    <MetadataFile FileName="service21.xsd" MetadataType="Schema" ID="6c425be6-16d7-4114-9fc1-8c13aa2121b8" SourceId="1" SourceUrl="net.tcp://10.50.19.46:8000/ServiceImplementation/mex" />
+    <MetadataFile FileName="ServicioJuego1.xsd" MetadataType="Schema" ID="8bc42442-917b-404a-84fe-f9b3bbb7cada" SourceId="1" SourceUrl="net.tcp://10.50.19.46:8000/ServiceImplementation/mex" />
+    <MetadataFile FileName="ServicioJuego.Excepciones1.xsd" MetadataType="Schema" ID="d8fae6ad-e9ea-4d22-b3db-fa3c28d103b5" SourceId="1" SourceUrl="net.tcp://10.50.19.46:8000/ServiceImplementation/mex" />
+    <MetadataFile FileName="Arrays1.xsd" MetadataType="Schema" ID="f898f39f-ccbe-4001-b448-92472cc718e5" SourceId="1" SourceUrl="net.tcp://10.50.19.46:8000/ServiceImplementation/mex" />
+    <MetadataFile FileName="AccesoDatos.Modelo1.xsd" MetadataType="Schema" ID="816f5bf6-51aa-4871-bbe8-f5d4a8d0f493" SourceId="1" SourceUrl="net.tcp://10.50.19.46:8000/ServiceImplementation/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

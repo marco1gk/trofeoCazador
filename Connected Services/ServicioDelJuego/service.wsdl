@@ -2251,51 +2251,51 @@
   </wsdl:binding>
   <wsdl:service name="ImplementacionServicio">
     <wsdl:port name="NetTcpBinding_IGestionCuentaServicio" binding="tns:NetTcpBinding_IGestionCuentaServicio">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://10.50.19.46:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://10.50.19.46:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_ISalaEsperaServicio" binding="tns:NetTcpBinding_ISalaEsperaServicio">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://10.50.19.46:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://10.50.19.46:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorAmistad" binding="tns:NetTcpBinding_IGestorAmistad">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://10.50.19.46:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://10.50.19.46:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorDeSolicitudesDeAmistad" binding="tns:NetTcpBinding_IGestorDeSolicitudesDeAmistad">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://10.50.19.46:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://10.50.19.46:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorUsuariosConectados" binding="tns:NetTcpBinding_IGestorUsuariosConectados">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://10.50.19.46:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://10.50.19.46:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IServicioPartida" binding="tns:NetTcpBinding_IServicioPartida">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Servicio" />
+      <soap12:address location="net.tcp://10.50.19.46:8000/ServiceImplementation/Servicio" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Servicio</wsa10:Address>
+        <wsa10:Address>net.tcp://10.50.19.46:8000/ServiceImplementation/Servicio</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IGestorInvitacion" binding="tns:NetTcpBinding_IGestorInvitacion">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://10.50.19.46:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://10.50.19.46:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IEstadisticasGlobales" binding="tns:NetTcpBinding_IEstadisticasGlobales">
-      <soap12:address location="net.tcp://localhost:8000/ServiceImplementation/Service" />
+      <soap12:address location="net.tcp://10.50.19.46:8000/ServiceImplementation/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8000/ServiceImplementation/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://10.50.19.46:8000/ServiceImplementation/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
