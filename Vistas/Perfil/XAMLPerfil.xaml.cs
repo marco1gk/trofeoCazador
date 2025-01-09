@@ -46,15 +46,13 @@ namespace trofeoCazador.Vistas.Perfil
                 }
 
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -64,15 +62,13 @@ namespace trofeoCazador.Vistas.Perfil
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
             
             

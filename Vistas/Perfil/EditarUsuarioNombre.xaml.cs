@@ -77,12 +77,10 @@ namespace trofeoCazador.Vistas.Perfil
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException)
             {
