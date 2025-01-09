@@ -125,11 +125,11 @@
     <Compile Include="Utilidades\Utilidades.cs" />
     <Compile Include="Utilidades\UtilidadesDeValidacion.cs" />
     <Compile Include="Utilidades\VentanasEmergentes.cs" />
-    <Compile Include="VentanasReutilizables\ValidarCodigoRegistro.xaml.cs">
-      <DependentUpon>ValidarCodigoRegistro.xaml</DependentUpon>
+    <Compile Include="VentanasReutilizables\XAMLValidarCodigoRegistro.xaml.cs">
+      <DependentUpon>XAMLValidarCodigoRegistro.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VentanasReutilizables\VentanaCorreoJugador.xaml.cs">
-      <DependentUpon>VentanaCorreoJugador.xaml</DependentUpon>
+    <Compile Include="VentanasReutilizables\XAMLVentanaCorreoJugador.xaml.cs">
+      <DependentUpon>XAMLVentanaCorreoJugador.xaml</DependentUpon>
     </Compile>
     <Compile Include="VentanasReutilizables\XAMLVentanaDeDecision.xaml.cs">
       <DependentUpon>XAMLVentanaDeDecision.xaml</DependentUpon>
@@ -208,11 +208,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="VentanasReutilizables\ValidarCodigoRegistro.xaml">
+    <Page Include="VentanasReutilizables\XAMLValidarCodigoRegistro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VentanasReutilizables\VentanaCorreoJugador.xaml">
+    <Page Include="VentanasReutilizables\XAMLVentanaCorreoJugador.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -311,23 +311,23 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\ServicioDelJuego\AccesoDatos.Modelo.xsd">
+    <None Include="Connected Services\ServicioDelJuego\AccesoDatos.Modelo1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioDelJuego\Arrays.xsd">
+    <None Include="Connected Services\ServicioDelJuego\Arrays1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioDelJuego\service.wsdl" />
-    <None Include="Connected Services\ServicioDelJuego\service.xsd">
+    <None Include="Connected Services\ServicioDelJuego\service1.wsdl" />
+    <None Include="Connected Services\ServicioDelJuego\service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioDelJuego\service1.xsd">
+    <None Include="Connected Services\ServicioDelJuego\service21.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioDelJuego\ServicioJuego.Excepciones.xsd">
+    <None Include="Connected Services\ServicioDelJuego\ServicioJuego.Excepciones1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServicioDelJuego\ServicioJuego.xsd">
+    <None Include="Connected Services\ServicioDelJuego\ServicioJuego1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServicioDelJuego\trofeoCazador.ServicioDelJuego.Estadisticas.datasource">

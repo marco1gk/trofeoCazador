@@ -16,6 +16,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices.WindowsRuntime;
 using trofeoCazador.Utilidades;
 using System.Diagnostics;
+using trofeoCazador.Vistas.Menu;
 
     namespace trofeoCazador.Vistas.SalaEspera
     {
@@ -121,14 +122,6 @@ using System.Diagnostics;
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-            }
-            catch (FaultException)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-            }
             catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
@@ -192,6 +185,19 @@ using System.Diagnostics;
             catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
             catch (Exception)
             {
@@ -264,33 +270,30 @@ using System.Diagnostics;
                         VentanasEmergentes.CrearSalaEsperaNoEncontradaMensajeVentana();
                     }
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
                 catch (FaultException<HuntersTrophyExcepcion>)
                 {
                     VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
                 }
+
                 catch (FaultException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
                 }
-                catch (CommunicationException ex)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
                 finally
                 {
@@ -326,37 +329,30 @@ using System.Diagnostics;
                     InstanceContext instanciaContexto = new InstanceContext(this);
                     cliente = new SalaEsperaServicioClient(instanciaContexto);
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
                 catch (FaultException<HuntersTrophyExcepcion>)
                 {
                     VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
                 }
 
                 catch (FaultException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
                 }
-                catch (CommunicationException ex)
+                catch (CommunicationException)
                 {
-
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
             }
             private void SetupClient()
@@ -382,10 +378,26 @@ using System.Diagnostics;
 
                 Debug.WriteLine("Creando nueva instancia de cliente.");
                 cliente = new SalaEsperaServicioClient(new InstanceContext(this));
+            try
+            {
+
                 cliente.Open();
                 Debug.WriteLine("Cliente abierto correctamente.");
-
                 RestaurarEstadoSalaEspera();
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                Console.WriteLine("el set up entro a la de endpoint"+ex);
+            }
+            catch(CommunicationException ex)
+            {
+                Console.WriteLine("el set up entro a la de communication" + ex);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("el set up entro a exception"+ex);
+            }
+
             }
 
             private void RestaurarEstadoSalaEspera()
@@ -412,14 +424,31 @@ using System.Diagnostics;
                     
                         cliente.ObtenerCodigosGenerados();
                     }
-                    catch (Exception ex)
+                    catch (EndpointNotFoundException)
                     {
-                        Debug.WriteLine($"Error al restaurar estado del lobby: {ex.Message}");
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
                     }
-                }
-                else
-                {
-                    Debug.WriteLine("No hay código de lobby guardado para restaurar.");
+                    catch (TimeoutException)
+                    {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                    }
+                    catch (FaultException<HuntersTrophyExcepcion>)
+                    {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                    }
+
+                    catch (FaultException)
+                    {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    }
+                    catch (CommunicationException)
+                    {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                    }
+                    catch (Exception)
+                    {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                    }
                 }
             }
         private async void BtnClicIniciarPartida_Click(object sender, RoutedEventArgs e)
@@ -434,74 +463,31 @@ using System.Diagnostics;
             {
                 VerificarYReiniciarCliente();
 
-                await Task.Run(() =>
-                {
-                    try
-                    {
-                        cliente.IniciarPartida(codigoSalaEsperaActual);
-                    }
-                    catch (EndpointNotFoundException)
-                    {
-                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    }
-                    catch (TimeoutException ex)
-                    {
-                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                        ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
-                    }
-                    catch (FaultException<HuntersTrophyExcepcion>)
-                    {
-                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    }
-
-                    catch (FaultException)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    }
-                    catch (CommunicationException ex)
-                    {
-
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
-                    }
-                    catch (Exception ex)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-                    }
-                });
+                await Task.Run(() => cliente.IniciarPartida(codigoSalaEsperaActual));
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-
             catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
-
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
@@ -518,7 +504,6 @@ using System.Diagnostics;
                 }
             });
         }
-        //jsandkndaksndak
         public async Task ExpulsarJugadorSalaEsperaAsync(string nombreUsuario)
         {
 
@@ -571,7 +556,7 @@ using System.Diagnostics;
             Application.Current.Dispatcher.Invoke(() =>
             {
                 VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloExpulsion, Properties.Resources.lbDetallesExpulsion);
-                NavigationService.Navigate(new XAMLSalaEspera());
+                NavigationService.Navigate(new XAMLMenu());
             });
         }
 
@@ -586,15 +571,13 @@ using System.Diagnostics;
             {
                 cliente.SalirSalaEspera(codigoSalaEspera, nombreUsuario);
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -604,15 +587,13 @@ using System.Diagnostics;
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
@@ -642,15 +623,13 @@ using System.Diagnostics;
                     JugadoresEnSala.Add(invitado);
                 });
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -660,15 +639,13 @@ using System.Diagnostics;
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
@@ -750,7 +727,7 @@ using System.Diagnostics;
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                NavigationService.Navigate(new XAMLSalaEspera()); 
+                NavigationService.Navigate(new XAMLMenu()); 
             });
         }
 
@@ -777,22 +754,20 @@ using System.Diagnostics;
 
                 if (NavigationService.CanGoBack)
                 {
-                    NavigationService.GoBack();
+                    NavigationService.Navigate(new XAMLMenu());
                 }
                 else
                 {
                     NavigationService.Navigate(new XAMLInicioSesion());
                 }
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -802,15 +777,13 @@ using System.Diagnostics;
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
@@ -833,15 +806,13 @@ using System.Diagnostics;
                     detallesVentana = Properties.Resources.lbInvitarAmigoSala +" "+ amigoSeleccionado.NombreUsuario;
                     VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloInvitacionEnviada, detallesVentana);
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
                 catch (FaultException<HuntersTrophyExcepcion>)
                 {
@@ -851,15 +822,13 @@ using System.Diagnostics;
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
                 }
-                catch (CommunicationException ex)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
             }
             else

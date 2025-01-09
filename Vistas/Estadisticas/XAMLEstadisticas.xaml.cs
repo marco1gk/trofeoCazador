@@ -45,15 +45,13 @@ namespace trofeoCazador.Vistas.Estadisticas
                     this.DataContext = this;
                 }
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -64,23 +62,49 @@ namespace trofeoCazador.Vistas.Estadisticas
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
-
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
         private static string ObtenerNombreUsuarioPorIdJugador(int idJugador)
         {
-            GestionCuentaServicioClient servicio = new GestionCuentaServicioClient();
-            return servicio.ObtenerNombreUsuarioPorIdJugador(idJugador);
+            string regreso = string.Empty;
+            try
+            {
+                GestionCuentaServicioClient servicio = new GestionCuentaServicioClient();
+                regreso = servicio.ObtenerNombreUsuarioPorIdJugador(idJugador);
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (Exception)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+            }
+            return regreso;
         }
 
         private void BtnAtras_Click(object sender, RoutedEventArgs e)

@@ -39,18 +39,6 @@ namespace trofeoCazador.Utilidades
             return solidColorBrush;
         }
 
-        public static string ConstruirPathAbsoluto(string pathRelativo)
-        {
-            string pathAbsoluto = "";
-
-            if (pathRelativo != null)
-            {
-                pathAbsoluto = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathRelativo);
-            }
-
-            return pathAbsoluto;
-        }
-
     }
 }
 

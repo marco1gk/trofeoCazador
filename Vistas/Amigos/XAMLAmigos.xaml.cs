@@ -42,8 +42,35 @@ namespace trofeoCazador.Vistas.Amigos
         {
             if (cliente != null)
             {
-                cliente.DesregistrarUsuarioDeUsuariosEnLinea(SingletonSesion.Instancia.NombreUsuario);
-                Console.WriteLine($"Usuario {SingletonSesion.Instancia.NombreUsuario} desregistrado.");
+                try
+                {
+                    cliente.DesregistrarUsuarioDeUsuariosEnLinea(SingletonSesion.Instancia.NombreUsuario);
+                    Console.WriteLine($"Usuario {SingletonSesion.Instancia.NombreUsuario} desregistrado.");
+                }
+                catch (EndpointNotFoundException)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                }
+                catch (TimeoutException)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                }
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                }
+                catch (CommunicationException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                }
+                catch (Exception)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                }
             }
         }
         public void MostrarComoUsuarioActivo()
@@ -54,32 +81,26 @@ namespace trofeoCazador.Vistas.Amigos
                 cliente.RegistrarUsuarioAUsuariosConectados(SingletonSesion.Instancia.JugadorId, SingletonSesion.Instancia.NombreUsuario);
 
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
 
             catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
-
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (Exception)
             {
@@ -95,37 +116,30 @@ namespace trofeoCazador.Vistas.Amigos
                 CargarAmigosJugador();
 
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
 
             catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
-
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
 
 

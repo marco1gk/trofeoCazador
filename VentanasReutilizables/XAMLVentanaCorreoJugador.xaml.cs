@@ -44,15 +44,13 @@ namespace trofeoCazador.VentanasReutilizables
 
                 }
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, this);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, this);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
@@ -62,18 +60,14 @@ namespace trofeoCazador.VentanasReutilizables
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, this);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, this);
-            }
-
-            
+            }            
         }
     }
 }

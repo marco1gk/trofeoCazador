@@ -23,7 +23,7 @@ namespace trofeoCazador.Vistas.Victoria
     public partial class XAMLVictoria : Page
     {
         private readonly KeyValuePair<JugadorDataContract, int>[] marcador;
-        private SingletonSesion sesion = SingletonSesion.Instancia;
+        private readonly SingletonSesion sesion = SingletonSesion.Instancia;
         private readonly int puntajeGanador;
         private int idGanador;
         private readonly string invitado="Invitado";
@@ -47,15 +47,13 @@ namespace trofeoCazador.Vistas.Victoria
                     marcadorGestor.ActualizarVictorias(idJugador);
                     Console.WriteLine("Las victorias se actualizaron correctamente.");
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
                 catch (FaultException<HuntersTrophyExcepcion>)
                 {
@@ -65,15 +63,13 @@ namespace trofeoCazador.Vistas.Victoria
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
                 }
-                catch (CommunicationException ex)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
                 finally
                 {

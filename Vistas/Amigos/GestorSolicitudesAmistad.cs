@@ -41,10 +41,9 @@ namespace trofeoCazador.Vistas.Amigos
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearVentanaEmergente("Error", mensajeError);
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
         }
 
@@ -58,9 +57,37 @@ namespace trofeoCazador.Vistas.Amigos
 
             await EjecutarAccionConSeguridad(async () =>
             {
-                InstanceContext contexto = new InstanceContext(this);
-                GestorDeSolicitudesDeAmistadClient gestorSolicitudesAmistadCliente = new GestorDeSolicitudesDeAmistadClient(contexto);
-                await gestorSolicitudesAmistadCliente.AgregarADiccionarioAmistadesEnLineaAsync(sesion.NombreUsuario);
+                try
+                {
+                    InstanceContext contexto = new InstanceContext(this);
+                    GestorDeSolicitudesDeAmistadClient gestorSolicitudesAmistadCliente = new GestorDeSolicitudesDeAmistadClient(contexto);
+                    await gestorSolicitudesAmistadCliente.AgregarADiccionarioAmistadesEnLineaAsync(sesion.NombreUsuario);
+                }
+                catch (EndpointNotFoundException)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                }
+                catch (TimeoutException)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                }
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                }
+                catch (CommunicationException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                }
+                catch (Exception)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                }
+
             }, "No se pudo suscribir al diccionario de amigos en línea.");
         }
 
@@ -107,8 +134,35 @@ namespace trofeoCazador.Vistas.Amigos
 
         private static void AgregarSolicitudAmistad(int idJugador, string nombreDeUsuarioJugadorSolicitado)
         {
-            GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
-            gestorAmistadCliente.AgregarSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
+            try
+            {
+                GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
+                gestorAmistadCliente.AgregarSolicitudAmistad(idJugador, nombreDeUsuarioJugadorSolicitado);
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (Exception)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+            }
         }
 
         private void EnviarSolicitudAmistad(string nombreDeUsuarioJugadorSolicitado)
@@ -295,35 +349,29 @@ namespace trofeoCazador.Vistas.Amigos
                 nombreUsuarioJugadores = gestorAmistadCliente.ObtenerNombresUsuariosSolicitantes(sesion.JugadorId);
                 Console.WriteLine($"Solicitudes encontradas: {nombreUsuarioJugadores?.Length ?? 0}");
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado(); 
             }
 
             return nombreUsuarioJugadores;
@@ -391,36 +439,32 @@ namespace trofeoCazador.Vistas.Amigos
             try
             {
                 gestorSolicitudesAmistadCliente.AceptarSolicitudAmistad(sesion.JugadorId, sesion.NombreUsuario, nombreUsuarioEmisor);
+                CambiarEstadoJugador(nombreUsuarioEmisor, true);
+
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (FaultException )
+            catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
@@ -434,35 +478,29 @@ namespace trofeoCazador.Vistas.Amigos
                 gestorSolicitudesAmistadCliente.RechazarSolicitudAmistad(sesion.JugadorId, nombreUsuario);
                 RemoverSolicitudAmistadStackPanel(nombreUsuario);
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (FaultException )
+            catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 

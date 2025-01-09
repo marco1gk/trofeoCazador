@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:trofeoCazador.Vistas.Amigos"
+      xmlns:p="clr-namespace:trofeoCazador.Properties"
       mc:Ignorable="d" Width="248" Height="66">
     <Grid Background="#00000000" Margin="0,8,0,-8">
         <Rectangle Fill="white" Height="50" RadiusX="25" RadiusY="25" Width="248" Opacity="0.75" Margin="-8,10,8,6" />
@@ -12,7 +13,7 @@
         <Rectangle x:Name="rectanguloEstadoJugador" Fill="#FF5A5E59" Width="15" Height="15" RadiusX="7.5" RadiusY="7.5"  Margin="5,22,228,22" Visibility="Visible"/>
         <Grid Margin="68,-10,-68,10" x:Name="gridOpcionesJugador" Visibility="Collapsed">
             <Border Background="#5E7682" BorderThickness="1" CornerRadius="15, 15, 0, 15" Margin="9,0,103,33" />
-            <Button Content="Eliminar Amigo" Margin="15,5,107,37" Background="#FF435B67" BorderBrush="{x:Null}" FontFamily="Inter" Foreground="White" Cursor="Hand" Click="BtnBorrarAmigo_Click" />
+            <Button Content="{x:Static p:Resources.btnEliminarAmigo}" Margin="15,5,107,37" Background="#FF435B67" BorderBrush="{x:Null}" FontFamily="Inter" Foreground="White" Cursor="Hand" Click="BtnBorrarAmigo_Click" />
         </Grid>
     </Grid>
 </UserControl>

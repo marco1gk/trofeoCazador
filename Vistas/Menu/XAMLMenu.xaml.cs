@@ -24,6 +24,10 @@ namespace trofeoCazador.Vistas.Menu
             InitializeComponent();
             this.paginaAmigos = paginaAmigos;
         }
+        public XAMLMenu()
+        {
+            InitializeComponent();
+        }
 
         private void BtnPerfil(object sender, RoutedEventArgs e)
         {

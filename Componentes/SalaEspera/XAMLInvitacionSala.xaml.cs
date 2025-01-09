@@ -78,29 +78,25 @@ namespace trofeoCazador.Componentes.SalaEspera
                 {
                     invitacionGestionCliente.EnviarInvitacionCorreo(salaEsperaCodigo, tbCorreoAmigo.Text.Trim());
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarComponenteErrorExcepcion(ex);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarComponenteErrorExcepcion(ex);
                 }
                 catch (FaultException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
                 }
-                catch (CommunicationException ex)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarComponenteErrorExcepcion(ex);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarComponenteFatalExcepcion(ex);
                 }
             }
         }

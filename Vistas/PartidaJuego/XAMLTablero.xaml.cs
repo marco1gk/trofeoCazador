@@ -61,6 +61,47 @@ namespace trofeoCazador.Vistas.PartidaJuego
             }
 
             private ModoSeleccionCarta modoSeleccionActual;
+        private void ImagenDado_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                cliente.LanzarDado(idPartida, jugadorActual.NombreUsuario);
+            }
+            catch (EndpointNotFoundException ex)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                NavigationService.Navigate(new XAMLInicioSesion());
+
+            }
+            catch (TimeoutException ex)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLSalaEspera());
+            }
+
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
+            }
+            catch (CommunicationException ex)
+            {
+
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+            }
+            catch (Exception ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
+
+            }
+        }
         public XAMLTablero(List<JugadorPartida> jugadores, string idPartida)
         {
             if (!Thread.CurrentThread.IsBackground && Thread.CurrentThread.GetApartmentState() != ApartmentState.STA)
@@ -273,12 +314,12 @@ namespace trofeoCazador.Vistas.PartidaJuego
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLSalaEspera());
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLSalaEspera());
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException ex)
             {
@@ -323,7 +364,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     catch (FaultException)
                     {
                         VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        NavigationService.Navigate(new XAMLSalaEspera());
+                        NavigationService.Navigate(new XAMLInicioSesion());
                     }
                     catch (CommunicationException ex)
                     {
@@ -380,6 +421,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     cliente.CrearPartida(listaDeJugadores.ToArray(), idPartida);
                     cliente.RepartirCartas(idPartida);
                     cliente.EmpezarTurno(idPartida);
+                    btnRepartirCartas.Visibility= Visibility.Collapsed;
                 }
                 catch (EndpointNotFoundException ex)
                 {
@@ -475,45 +517,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 FichasEstaticas.Add(new Ficha { IdFicha = i, RutaImagenFicha = $"/Recursos/ElementosPartida/ImagenesPartida/Fichas/Ficha{i}.png" });
             }
         }
-        private void ImagenDado_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                cliente.LanzarDado(idPartida, jugadorActual.NombreUsuario);
-            }
-            catch (EndpointNotFoundException ex)
-            {
-                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (TimeoutException ex)
-            {
-                VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
-            {
-                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-            }
-        }
+       
         private string ObtenerRutaImagenPerfil(int numeroFotoPerfil)
         {
             switch (numeroFotoPerfil)

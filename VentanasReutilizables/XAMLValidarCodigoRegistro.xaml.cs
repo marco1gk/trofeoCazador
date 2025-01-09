@@ -49,9 +49,9 @@ namespace trofeoCazador.VentanasReutilizables
                                 this.Close();
                                 VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloExito, Properties.Resources.lbDescripcionCuentaCreada);
                             }
-                            catch (FaultException<HuntersTrophyExcepcion> faultEx)
+                            catch (FaultException<HuntersTrophyExcepcion> )
                             {
-                            VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbCodigoError, faultEx.Detail.Mensaje);
+                            VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico,Properties.Resources.lbDescripcionExcepcionBaseDeDatos);
                         }
 
                         }

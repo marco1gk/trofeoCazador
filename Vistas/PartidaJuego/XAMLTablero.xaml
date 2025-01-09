@@ -203,7 +203,7 @@
             </ItemsControl>
         </StackPanel>
 
-        <Button   Content="Repartir cartas" HorizontalAlignment="Left" Margin="39,46,0,0" VerticalAlignment="Top" Click="BtnClicIniciarJuego" Grid.Row="1" Grid.RowSpan="2"/>
+        <Button    Name="btnRepartirCartas" Content="Repartir cartas" HorizontalAlignment="Left" Margin="39,46,0,0" VerticalAlignment="Top" Visibility="Visible" Click="BtnClicIniciarJuego" Grid.Row="1" Grid.RowSpan="2"/>
         <TextBlock Text="Descarte" FontSize="16" FontWeight="Bold" TextAlignment="Center" Margin="137,12,137,12" Grid.Row="1" />
     </Grid>
 </Page>

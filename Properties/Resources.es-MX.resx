@@ -690,4 +690,7 @@
   <data name="lbProblemaActualizandoContraseña" xml:space="preserve">
     <value>Hubo un error al intentar actualizar la contraseña, inténtelo de nuevo más tarde.</value>
   </data>
+  <data name="btnEliminarAmigo" xml:space="preserve">
+    <value>Eliminar amigo</value>
+  </data>
 </root>

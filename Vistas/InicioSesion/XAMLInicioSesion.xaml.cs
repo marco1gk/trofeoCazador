@@ -94,21 +94,17 @@ namespace trofeoCazador.Vistas.InicioSesion
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-
             catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException )
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex.StackTrace);
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
             }
         }
@@ -125,9 +121,39 @@ namespace trofeoCazador.Vistas.InicioSesion
 
         private static bool EsUsuarioEnLinea(string nombreUsuario)
         {
-            GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
-            return proxy.ValidarUsuarioEnLinea(nombreUsuario);
+            bool estaEnLinea = false; 
+            try
+            {
+                GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
+                estaEnLinea = proxy.ValidarUsuarioEnLinea(nombreUsuario);
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (Exception)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+            }
+            return estaEnLinea;
         }
+
 
         //Se decidio que este metodo regrese null debido a que solo tiene un sentido, si es nulo es porque no existe
         private static JugadorDataContract AutenticarUsuario(string usuario, string contraseña)

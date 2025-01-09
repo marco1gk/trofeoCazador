@@ -25,9 +25,38 @@ namespace trofeoCazador.Vistas.Amigos
         private void CargarAmigosJugador()
         {
             stackPanelAmigos.Children.Clear();
-            GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
-            string[] nombreUsuarioAmigosJugador = gestorAmistadCliente.ObtenerListaNombresUsuariosAmigos(sesion.JugadorId);
-            AñadirUsuariosListaAmigos(nombreUsuarioAmigosJugador);
+            try
+            {
+                GestorAmistadClient gestorAmistadCliente = new GestorAmistadClient();
+                string[] nombreUsuarioAmigosJugador = gestorAmistadCliente.ObtenerListaNombresUsuariosAmigos(sesion.JugadorId);
+                AñadirUsuariosListaAmigos(nombreUsuarioAmigosJugador);
+
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (Exception)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+            }
+            
         }
 
         private void CambiarEstadoAmigos(string[] nombreLinea, bool estaEnLinea)
@@ -38,7 +67,7 @@ namespace trofeoCazador.Vistas.Amigos
             }
         }
 
-        private void CambiarEstadoJugador(string nombreUsuario, bool enLinea)
+        public void CambiarEstadoJugador(string nombreUsuario, bool enLinea)
         {
             string idLabel = "lb";
             string idUsuarioItem = idLabel + nombreUsuario;
@@ -135,37 +164,30 @@ namespace trofeoCazador.Vistas.Amigos
             {
                 gestorSolicitudesAmistadCliente.EliminarAmigo(sesion.JugadorId, sesion.NombreUsuario, nombreUsuarioAmigoEliminar);
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
 
-            catch (FaultException )
+            catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
-
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
