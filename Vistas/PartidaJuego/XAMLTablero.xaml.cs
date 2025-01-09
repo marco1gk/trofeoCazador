@@ -128,14 +128,12 @@ namespace trofeoCazador.Vistas.PartidaJuego
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
                 NavigationService.Navigate(new XAMLInicioSesion());
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 throw;
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
                 NavigationService.Navigate(new XAMLInicioSesion());
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 throw;
             }
             catch (FaultException<HuntersTrophyExcepcion>)
@@ -149,16 +147,14 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 NavigationService.Navigate(new XAMLInicioSesion());
                 throw;
             }
-            catch (CommunicationException ex)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 throw;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 throw;
             }
         }
