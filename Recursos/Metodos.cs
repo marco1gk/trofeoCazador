@@ -46,7 +46,7 @@ namespace trofeoCazador.Recursos
 
         public static bool ValidarEntradaVacia(string cadena)
         {
-            return !string.IsNullOrWhiteSpace(cadena);
+            return string.IsNullOrWhiteSpace(cadena);
         }
 
         public static bool ValidarEntradaIgual(string valorActual, string valorNuevo)

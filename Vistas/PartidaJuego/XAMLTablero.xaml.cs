@@ -380,7 +380,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
             
             if (PuedeTomarFicha(fichaObtenida))
             {
-                EjecutarConManejoDeExcepciones(async () => await cliente.TomarFichaMesaAsync(idPartida, fichaSeleccionada.IdFicha));
+                EjecutarConManejoDeExcepciones(async () => await cliente.TomarFichaMesaAsync(idPartida, fichaObtenida.IdFicha));
                 await Task.Delay(1000);
                 await ManejarDecisionContinuarTurno();
             }
