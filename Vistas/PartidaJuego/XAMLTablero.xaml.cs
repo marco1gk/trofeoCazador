@@ -1750,16 +1750,16 @@ namespace trofeoCazador.Vistas.PartidaJuego
         public void NotificarTurnoIniciado(string jugadorTurnoActual)
         {
             this.jugadorTurnoActual = jugadorTurnoActual;
-            //modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
-            modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
+            modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
+            //modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
             jugadorDecidioParar = false;
             if (jugadorActual.NombreUsuario == jugadorTurnoActual)
             {
                 dado.DadoLanzado -= ManejarResultadoDado;
                 dado.DadoLanzado += ManejarResultadoDado;
                 DadoImagen.IsEnabled = true;
-                //modoSeleccionActual = ModoSeleccionCarta.AccionCartasEnTurno;
-                modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
+                modoSeleccionActual = ModoSeleccionCarta.AccionCartasEnTurno;
+                //modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
             }
         }
         public void NotificarTurnoTerminado(string nombreUsuario)
@@ -1814,11 +1814,11 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             this.idPartida = idPartida;
             DadoImagen.IsEnabled = false;
-            //ZonaMazoCartas.IsEnabled = false;
+            ZonaMazoCartas.IsEnabled = false;
             FichasManoItemsControl.IsEnabled = false;
             CargarFichas();
-            //modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
-            modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
+            modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
+            //modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
         }
 
         public void NotificarResultadoDado(string nombreUsuario, int resultadoDado)
