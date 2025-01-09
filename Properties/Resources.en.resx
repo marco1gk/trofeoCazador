@@ -693,4 +693,7 @@
   <data name="btnEliminarAmigo" xml:space="preserve">
     <value>Delete friend</value>
   </data>
+  <data name="lbAbandonarPartida" xml:space="preserve">
+    <value>A player left the match</value>
+  </data>
 </root>

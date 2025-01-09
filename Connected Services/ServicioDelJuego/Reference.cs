@@ -464,9 +464,9 @@ namespace trofeoCazador.ServicioDelJuego {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Estadisticas", Namespace="http://schemas.datacontract.org/2004/07/AccesoDatos.Modelo")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Estadistica", Namespace="http://schemas.datacontract.org/2004/07/AccesoDatos.Modelo")]
     [System.SerializableAttribute()]
-    public partial class Estadisticas : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Estadistica : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -771,6 +771,8 @@ namespace trofeoCazador.ServicioDelJuego {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugador", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugadorRespons" +
             "e")]
+        [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugadorHunters" +
+            "TrophyExcepcionFault", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
         string ObtenerNombreUsuarioPorIdJugador(int idJugador);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugador", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugadorRespons" +
@@ -778,6 +780,8 @@ namespace trofeoCazador.ServicioDelJuego {
         System.Threading.Tasks.Task<string> ObtenerNombreUsuarioPorIdJugadorAsync(int idJugador);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EditarContraseña", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EditarContraseñaResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestionCuentaServicio/EditarContraseñaHuntersTrophyExcepcionF" +
+            "ault", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
         bool EditarContraseña(string correo, string nuevaContraseña);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EditarContraseña", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EditarContraseñaResponse")]
@@ -800,42 +804,56 @@ namespace trofeoCazador.ServicioDelJuego {
         System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.JugadorDataContract> ObtenerJugadorAsync(int idJugador);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuario", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuarioResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuarioHuntersTrophyExcepci" +
+            "onFault", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
         bool EditarNombreUsuario(int idJugador, string nuevoNombreUsuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuario", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuarioResponse")]
         System.Threading.Tasks.Task<bool> EditarNombreUsuarioAsync(int idJugador, string nuevoNombreUsuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EditarCorreo", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EditarCorreoResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestionCuentaServicio/EditarCorreoHuntersTrophyExcepcionFault" +
+            "", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
         bool EditarCorreo(int idCuenta, string nuevoCorreo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EditarCorreo", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EditarCorreoResponse")]
         System.Threading.Tasks.Task<bool> EditarCorreoAsync(int idCuenta, string nuevoCorreo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacion", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacionHuntersTrophyEx" +
+            "cepcionFault", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
         string EnviarCodigoConfirmacion(string correo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacion", ReplyAction="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacionResponse")]
         System.Threading.Tasks.Task<string> EnviarCodigoConfirmacionAsync(string correo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigo", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ValidarCodigoResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigoHuntersTrophyExcepcionFaul" +
+            "t", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
         bool ValidarCodigo(string codigoIngresado, string codigoEnviado);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigo", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ValidarCodigoResponse")]
         System.Threading.Tasks.Task<bool> ValidarCodigoAsync(string codigoIngresado, string codigoEnviado);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ExisteCorreo", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ExisteCorreoResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestionCuentaServicio/ExisteCorreoHuntersTrophyExcepcionFault" +
+            "", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
         bool ExisteCorreo(string correo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ExisteCorreo", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ExisteCorreoResponse")]
         System.Threading.Tasks.Task<bool> ExisteCorreoAsync(string correo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuario", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuarioResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuarioHuntersTrophyExcepci" +
+            "onFault", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
         bool ExisteNombreUsuario(string nombreUsuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuario", ReplyAction="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuarioResponse")]
         System.Threading.Tasks.Task<bool> ExisteNombreUsuarioAsync(string nombreUsuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/VerificarContrasena", ReplyAction="http://tempuri.org/IGestionCuentaServicio/VerificarContrasenaResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IGestionCuentaServicio/VerificarContrasenaHuntersTrophyExcepci" +
+            "onFault", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
         bool VerificarContrasena(string contraseniaIngresada, string correo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionCuentaServicio/VerificarContrasena", ReplyAction="http://tempuri.org/IGestionCuentaServicio/VerificarContrasenaResponse")]
@@ -2132,10 +2150,10 @@ namespace trofeoCazador.ServicioDelJuego {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobales", ReplyAction="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobalesResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobalesHuntersTrophy" +
             "ExcepcionFault", Name="HuntersTrophyExcepcion", Namespace="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones")]
-        trofeoCazador.ServicioDelJuego.Estadisticas[] ObtenerEstadisticasGlobales();
+        trofeoCazador.ServicioDelJuego.Estadistica[] ObtenerEstadisticasGlobales();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobales", ReplyAction="http://tempuri.org/IEstadisticasGlobales/ObtenerEstadisticasGlobalesResponse")]
-        System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.Estadisticas[]> ObtenerEstadisticasGlobalesAsync();
+        System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.Estadistica[]> ObtenerEstadisticasGlobalesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEstadisticasGlobales/ActualizarVictorias", ReplyAction="http://tempuri.org/IEstadisticasGlobales/ActualizarVictoriasResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(trofeoCazador.ServicioDelJuego.HuntersTrophyExcepcion), Action="http://tempuri.org/IEstadisticasGlobales/ActualizarVictoriasHuntersTrophyExcepcio" +
@@ -2173,11 +2191,11 @@ namespace trofeoCazador.ServicioDelJuego {
                 base(binding, remoteAddress) {
         }
         
-        public trofeoCazador.ServicioDelJuego.Estadisticas[] ObtenerEstadisticasGlobales() {
+        public trofeoCazador.ServicioDelJuego.Estadistica[] ObtenerEstadisticasGlobales() {
             return base.Channel.ObtenerEstadisticasGlobales();
         }
         
-        public System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.Estadisticas[]> ObtenerEstadisticasGlobalesAsync() {
+        public System.Threading.Tasks.Task<trofeoCazador.ServicioDelJuego.Estadistica[]> ObtenerEstadisticasGlobalesAsync() {
             return base.Channel.ObtenerEstadisticasGlobalesAsync();
         }
         

@@ -153,11 +153,17 @@
   <wsdl:message name="IGestionCuentaServicio_ObtenerNombreUsuarioPorIdJugador_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerNombreUsuarioPorIdJugadorResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ObtenerNombreUsuarioPorIdJugador_HuntersTrophyExcepcionFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q2:HuntersTrophyExcepcion" />
+  </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_EditarContraseña_InputMessage">
     <wsdl:part name="parameters" element="tns:EditarContraseña" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_EditarContraseña_OutputMessage">
     <wsdl:part name="parameters" element="tns:EditarContraseñaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_EditarContraseña_HuntersTrophyExcepcionFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q3:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_ValidarInicioSesion_InputMessage">
     <wsdl:part name="parameters" element="tns:ValidarInicioSesion" />
@@ -166,7 +172,7 @@
     <wsdl:part name="parameters" element="tns:ValidarInicioSesionResponse" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_ValidarInicioSesion_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q2:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q4:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_ObtenerJugador_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerJugador" />
@@ -175,7 +181,7 @@
     <wsdl:part name="parameters" element="tns:ObtenerJugadorResponse" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_ObtenerJugador_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q3:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q5:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_EditarNombreUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:EditarNombreUsuario" />
@@ -183,11 +189,17 @@
   <wsdl:message name="IGestionCuentaServicio_EditarNombreUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:EditarNombreUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_EditarNombreUsuario_HuntersTrophyExcepcionFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q6:HuntersTrophyExcepcion" />
+  </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_EditarCorreo_InputMessage">
     <wsdl:part name="parameters" element="tns:EditarCorreo" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_EditarCorreo_OutputMessage">
     <wsdl:part name="parameters" element="tns:EditarCorreoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_EditarCorreo_HuntersTrophyExcepcionFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q7:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_EnviarCodigoConfirmacion_InputMessage">
     <wsdl:part name="parameters" element="tns:EnviarCodigoConfirmacion" />
@@ -195,11 +207,17 @@
   <wsdl:message name="IGestionCuentaServicio_EnviarCodigoConfirmacion_OutputMessage">
     <wsdl:part name="parameters" element="tns:EnviarCodigoConfirmacionResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_EnviarCodigoConfirmacion_HuntersTrophyExcepcionFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q8:HuntersTrophyExcepcion" />
+  </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_ValidarCodigo_InputMessage">
     <wsdl:part name="parameters" element="tns:ValidarCodigo" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_ValidarCodigo_OutputMessage">
     <wsdl:part name="parameters" element="tns:ValidarCodigoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ValidarCodigo_HuntersTrophyExcepcionFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q9:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_ExisteCorreo_InputMessage">
     <wsdl:part name="parameters" element="tns:ExisteCorreo" />
@@ -207,17 +225,26 @@
   <wsdl:message name="IGestionCuentaServicio_ExisteCorreo_OutputMessage">
     <wsdl:part name="parameters" element="tns:ExisteCorreoResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ExisteCorreo_HuntersTrophyExcepcionFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q10:HuntersTrophyExcepcion" />
+  </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_ExisteNombreUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:ExisteNombreUsuario" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_ExisteNombreUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ExisteNombreUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_ExisteNombreUsuario_HuntersTrophyExcepcionFault_FaultMessage">
+    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q11:HuntersTrophyExcepcion" />
+  </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_VerificarContrasena_InputMessage">
     <wsdl:part name="parameters" element="tns:VerificarContrasena" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_VerificarContrasena_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerificarContrasenaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionCuentaServicio_VerificarContrasena_HuntersTrophyExcepcionFault_FaultMessage">
+    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q12:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_ValidarUsuarioEnLinea_InputMessage">
     <wsdl:part name="parameters" element="tns:ValidarUsuarioEnLinea" />
@@ -232,7 +259,7 @@
     <wsdl:part name="parameters" element="tns:ObtenerIdJugadorPorNombreUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="IGestionCuentaServicio_ObtenerIdJugadorPorNombreUsuario_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q4:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q13:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="ISalaEsperaServicio_InvitarAmigoASala_InputMessage">
     <wsdl:part name="parameters" element="tns:InvitarAmigoASala" />
@@ -349,7 +376,7 @@
     <wsdl:part name="parameters" element="tns:ObtenerListaNombresUsuariosAmigosResponse" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_ObtenerListaNombresUsuariosAmigos_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q5:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q14:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_ValidarEnvioSolicitudAmistad_InputMessage">
     <wsdl:part name="parameters" element="tns:ValidarEnvioSolicitudAmistad" />
@@ -358,7 +385,7 @@
     <wsdl:part name="parameters" element="tns:ValidarEnvioSolicitudAmistadResponse" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_ValidarEnvioSolicitudAmistad_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q6:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q15:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_AgregarSolicitudAmistad_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarSolicitudAmistad" />
@@ -367,7 +394,7 @@
     <wsdl:part name="parameters" element="tns:AgregarSolicitudAmistadResponse" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_AgregarSolicitudAmistad_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q7:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q16="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q16:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_ObtenerNombresUsuariosSolicitantes_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerNombresUsuariosSolicitantes" />
@@ -376,7 +403,7 @@
     <wsdl:part name="parameters" element="tns:ObtenerNombresUsuariosSolicitantesResponse" />
   </wsdl:message>
   <wsdl:message name="IGestorAmistad_ObtenerNombresUsuariosSolicitantes_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q8:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q17="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q17:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IGestorDeSolicitudesDeAmistad_AgregarADiccionarioAmistadesEnLinea_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarADiccionarioAmistadesEnLinea" />
@@ -736,7 +763,7 @@
     <wsdl:part name="parameters" element="tns:ObtenerEstadisticasGlobalesResponse" />
   </wsdl:message>
   <wsdl:message name="IEstadisticasGlobales_ObtenerEstadisticasGlobales_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q9:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q18="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q18:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:message name="IEstadisticasGlobales_ActualizarVictorias_InputMessage">
     <wsdl:part name="parameters" element="tns:ActualizarVictorias" />
@@ -745,7 +772,7 @@
     <wsdl:part name="parameters" element="tns:ActualizarVictoriasResponse" />
   </wsdl:message>
   <wsdl:message name="IEstadisticasGlobales_ActualizarVictorias_HuntersTrophyExcepcionFault_FaultMessage">
-    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q10:HuntersTrophyExcepcion" />
+    <wsdl:part xmlns:q19="http://schemas.datacontract.org/2004/07/ServicioJuego.Excepciones" name="detail" element="q19:HuntersTrophyExcepcion" />
   </wsdl:message>
   <wsdl:portType name="IGestionCuentaServicio">
     <wsdl:operation name="AgregarJugador">
@@ -756,10 +783,12 @@
     <wsdl:operation name="ObtenerNombreUsuarioPorIdJugador">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugador" message="tns:IGestionCuentaServicio_ObtenerNombreUsuarioPorIdJugador_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugadorResponse" message="tns:IGestionCuentaServicio_ObtenerNombreUsuarioPorIdJugador_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ObtenerNombreUsuarioPorIdJugadorHuntersTrophyExcepcionFault" name="HuntersTrophyExcepcionFault" message="tns:IGestionCuentaServicio_ObtenerNombreUsuarioPorIdJugador_HuntersTrophyExcepcionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="EditarContraseña">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarContraseña" message="tns:IGestionCuentaServicio_EditarContraseña_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarContraseñaResponse" message="tns:IGestionCuentaServicio_EditarContraseña_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarContraseñaHuntersTrophyExcepcionFault" name="HuntersTrophyExcepcionFault" message="tns:IGestionCuentaServicio_EditarContraseña_HuntersTrophyExcepcionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ValidarInicioSesion">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarInicioSesion" message="tns:IGestionCuentaServicio_ValidarInicioSesion_InputMessage" />
@@ -774,30 +803,37 @@
     <wsdl:operation name="EditarNombreUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuario" message="tns:IGestionCuentaServicio_EditarNombreUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuarioResponse" message="tns:IGestionCuentaServicio_EditarNombreUsuario_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarNombreUsuarioHuntersTrophyExcepcionFault" name="HuntersTrophyExcepcionFault" message="tns:IGestionCuentaServicio_EditarNombreUsuario_HuntersTrophyExcepcionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="EditarCorreo">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarCorreo" message="tns:IGestionCuentaServicio_EditarCorreo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarCorreoResponse" message="tns:IGestionCuentaServicio_EditarCorreo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EditarCorreoHuntersTrophyExcepcionFault" name="HuntersTrophyExcepcionFault" message="tns:IGestionCuentaServicio_EditarCorreo_HuntersTrophyExcepcionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="EnviarCodigoConfirmacion">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacion" message="tns:IGestionCuentaServicio_EnviarCodigoConfirmacion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacionResponse" message="tns:IGestionCuentaServicio_EnviarCodigoConfirmacion_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacionHuntersTrophyExcepcionFault" name="HuntersTrophyExcepcionFault" message="tns:IGestionCuentaServicio_EnviarCodigoConfirmacion_HuntersTrophyExcepcionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ValidarCodigo">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigo" message="tns:IGestionCuentaServicio_ValidarCodigo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigoResponse" message="tns:IGestionCuentaServicio_ValidarCodigo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarCodigoHuntersTrophyExcepcionFault" name="HuntersTrophyExcepcionFault" message="tns:IGestionCuentaServicio_ValidarCodigo_HuntersTrophyExcepcionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ExisteCorreo">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ExisteCorreo" message="tns:IGestionCuentaServicio_ExisteCorreo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ExisteCorreoResponse" message="tns:IGestionCuentaServicio_ExisteCorreo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ExisteCorreoHuntersTrophyExcepcionFault" name="HuntersTrophyExcepcionFault" message="tns:IGestionCuentaServicio_ExisteCorreo_HuntersTrophyExcepcionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ExisteNombreUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuario" message="tns:IGestionCuentaServicio_ExisteNombreUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuarioResponse" message="tns:IGestionCuentaServicio_ExisteNombreUsuario_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuarioHuntersTrophyExcepcionFault" name="HuntersTrophyExcepcionFault" message="tns:IGestionCuentaServicio_ExisteNombreUsuario_HuntersTrophyExcepcionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="VerificarContrasena">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/VerificarContrasena" message="tns:IGestionCuentaServicio_VerificarContrasena_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionCuentaServicio/VerificarContrasenaResponse" message="tns:IGestionCuentaServicio_VerificarContrasena_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGestionCuentaServicio/VerificarContrasenaHuntersTrophyExcepcionFault" name="HuntersTrophyExcepcionFault" message="tns:IGestionCuentaServicio_VerificarContrasena_HuntersTrophyExcepcionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ValidarUsuarioEnLinea">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionCuentaServicio/ValidarUsuarioEnLinea" message="tns:IGestionCuentaServicio_ValidarUsuarioEnLinea_InputMessage" />
@@ -1226,6 +1262,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="HuntersTrophyExcepcionFault">
+        <soap12:fault use="literal" name="HuntersTrophyExcepcionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="EditarContraseña">
       <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/EditarContraseña" style="document" />
@@ -1235,6 +1274,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="HuntersTrophyExcepcionFault">
+        <soap12:fault use="literal" name="HuntersTrophyExcepcionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ValidarInicioSesion">
       <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ValidarInicioSesion" style="document" />
@@ -1268,6 +1310,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="HuntersTrophyExcepcionFault">
+        <soap12:fault use="literal" name="HuntersTrophyExcepcionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="EditarCorreo">
       <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/EditarCorreo" style="document" />
@@ -1277,6 +1322,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="HuntersTrophyExcepcionFault">
+        <soap12:fault use="literal" name="HuntersTrophyExcepcionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="EnviarCodigoConfirmacion">
       <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/EnviarCodigoConfirmacion" style="document" />
@@ -1286,6 +1334,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="HuntersTrophyExcepcionFault">
+        <soap12:fault use="literal" name="HuntersTrophyExcepcionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ValidarCodigo">
       <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ValidarCodigo" style="document" />
@@ -1295,6 +1346,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="HuntersTrophyExcepcionFault">
+        <soap12:fault use="literal" name="HuntersTrophyExcepcionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ExisteCorreo">
       <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ExisteCorreo" style="document" />
@@ -1304,6 +1358,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="HuntersTrophyExcepcionFault">
+        <soap12:fault use="literal" name="HuntersTrophyExcepcionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ExisteNombreUsuario">
       <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ExisteNombreUsuario" style="document" />
@@ -1313,6 +1370,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="HuntersTrophyExcepcionFault">
+        <soap12:fault use="literal" name="HuntersTrophyExcepcionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="VerificarContrasena">
       <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/VerificarContrasena" style="document" />
@@ -1322,6 +1382,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="HuntersTrophyExcepcionFault">
+        <soap12:fault use="literal" name="HuntersTrophyExcepcionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ValidarUsuarioEnLinea">
       <soap12:operation soapAction="http://tempuri.org/IGestionCuentaServicio/ValidarUsuarioEnLinea" style="document" />

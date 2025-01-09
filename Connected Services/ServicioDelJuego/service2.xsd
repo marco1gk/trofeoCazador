@@ -1278,7 +1278,7 @@
   <xs:element name="ObtenerEstadisticasGlobalesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/AccesoDatos.Modelo" minOccurs="0" name="ObtenerEstadisticasGlobalesResult" nillable="true" type="q27:ArrayOfEstadisticas" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/AccesoDatos.Modelo" minOccurs="0" name="ObtenerEstadisticasGlobalesResult" nillable="true" type="q27:ArrayOfEstadistica" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

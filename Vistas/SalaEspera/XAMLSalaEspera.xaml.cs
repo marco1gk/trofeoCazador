@@ -387,15 +387,15 @@ using trofeoCazador.Vistas.Menu;
             }
             catch (EndpointNotFoundException ex)
             {
-                Console.WriteLine("el set up entro a la de endpoint"+ex);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex,NavigationService);
             }
             catch(CommunicationException ex)
             {
-                Console.WriteLine("el set up entro a la de communication" + ex);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch(Exception ex)
             {
-                Console.WriteLine("el set up entro a exception"+ex);
+                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
 
             }

@@ -304,6 +304,15 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Salió de la partida el jugador .
+        /// </summary>
+        public static string lbAbandonarPartida {
+            get {
+                return ResourceManager.GetString("lbAbandonarPartida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Amigos.
         /// </summary>
         public static string lbAmigos {
