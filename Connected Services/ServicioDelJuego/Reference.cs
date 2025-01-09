@@ -1739,7 +1739,7 @@ namespace trofeoCazador.ServicioDelJuego {
     public interface IServicioPartidaCallback {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarTurnoIniciado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarTurnoIniciadoResponse")]
-        void NotificarTurnoIniciado(string nombreUsuario);
+        void NotificarTurnoIniciado(string jugadorTurnoActual);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarJugadorDesconectado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarJugadorDesconectadoResponse")]
         void NotificarJugadorDesconectado(string nombreUsuario);
@@ -1747,14 +1747,11 @@ namespace trofeoCazador.ServicioDelJuego {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarTurnoTerminado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarTurnoTerminadoResponse")]
         void NotificarTurnoTerminado(string nombreUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarResultadoAccion", ReplyAction="http://tempuri.org/IServicioPartida/NotificarResultadoAccionResponse")]
-        void NotificarResultadoAccion(string accion, bool sucedio);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarPartidaCreada", ReplyAction="http://tempuri.org/IServicioPartida/NotificarPartidaCreadaResponse")]
         void NotificarPartidaCreada(string idPartida);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarResultadoDado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarResultadoDadoResponse")]
-        void NotificarResultadoDado(string nombreUsuario, int resultado);
+        void NotificarResultadoDado(string nombreJugador, int resultadoDado);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartasEnMano", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartasEnManoResponse")]
         void NotificarCartasEnMano(trofeoCazador.ServicioDelJuego.Carta[] cartasRepartidas);
@@ -1769,13 +1766,13 @@ namespace trofeoCazador.ServicioDelJuego {
         void NotificarCartaAgregadaAMano(trofeoCazador.ServicioDelJuego.Carta carta);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarFichaTomadaMesa", ReplyAction="http://tempuri.org/IServicioPartida/NotificarFichaTomadaMesaResponse")]
-        void NotificarFichaTomadaMesa(string nombreUsuario, int idFicha);
+        void NotificarFichaTomadaMesa(string jugadorTurnoActual, int idFicha);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartaUtilizada", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartaUtilizadaResponse")]
-        void NotificarCartaUtilizada(int idCarta);
+        void NotificarCartaUtilizada(int idCartaUtilizada);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaADescarte", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaADescarteResponse")]
-        void NotificarCartaAgregadaADescarte(trofeoCazador.ServicioDelJuego.Carta carta);
+        void NotificarCartaAgregadaADescarte(trofeoCazador.ServicioDelJuego.Carta cartaUtilizada);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarFichaDevuelta", ReplyAction="http://tempuri.org/IServicioPartida/NotificarFichaDevueltaResponse")]
         void NotificarFichaDevuelta(int idFicha, string nombreJugadorTurnoActual);
@@ -1783,30 +1780,27 @@ namespace trofeoCazador.ServicioDelJuego {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAEscondite", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartaAgregadaAEsconditeResponse")]
         void NotificarCartaAgregadaAEscondite(int idCarta);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCarta", ReplyAction="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCartaResponse")]
-        void NotificarIntentoRoboCarta(string nombreUsuario);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartaRobada", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartaRobadaResponse")]
-        void NotificarCartaRobada(trofeoCazador.ServicioDelJuego.Carta cartaRobada, string nombreJugadorObjetivoRobo, string nombreJugadorTurnoActual);
+        void NotificarCartaRobada(trofeoCazador.ServicioDelJuego.Carta carta, string jugadorObjetivoRobo, string jugadorTurnoActual);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCartaEscondite", ReplyAction="http://tempuri.org/IServicioPartida/NotificarIntentoRoboCartaEsconditeResponse")]
-        void NotificarIntentoRoboCartaEscondite(string nombreUsuario);
+        void NotificarIntentoRoboCartaEscondite(string nombreJugadorAtacante);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartaEsconditeRobada", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartaEsconditeRobadaResponse")]
-        void NotificarCartaEsconditeRobada(trofeoCazador.ServicioDelJuego.Carta cartaRobada, string nombreJugadorObjetivoRobo, string nombreJugadorTurnoActual);
+        void NotificarCartaEsconditeRobada(trofeoCazador.ServicioDelJuego.Carta carta, string jugadorObjetivoRobo, string jugadorTurnoActual);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarCartaTomadaDescarte", ReplyAction="http://tempuri.org/IServicioPartida/NotificarCartaTomadaDescarteResponse")]
         void NotificarCartaTomadaDescarte(int idCarta);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarTiroDadoForzado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarTiroDadoForzadoResponse")]
-        void NotificarTiroDadoForzado(string jugadorEnTurno);
+        void NotificarTiroDadoForzado(string jugadorTurnoActual);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarPreguntaJugadores", ReplyAction="http://tempuri.org/IServicioPartida/NotificarPreguntaJugadoresResponse")]
         void NotificarPreguntaJugadores(string jugadorTurnoActual, string tipoCartaRevelada);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarNumeroJugadoresGuardaronCarta", ReplyAction="http://tempuri.org/IServicioPartida/NotificarNumeroJugadoresGuardaronCartaRespons" +
             "e")]
-        void NotificarNumeroJugadoresGuardaronCarta(int numeroJugadores);
+        void NotificarNumeroJugadoresGuardaronCarta(int numeroJugadoresGuardaronCarta);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarMazoRevelado", ReplyAction="http://tempuri.org/IServicioPartida/NotificarMazoReveladoResponse")]
         void NotificarMazoRevelado();
@@ -1821,10 +1815,13 @@ namespace trofeoCazador.ServicioDelJuego {
         void NotificarPararTirarDado();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarModoSeleccionCarta", ReplyAction="http://tempuri.org/IServicioPartida/NotificarModoSeleccionCartaResponse")]
-        void NotificarModoSeleccionCarta(int idModoSeleccion);
+        void NotificarModoSeleccionCarta(int idModoSeleccionCarta);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarActualizacionDecisionTurno", ReplyAction="http://tempuri.org/IServicioPartida/NotificarActualizacionDecisionTurnoResponse")]
         void NotificarActualizacionDecisionTurno();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicioPartida/NotificarIntentoRobo", ReplyAction="http://tempuri.org/IServicioPartida/NotificarIntentoRoboResponse")]
+        void NotificarIntentoRobo(string nombreJugadorDefensor);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

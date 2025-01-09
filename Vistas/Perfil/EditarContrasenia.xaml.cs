@@ -39,63 +39,68 @@ namespace trofeoCazador.Vistas.Perfil
             }
         }
 
-        private bool EditarContraseña()
+        private void EditarContraseña()
         {
             GestionCuentaServicioClient proxy = Metodos.EstablecerConexionServidor();
             string contraseniaNueva = ContrasenaNuevaTextBox.Password.Trim();
 
             if (correo != null)
             {
-                return EditarContraseñaConCorreo(proxy, contraseniaNueva);
+                EditarContraseñaConCorreo(proxy, contraseniaNueva);
             }
             else
             {
                 string contraseniaIngresada = ContraseniaActualTextBox.Password.Trim();
-                return EditarContraseñaSinCorreo(proxy, contraseniaIngresada, contraseniaNueva);
+                EditarContraseñaSinCorreo(proxy, contraseniaIngresada, contraseniaNueva);
             }
         }
 
-        private bool EditarContraseñaConCorreo(GestionCuentaServicioClient proxy, string contraseniaNueva)
+
+        private void EditarContraseñaConCorreo(GestionCuentaServicioClient proxy, string contraseniaNueva)
         {
             if (EsEntradaValida(contraseniaNueva))
             {
                 if (UtilidadesDeValidacion.EsContrasenaValida(contraseniaNueva))
                 {
-                    return ProcesarEdicionConCorreo(proxy, contraseniaNueva);
+                    ProcesarEdicionConCorreo(proxy, contraseniaNueva);
                 }
                 else
                 {
                     MostrarError(Properties.Resources.lbContraseñaSegura);
-                    return false;
                 }
             }
-            return false;
+            else
+            {
+                MostrarError(Properties.Resources.lbLlenarCamposObligatorios);
+            }
         }
 
-        private bool EditarContraseñaSinCorreo(GestionCuentaServicioClient proxy, string contraseniaIngresada, string contraseniaNueva)
+
+        private void EditarContraseñaSinCorreo(GestionCuentaServicioClient proxy, string contraseniaIngresada, string contraseniaNueva)
         {
             if (EsEntradaValida(contraseniaIngresada, contraseniaNueva))
             {
                 if (!proxy.VerificarContrasena(contraseniaIngresada, jugador.Correo))
                 {
                     MostrarError(Properties.Resources.lbContraseñaNoCoincide);
-                    return false;
                 }
-
-                if (UtilidadesDeValidacion.EsContrasenaValida(contraseniaNueva))
+                else if (UtilidadesDeValidacion.EsContrasenaValida(contraseniaNueva))
                 {
-                    return ProcesarEdicionSinCorreo(proxy, contraseniaNueva);
+                    ProcesarEdicionSinCorreo(proxy, contraseniaNueva);
                 }
                 else
                 {
                     MostrarError(Properties.Resources.lbContraseñaSegura);
-                    return false;
                 }
             }
-            return false;
+            else
+            {
+                MostrarError(Properties.Resources.lbLlenarCamposObligatorios);
+            }
         }
 
-        private bool EsEntradaValida(string contraseniaNueva)
+
+        private static bool EsEntradaValida(string contraseniaNueva)
         {
             if (Metodos.ValidarEntradaVacia(contraseniaNueva))
             {
@@ -105,7 +110,7 @@ namespace trofeoCazador.Vistas.Perfil
             return true;
         }
 
-        private bool EsEntradaValida(string contraseniaIngresada, string contraseniaNueva)
+        private static bool EsEntradaValida(string contraseniaIngresada, string contraseniaNueva)
         {
             if (Metodos.ValidarEntradaVacia(contraseniaIngresada) || Metodos.ValidarEntradaVacia(contraseniaNueva))
             {

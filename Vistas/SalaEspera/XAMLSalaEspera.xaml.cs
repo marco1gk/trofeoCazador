@@ -253,7 +253,7 @@ using trofeoCazador.Vistas.Menu;
 
                     if (codigos.Contains(codigoSalaEspera))
                     {
-                        cliente.UnirseSalaEspera(codigoSalaEspera, lb);
+                        await cliente.UnirseSalaEsperaAsync(codigoSalaEspera, lb);
 
                         stackPanelOpciones.Visibility = Visibility.Collapsed;
                         stackPanelJugadores.Visibility = Visibility.Visible;
@@ -560,9 +560,9 @@ using trofeoCazador.Vistas.Menu;
             });
         }
 
-        private void JugadorControl_JugadorExpulsado(object sender, string nombreUsuario)
+        private async Task JugadorControl_JugadorExpulsado(object sender, string nombreUsuario)
         {
-            ExpulsarJugadorSalaEsperaAsync(nombreUsuario);
+            await ExpulsarJugadorSalaEsperaAsync(nombreUsuario);
 
         }
         public void SalirSalaEspera(string codigoSalaEspera, string nombreUsuario)
@@ -750,7 +750,7 @@ using trofeoCazador.Vistas.Menu;
                 
                 codigoSalaEsperaActual = null;
 
-                Dispatcher.Invoke(() => JugadoresEnSala.Clear());
+                await Dispatcher.InvokeAsync(() => JugadoresEnSala.Clear());
 
                 if (NavigationService.CanGoBack)
                 {

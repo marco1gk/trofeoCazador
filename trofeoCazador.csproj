@@ -112,7 +112,6 @@
     <Compile Include="Recursos\ElementosPartida\Carta.cs" />
     <Compile Include="Recursos\ElementosPartida\Dado.cs" />
     <Compile Include="Recursos\ElementosPartida\Ficha.cs" />
-    <Compile Include="Recursos\ElementosPartida\Mazo.cs" />
     <Compile Include="Recursos\Metodos.cs" />
     <Compile Include="SingletonSesion.cs" />
     <Compile Include="Utilidades\App.cs" />

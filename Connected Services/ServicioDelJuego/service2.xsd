@@ -905,7 +905,7 @@
   <xs:element name="NotificarTurnoIniciado">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="jugadorTurnoActual" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -938,19 +938,6 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotificarResultadoAccion">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="accion" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="sucedio" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NotificarResultadoAccionResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="NotificarPartidaCreada">
     <xs:complexType>
       <xs:sequence>
@@ -966,8 +953,8 @@
   <xs:element name="NotificarResultadoDado">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="resultado" type="xs:int" />
+        <xs:element minOccurs="0" name="nombreJugador" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="resultadoDado" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1027,7 +1014,7 @@
   <xs:element name="NotificarFichaTomadaMesa">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="jugadorTurnoActual" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="idFicha" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -1040,7 +1027,7 @@
   <xs:element name="NotificarCartaUtilizada">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="idCarta" type="xs:int" />
+        <xs:element minOccurs="0" name="idCartaUtilizada" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1052,7 +1039,7 @@
   <xs:element name="NotificarCartaAgregadaADescarte">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="carta" nillable="true" type="q22:Carta" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="cartaUtilizada" nillable="true" type="q22:Carta" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1086,24 +1073,12 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NotificarIntentoRoboCarta">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NotificarIntentoRoboCartaResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="NotificarCartaRobada">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="cartaRobada" nillable="true" type="q23:Carta" />
-        <xs:element minOccurs="0" name="nombreJugadorObjetivoRobo" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="nombreJugadorTurnoActual" nillable="true" type="xs:string" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="carta" nillable="true" type="q23:Carta" />
+        <xs:element minOccurs="0" name="jugadorObjetivoRobo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="jugadorTurnoActual" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1115,7 +1090,7 @@
   <xs:element name="NotificarIntentoRoboCartaEscondite">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nombreJugadorAtacante" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1127,9 +1102,9 @@
   <xs:element name="NotificarCartaEsconditeRobada">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="cartaRobada" nillable="true" type="q24:Carta" />
-        <xs:element minOccurs="0" name="nombreJugadorObjetivoRobo" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="nombreJugadorTurnoActual" nillable="true" type="xs:string" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/ServicioJuego" minOccurs="0" name="carta" nillable="true" type="q24:Carta" />
+        <xs:element minOccurs="0" name="jugadorObjetivoRobo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="jugadorTurnoActual" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1153,7 +1128,7 @@
   <xs:element name="NotificarTiroDadoForzado">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="jugadorEnTurno" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="jugadorTurnoActual" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1178,7 +1153,7 @@
   <xs:element name="NotificarNumeroJugadoresGuardaronCarta">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="numeroJugadores" type="xs:int" />
+        <xs:element minOccurs="0" name="numeroJugadoresGuardaronCarta" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1236,7 +1211,7 @@
   <xs:element name="NotificarModoSeleccionCarta">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="idModoSeleccion" type="xs:int" />
+        <xs:element minOccurs="0" name="idModoSeleccionCarta" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1251,6 +1226,18 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="NotificarActualizacionDecisionTurnoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarIntentoRobo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreJugadorDefensor" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarIntentoRoboResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

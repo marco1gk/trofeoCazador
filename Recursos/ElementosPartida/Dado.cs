@@ -66,7 +66,7 @@ namespace trofeoCazador.Recursos.ElementosPartida
         }
         private async Task DetenerAnimacion(int resultadoDado)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            await Application.Current.Dispatcher.InvokeAsync(() =>
             {
                 animacionTimer.Stop();
                 int caraFinal = resultadoDado - 1;
@@ -77,5 +77,6 @@ namespace trofeoCazador.Recursos.ElementosPartida
             });
             await Task.Delay(1000);
         }
+
     }
 }

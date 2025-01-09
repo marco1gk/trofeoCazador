@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AnalysisConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
-  <SonarConfigDir>C:\Users\vaoma\source\repos\trofeoCazador\.sonarqube\conf</SonarConfigDir>
-  <SonarOutputDir>C:\Users\vaoma\source\repos\trofeoCazador\.sonarqube\out</SonarOutputDir>
-  <SonarBinDir>C:\Users\vaoma\source\repos\trofeoCazador\.sonarqube\bin</SonarBinDir>
-  <SonarScannerWorkingDirectory>C:\Users\vaoma\source\repos\trofeoCazador</SonarScannerWorkingDirectory>
-  <JavaExePath>C:\Users\vaoma\.sonar\cache\4bafe2e94439c8193fc8c68247cb0dbaf4e80265b903288f63f128304f129bbe\OpenJDK17U-jre_x64_windows_hotspot_17.0.11_9.zip_extracted\jdk-17.0.11+9-jre/bin/java.exe</JavaExePath>
+  <SonarConfigDir>C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\.sonarqube\conf</SonarConfigDir>
+  <SonarOutputDir>C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\.sonarqube\out</SonarOutputDir>
+  <SonarBinDir>C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\.sonarqube\bin</SonarBinDir>
+  <SonarScannerWorkingDirectory>C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente</SonarScannerWorkingDirectory>
+  <JavaExePath>C:\Users\axell\.sonar\cache\11a61a94d383e755b08b4e5890a13d148bc9f95b7149cbbeec62efb8c75a4a67\OpenJDK17U-jre_x64_windows_hotspot_17.0.13_11.zip_extracted\jdk-17.0.13+11-jre/bin/java.exe</JavaExePath>
   <ScanAllAnalysis>true</ScanAllAnalysis>
   <HasBeginStepCommandLineCredentials>true</HasBeginStepCommandLineCredentials>
   <SonarQubeHostUrl>http://localhost:9000</SonarQubeHostUrl>
-  <SonarQubeVersion>10.7.0.96327</SonarQubeVersion>
-  <SonarProjectKey>clienteeee</SonarProjectKey>
+  <SonarQubeVersion>25.1.0.102122</SonarQubeVersion>
+  <SonarProjectKey>AnalisisHuntersTrophyCliente6</SonarProjectKey>
   <AdditionalConfig>
     <ConfigSetting Id="BuildUri" />
     <ConfigSetting Id="TfsUri" />
     <ConfigSetting Id="VsCoverageConverterToolPath" />
     <ConfigSetting Id="UnchangedFilesPath" />
-    <ConfigSetting Id="sonar.pullrequest.cache.basepath" Value="C:\Users\vaoma\source\repos\trofeoCazador" />
-    <ConfigSetting Id="settings.file.path" Value="C:\Users\vaoma\Downloads\sonar-scanner-9.0.2.104486-net-framework (1)\SonarQube.Analysis.xml" />
+    <ConfigSetting Id="sonar.pullrequest.cache.basepath" Value="C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente" />
+    <ConfigSetting Id="settings.file.path" Value="C:\Users\axell\Downloads\SonarQube.Analysis.xml" />
   </AdditionalConfig>
   <ServerSettings>
-    <Property Name="sonaranalyzer-cs.nuget.packageVersion">9.32.0.97167</Property>
+    <Property Name="sonaranalyzer-cs.nuget.packageVersion">10.4.0.108396</Property>
     <Property Name="sonar.cs.ignoreHeaderComments">true</Property>
     <Property Name="sonar.typescript.file.suffixes">.ts,.tsx,.cts,.mts</Property>
-    <Property Name="email.fromName">SonarQube</Property>
     <Property Name="sonar.python.xunit.skipDetails">false</Property>
     <Property Name="sonar.ipynb.file.suffixes">ipynb</Property>
     <Property Name="sonar.auth.saml.signature.enabled">false</Property>
@@ -30,10 +29,11 @@
     <Property Name="sonar.terraform.file.suffixes">.tf</Property>
     <Property Name="sonar.forceAuthentication">true</Property>
     <Property Name="sonar.notifications.delay">60</Property>
+    <Property Name="sonar.multi-quality-mode.enabled">true</Property>
     <Property Name="sonaranalyzer-cs.ruleNamespace">SonarAnalyzer.CSharp</Property>
-    <Property Name="sonar.azureresourcemanager.file.identifier">https://schema.management.azure.com/schemas/</Property>
+    <Property Name="sonar.azureresourcemanager.file.identifier">https://schema.management.azure.com/schemas/,http://schema.management.azure.com/schemas/</Property>
     <Property Name="sonar.cs.analyzeGeneratedCode">false</Property>
-    <Property Name="sonar.java.jvmframeworkconfig.file.patterns">**/src/main/resources/**/application*.properties,**/src/main/resources/**/application*.yaml,**/src/main/resources/**/application*.yml</Property>
+    <Property Name="sonar.java.jvmframeworkconfig.file.patterns">**/src/main/resources/**/*app*.properties,**/src/main/resources/**/*app*.yaml,**/src/main/resources/**/*app*.yml</Property>
     <Property Name="sonar.builtInQualityProfiles.disableNotificationOnUpdate">false</Property>
     <Property Name="sonar.css.file.suffixes">.css,.less,.scss,.sass</Property>
     <Property Name="sonar.docker.file.patterns">Dockerfile,*.dockerfile</Property>
@@ -42,6 +42,7 @@
     <Property Name="sonar.cpd.cross_project">false</Property>
     <Property Name="sonar.vbnet.ignoreHeaderComments">true</Property>
     <Property Name="sonar.auth.github.groupsSync">false</Property>
+    <Property Name="sonar.vbnet.analyzer.dotnet.pluginKey">vbnet</Property>
     <Property Name="sonar.scala.file.suffixes">.scala</Property>
     <Property Name="sonar.cloudformation.activate">true</Property>
     <Property Name="sonaranalyzer-vbnet.ruleNamespace">SonarAnalyzer.VisualBasic</Property>
@@ -60,13 +61,14 @@
     <Property Name="sonar.ruby.exclusions">**/vendor/**</Property>
     <Property Name="sonar.auth.saml.enabled">false</Property>
     <Property Name="sonar.vbnet.file.suffixes">.vb</Property>
+    <Property Name="sonar.vbnet.analyzer.dotnet.pluginVersion">10.4.0.108396</Property>
     <Property Name="sonar.technicalDebt.developmentCost">30</Property>
     <Property Name="sonar.validateWebhooks">true</Property>
     <Property Name="sonar.python.file.suffixes">py</Property>
     <Property Name="sonar.cs.file.suffixes">.cs,.razor</Property>
     <Property Name="sonar.allowPermissionManagementForProjectAdmins">true</Property>
     <Property Name="sonar.text.inclusions.activate">true</Property>
-    <Property Name="sonaranalyzer-vbnet.staticResourceName">SonarAnalyzer-9.32.0.97167.zip</Property>
+    <Property Name="sonaranalyzer-vbnet.staticResourceName">SonarAnalyzer-vbnet-10.4.0.108396.zip</Property>
     <Property Name="sonar.java.file.suffixes">.java,.jav</Property>
     <Property Name="sonar.kotlin.file.suffixes">.kt,.kts</Property>
     <Property Name="sonar.php.file.suffixes">php,php3,php4,php5,phtml,inc</Property>
@@ -78,7 +80,7 @@
     <Property Name="sonar.auth.github.enabled">false</Property>
     <Property Name="sonar.python.coverage.reportPaths">coverage-reports/*coverage-*.xml</Property>
     <Property Name="sonar.text.activate">true</Property>
-    <Property Name="sonaranalyzer-vbnet.nuget.packageVersion">9.32.0.97167</Property>
+    <Property Name="sonaranalyzer-vbnet.nuget.packageVersion">10.4.0.108396</Property>
     <Property Name="provisioning.gitlab.enabled">false</Property>
     <Property Name="sonar.go.file.suffixes">.go</Property>
     <Property Name="sonar.cs.analyzeRazorCode">true</Property>
@@ -86,7 +88,6 @@
     <Property Name="sonar.dbcleaner.weeksBeforeKeepingOnlyAnalysesWithVersion">104</Property>
     <Property Name="sonar.qualitygate.ignoreSmallChanges">true</Property>
     <Property Name="sonar.php.exclusions">**/vendor/**</Property>
-    <Property Name="sonar.documentation.baseUrl">https://docs.sonarsource.com/sonarqube/</Property>
     <Property Name="sonar.vbnet.roslyn.ignoreIssues">false</Property>
     <Property Name="sonar.flex.file.suffixes">as</Property>
     <Property Name="sonar.filesize.limit">20</Property>
@@ -103,31 +104,33 @@
     <Property Name="sonar.auth.github.webUrl">https://github.com/</Property>
     <Property Name="sonar.php.frameworkDetection">true</Property>
     <Property Name="sonaranalyzer-vbnet.nuget.packageId">SonarAnalyzer.VisualBasic</Property>
-    <Property Name="email.from">noreply@nowhere</Property>
-    <Property Name="sonaranalyzer-vbnet.pluginVersion">9.32.0.97167</Property>
+    <Property Name="sonar.cs.analyzer.dotnet.pluginVersion">10.4.0.108396</Property>
+    <Property Name="sonaranalyzer-vbnet.pluginVersion">10.4.0.108396</Property>
     <Property Name="sonar.dbcleaner.weeksBeforeKeepingOnlyOneSnapshotByWeek">4</Property>
     <Property Name="sonaranalyzer-vbnet.analyzerId">SonarAnalyzer.VisualBasic</Property>
-    <Property Name="email.prefix">[SONARQUBE]</Property>
     <Property Name="sonar.cs.roslyn.ignoreIssues">false</Property>
     <Property Name="sonaranalyzer-cs.pluginKey">csharp</Property>
     <Property Name="sonar.kubernetes.activate">true</Property>
     <Property Name="sonar.java.ignoreUnnamedModuleForSplitPackage">False</Property>
+    <Property Name="sonar.vbnet.analyzer.dotnet.staticResourceName">SonarAnalyzer-vbnet-10.4.0.108396.zip</Property>
     <Property Name="sonar.json.file.suffixes">.json</Property>
     <Property Name="sonar.auth.saml.providerName">SAML</Property>
     <Property Name="provisioning.github.project.visibility.enabled">true</Property>
     <Property Name="sonar.ruby.coverage.reportPaths">coverage/.resultset.json</Property>
     <Property Name="sonar.text.inclusions">**/*.sh,**/*.bash,**/*.zsh,**/*.ksh,**/*.ps1,**/*.properties,**/*.conf,**/*.pem,**/*.config,.env,.aws/config</Property>
     <Property Name="sonar.qualityProfiles.allowDisableInheritedRules">true</Property>
-    <Property Name="sonaranalyzer-cs.staticResourceName">SonarAnalyzer-9.32.0.97167.zip</Property>
+    <Property Name="sonaranalyzer-cs.staticResourceName">SonarAnalyzer-csharp-10.4.0.108396.zip</Property>
     <Property Name="sonar.auth.gitlab.allowUsersToSignUp">true</Property>
     <Property Name="sonar.projectCreation.mainBranchName">main</Property>
+    <Property Name="sonar.cs.analyzer.dotnet.staticResourceName">SonarAnalyzer-csharp-10.4.0.108396.zip</Property>
     <Property Name="sonaranalyzer-cs.nuget.packageId">SonarAnalyzer.CSharp</Property>
     <Property Name="sonar.authenticator.downcase">false</Property>
     <Property Name="sonaranalyzer-cs.analyzerId">SonarAnalyzer.CSharp</Property>
+    <Property Name="sonar.cs.analyzer.dotnet.pluginKey">csharp</Property>
     <Property Name="sonar.technicalDebt.ratingGrid">0.05,0.1,0.2,0.5</Property>
     <Property Name="sonar.lf.enableGravatar">false</Property>
     <Property Name="sonar.docker.activate">true</Property>
-    <Property Name="sonaranalyzer-cs.pluginVersion">9.32.0.97167</Property>
+    <Property Name="sonaranalyzer-cs.pluginVersion">10.4.0.108396</Property>
     <Property Name="sonar.developerAggregatedInfo.disabled">false</Property>
     <Property Name="sonar.plugins.downloadOnlyRequired">true</Property>
     <Property Name="sonar.azureresourcemanager.file.suffixes">.bicep</Property>
@@ -135,11 +138,12 @@
     <Property Name="sonar.vbnet.analyzeGeneratedCode">false</Property>
     <Property Name="sonar.plugins.risk.consent">NOT_ACCEPTED</Property>
     <Property Name="sonar.auth.gitlab.url">https://gitlab.com</Property>
+    <Property Name="sonar.scanner.skipNodeProvisioning">false</Property>
     <Property Name="sonaranalyzer-vbnet.pluginKey">vbnet</Property>
     <Property Name="sonar.java.jvmframeworkconfig.activate">true</Property>
     <Property Name="sonar.updatecenter.url">https://downloads.sonarsource.com/sonarqube/update/update-center.properties</Property>
-    <Property Name="sonar.core.id">147B411E-AZNLKf48_IBuhGS5bCSt</Property>
-    <Property Name="sonar.core.startTime">07/01/2025 09:46:00 p. m.</Property>
+    <Property Name="sonar.core.id">147B411E-AZRDacnZaVLQSXeNUCb1</Property>
+    <Property Name="sonar.core.startTime">08/01/2025 11:58:38 p. m.</Property>
   </ServerSettings>
   <LocalSettings>
     <Property Name="sonar.host.url">http://localhost:9000</Property>
@@ -147,62 +151,46 @@
   <AnalyzersSettings>
     <AnalyzerSettings>
       <Language>cs</Language>
-      <RulesetPath>C:\Users\vaoma\source\repos\trofeoCazador\.sonarqube\conf\Sonar-cs.ruleset</RulesetPath>
-      <DeactivatedRulesetPath>C:\Users\vaoma\source\repos\trofeoCazador\.sonarqube\conf\Sonar-cs-none.ruleset</DeactivatedRulesetPath>
+      <RulesetPath>C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\.sonarqube\conf\Sonar-cs.ruleset</RulesetPath>
+      <DeactivatedRulesetPath>C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\.sonarqube\conf\Sonar-cs-none.ruleset</DeactivatedRulesetPath>
       <AnalyzerPlugins>
-        <AnalyzerPlugin Key="csharp" Version="9.32.0.97167" StaticResourceName="SonarAnalyzer-9.32.0.97167.zip">
+        <AnalyzerPlugin Key="csharp" Version="10.4.0.108396" StaticResourceName="SonarAnalyzer-csharp-10.4.0.108396.zip">
           <AssemblyPaths>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\Google.Protobuf.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.CFG.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.CSharp.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.ShimLayer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\axell\AppData\Local\Temp\.sonarqube\resources\0\SonarAnalyzer.CSharp.dll</Path>
+            <Path>C:\Users\axell\AppData\Local\Temp\.sonarqube\resources\0\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
-        <AnalyzerPlugin Key="vbnet" Version="9.32.0.97167" StaticResourceName="SonarAnalyzer-9.32.0.97167.zip">
+        <AnalyzerPlugin Key="vbnet" Version="10.4.0.108396" StaticResourceName="SonarAnalyzer-vbnet-10.4.0.108396.zip">
           <AssemblyPaths>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\Google.Protobuf.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.CFG.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.ShimLayer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.VisualBasic.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\axell\AppData\Local\Temp\.sonarqube\resources\1\SonarAnalyzer.VisualBasic.dll</Path>
+            <Path>C:\Users\axell\AppData\Local\Temp\.sonarqube\resources\1\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
       </AnalyzerPlugins>
       <AdditionalFilePaths>
-        <Path>C:\Users\vaoma\source\repos\trofeoCazador\.sonarqube\conf\cs\SonarLint.xml</Path>
+        <Path>C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\.sonarqube\conf\cs\SonarLint.xml</Path>
       </AdditionalFilePaths>
     </AnalyzerSettings>
     <AnalyzerSettings>
       <Language>vbnet</Language>
-      <RulesetPath>C:\Users\vaoma\source\repos\trofeoCazador\.sonarqube\conf\Sonar-vbnet.ruleset</RulesetPath>
-      <DeactivatedRulesetPath>C:\Users\vaoma\source\repos\trofeoCazador\.sonarqube\conf\Sonar-vbnet-none.ruleset</DeactivatedRulesetPath>
+      <RulesetPath>C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\.sonarqube\conf\Sonar-vbnet.ruleset</RulesetPath>
+      <DeactivatedRulesetPath>C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\.sonarqube\conf\Sonar-vbnet-none.ruleset</DeactivatedRulesetPath>
       <AnalyzerPlugins>
-        <AnalyzerPlugin Key="csharp" Version="9.32.0.97167" StaticResourceName="SonarAnalyzer-9.32.0.97167.zip">
+        <AnalyzerPlugin Key="csharp" Version="10.4.0.108396" StaticResourceName="SonarAnalyzer-csharp-10.4.0.108396.zip">
           <AssemblyPaths>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\Google.Protobuf.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.CFG.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.CSharp.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.ShimLayer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\4\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\axell\AppData\Local\Temp\.sonarqube\resources\0\SonarAnalyzer.CSharp.dll</Path>
+            <Path>C:\Users\axell\AppData\Local\Temp\.sonarqube\resources\0\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
-        <AnalyzerPlugin Key="vbnet" Version="9.32.0.97167" StaticResourceName="SonarAnalyzer-9.32.0.97167.zip">
+        <AnalyzerPlugin Key="vbnet" Version="10.4.0.108396" StaticResourceName="SonarAnalyzer-vbnet-10.4.0.108396.zip">
           <AssemblyPaths>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\Google.Protobuf.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.CFG.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.ShimLayer.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.VisualBasic.dll</Path>
-            <Path>C:\Users\vaoma\AppData\Local\Temp\.sonarqube\resources\5\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\axell\AppData\Local\Temp\.sonarqube\resources\1\SonarAnalyzer.VisualBasic.dll</Path>
+            <Path>C:\Users\axell\AppData\Local\Temp\.sonarqube\resources\1\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
       </AnalyzerPlugins>
       <AdditionalFilePaths>
-        <Path>C:\Users\vaoma\source\repos\trofeoCazador\.sonarqube\conf\vbnet\SonarLint.xml</Path>
+        <Path>C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\.sonarqube\conf\vbnet\SonarLint.xml</Path>
       </AdditionalFilePaths>
     </AnalyzerSettings>
   </AnalyzersSettings>

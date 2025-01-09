@@ -1,64 +1,63 @@
-﻿C:\Users\vaoma\source\repos\trofeoCazador\Componentes\SalaEspera\XAMLInvitacionSala.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\Carta.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\Dado.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\Ficha.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\ElementosPartida\Mazo.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\Metodos.cs
-C:\Users\vaoma\source\repos\trofeoCazador\SingletonSesion.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\App.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\ArgumentosDeEventoDeClicDeBotón.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\GestorColores.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\ImagenPerfil.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\JugadorEstadisticas.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\ManejadorExcepciones.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\ManejadorLogger.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\Utilidades.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\UtilidadesDeValidacion.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Utilidades\VentanasEmergentes.cs
-C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\ValidarCodigoRegistro.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\VentanaCorreoJugador.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\XAMLVentanaDeDecision.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\VentanasReutilizables\XAMLVentanaEmergente.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\GestorAmigosLinea.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\GestorSolicitudesAmistad.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\XAMLUsuarioConectadoControl.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\XAMLAmigos.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Amigos\XAMLSolicitudAmistad.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Estadisticas\XAMLEstadisticas.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\InicioSesion\XAMLInicioSesion.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\DialogoSeleccionCarta.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\DialogoSeleccionCartaViewModel.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\RelayCommand.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\PartidaJuego\XAMLTablero.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\EditarContrasenia.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\EditarCorreo.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\VerificarCodigo.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\EditarUsuarioNombre.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Perfil\XAMLPerfil.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\RegistroUsuario\XAMLRegistroUsuario.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Menu\XAMLMenu.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\SalaEspera\XAMLSalaEspera.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\SalaEspera\XAMLUsuario.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Vistas\Victoria\XAMLVictoria.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\App.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\MainWindow.xaml.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Properties\AssemblyInfo.cs
-C:\Users\vaoma\source\repos\trofeoCazador\Properties\Resources.en.resx
-C:\Users\vaoma\source\repos\trofeoCazador\Properties\Resources.es-MX.resx
-C:\Users\vaoma\source\repos\trofeoCazador\Properties\Resources.resx
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\AccesoDatos.Modelo.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\Arrays.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service.wsdl
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\service1.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\ServicioJuego.Excepciones.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\ServicioJuego.xsd
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\trofeoCazador.ServicioDelJuego.Estadisticas.datasource
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\trofeoCazador.ServicioDelJuego.JugadorDataContract.datasource
-C:\Users\vaoma\source\repos\trofeoCazador\packages.config
-C:\Users\vaoma\source\repos\trofeoCazador\Properties\Settings.settings
-C:\Users\vaoma\source\repos\trofeoCazador\Recursos\otoño.webp
-C:\Users\vaoma\source\repos\trofeoCazador\App.config
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\configuration91.svcinfo
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\configuration.svcinfo
-C:\Users\vaoma\source\repos\trofeoCazador\Connected Services\ServicioDelJuego\Reference.svcmap
+﻿C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Componentes\SalaEspera\XAMLInvitacionSala.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Recursos\ElementosPartida\Carta.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Recursos\ElementosPartida\Dado.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Recursos\ElementosPartida\Ficha.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Recursos\Metodos.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\SingletonSesion.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Utilidades\App.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Utilidades\ArgumentosDeEventoDeClicDeBotón.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Utilidades\GestorColores.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Utilidades\ImagenPerfil.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Utilidades\JugadorEstadisticas.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Utilidades\ManejadorExcepciones.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Utilidades\ManejadorLogger.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Utilidades\Utilidades.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Utilidades\UtilidadesDeValidacion.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Utilidades\VentanasEmergentes.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\VentanasReutilizables\ValidarCodigoRegistro.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\VentanasReutilizables\VentanaCorreoJugador.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\VentanasReutilizables\XAMLVentanaDeDecision.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\VentanasReutilizables\XAMLVentanaEmergente.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\Amigos\GestorAmigosLinea.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\Amigos\GestorSolicitudesAmistad.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\Amigos\XAMLUsuarioConectadoControl.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\Amigos\XAMLAmigos.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\Amigos\XAMLSolicitudAmistad.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\Estadisticas\XAMLEstadisticas.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\InicioSesion\XAMLInicioSesion.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\PartidaJuego\DialogoSeleccionCarta.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\PartidaJuego\DialogoSeleccionCartaViewModel.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\PartidaJuego\RelayCommand.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\PartidaJuego\XAMLTablero.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\Perfil\EditarContrasenia.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\Perfil\EditarCorreo.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\Perfil\VerificarCodigo.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\Perfil\EditarUsuarioNombre.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\Perfil\XAMLPerfil.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\RegistroUsuario\XAMLRegistroUsuario.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\Menu\XAMLMenu.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\SalaEspera\XAMLSalaEspera.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\SalaEspera\XAMLUsuario.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Vistas\Victoria\XAMLVictoria.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\App.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\MainWindow.xaml.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Properties\AssemblyInfo.cs
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Properties\Resources.en.resx
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Properties\Resources.es-MX.resx
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Properties\Resources.resx
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Connected Services\ServicioDelJuego\AccesoDatos.Modelo1.xsd
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Connected Services\ServicioDelJuego\Arrays1.xsd
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Connected Services\ServicioDelJuego\service1.wsdl
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Connected Services\ServicioDelJuego\service2.xsd
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Connected Services\ServicioDelJuego\service21.xsd
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Connected Services\ServicioDelJuego\ServicioJuego.Excepciones1.xsd
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Connected Services\ServicioDelJuego\ServicioJuego1.xsd
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Connected Services\ServicioDelJuego\trofeoCazador.ServicioDelJuego.Estadisticas.datasource
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Connected Services\ServicioDelJuego\trofeoCazador.ServicioDelJuego.JugadorDataContract.datasource
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\packages.config
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Properties\Settings.settings
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Recursos\otoño.webp
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\App.config
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Connected Services\ServicioDelJuego\configuration91.svcinfo
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Connected Services\ServicioDelJuego\configuration.svcinfo
+C:\Users\axell\OneDrive\Documentos\HuntersTrophyCliente\Connected Services\ServicioDelJuego\Reference.svcmap
