@@ -205,6 +205,7 @@ namespace trofeoCazador.Vistas.Victoria
                 if (puntaje == puntajeGanador && !ganadorEncontrado)
                 {
                     idGanador = idJugador;
+                    ActualizarVictorias(idGanador);
                     ganadorEncontrado = true;
                 }
             }
@@ -213,25 +214,25 @@ namespace trofeoCazador.Vistas.Victoria
 
         private void BtnSalir_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("la seseion es de "+sesion.JugadorId);
-            Console.WriteLine("El ganador es "+idGanador);
-            Console.WriteLine(sesion.JugadorId == idGanador);
-            if (sesion.JugadorId == idGanador)
-            {
-                if (ActualizarVictorias(idGanador))
-                {
-                    Console.WriteLine("entro actualizar victorias");
+            //Console.WriteLine("la seseion es de "+sesion.JugadorId);
+            //Console.WriteLine("El ganador es "+idGanador);
+            //Console.WriteLine(sesion.JugadorId == idGanador);
+            //if (sesion.JugadorId == idGanador)
+            //{
+            //    if (ActualizarVictorias(idGanador))
+            //    {
+            //        Console.WriteLine("entro actualizar victorias");
                     this.NavigationService.Navigate(new XAMLSalaEspera());
 
-                }
-            }
-            else
-            {
-                this.NavigationService.Navigate(new XAMLSalaEspera());
-            }
-        }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        this.NavigationService.Navigate(new XAMLSalaEspera());
+            //    }
+            //}
 
-
+            }
 
     }
 }
