@@ -124,10 +124,10 @@ namespace trofeoCazador.Vistas.PartidaJuego
             {
                 accion();
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                NavigationService.Navigate(new XAMLInicioSesion());
                 throw;
             }
             catch (TimeoutException ex)
@@ -136,10 +136,15 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 throw;
             }
-            catch (FaultException ex)
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                NavigationService.Navigate(new XAMLSalaEspera());
+            }
+            catch (FaultException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                NavigationService.Navigate(new XAMLInicioSesion());
                 throw;
             }
             catch (CommunicationException ex)
@@ -151,7 +156,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
             catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 throw;
             }
         }
@@ -261,42 +266,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             GestionCuentaServicioClient gestorAmigos = new GestionCuentaServicioClient();
             int idJugador = -1;
-
-            try
-            {
-                idJugador = gestorAmigos.ObtenerIdJugadorPorNombreUsuario(nombreUsuario);
-            }
-            catch (EndpointNotFoundException ex)
-            {
-                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (TimeoutException ex)
-            {
-                VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLSalaEspera());
-            }
-            catch (FaultException)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLSalaEspera());
-            }
-            catch (CommunicationException ex)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
-            {
-                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-
+            EjecutarConManejoDeExcepciones(() => idJugador = gestorAmigos.ObtenerIdJugadorPorNombreUsuario(nombreUsuario));
             return idJugador;
         }
 
@@ -318,9 +288,10 @@ namespace trofeoCazador.Vistas.PartidaJuego
           
             private void BtnClicIniciarJuego(object sender, RoutedEventArgs e)
             {
-            EjecutarConManejoDeExcepciones(() => cliente.CrearPartida(listaDeJugadores.ToArray(), idPartida));
-            EjecutarConManejoDeExcepciones(() => cliente.RepartirCartas(idPartida));
-            EjecutarConManejoDeExcepciones(() => cliente.EmpezarTurno(idPartida));
+                btnRepartirCartas.Visibility = Visibility.Collapsed;
+                EjecutarConManejoDeExcepciones(() => cliente.CrearPartida(listaDeJugadores.ToArray(), idPartida));
+                EjecutarConManejoDeExcepciones(() => cliente.RepartirCartas(idPartida));
+                EjecutarConManejoDeExcepciones(() => cliente.EmpezarTurno(idPartida));
             }
 
 
