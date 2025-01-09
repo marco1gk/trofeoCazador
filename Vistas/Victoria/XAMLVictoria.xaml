@@ -13,7 +13,6 @@
         <Grid>
             <Grid Margin="374,140,374,140">
                 <Label x:Name="lbVictoria" Content="{x:Static p:Resources.lbVictoria}" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Titan One" Foreground="White" FontSize="150" Visibility="Collapsed"/>
-                <Label x:Name="lbDerrota" Content="{x:Static p:Resources.lbDerrota}" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Titan One" Foreground="White" FontSize="150" Visibility="Visible"/>
                 <TextBlock x:Name="lbPrimerLugar" Visibility="Collapsed" Text="1°" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Titan One" Foreground="#FF9D0A" FontSize="150" Margin="0,230,0,0"/>
                 <TextBlock x:Name="lbSegundoLugar" Visibility="Collapsed" Text="2°" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Titan One" Foreground="#E3E4E5" FontSize="150" Margin="0,230,0,0"/>
                 <TextBlock x:Name="lbTercerLugar" Visibility="Collapsed" Text="3°" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Titan One" Foreground="#CD5715" FontSize="150" Margin="0,230,0,0"/>

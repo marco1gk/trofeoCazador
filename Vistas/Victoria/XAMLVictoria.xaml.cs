@@ -160,13 +160,11 @@ namespace trofeoCazador.Vistas.Victoria
                     {
                         lbnombreUsuario.Content = sesion.NombreUsuario;
                         lbVictoria.Visibility = Visibility.Visible; 
-                        lbDerrota.Visibility = Visibility.Collapsed; 
                     }
                     else if (jugador.Key.NombreUsuario == invitado)
                     {
                         lbnombreUsuario.Content = invitado;
                         lbVictoria.Visibility = Visibility.Visible; 
-                        lbDerrota.Visibility = Visibility.Collapsed; 
                     }
                 }
                 else
@@ -174,20 +172,17 @@ namespace trofeoCazador.Vistas.Victoria
                     if (jugador.Key.NombreUsuario == sesion.NombreUsuario)
                     {
                         lbnombreUsuario.Content = sesion.NombreUsuario;
-                        lbDerrota.Visibility = Visibility.Visible;
                         lbVictoria.Visibility = Visibility.Collapsed; 
                     }
                     else if (jugador.Key.NombreUsuario == invitado)
                     {
                         lbnombreUsuario.Content = invitado;
-                        lbDerrota.Visibility = Visibility.Visible;
                         lbVictoria.Visibility = Visibility.Collapsed;
                     }
                     else
                     {
                        
                         lbnombreUsuario.Content = jugador.Key.NombreUsuario;
-                        lbDerrota.Visibility = Visibility.Visible; 
                         lbVictoria.Visibility = Visibility.Collapsed; 
                     }
                 }
@@ -211,7 +206,6 @@ namespace trofeoCazador.Vistas.Victoria
                 if (puntaje == puntajeGanador && !ganadorEncontrado)
                 {
                     idGanador = idJugador;
-                    ActualizarVictorias(idGanador);
                     ganadorEncontrado = true;
                 }
             }
@@ -220,6 +214,7 @@ namespace trofeoCazador.Vistas.Victoria
 
         private void BtnSalir_Click(object sender, RoutedEventArgs e)
         {
+            ActualizarVictorias(idGanador);
             this.NavigationService.Navigate(new XAMLSalaEspera());
         }
     }
