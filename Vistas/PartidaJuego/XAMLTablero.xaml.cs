@@ -124,22 +124,24 @@ namespace trofeoCazador.Vistas.PartidaJuego
             {
                 accion();
             }
-            catch (EndpointNotFoundException)
+            catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
                 NavigationService.Navigate(new XAMLInicioSesion());
+                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 throw;
             }
             catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                NavigationService.Navigate(new XAMLInicioSesion());
                 ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 throw;
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
                 VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLSalaEspera());
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (FaultException)
             {
@@ -176,9 +178,9 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         public void NotificarJugadorDesconectado(string nombreUsuario)
         {
-            MessageBox.Show("se salio el cabron de " + nombreUsuario);
+            string mensaje = Properties.Resources.lbAbandonarPartida + " " + nombreUsuario;
+            VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, mensaje);
             listaDeJugadores = listaDeJugadores.Where(j => j.NombreUsuario != nombreUsuario).ToList();
-
             MostrarJugadores();
 
         }
