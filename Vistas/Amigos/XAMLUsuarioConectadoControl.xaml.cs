@@ -20,7 +20,7 @@ namespace trofeoCazador.Vistas.Amigos
 {
     public partial class XAMLUsuarioConectadoControl : UserControl
     {
-        private const string BTN_BORRAR_AMIGO = "DeleteFriend";
+        private const string BTN_BORRAR_AMIGO = "EliminarAmigo";
         private readonly string nombreUsuario;
 
         public event EventHandler<ArgumentosDeEventoDeClicDeBotón> BotonUsado;

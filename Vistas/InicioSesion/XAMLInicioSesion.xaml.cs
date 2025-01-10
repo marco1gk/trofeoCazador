@@ -155,7 +155,6 @@ namespace trofeoCazador.Vistas.InicioSesion
         }
 
 
-        //Se decidio que este metodo regrese null debido a que solo tiene un sentido, si es nulo es porque no existe
         private static JugadorDataContract AutenticarUsuario(string usuario, string contraseña)
         {
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();

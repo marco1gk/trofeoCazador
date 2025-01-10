@@ -43,19 +43,8 @@ using trofeoCazador.Vistas.Menu;
         }
         public void NotificarIniciarPartida(JugadorPartida[] jugadoresPartida)
         {
-
-            Console.WriteLine("NotificarIniciarPartida"+numeroJugadoresSalaEspera);
-            Console.WriteLine("Jugadores recibidos en el cliente:");
-            foreach (var jugador in jugadoresPartida)
-            {
-                Console.WriteLine($"Jugador: {jugador.NombreUsuario}");
-                Console.WriteLine($"Foto de perfil: {jugador.NumeroFotoPerfil}");
-            }
-
             Application.Current.Dispatcher.Invoke(() =>
             {
-                Console.WriteLine("Comprobando NavigationService...");
-
                 if (this.NavigationService == null)
                 {
                     Console.WriteLine("NavigationService es null, intentando obtener el Frame principal.");
@@ -306,21 +295,6 @@ using trofeoCazador.Vistas.Menu;
                 }
             }
 
-            private void VerificarYReiniciarCliente()
-            {
-                if (cliente == null || cliente.State == CommunicationState.Faulted)
-                {
-                    try
-                    {
-                        ReiniciarCliente();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Error al reiniciar el cliente: {ex.Message}",
-                                        "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-            }
 
             private void ReiniciarCliente()
             {
@@ -666,6 +640,23 @@ using trofeoCazador.Vistas.Menu;
             gridChat.Visibility = Visibility.Visible;
             btnSalir.Visibility = Visibility.Visible;
             btnIniciarPartida.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void VerificarYReiniciarCliente()
+        {
+            if (cliente == null || cliente.State == CommunicationState.Faulted)
+            {
+                try
+                {
+                    ReiniciarCliente();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al reiniciar el cliente: {ex.Message}",
+                                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
 
@@ -882,8 +873,6 @@ using trofeoCazador.Vistas.Menu;
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
             }
-
-
         }
 
         private void BtnCrearVentanaInvitacion_Click(object sender, RoutedEventArgs e)

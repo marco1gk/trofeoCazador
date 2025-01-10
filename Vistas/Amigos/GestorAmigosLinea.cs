@@ -147,7 +147,7 @@ namespace trofeoCazador.Vistas.Amigos
 
         private void ElementoUsuarioEnLínea_BotónEliminarAmigoClickeado(object sender, ArgumentosDeEventoDeClicDeBotón e)
         {
-            string btnEliminarAmigo = "DeleteFriend";
+            string btnEliminarAmigo = "EliminarAmigo";
 
             if (e.NombreBoton.Equals(btnEliminarAmigo))
             {

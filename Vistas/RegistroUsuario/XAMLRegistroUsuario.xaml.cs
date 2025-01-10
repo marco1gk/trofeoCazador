@@ -82,7 +82,6 @@ namespace trofeoCazador.Vistas.RegistroUsuario
             VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbTituloErroresValidacion);
         }
 
-        //Se decidio que este metodo regrese null debido a que solo tiene un sentido, si es nulo es porque no existe
         private string ProcesarCuenta()
         {
             try

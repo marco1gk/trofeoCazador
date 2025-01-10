@@ -19,6 +19,7 @@ using trofeoCazador.Vistas.Victoria;
 using trofeoCazador.Utilidades;
 using trofeoCazador.Vistas.InicioSesion;
 using trofeoCazador.Vistas.SalaEspera;
+using System.Diagnostics;
 
 namespace trofeoCazador.Vistas.PartidaJuego
 {
@@ -328,32 +329,61 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             try
             {
-                btnRepartirCartas.Visibility = Visibility.Collapsed;
                 cliente.CrearPartida(listaDeJugadores.ToArray(), idPartida);
                 cliente.RepartirCartas(idPartida);
                 cliente.EmpezarTurno(idPartida);
             }
-            catch (EndpointNotFoundException)
+            catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                NavigationService.Navigate(new XAMLInicioSesion());
+                Debug.WriteLine($"Error de conexión: {ex.Message}");
+                CerrarSesion();
             }
-            catch (TimeoutException)
+            catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                NavigationService.Navigate(new XAMLInicioSesion());
+                Debug.WriteLine($"Tiempo de espera excedido: {ex.Message}");
+                CerrarSesion();
             }
-            catch (CommunicationException)
+            catch (CommunicationObjectFaultedException ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
+                Debug.WriteLine($"El cliente ha fallado: {ex.Message}");
+                CerrarSesion();
             }
-            catch (Exception)
+            catch (CommunicationException ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                Debug.WriteLine($"Error de comunicación: {ex.Message}");
+                CerrarSesion();
+            }
+            catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                NavigationService.Navigate(new XAMLInicioSesion());
+                Debug.WriteLine($"Error inesperado: {ex.Message}");
+                CerrarSesion();
             }
         }
+
+        private void CerrarSesion()
+        {
+            try
+            {
+                if (cliente != null)
+                {
+                    cliente.Abort();
+                    cliente = null;
+                }
+                
+                NavigationService.Navigate(new Uri("/trofeoCazador;component/Vistas/InicioSesion/XAMLInicioSesion.xaml", UriKind.Relative));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error al cerrar la sesión: {ex.Message}");
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+            }
+        }
+
 
 
         private Thickness margenInicialCarta = new Thickness();
@@ -421,27 +451,38 @@ namespace trofeoCazador.Vistas.PartidaJuego
             {
                 cliente.LanzarDado(idPartida, jugadorActual.NombreUsuario);
             }
-            catch (EndpointNotFoundException)
+            catch (EndpointNotFoundException ex)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                NavigationService.Navigate(new XAMLInicioSesion());
+                Debug.WriteLine($"Error de conexión: {ex.Message}");
+                CerrarSesion();
             }
-            catch (TimeoutException)
+            catch (TimeoutException ex)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                NavigationService.Navigate(new XAMLInicioSesion());
+                Debug.WriteLine($"Tiempo de espera excedido: {ex.Message}");
+                CerrarSesion();
             }
-            catch (CommunicationException)
+            catch (CommunicationObjectFaultedException ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
+                Debug.WriteLine($"El cliente ha fallado: {ex.Message}");
+                CerrarSesion();
             }
-            catch (Exception)
+            catch (CommunicationException ex)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                Debug.WriteLine($"Error de comunicación: {ex.Message}");
+                CerrarSesion();
+            }
+            catch (Exception ex)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                NavigationService.Navigate(new XAMLInicioSesion());
+                Debug.WriteLine($"Error inesperado: {ex.Message}");
+                CerrarSesion();
             }
         }
+    
         private static string ObtenerRutaImagenPerfil(int numeroFotoPerfil)
         {
             switch (numeroFotoPerfil)
@@ -903,15 +944,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     
                 }
             }
-        }
-
-
-        private JugadorPartida ObtenerJugadorDesdeArea(StackPanel area)
-        {
-            if (area == AreaJugador2) return listaDeJugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador2.Text);
-            if (area == AreaJugador3) return listaDeJugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador3.Text);
-            if (area == AreaJugador4) return listaDeJugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador4.Text);
-            return null;
         }
 
         private async Task AccionFichaRevelarCarta()
@@ -1384,14 +1416,15 @@ namespace trofeoCazador.Vistas.PartidaJuego
         public void NotificarTurnoIniciado(string jugadorTurnoActual)
         {
             this.jugadorTurnoActual = jugadorTurnoActual;
-            modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
+            //modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
+            modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
             jugadorDecidioParar = false;
             if (jugadorActual.NombreUsuario == jugadorTurnoActual)
             {
                 dado.DadoLanzado -= ManejarResultadoDado;
                 dado.DadoLanzado += ManejarResultadoDado;
                 DadoImagen.IsEnabled = true;
-                modoSeleccionActual = ModoSeleccionCarta.AccionCartasEnTurno;
+                //modoSeleccionActual = ModoSeleccionCarta.AccionCartasEnTurno;
             }
         }
         public void NotificarTurnoTerminado(string nombreUsuario)
@@ -1429,10 +1462,11 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             this.idPartida = idPartida;
             DadoImagen.IsEnabled = false;
-          //  ZonaMazoCartas.IsEnabled = false;
+            //  ZonaMazoCartas.IsEnabled = false;
             FichasManoItemsControl.IsEnabled = false;
             CargarFichas();
-            modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
+            //modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
+            modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
         }
 
         public void NotificarResultadoDado(string nombreJugador, int resultadoDado)
@@ -1804,8 +1838,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
             }
         }
-
-
         private static async Task<bool> DecisionGuardarCartaEnEscondite()
         {
             var ventanaDeDecision = VentanasEmergentes.CrearVentanaDeDecision("Decision guardar carta", "¿Quieres guardar una carta en el escondite que sea del tipo que ha sido revelada?");
@@ -1828,7 +1860,13 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
             }
         }
-
+        private JugadorPartida ObtenerJugadorDesdeArea(StackPanel area)
+        {
+            if (area == AreaJugador2) return listaDeJugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador2.Text);
+            if (area == AreaJugador3) return listaDeJugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador3.Text);
+            if (area == AreaJugador4) return listaDeJugadores.FirstOrDefault(j => j.NombreUsuario == NombreJugador4.Text);
+            return null;
+        }
         private async Task UsarCartaSalvacionTurno(CartaCliente cartaSeleccionada)
         {
             switch (cartaSeleccionada.Tipo)
