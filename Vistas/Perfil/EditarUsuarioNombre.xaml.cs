@@ -24,19 +24,42 @@ namespace trofeoCazador.Vistas.Perfil
 {
     public partial class EditarUsuarioNombre : Page
     {
-        private JugadorDataContract Jugador;
+        private JugadorDataContract jugador;
         public EditarUsuarioNombre()
         {
             InitializeComponent();
-            Jugador = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
+            try
+            {
+                jugador = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
             CargarUsuarioJugador();
         }
 
         private void CargarUsuarioJugador()
         {
-            if (Jugador != null)
+            if (jugador != null)
             {
-                NombreUsuarioActualLabel.Content = Jugador.NombreUsuario;
+                NombreUsuarioActualLabel.Content = jugador.NombreUsuario;
             }
         }
 
@@ -106,7 +129,7 @@ namespace trofeoCazador.Vistas.Perfil
                 return false;
             }
 
-            if (!Metodos.ValidarEntradaIgual(Jugador.NombreUsuario, nombreUsuario))
+            if (!Metodos.ValidarEntradaIgual(jugador.NombreUsuario, nombreUsuario))
             {
                 VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbNombreUsuarioRepetido);
                 return false;

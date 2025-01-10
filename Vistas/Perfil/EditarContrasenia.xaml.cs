@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,7 +26,32 @@ namespace trofeoCazador.Vistas.Perfil
         public EditarContrasenia(string correo)
         {
             InitializeComponent();
-            jugador = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
+
+            try
+            {
+                jugador = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+
             this.correo = correo;
             if(correo != null)
             {
@@ -41,17 +67,35 @@ namespace trofeoCazador.Vistas.Perfil
 
         private void EditarContraseña()
         {
-            GestionCuentaServicioClient proxy = Metodos.EstablecerConexionServidor();
-            string contraseniaNueva = ContrasenaNuevaTextBox.Password.Trim();
-
-            if (correo != null)
+            try
             {
-                EditarContraseñaConCorreo(proxy, contraseniaNueva);
+                GestionCuentaServicioClient proxy = Metodos.EstablecerConexionServidor();
+                string contraseniaNueva = ContrasenaNuevaTextBox.Password.Trim();
+                if (correo != null)
+                {
+                    EditarContraseñaConCorreo(proxy, contraseniaNueva);
+                }
+                else
+                {
+                    string contraseniaIngresada = ContraseniaActualTextBox.Password.Trim();
+                    EditarContraseñaSinCorreo(proxy, contraseniaIngresada, contraseniaNueva);
+                }
             }
-            else
+            catch (EndpointNotFoundException)
             {
-                string contraseniaIngresada = ContraseniaActualTextBox.Password.Trim();
-                EditarContraseñaSinCorreo(proxy, contraseniaIngresada, contraseniaNueva);
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
         }
 
@@ -80,17 +124,40 @@ namespace trofeoCazador.Vistas.Perfil
         {
             if (EsEntradaValida(contraseniaIngresada, contraseniaNueva))
             {
-                if (!proxy.VerificarContrasena(contraseniaIngresada, jugador.Correo))
+                try
                 {
-                    MostrarError(Properties.Resources.lbContraseñaNoCoincide);
+                    if (!proxy.VerificarContrasena(contraseniaIngresada, jugador.Correo))
+                    {
+                        MostrarError(Properties.Resources.lbContraseñaNoCoincide);
+                    }
+                    else if (UtilidadesDeValidacion.EsContrasenaValida(contraseniaNueva))
+                    {
+                        ProcesarEdicionSinCorreo(proxy, contraseniaNueva);
+                    }
+                    else
+                    {
+                        MostrarError(Properties.Resources.lbContraseñaSegura);
+                    }
                 }
-                else if (UtilidadesDeValidacion.EsContrasenaValida(contraseniaNueva))
+                catch (EndpointNotFoundException)
                 {
-                    ProcesarEdicionSinCorreo(proxy, contraseniaNueva);
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
                 }
-                else
+                catch (TimeoutException)
                 {
-                    MostrarError(Properties.Resources.lbContraseñaSegura);
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                }
+                catch (FaultException<HuntersTrophyExcepcion>)
+                {
+                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+                }
+                catch (FaultException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                }
+                catch (CommunicationException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
                 }
             }
             else
@@ -103,7 +170,7 @@ namespace trofeoCazador.Vistas.Perfil
         private static bool EsEntradaValida(string contraseniaNueva)
         {
             if (Metodos.ValidarEntradaVacia(contraseniaNueva))
-            {
+            {   
                 MostrarError(Properties.Resources.lbLlenarCamposObligatorios);
                 return false;
             }
@@ -125,31 +192,73 @@ namespace trofeoCazador.Vistas.Perfil
             VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, mensaje);
         }
 
-        private bool ProcesarEdicionConCorreo(GestionCuentaServicioClient proxy, string contraseniaNueva)
+        private void ProcesarEdicionConCorreo(GestionCuentaServicioClient proxy, string contraseniaNueva)
         {
-            if (proxy.EditarContraseña(correo, contraseniaNueva))
+            try
             {
-                MostrarExito(Properties.Resources.lbContraseñaRestablecida);
-                return true;
+                if (proxy.EditarContraseña(correo, contraseniaNueva))
+                {
+                    MostrarExito(Properties.Resources.lbContraseñaRestablecida);
+                }
+                else
+                {
+                    MostrarError(Properties.Resources.lbErrorActualizarContraseña);
+                }
             }
-            else
+            catch (EndpointNotFoundException)
             {
-                MostrarError(Properties.Resources.lbErrorActualizarContraseña);
-                return false;
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
         }
 
-        private bool ProcesarEdicionSinCorreo(GestionCuentaServicioClient proxy, string contraseniaNueva)
+        private void ProcesarEdicionSinCorreo(GestionCuentaServicioClient proxy, string contraseniaNueva)
         {
-            if (proxy.EditarContraseña(jugador.Correo, contraseniaNueva))
+            try
             {
-                MostrarExito(Properties.Resources.lbContraseñaActualizada);
-                return true;
+                if (proxy.EditarContraseña(jugador.Correo, contraseniaNueva))
+                {
+                    MostrarExito(Properties.Resources.lbContraseñaActualizada);
+                }
+                else
+                {
+                    MostrarError(Properties.Resources.lbProblemaActualizandoContraseña);
+                }
             }
-            else
+            catch (EndpointNotFoundException)
             {
-                MostrarError(Properties.Resources.lbProblemaActualizandoContraseña);
-                return false;
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
         }
 

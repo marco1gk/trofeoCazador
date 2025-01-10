@@ -28,7 +28,31 @@ namespace trofeoCazador.Vistas.Perfil
         public XAMLEditarCorreo()
         {
             InitializeComponent();
-            jugador = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
+
+            try
+            {
+                jugador = Metodos.ObtenerDatosJugador(Metodos.ObtenerIdJugador());
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (FaultException<HuntersTrophyExcepcion>)
+            {
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
+            }
+            catch (FaultException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
             CargarCorreoActual();
         }
         private void CargarCorreoActual()
