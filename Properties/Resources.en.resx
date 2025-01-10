@@ -655,13 +655,13 @@
     <value>The mail is the same that you used</value>
   </data>
   <data name="lbCorreoExceso" xml:space="preserve">
-    <value>The new mail can use mora than 50 simbols</value>
+    <value>The new mail cant use mora than 50 simbols</value>
   </data>
   <data name="lbIngresarUsuario" xml:space="preserve">
     <value>Please write a new username</value>
   </data>
   <data name="lbCaracteresNombreUsuario" xml:space="preserve">
-    <value>The username can exceed 50 characters</value>
+    <value>The username cant exceed 50 characters</value>
   </data>
   <data name="lbNombreUsuarioRepetido" xml:space="preserve">
     <value>The new username is the same that the actual</value>
@@ -695,5 +695,14 @@
   </data>
   <data name="lbAbandonarPartida" xml:space="preserve">
     <value>A player left the match</value>
+  </data>
+  <data name="lbMensajeLargo" xml:space="preserve">
+    <value>The message is too long</value>
+  </data>
+  <data name="lbMensaje50Caracteres" xml:space="preserve">
+    <value>The message can´t have more than 50 characters</value>
+  </data>
+  <data name="lbErrorVictorias" xml:space="preserve">
+    <value>There was a problem, try again</value>
   </data>
 </root>

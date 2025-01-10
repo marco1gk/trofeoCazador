@@ -37,6 +37,7 @@ namespace trofeoCazador.Vistas.Victoria
             this.puntajeGanador = puntajeGanador;
             MostrarResultados();
             PosicionesJuego();
+
         }
         private bool ActualizarVictorias(int idJugador)
         {
@@ -60,7 +61,6 @@ namespace trofeoCazador.Vistas.Victoria
                 }
                 catch (FaultException<HuntersTrophyExcepcion>)
                 {
-                    Console.WriteLine("hay un error.");
                     VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
                     return false;
                 }
@@ -190,49 +190,52 @@ namespace trofeoCazador.Vistas.Victoria
 
         private void PosicionesJuego()
         {
+            Console.WriteLine($"Puntaje ganador esperado: {puntajeGanador}");
+
+            foreach (var jugador in marcador)
+            {
+                Console.WriteLine($"Jugador: {jugador.Key.NombreUsuario}, Puntaje: {jugador.Value}");
+            }
+
             var marcadorOrdenado = marcador
                 .OrderByDescending(kv => kv.Value)
                 .ToList();
 
-            bool ganadorEncontrado = false; 
+            var jugadorGanador = marcadorOrdenado.FirstOrDefault(j => j.Value == puntajeGanador);
 
-            for (int i = 0; i < marcadorOrdenado.Count; i++)
+            if (jugadorGanador.Key != null)
             {
-                var jugador = marcadorOrdenado[i].Key.NombreUsuario;
-                var idJugador = marcadorOrdenado[i].Key.JugadorId;
-                var puntaje = marcadorOrdenado[i].Value;
-
-                if (puntaje == puntajeGanador && !ganadorEncontrado)
-                {
-                    idGanador = idJugador;
-                    ActualizarVictorias(idGanador);
-                    ganadorEncontrado = true;
-                }
+                idGanador = jugadorGanador.Key.JugadorId;
+                Console.WriteLine($"ID del ganador encontrado: {idGanador}");
+            }
+            else
+            {
+                Console.WriteLine("No se encontró un jugador con el puntaje ganador.");
             }
         }
-        
+
+
 
         private void BtnSalir_Click(object sender, RoutedEventArgs e)
         {
-            //Console.WriteLine("la seseion es de "+sesion.JugadorId);
-            //Console.WriteLine("El ganador es "+idGanador);
-            //Console.WriteLine(sesion.JugadorId == idGanador);
-            //if (sesion.JugadorId == idGanador)
-            //{
-            //    if (ActualizarVictorias(idGanador))
-            //    {
-            //        Console.WriteLine("entro actualizar victorias");
-                    this.NavigationService.Navigate(new XAMLSalaEspera());
+            if (idGanador > 0 && sesion.JugadorId == idGanador)
+            {
+                bool actualizacionExitosa = ActualizarVictorias(idGanador);
 
-            //        }
-            //    }
-            //    else
-            //    {
-            //        this.NavigationService.Navigate(new XAMLSalaEspera());
-            //    }
-            //}
-
+                if (!actualizacionExitosa)
+                {
+                    VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico,Properties.Resources.lbErrorVictorias);
+                    return;
+                }
             }
 
+            this.NavigationService.Navigate(new XAMLSalaEspera());
+        }
+
+
+
+
     }
+
 }
+

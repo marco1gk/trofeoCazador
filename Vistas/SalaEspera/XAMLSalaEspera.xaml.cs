@@ -103,7 +103,12 @@ using trofeoCazador.Vistas.Menu;
                 VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbMensajeFaltante, Properties.Resources.lbMensajeFaltanteDescripcion);
                 return;
             }
-
+            
+            if (mensaje.Length > 50)
+            {
+                VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbMensajeLargo, Properties.Resources.lbMensaje50Caracteres);
+                return;
+            }
             try
             {
                 SetupClient();

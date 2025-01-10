@@ -230,7 +230,12 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 var jugadores = puntajes.Keys
                     .ToDictionary(
                         nombreUsuario => nombreUsuario,
-                        nombreUsuario => ObtenerJugadorId(nombreUsuario)
+                        nombreUsuario =>
+                        {
+                            var jugadorId = ObtenerJugadorId(nombreUsuario);
+                            Console.WriteLine($"Jugador: {nombreUsuario}, ID: {jugadorId}");
+                            return jugadorId;
+                        }
                     );
 
                 var scoreboard = jugadores
@@ -256,6 +261,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 Console.WriteLine($"Error inesperado: {ex.Message}");
             }
         }
+
         private int ObtenerJugadorId(string nombreUsuario)
         {
             GestionCuentaServicioClient gestorAmigos = new GestionCuentaServicioClient();
@@ -1415,7 +1421,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             this.idPartida = idPartida;
             DadoImagen.IsEnabled = false;
-            ZonaMazoCartas.IsEnabled = false;
+          //  ZonaMazoCartas.IsEnabled = false;
             FichasManoItemsControl.IsEnabled = false;
             CargarFichas();
             modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;

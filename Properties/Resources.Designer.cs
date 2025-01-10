@@ -817,6 +817,15 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Hubo un problema al actualizar las victorias. Intenta nuevamente.
+        /// </summary>
+        public static string lbErrorVictorias {
+            get {
+                return ResourceManager.GetString("lbErrorVictorias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Gestor amigos.
         /// </summary>
         public static string lbGestorAmigos {
@@ -961,6 +970,15 @@ namespace trofeoCazador.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El mensaje no puede exceder los 50 caracteres..
+        /// </summary>
+        public static string lbMensaje50Caracteres {
+            get {
+                return ResourceManager.GetString("lbMensaje50Caracteres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Mensaje.
         /// </summary>
         public static string lbMensajeFaltante {
@@ -975,6 +993,15 @@ namespace trofeoCazador.Properties {
         public static string lbMensajeFaltanteDescripcion {
             get {
                 return ResourceManager.GetString("lbMensajeFaltanteDescripcion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Mensaje demasiado largo.
+        /// </summary>
+        public static string lbMensajeLargo {
+            get {
+                return ResourceManager.GetString("lbMensajeLargo", resourceCulture);
             }
         }
         

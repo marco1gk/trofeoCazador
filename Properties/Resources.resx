@@ -696,4 +696,13 @@
   <data name="lbAbandonarPartida" xml:space="preserve">
     <value>Salió de la partida el jugador </value>
   </data>
+  <data name="lbMensajeLargo" xml:space="preserve">
+    <value>Mensaje demasiado largo</value>
+  </data>
+  <data name="lbMensaje50Caracteres" xml:space="preserve">
+    <value>El mensaje no puede exceder los 50 caracteres.</value>
+  </data>
+  <data name="lbErrorVictorias" xml:space="preserve">
+    <value>Hubo un problema al actualizar las victorias. Intenta nuevamente</value>
+  </data>
 </root>

@@ -166,27 +166,30 @@ namespace trofeoCazador.Vistas.Amigos
             }
             catch (EndpointNotFoundException)
             {
+                Console.WriteLine("entra al primero");
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
             }
             catch (TimeoutException)
             {
+                Console.WriteLine("entra al segundo");
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-            }
 
-            catch (FaultException)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
+                Console.WriteLine("entra al tercero");
+                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
             }
             catch (CommunicationException)
             {
+
+                Console.WriteLine("entra al cuarto");
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
             }
             catch (Exception)
             {
+
+                Console.WriteLine("entra al quinto");
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
             }
         }
