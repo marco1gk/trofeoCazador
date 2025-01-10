@@ -336,18 +336,22 @@ namespace trofeoCazador.Vistas.PartidaJuego
             catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
         }
 
@@ -420,18 +424,22 @@ namespace trofeoCazador.Vistas.PartidaJuego
             catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
             catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                NavigationService.Navigate(new XAMLInicioSesion());
             }
         }
         private static string ObtenerRutaImagenPerfil(int numeroFotoPerfil)
