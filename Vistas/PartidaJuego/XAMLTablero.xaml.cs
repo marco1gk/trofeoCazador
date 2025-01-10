@@ -45,10 +45,10 @@ namespace trofeoCazador.Vistas.PartidaJuego
         private int cartasTomadasMazo = 0;
         private int cartasGuardadasEscondite = 0;
         private ModoSeleccionCarta[] modosSeleccionCarta = Enum.GetValues(typeof(ModoSeleccionCarta)).Cast<ModoSeleccionCarta>().ToArray();
-        private string[] nombresJugadoresModoSeleccion;
         private bool cartaTomada = false;
         private TaskCompletionSource<bool> jugadorGuardoCartaEnEscondite;
         private string tipoCartaRevelada;
+        private const string CARTA_NO_DISPONIBLE = "Carta no disponible";
 
         private enum ModoSeleccionCarta
         {
@@ -61,146 +61,112 @@ namespace trofeoCazador.Vistas.PartidaJuego
         }
 
         private ModoSeleccionCarta modoSeleccionActual;
-        private void ImagenDado_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                cliente.LanzarDado(idPartida, jugadorActual.NombreUsuario);
-            }
-            catch (EndpointNotFoundException ex)
-            {
-                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                NavigationService.Navigate(new XAMLInicioSesion());
-
-            }
-            catch (TimeoutException ex)
-            {
-                VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLSalaEspera());
-            }
-
-            catch (FaultException)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
-            {
-                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-
-            }
-        }
         public XAMLTablero(List<JugadorPartida> jugadores, string idPartida)
         {
-            if (!Thread.CurrentThread.IsBackground && Thread.CurrentThread.GetApartmentState() != ApartmentState.STA)
-            {
-                throw new InvalidOperationException("El constructor XAMLTablero debe ejecutarse en un subproceso STA.");
-            }
+            ValidarSubproceso();
             InitializeComponent();
             SetupClient();
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                this.listaDeJugadores = jugadores;
-                CargarFichasEstaticas();
-                dado = new Dado(DadoImagen);
-                this.idPartida = idPartida;
-
-                if (jugadorActual.EsInvitado)
-                {
-
-
-                    JugadorPartida invitado = new JugadorPartida
-                    {
-                        NombreUsuario = jugadorActual.NombreUsuario,
-                        EsInvitado = true
-                    };
-                    try
-                    {
-                        cliente.RegistrarJugadorInvitado(invitado);
-                    }
-                    catch (EndpointNotFoundException ex)
-                    {
-                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (TimeoutException ex)
-                    {
-                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (FaultException ex)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (CommunicationException ex)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (Exception ex)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-
-                }
-                else
-                {
-                    try
-                    {
-                        cliente.RegistrarJugador(jugadorActual.NombreUsuario);
-                    }
-                    catch (EndpointNotFoundException ex)
-                    {
-                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (TimeoutException ex)
-                    {
-                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (FaultException ex)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (CommunicationException ex)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (Exception ex)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                }
-
-                MostrarJugadores();
-
-                FichasItemsControl.ItemsSource = Fichas;
-                FichasManoItemsControl.ItemsSource = FichasEnMano;
-                ZonaDescarte.ItemsSource = CartasDescarte;
-                CartasManoItemsControl.ItemsSource = CartasEnMano;
-                ZonaMazoCartas.ItemsSource = CartasEnMazo;
-                CartasEsconditeItemsControl.ItemsSource = CartasEnEscondite;
+                InicializarPropiedades(jugadores, idPartida);
+                ManejarRegistroJugador();
+                ConfigurarInterfaz();
             });
         }
+
+        private static void ValidarSubproceso()
+        {
+            if (!Thread.CurrentThread.IsBackground && Thread.CurrentThread.GetApartmentState() != ApartmentState.STA)
+            {
+                throw new InvalidOperationException("El constructor XAMLTablero debe ejecutarse en un subproceso STA.");
+            }
+        }
+
+        private void InicializarPropiedades(List<JugadorPartida> jugadores, string idPartida)
+        {
+            this.listaDeJugadores = jugadores;
+            CargarFichasEstaticas();
+            dado = new Dado(DadoImagen);
+            this.idPartida = idPartida;
+        }
+
+        private void ManejarRegistroJugador()
+        {
+            if (jugadorActual.EsInvitado)
+            {
+                RegistrarJugadorInvitado();
+            }
+            else
+            {
+                RegistrarJugadorNormal();
+            }
+        }
+
+        private void RegistrarJugadorInvitado()
+        {
+            JugadorPartida invitado = new JugadorPartida
+            {
+                NombreUsuario = jugadorActual.NombreUsuario,
+                EsInvitado = true
+            };
+            try
+            {
+                cliente.RegistrarJugadorInvitado(invitado);
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (Exception)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+            }
+        }
+
+        private void RegistrarJugadorNormal()
+        {
+            try
+            {
+                cliente.RegistrarJugador(jugadorActual.NombreUsuario);
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (Exception)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+            }
+        }
+
+        private void ConfigurarInterfaz()
+        {
+            MostrarJugadores();
+            FichasItemsControl.ItemsSource = Fichas;
+            FichasManoItemsControl.ItemsSource = FichasEnMano;
+            ZonaDescarte.ItemsSource = CartasDescarte;
+            CartasManoItemsControl.ItemsSource = CartasEnMano;
+            ZonaMazoCartas.ItemsSource = CartasEnMazo;
+            CartasEsconditeItemsControl.ItemsSource = CartasEnEscondite;
+        }
+
 
         public void NotificarJugadorDesconectado(string nombreUsuario)
         {
@@ -208,8 +174,8 @@ namespace trofeoCazador.Vistas.PartidaJuego
             VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, mensaje);
             listaDeJugadores = listaDeJugadores.Where(j => j.NombreUsuario != nombreUsuario).ToList();
             MostrarJugadores();
-        }
 
+        }
         public void MostrarJugadores()
         {
             var jugadoresEnPartida = listaDeJugadores
@@ -259,8 +225,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
             if (string.IsNullOrEmpty(ganador))
                 throw new ArgumentException("El nombre del ganador no puede ser nulo o vacío.");
 
-            var servicioDelJuegoClient = new GestionCuentaServicioClient();
-
             try
             {
                 var jugadores = puntajes.Keys
@@ -296,42 +260,26 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             GestionCuentaServicioClient gestorAmigos = new GestionCuentaServicioClient();
             int idJugador = -1;
-
             try
             {
                 idJugador = gestorAmigos.ObtenerIdJugadorPorNombreUsuario(nombreUsuario);
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-
             return idJugador;
         }
 
@@ -340,77 +288,33 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         private void Mazo_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (EsMazoVacio())
+            try
             {
-                try
+                if (EsMazoVacio())
                 {
                     cliente.FinalizarJuego(idPartida);
                 }
-                catch (EndpointNotFoundException ex)
+                else
                 {
-                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (TimeoutException ex)
-                {
-                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLSalaEspera());
-                }
-                catch (FaultException)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-                catch (CommunicationException ex)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-
-            }
-            else
-            {
-                var cartaSuperior = ObtenerCartaSuperiorDelMazo();
-                try
-                {
+                    var cartaSuperior = ObtenerCartaSuperiorDelMazo();
                     cliente.TomarCartaDeMazo(idPartida, jugadorActual.NombreUsuario, cartaSuperior.IdCarta);
                 }
-                catch (EndpointNotFoundException ex)
-                {
-                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (TimeoutException ex)
-                {
-                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (FaultException)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLSalaEspera());
-                }
-                catch (CommunicationException ex)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (Exception)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
             }
         }
 
@@ -418,42 +322,26 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             try
             {
+                btnRepartirCartas.Visibility = Visibility.Collapsed;
                 cliente.CrearPartida(listaDeJugadores.ToArray(), idPartida);
                 cliente.RepartirCartas(idPartida);
                 cliente.EmpezarTurno(idPartida);
-                btnRepartirCartas.Visibility = Visibility.Collapsed;
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
@@ -517,8 +405,30 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 FichasEstaticas.Add(new Ficha { IdFicha = i, RutaImagenFicha = $"/Recursos/ElementosPartida/ImagenesPartida/Fichas/Ficha{i}.png" });
             }
         }
-
-        private string ObtenerRutaImagenPerfil(int numeroFotoPerfil)
+        private void ImagenDado_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                cliente.LanzarDado(idPartida, jugadorActual.NombreUsuario);
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (Exception)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+            }
+        }
+        private static string ObtenerRutaImagenPerfil(int numeroFotoPerfil)
         {
             switch (numeroFotoPerfil)
             {
@@ -534,11 +444,32 @@ namespace trofeoCazador.Vistas.PartidaJuego
         private async void ManejarResultadoDado(int resultadoDado)
         {
             await Task.Delay(1000);
-            Ficha fichaSeleccionada = SeleccionarFichaPorResultado(resultadoDado);
+            Ficha fichaObtenida = SeleccionarFichaPorResultado(resultadoDado);
 
-            if (PuedeTomarFicha(fichaSeleccionada))
+            if (PuedeTomarFicha(fichaObtenida))
             {
-                await TomarFicha(fichaSeleccionada);
+                try
+                {
+                    await cliente.TomarFichaMesaAsync(idPartida, fichaObtenida.IdFicha);
+                }
+                catch (EndpointNotFoundException)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                }
+                catch (TimeoutException)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                }
+                catch (CommunicationException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                }
+                catch (Exception)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                }
+                await Task.Delay(1000);
+                await ManejarDecisionContinuarTurno();
             }
             else
             {
@@ -551,53 +482,11 @@ namespace trofeoCazador.Vistas.PartidaJuego
             return Fichas.FirstOrDefault(f => f.IdFicha == resultadoDado);
         }
 
-        private bool PuedeTomarFicha(Ficha fichaSeleccionada)
+        private static bool PuedeTomarFicha(Ficha fichaSeleccionada)
         {
             return fichaSeleccionada != null;
         }
 
-        private async Task TomarFicha(Ficha fichaSeleccionada)
-        {
-            try
-            {
-                cliente.TomarFichaMesa(idPartida, fichaSeleccionada.IdFicha);
-            }
-            catch (EndpointNotFoundException ex)
-            {
-                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (TimeoutException ex)
-            {
-                VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
-            {
-                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-            }
-            await Task.Delay(1000);
-
-            ManejarDecisionContinuarTurno();
-        }
         private async Task ManejarFichaDuplicada()
         {
             await Task.Delay(1000);
@@ -625,7 +514,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
             return VerificarCartaEnMano("Carta6") || VerificarCartaEnMano("Carta5");
         }
 
-        private async Task<bool> SolicitarDecisionSalvarTurno()
+        private static async Task<bool> SolicitarDecisionSalvarTurno()
         {
             return await DecisionSalvarTurno();
         }
@@ -640,39 +529,23 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 jugadorTurnoActual
             );
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
-
+            
         }
 
 
@@ -685,18 +558,16 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             VentanasEmergentes.CrearVentanaEmergente("Ficha repetida", "Esta ficha ya la tenías, por lo que termina tu turno. Pero puedes tomar una carta del mazo.");
             ZonaMazoCartas.IsEnabled = true;
-
-            bool cartaTomadaDelMazo = await EsperarTomaDeCarta();
-
+            await EsperarTomaDeCarta();
             ZonaMazoCartas.IsEnabled = false;
-            await FinalizarTurno();
+            FinalizarTurno();
         }
 
         private async Task<bool> EsperarTomaDeCarta()
         {
             SuscribirEventoTomaDeCarta();
 
-            bool cartaTomada = await EsperarCartaTomada();
+            cartaTomada = await EsperarCartaTomada();
 
             DesuscribirEventoTomaDeCarta();
 
@@ -729,45 +600,29 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
 
 
-        private async Task FinalizarTurno()
+        private void FinalizarTurno()
         {
             try
             {
-                await Task.Run(() => cliente.FinalizarTurno(idPartida, jugadorActual.NombreUsuario));
+                cliente.FinalizarTurno(idPartida, jugadorActual.NombreUsuario);
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
-
+            
         }
 
 
@@ -784,14 +639,14 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         }
 
-        private async Task<bool> DecisionSalvarTurno()
+        private static async Task<bool> DecisionSalvarTurno()
         {
             var ventanaDeDecision = VentanasEmergentes.CrearVentanaDeDecision("Decision de turno", "Obtuviste una ficha repetida, puedes usar una carta para salvarte.");
             return await ventanaDeDecision.MostrarDecision();
         }
 
 
-        private void SeleccionarCarta(object sender, MouseButtonEventArgs e)
+        private async void SeleccionarCarta(object sender, MouseButtonEventArgs e)
         {
             var cartaSeleccionada = ObtenerCartaSeleccionada(sender);
             if (cartaSeleccionada != null)
@@ -807,7 +662,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                         break;
 
                     case ModoSeleccionCarta.SalvarTurno:
-                        UsarCartaSalvacionTurno(cartaSeleccionada);
+                        await UsarCartaSalvacionTurno(cartaSeleccionada);
                         break;
 
                     case ModoSeleccionCarta.AccionCartasEnTurno:
@@ -834,7 +689,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
             }
         }
 
-        private CartaCliente ObtenerCartaSeleccionada(object sender)
+        private static CartaCliente ObtenerCartaSeleccionada(object sender)
         {
             return (sender as Border)?.DataContext as CartaCliente;
         }
@@ -845,39 +700,23 @@ namespace trofeoCazador.Vistas.PartidaJuego
             {
                 cliente.AgregarCartaAEscondite(jugadorActual.NombreUsuario, carta.IdCarta, idPartida);
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
-
+            
         }
 
 
@@ -895,16 +734,16 @@ namespace trofeoCazador.Vistas.PartidaJuego
         }
 
 
-        private void Ficha_MouseDown(object sender, MouseButtonEventArgs e)
+        private async void Ficha_MouseDown(object sender, MouseButtonEventArgs e)
         {
             fichaSeleccionada = (sender as Border)?.DataContext as Ficha;
             if (fichaSeleccionada != null)
             {
-                EjecutarAccionFicha(fichaSeleccionada);
+                await EjecutarAccionFicha(fichaSeleccionada);
             }
         }
 
-        private void EjecutarAccionFicha(Ficha fichaSeleccionada)
+        private async Task EjecutarAccionFicha(Ficha fichaSeleccionada)
         {
             switch (fichaSeleccionada.IdFicha)
             {
@@ -925,7 +764,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     break;
 
                 case 5:
-                    AccionFichaRevelarCarta();
+                    await AccionFichaRevelarCarta();
                     break;
 
                 case 6:
@@ -959,39 +798,22 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 {
                     cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
                 }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
-
             }
         }
 
@@ -1006,39 +828,22 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     cliente.TomarFichaMesa(idPartida, fichaEnMesaSeleccionada.IdFicha);
                     cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
                 }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
-
                 FichasItemsControl.IsEnabled = false;
                 FichasItemsControl.MouseDown -= FichasItemsControl_MouseDown;
             }
@@ -1060,45 +865,32 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 if (jugadorObjetivo != null)
                 {
                     HabilitarClickEnAreasJugadores(false);
+
                     try
                     {
                         cliente.RobarCartaAJugador(jugadorObjetivo.NombreUsuario, idPartida, CartaDuplicacionActiva);
                     }
-                    catch (EndpointNotFoundException ex)
+                    catch (EndpointNotFoundException)
                     {
                         VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                     }
-                    catch (TimeoutException ex)
+                    catch (TimeoutException)
                     {
                         VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                     }
-                    catch (FaultException<HuntersTrophyExcepcion>)
-                    {
-                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                        NavigationService.Navigate(new XAMLInicioSesion());
-                    }
-
-                    catch (FaultException)
+                    catch (CommunicationException)
                     {
                         VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        NavigationService.Navigate(new XAMLInicioSesion());
                     }
-                    catch (CommunicationException ex)
-                    {
-
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                     }
+                    
                 }
             }
         }
+
 
         private JugadorPartida ObtenerJugadorDesdeArea(StackPanel area)
         {
@@ -1108,48 +900,34 @@ namespace trofeoCazador.Vistas.PartidaJuego
             return null;
         }
 
-        private async void AccionFichaRevelarCarta()
+        private async Task AccionFichaRevelarCarta()
         {
             try
             {
-                cliente.RevelarCartaMazo(idPartida);
+                await cliente.RevelarCartaMazoAsync(idPartida);
                 await Task.Delay(100);
-                cliente.PreguntarGuardarCartaEnEscondite(idPartida);
+                await cliente.PreguntarGuardarCartaEnEsconditeAsync(idPartida);
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
-
+            
         }
+
+
 
         private void MoverCartaTipoEspecificoAEscondite(CartaCliente cartaSeleccionada, string tipoCartaRevelada)
         {
@@ -1161,45 +939,30 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     cliente.AgregarCartaAEscondite(jugadorActual.NombreUsuario, cartaSeleccionada.IdCarta, idPartida);
                     cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.CartasSinTurno), jugadorActual.NombreUsuario);
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
                 }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
-
+                
             }
             else
             {
                 VentanasEmergentes.CrearVentanaEmergente("Carta incorrecta", "La carta seleccionada no es del tipo de la carta que fue revelada.");
             }
         }
+
         private void AccionFichaRobarCartaAJugador()
         {
             DesuscribirEventosRobarCarta();
@@ -1238,45 +1001,30 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
             try
             {
-                cliente.EstablecerModoSeleccionCarta(
+
+            }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (Exception)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+            }
+
+            cliente.EstablecerModoSeleccionCarta(
                 idPartida,
                 Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverAlEscondite),
                 jugadorTurnoActual
             );
-            }
-            catch (EndpointNotFoundException ex)
-            {
-                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (TimeoutException ex)
-            {
-                VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
-            {
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
-            {
-                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-            }
-
         }
 
         private void ConfigurarAccionFicha()
@@ -1325,40 +1073,24 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 );
                 CartaDuplicacionActiva = false;
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
-
         }
+
 
         private void DeshabilitarInteraccionMazo()
         {
@@ -1393,145 +1125,81 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 DeshabilitarInteraccionMazo();
                 DesuscribirEventos();
                 cliente.EstablecerModoSeleccionCarta(
-                   idPartida,
-                   Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno),
-                   jugadorTurnoActual
-               );
+                    idPartida,
+                    Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno),
+                    jugadorTurnoActual
+                );
                 CartaDuplicacionActiva = false;
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
+                
         }
+
 
         private void AccionFichaGuardarCartasEscondite()
         {
-            if (CartasEnMano.Any())
+            try
             {
-                ConfigurarCartasAGuardar();
-                VentanasEmergentes.CrearVentanaEmergente(
-                "Acción ficha",
-                $"Puedes guardar {cartasAGuardarEscondite} cartas en el escondite."
-            );
-                try
+                if (CartasEnMano.Any())
                 {
+                    ConfigurarCartasAGuardar();
+                    VentanasEmergentes.CrearVentanaEmergente(
+                        "Acción ficha",
+                        $"Puedes guardar {cartasAGuardarEscondite} cartas en el escondite."
+                    );
+
                     cliente.EstablecerModoSeleccionCarta(
                         idPartida,
                         Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverAlEscondite),
                         jugadorTurnoActual
                     );
-                }
-                catch (EndpointNotFoundException ex)
-                {
-                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (TimeoutException ex)
-                {
-                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
 
-                catch (FaultException)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
+                    CartasManoItemsControl.MouseDown += CartasManoItemsControl_MouseDown1;
                 }
-                catch (CommunicationException ex)
+                else
                 {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-                }
-
-                CartasManoItemsControl.MouseDown += CartasManoItemsControl_MouseDown1;
-            }
-            else
-            {
-                VentanasEmergentes.CrearVentanaEmergente(
-                "Sin cartas en mano",
-                "No tiene cartas que pueda guardar en el escondite."
-                );
-
-                try
-                {
+                    VentanasEmergentes.CrearVentanaEmergente(
+                        "Sin cartas en mano",
+                        "No tiene cartas que pueda guardar en el escondite."
+                    );
                     cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
+                    CartaDuplicacionActiva = false;
                 }
-                catch (EndpointNotFoundException ex)
-                {
-                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (TimeoutException ex)
-                {
-                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-                }
-
-                CartaDuplicacionActiva = false;
             }
+            catch (EndpointNotFoundException)
+            {
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (Exception)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+            }
+            
         }
+
 
         private void ConfigurarCartasAGuardar()
         {
@@ -1562,48 +1230,32 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     jugadorTurnoActual
                 );
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
-
         }
+
 
         private void TomarCartasMazo()
         {
             if (cartasATomarMazo == 0)
             {
                 VentanasEmergentes.CrearVentanaEmergente(
-                "",
-                "Nadie guardó una carta en el escondite, por lo que no puedes tomar cartas del mazo."
+                    "",
+                    "Nadie guardó una carta en el escondite, por lo que no puedes tomar cartas del mazo."
                 );
 
                 if (fichaSeleccionada != null)
@@ -1612,52 +1264,37 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     {
                         cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
                     }
-                    catch (EndpointNotFoundException ex)
+                    catch (EndpointNotFoundException)
                     {
                         VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                     }
-                    catch (TimeoutException ex)
+                    catch (TimeoutException)
                     {
                         VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                     }
-                    catch (FaultException<HuntersTrophyExcepcion>)
-                    {
-                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                        NavigationService.Navigate(new XAMLInicioSesion());
-                    }
-
-                    catch (FaultException)
+                    catch (CommunicationException)
                     {
                         VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        NavigationService.Navigate(new XAMLInicioSesion());
                     }
-                    catch (CommunicationException ex)
-                    {
-
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                     }
-
+                    
                 }
             }
             else
             {
                 ConfigurarCartasParaTomar();
                 VentanasEmergentes.CrearVentanaEmergente(
-                "Tomar cartas del mazo",
-                $"Puedes tomar {cartasATomarMazo} cartas del mazo."
+                    "Tomar cartas del mazo",
+                    $"Puedes tomar {cartasATomarMazo} cartas del mazo."
                 );
                 HabilitarInteraccionMazo();
                 ZonaMazoCartas.MouseDown += ZonaMazoCartas_MouseDown1;
             }
         }
+
 
         private void ConfigurarCartasParaTomar()
         {
@@ -1685,41 +1322,24 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     {
                         cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
                     }
-                    catch (EndpointNotFoundException ex)
+                    catch (EndpointNotFoundException)
                     {
                         VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                     }
-                    catch (TimeoutException ex)
+                    catch (TimeoutException)
                     {
                         VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                     }
-                    catch (FaultException<HuntersTrophyExcepcion>)
-                    {
-                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                        NavigationService.Navigate(new XAMLInicioSesion());
-                    }
-
-                    catch (FaultException)
+                    catch (CommunicationException)
                     {
                         VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        NavigationService.Navigate(new XAMLInicioSesion());
                     }
-                    catch (CommunicationException ex)
-                    {
-
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                     }
-
+                    
                 }
-
                 CartaDuplicacionActiva = false;
             }
         }
@@ -1751,7 +1371,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
         {
             this.jugadorTurnoActual = jugadorTurnoActual;
             modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
-            //modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
             jugadorDecidioParar = false;
             if (jugadorActual.NombreUsuario == jugadorTurnoActual)
             {
@@ -1759,7 +1378,6 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 dado.DadoLanzado += ManejarResultadoDado;
                 DadoImagen.IsEnabled = true;
                 modoSeleccionActual = ModoSeleccionCarta.AccionCartasEnTurno;
-                //modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
             }
         }
         public void NotificarTurnoTerminado(string nombreUsuario)
@@ -1770,44 +1388,27 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 {
                     cliente.DevolverFichaAMesa(ficha.IdFicha, idPartida);
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
                 }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
-
             }
+
             DadoImagen.IsEnabled = false;
             dado.DadoLanzado -= ManejarResultadoDado;
             modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
-
         }
 
         public void NotificarPartidaCreada(string idPartida)
@@ -1818,10 +1419,9 @@ namespace trofeoCazador.Vistas.PartidaJuego
             FichasManoItemsControl.IsEnabled = false;
             CargarFichas();
             modoSeleccionActual = ModoSeleccionCarta.CartasSinTurno;
-            //modoSeleccionActual = ModoSeleccionCarta.MoverAlEscondite;
         }
 
-        public void NotificarResultadoDado(string nombreUsuario, int resultadoDado)
+        public void NotificarResultadoDado(string nombreJugador, int resultadoDado)
         {
             dado.LanzarDado(resultadoDado);
         }
@@ -1860,24 +1460,24 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
         public void NotificarCartaTomadaMazo(int idCarta)
         {
-            var cartaTomada = CartasEnMazo.FirstOrDefault(c => c.IdCarta == idCarta);
-            CartasEnMazo.Remove(cartaTomada);
+            var cartaTomadaMazo = CartasEnMazo.FirstOrDefault(c => c.IdCarta == idCarta);
+            CartasEnMazo.Remove(cartaTomadaMazo);
         }
 
         public void NotificarCartaTomadaDescarte(int idCarta)
         {
-            var cartaTomada = CartasDescarte.FirstOrDefault(c => c.IdCarta == idCarta);
-            CartasDescarte.Remove(cartaTomada);
+            var cartaTomadaDescarte = CartasDescarte.FirstOrDefault(c => c.IdCarta == idCarta);
+            CartasDescarte.Remove(cartaTomadaDescarte);
         }
 
         public void NotificarFichaTomadaMesa(string jugadorTurnoActual, int idFicha)
         {
-            var fichaSeleccionada = Fichas.FirstOrDefault(f => f.IdFicha == idFicha);
-            Fichas.Remove(fichaSeleccionada);
+            var fichaObtenida = Fichas.FirstOrDefault(f => f.IdFicha == idFicha);
+            Fichas.Remove(fichaObtenida);
 
             if (jugadorActual.NombreUsuario == jugadorTurnoActual)
             {
-                FichasEnMano.Add(fichaSeleccionada);
+                FichasEnMano.Add(fichaObtenida);
             }
         }
 
@@ -1915,103 +1515,52 @@ namespace trofeoCazador.Vistas.PartidaJuego
             CartasEnEscondite.Add(carta);
         }
 
-        public async void NotificarIntentoRobo(string nombreUsuarioAtacante)
+        public async void NotificarIntentoRobo(string nombreJugadorDefensor)
         {
-            if (jugadorActual.NombreUsuario == nombreUsuarioAtacante)
+            if (jugadorActual.NombreUsuario == nombreJugadorDefensor)
             {
                 bool decision = await DecisionDefenderseRobo();
 
-                if (decision)
+                try
                 {
-                    try
+                    if (decision)
                     {
-                        cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.DefenderRobo), jugadorActual.NombreUsuario);
+                        await cliente.EstablecerModoSeleccionCartaAsync(
+                            idPartida,
+                            Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.DefenderRobo),
+                            jugadorActual.NombreUsuario
+                        );
                     }
-                    catch (EndpointNotFoundException ex)
+                    else
                     {
-                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (TimeoutException ex)
-                    {
-                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (FaultException<HuntersTrophyExcepcion>)
-                    {
-                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                        NavigationService.Navigate(new XAMLInicioSesion());
-                    }
+                        int cartasARobar = CartaDuplicacionActiva ? 2 : 1;
 
-                    catch (FaultException)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        NavigationService.Navigate(new XAMLInicioSesion());
+                        for (int i = 0; i < cartasARobar; i++)
+                        {
+                            await cliente.RobarCartaAsync(idPartida, nombreJugadorDefensor);
+                        }
                     }
-                    catch (CommunicationException ex)
-                    {
-
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (Exception ex)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-                    }
-
                 }
-                else
+                catch (EndpointNotFoundException)
                 {
-                    int cartasARobar = 1;
-                    if (CartaDuplicacionActiva)
-                    {
-                        cartasARobar = 2;
-                    }
-                    for (int i = 0; i < cartasARobar; i++)
-                    {
-                        try
-                        {
-                            cliente.RobarCarta(idPartida, nombreUsuarioAtacante);
-                        }
-                        catch (EndpointNotFoundException ex)
-                        {
-                            VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                            ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                        }
-                        catch (TimeoutException ex)
-                        {
-                            VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                            ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                        }
-                        catch (FaultException<HuntersTrophyExcepcion>)
-                        {
-                            VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                            NavigationService.Navigate(new XAMLInicioSesion());
-                        }
-
-                        catch (FaultException)
-                        {
-                            VentanasEmergentes.CrearMensajeVentanaServidorError();
-                            NavigationService.Navigate(new XAMLInicioSesion());
-                        }
-                        catch (CommunicationException ex)
-                        {
-
-                            VentanasEmergentes.CrearMensajeVentanaServidorError();
-                            ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                        }
-                        catch (Exception ex)
-                        {
-                            VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                            ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-                        }
-
-                    }
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                }
+                catch (TimeoutException)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                }
+                catch (CommunicationException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                }
+                catch (Exception)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 }
             }
             CartaDuplicacionActiva = false;
         }
+
 
         public void NotificarCartaRobada(Carta carta, string jugadorObjetivoRobo, string jugadorTurnoActual)
         {
@@ -2030,132 +1579,64 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 {
                     cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
                 }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
-
+                
             }
             CartaDuplicacionActiva = false;
         }
 
-        public async void NotificarIntentoRoboCartaEscondite(string nombreUsuarioAtacante)
+        public async void NotificarIntentoRoboCartaEscondite(string nombreJugadorAtacante)
         {
-            if (jugadorActual.NombreUsuario == nombreUsuarioAtacante)
+            if (jugadorActual.NombreUsuario == nombreJugadorAtacante)
             {
                 bool decision = await DecisionDefenderseRobo();
 
-                if (decision)
+                try
                 {
-                    try
+                    if (decision)
                     {
-                        cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.DefenderRobo), jugadorActual.NombreUsuario);
+                        await cliente.EstablecerModoSeleccionCartaAsync(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.DefenderRobo), jugadorActual.NombreUsuario);
                     }
-                    catch (EndpointNotFoundException ex)
+                    else
                     {
-                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                        await cliente.RobarCartaEsconditeAsync(idPartida, nombreJugadorAtacante);
                     }
-                    catch (TimeoutException ex)
-                    {
-                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (FaultException<HuntersTrophyExcepcion>)
-                    {
-                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                        NavigationService.Navigate(new XAMLInicioSesion());
-                    }
-
-                    catch (FaultException)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        NavigationService.Navigate(new XAMLInicioSesion());
-                    }
-                    catch (CommunicationException ex)
-                    {
-
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (Exception ex)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-                    }
-
                 }
-                else
+                catch (EndpointNotFoundException)
                 {
-                    try
-                    {
-                        cliente.RobarCartaEscondite(idPartida, nombreUsuarioAtacante);
-                    }
-                    catch (EndpointNotFoundException ex)
-                    {
-                        VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (TimeoutException ex)
-                    {
-                        VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (FaultException<HuntersTrophyExcepcion>)
-                    {
-                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                        NavigationService.Navigate(new XAMLInicioSesion());
-                    }
-
-                    catch (FaultException)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        NavigationService.Navigate(new XAMLInicioSesion());
-                    }
-                    catch (CommunicationException ex)
-                    {
-
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (Exception ex)
-                    {
-                        VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-                    }
-
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                }
+                catch (TimeoutException)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                }
+                catch (CommunicationException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                }
+                catch (Exception)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
                 }
             }
             CartaDuplicacionActiva = false;
         }
+
 
         public void NotificarCartaEsconditeRobada(Carta carta, string jugadorObjetivoRobo, string jugadorTurnoActual)
         {
@@ -2182,91 +1663,60 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 {
                     cliente.LanzarDado(idPartida, jugadorTurnoActual);
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
                 }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
-
+                
             });
         }
 
-        public void NotificarPreguntaJugadores(string jugadorTurnoActual, string tipoCartaRevelada)
+
+        public async void NotificarPreguntaJugadores(string jugadorTurnoActual, string tipoCartaRevelada)
         {
             this.tipoCartaRevelada = tipoCartaRevelada;
-            ManejarDecisionGuardarCartaEnEscondite();
+            await ManejarDecisionGuardarCartaEnEscondite();
         }
 
         public void NotificarNumeroJugadoresGuardaronCarta(int numeroJugadoresGuardaronCarta)
         {
             try
             {
-                cliente.TomarCartaDeMazo(idPartida, jugadorActual.NombreUsuario, CartasEnMazo.Last().IdCarta);
+                cliente.TomarCartaDeMazo(idPartida, jugadorActual.NombreUsuario, CartasEnMazo[CartasEnMazo.Count - 1].IdCarta);
                 cliente.OcultarCartaMazo(idPartida);
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
-
             cartasATomarMazo = numeroJugadoresGuardaronCarta;
             TomarCartasMazo();
         }
+
 
         public void NotificarPararTirarDado()
         {
@@ -2288,18 +1738,13 @@ namespace trofeoCazador.Vistas.PartidaJuego
         }
         public void NotificarMazoRevelado()
         {
-            CartasEnMazo.Remove(CartasEnMazo.Last());
+            CartasEnMazo.Remove(CartasEnMazo[CartasEnMazo.Count - 1]);
         }
 
         public void NotificarMazoOculto(Carta cartaParteTrasera)
         {
             CartaCliente carta = new CartaCliente { Tipo = cartaParteTrasera.Tipo, RutaImagen = CartaCliente.ObtenerRutaImagenCarta(cartaParteTrasera.IdRutaImagen), IdCarta = cartaParteTrasera.IdCarta };
             CartasEnMazo.Add(carta);
-        }
-
-        public void NotificarResultadoAccion(string accion, bool resultado)
-        {
-
         }
 
         public void CompletarGuardarCartaEscondite()
@@ -2309,100 +1754,45 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 jugadorGuardoCartaEnEscondite.SetResult(true);
             }
         }
-        private async void ManejarDecisionGuardarCartaEnEscondite()
+        private async Task ManejarDecisionGuardarCartaEnEscondite()
         {
             bool decision = await DecisionGuardarCartaEnEscondite();
-
-            if (decision)
+            try
             {
-                jugadorGuardoCartaEnEscondite = new TaskCompletionSource<bool>();
-                try
+                if (decision)
                 {
-                    cliente.EnviarDecision(idPartida, true);
-                    cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverCartaTipoEspecificoAEscondite), jugadorActual.NombreUsuario);
+                    jugadorGuardoCartaEnEscondite = new TaskCompletionSource<bool>();
+                    await cliente.EnviarDecisionAsync(idPartida, true);
+                    await cliente.EstablecerModoSeleccionCartaAsync(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverCartaTipoEspecificoAEscondite), jugadorActual.NombreUsuario);
                     await jugadorGuardoCartaEnEscondite.Task;
-                    cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.CartasSinTurno), jugadorActual.NombreUsuario);
-
+                    await cliente.EstablecerModoSeleccionCartaAsync(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.CartasSinTurno), jugadorActual.NombreUsuario);
                 }
-                catch (EndpointNotFoundException ex)
+                else
                 {
-                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
+                    await cliente.EnviarDecisionAsync(idPartida, false);
+                    await cliente.EstablecerModoSeleccionCartaAsync(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverCartaTipoEspecificoAEscondite), jugadorTurnoActual);
                 }
-                catch (TimeoutException ex)
-                {
-                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-                }
-
             }
-            else
+            catch (EndpointNotFoundException)
             {
-                try
-                {
-                    cliente.EnviarDecision(idPartida, false);
-                    cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.MoverCartaTipoEspecificoAEscondite), jugadorTurnoActual);
-
-                }
-                catch (EndpointNotFoundException ex)
-                {
-                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (TimeoutException ex)
-                {
-                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-                }
-
+                VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+            }
+            catch (TimeoutException)
+            {
+                VentanasEmergentes.CrearVentanaMensajeTimeOut();
+            }
+            catch (CommunicationException)
+            {
+                VentanasEmergentes.CrearMensajeVentanaServidorError();
+            }
+            catch (Exception)
+            {
+                VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
             }
         }
 
-        private async Task<bool> DecisionGuardarCartaEnEscondite()
+
+        private static async Task<bool> DecisionGuardarCartaEnEscondite()
         {
             var ventanaDeDecision = VentanasEmergentes.CrearVentanaDeDecision("Decision guardar carta", "¿Quieres guardar una carta en el escondite que sea del tipo que ha sido revelada?");
             return await ventanaDeDecision.MostrarDecision();
@@ -2419,24 +1809,24 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     UsarCarta8(cartaSeleccionada.IdCarta);
                     break;
                 default:
-                    VentanasEmergentes.CrearVentanaEmergente("Carta incorrecta.", "La carta seleccionada no sirve para bloquear un robo.");
+                    VentanasEmergentes.CrearVentanaEmergente(CARTA_NO_DISPONIBLE, "La carta seleccionada no sirve para bloquear un robo.");
                     break;
 
             }
         }
 
-        private void UsarCartaSalvacionTurno(CartaCliente cartaSeleccionada)
+        private async Task UsarCartaSalvacionTurno(CartaCliente cartaSeleccionada)
         {
             switch (cartaSeleccionada.Tipo)
             {
                 case "Carta5":
-                    UsarCarta5(cartaSeleccionada.IdCarta);
+                    await UsarCarta5(cartaSeleccionada.IdCarta);
                     break;
                 case "Carta6":
-                    UsarCarta6(cartaSeleccionada.IdCarta);
+                    await UsarCarta6(cartaSeleccionada.IdCarta);
                     break;
                 default:
-                    VentanasEmergentes.CrearVentanaEmergente("Carta incorrecta.", "La carta seleccionada no sirve para salvar tu turno.");
+                    VentanasEmergentes.CrearVentanaEmergente(CARTA_NO_DISPONIBLE, "La carta seleccionada no sirve para salvar tu turno.");
                     break;
 
             }
@@ -2459,7 +1849,7 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     break;
 
                 default:
-                    VentanasEmergentes.CrearVentanaEmergente("Carta no disponible", "La accion de esta carta no se puede aplicar en este momento");
+                    VentanasEmergentes.CrearVentanaEmergente(CARTA_NO_DISPONIBLE, "La accion de esta carta no se puede aplicar en este momento");
                     break;
             }
         }
@@ -2472,24 +1862,43 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     UsarCarta2(cartaSeleccionada.IdCarta);
                     break;
                 default:
-                    VentanasEmergentes.CrearVentanaEmergente("Carta no disponible", "La accion de esta carta no se puede aplicar en este momento");
+                    VentanasEmergentes.CrearVentanaEmergente(CARTA_NO_DISPONIBLE, "La accion de esta carta no se puede aplicar en este momento");
                     break;
             }
         }
 
-        private async void ManejarDecisionContinuarTurno()
+        private async Task ManejarDecisionContinuarTurno()
         {
             bool decision = await DecisionContinuarTurno();
             if (!decision)
             {
-                cliente.DejarTirarDado(idPartida);
+                try
+                {
+                    await cliente.DejarTirarDadoAsync(idPartida);
+                }
+                catch (EndpointNotFoundException)
+                {
+                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
+                }
+                catch (TimeoutException)
+                {
+                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
+                }
+                catch (CommunicationException)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaServidorError();
+                }
+                catch (Exception)
+                {
+                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
+                }
                 DadoImagen.IsEnabled = false;
                 await ResolverFichas();
-                await FinalizarTurno();
+                FinalizarTurno();
             }
         }
 
-        private async Task<bool> DecisionContinuarTurno()
+        private static async Task<bool> DecisionContinuarTurno()
         {
             var ventanaDeDecision = VentanasEmergentes.CrearVentanaDeDecision("Decisión de turno", "¿Quieres continuar tirando?");
             return await ventanaDeDecision.MostrarDecision();
@@ -2500,42 +1909,26 @@ namespace trofeoCazador.Vistas.PartidaJuego
             {
                 cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
 
             RobarCartaEsconditeAJugador();
-
         }
+
 
         private void UsarCarta2(int idCarta)
         {
@@ -2547,44 +1940,29 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     cliente.ObligarATirarDado(idPartida);
                     cliente.ActualizarDecisionTurno(idPartida);
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
                 }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
             }
             else
             {
-                VentanasEmergentes.CrearVentanaEmergente("Carta no disponible", "Para poder ocupar esta carta el jugador en turno debe haber decidido dejar de tirar el dado.");
+                VentanasEmergentes.CrearVentanaEmergente(CARTA_NO_DISPONIBLE, "Para poder ocupar esta carta el jugador en turno debe haber decidido dejar de tirar el dado.");
             }
         }
+
 
         private void UsarCarta3(int idCarta)
         {
@@ -2593,44 +1971,28 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 try
                 {
                     cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+                    SeleccionarCartaDescarte(idCarta);
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
                 }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
-                SeleccionarCartaDescarte(idCarta);
             }
             else
             {
-                VentanasEmergentes.CrearVentanaEmergente("Carta no disponible", "No hay cartas en el descarte por lo que no puede ocupar esta carta");
+                VentanasEmergentes.CrearVentanaEmergente(CARTA_NO_DISPONIBLE, "No hay cartas en el descarte por lo que no puede ocupar esta carta");
             }
         }
 
@@ -2639,176 +2001,107 @@ namespace trofeoCazador.Vistas.PartidaJuego
             try
             {
                 cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+                CartaDuplicacionActiva = true;
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
-            CartaDuplicacionActiva = true;
         }
 
-        private async void UsarCarta5(int idCarta)
+        private async Task UsarCarta5(int idCarta)
         {
             try
             {
-                cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+                await cliente.UtilizarCartaAsync(idPartida, idCarta, jugadorActual.NombreUsuario);
                 DadoImagen.IsEnabled = false;
-                cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
+                await cliente.EstablecerModoSeleccionCartaAsync(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
+                await ResolverFichas();
+                FinalizarTurno();
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
-
-            await ResolverFichas();
-            await FinalizarTurno();
         }
 
-        private void UsarCarta6(int idCarta)
+        private async Task UsarCarta6(int idCarta)
         {
             try
             {
-                cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
-                cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
-
+                await cliente.UtilizarCartaAsync(idPartida, idCarta, jugadorActual.NombreUsuario);
+                await cliente.EstablecerModoSeleccionCartaAsync(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno), jugadorTurnoActual);
+                await ManejarDecisionContinuarTurno();
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
-            ManejarDecisionContinuarTurno();
-
         }
-
 
         private void UsarCarta7(int idCarta)
         {
             try
             {
                 cliente.UtilizarCarta(idPartida, idCarta, jugadorActual.NombreUsuario);
+                VentanasEmergentes.CrearVentanaEmergente(
+                    "Acción de carta",
+                    "Puedes tomar 2 cartas del Mazo, da clic 2 veces en él."
+                );
+                ConfigurarZonaMazoParaTomaDeCartas();
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
-
-            VentanasEmergentes.CrearVentanaEmergente(
-                "Acción de carta",
-                "Puedes tomar 2 cartas del Mazo, da clic 2 veces en él."
-            );
-            ConfigurarZonaMazoParaTomaDeCartas();
         }
 
         private void ConfigurarZonaMazoParaTomaDeCartas()
@@ -2835,91 +2128,19 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
             if (jugadorActual.NombreUsuario == jugadorTurnoActual)
             {
-                try
-                {
-                    cliente.EstablecerModoSeleccionCarta(
+                cliente.EstablecerModoSeleccionCarta(
                     idPartida,
                     Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.AccionCartasEnTurno),
                     jugadorTurnoActual
                 );
-                }
-                catch (EndpointNotFoundException ex)
-                {
-                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (TimeoutException ex)
-                {
-                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-                }
-
             }
             else
             {
-                try
-                {
-                    cliente.EstablecerModoSeleccionCarta(
-                    idPartida,
-                    Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.CartasSinTurno),
-                    jugadorActual.NombreUsuario
+                cliente.EstablecerModoSeleccionCarta(
+                        idPartida,
+                        Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.CartasSinTurno),
+                        jugadorActual.NombreUsuario
                 );
-                }
-                catch (EndpointNotFoundException ex)
-                {
-                    VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (TimeoutException ex)
-                {
-                    VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
-                {
-                    VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
-                }
-
             }
 
             if (fichaSeleccionada != null)
@@ -2928,42 +2149,25 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 {
                     cliente.DevolverFichaAMesa(fichaSeleccionada.IdFicha, idPartida);
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
                 }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
-
+                
             }
         }
-
 
         private void UsarCarta8(int idCarta)
         {
@@ -2981,41 +2185,25 @@ namespace trofeoCazador.Vistas.PartidaJuego
                     cliente.EstablecerModoSeleccionCarta(idPartida, Array.IndexOf(modosSeleccionCarta, ModoSeleccionCarta.CartasSinTurno), jugadorActual.NombreUsuario);
                 }
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
             }
-            catch (FaultException<HuntersTrophyExcepcion>)
-            {
-                VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                NavigationService.Navigate(new XAMLInicioSesion());
-            }
-
-            catch (FaultException)
+            catch (CommunicationException)
             {
                 VentanasEmergentes.CrearMensajeVentanaServidorError();
-                NavigationService.Navigate(new XAMLInicioSesion());
             }
-            catch (CommunicationException ex)
-            {
-
-                VentanasEmergentes.CrearMensajeVentanaServidorError();
-                ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-            }
-            catch (Exception ex)
+            catch (Exception)
             {
                 VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
             }
         }
 
-        private async Task<bool> DecisionDefenderseRobo()
+        private static async Task<bool> DecisionDefenderseRobo()
         {
             var ventanaDeDecision = VentanasEmergentes.CrearVentanaDeDecision("Decision de defensa", "Has sido elegido como objeto de robo. ¿Quieres defenderte?");
             return await ventanaDeDecision.MostrarDecision();
@@ -3047,46 +2235,32 @@ namespace trofeoCazador.Vistas.PartidaJuego
                 if (jugadorObjetivo != null)
                 {
                     HabilitarClickEnAreasJugadores(false);
+
                     try
                     {
                         cliente.RobarCartaEsconditeAJugador(jugadorObjetivo.NombreUsuario, idPartida, CartaDuplicacionActiva);
                     }
-                    catch (EndpointNotFoundException ex)
+                    catch (EndpointNotFoundException)
                     {
                         VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                     }
-                    catch (TimeoutException ex)
+                    catch (TimeoutException)
                     {
                         VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                     }
-                    catch (FaultException<HuntersTrophyExcepcion>)
-                    {
-                        VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                        NavigationService.Navigate(new XAMLInicioSesion());
-                    }
-
-                    catch (FaultException)
+                    catch (CommunicationException)
                     {
                         VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        NavigationService.Navigate(new XAMLInicioSesion());
                     }
-                    catch (CommunicationException ex)
-                    {
-
-                        VentanasEmergentes.CrearMensajeVentanaServidorError();
-                        ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                    }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                        ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                     }
-
+                    
                 }
             }
         }
+
 
         private void SeleccionarCartaDescarte(int idCartaRecientementeDescartada)
         {
@@ -3094,57 +2268,41 @@ namespace trofeoCazador.Vistas.PartidaJuego
 
             if (!cartasElegibles.Any())
             {
-                MessageBox.Show("No hay cartas disponibles en el descarte.");
-                return;
+                VentanasEmergentes.CrearVentanaEmergente(
+                    "Sin cartas disponibles",
+                    "No hay cartas disponibles en el descarte."
+                );
             }
 
             var dialogo = new DialogoSeleccionCarta(cartasElegibles);
             if (dialogo.ShowDialog() == true)
             {
                 var cartaSeleccionada = dialogo.CartaSeleccionada;
-                Metodos.MostrarMensaje($"Carta seleccionada: {cartaSeleccionada.Tipo}");
 
                 try
                 {
                     cliente.TomarCartaDeDescarte(idPartida, jugadorActual.NombreUsuario, cartaSeleccionada.IdCarta);
                 }
-                catch (EndpointNotFoundException ex)
+                catch (EndpointNotFoundException)
                 {
                     VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (TimeoutException ex)
+                catch (TimeoutException)
                 {
                     VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
                 }
-                catch (FaultException<HuntersTrophyExcepcion>)
-                {
-                    VentanasEmergentes.CrearErrorMensajeVentanaBaseDatos();
-                    NavigationService.Navigate(new XAMLInicioSesion());
-                }
-
-                catch (FaultException)
+                catch (CommunicationException)
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    NavigationService.Navigate(new XAMLInicioSesion());
                 }
-                catch (CommunicationException ex)
-                {
-
-                    VentanasEmergentes.CrearMensajeVentanaServidorError();
-                    ManejadorExcepciones.ManejarErrorExcepcionPartida(ex, NavigationService);
-                }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     VentanasEmergentes.CrearMensajeVentanaErrorInesperado();
-                    ManejadorExcepciones.ManejarFatalExcepcion(ex, NavigationService);
                 }
 
             }
         }
 
-
-
     }
 }
+
