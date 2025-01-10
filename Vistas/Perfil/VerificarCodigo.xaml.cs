@@ -37,7 +37,7 @@ namespace trofeoCazador.Vistas.Perfil
             string codigoEnviado = sesion.CodigoVerificacion;
             int longitudMaximaCodigo = 6;
 
-            if (!Metodos.ValidarEntradaVacia(codigoIngresado))
+            if (Metodos.ValidarEntradaVacia(codigoIngresado))
             {
                 VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbIngresaCodigo);
                 return;

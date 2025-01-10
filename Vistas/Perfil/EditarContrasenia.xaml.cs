@@ -113,10 +113,6 @@ namespace trofeoCazador.Vistas.Perfil
                     MostrarError(Properties.Resources.lbContraseñaSegura);
                 }
             }
-            else
-            {
-                MostrarError(Properties.Resources.lbLlenarCamposObligatorios);
-            }
         }
 
 
@@ -159,10 +155,6 @@ namespace trofeoCazador.Vistas.Perfil
                 {
                     VentanasEmergentes.CrearMensajeVentanaServidorError();
                 }
-            }
-            else
-            {
-                MostrarError(Properties.Resources.lbLlenarCamposObligatorios);
             }
         }
 

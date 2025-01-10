@@ -28,6 +28,12 @@ namespace trofeoCazador.VentanasReutilizables
         {
             string correo = tbCorreo.Text.Trim();
 
+            if (!UtilidadesDeValidacion.EsCorreoValido(correo))
+            {
+                VentanasEmergentes.CrearVentanaEmergente("", Properties.Resources.lbDescripcionCorreoIncorrecto);
+                tbCorreo.Clear();
+                return;
+            }
             GestionCuentaServicioClient proxy = new GestionCuentaServicioClient();
             try
             {

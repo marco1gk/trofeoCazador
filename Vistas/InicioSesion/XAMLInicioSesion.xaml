@@ -97,6 +97,7 @@
                            Foreground="PowderBlue" 
                            Cursor="Hand" 
                            Text="{x:Static p:Resources.lbContraseniaOlvidada}"
+                           Name="BtnRecuperarContraseña"
                            TextAlignment="Center"
                            Margin="0,10,0,0"
                            MouseLeftButtonUp="BtnRecuperarContraseña_Click" />

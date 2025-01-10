@@ -83,7 +83,7 @@ namespace trofeoCazador.Vistas.Perfil
                     {
                         SingletonSesion.Instancia.NuevoCorreo = nuevoCorreo;
                         SingletonSesion.Instancia.CodigoVerificacion = codigoVerificacion;
-                        NavigationService.Navigate(new Uri("Vistas/Perfil/EditarCorreoCodigo.xaml", UriKind.Relative));
+                        NavigationService.Navigate(new Uri("Vistas/Perfil/VerificarCodigo.xaml", UriKind.Relative));
                     }
                 }
             }
@@ -115,7 +115,7 @@ namespace trofeoCazador.Vistas.Perfil
 
         private bool ValidarCorreo(string correo, int longitudMaxima)
         {
-            if (!Metodos.ValidarEntradaVacia(correo))
+            if (Metodos.ValidarEntradaVacia(correo))
             {
                 VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbCorreoVacio);
                 return false;

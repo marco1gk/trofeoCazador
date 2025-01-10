@@ -273,10 +273,18 @@ namespace trofeoCazador.Vistas.InicioSesion
             }
         }
 
-        private  void BtnRecuperarContraseña_Click(object sender, MouseButtonEventArgs e)
+        private void BtnRecuperarContraseña_Click(object sender, MouseButtonEventArgs e)
         {
+            BtnRecuperarContraseña.IsEnabled = false;
             VentanaCorreoJugador ventanaCorreo = new VentanaCorreoJugador();
+
+            ventanaCorreo.Closed += (s, args) =>
+            {
+                BtnRecuperarContraseña.IsEnabled = true;
+            };
+
             ventanaCorreo.Show();
         }
+
     }
 }

@@ -117,7 +117,7 @@ namespace trofeoCazador.Vistas.Perfil
 
         private bool ValidarNombreUsuario(string nombreUsuario, int longitudMaxima)
         {
-            if (!Metodos.ValidarEntradaVacia(nombreUsuario))
+            if (Metodos.ValidarEntradaVacia(nombreUsuario))
             {
                 VentanasEmergentes.CrearVentanaEmergente(Properties.Resources.lbTituloGenerico, Properties.Resources.lbIngresarUsuario);
                 return false;
