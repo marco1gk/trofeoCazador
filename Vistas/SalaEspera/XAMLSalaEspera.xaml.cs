@@ -676,15 +676,13 @@ using trofeoCazador.Vistas.Menu;
             {
                 cliente.UnirSalaEsperaComoAnfitrion(codigoSalaEspera);
             }
-            catch (EndpointNotFoundException ex)
+            catch (EndpointNotFoundException)
             {
                 VentanasEmergentes.CrearConexionFallidaMensajeVentana();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 VentanasEmergentes.CrearVentanaMensajeTimeOut();
-                ManejadorExcepciones.ManejarErrorExcepcion(ex, NavigationService);
             }
             catch (FaultException<HuntersTrophyExcepcion>)
             {

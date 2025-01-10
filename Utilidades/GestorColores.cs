@@ -31,7 +31,6 @@ namespace trofeoCazador.Utilidades
                 catch (FormatException ex)
                 {
                     Console.WriteLine($"Error al convertir color: {ex.Message}");
-                    ManejadorExcepciones.ManejarComponenteErrorExcepcion(ex);
                 }
                 catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             }
